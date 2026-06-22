@@ -1648,18 +1648,26 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
       "fanfare",
       "lastWords"
     ],
-    "parseConfidence": "manual",
+    "parseConfidence": "high",
     "abilities": [
       {
         "timing": "fanfare",
         "effect": {
-          "op": "tutorFromDeck",
-          "filter": {
-            "trait": "Machina",
-            "cardType": "follower",
-            "maxCost": 3
-          },
-          "to": "field"
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Machina",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
         }
       },
       {
@@ -1687,11 +1695,19 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
       {
         "timing": "onEvolve",
         "effect": {
+          "op": "sequence",
+          "steps": [
+            {
           "op": "tutorFromDeck",
           "filter": {
             "identityName": "Roly-Poly Mk II"
-          },
-          "to": "field"
+            },
+            "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
         }
       },
       {
@@ -1966,14 +1982,13 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
         "timing": "lastWords",
         "effect": {
           "op": "summon",
-          "tokenCardNo": "BP07-T02EN",
           "tokenName": "Repair Mode",
           "count": 1,
           "zone": "exArea"
         }
       }
     ],
-    "parseConfidence": "review"
+    "parseConfidence": "high"
   },
   "Bellringer Angel": {
     "evolvesTo": "Bellringer Angel Evolved",
@@ -2190,7 +2205,7 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
         }
       }
     ],
-    "parseConfidence": "review"
+    "parseConfidence": "high"
   },
   "Cerberus, Hellfire Unleashed": {
     "keywords": [],
@@ -2701,11 +2716,19 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
                   ]
                 },
                 "then": {
-                  "op": "tutorFromDeck",
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
                   "filter": {
                     "identityNameContains": "Fumika Sagisawa"
                   },
-                  "to": "field"
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
                 }
               }
             }
@@ -3064,11 +3087,19 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
                 "count": 5
               },
               "then": {
-                "op": "tutorFromDeck",
-                "filter": {
-                  "identityName": "Taketsumi, Aconite Paladin"
-                },
-                "to": "field"
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Taketsumi, Aconite Paladin"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
               },
               "else": {
                 "op": "if",
@@ -3078,11 +3109,19 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
                   "count": 10
                 },
                 "then": {
-                  "op": "tutorFromDeck",
-                  "filter": {
-                    "identityName": "Taketsumi, Aconite Paladin"
-                  },
-                  "to": "field"
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
+                      "filter": {
+                        "identityName": "Taketsumi, Aconite Paladin"
+                      },
+                      "to": "field"
+                    },
+                    {
+                      "op": "shuffleDeck"
+                    }
+                  ]
                 }
               }
             }
@@ -3467,6 +3506,9 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
             {
               "op": "playCostReduction",
               "amount": 2
+            },
+            {
+              "op": "shuffleDeck"
             }
           ]
         },
@@ -3704,12 +3746,20 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
       {
         "timing": "fanfare",
         "effect": {
-          "op": "tutorFromDeck",
-          "filter": {
-            "cardClass": "sword",
-            "maxCost": 1
-          },
-          "to": "exArea"
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "sword",
+                "maxCost": 1
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
         }
       },
       {
@@ -4201,7 +4251,7 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
         }
       }
     ],
-    "parseConfidence": "review"
+    "parseConfidence": "high"
   },
   "Roly-Poly Mk I": {
     "keywords": [
@@ -4398,12 +4448,20 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
             {
               "label": "Search Machina to hand",
               "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
                 "op": "tutorFromDeck",
-                "filter": {
-                  "trait": "Machina",
-                  "cardType": "follower"
-                },
-                "to": "hand"
+                    "filter": {
+                      "trait": "Machina",
+                      "cardType": "follower"
+                    },
+                    "to": "hand"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
               }
             },
             {
@@ -4438,6 +4496,9 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
                       "maxCost": 2
                     },
                     "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
                   }
                 ]
               }
@@ -4876,7 +4937,6 @@ Input may be a JSON object keyed by cardNo or an array of card objects.
     "specialType": "evolved"
   }
 }
-
 </EXAMPLE_CARD_CODE>
 <ABILITY_REFERENCE>
 # Engine ability reference

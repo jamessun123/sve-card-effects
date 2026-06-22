@@ -4,7 +4,7 @@
       "fanfare",
       "lastWords"
     ],
-    "parseConfidence": "manual",
+    "parseConfidence": "high",
     "abilities": [
       {
         "timing": "fanfare",
@@ -338,14 +338,13 @@
         "timing": "lastWords",
         "effect": {
           "op": "summon",
-          "tokenCardNo": "BP07-T02EN",
           "tokenName": "Repair Mode",
           "count": 1,
           "zone": "exArea"
         }
       }
     ],
-    "parseConfidence": "review"
+    "parseConfidence": "high"
   },
   "Bellringer Angel": {
     "evolvesTo": "Bellringer Angel Evolved",
@@ -562,7 +561,7 @@
         }
       }
     ],
-    "parseConfidence": "review"
+    "parseConfidence": "high"
   },
   "Cerberus, Hellfire Unleashed": {
     "keywords": [],
@@ -2608,7 +2607,7 @@
         }
       }
     ],
-    "parseConfidence": "review"
+    "parseConfidence": "high"
   },
   "Roly-Poly Mk I": {
     "keywords": [
