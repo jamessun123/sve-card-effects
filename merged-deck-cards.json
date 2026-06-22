@@ -1,7 +1,5 @@
 {
   "Aenea, Amethyst Rebel": {
-    "class": "abyss",
-    "printingType": "base",
     "keywords": [
       "fanfare",
       "lastWords"
@@ -11,13 +9,21 @@
       {
         "timing": "fanfare",
         "effect": {
-          "op": "tutorFromDeck",
-          "filter": {
-            "trait": "Machina",
-            "cardType": "follower",
-            "maxCost": 3
-          },
-          "to": "field"
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Machina",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
         }
       },
       {
@@ -27,50 +33,37 @@
           "amount": 2
         }
       }
-    ],
-    "cardNo": "BP07-072EN"
+    ]
   },
   "Aenea, Creative Amethyst": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 1,
     "evolvesTo": "Aenea, Creative Amethyst Evolved",
     "evolveCost": 1,
     "keywords": [
       "evolve"
     ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Demon"
-    ],
-    "abilities": [],
-    "cardNo": "BP17-077EN"
+    "abilities": []
   },
   "Aenea, Creative Amethyst Evolved": {
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 2,
-    "defense": 2,
     "evolvesFrom": "Aenea, Creative Amethyst",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
         "timing": "onEvolve",
         "effect": {
+          "op": "sequence",
+          "steps": [
+            {
           "op": "tutorFromDeck",
           "filter": {
             "identityName": "Roly-Poly Mk II"
-          },
-          "to": "field"
+            },
+            "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
         }
       },
       {
@@ -84,16 +77,9 @@
           "playCostReduction": 3
         }
       }
-    ],
-    "cardNo": "BP17-078EN"
+    ]
   },
   "Aiolon's Remains": {
-    "printingType": "base",
-    "cost": 2,
-    "cardType": "amulet",
-    "traits": [
-      "Machina"
-    ],
     "keywords": [
       "fanfare"
     ],
@@ -170,19 +156,9 @@
         }
       }
     ],
-    "class": "neutral",
-    "parseConfidence": "manual",
-    "cardNo": "BP17-119EN"
+    "parseConfidence": "manual"
   },
   "Alpha Drive": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -216,24 +192,14 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP07-075EN"
+    ]
   },
   "Anastasia [Seize the Light]": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 1,
     "evolvesTo": "Anastasia [Seize the Light] Evolved",
     "evolveCost": 1,
     "keywords": [
       "evolve",
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
     ],
     "abilities": [
       {
@@ -271,21 +237,11 @@
         }
       }
     ],
-    "class": "forest",
-    "parseConfidence": "manual",
-    "cardNo": "ECP02-001EN"
+    "parseConfidence": "manual"
   },
   "Anastasia [Seize the Light] Evolved": {
-    "printingType": "evolved",
-    "attack": 2,
-    "defense": 2,
     "evolvesFrom": "Anastasia [Seize the Light]",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -315,18 +271,9 @@
         }
       }
     ],
-    "class": "forest",
-    "parseConfidence": "manual",
-    "cardNo": "ECP02-002EN"
+    "parseConfidence": "manual"
   },
   "Angel's Blessing": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 3,
-    "cardType": "spell",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -346,26 +293,15 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-110EN"
+    ]
   },
   "Awakened Robot": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "Awakened Robot Evolved",
     "evolveCost": 1,
     "keywords": [
       "evolve",
       "lastWords"
     ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Natura",
-      "Golem"
-    ],
     "abilities": [
       {
         "timing": "lastWords",
@@ -378,22 +314,11 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "auto",
-    "cardNo": "BP17-049EN"
+    "parseConfidence": "auto"
   },
   "Awakened Robot Evolved": {
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
     "evolvesFrom": "Awakened Robot",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Natura",
-      "Golem"
-    ],
     "keywords": [
       "lastWords"
     ],
@@ -420,22 +345,11 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "review",
-    "cardNo": "BP17-050EN"
+    "parseConfidence": "review"
   },
   "Bellringer Angel": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "attack": 0,
-    "defense": 2,
     "evolvesTo": "Bellringer Angel Evolved",
     "evolveCost": 2,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [
       "evolve",
       "ward"
@@ -448,19 +362,10 @@
           "count": 1
         }
       }
-    ],
-    "cardNo": "BP01-159EN"
+    ]
   },
   "Bellringer Angel Evolved": {
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 0,
-    "defense": 2,
     "evolvesFrom": "Bellringer Angel",
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [
       "ward"
     ],
@@ -484,22 +389,12 @@
         }
       }
     ],
-    "specialType": "evolved",
-    "cardNo": "BP01-160EN"
+    "specialType": "evolved"
   },
   "Belphomet, Lord of Aiolon": {
-    "printingType": "base",
-    "cost": 7,
-    "attack": 5,
-    "defense": 5,
     "keywords": [
       "rush",
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Supreme"
     ],
     "abilities": [
       {
@@ -526,22 +421,11 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "manual",
-    "cardNo": "BP07-037EN"
+    "parseConfidence": "manual"
   },
   "Belphomet, Ultimate Creator": {
-    "printingType": "base",
-    "cost": 5,
-    "attack": 5,
-    "defense": 5,
     "keywords": [
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Supreme"
     ],
     "abilities": [
       {
@@ -611,25 +495,14 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "manual",
-    "cardNo": "BP17-040EN"
+    "parseConfidence": "manual"
   },
   "Belphomet, Worldreaver": {
-    "printingType": "base",
-    "cost": 6,
-    "attack": 5,
-    "defense": 5,
     "evolvesTo": "Belphomet, Worldreaver Evolved",
     "evolveCost": 1,
     "keywords": [
       "fanfare",
       "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Supreme"
     ],
     "abilities": [
       {
@@ -689,20 +562,9 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "review",
-    "cardNo": "BP12-035EN"
+    "parseConfidence": "review"
   },
   "Cerberus, Hellfire Unleashed": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 3,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -776,20 +638,9 @@
           }
         }
       }
-    ],
-    "cardNo": "BP16-077EN"
+    ]
   },
   "Chris, Beyond the Patch": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 4,
-    "defense": 4,
-    "cardType": "follower",
-    "traits": [
-      "Departed",
-      "Cutthroat"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -824,17 +675,9 @@
           }
         }
       }
-    ],
-    "cardNo": "BP13-077EN"
+    ]
   },
   "Clash of Heroes": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Arena"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -843,19 +686,9 @@
           "op": "clash"
         }
       }
-    ],
-    "cardNo": "BP06-112EN"
+    ]
   },
   "Corruption Guardian": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 3,
-    "defense": 6,
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
     "keywords": [
       "ward"
     ],
@@ -894,21 +727,11 @@
           }
         }
       }
-    ],
-    "cardNo": "BP10-121EN"
+    ]
   },
   "Dead to Rights": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 1,
     "keywords": [
       "quick"
-    ],
-    "cardType": "spell",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
     ],
     "abilities": [
       {
@@ -942,19 +765,11 @@
           }
         }
       }
-    ],
-    "cardNo": "BP11-075EN"
+    ]
   },
   "Delta Cannon": {
-    "printingType": "base",
-    "cost": 1,
     "keywords": [
       "quick"
-    ],
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Golem"
     ],
     "abilities": [
       {
@@ -983,22 +798,11 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "manual",
-    "cardNo": "BP07-041EN"
+    "parseConfidence": "manual"
   },
   "Device Diviner": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
     "keywords": [
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
     ],
     "abilities": [
       {
@@ -1023,21 +827,9 @@
         "oncePerTurn": true
       }
     ],
-    "class": "rune",
-    "parseConfidence": "manual",
-    "cardNo": "BP12-048EN"
+    "parseConfidence": "manual"
   },
   "Disciple of Usurpation": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Omen",
-      "Thief"
-    ],
     "keywords": [
       "storm",
       "strike"
@@ -1070,17 +862,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP05-025EN"
+    ]
   },
   "Fallen Shot": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Fallen Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1106,17 +890,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP10-114EN"
+    ]
   },
   "Fount of Angels": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "amulet",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1164,19 +940,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP09-137EN"
+    ]
   },
   "Friends Forever": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 5,
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Necromancer",
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1191,26 +957,14 @@
           "maxTotalCost": 5
         }
       }
-    ],
-    "cardNo": "BP12-075EN"
+    ]
   },
   "Front Desk Frog": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "Front Desk Frog Evolved",
     "evolveCost": 1,
     "keywords": [
       "fanfare",
       "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Thief",
-      "Beast"
     ],
     "abilities": [
       {
@@ -1242,22 +996,11 @@
           "keywords": []
         }
       }
-    ],
-    "cardNo": "BP14-030EN"
+    ]
   },
   "Front Desk Frog Evolved": {
-    "class": "sword",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
     "evolvesFrom": "Front Desk Frog",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Festive",
-      "Thief",
-      "Beast"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1288,20 +1031,11 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-031EN"
+    ]
   },
   "Fumika Sagisawa [Cinderella Girl] Evolved": {
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
     "evolvesFrom": "Fumika Sagisawa [Cinderella Girl]",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1339,11 +1073,19 @@
                   ]
                 },
                 "then": {
-                  "op": "tutorFromDeck",
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
                   "filter": {
                     "identityNameContains": "Fumika Sagisawa"
                   },
-                  "to": "field"
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
                 }
               }
             }
@@ -1351,21 +1093,10 @@
         }
       }
     ],
-    "class": "dragon",
-    "parseConfidence": "manual",
-    "cardNo": "ECP02-038EN"
+    "parseConfidence": "manual"
   },
   "Ginne, Bewitching Courtesan": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 3,
-    "defense": 2,
     "keywords": [],
-    "cardType": "follower",
-    "traits": [
-      "Festive"
-    ],
     "abilities": [
       {
         "timing": "fanfare",
@@ -1461,22 +1192,15 @@
           }
         }
       }
-    ],
-    "cardNo": "BP16-022EN"
+    ]
   },
   "Glistering Angel": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "Glistering Angel Evolved",
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
+    "keywords": [
+      "ward",
+      "fanfare"
     ],
-    "keywords": ["ward", "fanfare"],
     "abilities": [
       {
         "timing": "fanfare",
@@ -1493,19 +1217,10 @@
           }
         }
       }
-    ],
-    "cardNo": "BP14-108EN"
+    ]
   },
   "Glistering Angel Evolved": {
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
     "evolvesFrom": "Glistering Angel",
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [
       "ward"
     ],
@@ -1528,20 +1243,9 @@
         }
       }
     ],
-    "specialType": "evolved",
-    "cardNo": "BP14-109EN"
+    "specialType": "evolved"
   },
   "Gold Rush Ghost": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed"
-    ],
     "keywords": [
       "storm"
     ],
@@ -1625,19 +1329,9 @@
           "op": "burySelf"
         }
       }
-    ],
-    "cardNo": "BP16-080EN"
+    ]
   },
   "Gremory, Death Teller": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Demon"
-    ],
     "keywords": [
       "ward",
       "fanfare"
@@ -1683,17 +1377,9 @@
         }
       }
     ],
-    "parseConfidence": "manual",
-    "cardNo": "BP12-U05EN"
+    "parseConfidence": "manual"
   },
   "Haggler's Gambit": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Merchant"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1726,18 +1412,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-035EN"
+    ]
   },
   "Hero of the Hunt": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 3,
-    "cardType": "spell",
-    "traits": [
-      "Festive",
-      "Commander"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1767,11 +1444,19 @@
                 "count": 5
               },
               "then": {
-                "op": "tutorFromDeck",
-                "filter": {
-                  "identityName": "Taketsumi, Aconite Paladin"
-                },
-                "to": "field"
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Taketsumi, Aconite Paladin"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
               },
               "else": {
                 "op": "if",
@@ -1781,36 +1466,33 @@
                   "count": 10
                 },
                 "then": {
-                  "op": "tutorFromDeck",
-                  "filter": {
-                    "identityName": "Taketsumi, Aconite Paladin"
-                  },
-                  "to": "field"
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
+                      "filter": {
+                        "identityName": "Taketsumi, Aconite Paladin"
+                      },
+                      "to": "field"
+                    },
+                    {
+                      "op": "shuffleDeck"
+                    }
+                  ]
                 }
               }
             }
           ]
         }
       }
-    ],
-    "cardNo": "BP14-025EN"
+    ]
   },
   "Hoverboard Mercenary": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 1,
     "evolvesTo": "Hoverboard Mercenary Evolved",
     "evolveCost": 1,
     "keywords": [
       "fanfare",
       "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Mercenary"
     ],
     "abilities": [
       {
@@ -1833,21 +1515,11 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP17-113EN"
+    ]
   },
   "Hoverboard Mercenary Evolved": {
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 2,
-    "defense": 2,
     "evolvesFrom": "Hoverboard Mercenary",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Mercenary"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1870,22 +1542,10 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP17-114EN"
+    ]
   },
   "Iceschillendrig, Gilded Autocrat": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 5,
-    "defense": 5,
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
-    ],
     "keywords": [
       "evolve"
     ],
@@ -1911,20 +1571,9 @@
         }
       }
     ],
-    "evolvesTo": "Iceschillendrig, Gilded Autocrat Evolved",
-    "cardNo": "BP11-069EN"
+    "evolvesTo": "Iceschillendrig, Gilded Autocrat Evolved"
   },
   "Iceschillendrig, Gilded Autocrat Evolved": {
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 6,
-    "defense": 6,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -1976,21 +1625,9 @@
       }
     ],
     "evolvesFrom": "Iceschillendrig, Gilded Autocrat",
-    "specialType": "evolved",
-    "cardNo": "BP11-070EN"
+    "specialType": "evolved"
   },
   "Itsurugi, Eager Admirer": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 3,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Demon",
-      "Beast"
-    ],
     "keywords": [
       "advanced"
     ],
@@ -2054,21 +1691,9 @@
           }
         }
       }
-    ],
-    "cardNo": "BP14-070EN"
+    ]
   },
   "Itsurugi, End of Paradise": {
-    "class": "abyss",
-    "printingType": "evolved",
-    "cost": 4,
-    "attack": 6,
-    "defense": 5,
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Demon",
-      "Beast"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -2102,26 +1727,14 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-071EN"
+    ]
   },
   "Jiemon, Thief Lord": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 3,
-    "defense": 4,
     "evolvesTo": "Jiemon, Thief Lord Evolved",
     "evolveCost": 1,
     "keywords": [
       "fanfare",
       "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Commander",
-      "Thief"
     ],
     "abilities": [
       {
@@ -2142,22 +1755,11 @@
           "zone": "exArea"
         }
       }
-    ],
-    "cardNo": "BP14-022EN"
+    ]
   },
   "Jiemon, Thief Lord Evolved": {
-    "class": "sword",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 5,
     "evolvesFrom": "Jiemon, Thief Lord",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Festive",
-      "Commander",
-      "Thief"
-    ],
     "keywords": [
       "storm"
     ],
@@ -2208,41 +1810,20 @@
           "timing": "onEvolve"
         }
       }
-    ],
-    "cardNo": "BP14-023EN"
+    ]
   },
   "Kako Takafuji": {
-    "printingType": "base",
-    "cost": 1,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "Kako Takafuji Evolved",
     "evolveCost": 2,
     "keywords": [
       "evolve"
     ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
     "abilities": [],
-    "class": "haven",
-    "parseConfidence": "keyword-only",
-    "cardNo": "CSD02b-007EN"
+    "parseConfidence": "keyword-only"
   },
   "Koume Shirasaka [Haunted Gown]": {
-    "printingType": "base",
-    "cost": 3,
-    "attack": 2,
-    "defense": 2,
     "keywords": [
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
     ],
     "abilities": [
       {
@@ -2282,6 +1863,9 @@
             {
               "op": "playCostReduction",
               "amount": 2
+            },
+            {
+              "op": "shuffleDeck"
             }
           ]
         },
@@ -2295,20 +1879,9 @@
         }
       }
     ],
-    "class": "abyss",
-    "parseConfidence": "manual",
-    "cardNo": "ECP02-058EN"
+    "parseConfidence": "manual"
   },
   "Leah, Bellringer Angel": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "attack": 0,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [
       "ward"
     ],
@@ -2329,25 +1902,14 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP16-119EN"
+    ]
   },
   "Masterful Musician": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
     "evolvesTo": "Masterful Musician Evolved",
     "evolveCost": 1,
     "keywords": [
       "fanfare",
       "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Thief"
     ],
     "abilities": [
       {
@@ -2375,21 +1937,11 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-026EN"
+    ]
   },
   "Masterful Musician Evolved": {
-    "class": "sword",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
     "evolvesFrom": "Masterful Musician",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Festive",
-      "Thief"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -2412,12 +1964,9 @@
           "zone": "exArea"
         }
       }
-    ],
-    "cardNo": "BP14-027EN"
+    ]
   },
   "Mono, Garnet Rebel": {
-    "class": "abyss",
-    "printingType": "base",
     "keywords": [
       "evolve"
     ],
@@ -2454,12 +2003,9 @@
           "zone": "field"
         }
       }
-    ],
-    "cardNo": "BP07-069EN"
+    ]
   },
   "Mono, Garnet Rebel Evolved": {
-    "class": "abyss",
-    "printingType": "evolved",
     "keywords": [
       "storm"
     ],
@@ -2483,38 +2029,17 @@
           "keyword": "rush"
         }
       }
-    ],
-    "cardNo": "BP07-070EN"
+    ]
   },
   "Mukan, Shadowcrypt Ward": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Necromancer",
-      "Demon"
-    ],
     "keywords": [
       "evolve"
     ],
     "abilities": [],
-    "evolvesTo": "Mukan, Shadowcrypt Ward Evolved",
-    "cardNo": "BP16-081EN"
+    "evolvesTo": "Mukan, Shadowcrypt Ward Evolved"
   },
   "Mukan, Shadowcrypt Ward Evolved": {
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
-    "cardType": "follower",
-    "traits": [
-      "Necromancer",
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -2568,33 +2093,30 @@
       }
     ],
     "evolvesFrom": "Mukan, Shadowcrypt Ward",
-    "specialType": "evolved",
-    "cardNo": "BP16-082EN"
+    "specialType": "evolved"
   },
   "Nahtnaught, Cursed Queen": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 3,
-    "defense": 5,
     "keywords": [
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Commander"
     ],
     "abilities": [
       {
         "timing": "fanfare",
         "effect": {
-          "op": "tutorFromDeck",
-          "filter": {
-            "cardClass": "sword",
-            "maxCost": 1
-          },
-          "to": "exArea"
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "sword",
+                "maxCost": 1
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
         }
       },
       {
@@ -2611,23 +2133,12 @@
           }
         }
       }
-    ],
-    "cardNo": "BP11-018EN"
+    ]
   },
   "Nicola, Enduring Steward": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 2,
     "keywords": [
       "fanfare",
       "rush"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Departed"
     ],
     "abilities": [
       {
@@ -2698,12 +2209,9 @@
           }
         }
       }
-    ],
-    "cardNo": "BP17-079EN"
+    ]
   },
   "Nicola, Forbidden Strength": {
-    "class": "abyss",
-    "printingType": "base",
     "keywords": [
       "evolve",
       "fanfare"
@@ -2719,21 +2227,11 @@
           "count": 2
         }
       }
-    ],
-    "cardNo": "BP07-076EN"
+    ]
   },
   "Nicola, Forbidden Strength Evolved": {
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
     "evolvesFrom": "Nicola, Forbidden Strength",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Departed"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -2749,19 +2247,9 @@
           "playCostReduction": 2
         }
       }
-    ],
-    "cardNo": "BP07-077EN"
+    ]
   },
   "Night on the Town": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Festive",
-      "Commander",
-      "Thief"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -2815,19 +2303,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-034EN"
+    ]
   },
   "Odile, Black Swan": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 6,
-    "defense": 4,
-    "cardType": "follower",
-    "traits": [
-      "Fable"
-    ],
     "keywords": [
       "strike"
     ],
@@ -2860,21 +2338,11 @@
           "amount": 2
         }
       }
-    ],
-    "cardNo": "BP03-076EN"
+    ]
   },
   "Olivia, Heroic Dark Angel": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 4,
-    "defense": 4,
     "evolvesTo": "Olivia, Heroic Dark Angel Evolved",
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
     "keywords": [
       "evolve",
       "ward"
@@ -2887,19 +2355,10 @@
           "count": 1
         }
       }
-    ],
-    "cardNo": "BP16-113EN"
+    ]
   },
   "Olivia, Heroic Dark Angel Evolved": {
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 5,
-    "defense": 5,
     "evolvesFrom": "Olivia, Heroic Dark Angel",
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
     "keywords": [
       "ward"
     ],
@@ -2932,21 +2391,11 @@
         }
       }
     ],
-    "specialType": "evolved",
-    "cardNo": "BP16-114EN"
+    "specialType": "evolved"
   },
   "One-Winged Traitor": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "One-Winged Traitor Evolved",
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
     "keywords": [
       "evolve"
     ],
@@ -2967,19 +2416,10 @@
           "reveal": true
         }
       }
-    ],
-    "cardNo": "BP10-115EN"
+    ]
   },
   "One-Winged Traitor Evolved": {
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
     "evolvesFrom": "One-Winged Traitor",
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3002,21 +2442,11 @@
         }
       }
     ],
-    "specialType": "evolved",
-    "cardNo": "BP10-116EN"
+    "specialType": "evolved"
   },
   "Paradise Vanguard": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "Paradise Vanguard Evolved",
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [
       "evolve"
     ],
@@ -3039,19 +2469,10 @@
           }
         }
       }
-    ],
-    "cardNo": "BP09-126EN"
+    ]
   },
   "Paradise Vanguard Evolved": {
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
     "evolvesFrom": "Paradise Vanguard",
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3065,19 +2486,9 @@
         }
       }
     ],
-    "specialType": "evolved",
-    "cardNo": "BP09-127EN"
+    "specialType": "evolved"
   },
   "Planetary Fracture": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 8,
-    "cardType": "spell",
-    "traits": [
-      "Deity",
-      "Archfiend",
-      "Cutthroat"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3095,20 +2506,11 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP13-107EN"
+    ]
   },
   "Ranko Kanzaki Evolved": {
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
     "evolvesFrom": "Ranko Kanzaki",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3171,22 +2573,12 @@
           }
         }
       }
-    ],
-    "cardNo": "CP02-070EN"
+    ]
   },
   "Rin Shibuya [Cinderella Girl]": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 1,
     "keywords": [
       "storm",
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
     ],
     "abilities": [
       {
@@ -3216,21 +2608,9 @@
         }
       }
     ],
-    "class": "sword",
-    "parseConfidence": "review",
-    "cardNo": "ECP02-012EN"
+    "parseConfidence": "review"
   },
   "Roly-Poly Mk I": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 1,
-    "attack": 1,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Demon"
-    ],
     "keywords": [
       "ward"
     ],
@@ -3280,23 +2660,12 @@
         }
       }
     ],
-    "parseConfidence": "manual",
-    "cardNo": "BP12-082EN"
+    "parseConfidence": "manual"
   },
   "Roly-Poly Mk II": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 3,
     "keywords": [
       "fanfare",
       "ward"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Demon"
     ],
     "abilities": [
       {
@@ -3312,17 +2681,9 @@
           "remainderTo": "cemetery"
         }
       }
-    ],
-    "cardNo": "BP17-083EN"
+    ]
   },
   "Seraphic Blade": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "cardType": "spell",
-    "traits": [
-      "Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3356,17 +2717,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP12-106EN"
+    ]
   },
   "Soul Conversion": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Departed"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3390,19 +2743,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP01-116EN"
+    ]
   },
   "Spartacus": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 4,
-    "defense": 6,
-    "cardType": "follower",
-    "traits": [
-      "Commander"
-    ],
     "keywords": [
       "ward"
     ],
@@ -3429,17 +2772,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP09-020EN"
+    ]
   },
   "Stay in Paradise": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Festive"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3455,18 +2790,9 @@
           "remainderTo": "deckBottom"
         }
       }
-    ],
-    "cardNo": "BP14-115EN"
+    ]
   },
   "Steeled Hopes": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Demon"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3479,12 +2805,20 @@
             {
               "label": "Search Machina to hand",
               "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
                 "op": "tutorFromDeck",
-                "filter": {
-                  "trait": "Machina",
-                  "cardType": "follower"
-                },
-                "to": "hand"
+                    "filter": {
+                      "trait": "Machina",
+                      "cardType": "follower"
+                    },
+                    "to": "hand"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
               }
             },
             {
@@ -3519,6 +2853,9 @@
                       "maxCost": 2
                     },
                     "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
                   }
                 ]
               }
@@ -3526,18 +2863,9 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP17-080EN"
+    ]
   },
   "Stone Merchant": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Merchant"
-    ],
     "keywords": [
       "fanfare"
     ],
@@ -3572,24 +2900,12 @@
         }
       }
     ],
-    "class": "sword",
-    "parseConfidence": "manual",
-    "cardNo": "BP17-033EN"
+    "parseConfidence": "manual"
   },
   "Taketsumi, Aconite Paladin": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
     "keywords": [
       "fanfare",
       "advanced"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Commander"
     ],
     "abilities": [
       {
@@ -3664,25 +2980,14 @@
           }
         }
       }
-    ],
-    "cardNo": "BP14-018EN"
+    ]
   },
   "Taketsumi, Creator of Paradise": {
-    "class": "sword",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 5,
-    "defense": 6,
     "keywords": [
       "fanfare",
       "advanced"
     ],
-    "cardType": "follower",
     "specialType": "advanced",
-    "traits": [
-      "Festive",
-      "Commander"
-    ],
     "abilities": [
       {
         "timing": "fanfare",
@@ -3725,24 +3030,14 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP14-019EN"
+    ]
   },
   "Tetra, Sapphire Rebel": {
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
     "evolvesTo": "Tetra, Sapphire Rebel Evolved",
     "evolveCost": 1,
     "keywords": [
       "evolve",
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
     ],
     "abilities": [
       {
@@ -3755,21 +3050,11 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "auto",
-    "cardNo": "BP07-035EN"
+    "parseConfidence": "auto"
   },
   "Tetra, Sapphire Rebel Evolved": {
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
     "evolvesFrom": "Tetra, Sapphire Rebel",
-    "cardType": "follower",
     "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3801,25 +3086,14 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "manual",
-    "cardNo": "BP07-036EN"
+    "parseConfidence": "manual"
   },
   "Tetra, Serene Sapphire": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
     "evolvesTo": "Tetra, Serene Sapphire Evolved",
     "evolveCost": 1,
     "keywords": [
       "evolve",
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
     ],
     "abilities": [
       {
@@ -3832,23 +3106,11 @@
         }
       }
     ],
-    "class": "rune",
-    "parseConfidence": "auto",
-    "cardNo": "BP17-041EN"
+    "parseConfidence": "auto"
   },
   "Torchbearing Guide": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
     "keywords": [
       "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Mercenary"
     ],
     "abilities": [
       {
@@ -3890,18 +3152,9 @@
           }
         }
       }
-    ],
-    "cardNo": "BP14-118EN"
+    ]
   },
   "Winged Inversion": {
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Angel",
-      "Fallen Angel"
-    ],
     "keywords": [],
     "abilities": [
       {
@@ -3961,22 +3214,10 @@
           ]
         }
       }
-    ],
-    "cardNo": "BP03-117EN"
+    ]
   },
   "Wretch": {
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 2,
     "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
-    ],
     "keywords": [
       "rush",
       "evolve",
@@ -4012,20 +3253,9 @@
         }
       }
     ],
-    "evolvesTo": "Wretch Evolved",
-    "cardNo": "BP11-076EN"
+    "evolvesTo": "Wretch Evolved"
   },
   "Wretch Evolved": {
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
-    ],
     "keywords": [
       "storm"
     ],
@@ -4061,7 +3291,6 @@
       }
     ],
     "evolvesFrom": "Wretch",
-    "specialType": "evolved",
-    "cardNo": "BP11-077EN"
+    "specialType": "evolved"
   }
 }

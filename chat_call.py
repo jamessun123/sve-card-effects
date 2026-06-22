@@ -4,15 +4,16 @@
 import json
 from pathlib import Path
 
-from card_schema import card_list_text_format, parse_card_list_response
 from openai import OpenAI
 
 # --- Fill this in ---
+prompt_body_filename = "prompt_example_body.txt"
+
 with open("prompt_format.txt", "r") as f:
     PROMPT_CONTEXT = f.read()
 
-with open("prompt_example_body.txt", "r") as f:
-    PROMPT_EXAMPLE_BODY = f.read()
+with open(prompt_body_filename, "r") as f:
+    PROMPT_BODY = f.read()
 
 # Optional settings
 MODEL = "gpt-5.4-mini"
@@ -43,12 +44,13 @@ def main() -> None:
     response = client.responses.create(
         model=MODEL,
         input=[
-            {"role": "user", "content": PROMPT_CONTEXT + "\n" + PROMPT_EXAMPLE_BODY}
-        ],
-        #text={"format": card_list_text_format()},
+            {"role": "user", "content": PROMPT_CONTEXT + "\n" + PROMPT_BODY}
+        ]
     )
 
-    print(response.content[0].text)
+    with open("outputs/" + prompt_body_filename.replace(".txt", "_output.json"), "w") as f:
+        json.dump(response.output_text, f)
+    print(f"Output written to outputs/{prompt_body_filename.replace('.txt', '_output.json')}")
 
 
 if __name__ == "__main__":
