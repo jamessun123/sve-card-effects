@@ -1,0 +1,2683 @@
+# Engine ability reference
+This document lists **implemented** effect operations used in card DSL JSON (`abilities[].effect`).
+Each entry shows required JSON shape, arguments, and representative English card text.
+
+---
+
+## Card ability wrapper
+
+Every ability on a card is an object in `abilities[]`:
+
+```json
+{
+  "timing": "fanfare",
+  "oncePerTurn": false,
+  "condition": { "type": "combo", "count": 3 },
+  "cost": { "pp": 1, "engage": true },
+  "activateFrom": "field",
+  "effect": { "op": "draw", "count": 1 }
+}
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `timing` | yes | When the ability fires (see table below) |
+| `effect` | yes | Root effect object with `op` |
+| `condition` | no | Gate the ability (`Condition`) |
+| `cost` | no | For `timing: "activated"` only |
+| `activateFrom` | no | `field`, `cemetery`, `exArea`, or `hand` |
+| `oncePerTurn` | no | Limit activations per turn |
+| `maxPerTurn` | no | Max trigger count per turn |
+| `quick` | no | Can be played during quick windows |
+
+### Trigger timings
+
+| Timing | English on card |
+|--------|-----------------|
+| `fanfare` | [fanfare] — when you play this card from hand |
+| `lastWords` | Last Words — when this card is destroyed or leaves the field |
+| `onEvolve` | On Evolve — when this follower evolves |
+| `onSuperEvolve` | On Super-Evolve |
+| `strike` | Strike — when this follower attacks |
+| `activated` | [act] — paid activate ability (see `cost`) |
+| `spell` | Spell — when you play this spell |
+| `passive` | Continuous effect while on field / in zone |
+| `aura` | Aura — continuous effect affecting other cards |
+| `startOfMain` | At the start of your main phase |
+| `startOfEnd` | At the start of your end phase |
+| `onCardPlayed` | Whenever you play a card |
+| `onDiscard` | When this card is discarded |
+| `onLeaveField` | When this card leaves the field |
+| `onDamaged` | When this follower takes damage |
+| `onAllyEvolve` | When an ally follower evolves |
+| `onAllyFollowerEnter` | When an ally follower enters your field |
+| `onReturnToHand` | When this card returns to hand |
+| `evolve` | [evolve] cost line / evolve payment ability |
+
+### Activated ability costs (`cost`)
+
+- **pp** — `cost.pp` — play points, e.g. `[cost01]` → `{ "pp": 1 }`
+- **engage** — `cost.engage: true` — engage this card
+- **banishFromCemetery** — Banish matching cards from cemetery
+- **banishFromExArea** — Banish matching cards from EX area
+- **buryFromField** — Bury followers from field matching filter
+- **burySelf** — Put this card into cemetery
+- **banishSelf** — Banish this card (activate from cemetery)
+- **earthRite** — Consume Earth Sigil stacks: `{ "earthRite": { "count": 1 } }`
+
+### DeckFilter (used in tutors, searches, discards)
+
+```json
+{
+  "cardNo": "BP14-T01EN",
+  "identityName": "Glittering Gold",
+  "trait": "Festive",
+  "traitsAny": ["Angel", "Fallen Angel"],
+  "cardClass": "sword",
+  "cardType": "follower",
+  "maxCost": 3,
+  "minCost": 1,
+  "identityNameContains": "Ranko Kanzaki",
+  "excludeIdentityName": "Foo",
+  "excludeCardClass": "neutral"
+}
+```
+
+---
+
+## Effect operations (`effect.op`)
+
+### `addCounter`
+
+**Arguments:** `counter` (string name), `amount?`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "addCounter",
+  "counter": "fable",
+  "amount": 1,
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Put a Fable counter on this follower."
+
+### `addStack`
+
+**Arguments:** `amount` — Earth Rite / stack counters on source
+
+**Syntax:**
+
+```json
+{
+  "op": "addStack",
+  "amount": 1
+}
+```
+**Example card text:** "Put a stack counter on this card."
+
+### `auraAbilityDamageCap`
+
+**Arguments:** `amount`
+
+**Notes:** Passive aura.
+
+**Syntax:**
+
+```json
+{
+  "op": "auraAbilityDamageCap",
+  "amount": 1
+}
+```
+**Example card text:** "Damage this follower takes from abilities is reduced to 1 per hit."
+
+### `auraGrantKeyword`
+
+**Arguments:** `keyword`, `trait?`, `excludeSelf?`
+
+**Notes:** Use timing `passive` or `aura`.
+
+**Syntax:**
+
+```json
+{
+  "op": "auraGrantKeyword",
+  "keyword": "storm",
+  "trait": "Festive",
+  "excludeSelf": false
+}
+```
+**Example card text:** "Each other Festive follower on your field has Storm."
+
+### `autoEvolveIf`
+
+**Arguments:** `condition`, `triggerOnEvolve?`
+
+**Syntax:**
+
+```json
+{
+  "op": "autoEvolveIf",
+  "condition": {
+    "type": "fieldTraitMin",
+    "trait": "Festive",
+    "count": 3
+  },
+  "triggerOnEvolve": true
+}
+```
+**Example card text:** "If there are at least 3 Festive cards in your EX area, evolve this follower."
+
+### `banish`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "banish",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Banish an enemy follower on the field."
+
+### `banishAllFieldAndEx`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "banishAllFieldAndEx"
+}
+```
+**Example card text:** "Banish all cards on the field and in both players' EX areas."
+
+### `banishFromCemetery`
+
+**Arguments:** `filter`, `count`
+
+**Syntax:**
+
+```json
+{
+  "op": "banishFromCemetery",
+  "filter": {
+    "cardClass": "abyss"
+  },
+  "count": 2
+}
+```
+**Example card text:** "Banish 2 Abysscraft cards from your cemetery."
+
+### `banishFromDeck`
+
+**Arguments:** `maxCount`, `filter?`
+
+**Syntax:**
+
+```json
+{
+  "op": "banishFromDeck",
+  "maxCount": 2,
+  "filter": {
+    "cardType": "spell"
+  }
+}
+```
+**Example card text:** "Banish up to 2 spells from your deck."
+
+### `banishFromExArea`
+
+**Arguments:** `filter`, `count`
+
+**Syntax:**
+
+```json
+{
+  "op": "banishFromExArea",
+  "filter": {
+    "trait": "Magical Item"
+  },
+  "count": 1
+}
+```
+**Example card text:** "Banish a Magical Item card from your EX area."
+
+### `banishFromOpponentExArea`
+
+**Arguments:** `count?`, `filter?`
+
+**Syntax:**
+
+```json
+{
+  "op": "banishFromOpponentExArea",
+  "count": 1
+}
+```
+**Example card text:** "Banish a card from your opponent's EX area."
+
+### `banishSelf`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "banishSelf"
+}
+```
+**Example card text:** "[adv] [cost04], banish this: …"
+
+### `banishUpTo`
+
+**Arguments:** `targets`, `maxCount` (DamageAmount)
+
+**Syntax:**
+
+```json
+{
+  "op": "banishUpTo",
+  "targets": {
+    "type": "enemyFollower"
+  },
+  "maxCount": 3
+}
+```
+**Example card text:** "Banish up to 3 enemy followers on the field."
+
+### `box`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "box",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower and engage it. It becomes Boxed until the end of its controller's next turn."
+
+### `buff`
+
+**Arguments:** `atk?`, `def?`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "buff",
+  "atk": 2,
+  "def": 1,
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Give this follower [attack]+2/[defense]+1."
+
+### `buffAllEnemyFollowers`
+
+**Arguments:** `atk?`, `def?` (number or DamageAmount)
+
+**Syntax:**
+
+```json
+{
+  "op": "buffAllEnemyFollowers",
+  "atk": -2,
+  "def": -2
+}
+```
+**Example card text:** "Give all enemy followers on the field [attack]-2/[defense]-2."
+
+### `buffDynamic`
+
+**Arguments:** `atk?`, `def?` (DamageAmount), `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "buffDynamic",
+  "atk": {
+    "op": "handCount"
+  },
+  "def": {
+    "op": "handCount"
+  },
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Give this follower [attack]+X/[defense]+X. X equals the number of cards in your hand."
+
+### `buffFieldTrait`
+
+**Arguments:** `trait?` or `cardClass?`, `atk?`, `def?`, `keyword?`, `excludeSelf?`, `otherOnly?`
+
+**Syntax:**
+
+```json
+{
+  "op": "buffFieldTrait",
+  "trait": "Festive",
+  "atk": 1,
+  "def": 1,
+  "otherOnly": true
+}
+```
+**Example card text:** "Give each other Festive follower on your field [attack]+1/[defense]+1."
+
+### `buryEachOpponentDeck`
+
+**Arguments:** `count` (number)
+
+**Syntax:**
+
+```json
+{
+  "op": "buryEachOpponentDeck",
+  "count": 1
+}
+```
+**Example card text:** "Each opponent puts the top card of their deck into their cemetery."
+
+### `buryEachOpponentFollowers`
+
+**Arguments:** `count` (number) — buries that many followers per opponent field
+
+**Syntax:**
+
+```json
+{
+  "op": "buryEachOpponentFollowers",
+  "count": 1
+}
+```
+**Example card text:** "Put the follower with the lowest defense on each opponent's field into its owner's cemetery."
+
+### `buryFieldFollowers`
+
+**Arguments:** `filter?`, `minCost?`, `excludeSelf?`, `sourceOnly?`
+
+**Syntax:**
+
+```json
+{
+  "op": "buryFieldFollowers",
+  "filter": {
+    "trait": "Machina"
+  },
+  "excludeSelf": true
+}
+```
+**Example card text:** "Put all other Machina followers on your field into your cemetery."
+
+### `buryFromFieldSelect`
+
+**Arguments:** `excludeSelf?`, `optional?`
+
+**Syntax:**
+
+```json
+{
+  "op": "buryFromFieldSelect",
+  "excludeSelf": true,
+  "optional": true
+}
+```
+**Example card text:** "You may select a follower on your field and put it into your cemetery."
+
+### `buryOpponentMaxAttackFollower`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "buryOpponentMaxAttackFollower"
+}
+```
+**Example card text:** "Put the enemy follower with the highest attack into its owner's cemetery."
+
+### `burySelf`
+
+**Arguments:** none — source card to cemetery (often activate cost)
+
+**Syntax:**
+
+```json
+{
+  "op": "burySelf"
+}
+```
+**Example card text:** "[act] [engage], put this card into its owner's cemetery: …"
+
+### `cannotAttack`
+
+**Arguments:** none
+
+**Notes:** Passive.
+
+**Syntax:**
+
+```json
+{
+  "op": "cannotAttack"
+}
+```
+**Example card text:** "This follower can't attack."
+
+### `choose`
+
+**Arguments:** `options` ({ label, effect, additionalPpCost? }[]), `min`, `max`
+
+**Syntax:**
+
+```json
+{
+  "op": "choose",
+  "min": 1,
+  "max": 1,
+  "options": [
+    {
+      "label": "Deal 2 damage",
+      "effect": {
+        "op": "dealDamage",
+        "amount": 2,
+        "targets": {
+          "type": "enemyFollower",
+          "count": 1
+        }
+      }
+    },
+    {
+      "label": "Draw a card",
+      "effect": {
+        "op": "draw",
+        "count": 1
+      }
+    }
+  ]
+}
+```
+**Example card text:** "Choose one. (1) Deal 2 damage to an enemy follower. (2) Draw a card."
+
+### `chooseMultiple`
+
+**Arguments:** same as `choose`, but player may pick multiple options up to `max`
+
+**Syntax:**
+
+```json
+{
+  "op": "chooseMultiple",
+  "min": 1,
+  "max": 2,
+  "options": [
+    {
+      "label": "Draw",
+      "effect": {
+        "op": "draw",
+        "count": 1
+      }
+    },
+    {
+      "label": "Heal",
+      "effect": {
+        "op": "healLeader",
+        "amount": 2
+      }
+    }
+  ]
+}
+```
+**Example card text:** "Choose up to 2."
+
+### `clash`
+
+**Arguments:** none — initiates clash combat between selected followers
+
+**Syntax:**
+
+```json
+{
+  "op": "clash"
+}
+```
+**Example card text:** "Clash with an enemy follower."
+
+### `damageCap`
+
+**Arguments:** `maxPerHit` — passive; limits ability damage per hit
+
+**Notes:** Use timing `passive`.
+
+**Syntax:**
+
+```json
+{
+  "op": "damageCap",
+  "maxPerHit": 1
+}
+```
+**Example card text:** "While this is on your field, if this follower would take more than 1 damage from an ability, it takes 1 instead."
+
+### `damageImmunity`
+
+**Arguments:** `amount`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "damageImmunity",
+  "amount": 99,
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Give this follower immunity to ability damage this turn."
+
+### `dealDamage`
+
+**Arguments:** `amount` (DamageAmount), `targets` (TargetSelector)
+
+**Syntax:**
+
+```json
+{
+  "op": "dealDamage",
+  "amount": 3,
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower on the field. Deal it 3 damage."
+
+### `dealDamageAllEnemies`
+
+**Arguments:** `amount`, `followersOnly?`
+
+**Syntax:**
+
+```json
+{
+  "op": "dealDamageAllEnemies",
+  "amount": 2,
+  "followersOnly": true
+}
+```
+**Example card text:** "Deal 2 damage to each enemy follower on the field."
+
+### `dealDamageCompare`
+
+**Arguments:** `targets` — pick two followers; first takes damage equal to second's attack
+
+**Syntax:**
+
+```json
+{
+  "op": "dealDamageCompare",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 2
+  },
+  "damageTargetFirst": true
+}
+```
+**Example card text:** "Select two enemy followers. Deal the first damage equal to the second's attack."
+
+### `dealDamageDynamic`
+
+**Arguments:** use `dealDamage` with dynamic `amount`
+
+**Notes:** Alias pattern — always `dealDamage` with a DamageAmount object.
+
+**Syntax:**
+
+```json
+{
+  "op": "dealDamage",
+  "amount": {
+    "op": "traitFieldCount",
+    "trait": "Machina"
+  },
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Deal X damage to an enemy follower. X equals the number of Machina followers on your field."
+
+### `dealDamageFollowerAndLeader`
+
+**Arguments:** `followerAmount`, `leaderAmount`
+
+**Notes:** Op id is `damageFollowerAndLeader` (not dealDamageFollowerAndLeader).
+
+**Syntax:**
+
+```json
+{
+  "op": "damageFollowerAndLeader",
+  "followerAmount": 5,
+  "leaderAmount": 3
+}
+```
+**Example card text:** "Select an enemy follower. Deal it 5 damage and 3 damage to its leader."
+
+### `dealDamageOtherFollowers`
+
+**Arguments:** `amount`, `includeLeaders?`
+
+**Syntax:**
+
+```json
+{
+  "op": "dealDamageOtherFollowers",
+  "amount": 1,
+  "includeLeaders": false
+}
+```
+**Example card text:** "Deal 1 damage to each other follower on the field."
+
+### `dealDamageSplit`
+
+**Arguments:** `primaryAmount`, `secondaryAmount?`, `maxTargets`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "dealDamageSplit",
+  "primaryAmount": {
+    "op": "handExAreaTotal"
+  },
+  "maxTargets": 99,
+  "targets": {
+    "type": "enemyFollower"
+  }
+}
+```
+**Example card text:** "Select any number of enemy followers and deal X damage divided between them. X equals cards in your hand and EX area."
+
+### `defAsAttackAura`
+
+**Arguments:** none
+
+**Notes:** Passive aura; resolver is a no-op — applied in combat queries.
+
+**Syntax:**
+
+```json
+{
+  "op": "defAsAttackAura"
+}
+```
+**Example card text:** "This follower deals attack damage using its defense instead of its attack."
+
+### `destroy`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "destroy",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower on the field. Destroy it."
+
+### `destroyAllAmulets`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "destroyAllAmulets"
+}
+```
+**Example card text:** "Destroy all amulets on the field."
+
+### `destroyAllEnemyField`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "destroyAllEnemyField"
+}
+```
+**Example card text:** "Destroy all enemy followers and amulets on the field."
+
+### `destroyAllFollowers`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "destroyAllFollowers"
+}
+```
+**Example card text:** "Destroy all followers on the field."
+
+### `destroyLowestCostEnemyFollowers`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "destroyLowestCostEnemyFollowers"
+}
+```
+**Example card text:** "Destroy the enemy follower with the lowest cost on the field."
+
+### `discard`
+
+**Arguments:** `count` (number) — random cards discarded from hand
+
+**Syntax:**
+
+```json
+{
+  "op": "discard",
+  "count": 1
+}
+```
+**Example card text:** "Discard a card."
+
+### `discardFromHand`
+
+**Arguments:** `filter` (DeckFilter), `count` (number)
+
+**Syntax:**
+
+```json
+{
+  "op": "discardFromHand",
+  "filter": {
+    "cardClass": "sword"
+  },
+  "count": 1
+}
+```
+**Example card text:** "Discard a Swordcraft card."
+
+### `discardHand`
+
+**Arguments:** none — discards your entire hand to cemetery
+
+**Syntax:**
+
+```json
+{
+  "op": "discardHand"
+}
+```
+**Example card text:** "Discard your hand."
+
+### `discardOptionalDraw`
+
+**Arguments:** `drawBonus` (number) — if you discard, draw base + bonus
+
+**Syntax:**
+
+```json
+{
+  "op": "discardOptionalDraw",
+  "drawBonus": 1
+}
+```
+**Example card text:** "You may discard a card. If you do, draw 2 cards."
+
+### `draw`
+
+**Arguments:** `count` (number) — cards to draw
+
+**Syntax:**
+
+```json
+{
+  "op": "draw",
+  "count": 1
+}
+```
+**Example card text:** "Draw a card."
+
+### `drawDynamic`
+
+**Arguments:** `amount` (DamageAmount) — draw that many cards
+
+**Syntax:**
+
+```json
+{
+  "op": "drawDynamic",
+  "amount": {
+    "op": "handCount"
+  }
+}
+```
+**Example card text:** "Draw X cards. X equals the number of cards in your hand."
+
+### `engage`
+
+**Arguments:** `targets`, `skipRefreshNextStart?`
+
+**Syntax:**
+
+```json
+{
+  "op": "engage",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  },
+  "skipRefreshNextStart": true
+}
+```
+**Example card text:** "Select an enemy follower on the field and engage it. It doesn't refresh during its controller's next start phase."
+
+### `engageSelf`
+
+**Arguments:** none — engages the source follower
+
+**Syntax:**
+
+```json
+{
+  "op": "engageSelf"
+}
+```
+**Example card text:** "[act] [engage]: …"
+
+### `evolveCostReduction`
+
+**Arguments:** `amount`
+
+**Syntax:**
+
+```json
+{
+  "op": "evolveCostReduction",
+  "amount": 1
+}
+```
+**Example card text:** "It costs 1 less to evolve this follower this turn."
+
+### `evolveOtherFollower`
+
+**Arguments:** `filter?`, `excludeSelf?`
+
+**Syntax:**
+
+```json
+{
+  "op": "evolveOtherFollower",
+  "filter": {
+    "trait": "Officer"
+  },
+  "excludeSelf": true
+}
+```
+**Example card text:** "Evolve another Officer follower on your field."
+
+### `exAreaPlayCostReduction`
+
+**Arguments:** `amount`
+
+**Notes:** Passive while condition holds.
+
+**Syntax:**
+
+```json
+{
+  "op": "exAreaPlayCostReduction",
+  "amount": 1
+}
+```
+**Example card text:** "This card costs 1 less to play from the EX area."
+
+### `gainEvolutionPoint`
+
+**Arguments:** `amount?` (default 1)
+
+**Syntax:**
+
+```json
+{
+  "op": "gainEvolutionPoint",
+  "amount": 1
+}
+```
+**Example card text:** "Gain an evolution point."
+
+### `grantActRestriction`
+
+**Arguments:** `exceptEvolve?`, `untilEndOfTurn?`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantActRestriction",
+  "exceptEvolve": true,
+  "untilEndOfTurn": true
+}
+```
+**Example card text:** "This follower can't activate [act] abilities this turn (except Evolve)."
+
+### `grantIgnoresWard`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantIgnoresWard",
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "This follower ignores Ward."
+
+### `grantIndestructible`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantIndestructible",
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "This follower can't be destroyed by abilities."
+
+### `grantKeyword`
+
+**Arguments:** `keyword` (Keyword), `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantKeyword",
+  "keyword": "storm",
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Give this follower Storm."
+
+### `grantLastWords`
+
+**Arguments:** `effect` — grants extra last words while on field
+
+**Syntax:**
+
+```json
+{
+  "op": "grantLastWords",
+  "effect": {
+    "op": "draw",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Give this follower "Last Words: Draw a card.""
+
+### `grantLeaderDamageShield`
+
+**Arguments:** `charges`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantLeaderDamageShield",
+  "charges": 2
+}
+```
+**Example card text:** "Give your leader a 2-damage shield."
+
+### `grantNextPlayCostReduction`
+
+**Arguments:** `filter?`, `amount`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantNextPlayCostReduction",
+  "filter": {
+    "cardType": "spell"
+  },
+  "amount": 1
+}
+```
+**Example card text:** "The next spell you play this turn costs 1 less."
+
+### `grantOnAllyFollowerEnter`
+
+**Arguments:** `filter?`, `effect`, `untilEndOfTurn?`, `oncePerTurn?`, `maxPerTurn?`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantOnAllyFollowerEnter",
+  "filter": {
+    "trait": "Machina"
+  },
+  "effect": {
+    "op": "draw",
+    "count": 1
+  },
+  "oncePerTurn": true
+}
+```
+**Example card text:** "Whenever you play a Machina follower, draw a card."
+
+### `grantOnCardPlayed`
+
+**Arguments:** `filter?`, `effect`, `untilEndOfTurn?`, `oncePerTurn?`, `maxPerTurn?`, `label?`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantOnCardPlayed",
+  "filter": {
+    "cardType": "spell"
+  },
+  "effect": {
+    "op": "draw",
+    "count": 1
+  },
+  "untilEndOfTurn": true,
+  "oncePerTurn": true
+}
+```
+**Example card text:** "Whenever you play a spell this turn, draw a card. Activate only once per turn."
+
+### `grantOnDamaged`
+
+**Arguments:** `effect`, `oncePerTurn?`, `opponentTurnOnly?`, `label?`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantOnDamaged",
+  "effect": {
+    "op": "dealDamage",
+    "amount": 2,
+    "targets": {
+      "type": "enemyLeader"
+    }
+  },
+  "oncePerTurn": true
+}
+```
+**Example card text:** "The first time this follower takes damage each turn, deal 2 damage to the enemy leader."
+
+### `grantOpponentRestriction`
+
+**Arguments:** `restriction` (`skipDraw` | `skipPp` | `noFollowers`)
+
+**Syntax:**
+
+```json
+{
+  "op": "grantOpponentRestriction",
+  "restriction": "noFollowers"
+}
+```
+**Example card text:** "Your opponent can't play followers during their next main phase."
+
+### `grantPlayCostReduction`
+
+**Arguments:** `amount`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "grantPlayCostReduction",
+  "amount": 2,
+  "targets": {
+    "type": "selfFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Give a follower in your hand [cost]-2 this turn."
+
+### `handResetDraw`
+
+**Arguments:** `controllerBonusDraw?`
+
+**Syntax:**
+
+```json
+{
+  "op": "handResetDraw",
+  "controllerBonusDraw": 1
+}
+```
+**Example card text:** "Each player returns their hand to their deck, shuffles, then draws cards equal to the number returned. You draw 1 more."
+
+### `healLeader`
+
+**Arguments:** `amount` (number)
+
+**Syntax:**
+
+```json
+{
+  "op": "healLeader",
+  "amount": 3
+}
+```
+**Example card text:** "Recover 3 defense to your leader."
+
+### `if`
+
+**Arguments:** `condition`, `then`, `else?`
+
+**Syntax:**
+
+```json
+{
+  "op": "if",
+  "condition": {
+    "type": "combo",
+    "count": 3
+  },
+  "then": {
+    "op": "buff",
+    "atk": 1,
+    "def": 1,
+    "targets": {
+      "type": "self"
+    }
+  }
+}
+```
+**Example card text:** "Combo (3) - Give this follower [attack]+1/[defense]+1."
+
+### `increaseMaxPp`
+
+**Arguments:** `amount`
+
+**Syntax:**
+
+```json
+{
+  "op": "increaseMaxPp",
+  "amount": 1
+}
+```
+**Example card text:** "Increase your maximum play points by 1."
+
+### `maneuver`
+
+**Arguments:** none — amulet maneuvers as follower until end of turn
+
+**Syntax:**
+
+```json
+{
+  "op": "maneuver"
+}
+```
+**Example card text:** "Maneuver this amulet as a follower until the end of your turn."
+
+### `mill`
+
+**Arguments:** `count` (number) — top cards of your deck to cemetery
+
+**Syntax:**
+
+```json
+{
+  "op": "mill",
+  "count": 2
+}
+```
+**Example card text:** "Bury the top 2 cards of your deck."
+
+### `millOpponent`
+
+**Arguments:** `count` (number)
+
+**Syntax:**
+
+```json
+{
+  "op": "millOpponent",
+  "count": 1
+}
+```
+**Example card text:** "Each opponent puts the top card of their deck into their cemetery."
+
+### `millToBanish`
+
+**Arguments:** `count` (number) — mill from deck to banish zone
+
+**Syntax:**
+
+```json
+{
+  "op": "millToBanish",
+  "count": 3
+}
+```
+**Example card text:** "Banish the top 3 cards of your deck."
+
+### `moveSourceToExArea`
+
+**Arguments:** none — moves the effect source to EX area
+
+**Syntax:**
+
+```json
+{
+  "op": "moveSourceToExArea"
+}
+```
+**Example card text:** "Put this card into your EX area."
+
+### `moveToExArea`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "moveToExArea",
+  "targets": {
+    "type": "selfFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Put this follower into your EX area."
+
+### `noop`
+
+**Arguments:** `label?` — placeholder for unimplemented text
+
+**Notes:** Do not ship in production card defs.
+
+**Syntax:**
+
+```json
+{
+  "op": "noop",
+  "label": "stub"
+}
+```
+**Example card text:** "(Not implemented — used only as a parser stub.)"
+
+### `opponentDiscardEach`
+
+**Arguments:** `count` (number) — each opponent discards that many
+
+**Syntax:**
+
+```json
+{
+  "op": "opponentDiscardEach",
+  "count": 1
+}
+```
+**Example card text:** "Each opponent discards a card."
+
+### `opponentTurnStrikeBonus`
+
+**Arguments:** `amount`
+
+**Notes:** Passive; applied in combat.
+
+**Syntax:**
+
+```json
+{
+  "op": "opponentTurnStrikeBonus",
+  "amount": 2
+}
+```
+**Example card text:** "During your opponent's turn, this follower gets [attack]+2 when striking."
+
+### `optionalCost`
+
+**Arguments:** `label?`, `cost` (Effect), `then` (Effect)
+
+**Syntax:**
+
+```json
+{
+  "op": "optionalCost",
+  "label": "Discard a Swordcraft card",
+  "cost": {
+    "op": "discardFromHand",
+    "filter": {
+      "cardClass": "sword"
+    },
+    "count": 1
+  },
+  "then": {
+    "op": "if",
+    "condition": {
+      "type": "discardedCardType",
+      "cardType": "spell"
+    },
+    "then": {
+      "op": "draw",
+      "count": 2
+    },
+    "else": {
+      "op": "draw",
+      "count": 1
+    }
+  }
+}
+```
+**Example card text:** "Discard a Swordcraft card: Draw 2 cards if you discarded a spell, or draw 1 card otherwise."
+
+### `passiveKeywords`
+
+**Arguments:** `keywords` (Keyword[])
+
+**Notes:** Use timing `passive` or printed keywords on the card.
+
+**Syntax:**
+
+```json
+{
+  "op": "passiveKeywords",
+  "keywords": [
+    "ward",
+    "storm"
+  ]
+}
+```
+**Example card text:** "Ward. Storm."
+
+### `peekDeck`
+
+**Arguments:** `count`, `optionalBury?`, `then?`
+
+**Syntax:**
+
+```json
+{
+  "op": "peekDeck",
+  "count": 2,
+  "optionalBury": true
+}
+```
+**Example card text:** "Look at the top 2 cards of your deck. You may bury them."
+
+### `playCostIncrease`
+
+**Arguments:** `amountPerFollower`
+
+**Notes:** Passive.
+
+**Syntax:**
+
+```json
+{
+  "op": "playCostIncrease",
+  "amountPerFollower": 1
+}
+```
+**Example card text:** "This card costs 1 more to play for each follower on your field."
+
+### `playCostReduction`
+
+**Arguments:** `amount` (number or DamageAmount)
+
+**Notes:** Usually timing `passive`.
+
+**Syntax:**
+
+```json
+{
+  "op": "playCostReduction",
+  "amount": 1
+}
+```
+**Example card text:** "This card costs 1 less to play."
+
+### `playDeckTopFollower`
+
+**Arguments:** `optional?`
+
+**Syntax:**
+
+```json
+{
+  "op": "playDeckTopFollower",
+  "optional": true
+}
+```
+**Example card text:** "You may put the top card of your deck onto your field if it's a follower."
+
+### `playFromOpponentCemetery`
+
+**Arguments:** `filter?`, `maxCost?`
+
+**Syntax:**
+
+```json
+{
+  "op": "playFromOpponentCemetery",
+  "filter": {
+    "cardType": "follower"
+  },
+  "maxCost": 3
+}
+```
+**Example card text:** "Select a follower that costs 3 or less in your opponent's cemetery and play it for 0 PP."
+
+### `putAllEnemyFollowersOnDeck`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "putAllEnemyFollowersOnDeck"
+}
+```
+**Example card text:** "Put all enemy followers on the field on the bottom of their owners' decks."
+
+### `putDeckTopToExArea`
+
+**Arguments:** `ifFilter?`, `then?`, `playCostReduction?`
+
+**Syntax:**
+
+```json
+{
+  "op": "putDeckTopToExArea",
+  "ifFilter": {
+    "cardType": "follower"
+  },
+  "playCostReduction": 2
+}
+```
+**Example card text:** "Put the top card of your deck into your EX area. If it's a follower, it costs 2 less to play this turn."
+
+### `putHandCardOnDeck`
+
+**Arguments:** `position` (`top` | `bottom`)
+
+**Syntax:**
+
+```json
+{
+  "op": "putHandCardOnDeck",
+  "position": "bottom"
+}
+```
+**Example card text:** "Put a card from your hand on the bottom of your deck."
+
+### `putOnBottomOfDeck`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "putOnBottomOfDeck",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower. Put it on the bottom of its owner's deck."
+
+### `putOnTopOfDeck`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "putOnTopOfDeck",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Put an enemy follower on the top of its owner's deck."
+
+### `putSameNameTokenToExArea`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "putSameNameTokenToExArea"
+}
+```
+**Example card text:** "Put a token copy of this card into your EX area."
+
+### `recoverPp`
+
+**Arguments:** `amount` (DamageAmount)
+
+**Syntax:**
+
+```json
+{
+  "op": "recoverPp",
+  "amount": 3
+}
+```
+**Example card text:** "Recover 3 play points."
+
+### `refresh`
+
+**Arguments:** `targets` — un-engage followers
+
+**Syntax:**
+
+```json
+{
+  "op": "refresh",
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Refresh this follower."
+
+### `removeCounter`
+
+**Arguments:** `counter`, `amount?`, `targets?`, `then?`
+
+**Syntax:**
+
+```json
+{
+  "op": "removeCounter",
+  "counter": "earth_sigil",
+  "amount": 1,
+  "then": {
+    "op": "draw",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Remove an Earth Sigil stack. If you do, draw a card."
+
+### `returnToHand`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "returnToHand",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Return an enemy follower on the field to its owner's hand."
+
+### `revealRandomHandSummonFollowers`
+
+**Arguments:** `count`
+
+**Syntax:**
+
+```json
+{
+  "op": "revealRandomHandSummonFollowers",
+  "count": 2
+}
+```
+**Example card text:** "Reveal 2 random cards from your hand. Summon each follower among them."
+
+### `reviveSelfFromCemetery`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "reviveSelfFromCemetery"
+}
+```
+**Example card text:** "[act] [cost01]: Summon this card from your cemetery."
+
+### `reviveToField`
+
+**Arguments:** `engaged?`
+
+**Syntax:**
+
+```json
+{
+  "op": "reviveToField",
+  "engaged": false
+}
+```
+**Example card text:** "Summon this card from your cemetery."
+
+### `rollDie`
+
+**Arguments:** `sides`, `outcomes` ({ on: number[], effect })
+
+**Syntax:**
+
+```json
+{
+  "op": "rollDie",
+  "sides": 6,
+  "outcomes": [
+    {
+      "on": [
+        6
+      ],
+      "effect": {
+        "op": "draw",
+        "count": 2
+      }
+    }
+  ]
+}
+```
+**Example card text:** "Roll a die. If the result is 6, draw 2 cards."
+
+### `searchDeckChoose`
+
+**Arguments:** `filter`, `lookAt`, `to`, `optional?`, `playCostReduction?`, `remainderTo?`
+
+**Syntax:**
+
+```json
+{
+  "op": "searchDeckChoose",
+  "filter": {
+    "trait": "Festive"
+  },
+  "lookAt": 4,
+  "to": "exArea",
+  "optional": true,
+  "remainderTo": "deckBottom"
+}
+```
+**Example card text:** "Look at the top 4 cards of your deck. You may put a Festive card from among them into your EX area. Put the rest on the bottom of your deck."
+
+### `searchDeckSummonMultiple`
+
+**Arguments:** `filter`, `lookAt`, `maxTotalCost`, `remainderTo?`
+
+**Syntax:**
+
+```json
+{
+  "op": "searchDeckSummonMultiple",
+  "filter": {
+    "cardType": "follower"
+  },
+  "lookAt": 5,
+  "maxTotalCost": 8,
+  "remainderTo": "deckBottom"
+}
+```
+**Example card text:** "Look at the top 5 cards of your deck. Summon followers from among them that cost 8 total or less. Put the rest on the bottom."
+
+### `selectEvolveDeckCard`
+
+**Arguments:** `filter?`, `face?`, `turnTo?`, `then?`, `optional?`
+
+**Syntax:**
+
+```json
+{
+  "op": "selectEvolveDeckCard",
+  "filter": {
+    "cardType": "follower"
+  },
+  "face": "facedown",
+  "turnTo": "faceup",
+  "optional": true
+}
+```
+**Example card text:** "Select a facedown card in your evolve deck and turn it face up."
+
+### `selectFromHand`
+
+**Arguments:** `filter`, `to`, `optional?`, `playCostReduction?`
+
+**Syntax:**
+
+```json
+{
+  "op": "selectFromHand",
+  "filter": {
+    "trait": "iM@S CG",
+    "cardType": "follower",
+    "maxCost": 2
+  },
+  "to": "exArea",
+  "optional": true,
+  "playCostReduction": 2
+}
+```
+**Example card text:** "Select a 2-cost or less iM@S CG follower in your hand and put it into your EX area. It costs 2 less to play."
+
+### `sequence`
+
+**Arguments:** `steps` (Effect[]) — run in order
+
+**Syntax:**
+
+```json
+{
+  "op": "sequence",
+  "steps": [
+    {
+      "op": "draw",
+      "count": 1
+    },
+    {
+      "op": "discard",
+      "count": 1
+    }
+  ]
+}
+```
+**Example card text:** "Draw a card. Discard a card."
+
+### `setLeaderDef`
+
+**Arguments:** `amount` — sets opponent leader defense
+
+**Syntax:**
+
+```json
+{
+  "op": "setLeaderDef",
+  "amount": 10
+}
+```
+**Example card text:** "Set your opponent's leader defense to 10."
+
+### `setStats`
+
+**Arguments:** `atk`, `def`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "setStats",
+  "atk": 10,
+  "def": 10,
+  "targets": {
+    "type": "self"
+  }
+}
+```
+**Example card text:** "Set this follower's attack and defense to 10."
+
+### `shuffleDeck`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "shuffleDeck"
+}
+```
+**Example card text:** "Shuffle your deck."
+
+### `silence`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "silence",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower. It loses all abilities."
+
+### `silenceOpponents`
+
+**Arguments:** none — silences all opponent field cards
+
+**Notes:** Passive aura on source.
+
+**Syntax:**
+
+```json
+{
+  "op": "silenceOpponents"
+}
+```
+**Example card text:** "All enemy followers and amulets lose all abilities."
+
+### `skipNextTurn`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "skipNextTurn"
+}
+```
+**Example card text:** "Your opponent skips their next turn."
+
+### `spendPp`
+
+**Arguments:** `amount` (number)
+
+**Syntax:**
+
+```json
+{
+  "op": "spendPp",
+  "amount": 1
+}
+```
+**Example card text:** "[cost01]: … (pay 1 PP as part of an optional cost)"
+
+### `summon`
+
+**Arguments:** `tokenCardNo?` or `tokenName?`, `count`, `zone` (`field` | `exArea`)
+
+**Syntax:**
+
+```json
+{
+  "op": "summon",
+  "tokenCardNo": "BP14-T01EN",
+  "count": 1,
+  "zone": "exArea"
+}
+```
+**Example card text:** "Put a Glittering Gold token into your EX area."
+
+### `summonCopyOfTarget`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "summonCopyOfTarget",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower. Summon a copy of it onto your field."
+
+### `summonFromCemetery`
+
+**Arguments:** `filter`, `count`, `maxTotalCost?`
+
+**Syntax:**
+
+```json
+{
+  "op": "summonFromCemetery",
+  "filter": {
+    "cardClass": "portal",
+    "cardType": "follower",
+    "maxCost": 5
+  },
+  "count": 2,
+  "maxTotalCost": 5
+}
+```
+**Example card text:** "Select up to 2 Portalcraft followers that cost a total of 5 or less in your cemetery and summon them."
+
+### `summonFromEvolveDeck`
+
+**Arguments:** `filter?`
+
+**Syntax:**
+
+```json
+{
+  "op": "summonFromEvolveDeck",
+  "filter": {
+    "cardNo": "BP14-019EN"
+  }
+}
+```
+**Example card text:** "You may summon a Taketsumi, Creator of Paradise from your evolve deck."
+
+### `summonFromExArea`
+
+**Arguments:** `filter?`, `engaged?`
+
+**Syntax:**
+
+```json
+{
+  "op": "summonFromExArea",
+  "filter": {
+    "cardNo": "BP12-082EN"
+  },
+  "engaged": false
+}
+```
+**Example card text:** "Summon this card from your EX area."
+
+### `summonLastTutoredFromHand`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "summonLastTutoredFromHand"
+}
+```
+**Example card text:** "Summon the card you added to your hand with this card's effect."
+
+### `summonSameNameToken`
+
+**Arguments:** none — summons a token matching source card's name
+
+**Syntax:**
+
+```json
+{
+  "op": "summonSameNameToken"
+}
+```
+**Example card text:** "Summon a token copy of this follower."
+
+### `summonSelfFromExArea`
+
+**Arguments:** `engaged?`
+
+**Syntax:**
+
+```json
+{
+  "op": "summonSelfFromExArea",
+  "engaged": true
+}
+```
+**Example card text:** "[act] [cost01]: Summon this card from your cemetery."
+
+### `swapAtkDef`
+
+**Arguments:** `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "swapAtkDef",
+  "targets": {
+    "type": "enemyFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Select an enemy follower. Swap its attack and defense."
+
+### `takeExtraTurn`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "takeExtraTurn"
+}
+```
+**Example card text:** "Take an extra turn after this one."
+
+### `transferCounters`
+
+**Arguments:** `counter`, `targets`
+
+**Syntax:**
+
+```json
+{
+  "op": "transferCounters",
+  "counter": "fable",
+  "targets": {
+    "type": "allyFieldCard",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Move all Fable counters from this card to another follower on your field."
+
+### `transform`
+
+**Arguments:** `tokenCardNo?` or `tokenName?`, `targets`, `count?`
+
+**Syntax:**
+
+```json
+{
+  "op": "transform",
+  "tokenCardNo": "BP01-T01EN",
+  "targets": {
+    "type": "selfFollower",
+    "count": 1
+  }
+}
+```
+**Example card text:** "Transform this follower into a Fairy."
+
+### `triggerAbilities`
+
+**Arguments:** `timing` — fires another timing on source immediately
+
+**Syntax:**
+
+```json
+{
+  "op": "triggerAbilities",
+  "timing": "onEvolve"
+}
+```
+**Example card text:** "[act] [cost01]: Play this follower's On Evolve ability."
+
+### `turnEvolveDeck`
+
+**Arguments:** `orientation` (`faceup`|`facedown`), `count`, `filter?`, `allMatching?`
+
+**Syntax:**
+
+```json
+{
+  "op": "turnEvolveDeck",
+  "orientation": "faceup",
+  "count": 1,
+  "filter": {
+    "cardClass": "forest"
+  }
+}
+```
+**Example card text:** "Turn the top card of your evolve deck face up."
+
+### `tutorFromCemetery`
+
+**Arguments:** `filter`, `to`, `playCostReduction?`, `reveal?`
+
+**Syntax:**
+
+```json
+{
+  "op": "tutorFromCemetery",
+  "filter": {
+    "trait": "Machina",
+    "cardType": "follower"
+  },
+  "to": "hand"
+}
+```
+**Example card text:** "Select a Machina follower in your cemetery and add it to your hand."
+
+### `tutorFromDeck`
+
+**Arguments:** `filter`, `to` (`hand`|`exArea`|`field`), `playCostReduction?`, `reveal?`
+
+**Syntax:**
+
+```json
+{
+  "op": "tutorFromDeck",
+  "filter": {
+    "cardClass": "sword",
+    "maxCost": 1
+  },
+  "to": "exArea"
+}
+```
+**Example card text:** "Search your deck for a 1-cost Swordcraft card, put it into your EX area, then shuffle."
+
+### `tutorFromDeckAny`
+
+**Arguments:** `to`, `optional?`, `reveal?`
+
+**Syntax:**
+
+```json
+{
+  "op": "tutorFromDeckAny",
+  "to": "hand",
+  "optional": true
+}
+```
+**Example card text:** "Search your deck for any card and add it to your hand."
+
+### `tutorFromEvolveDeck`
+
+**Arguments:** `filter`, `to`, `optional?`, `playCostReduction?`
+
+**Syntax:**
+
+```json
+{
+  "op": "tutorFromEvolveDeck",
+  "filter": {
+    "identityNameContains": "Taketsumi"
+  },
+  "to": "field",
+  "optional": true
+}
+```
+**Example card text:** "Search your evolve deck for Taketsumi and summon it."
+
+### `winGame`
+
+**Arguments:** none
+
+**Syntax:**
+
+```json
+{
+  "op": "winGame"
+}
+```
+**Example card text:** "You win the game."
+
+### `withChosenNumber`
+
+**Arguments:** `min`, `max`, `then` — player picks X in range
+
+**Syntax:**
+
+```json
+{
+  "op": "withChosenNumber",
+  "min": 0,
+  "max": 5,
+  "then": {
+    "op": "searchDeckChoose",
+    "filter": {
+      "maxCost": {
+        "op": "chosenNumber"
+      }
+    },
+    "lookAt": 40,
+    "to": "field"
+  }
+}
+```
+**Example card text:** "Search your deck for an Officer follower that costs X or less and put it onto your field. X is a number of your choice."
+
+
+---
+
+## Conditions (`condition.type`)
+
+| Type | Example card text |
+| --- | --- |
+| `always` | (unconditional) |
+| `combo` | Combo (3) - … |
+| `necrocharge` | Necromancy (10) - … |
+| `overflow` | Overflow - … |
+| `sanguine` | Sanguine - … |
+| `inExArea` | While this card is in your EX area, … |
+| `sourceInExArea` | While this card is in your EX area, … |
+| `namedFollowerOnField` | If there's a Nahtnaught, Cursed Queen on your field, … |
+| `namedFollowerOnFieldByName` | If there's a Jiemon, Thief Lord on your field, … |
+| `opponentCemeteryMin` | if there are at least 10 cards in opponents' cemeteries |
+| `ownCemeteryMin` | if there are at least 5 cards in your cemetery |
+| `ownCemeteryTraitMin` | if there are at least 5 Festive cards in your cemetery |
+| `ownCemeteryClassMin` | if there are at least 10 Swordcraft cards in your cemetery |
+| `exAreaTraitMin` | if there are at least 3 Festive cards in your EX area |
+| `exAreaNamedMin` | if there are at least 3 cards named Glittering Gold in your EX area |
+| `fieldTraitMin` | if there are 5 Machina followers on your field |
+| `handMin` | if you have at least 5 cards in hand |
+| `handMax` | if you have 3 or fewer cards in hand |
+| `ppMin` | if you have at least 7 play points |
+| `earthRite` | Earth Rite (1) - … |
+| `spellchain` | if there are at least 5 spells with different names in your cemetery |
+| `discardedThisTurn` | if you've discarded a card this turn |
+| `discardedCardType` | if you discarded a spell |
+| `enteredFromHand` | if this was played from hand |
+| `notEnteredFromHand` | if this wasn't put onto the field from hand |
+| `conditionAny` | if there are at least 5 Festive cards or at least 10 Swordcraft cards in your cemetery |
+
+**Syntax examples:**
+
+- `always`: ```json
+  {
+    "type": "always"
+  }
+  ```
+- `combo`: ```json
+  {
+    "type": "combo",
+    "count": 3
+  }
+  ```
+- `necrocharge`: ```json
+  {
+    "type": "necrocharge",
+    "count": 10
+  }
+  ```
+- `overflow`: ```json
+  {
+    "type": "overflow"
+  }
+  ```
+- `sanguine`: ```json
+  {
+    "type": "sanguine"
+  }
+  ```
+- `inExArea`: ```json
+  {
+    "type": "inExArea"
+  }
+  ```
+- `sourceInExArea`: ```json
+  {
+    "type": "sourceInExArea"
+  }
+  ```
+- `namedFollowerOnField`: ```json
+  {
+    "type": "namedFollowerOnField",
+    "cardNo": "BP11-018EN"
+  }
+  ```
+- `namedFollowerOnFieldByName`: ```json
+  {
+    "type": "namedFollowerOnFieldByName",
+    "identityName": "Jiemon, Thief Lord"
+  }
+  ```
+- `opponentCemeteryMin`: ```json
+  {
+    "type": "opponentCemeteryMin",
+    "count": 10
+  }
+  ```
+- `ownCemeteryMin`: ```json
+  {
+    "type": "ownCemeteryMin",
+    "count": 5
+  }
+  ```
+- `ownCemeteryTraitMin`: ```json
+  {
+    "type": "ownCemeteryTraitMin",
+    "trait": "Festive",
+    "count": 5
+  }
+  ```
+- `ownCemeteryClassMin`: ```json
+  {
+    "type": "ownCemeteryClassMin",
+    "cardClass": "sword",
+    "count": 10
+  }
+  ```
+- `exAreaTraitMin`: ```json
+  {
+    "type": "exAreaTraitMin",
+    "trait": "Festive",
+    "count": 3
+  }
+  ```
+- `exAreaNamedMin`: ```json
+  {
+    "type": "exAreaNamedMin",
+    "identityName": "Glittering Gold",
+    "count": 3
+  }
+  ```
+- `fieldTraitMin`: ```json
+  {
+    "type": "fieldTraitMin",
+    "trait": "Machina",
+    "count": 5
+  }
+  ```
+- `handMin`: ```json
+  {
+    "type": "handMin",
+    "count": 5
+  }
+  ```
+- `handMax`: ```json
+  {
+    "type": "handMax",
+    "count": 3
+  }
+  ```
+- `ppMin`: ```json
+  {
+    "type": "ppMin",
+    "count": 7
+  }
+  ```
+- `earthRite`: ```json
+  {
+    "type": "earthRite",
+    "count": 1
+  }
+  ```
+- `spellchain`: ```json
+  {
+    "type": "spellchain",
+    "count": 5
+  }
+  ```
+- `discardedThisTurn`: ```json
+  {
+    "type": "discardedThisTurn"
+  }
+  ```
+- `discardedCardType`: ```json
+  {
+    "type": "discardedCardType",
+    "cardType": "spell"
+  }
+  ```
+- `enteredFromHand`: ```json
+  {
+    "type": "enteredFromHand"
+  }
+  ```
+- `notEnteredFromHand`: ```json
+  {
+    "type": "notEnteredFromHand"
+  }
+  ```
+- `conditionAny`: ```json
+  {
+    "type": "conditionAny",
+    "conditions": [
+      {
+        "type": "ownCemeteryTraitMin",
+        "trait": "Festive",
+        "count": 5
+      },
+      {
+        "type": "ownCemeteryClassMin",
+        "cardClass": "sword",
+        "count": 10
+      }
+    ]
+  }
+  ```
+
+---
+
+## Target selectors (`targets.type`)
+
+| Type | Example card text |
+| --- | --- |
+| `self` | this card / this follower |
+| `selfLeader` | your leader |
+| `enemyLeader` | the enemy leader |
+| `enemyFollower` | Select an enemy follower that costs 3 or less |
+| `enemyFieldCard` | Select an enemy card on the field |
+| `selfFollower` | Select another follower on your field |
+| `allyFieldCard` | Select another card on your field |
+| `anyFollower` | Select a follower on the field |
+| `lastSummoned` | the last follower you summoned this turn |
+
+**Syntax examples:**
+
+- `self`: ```json
+  {
+    "type": "self"
+  }
+  ```
+- `selfLeader`: ```json
+  {
+    "type": "selfLeader"
+  }
+  ```
+- `enemyLeader`: ```json
+  {
+    "type": "enemyLeader"
+  }
+  ```
+- `enemyFollower`: ```json
+  {
+    "type": "enemyFollower",
+    "count": 1,
+    "maxCost": 3,
+    "maxDef": 5
+  }
+  ```
+- `enemyFieldCard`: ```json
+  {
+    "type": "enemyFieldCard",
+    "count": 1
+  }
+  ```
+- `selfFollower`: ```json
+  {
+    "type": "selfFollower",
+    "count": 1,
+    "excludeSelf": true
+  }
+  ```
+- `allyFieldCard`: ```json
+  {
+    "type": "allyFieldCard",
+    "count": 1,
+    "excludeSelf": true
+  }
+  ```
+- `anyFollower`: ```json
+  {
+    "type": "anyFollower",
+    "count": 1
+  }
+  ```
+- `lastSummoned`: ```json
+  {
+    "type": "lastSummoned"
+  }
+  ```
+
+---
+
+## Dynamic amounts (`DamageAmount`)
+
+| Form | Example card text |
+| --- | --- |
+| `number` | Deal 3 damage. |
+| `handCount` | X equals the number of cards in your hand. |
+| `handExAreaTotal` | X equals the total number of cards in your hand and EX area. |
+| `traitFieldCount` | X equals the number of Machina followers on your field. |
+| `namedIdentityFieldCount` | X equals the number of Assembly Droid on your field. |
+| `selfAttack` | damage equal to this follower's attack |
+| `selfDefense` | damage equal to this follower's defense |
+| `targetAttack` | damage equal to the selected follower's attack |
+| `maxPp` | X equals your maximum play points. |
+| `cemeteryFilterCount` | X equals half the number of Abysscraft cards in your cemetery (rounded down). |
+| `chosenNumber` | X is a number of your choice from 0 to 5. |
+
+**Syntax examples:**
+
+- `number`: ```json
+  3
+  ```
+- `handCount`: ```json
+  {
+    "op": "handCount"
+  }
+  ```
+- `handExAreaTotal`: ```json
+  {
+    "op": "handExAreaTotal"
+  }
+  ```
+- `traitFieldCount`: ```json
+  {
+    "op": "traitFieldCount",
+    "trait": "Machina",
+    "multiplier": 1
+  }
+  ```
+- `namedIdentityFieldCount`: ```json
+  {
+    "op": "namedIdentityFieldCount",
+    "identityName": "Assembly Droid",
+    "multiplier": 1
+  }
+  ```
+- `selfAttack`: ```json
+  {
+    "op": "selfAttack"
+  }
+  ```
+- `selfDefense`: ```json
+  {
+    "op": "selfDefense"
+  }
+  ```
+- `targetAttack`: ```json
+  {
+    "op": "targetAttack"
+  }
+  ```
+- `maxPp`: ```json
+  {
+    "op": "maxPp"
+  }
+  ```
+- `cemeteryFilterCount`: ```json
+  {
+    "op": "cemeteryFilterCount",
+    "filter": {
+      "cardClass": "abyss"
+    },
+    "divisor": 2
+  }
+  ```
+- `chosenNumber`: ```json
+  {
+    "op": "chosenNumber",
+    "min": 0,
+    "max": 5
+  }
+  ```
+
+---
+
+## Composing effects
+
+Most real cards nest primitives:
+
+```json
+{
+  "timing": "fanfare",
+  "effect": {
+    "op": "sequence",
+    "steps": [
+      { "op": "draw", "count": 1 },
+      { "op": "discard", "count": 1 },
+      {
+        "op": "if",
+        "condition": { "type": "ownCemeteryTraitMin", "trait": "Festive", "count": 5 },
+        "then": { "op": "summon", "tokenCardNo": "BP14-019EN", "count": 1, "zone": "field" }
+      }
+    ]
+  }
+}
+```
+
+**Example card text:** "[fanfare] Draw a card. Discard a card. If there are at least 5 Festive cards in your cemetery, summon a Taketsumi, Creator of Paradise."
+
+---
+
+## Not yet implemented (planned)
+
+See `packages/sve-engine/data/engine-blockers.json` for mechanics not in the current EN scrape: **countdown**, **enhance**, **spellboost**, **accelerate**, **fuse**, **crest**.
+
+## Vanguard crossover
+
+Cardfight!! Vanguard ride/feed/drive mechanics are deferred and excluded from the standard DSL pipeline.

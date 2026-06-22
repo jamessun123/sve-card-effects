@@ -1,0 +1,1864 @@
+{
+  "BP05-025EN": {
+    "cardNo": "BP05-025EN",
+    "name": "Disciple of Usurpation",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Omen / Thief",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #5 “Omens Eternal”",
+      "cost": "3",
+      "attack": "3",
+      "defense": "2",
+      "effect": "Storm. Strike: Each opponent puts the top card of their deck into their cemetery. Then, if there are at least 10 cards in opponents' cemeteries, give this follower [attack]+2."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-025EN.png"
+  },
+  "BP11-018EN": {
+    "cardNo": "BP11-018EN",
+    "name": "Nahtnaught, Cursed Queen",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Wasteland / Commander",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "4",
+      "attack": "3",
+      "defense": "5",
+      "effect": "[fanfare] Search your deck for a 1-cost [swordcraft] card, put it into your EX area, then shuffle. [act] [cost00]: Select an enemy follower on the field and engage it. It becomes Boxed until the end of its controller's next turn. Activate only once per turn. (Boxed followers lose all abilities and don't refresh during the start phase.)"
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-018EN.png"
+  },
+  "BP14-018EN": {
+    "cardNo": "BP14-018EN",
+    "name": "Taketsumi, Aconite Paladin",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Festive / Commander",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "3",
+      "effect": "[adv] [cost04], banish this: You may summon a Taketsumi, Creator of Paradise from your evolve deck. Activate only if there are at least 5 Festive cards or at least 10 [swordcraft] cards in your cemetery. [fanfare] Draw a card. Discard a card. Put a Glittering Gold token into your EX area."
+    },
+    "imgSrc": ""
+  },
+  "BP14-022EN": {
+    "cardNo": "BP14-022EN",
+    "name": "Jiemon, Thief Lord",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Festive / Commander / Thief",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "4",
+      "attack": "3",
+      "defense": "4",
+      "effect": "[evolve] [cost01]: Evolve this. Each other Festive follower on your field has Storm. [fanfare] Put a Glittering Gold token into your EX area."
+    },
+    "imgSrc": ""
+  },
+  "BP14-025EN": {
+    "cardNo": "BP14-025EN",
+    "name": "Hero of the Hunt",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Spell",
+      "trait": "Festive / Commander",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "3",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Select an enemy follower on the field. Deal it 5 damage, put a Glittering Gold token into your EX area, and, if there are at least 5 Festive cards or at least 10 [swordcraft] cards in your cemetery, search your deck for a Taketsumi, Aconite Paladin, summon it, then shuffle."
+    },
+    "imgSrc": ""
+  },
+  "BP14-026EN": {
+    "cardNo": "BP14-026EN",
+    "name": "Masterful Musician",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Festive / Thief",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "3",
+      "attack": "3",
+      "defense": "3",
+      "effect": "[evolve] [cost01]: Evolve this. [fanfare] Put a Glittering Gold token into your EX area. If there's a Jiemon, Thief Lord on your field, give your leader [defense]+3."
+    },
+    "imgSrc": ""
+  },
+  "BP14-030EN": {
+    "cardNo": "BP14-030EN",
+    "name": "Front Desk Frog",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Festive / Thief / Beast",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this. [fanfare] Put a Glittering Gold token into your EX area. If there's a Jiemon, Thief Lord on your field, evolve this."
+    },
+    "imgSrc": ""
+  },
+  "BP14-034EN": {
+    "cardNo": "BP14-034EN",
+    "name": "Night on the Town",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Spell",
+      "trait": "Festive / Commander / Thief",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Choose 1. (1) Select an enemy follower on the field. Deal it 2 damage and put a Glittering Gold token into your EX area. (2) Select an enemy follower on the field and, if there are at least 3 Festive cards in your EX area, deal it 4 damage."
+    },
+    "imgSrc": ""
+  },
+  "BP14-035EN": {
+    "cardNo": "BP14-035EN",
+    "name": "Haggler's Gambit",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Spell",
+      "trait": "Merchant",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "This costs 1 less to play if there are at least 3 cards in your EX area named Glittering Gold. ---------- Draw a card. Put a Glittering Gold token into your EX area."
+    },
+    "imgSrc": ""
+  },
+  "BP14-115EN": {
+    "cardNo": "BP14-115EN",
+    "name": "Stay in Paradise",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Festive",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Look at the top 4 cards of your deck. You may put a Festive card from among them into your EX area. Put the rest on the bottom of your deck in any order."
+    },
+    "imgSrc": ""
+  },
+  "BP14-118EN": {
+    "cardNo": "BP14-118EN",
+    "name": "Torchbearing Guide",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Festive / Mercenary",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "3",
+      "effect": "[fanfare] Put a Festive card from your hand into your EX area: Draw a card. If there are at least 3 Festive cards in your EX area, give this [attack]+1/[defense]+1."
+    },
+    "imgSrc": ""
+  },
+  "BP16-022EN": {
+    "cardNo": "BP16-022EN",
+    "name": "Ginne, Bewitching Courtesan",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Festive",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "2",
+      "attack": "3",
+      "defense": "2",
+      "effect": "[fanfare] Choose up to 2. If there's a Jiemon, Thief Lord on your field, choose up to 3 instead. (1) Select an enemy follower on the field and engage it. It doesn't refresh during its controller's next start phase. (2) Draw a card. Put a card from your hand on the top or bottom of your deck. (3) Put 2 Glittering Gold tokens into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-022EN.png"
+  },
+  "BP07-022EN": {
+    "cardNo": "BP07-022EN",
+    "name": "Leod, the Crescent Blade",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Assassin",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "2",
+      "attack": "1",
+      "defense": "3",
+      "effect": "[evolve] [cost02]: Evolve this follower. While this card is reserved on your field, it has Intimidate and Aura. At the start of your end phase, select an enemy follower on the field and deal it 1 damage."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-022EN.png"
+  },
+  "BP17-033EN": {
+    "cardNo": "BP17-033EN",
+    "name": "Stone Merchant",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Merchant",
+      "rarity": "Bronze",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[fanfare] Discard a [swordcraft] card: Draw a card. If you discarded a spell, draw 2 instead."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-033EN.png"
+  },
+  "BP14-023EN": {
+    "cardNo": "BP14-023EN",
+    "name": "Jiemon, Thief Lord Evolved",
+    "type": "evolved",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Festive / Commander / Thief",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "-",
+      "attack": "4",
+      "defense": "5",
+      "effect": "Each other Festive follower on your field has Storm. On Evolve - Banish 2 cards named Glittering Gold from your EX area: Look at the top 5 cards of your deck. You may put a Festive card that costs 3 or less from among them into your EX area. It costs 3 less to play this turn. Put the rest on the bottom of your deck in any order. [act] [cost01]: Play this follower's On Evolve ability."
+    },
+    "imgSrc": ""
+  },
+  "BP14-027EN": {
+    "cardNo": "BP14-027EN",
+    "name": "Masterful Musician Evolved",
+    "type": "evolved",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Festive / Thief",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "-",
+      "attack": "4",
+      "defense": "4",
+      "effect": "Whenever a Glittering Gold token is put into your EX area, select an enemy follower on the field. Deal 3 damage to it and 1 damage to its leader. On Evolve - Put a Glittering Gold token into your EX area."
+    },
+    "imgSrc": ""
+  },
+  "BP14-031EN": {
+    "cardNo": "BP14-031EN",
+    "name": "Front Desk Frog Evolved",
+    "type": "evolved",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Festive / Thief / Beast",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "-",
+      "attack": "3",
+      "defense": "3",
+      "effect": "On Evolve - Select an enemy follower on the field. Deal it 2 damage and, if there are at least 3 Festive cards in your EX area, draw a card."
+    },
+    "imgSrc": ""
+  },
+  "BP07-023EN": {
+    "cardNo": "BP07-023EN",
+    "name": "Leod, the Crescent Blade Evolved",
+    "type": "evolved",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Assassin",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "-",
+      "attack": "2",
+      "defense": "4",
+      "effect": "On Evolve - Select an enemy leader or enemy follower on the field and deal it 2 damage. While this card is reserved on your field, it has Intimidate and Aura. At the start of your end phase, select an enemy follower on the field and deal it 1 damage."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-023EN.png"
+  },
+  "BP14-019EN": {
+    "cardNo": "BP14-019EN",
+    "name": "Taketsumi, Creator of Paradise ADVANCED",
+    "type": "evolved",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower / Advanced",
+      "trait": "Festive / Commander",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "4",
+      "attack": "5",
+      "defense": "6",
+      "effect": "[fanfare] Summon 2 Sootspawn tokens. [act] [engage]: Select an enemy follower on the field. Deal 5 damage to it and 3 damage to its leader."
+    },
+    "imgSrc": ""
+  },
+  "ECP02-001EN": {
+    "cardNo": "ECP02-001EN",
+    "name": "Anastasia [Seize the Light]",
+    "type": "base",
+    "class": "forest",
+    "details": {
+      "format": "Any",
+      "class": "Forestcraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "2",
+      "attack": "1",
+      "defense": "1",
+      "effect": "[evolve] [cost01]: Evolve this. [fanfare] [cost01], Lesson (1): You may put an iM@S CG follower that costs 2 or less from your hand into your EX area. It costs 2 less to play this turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-001EN.png"
+  },
+  "ECP02-003EN": {
+    "cardNo": "ECP02-003EN",
+    "name": "Hajime Fujiwara [Pink Blossom Dream]",
+    "type": "base",
+    "class": "forest",
+    "details": {
+      "format": "Any",
+      "class": "Forestcraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[fanfare] Look at the top card of your deck. If it's a Cool card, you may reveal it and add it to your hand. [act] [cost00]: Select an enemy follower on the field and deal it 1 damage. Activate only if there are at least 3 Cool followers on your field, and only once per turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-003EN.png"
+  },
+  "ECP02-012EN": {
+    "cardNo": "ECP02-012EN",
+    "name": "Rin Shibuya [Cinderella Girl]",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "1",
+      "effect": "Storm. [fanfare] Lesson (2): Select an enemy follower on the field and deal it damage equal to the number of Cool followers on your field."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-012EN.png"
+  },
+  "ECP02-016EN": {
+    "cardNo": "ECP02-016EN",
+    "name": "Karen Hojo [Cinderella Girl]",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "1",
+      "attack": "1",
+      "defense": "1",
+      "effect": "[fanfare] Look at the top card of your deck. If it's a Cool card, you may reveal it and add it to your hand. [lastwords] Put a Magical Item token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-016EN.png"
+  },
+  "CSD02b-004EN": {
+    "cardNo": "CSD02b-004EN",
+    "name": "Yasuha Okazaki",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Gold",
+      "cardSet": "Crossover Starter Deck “Cool”",
+      "cost": "4",
+      "attack": "4",
+      "defense": "4",
+      "effect": "[fanfare] Search your deck for a Cool follower that costs 2 or less, summon it, then shuffle your deck."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02b/CSD02b-004EN.png"
+  },
+  "CSD02b-007EN": {
+    "cardNo": "CSD02b-007EN",
+    "name": "Kako Takafuji",
+    "type": "base",
+    "class": "haven",
+    "details": {
+      "format": "Any",
+      "class": "Havencraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Silver",
+      "cardSet": "Crossover Starter Deck “Cool”",
+      "cost": "1",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost02]: Evolve this follower."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02b/CSD02b-007EN.png"
+  },
+  "ECP02-058EN": {
+    "cardNo": "ECP02-058EN",
+    "name": "Koume Shirasaka [Haunted Gown]",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Gold",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "3",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[fanfare] Select a Cool follower in your cemetery not named Koume Shirasaka [Haunted Gown] that costs 3 or less and, if there are at least 3 Cool followers on your field, summon it. [act] [cost01], Lesson (1), [engage]: Search your deck for a Last Daylight, put it into your EX area, then shuffle. It costs 2 less to play this turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-058EN.png"
+  },
+  "ECP02-002EN": {
+    "cardNo": "ECP02-002EN",
+    "name": "Anastasia [Seize the Light] Evolved",
+    "type": "evolved",
+    "class": "forest",
+    "details": {
+      "format": "Any",
+      "class": "Forestcraft",
+      "cardType": "Follower / Evolved",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "-",
+      "attack": "2",
+      "defense": "2",
+      "effect": "On Evolve - Select up to 2 other iM@S CG followers on your field and give them [attack]+1/[defense]+1. On Super-Evolve - Give each other iM@S CG follower on your field [attack]+1/[defense]+1."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-002EN.png"
+  },
+  "CP02-070EN": {
+    "cardNo": "CP02-070EN",
+    "name": "Ranko Kanzaki Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+      "cost": "-",
+      "attack": "4",
+      "defense": "4",
+      "effect": "On Evolve - Look at the top 4 cards of your deck. You may put one of them into your EX area. Bury the rest. [act] [cost01], Lesson (2): Select up to 2 enemy followers on the field and deal them 2 damage."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-070EN.png"
+  },
+  "ECP02-038EN": {
+    "cardNo": "ECP02-038EN",
+    "name": "Fumika Sagisawa [Cinderella Girl] Evolved",
+    "type": "evolved",
+    "class": "dragon",
+    "details": {
+      "format": "Any",
+      "class": "Dragoncraft",
+      "cardType": "Follower / Evolved",
+      "trait": "iM@S CG / Cool",
+      "rarity": "Legendary",
+      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+      "cost": "-",
+      "attack": "3",
+      "defense": "3",
+      "effect": "On Evolve - Choose 1. (1) Select an enemy follower on the field and deal it 2 damage. (2) [cost04], bury this: Search your deck for a follower with \"Fumika Sagisawa\" in its name, summon it, then shuffle."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-038EN.png"
+  },
+  "BP07-116EN": {
+    "cardNo": "BP07-116EN",
+    "name": "Mechagun Wielder",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Machina / Mercenary",
+      "rarity": "Bronze",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "1",
+      "attack": "1",
+      "defense": "2",
+      "effect": "[fanfare] Put an Assembly Droid or Repair Mode token into your EX area. [lastwords] Discard a Machina card: Draw a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-116EN.png"
+  },
+  "BP12-048EN": {
+    "cardNo": "BP12-048EN",
+    "name": "Device Diviner",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Alchemist",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "3",
+      "effect": "[fanfare] Put an Assembly Droid or Repair Mode token into your EX area. Once per turn, when you play a Machina card, give your leader [defense]+1."
+    },
+    "imgSrc": ""
+  },
+  "BP12-049EN": {
+    "cardNo": "BP12-049EN",
+    "name": "Mechabook Sorcerer",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Mage",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "3",
+      "effect": "[fanfare] Discard a Machina card: Draw a card. Put an Assembly Droid and Repair Mode token into your EX area. Then, if there are 5 Machina cards in your EX area, recover 1 play point."
+    },
+    "imgSrc": ""
+  },
+  "BP17-049EN": {
+    "cardNo": "BP17-049EN",
+    "name": "Awakened Robot",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Natura / Golem",
+      "rarity": "Bronze",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this. [lastwords] Put a Repair Mode token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-049EN.png"
+  },
+  "BP17-041EN": {
+    "cardNo": "BP17-041EN",
+    "name": "Tetra, Serene Sapphire",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Golem",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this. [fanfare] Put a Repair Mode token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-041EN.png"
+  },
+  "BP07-035EN": {
+    "cardNo": "BP07-035EN",
+    "name": "Tetra, Sapphire Rebel",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Golem",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "3",
+      "attack": "3",
+      "defense": "3",
+      "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Put a Repair Mode token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-035EN.png"
+  },
+  "BP07-037EN": {
+    "cardNo": "BP07-037EN",
+    "name": "Belphomet, Lord of Aiolon",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Supreme",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "7",
+      "attack": "5",
+      "defense": "5",
+      "effect": "Rush. [fanfare] Look at the top 5 cards of your deck. From among them, you may summon any number of Machina followers that cost a total of 6 or less. Put the rest on the bottom of your deck in any order. At the start of your end phase, give each other Machina follower on your field [attack]+1/[defense]+1."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-037EN.png"
+  },
+  "BP12-035EN": {
+    "cardNo": "BP12-035EN",
+    "name": "Belphomet, Worldreaver",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Supreme",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "6",
+      "attack": "5",
+      "defense": "5",
+      "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Summon an Armored Tentacle token. [act] [cost03], banish 2 Machina tokens from your EX area, put this card from your hand into your EX area: Summon an Armored Tentacle or Assault Tentacle token."
+    },
+    "imgSrc": ""
+  },
+  "BP17-040EN": {
+    "cardNo": "BP17-040EN",
+    "name": "Belphomet, Ultimate Creator",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower",
+      "trait": "Machina / Supreme",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "5",
+      "attack": "5",
+      "defense": "5",
+      "effect": "This costs 5 less to play if there's a Machina follower on your field that costs 6 or more. ---------- [fanfare] Bury each Machina follower that costs 6 or more. If you buried a 6-cost Machina follower, summon an Assault Tentacle token. If you buried a 7-cost Machina follower, deal 4 damage to each enemy follower on the field and give each other Machina follower on your field [attack]+2/[defense]+2."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-040EN.png"
+  },
+  "BP17-048EN": {
+    "cardNo": "BP17-048EN",
+    "name": "Fruits of Wisdom",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Spell",
+      "trait": "Machina / Natura / Golem",
+      "rarity": "Silver",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Look at the top card of your deck. If it's a Machina card, you may put it into your EX area. Put an Assembly Droid token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-048EN.png"
+  },
+  "BP07-041EN": {
+    "cardNo": "BP07-041EN",
+    "name": "Delta Cannon",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Spell",
+      "trait": "Machina / Golem",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "When a Tetra, Sapphire Rebel is put onto your field, [cost01]: Put this card from your cemetery into your EX area. ---------- [quick] Select an enemy follower on the field and deal it 2 damage."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-041EN.png"
+  },
+  "BP12-041EN": {
+    "cardNo": "BP12-041EN",
+    "name": "Sorcery in Solidarity",
+    "type": "base",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Spell",
+      "trait": "Machina / Mage / Golem",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "3",
+      "attack": "-",
+      "defense": "-",
+      "effect": "If there are at least 5 Machina cards in your cemetery, search your deck for a Machina follower that costs 3 or less and a 1-cost [runecraft] spell, summon the follower, put the spell into your EX area, then shuffle."
+    },
+    "imgSrc": ""
+  },
+  "BP17-119EN": {
+    "cardNo": "BP17-119EN",
+    "name": "Aiolon's Remains",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Amulet",
+      "trait": "Machina",
+      "rarity": "Silver",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "-",
+      "defense": "-",
+      "effect": "[fanfare] Discard a Machina card: Draw 2 cards. If there are at least 3 Machina cards in your EX area, recover 1 play point. [act] [engage], bury this: Choose 1. (1) Select a Machina follower on your field and give it [defense]+1. (2) Give your leader [defense]+1."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-119EN.png"
+  },
+  "BP07-036EN": {
+    "cardNo": "BP07-036EN",
+    "name": "Tetra, Sapphire Rebel Evolved",
+    "type": "evolved",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Golem",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "-",
+      "attack": "4",
+      "defense": "4",
+      "effect": "While this card is on your field, any Machina card you play from the EX area costs 1 less. 4 times per turn, when you play a Machina card, select an enemy follower on the field and deal it 1 damage."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-036EN.png"
+  },
+  "BP12-036EN": {
+    "cardNo": "BP12-036EN",
+    "name": "Belphomet, Worldreaver Evolved",
+    "type": "evolved",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Supreme",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "-",
+      "attack": "6",
+      "defense": "6",
+      "effect": "On Evolve - Discard a Machina card: Summon an Assault Tentacle token. [act] [cost02], banish a Machina token from your EX area: Summon an Assault Tentacle token."
+    },
+    "imgSrc": ""
+  },
+  "BP17-050EN": {
+    "cardNo": "BP17-050EN",
+    "name": "Awakened Robot Evolved",
+    "type": "evolved",
+    "class": "rune",
+    "details": {
+      "format": "Any",
+      "class": "Runecraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Natura / Golem",
+      "rarity": "Bronze",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "-",
+      "attack": "3",
+      "defense": "3",
+      "effect": "On Evolve - Select an enemy follower on the field and deal it 2 damage. [lastwords] Put a Repair Mode token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-050EN.png"
+  },
+  "BP07-072EN": {
+    "cardNo": "BP07-072EN",
+    "name": "Aenea, Amethyst Rebel",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "4",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[fanfare] Search your deck for a Machina follower that costs 3 or less, summon it, then shuffle your deck. [lastwords] Give your leader [defense]+2."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-072EN.png"
+  },
+  "BP07-075EN": {
+    "cardNo": "BP07-075EN",
+    "name": "Alpha Drive",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Machina / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Choose one of the following. (1) Select a Machina follower in your cemetery and add it to your hand. (2) Select a Mono, Garnet Rebel in your cemetery and summon it."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-075EN.png"
+  },
+  "BP07-076EN": {
+    "cardNo": "BP07-076EN",
+    "name": "Nicola, Forbidden Strength",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Departed",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "3",
+      "attack": "3",
+      "defense": "3",
+      "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Bury the top 2 cards of your deck."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-076EN.png"
+  },
+  "BP11-075EN": {
+    "cardNo": "BP11-075EN",
+    "name": "Dead to Rights",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Wasteland / Departed / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "[act] Banish this card and an Iceschillendrig, Gilded Autocrat from your cemetery: Select an enemy follower on the field and engage it. ---------- [quick] Select an enemy follower on the field and give it [attack]-2/[defense]-2."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-075EN.png"
+  },
+  "BP12-075EN": {
+    "cardNo": "BP12-075EN",
+    "name": "Friends Forever",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Machina / Necromancer / Demon",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "5",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Select up to 2 Machina followers that cost a total of 5 or less in your cemetery and summon them."
+    },
+    "imgSrc": ""
+  },
+  "BP12-082EN": {
+    "cardNo": "BP12-082EN",
+    "name": "Roly-Poly Mk I",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "1",
+      "attack": "1",
+      "defense": "3",
+      "effect": "Ward. While there's an Aenea, Amethyst Rebel on your field, if this follower would take more than 1 damage, it takes 1 instead. [act] [cost01]: Summon this card from your cemetery. Give it [attack]+1 and \"[lastwords] Banish this card.\" Activate only if there's an Aenea, Amethyst Rebel on your field."
+    },
+    "imgSrc": ""
+  },
+  "BP17-077EN": {
+    "cardNo": "BP17-077EN",
+    "name": "Aenea, Creative Amethyst",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "1",
+      "defense": "1",
+      "effect": "[evolve] [cost01]: Evolve this."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-077EN.png"
+  },
+  "BP17-079EN": {
+    "cardNo": "BP17-079EN",
+    "name": "Nicola, Enduring Steward",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Departed",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "1",
+      "defense": "2",
+      "effect": "While there's another Machina follower on your field, this has Rush and Bane. [fanfare] If this wasn't put onto the field from hand, give it Assail. [lastwords] Discard 2 Machina cards: Put this into its owner's EX area and give it \"This costs 1 less to play.\""
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-079EN.png"
+  },
+  "BP17-080EN": {
+    "cardNo": "BP17-080EN",
+    "name": "Steeled Hopes",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Machina / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Choose 1. (1) Search your deck for a Machina follower, reveal it, add it to your hand, then shuffle. (2) [cost06]: Search your deck for a Machina follower that costs 4 or less, a Machina follower that costs 3 or less, and a Machina follower that costs 2 or less, summon them, then shuffle."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-080EN.png"
+  },
+  "BP17-083EN": {
+    "cardNo": "BP17-083EN",
+    "name": "Roly-Poly Mk II",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Silver",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "1",
+      "defense": "3",
+      "effect": "Ward. [fanfare] Look at the top 2 cards of your deck. You may reveal a Machina card from among them and add it to your hand. Bury the rest."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-083EN.png"
+  },
+  "BP17-113EN": {
+    "cardNo": "BP17-113EN",
+    "name": "Hoverboard Mercenary",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Machina / Mercenary",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "2",
+      "attack": "1",
+      "defense": "1",
+      "effect": "[evolve] [cost01]: Evolve this. [fanfare] Summon an Assembly Droid token. Put a Repair Mode token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-113EN.png"
+  },
+  "BP07-069EN": {
+    "cardNo": "BP07-069EN",
+    "name": "Mono, Garnet Rebel",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "2",
+      "attack": "3",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this follower. Activate only if there are 5 Machina followers on your field. [act] Banish 2 Machina cards from your cemetery: Summon an Assembly Droid token. Activate only once per turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-069EN.png"
+  },
+  "BP17-076EN": {
+    "cardNo": "BP17-076EN",
+    "name": "Mono, Immortal Garnet",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "3",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[fanfare] Summon an Assembly Droid token. Strike - Select an enemy follower on the field and deal it damage equal to the number of other Machina followers on your field. [act] [cost00]: Give this [attack]+1/[defense]+1 and Storm. Activate only if there are 5 Machina followers on your field, and only once per turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-076EN.png"
+  },
+  "BP07-077EN": {
+    "cardNo": "BP07-077EN",
+    "name": "Nicola, Forbidden Strength Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Departed",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "-",
+      "attack": "4",
+      "defense": "4",
+      "effect": "On Evolve - Select a Machina card that costs 2 or less in your cemetery and put it into your EX area. It costs 2 less to play this turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-077EN.png"
+  },
+  "BP07-070EN": {
+    "cardNo": "BP07-070EN",
+    "name": "Mono, Garnet Rebel Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Demon",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #7 \"Verdant Steel\"",
+      "cost": "-",
+      "attack": "5",
+      "defense": "4",
+      "effect": "Storm. [act] [cost02], banish an Alpha Drive from your cemetery: Give each Machina follower on your field [attack]+2/[defense]+2 and Rush. Activate only once per turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-070EN.png"
+  },
+  "BP17-078EN": {
+    "cardNo": "BP17-078EN",
+    "name": "Aenea, Creative Amethyst Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "-",
+      "attack": "2",
+      "defense": "2",
+      "effect": "On Evolve - Search your deck for a Roly-Poly Mk II, summon it, then shuffle. On Super-Evolve - Select a Machina card in your cemetery and put it into your EX area. It costs 3 less to play this turn."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-078EN.png"
+  },
+  "BP17-114EN": {
+    "cardNo": "BP17-114EN",
+    "name": "Hoverboard Mercenary Evolved",
+    "type": "evolved",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower / Evolved",
+      "trait": "Machina / Mercenary",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Convergent Destinies\"",
+      "cost": "-",
+      "attack": "2",
+      "defense": "2",
+      "effect": "On Evolve - Summon an Assembly Droid token. Put a Repair Mode token into your EX area."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-114EN.png"
+  },
+  "BP16-119EN": {
+    "cardNo": "BP16-119EN",
+    "name": "Leah, Bellringer Angel",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "1",
+      "attack": "0",
+      "defense": "3",
+      "effect": "Ward. [lastwords] Give your leader [defense]+1. Draw a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-119EN.png"
+  },
+  "BP09-137EN": {
+    "cardNo": "BP09-137EN",
+    "name": "Fount of Angels",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Amulet",
+      "trait": "Angel",
+      "rarity": "Bronze",
+      "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "[fanfare] Look at the top 3 cards of your deck. You may reveal an Angel or Fallen Angel card from among them and add it to your hand. Put the rest on the bottom of your deck in any order. [act] [engage], bury this card: Give your leader [defense]+1. Activate only if there are at least 2 Angel and/or Fallen Angel followers on your field."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-137EN.png"
+  },
+  "BP01-159EN": {
+    "cardNo": "BP01-159EN",
+    "name": "Bellringer Angel",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #1 “Advent of Genesis”",
+      "cost": "1",
+      "attack": "0",
+      "defense": "2",
+      "effect": "[evolve][cost02]: Evolve this follower. Ward. [lastwords] Draw a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-159EN.png"
+  },
+  "BP03-117EN": {
+    "cardNo": "BP03-117EN",
+    "name": "Winged Inversion",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Angel / Fallen Angel",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Choose one of the following. (1) Discard an Angel follower: Select an enemy follower on the field and destroy it. (2) Discard a Fallen Angel follower: Give your leader [defense]+3. Draw a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-117EN.png"
+  },
+  "BP10-114EN": {
+    "cardNo": "BP10-114EN",
+    "name": "Fallen Shot",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Fallen Angel",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Select an Angel follower in your cemetery and enemy follower on the field. Put them into their owners' EX areas."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-114EN.png"
+  },
+  "BP10-115EN": {
+    "cardNo": "BP10-115EN",
+    "name": "One-Winged Traitor",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Fallen Angel",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Look at the top card of your deck. If it's an Angel or Fallen Angel card, you may reveal it and add it to your hand."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-115EN.png"
+  },
+  "BP14-108EN": {
+    "cardNo": "BP14-108EN",
+    "name": "Glistering Angel",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this. Ward. [fanfare] If there are at least 5 Angel cards in your cemetery, give your leader [defense]+2."
+    },
+    "imgSrc": ""
+  },
+  "BP12-106EN": {
+    "cardNo": "BP12-106EN",
+    "name": "Seraphic Blade",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "2",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Choose one. (1) Select an enemy card that costs 2 or less on the field and destroy it. (2) [cost02]: Select an enemy card that costs 6 or less on the field and destroy it."
+    },
+    "imgSrc": ""
+  },
+  "BP09-126EN": {
+    "cardNo": "BP09-126EN",
+    "name": "Paradise Vanguard",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+      "cost": "3",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] If there are at least 5 Angel cards in your cemetery, select an enemy follower on the field and banish it."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-126EN.png"
+  },
+  "BP06-112EN": {
+    "cardNo": "BP06-112EN",
+    "name": "Clash of Heroes",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Arena",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Select a follower on your field and an enemy follower on the field. Deal the first follower damage equal to the second's attack. Deal the second follower damage equal to the first's attack."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-112EN.png"
+  },
+  "BP14-110EN": {
+    "cardNo": "BP14-110EN",
+    "name": "Angel's Blessing",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "3",
+      "attack": "-",
+      "defense": "-",
+      "effect": "[quick] Give your leader [defense]+2. Draw 2 cards."
+    },
+    "imgSrc": ""
+  },
+  "BP10-121EN": {
+    "cardNo": "BP10-121EN",
+    "name": "Corruption Guardian",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Fallen Angel",
+      "rarity": "Bronze",
+      "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+      "cost": "5",
+      "attack": "3",
+      "defense": "6",
+      "effect": "Ward. [fanfare] Discard an Angel or Fallen Angel card: Give your leader [defense]+3. Draw a card. Recover 2 play points."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-121EN.png"
+  },
+  "BP09-020EN": {
+    "cardNo": "BP09-020EN",
+    "name": "Spartacus",
+    "type": "base",
+    "class": "sword",
+    "details": {
+      "format": "Any",
+      "class": "Swordcraft",
+      "cardType": "Follower",
+      "trait": "Commander",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+      "cost": "5",
+      "attack": "4",
+      "defense": "6",
+      "effect": "Ward. At the start of your end phase, discard any number of cards and draw that many cards plus 1. Then, if there's 1 card or less in your deck, you win the game."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-020EN.png"
+  },
+  "BP16-113EN": {
+    "cardNo": "BP16-113EN",
+    "name": "Olivia, Heroic Dark Angel",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower",
+      "trait": "Fallen Angel",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "5",
+      "attack": "4",
+      "defense": "4",
+      "effect": "[evolve] [cost01]: Evolve this. Ward. [fanfare] Draw a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-113EN.png"
+  },
+  "BP13-107EN": {
+    "cardNo": "BP13-107EN",
+    "name": "Planetary Fracture",
+    "type": "base",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Spell",
+      "trait": "Deity / Archfiend / Cutthroat",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "8",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Banish each card on the field and in the EX area. Each player banishes the top 10 cards of their deck."
+    },
+    "imgSrc": ""
+  },
+  "BP01-160EN": {
+    "cardNo": "BP01-160EN",
+    "name": "Bellringer Angel Evolved",
+    "type": "evolved",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower / Evolved",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #1 “Advent of Genesis”",
+      "cost": "-",
+      "attack": "0",
+      "defense": "2",
+      "effect": "Ward. On Evolve: Select an enemy follower on the field and deal it 2 damage. [lastwords] Draw a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-160EN.png"
+  },
+  "BP10-116EN": {
+    "cardNo": "BP10-116EN",
+    "name": "One-Winged Traitor Evolved",
+    "type": "evolved",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower / Evolved",
+      "trait": "Fallen Angel",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+      "cost": "-",
+      "attack": "3",
+      "defense": "3",
+      "effect": "On Evolve - Select another Fallen Angel or Angel follower on your field and give it [attack]+1/[defense]+1."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-116EN.png"
+  },
+  "BP14-109EN": {
+    "cardNo": "BP14-109EN",
+    "name": "Glistering Angel Evolved",
+    "type": "evolved",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower / Evolved",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "-",
+      "attack": "3",
+      "defense": "3",
+      "effect": "Ward. On Evolve - Look at the top 4 cards of your deck. You may reveal an Angel or Fallen Angel card from among them and add it to your hand. Put the rest on the bottom of your deck in any order."
+    },
+    "imgSrc": ""
+  },
+  "BP09-127EN": {
+    "cardNo": "BP09-127EN",
+    "name": "Paradise Vanguard Evolved",
+    "type": "evolved",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower / Evolved",
+      "trait": "Angel",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+      "cost": "-",
+      "attack": "3",
+      "defense": "3",
+      "effect": "On Evolve - Select an enemy follower that costs 4 or less on the field and banish it."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-127EN.png"
+  },
+  "BP16-114EN": {
+    "cardNo": "BP16-114EN",
+    "name": "Olivia, Heroic Dark Angel Evolved",
+    "type": "evolved",
+    "class": "neutral",
+    "details": {
+      "format": "Any",
+      "class": "Neutral",
+      "cardType": "Follower / Evolved",
+      "trait": "Fallen Angel",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "-",
+      "attack": "5",
+      "defense": "5",
+      "effect": "Ward. On Evolve - Select an enemy follower on the field and deal it 5 damage. On Super-Evolve - Give your leader [defense]+3. Recover 3 play points."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-114EN.png"
+  },
+  "BP01-116EN": {
+    "cardNo": "BP01-116EN",
+    "name": "Soul Conversion",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Departed",
+      "rarity": "Silver",
+      "cardSet": "Booster Set #1 “Advent of Genesis”",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "[quick] Select a follower on your field. Destroy it and draw 2 cards."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-116EN.png"
+  },
+  "BP14-070EN": {
+    "cardNo": "BP14-070EN",
+    "name": "Itsurugi, Eager Admirer",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Festive / Demon / Beast",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "2",
+      "attack": "3",
+      "defense": "2",
+      "effect": "[adv] [cost04], banish this: You may summon an Itsurugi, Paradise's End from your evolve deck. Activate only if there are at least 5 Festive cards or at least 10 [abysscraft] cards in your cemetery. [fanfare] Put a Wolfling's Struggle token into your EX area."
+    },
+    "imgSrc": ""
+  },
+  "BP16-080EN": {
+    "cardNo": "BP16-080EN",
+    "name": "Gold Rush Ghost",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Wasteland / Departed",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "Storm. [fanfare] Choose 1. If this was put onto the field from the cemetery, choose up to 2 instead. (1) Summon an Arcane Personnel Carrier token. Give your leader [defense]+1. (2) Bury the top 2 cards of your deck. At the start of each opponent's end phase, bury this."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-080EN.png"
+  },
+  "BP12-U05EN": {
+    "cardNo": "BP12-U05EN",
+    "name": "Gremory, Death Teller",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Demon",
+      "rarity": "Ultimate",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "3",
+      "effect": "Ward. [fanfare] Bury the top 2 cards of your deck. [act] [cost01]: Summon this card from your cemetery. Give it \"[lastwords] Banish this card.\" Activate only if there are at least 10 cards in your cemetery and no cards named Gremory, Death Teller on your field."
+    },
+    "imgSrc": ""
+  },
+  "BP09-091EN": {
+    "cardNo": "BP09-091EN",
+    "name": "Arcus, Spirited Manager",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Departed / Necromancer",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+      "cost": "2",
+      "attack": "5",
+      "defense": "5",
+      "effect": "This follower can't attack enemies. At the start of your main phase, Necrocharge (10) - Summon a Ghost token. [act] Bury another follower: Choose one of the following. Activate only once per turn. (1) Draw a card. (2) Summon 2 Ghost tokens. (3) Bury the top 2 cards of your deck."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-091EN.png"
+  },
+  "BP11-076EN": {
+    "cardNo": "BP11-076EN",
+    "name": "Wretch",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Wasteland / Departed / Demon",
+      "rarity": "Silver",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "3",
+      "attack": "3",
+      "defense": "2",
+      "effect": "[evolve] [cost01]: Evolve this follower. Activate only if this follower was put onto the field from the cemetery. Rush. [lastwords] Summon a Bullet Bike token. Bury the top 2 cards of your deck."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-076EN.png"
+  },
+  "BP16-081EN": {
+    "cardNo": "BP16-081EN",
+    "name": "Mukan, Shadowcrypt Ward",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Necromancer / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "3",
+      "attack": "3",
+      "defense": "3",
+      "effect": "[evolve] [cost01]: Evolve this."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-081EN.png"
+  },
+  "BP13-077EN": {
+    "cardNo": "BP13-077EN",
+    "name": "Chris, Beyond the Patch",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Departed / Cutthroat",
+      "rarity": "Gold",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "4",
+      "attack": "4",
+      "defense": "4",
+      "effect": "[fanfare] Select an [abysscraft] follower not named Chris, Beyond the Patch that costs 5 or less in your cemetery. Necrocharge (10) - Summon it and give it Ward."
+    },
+    "imgSrc": ""
+  },
+  "BP16-077EN": {
+    "cardNo": "BP16-077EN",
+    "name": "Cerberus, Hellfire Unleashed",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Demon",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "4",
+      "attack": "3",
+      "defense": "3",
+      "effect": "[fanfare] Summon a Mimi, Right Paw Hellhound and Coco, Left Paw Hellhound token. Necrocharge (10) - Give them Storm. [act] [engage], bury another follower: Select an enemy follower on the field and deal it 2 damage."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-077EN.png"
+  },
+  "BP11-069EN": {
+    "cardNo": "BP11-069EN",
+    "name": "Iceschillendrig, Gilded Autocrat",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Wasteland / Departed / Demon",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "5",
+      "attack": "5",
+      "defense": "5",
+      "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] If there's no Magitrain on your field, summon one. Whenever this card becomes engaged, each opponent discards a card."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-069EN.png"
+  },
+  "BP03-076EN": {
+    "cardNo": "BP03-076EN",
+    "name": "Odile, Black Swan",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Fable",
+      "rarity": "Gold",
+      "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+      "cost": "5",
+      "attack": "6",
+      "defense": "4",
+      "effect": "[fanfare] Deal 2 damage to each enemy leader and enemy follower on the field. Necrocharge (20): Give this follower Storm. Strike: Deal 2 damage to each enemy leader and enemy follower on the field."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-076EN.png"
+  },
+  "BP11-074EN": {
+    "cardNo": "BP11-074EN",
+    "name": "Greatpick Corpse",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Wasteland / Departed",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "3",
+      "attack": "3",
+      "defense": "3",
+      "effect": "[fanfare] Bury another card: Select an enemy follower on the field and deal it 4 damage. Once per turn, when a 1-cost token card you control leaves the field, summon a token of the same name."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-074EN.png"
+  },
+  "BP11-077EN": {
+    "cardNo": "BP11-077EN",
+    "name": "Wretch Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Wasteland / Departed / Demon",
+      "rarity": "Silver",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "-",
+      "attack": "4",
+      "defense": "3",
+      "effect": "Storm. On Evolve - Select an enemy follower on the field and deal it 5 damage. [lastwords] Summon a Bullet Bike token. Bury the top 2 cards of your deck."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-077EN.png"
+  },
+  "BP16-082EN": {
+    "cardNo": "BP16-082EN",
+    "name": "Mukan, Shadowcrypt Ward Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Necromancer / Demon",
+      "rarity": "Gold",
+      "cardSet": "Booster Set \"New World Genesis\"",
+      "cost": "-",
+      "attack": "4",
+      "defense": "4",
+      "effect": "Whenever a Departed follower is put onto your field, give your leader [defense]+1. On Evolve - Select a Departed follower in your cemetery that costs 3 or less and summon it. On Super-Evolve - Select a Departed follower in your cemetery that costs 3 or less. Summon it and give it Assail."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-082EN.png"
+  },
+  "BP11-070EN": {
+    "cardNo": "BP11-070EN",
+    "name": "Iceschillendrig, Gilded Autocrat Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Wasteland / Departed / Demon",
+      "rarity": "Legendary",
+      "cardSet": "Booster Set \"Bullet of Fate\"",
+      "cost": "-",
+      "attack": "6",
+      "defense": "6",
+      "effect": "On Evolve - Discard a card: Select 2 followers in your cemetery and add them to your hand. Whenever this card becomes engaged, each opponent discards a card. During your turn, whenever a player discards a card, select an enemy follower on the field and engage it."
+    },
+    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-070EN.png"
+  },
+  "BP14-071EN": {
+    "cardNo": "BP14-071EN",
+    "name": "Itsurugi, Paradise's End ADVANCED",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Advanced",
+      "trait": "Festive / Demon / Beast",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+      "cost": "4",
+      "attack": "6",
+      "defense": "5",
+      "effect": "[fanfare] Select up to 3 enemy followers on the field. Deal 5 damage to one and 2 damage to the others. During your turn, whenever an enemy follower is put from the field into the cemetery, deal 1 damage to its leader and give your leader [defense]+1."
+    },
+    "imgSrc": ""
+  }
+}
