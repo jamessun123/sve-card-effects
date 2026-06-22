@@ -9076,17 +9076,6 @@ Most real cards nest primitives:
 ```
 
 **Example card text:** "[fanfare] Draw a card. Discard a card. If there are at least 5 Festive cards in your cemetery, summon a Taketsumi, Creator of Paradise."
-
----
-
-## Not yet implemented (planned)
-
-See `packages/sve-engine/data/engine-blockers.json` for mechanics not in the current EN scrape: **countdown**, **enhance**, **spellboost**, **accelerate**, **fuse**, **crest**.
-
-## Vanguard crossover
-
-Cardfight!! Vanguard ride/feed/drive mechanics are deferred and excluded from the standard DSL pipeline.
-
 </ABILITY_REFERENCE>
 <RESPONSE_RULES>
 Output only valid JSON — no markdown fences, no commentary, unless the user explicitly asks for explanation.
@@ -9115,25 +9104,3 @@ Return a JSON object keyed by `name`. Each value is a card definition:
   "parseConfidence": "high"
 }
 </RESPONSE_RULES>
-
-<INPUT_CARDS>
-{
-    "cardNo": "BP12-079EN",
-    "name": "Garnet Waltz",
-    "type": "base",
-    "class": "abyss",
-    "details": {
-      "format": "Any",
-      "class": "Abysscraft",
-      "cardType": "Spell",
-      "trait": "Machina / Demon / Vampire",
-      "rarity": "Silver",
-      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
-      "cost": "1",
-      "attack": "-",
-      "defense": "-",
-      "effect": "Choose one. (1) Deal 2 damage to each enemy leader and 1 damage to your own. (2) Summon an Assembly Droid token. Put an Assembly Droid token into your EX area. If there's a Mono, Garnet Rebel on your field, summon the second token instead."
-    },
-    "imgSrc": ""
-},
-</INPUT_CARDS>

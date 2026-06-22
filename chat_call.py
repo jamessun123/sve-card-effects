@@ -4,14 +4,18 @@
 import json
 from pathlib import Path
 
+from card_schema import card_list_text_format, parse_card_list_response
 from openai import OpenAI
 
 # --- Fill this in ---
-with open("prompt.txt", "r") as f:
-    PROMPT = f.read()
+with open("prompt_format.txt", "r") as f:
+    PROMPT_CONTEXT = f.read()
+
+with open("prompt_example_body.txt", "r") as f:
+    PROMPT_EXAMPLE_BODY = f.read()
 
 # Optional settings
-MODEL = "gpt-5.4-nano"
+MODEL = "gpt-5.4-mini"
 
 SECRETS_PATH = Path(__file__).resolve().parent / "secrets.json"
 
@@ -38,13 +42,13 @@ def main() -> None:
 
     response = client.responses.create(
         model=MODEL,
-        messages=[
-            {"role": "user", "content": PROMPT}
+        input=[
+            {"role": "user", "content": PROMPT_CONTEXT + "\n" + PROMPT_EXAMPLE_BODY}
         ],
-        text_format=json.load(open("card_schema.json", "r"))
+        #text={"format": card_list_text_format()},
     )
 
-    print(response.output_parsed)
+    print(response.content[0].text)
 
 
 if __name__ == "__main__":

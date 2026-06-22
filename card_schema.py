@@ -3,14 +3,26 @@
 Matches ABILITY-REFERENCE.md and the encoded output shape in prompt.txt /
 merged-deck-cards.json. Use CardList as the structured-output root when the
 model should return multiple cards.
+
+OpenAI note: ``text_format=CardList`` enables *strict* JSON schema, which forces
+the model to emit every declared property (often as null). Use
+:func:`card_list_text_format` with ``responses.create`` instead so only truly
+required fields must appear in the output.
 """
 
 from __future__ import annotations
 
+import json
 from enum import Enum
 from typing import Annotated, Any, Literal, Union
 
 from pydantic import BaseModel, ConfigDict, Field, RootModel
+
+
+class OpenAISchemaModel(BaseModel):
+    """Base model compatible with OpenAI strict JSON schema (extra forbid)."""
+
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
 
 
 class CardClass(str, Enum):
@@ -43,7 +55,7 @@ class ParseConfidence(str, Enum):
     KEYWORD_ONLY = "keyword-only"
 
 
-# Documented in ABILITY-REFERENCE.md — kept as constants for JSON Schema enums.
+# Documented in ABILITY-REFERENCE.md plus values used in merged-deck-cards.json.
 TIMINGS: tuple[str, ...] = (
     "fanfare",
     "lastWords",
@@ -64,6 +76,11 @@ TIMINGS: tuple[str, ...] = (
     "onAllyFollowerEnter",
     "onReturnToHand",
     "evolve",
+    "onBecomeEngaged",
+    "onEnemyFollowerLeaveField",
+    "onExAreaEntry",
+    "onTokenLeaveField",
+    "startOfOpponentEnd",
 )
 Timing = Annotated[str, Field(description=f"Trigger timing; one of {', '.join(TIMINGS)}")]
 
@@ -96,9 +113,15 @@ CONDITION_TYPES: tuple[str, ...] = (
     "ownCemeteryMin",
     "ownCemeteryTraitMin",
     "ownCemeteryClassMin",
+    "ownCemeteryTraitMinBeforeSourceEnters",
+    "ownCemeteryClassMinBeforeSourceEnters",
     "exAreaTraitMin",
     "exAreaNamedMin",
     "fieldTraitMin",
+    "fieldFollowerMinCost",
+    "fieldFollowerTraitAnyMin",
+    "buriedExactCost",
+    "buriedAtLeastCost",
     "handMin",
     "handMax",
     "ppMin",
@@ -107,7 +130,9 @@ CONDITION_TYPES: tuple[str, ...] = (
     "discardedThisTurn",
     "discardedCardType",
     "enteredFromHand",
+    "enteredFromCemetery",
     "notEnteredFromHand",
+    "namedCardNotOnFieldByName",
     "conditionAny",
 )
 ConditionType = Annotated[
@@ -165,6 +190,7 @@ EFFECT_OPS: tuple[str, ...] = (
     "dealDamageCompare",
     "dealDamageDynamic",
     "dealDamageFollowerAndLeader",
+    "damageFollowerAndLeader",
     "dealDamageOtherFollowers",
     "dealDamageSplit",
     "defAsAttackAura",
@@ -253,6 +279,7 @@ EFFECT_OPS: tuple[str, ...] = (
     "summonSelfFromExArea",
     "swapAtkDef",
     "takeExtraTurn",
+    "traitFieldCount",
     "transferCounters",
     "transform",
     "triggerAbilities",
@@ -290,10 +317,8 @@ class ActivateFrom(str, Enum):
     HAND = "hand"
 
 
-class DeckFilter(BaseModel):
+class DeckFilter(OpenAISchemaModel):
     """Filter for tutors, searches, discards (ABILITY-REFERENCE DeckFilter)."""
-
-    model_config = ConfigDict(extra="allow")
 
     card_no: str | None = Field(default=None, alias="cardNo")
     identity_name: str | None = Field(default=None, alias="identityName")
@@ -308,16 +333,12 @@ class DeckFilter(BaseModel):
     exclude_card_class: CardClass | None = Field(default=None, alias="excludeCardClass")
 
 
-class EarthRiteCost(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-
+class EarthRiteCost(OpenAISchemaModel):
     count: int
 
 
-class ActivatedCost(BaseModel):
+class ActivatedCost(OpenAISchemaModel):
     """Cost for timing: activated abilities."""
-
-    model_config = ConfigDict(extra="allow")
 
     pp: int | None = None
     engage: bool | None = None
@@ -327,12 +348,13 @@ class ActivatedCost(BaseModel):
     bury_self: bool | None = Field(default=None, alias="burySelf")
     banish_self: bool | None = Field(default=None, alias="banishSelf")
     earth_rite: EarthRiteCost | None = Field(default=None, alias="earthRite")
+    bury_field_count: int | None = Field(default=None, alias="buryFieldCount")
+    exclude_self_from_bury: bool | None = Field(default=None, alias="excludeSelfFromBury")
+    banish_count: int | None = Field(default=None, alias="banishCount")
 
 
-class Condition(BaseModel):
+class Condition(OpenAISchemaModel):
     """Gate for abilities and if/autoEvolveIf effects."""
-
-    model_config = ConfigDict(extra="allow")
 
     type: ConditionType
     count: int | None = None
@@ -341,13 +363,14 @@ class Condition(BaseModel):
     card_no: str | None = Field(default=None, alias="cardNo")
     identity_name: str | None = Field(default=None, alias="identityName")
     card_type: CardType | None = Field(default=None, alias="cardType")
+    traits: list[str] | None = None
+    min_cost: int | None = Field(default=None, alias="minCost")
+    cost: int | None = None
     conditions: list[Condition] | None = None
 
 
-class TargetSelector(BaseModel):
+class TargetSelector(OpenAISchemaModel):
     """targets object on effects (ABILITY-REFERENCE Target selectors)."""
-
-    model_config = ConfigDict(extra="allow")
 
     type: TargetType
     count: int | None = None
@@ -355,12 +378,11 @@ class TargetSelector(BaseModel):
     min_cost: int | None = Field(default=None, alias="minCost")
     max_def: int | None = Field(default=None, alias="maxDef")
     exclude_self: bool | None = Field(default=None, alias="excludeSelf")
+    filter: DeckFilter | None = None
 
 
-class DamageAmountExpr(BaseModel):
+class DamageAmountExpr(OpenAISchemaModel):
     """Dynamic damage / amount expression."""
-
-    model_config = ConfigDict(extra="allow")
 
     op: DamageAmountOp
     trait: str | None = None
@@ -375,21 +397,18 @@ class DamageAmountExpr(BaseModel):
 DamageAmount = Annotated[Union[int, DamageAmountExpr], Field(discriminator=None)]
 
 
-class ChooseOption(BaseModel):
-    model_config = ConfigDict(extra="allow")
-
+class ChooseOption(OpenAISchemaModel):
     label: str | None = None
     effect: Effect | None = None
+    additional_pp_cost: int | None = Field(default=None, alias="additionalPpCost")
 
 
-class Effect(BaseModel):
+class Effect(OpenAISchemaModel):
     """Recursive effect tree rooted at effect.op (ABILITY-REFERENCE)."""
-
-    model_config = ConfigDict(extra="allow", populate_by_name=True)
 
     op: EffectOp
 
-    # Common composition fields
+    # Composition
     steps: list[Effect] | None = None
     then: Effect | None = None
     else_: Effect | None = Field(default=None, alias="else")
@@ -397,19 +416,26 @@ class Effect(BaseModel):
     choices: list[ChooseOption] | None = None
     options: list[ChooseOption] | None = None
     body: Effect | None = None
+    cost: Effect | None = None
+    child_effect: Effect | None = Field(default=None, alias="effect")
+    label: str | None = None
+    timing: Timing | None = None
+    min: int | None = None
+    max: int | None = None
 
-    # Frequently referenced leaf / shared fields
+    # Shared leaf / cross-op fields
     count: int | None = None
     amount: DamageAmount | None = None
     targets: TargetSelector | None = None
     filter: DeckFilter | None = None
     keyword: Keyword | str | None = None
     keywords: list[Keyword | str] | None = None
-    atk: int | None = None
-    def_: int | None = Field(default=None, alias="def")
+    atk: DamageAmount | None = None
+    def_: DamageAmount | None = Field(default=None, alias="def")
     trait: str | None = None
     card_class: CardClass | None = Field(default=None, alias="cardClass")
     card_type: CardType | None = Field(default=None, alias="cardType")
+    min_cost: int | None = Field(default=None, alias="minCost")
     token_card_no: str | None = Field(default=None, alias="tokenCardNo")
     token_name: str | None = Field(default=None, alias="tokenName")
     zone: Literal["field", "exArea", "hand", "cemetery", "deck"] | None = None
@@ -424,27 +450,37 @@ class Effect(BaseModel):
     primary_amount: DamageAmount | None = Field(default=None, alias="primaryAmount")
     secondary_amount: DamageAmount | None = Field(default=None, alias="secondaryAmount")
     damage_target_first: bool | None = Field(default=None, alias="damageTargetFirst")
+    look_at: int | None = Field(default=None, alias="lookAt")
+    max_total_cost: int | None = Field(default=None, alias="maxTotalCost")
+    remainder_to: str | None = Field(default=None, alias="remainderTo")
+    reveal: bool | None = None
+    skip_refresh_next_start: bool | None = Field(default=None, alias="skipRefreshNextStart")
+    follower_amount: int | None = Field(default=None, alias="followerAmount")
+    leader_amount: int | None = Field(default=None, alias="leaderAmount")
+    followers_only: bool | None = Field(default=None, alias="followersOnly")
+    additional_pp_cost: int | None = Field(default=None, alias="additionalPpCost")
+    max_per_hit: int | None = Field(default=None, alias="maxPerHit")
+    source_only: bool | None = Field(default=None, alias="sourceOnly")
+    draw_bonus: int | None = Field(default=None, alias="drawBonus")
+    max_per_turn: int | None = Field(default=None, alias="maxPerTurn")
 
 
-class Ability(BaseModel):
+class Ability(OpenAISchemaModel):
     """Single entry in card.abilities[]."""
-
-    model_config = ConfigDict(extra="allow")
 
     timing: Timing
     effect: Effect
     condition: Condition | None = None
     cost: ActivatedCost | None = None
+    filter: DeckFilter | None = None
     activate_from: ActivateFrom | None = Field(default=None, alias="activateFrom")
     once_per_turn: bool | None = Field(default=None, alias="oncePerTurn")
     max_per_turn: int | None = Field(default=None, alias="maxPerTurn")
     quick: bool | None = None
 
 
-class Card(BaseModel):
+class Card(OpenAISchemaModel):
     """Encoded card definition (output DSL)."""
-
-    model_config = ConfigDict(extra="allow", populate_by_name=True)
 
     name: str
     card_no: str | None = Field(default=None, alias="cardNo")
@@ -466,14 +502,14 @@ class Card(BaseModel):
     )
 
 
-class CardList(BaseModel):
+class CardList(OpenAISchemaModel):
     """Structured-output root when returning multiple cards as a JSON array."""
 
     cards: list[Card]
 
 
 class CardMap(RootModel[dict[str, Card]]):
-    """Alternative batch shape: object keyed by cardNo (merged-deck-cards.json)."""
+    """Alternative batch shape: object keyed by card name (merged-deck-cards.json)."""
 
 
 # Resolve forward references for recursive models.
@@ -482,29 +518,49 @@ ChooseOption.model_rebuild()
 Effect.model_rebuild()
 
 
-def card_json_schema() -> dict[str, Any]:
-    """JSON Schema for a single Card (e.g. OpenAI response_format)."""
-    schema = Card.model_json_schema()
-    _inject_enum(schema, "Timing", TIMINGS)
-    _inject_enum(schema, "ConditionType", CONDITION_TYPES)
-    _inject_enum(schema, "TargetType", TARGET_TYPES)
-    _inject_enum(schema, "EffectOp", EFFECT_OPS)
-    _inject_enum(schema, "DamageAmountOp", DAMAGE_AMOUNT_OPS)
-    return schema
-
-
-def card_list_json_schema() -> dict[str, Any]:
-    """JSON Schema for CardList — use when the model returns multiple cards."""
-    schema = CardList.model_json_schema()
-    _inject_enum(schema, "Timing", TIMINGS)
-    _inject_enum(schema, "ConditionType", CONDITION_TYPES)
-    _inject_enum(schema, "TargetType", TARGET_TYPES)
-    _inject_enum(schema, "EffectOp", EFFECT_OPS)
-    _inject_enum(schema, "DamageAmountOp", DAMAGE_AMOUNT_OPS)
-    return schema
-
-
 def _inject_enum(schema: dict[str, Any], def_name: str, values: tuple[str, ...]) -> None:
     defs = schema.get("$defs", {})
     if def_name in defs:
         defs[def_name]["enum"] = list(values)
+
+
+def _finalize_schema(schema: dict[str, Any]) -> dict[str, Any]:
+    _inject_enum(schema, "Timing", TIMINGS)
+    _inject_enum(schema, "ConditionType", CONDITION_TYPES)
+    _inject_enum(schema, "TargetType", TARGET_TYPES)
+    _inject_enum(schema, "EffectOp", EFFECT_OPS)
+    _inject_enum(schema, "DamageAmountOp", DAMAGE_AMOUNT_OPS)
+    return schema
+
+
+def card_json_schema() -> dict[str, Any]:
+    """JSON Schema for a single Card (e.g. OpenAI response_format)."""
+    return _finalize_schema(Card.model_json_schema())
+
+
+def card_list_json_schema() -> dict[str, Any]:
+    """JSON Schema for CardList — use when the model returns multiple cards."""
+    return _finalize_schema(CardList.model_json_schema())
+
+
+def card_list_text_format() -> dict[str, Any]:
+    """OpenAI Responses ``text.format`` value for CardList.
+
+    Uses non-strict JSON schema so optional fields are omitted from the output
+    instead of being emitted as null. Pair with :func:`parse_card_list_response`.
+    """
+    schema = card_list_json_schema()
+    return {
+        "type": "json_schema",
+        "name": "CardList",
+        "strict": False,
+        "schema": schema,
+    }
+
+
+def parse_card_list_response(response: Any) -> CardList:
+    """Parse a Responses API result into CardList."""
+    text = getattr(response, "output_text", None)
+    if not text:
+        raise RuntimeError("Response did not contain output_text")
+    return CardList.model_validate(json.loads(text))

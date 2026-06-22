@@ -227,25 +227,6 @@
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-022EN.png"
   },
-  "BP07-022EN": {
-    "cardNo": "BP07-022EN",
-    "name": "Leod, the Crescent Blade",
-    "type": "base",
-    "class": "sword",
-    "details": {
-      "format": "Any",
-      "class": "Swordcraft",
-      "cardType": "Follower",
-      "trait": "Assassin",
-      "rarity": "Gold",
-      "cardSet": "Booster Set #7 \"Verdant Steel\"",
-      "cost": "2",
-      "attack": "1",
-      "defense": "3",
-      "effect": "[evolve] [cost02]: Evolve this follower. While this card is reserved on your field, it has Intimidate and Aura. At the start of your end phase, select an enemy follower on the field and deal it 1 damage."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-022EN.png"
-  },
   "BP17-033EN": {
     "cardNo": "BP17-033EN",
     "name": "Stone Merchant",
@@ -322,25 +303,6 @@
     },
     "imgSrc": ""
   },
-  "BP07-023EN": {
-    "cardNo": "BP07-023EN",
-    "name": "Leod, the Crescent Blade Evolved",
-    "type": "evolved",
-    "class": "sword",
-    "details": {
-      "format": "Any",
-      "class": "Swordcraft",
-      "cardType": "Follower / Evolved",
-      "trait": "Assassin",
-      "rarity": "Gold",
-      "cardSet": "Booster Set #7 \"Verdant Steel\"",
-      "cost": "-",
-      "attack": "2",
-      "defense": "4",
-      "effect": "On Evolve - Select an enemy leader or enemy follower on the field and deal it 2 damage. While this card is reserved on your field, it has Intimidate and Aura. At the start of your end phase, select an enemy follower on the field and deal it 1 damage."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-023EN.png"
-  },
   "BP14-019EN": {
     "cardNo": "BP14-019EN",
     "name": "Taketsumi, Creator of Paradise ADVANCED",
@@ -379,25 +341,6 @@
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-001EN.png"
   },
-  "ECP02-003EN": {
-    "cardNo": "ECP02-003EN",
-    "name": "Hajime Fujiwara [Pink Blossom Dream]",
-    "type": "base",
-    "class": "forest",
-    "details": {
-      "format": "Any",
-      "class": "Forestcraft",
-      "cardType": "Follower",
-      "trait": "iM@S CG / Cool",
-      "rarity": "Legendary",
-      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
-      "cost": "2",
-      "attack": "2",
-      "defense": "2",
-      "effect": "[fanfare] Look at the top card of your deck. If it's a Cool card, you may reveal it and add it to your hand. [act] [cost00]: Select an enemy follower on the field and deal it 1 damage. Activate only if there are at least 3 Cool followers on your field, and only once per turn."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-003EN.png"
-  },
   "ECP02-012EN": {
     "cardNo": "ECP02-012EN",
     "name": "Rin Shibuya [Cinderella Girl]",
@@ -416,44 +359,6 @@
       "effect": "Storm. [fanfare] Lesson (2): Select an enemy follower on the field and deal it damage equal to the number of Cool followers on your field."
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-012EN.png"
-  },
-  "ECP02-016EN": {
-    "cardNo": "ECP02-016EN",
-    "name": "Karen Hojo [Cinderella Girl]",
-    "type": "base",
-    "class": "sword",
-    "details": {
-      "format": "Any",
-      "class": "Swordcraft",
-      "cardType": "Follower",
-      "trait": "iM@S CG / Cool",
-      "rarity": "Legendary",
-      "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
-      "cost": "1",
-      "attack": "1",
-      "defense": "1",
-      "effect": "[fanfare] Look at the top card of your deck. If it's a Cool card, you may reveal it and add it to your hand. [lastwords] Put a Magical Item token into your EX area."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-016EN.png"
-  },
-  "CSD02b-004EN": {
-    "cardNo": "CSD02b-004EN",
-    "name": "Yasuha Okazaki",
-    "type": "base",
-    "class": "rune",
-    "details": {
-      "format": "Any",
-      "class": "Runecraft",
-      "cardType": "Follower",
-      "trait": "iM@S CG / Cool",
-      "rarity": "Gold",
-      "cardSet": "Crossover Starter Deck “Cool”",
-      "cost": "4",
-      "attack": "4",
-      "defense": "4",
-      "effect": "[fanfare] Search your deck for a Cool follower that costs 2 or less, summon it, then shuffle your deck."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02b/CSD02b-004EN.png"
   },
   "CSD02b-007EN": {
     "cardNo": "CSD02b-007EN",
@@ -550,25 +455,6 @@
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-038EN.png"
   },
-  "BP07-116EN": {
-    "cardNo": "BP07-116EN",
-    "name": "Mechagun Wielder",
-    "type": "base",
-    "class": "neutral",
-    "details": {
-      "format": "Any",
-      "class": "Neutral",
-      "cardType": "Follower",
-      "trait": "Machina / Mercenary",
-      "rarity": "Bronze",
-      "cardSet": "Booster Set #7 \"Verdant Steel\"",
-      "cost": "1",
-      "attack": "1",
-      "defense": "2",
-      "effect": "[fanfare] Put an Assembly Droid or Repair Mode token into your EX area. [lastwords] Discard a Machina card: Draw a card."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-116EN.png"
-  },
   "BP12-048EN": {
     "cardNo": "BP12-048EN",
     "name": "Device Diviner",
@@ -585,25 +471,6 @@
       "attack": "2",
       "defense": "3",
       "effect": "[fanfare] Put an Assembly Droid or Repair Mode token into your EX area. Once per turn, when you play a Machina card, give your leader [defense]+1."
-    },
-    "imgSrc": ""
-  },
-  "BP12-049EN": {
-    "cardNo": "BP12-049EN",
-    "name": "Mechabook Sorcerer",
-    "type": "base",
-    "class": "rune",
-    "details": {
-      "format": "Any",
-      "class": "Runecraft",
-      "cardType": "Follower",
-      "trait": "Machina / Mage",
-      "rarity": "Bronze",
-      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
-      "cost": "2",
-      "attack": "2",
-      "defense": "3",
-      "effect": "[fanfare] Discard a Machina card: Draw a card. Put an Assembly Droid and Repair Mode token into your EX area. Then, if there are 5 Machina cards in your EX area, recover 1 play point."
     },
     "imgSrc": ""
   },
@@ -721,25 +588,6 @@
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-040EN.png"
   },
-  "BP17-048EN": {
-    "cardNo": "BP17-048EN",
-    "name": "Fruits of Wisdom",
-    "type": "base",
-    "class": "rune",
-    "details": {
-      "format": "Any",
-      "class": "Runecraft",
-      "cardType": "Spell",
-      "trait": "Machina / Natura / Golem",
-      "rarity": "Silver",
-      "cardSet": "Booster Set \"Convergent Destinies\"",
-      "cost": "1",
-      "attack": "-",
-      "defense": "-",
-      "effect": "Look at the top card of your deck. If it's a Machina card, you may put it into your EX area. Put an Assembly Droid token into your EX area."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-048EN.png"
-  },
   "BP07-041EN": {
     "cardNo": "BP07-041EN",
     "name": "Delta Cannon",
@@ -758,25 +606,6 @@
       "effect": "When a Tetra, Sapphire Rebel is put onto your field, [cost01]: Put this card from your cemetery into your EX area. ---------- [quick] Select an enemy follower on the field and deal it 2 damage."
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-041EN.png"
-  },
-  "BP12-041EN": {
-    "cardNo": "BP12-041EN",
-    "name": "Sorcery in Solidarity",
-    "type": "base",
-    "class": "rune",
-    "details": {
-      "format": "Any",
-      "class": "Runecraft",
-      "cardType": "Spell",
-      "trait": "Machina / Mage / Golem",
-      "rarity": "Gold",
-      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
-      "cost": "3",
-      "attack": "-",
-      "defense": "-",
-      "effect": "If there are at least 5 Machina cards in your cemetery, search your deck for a Machina follower that costs 3 or less and a 1-cost [runecraft] spell, summon the follower, put the spell into your EX area, then shuffle."
-    },
-    "imgSrc": ""
   },
   "BP17-119EN": {
     "cardNo": "BP17-119EN",
@@ -815,25 +644,6 @@
       "effect": "While this card is on your field, any Machina card you play from the EX area costs 1 less. 4 times per turn, when you play a Machina card, select an enemy follower on the field and deal it 1 damage."
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-036EN.png"
-  },
-  "BP12-036EN": {
-    "cardNo": "BP12-036EN",
-    "name": "Belphomet, Worldreaver Evolved",
-    "type": "evolved",
-    "class": "rune",
-    "details": {
-      "format": "Any",
-      "class": "Runecraft",
-      "cardType": "Follower / Evolved",
-      "trait": "Machina / Supreme",
-      "rarity": "Legendary",
-      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
-      "cost": "-",
-      "attack": "6",
-      "defense": "6",
-      "effect": "On Evolve - Discard a Machina card: Summon an Assault Tentacle token. [act] [cost02], banish a Machina token from your EX area: Summon an Assault Tentacle token."
-    },
-    "imgSrc": ""
   },
   "BP17-050EN": {
     "cardNo": "BP17-050EN",
@@ -1081,25 +891,6 @@
       "effect": "[evolve] [cost01]: Evolve this follower. Activate only if there are 5 Machina followers on your field. [act] Banish 2 Machina cards from your cemetery: Summon an Assembly Droid token. Activate only once per turn."
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-069EN.png"
-  },
-  "BP17-076EN": {
-    "cardNo": "BP17-076EN",
-    "name": "Mono, Immortal Garnet",
-    "type": "base",
-    "class": "abyss",
-    "details": {
-      "format": "Any",
-      "class": "Abysscraft",
-      "cardType": "Follower",
-      "trait": "Machina / Demon",
-      "rarity": "Legendary",
-      "cardSet": "Booster Set \"Convergent Destinies\"",
-      "cost": "3",
-      "attack": "2",
-      "defense": "2",
-      "effect": "[fanfare] Summon an Assembly Droid token. Strike - Select an enemy follower on the field and deal it damage equal to the number of other Machina followers on your field. [act] [cost00]: Give this [attack]+1/[defense]+1 and Storm. Activate only if there are 5 Machina followers on your field, and only once per turn."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-076EN.png"
   },
   "BP07-077EN": {
     "cardNo": "BP07-077EN",
@@ -1633,25 +1424,6 @@
     },
     "imgSrc": ""
   },
-  "BP09-091EN": {
-    "cardNo": "BP09-091EN",
-    "name": "Arcus, Spirited Manager",
-    "type": "base",
-    "class": "abyss",
-    "details": {
-      "format": "Any",
-      "class": "Abysscraft",
-      "cardType": "Follower",
-      "trait": "Departed / Necromancer",
-      "rarity": "Legendary",
-      "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
-      "cost": "2",
-      "attack": "5",
-      "defense": "5",
-      "effect": "This follower can't attack enemies. At the start of your main phase, Necrocharge (10) - Summon a Ghost token. [act] Bury another follower: Choose one of the following. Activate only once per turn. (1) Draw a card. (2) Summon 2 Ghost tokens. (3) Bury the top 2 cards of your deck."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-091EN.png"
-  },
   "BP11-076EN": {
     "cardNo": "BP11-076EN",
     "name": "Wretch",
@@ -1765,25 +1537,6 @@
       "effect": "[fanfare] Deal 2 damage to each enemy leader and enemy follower on the field. Necrocharge (20): Give this follower Storm. Strike: Deal 2 damage to each enemy leader and enemy follower on the field."
     },
     "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-076EN.png"
-  },
-  "BP11-074EN": {
-    "cardNo": "BP11-074EN",
-    "name": "Greatpick Corpse",
-    "type": "base",
-    "class": "abyss",
-    "details": {
-      "format": "Any",
-      "class": "Abysscraft",
-      "cardType": "Follower",
-      "trait": "Wasteland / Departed",
-      "rarity": "Gold",
-      "cardSet": "Booster Set \"Bullet of Fate\"",
-      "cost": "3",
-      "attack": "3",
-      "defense": "3",
-      "effect": "[fanfare] Bury another card: Select an enemy follower on the field and deal it 4 damage. Once per turn, when a 1-cost token card you control leaves the field, summon a token of the same name."
-    },
-    "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-074EN.png"
   },
   "BP11-077EN": {
     "cardNo": "BP11-077EN",

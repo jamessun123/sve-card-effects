@@ -1,0 +1,211 @@
+<INPUT_CARDS>
+{
+    "cardNo": "BP12-076EN",
+    "name": "Liberté, Werewolf Pup",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Beast",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "1",
+      "attack": "1",
+      "defense": "1",
+      "effect": "[evolve] [cost01]: Evolve this follower."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-077EN",
+    "name": "Liberté, Werewolf Pup Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Beast",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "-",
+      "attack": "2",
+      "defense": "2",
+      "effect": "On Evolve - If Sanguine is active for you, give your leader [defense]+2 and draw a card."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-078EN",
+    "name": "Hellfire Hound",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Demon / Beast",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "4",
+      "attack": "4",
+      "defense": "4",
+      "effect": "[fanfare] Banish 6 cards from your cemetery: Select any number of enemy followers on the field and deal 6 damage divided between them."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-079EN",
+    "name": "Garnet Waltz",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Machina / Demon / Vampire",
+      "rarity": "Silver",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "1",
+      "attack": "-",
+      "defense": "-",
+      "effect": "Choose one. (1) Deal 2 damage to each enemy leader and 1 damage to your own. (2) Summon an Assembly Droid token. Put an Assembly Droid token into your EX area. If there's a Mono, Garnet Rebel on your field, summon the second token instead."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-080EN",
+    "name": "Bloodstained Berserker",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Demon",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "6",
+      "attack": "5",
+      "defense": "4",
+      "effect": "[evolve] [cost02]: Evolve this follower. Storm. [fanfare] Give this follower [attack]+X/[defense]+X, where X equals the number of cards named Bloodstained Berserker in your cemetery."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-081EN",
+    "name": "Bloodstained Berserker Evolved",
+    "type": "evolved",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower / Evolved",
+      "trait": "Demon",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "-",
+      "attack": "6",
+      "defense": "5",
+      "effect": "Storm. On Evolve - Select an enemy follower on the field and destroy it."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-082EN",
+    "name": "Roly-Poly Mk I",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Demon",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "1",
+      "attack": "1",
+      "defense": "3",
+      "effect": "Ward. While there's an Aenea, Amethyst Rebel on your field, if this follower would take more than 1 damage, it takes 1 instead. [act] [cost01]: Summon this card from your cemetery. Give it [attack]+1 and \"[lastwords] Banish this card.\" Activate only if there's an Aenea, Amethyst Rebel on your field."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-083EN",
+    "name": "Mechasaw Deathbringer",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Machina / Departed",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "3",
+      "attack": "1",
+      "defense": "1",
+      "effect": "[act] [cost01], bury this card: Bury the top 2 cards of your deck. [lastwords] Select an enemy follower on the field and destroy it."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-084EN",
+    "name": "Ghoul",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Follower",
+      "trait": "Departed",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "3",
+      "effect": "[fanfare] Bury another Departed follower: Draw 2 cards. Discard a card."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-085EN",
+    "name": "Viper Lash",
+    "type": "base",
+    "class": "abyss",
+    "details": {
+      "format": "Any",
+      "class": "Abysscraft",
+      "cardType": "Spell",
+      "trait": "Demon / Gorgon",
+      "rarity": "Bronze",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "3",
+      "attack": "-",
+      "defense": "-",
+      "effect": "[quick] Select an enemy follower on the field. Deal it 5 damage, summon a Serpent token, and put a Serpent token into your EX area."
+    },
+    "imgSrc": ""
+  },
+  {
+    "cardNo": "BP12-086EN",
+    "name": "Rola, Inferno Dragoon",
+    "type": "base",
+    "class": "haven",
+    "details": {
+      "format": "Any",
+      "class": "Havencraft",
+      "cardType": "Follower",
+      "trait": "Machina / Faith / Eidolon",
+      "rarity": "Legendary",
+      "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+      "cost": "2",
+      "attack": "2",
+      "defense": "2",
+      "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Put a Repair Mode token into your EX area. If this card was put onto the field by an ability, evolve it."
+    },
+    "imgSrc": ""
+  }
+</INPUT_CARDS>

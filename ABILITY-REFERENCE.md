@@ -2672,12 +2672,3 @@ Most real cards nest primitives:
 
 **Example card text:** "[fanfare] Draw a card. Discard a card. If there are at least 5 Festive cards in your cemetery, summon a Taketsumi, Creator of Paradise."
 
----
-
-## Not yet implemented (planned)
-
-See `packages/sve-engine/data/engine-blockers.json` for mechanics not in the current EN scrape: **countdown**, **enhance**, **spellboost**, **accelerate**, **fuse**, **crest**.
-
-## Vanguard crossover
-
-Cardfight!! Vanguard ride/feed/drive mechanics are deferred and excluded from the standard DSL pipeline.

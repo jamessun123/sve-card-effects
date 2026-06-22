@@ -1,1957 +1,93 @@
 {
-  "BP05-025EN": {
-    "name": "Disciple of Usurpation",
-    "class": "sword",
+  "Aenea, Amethyst Rebel": {
+    "class": "abyss",
     "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Omen",
-      "Thief"
-    ],
     "keywords": [
-      "storm",
-      "strike"
+      "fanfare",
+      "lastWords"
     ],
-    "abilities": [
-      {
-        "timing": "strike",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "millOpponent",
-              "count": 1
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "opponentCemeteryMin",
-                "count": 10
-              },
-              "then": {
-                "op": "buff",
-                "atk": 2,
-                "def": 0,
-                "targets": {
-                  "type": "self"
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP11-018EN": {
-    "name": "Nahtnaught, Cursed Queen",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 3,
-    "defense": 5,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Commander"
-    ],
+    "parseConfidence": "manual",
     "abilities": [
       {
         "timing": "fanfare",
         "effect": {
           "op": "tutorFromDeck",
           "filter": {
-            "cardClass": "sword",
-            "maxCost": 1
+            "trait": "Machina",
+            "cardType": "follower",
+            "maxCost": 3
           },
-          "to": "exArea"
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "pp": 0
-        },
-        "oncePerTurn": true,
-        "effect": {
-          "op": "box",
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      }
-    ]
-  },
-  "BP14-018EN": {
-    "name": "Taketsumi, Aconite Paladin",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
-    "keywords": [
-      "fanfare",
-      "advanced"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Commander"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "draw",
-              "count": 1
-            },
-            {
-              "op": "discard",
-              "count": 1
-            },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP14-T02EN",
-              "count": 1,
-              "zone": "exArea"
-            }
-          ]
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "pp": 4
-        },
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "ownCemeteryTraitMin",
-            "trait": "Festive",
-            "count": 5
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "banishSelf"
-              },
-              {
-                "op": "summonFromEvolveDeck",
-                "filter": {
-                  "cardNo": "BP14-019EN"
-                }
-              }
-            ]
-          },
-          "else": {
-            "op": "if",
-            "condition": {
-              "type": "ownCemeteryClassMin",
-              "cardClass": "sword",
-              "count": 10
-            },
-            "then": {
-              "op": "sequence",
-              "steps": [
-                {
-                  "op": "banishSelf"
-                },
-                {
-                  "op": "summonFromEvolveDeck",
-                  "filter": {
-                    "cardNo": "BP14-019EN"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    ]
-  },
-  "BP14-022EN": {
-    "name": "Jiemon, Thief Lord",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 3,
-    "defense": 4,
-    "evolvesTo": "BP14-023EN",
-    "evolveCost": 1,
-    "keywords": [
-      "fanfare",
-      "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Commander",
-      "Thief"
-    ],
-    "abilities": [
-      {
-        "timing": "aura",
-        "effect": {
-          "op": "auraGrantKeyword",
-          "keyword": "storm",
-          "trait": "Festive",
-          "excludeSelf": true
-        }
-      },
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP14-T02EN",
-          "count": 1,
-          "zone": "exArea"
-        }
-      }
-    ]
-  },
-  "BP14-025EN": {
-    "name": "Hero of the Hunt",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 3,
-    "cardType": "spell",
-    "traits": [
-      "Festive",
-      "Commander"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "dealDamage",
-              "amount": 5,
-              "targets": {
-                "type": "enemyFollower",
-                "count": 1
-              }
-            },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP14-T02EN",
-              "count": 1,
-              "zone": "exArea"
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "ownCemeteryTraitMinBeforeSourceEnters",
-                "trait": "Festive",
-                "count": 5
-              },
-              "then": {
-                "op": "tutorFromDeck",
-                "filter": {
-                  "cardNo": "BP14-018EN"
-                },
-                "to": "field"
-              },
-              "else": {
-                "op": "if",
-                "condition": {
-                  "type": "ownCemeteryClassMinBeforeSourceEnters",
-                  "cardClass": "sword",
-                  "count": 10
-                },
-                "then": {
-                  "op": "tutorFromDeck",
-                  "filter": {
-                    "cardNo": "BP14-018EN"
-                  },
-                  "to": "field"
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP14-026EN": {
-    "name": "Masterful Musician",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
-    "evolvesTo": "BP14-027EN",
-    "evolveCost": 1,
-    "keywords": [
-      "fanfare",
-      "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Thief"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summon",
-              "tokenCardNo": "BP14-T02EN",
-              "count": 1,
-              "zone": "exArea"
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "namedFollowerOnFieldByName",
-                "identityName": "Jiemon, Thief Lord"
-              },
-              "then": {
-                "op": "healLeader",
-                "amount": 3
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP14-030EN": {
-    "name": "Front Desk Frog",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "BP14-031EN",
-    "evolveCost": 1,
-    "keywords": [
-      "fanfare",
-      "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Thief",
-      "Beast"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summon",
-              "tokenCardNo": "BP14-T02EN",
-              "count": 1,
-              "zone": "exArea"
-            },
-            {
-              "op": "autoEvolveIf",
-              "condition": {
-                "type": "namedFollowerOnFieldByName",
-                "identityName": "Jiemon, Thief Lord"
-              },
-              "triggerOnEvolve": true
-            }
-          ]
-        }
-      },
-      {
-        "timing": "evolve",
-        "effect": {
-          "op": "passiveKeywords",
-          "keywords": []
-        }
-      }
-    ]
-  },
-  "BP14-034EN": {
-    "name": "Night on the Town",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Festive",
-      "Commander",
-      "Thief"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "choose",
-          "min": 1,
-          "max": 1,
-          "options": [
-            {
-              "label": "Deal 2 damage and add Gold",
-              "effect": {
-                "op": "sequence",
-                "steps": [
-                  {
-                    "op": "dealDamage",
-                    "amount": 2,
-                    "targets": {
-                      "type": "enemyFollower",
-                      "count": 1
-                    }
-                  },
-                  {
-                    "op": "summon",
-                    "tokenCardNo": "BP14-T02EN",
-                    "count": 1,
-                    "zone": "exArea"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Deal 4 if 3+ Festive in EX",
-              "effect": {
-                "op": "if",
-                "condition": {
-                  "type": "exAreaTraitMin",
-                  "trait": "Festive",
-                  "count": 3
-                },
-                "then": {
-                  "op": "dealDamage",
-                  "amount": 4,
-                  "targets": {
-                    "type": "enemyFollower",
-                    "count": 1
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP14-035EN": {
-    "name": "Haggler's Gambit",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Merchant"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "passive",
-        "condition": {
-          "type": "exAreaTraitMin",
-          "trait": "Loot",
-          "count": 3
-        },
-        "effect": {
-          "op": "playCostReduction",
-          "amount": 1
-        }
-      },
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "draw",
-              "count": 1
-            },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP14-T02EN",
-              "count": 1,
-              "zone": "exArea"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP14-115EN": {
-    "name": "Stay in Paradise",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Festive"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "searchDeckChoose",
-          "filter": {
-            "trait": "Festive"
-          },
-          "lookAt": 4,
-          "to": "exArea",
-          "optional": true,
-          "remainderTo": "deckBottom"
-        }
-      }
-    ]
-  },
-  "BP14-118EN": {
-    "name": "Torchbearing Guide",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Mercenary"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "optionalCost",
-          "label": "Put a Festive card from your hand into your EX area",
-          "cost": {
-            "op": "selectFromHand",
-            "filter": {
-              "trait": "Festive"
-            },
-            "to": "exArea"
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "draw",
-                "count": 1
-              },
-              {
-                "op": "if",
-                "condition": {
-                  "type": "exAreaTraitMin",
-                  "trait": "Festive",
-                  "count": 3
-                },
-                "then": {
-                  "op": "buff",
-                  "atk": 1,
-                  "def": 1,
-                  "targets": {
-                    "type": "self"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      }
-    ]
-  },
-  "BP16-022EN": {
-    "name": "Ginne, Bewitching Courtesan",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 3,
-    "defense": 2,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Festive"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "namedFollowerOnFieldByName",
-            "identityName": "Jiemon, Thief Lord"
-          },
-          "then": {
-            "op": "chooseMultiple",
-            "min": 0,
-            "max": 3,
-            "options": [
-              {
-                "label": "Engage enemy follower (no refresh next turn)",
-                "effect": {
-                  "op": "engage",
-                  "targets": {
-                    "type": "enemyFollower",
-                    "count": 1
-                  },
-                  "skipRefreshNextStart": true
-                }
-              },
-              {
-                "label": "Draw a card and put a hand card on deck",
-                "effect": {
-                  "op": "sequence",
-                  "steps": [
-                    {
-                      "op": "draw",
-                      "count": 1
-                    },
-                    {
-                      "op": "putHandCardOnDeck"
-                    }
-                  ]
-                }
-              },
-              {
-                "label": "Add 2 Glittering Gold",
-                "effect": {
-                  "op": "summon",
-                  "tokenCardNo": "BP14-T02EN",
-                  "count": 2,
-                  "zone": "exArea"
-                }
-              }
-            ]
-          },
-          "else": {
-            "op": "chooseMultiple",
-            "min": 0,
-            "max": 2,
-            "options": [
-              {
-                "label": "Engage enemy follower (no refresh next turn)",
-                "effect": {
-                  "op": "engage",
-                  "targets": {
-                    "type": "enemyFollower",
-                    "count": 1
-                  },
-                  "skipRefreshNextStart": true
-                }
-              },
-              {
-                "label": "Draw a card and put a hand card on deck",
-                "effect": {
-                  "op": "sequence",
-                  "steps": [
-                    {
-                      "op": "draw",
-                      "count": 1
-                    },
-                    {
-                      "op": "putHandCardOnDeck"
-                    }
-                  ]
-                }
-              },
-              {
-                "label": "Add 2 Glittering Gold",
-                "effect": {
-                  "op": "summon",
-                  "tokenCardNo": "BP14-T02EN",
-                  "count": 2,
-                  "zone": "exArea"
-                }
-              }
-            ]
-          }
-        }
-      }
-    ]
-  },
-  "BP07-022EN": {
-    "name": "Leod, the Crescent Blade",
-    "class": "sword",
-    "printingType": "base",
-    "keywords": [
-      "aura",
-      "evolve",
-      "intimidate"
-    ],
-    "parseConfidence": "manual",
-    "abilities": []
-  },
-  "BP17-033EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Merchant"
-    ],
-    "keywords": [
-      "fanfare"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "optionalCost",
-          "label": "Discard a Swordcraft card",
-          "cost": {
-            "op": "discardFromHand",
-            "filter": {
-              "cardClass": "sword"
-            },
-            "count": 1
-          },
-          "then": {
-            "op": "if",
-            "condition": {
-              "type": "discardedCardType",
-              "cardType": "spell"
-            },
-            "then": {
-              "op": "draw",
-              "count": 2
-            },
-            "else": {
-              "op": "draw",
-              "count": 1
-            }
-          }
-        }
-      }
-    ],
-    "name": "Stone Merchant",
-    "class": "sword",
-    "parseConfidence": "manual"
-  },
-  "BP14-023EN": {
-    "name": "Jiemon, Thief Lord Evolved",
-    "class": "sword",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 5,
-    "evolvesFrom": "BP14-022EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Festive",
-      "Commander",
-      "Thief"
-    ],
-    "keywords": [
-      "storm"
-    ],
-    "abilities": [
-      {
-        "timing": "aura",
-        "effect": {
-          "op": "auraGrantKeyword",
-          "keyword": "storm",
-          "trait": "Festive",
-          "excludeSelf": true
-        }
-      },
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "banishFromExArea",
-              "filter": {
-                "cardNo": "BP14-T02EN"
-              },
-              "count": 2
-            },
-            {
-              "op": "searchDeckChoose",
-              "filter": {
-                "trait": "Festive",
-                "maxCost": 3
-              },
-              "lookAt": 5,
-              "to": "exArea",
-              "optional": true,
-              "playCostReduction": 3,
-              "remainderTo": "deckBottom"
-            }
-          ]
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "pp": 1
-        },
-        "effect": {
-          "op": "triggerAbilities",
-          "timing": "onEvolve"
-        }
-      }
-    ]
-  },
-  "BP14-027EN": {
-    "name": "Masterful Musician Evolved",
-    "class": "sword",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
-    "evolvesFrom": "BP14-026EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Festive",
-      "Thief"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onExAreaEntry",
-        "filter": {
-          "cardNo": "BP14-T02EN"
-        },
-        "effect": {
-          "op": "damageFollowerAndLeader",
-          "followerAmount": 3,
-          "leaderAmount": 1
-        }
-      },
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP14-T02EN",
-          "count": 1,
-          "zone": "exArea"
-        }
-      }
-    ]
-  },
-  "BP14-031EN": {
-    "name": "Front Desk Frog Evolved",
-    "class": "sword",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
-    "evolvesFrom": "BP14-030EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Festive",
-      "Thief",
-      "Beast"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "dealDamage",
-              "amount": 2,
-              "targets": {
-                "type": "enemyFollower",
-                "count": 1
-              }
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "exAreaTraitMin",
-                "trait": "Festive",
-                "count": 3
-              },
-              "then": {
-                "op": "draw",
-                "count": 1
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP07-023EN": {
-    "name": "Leod, the Crescent Blade Evolved",
-    "class": "sword",
-    "printingType": "evolved",
-    "keywords": [
-      "aura",
-      "intimidate"
-    ],
-    "parseConfidence": "manual",
-    "abilities": []
-  },
-  "BP14-019EN": {
-    "name": "Taketsumi, Creator of Paradise",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 5,
-    "defense": 6,
-    "keywords": [
-      "fanfare",
-      "advanced"
-    ],
-    "cardType": "follower",
-    "specialType": "advanced",
-    "traits": [
-      "Festive",
-      "Commander"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "dealDamage",
-              "amount": 1,
-              "targets": {
-                "type": "enemyFollower",
-                "count": 1
-              }
-            },
-            {
-              "op": "damageFollowerAndLeader",
-              "followerAmount": 5,
-              "leaderAmount": 3
-            }
-          ]
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "pp": 0,
-          "engage": true
-        },
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "dealDamage",
-              "amount": 5,
-              "targets": {
-                "type": "enemyFollower",
-                "count": 1
-              }
-            },
-            {
-              "op": "dealDamage",
-              "amount": 3,
-              "targets": {
-                "type": "enemyLeader"
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "ECP02-001EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 1,
-    "evolvesTo": "ECP02-002EN",
-    "evolveCost": 1,
-    "keywords": [
-      "evolve",
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "optionalCost",
-          "label": "[cost01], Lesson (1)",
-          "cost": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "spendPp",
-                "amount": 1
-              },
-              {
-                "op": "banishFromExArea",
-                "filter": {
-                  "trait": "Magical Item"
-                },
-                "count": 1
-              }
-            ]
-          },
-          "then": {
-            "op": "selectFromHand",
-            "filter": {
-              "trait": "iM@S CG",
-              "cardType": "follower",
-              "maxCost": 2
-            },
-            "to": "exArea",
-            "optional": true,
-            "playCostReduction": 2
-          }
-        }
-      }
-    ],
-    "name": "Anastasia [Seize the Light]",
-    "class": "forest",
-    "parseConfidence": "manual"
-  },
-  "ECP02-003EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "peekDeck",
-          "count": 1
-        }
-      }
-    ],
-    "name": "Hajime Fujiwara [Pink Blossom Dream]",
-    "class": "forest",
-    "parseConfidence": "review"
-  },
-  "ECP02-012EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 1,
-    "keywords": [
-      "storm",
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "optionalCost",
-          "label": "Lesson (2)",
-          "cost": {
-            "op": "banishFromExArea",
-            "filter": {
-              "trait": "Magical Item"
-            },
-            "count": 2
-          },
-          "then": {
-            "op": "dealDamage",
-            "amount": {
-              "op": "traitFieldCount",
-              "trait": "Cool",
-              "multiplier": 1
-            },
-            "targets": {
-              "type": "enemyFollower",
-              "count": 1
-            }
-          }
-        }
-      }
-    ],
-    "name": "Rin Shibuya [Cinderella Girl]",
-    "class": "sword",
-    "parseConfidence": "review"
-  },
-  "ECP02-016EN": {
-    "printingType": "base",
-    "cost": 1,
-    "attack": 1,
-    "defense": 1,
-    "keywords": [
-      "fanfare",
-      "lastWords"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "draw",
-          "count": 1
+          "to": "field"
         }
       },
       {
         "timing": "lastWords",
         "effect": {
-          "op": "summon",
-          "tokenCardNo": "CP02-T04EN",
-          "tokenName": "Cool Earrings",
-          "count": 1,
-          "zone": "exArea"
+          "op": "healLeader",
+          "amount": 2
         }
       }
     ],
-    "name": "Karen Hojo [Cinderella Girl]",
-    "class": "sword",
-    "parseConfidence": "manual"
+    "cardNo": "BP07-072EN"
   },
-  "CSD02b-004EN": {
+  "Aenea, Creative Amethyst": {
+    "class": "abyss",
     "printingType": "base",
-    "cost": 4,
-    "attack": 4,
-    "defense": 4,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "searchDeckChoose",
-          "filter": {
-            "trait": "Cool",
-            "cardType": "follower",
-            "maxCost": 2
-          },
-          "lookAt": 40,
-          "to": "field",
-          "remainderTo": "deckBottom"
-        }
-      }
-    ],
-    "name": "Yasuha Okazaki",
-    "class": "rune",
-    "parseConfidence": "review"
-  },
-  "CSD02b-007EN": {
-    "printingType": "base",
-    "cost": 1,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "CSD02b-008EN",
-    "evolveCost": 2,
+    "cost": 2,
+    "attack": 1,
+    "defense": 1,
+    "evolvesTo": "Aenea, Creative Amethyst Evolved",
+    "evolveCost": 1,
     "keywords": [
       "evolve"
     ],
     "cardType": "follower",
     "traits": [
-      "iM@S CG",
-      "Cool"
+      "Machina",
+      "Demon"
     ],
     "abilities": [],
-    "name": "Kako Takafuji",
-    "class": "haven",
-    "parseConfidence": "keyword-only"
+    "cardNo": "BP17-077EN"
   },
-  "ECP02-058EN": {
-    "printingType": "base",
-    "cost": 3,
-    "attack": 2,
-    "defense": 2,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "fieldTraitMin",
-            "trait": "Cool",
-            "count": 3
-          },
-          "then": {
-            "op": "summonFromCemetery",
-            "filter": {
-              "trait": "Cool",
-              "cardType": "follower",
-              "maxCost": 3,
-              "excludeIdentityName": "Koume Shirasaka [Haunted Gown]"
-            },
-            "count": 1
-          }
-        }
-      },
-      {
-        "timing": "activated",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "tutorFromDeck",
-              "filter": {
-                "identityNameContains": "Last Daylight"
-              },
-              "to": "exArea",
-              "reveal": true
-            },
-            {
-              "op": "playCostReduction",
-              "amount": 2
-            }
-          ]
-        },
-        "cost": {
-          "pp": 1,
-          "banishFromExArea": {
-            "trait": "Magical Item"
-          },
-          "banishCount": 1,
-          "engage": true
-        }
-      }
-    ],
-    "name": "Koume Shirasaka [Haunted Gown]",
+  "Aenea, Creative Amethyst Evolved": {
     "class": "abyss",
-    "parseConfidence": "manual"
-  },
-  "ECP02-002EN": {
     "printingType": "evolved",
     "attack": 2,
     "defense": 2,
-    "evolvesFrom": "ECP02-001EN",
+    "evolvesFrom": "Aenea, Creative Amethyst",
     "cardType": "follower",
     "specialType": "evolved",
     "traits": [
-      "iM@S CG",
-      "Cool"
+      "Machina",
+      "Demon"
     ],
     "keywords": [],
     "abilities": [
       {
         "timing": "onEvolve",
         "effect": {
-          "op": "buff",
-          "atk": 1,
-          "def": 1,
-          "targets": {
-            "type": "selfFollower",
-            "count": 2,
-            "excludeSelf": true,
-            "filter": {
-              "trait": "iM@S CG"
-            }
-          }
+          "op": "tutorFromDeck",
+          "filter": {
+            "identityName": "Roly-Poly Mk II"
+          },
+          "to": "field"
         }
       },
       {
         "timing": "onSuperEvolve",
         "effect": {
-          "op": "buffFieldTrait",
-          "trait": "iM@S CG",
-          "atk": 1,
-          "def": 1,
-          "excludeSelf": true
-        }
-      }
-    ],
-    "name": "Anastasia [Seize the Light] Evolved",
-    "class": "forest",
-    "parseConfidence": "manual"
-  },
-  "CP02-070EN": {
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
-    "evolvesFrom": "CP02-069EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "searchDeckChoose",
+          "op": "tutorFromCemetery",
           "filter": {
-            "trait": "iM@S CG"
-          },
-          "lookAt": 4,
-          "to": "exArea",
-          "optional": true,
-          "remainderTo": "cemetery"
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "pp": 0
-        },
-        "effect": {
-          "op": "optionalCost",
-          "label": "[cost01], Lesson (2)",
-          "cost": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "spendPp",
-                "amount": 1
-              },
-              {
-                "op": "banishFromExArea",
-                "filter": {
-                  "trait": "Magical Item"
-                },
-                "count": 2
-              }
-            ]
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "dealDamage",
-                "amount": 2,
-                "targets": {
-                  "type": "enemyFollower",
-                  "count": 1
-                }
-              },
-              {
-                "op": "dealDamage",
-                "amount": 2,
-                "targets": {
-                  "type": "enemyFollower",
-                  "count": 1
-                }
-              }
-            ]
-          }
-        }
-      }
-    ]
-  },
-  "ECP02-038EN": {
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
-    "evolvesFrom": "ECP02-037EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "iM@S CG",
-      "Cool"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "choose",
-          "min": 1,
-          "max": 1,
-          "options": [
-            {
-              "label": "(1) Select an enemy follower on the field and deal it 2 damage",
-              "effect": {
-                "op": "dealDamage",
-                "amount": 2,
-                "targets": {
-                  "type": "enemyFollower",
-                  "count": 1
-                }
-              }
-            },
-            {
-              "label": "(2) bury and tutor Fumika",
-              "effect": {
-                "op": "optionalCost",
-                "cost": {
-                  "op": "sequence",
-                  "steps": [
-                    {
-                      "op": "spendPp",
-                      "amount": 4
-                    },
-                    {
-                      "op": "burySelf"
-                    }
-                  ]
-                },
-                "then": {
-                  "op": "tutorFromDeck",
-                  "filter": {
-                    "identityNameContains": "Fumika Sagisawa"
-                  },
-                  "to": "field"
-                }
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "name": "Fumika Sagisawa [Cinderella Girl] Evolved",
-    "class": "dragon",
-    "parseConfidence": "manual"
-  },
-  "BP07-116EN": {
-    "name": "Mechagun Wielder",
-    "class": "neutral",
-    "printingType": "base",
-    "keywords": [
-      "fanfare",
-      "lastWords"
-    ],
-    "parseConfidence": "manual",
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "draw",
-              "count": 1
-            },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP17-T17EN",
-              "count": 1,
-              "zone": "exArea"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP12-048EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP12-T01EN",
-          "tokenName": "Assembly Droid",
-          "count": 1,
-          "zone": "exArea"
-        }
-      },
-      {
-        "timing": "onCardPlayed",
-        "filter": {
-          "trait": "Machina"
-        },
-        "effect": {
-          "op": "healLeader",
-          "amount": 1
-        },
-        "oncePerTurn": true
-      }
-    ],
-    "name": "Device Diviner",
-    "class": "rune",
-    "parseConfidence": "manual"
-  },
-  "BP12-049EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "draw",
-              "count": 1
-            },
-            {
-              "op": "summon",
-              "tokenName": "Assembly Droid and Repair Mode",
-              "count": 1,
-              "zone": "exArea"
-            }
-          ]
-        }
-      }
-    ],
-    "name": "Mechabook Sorcerer",
-    "class": "rune",
-    "parseConfidence": "review"
-  },
-  "BP17-049EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "BP17-050EN",
-    "evolveCost": 1,
-    "keywords": [
-      "evolve",
-      "lastWords"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Natura",
-      "Golem"
-    ],
-    "abilities": [
-      {
-        "timing": "lastWords",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP07-T02EN",
-          "tokenName": "Repair Mode",
-          "count": 1,
-          "zone": "exArea"
-        }
-      }
-    ],
-    "name": "Awakened Robot",
-    "class": "rune",
-    "parseConfidence": "auto"
-  },
-  "BP17-041EN": {
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "BP17-042EN",
-    "evolveCost": 1,
-    "keywords": [
-      "evolve",
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP07-T02EN",
-          "tokenName": "Repair Mode",
-          "count": 1,
-          "zone": "exArea"
-        }
-      }
-    ],
-    "name": "Tetra, Serene Sapphire",
-    "class": "rune",
-    "parseConfidence": "auto"
-  },
-  "BP07-035EN": {
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
-    "evolvesTo": "BP07-036EN",
-    "evolveCost": 1,
-    "keywords": [
-      "evolve",
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP07-T02EN",
-          "tokenName": "Repair Mode",
-          "count": 1,
-          "zone": "exArea"
-        }
-      }
-    ],
-    "name": "Tetra, Sapphire Rebel",
-    "class": "rune",
-    "parseConfidence": "auto"
-  },
-  "BP07-037EN": {
-    "printingType": "base",
-    "cost": 7,
-    "attack": 5,
-    "defense": 5,
-    "keywords": [
-      "rush",
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Supreme"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "searchDeckSummonMultiple",
-          "filter": {
-            "trait": "Machina",
-            "cardType": "follower"
-          },
-          "lookAt": 5,
-          "maxTotalCost": 6,
-          "remainderTo": "deckBottom"
-        }
-      },
-      {
-        "timing": "startOfEnd",
-        "effect": {
-          "op": "buffFieldTrait",
-          "trait": "Machina",
-          "atk": 1,
-          "def": 1,
-          "excludeSelf": true
-        }
-      }
-    ],
-    "name": "Belphomet, Lord of Aiolon",
-    "class": "rune",
-    "parseConfidence": "manual"
-  },
-  "BP12-035EN": {
-    "printingType": "base",
-    "cost": 6,
-    "attack": 5,
-    "defense": 5,
-    "evolvesTo": "BP12-036EN",
-    "evolveCost": 1,
-    "keywords": [
-      "fanfare",
-      "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Supreme"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP12-T03EN",
-          "tokenName": "Armored Tentacle",
-          "count": 1,
-          "zone": "field"
-        }
-      },
-      {
-        "timing": "activated",
-        "activateFrom": "hand",
-        "cost": {
-          "pp": 3,
-          "banishFromExArea": {
             "trait": "Machina"
           },
-          "banishCount": 2
-        },
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "moveSourceToExArea"
-            },
-            {
-              "op": "choose",
-              "min": 1,
-              "max": 1,
-              "options": [
-                {
-                  "label": "Armored Tentacle",
-                  "effect": {
-                    "op": "summon",
-                    "tokenCardNo": "BP12-T03EN",
-                    "tokenName": "Armored Tentacle",
-                    "count": 1,
-                    "zone": "field"
-                  }
-                },
-                {
-                  "label": "Assault Tentacle",
-                  "effect": {
-                    "op": "summon",
-                    "tokenCardNo": "BP12-T04EN",
-                    "tokenName": "Assault Tentacle",
-                    "count": 1,
-                    "zone": "field"
-                  }
-                }
-              ]
-            }
-          ]
+          "to": "exArea",
+          "playCostReduction": 3
         }
       }
     ],
-    "name": "Belphomet, Worldreaver",
-    "class": "rune",
-    "parseConfidence": "review"
+    "cardNo": "BP17-078EN"
   },
-  "BP17-040EN": {
-    "printingType": "base",
-    "cost": 5,
-    "attack": 5,
-    "defense": 5,
-    "keywords": [
-      "fanfare"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Supreme"
-    ],
-    "abilities": [
-      {
-        "timing": "passive",
-        "condition": {
-          "type": "fieldFollowerMinCost",
-          "trait": "Machina",
-          "minCost": 6,
-          "count": 1
-        },
-        "effect": {
-          "op": "playCostReduction",
-          "amount": 5
-        }
-      },
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "buryFieldFollowers",
-              "filter": {
-                "trait": "Machina"
-              },
-              "minCost": 6
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "buriedExactCost",
-                "cost": 6
-              },
-              "then": {
-                "op": "summon",
-                "tokenCardNo": "BP12-T04EN",
-                "tokenName": "Assault Tentacle",
-                "count": 1,
-                "zone": "field"
-              }
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "buriedAtLeastCost",
-                "cost": 7
-              },
-              "then": {
-                "op": "sequence",
-                "steps": [
-                  {
-                    "op": "dealDamageAllEnemies",
-                    "amount": 4,
-                    "followersOnly": true
-                  },
-                  {
-                    "op": "buffFieldTrait",
-                    "trait": "Machina",
-                    "atk": 2,
-                    "def": 2,
-                    "excludeSelf": true
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "name": "Belphomet, Ultimate Creator",
-    "class": "rune",
-    "parseConfidence": "manual"
-  },
-  "BP17-048EN": {
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Natura",
-      "Golem"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "peekDeck",
-          "count": 1
-        }
-      }
-    ],
-    "name": "Fruits of Wisdom",
-    "class": "rune",
-    "parseConfidence": "review"
-  },
-  "BP07-041EN": {
-    "printingType": "base",
-    "cost": 1,
-    "keywords": [
-      "quick"
-    ],
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "abilities": [
-      {
-        "timing": "onAllyFollowerEnter",
-        "activateFrom": "cemetery",
-        "filter": {
-          "identityName": "Tetra, Sapphire Rebel"
-        },
-        "cost": {
-          "pp": 1
-        },
-        "effect": {
-          "op": "moveSourceToExArea"
-        }
-      },
-      {
-        "timing": "spell",
-        "quick": true,
-        "effect": {
-          "op": "dealDamage",
-          "amount": 2,
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      }
-    ],
-    "name": "Delta Cannon",
-    "class": "rune",
-    "parseConfidence": "manual"
-  },
-  "BP12-041EN": {
-    "printingType": "base",
-    "cost": 3,
-    "cardType": "spell",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "ownCemeteryTraitMin",
-            "trait": "Machina",
-            "count": 5
-          },
-          "then": {
-            "op": "tutorFromDeck",
-            "filter": {
-              "trait": "Machina",
-              "cardType": "follower",
-              "maxCost": 3
-            },
-            "to": "field"
-          }
-        }
-      }
-    ],
-    "name": "Sorcery in Solidarity",
-    "class": "rune",
-    "parseConfidence": "manual"
-  },
-  "BP17-119EN": {
+  "Aiolon's Remains": {
     "printingType": "base",
     "cost": 2,
     "cardType": "amulet",
@@ -2034,169 +170,11 @@
         }
       }
     ],
-    "name": "Aiolon's Remains",
     "class": "neutral",
-    "parseConfidence": "manual"
-  },
-  "BP07-036EN": {
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
-    "evolvesFrom": "BP07-035EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Golem"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "passive",
-        "filter": {
-          "trait": "Machina"
-        },
-        "effect": {
-          "op": "exAreaPlayCostReduction",
-          "amount": 1
-        }
-      },
-      {
-        "timing": "passive",
-        "effect": {
-          "op": "grantOnCardPlayed",
-          "filter": {
-            "trait": "Machina"
-          },
-          "effect": {
-            "op": "dealDamage",
-            "amount": 1,
-            "targets": {
-              "type": "enemyFollower",
-              "count": 1
-            }
-          },
-          "maxPerTurn": 4
-        }
-      }
-    ],
-    "name": "Tetra, Sapphire Rebel Evolved",
-    "class": "rune",
-    "parseConfidence": "manual"
-  },
-  "BP12-036EN": {
-    "printingType": "evolved",
-    "attack": 6,
-    "defense": 6,
-    "evolvesFrom": "BP12-035EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Supreme"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summon",
-              "tokenName": "Assault Tentacle token. [act] [cost02]",
-              "count": 1,
-              "zone": "field"
-            },
-            {
-              "op": "summon",
-              "tokenName": "banish a Machina token from your EX area: Summon an Assault Tentacle",
-              "count": 1,
-              "zone": "field"
-            }
-          ]
-        }
-      }
-    ],
-    "name": "Belphomet, Worldreaver Evolved",
-    "class": "rune",
-    "parseConfidence": "review"
-  },
-  "BP17-050EN": {
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
-    "evolvesFrom": "BP17-049EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Natura",
-      "Golem"
-    ],
-    "keywords": [
-      "lastWords"
-    ],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "dealDamage",
-          "amount": 2,
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      },
-      {
-        "timing": "lastWords",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP07-T02EN",
-          "tokenName": "Repair Mode",
-          "count": 1,
-          "zone": "exArea"
-        }
-      }
-    ],
-    "name": "Awakened Robot Evolved",
-    "class": "rune",
-    "parseConfidence": "review"
-  },
-  "BP07-072EN": {
-    "name": "Aenea, Amethyst Rebel",
-    "class": "abyss",
-    "printingType": "base",
-    "keywords": [
-      "fanfare",
-      "lastWords"
-    ],
     "parseConfidence": "manual",
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "tutorFromDeck",
-          "filter": {
-            "trait": "Machina",
-            "cardType": "follower",
-            "maxCost": 3
-          },
-          "to": "field"
-        }
-      },
-      {
-        "timing": "lastWords",
-        "effect": {
-          "op": "healLeader",
-          "amount": 2
-        }
-      }
-    ]
+    "cardNo": "BP17-119EN"
   },
-  "BP07-075EN": {
-    "name": "Alpha Drive",
+  "Alpha Drive": {
     "class": "abyss",
     "printingType": "base",
     "cost": 1,
@@ -2230,7 +208,7 @@
               "effect": {
                 "op": "tutorFromCemetery",
                 "filter": {
-                  "cardNo": "BP07-SL13EN"
+                  "identityName": "Mono, Garnet Rebel"
                 },
                 "to": "field"
               }
@@ -2238,29 +216,688 @@
           ]
         }
       }
-    ]
+    ],
+    "cardNo": "BP07-075EN"
   },
-  "BP07-076EN": {
-    "name": "Nicola, Forbidden Strength",
-    "class": "abyss",
+  "Anastasia [Seize the Light]": {
     "printingType": "base",
+    "cost": 2,
+    "attack": 1,
+    "defense": 1,
+    "evolvesTo": "Anastasia [Seize the Light] Evolved",
+    "evolveCost": 1,
     "keywords": [
       "evolve",
       "fanfare"
     ],
-    "parseConfidence": "auto",
+    "cardType": "follower",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
     "abilities": [
       {
         "timing": "fanfare",
         "effect": {
-          "op": "mill",
-          "count": 2
+          "op": "optionalCost",
+          "label": "[cost01], Lesson (1)",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "spendPp",
+                "amount": 1
+              },
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "trait": "Magical Item"
+                },
+                "count": 1
+              }
+            ]
+          },
+          "then": {
+            "op": "selectFromHand",
+            "filter": {
+              "trait": "iM@S CG",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 2
+          }
         }
       }
-    ]
+    ],
+    "class": "forest",
+    "parseConfidence": "manual",
+    "cardNo": "ECP02-001EN"
   },
-  "BP11-075EN": {
-    "name": "Dead to Rights",
+  "Anastasia [Seize the Light] Evolved": {
+    "printingType": "evolved",
+    "attack": 2,
+    "defense": 2,
+    "evolvesFrom": "Anastasia [Seize the Light]",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 2,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "iM@S CG"
+            }
+          }
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "iM@S CG",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": true
+        }
+      }
+    ],
+    "class": "forest",
+    "parseConfidence": "manual",
+    "cardNo": "ECP02-002EN"
+  },
+  "Angel's Blessing": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 3,
+    "cardType": "spell",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP14-110EN"
+  },
+  "Awakened Robot": {
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "Awakened Robot Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "lastWords"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Natura",
+      "Golem"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenCardNo": "BP07-T02EN",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "auto",
+    "cardNo": "BP17-049EN"
+  },
+  "Awakened Robot Evolved": {
+    "printingType": "evolved",
+    "attack": 3,
+    "defense": 3,
+    "evolvesFrom": "Awakened Robot",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Machina",
+      "Natura",
+      "Golem"
+    ],
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenCardNo": "BP07-T02EN",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "review",
+    "cardNo": "BP17-050EN"
+  },
+  "Bellringer Angel": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 1,
+    "attack": 0,
+    "defense": 2,
+    "evolvesTo": "Bellringer Angel Evolved",
+    "evolveCost": 2,
+    "cardType": "follower",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "cardNo": "BP01-159EN"
+  },
+  "Bellringer Angel Evolved": {
+    "class": "neutral",
+    "printingType": "evolved",
+    "attack": 0,
+    "defense": 2,
+    "evolvesFrom": "Bellringer Angel",
+    "cardType": "follower",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "cardNo": "BP01-160EN"
+  },
+  "Belphomet, Lord of Aiolon": {
+    "printingType": "base",
+    "cost": 7,
+    "attack": 5,
+    "defense": 5,
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Supreme"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower"
+          },
+          "lookAt": 5,
+          "maxTotalCost": 6,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Machina",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": true
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "manual",
+    "cardNo": "BP07-037EN"
+  },
+  "Belphomet, Ultimate Creator": {
+    "printingType": "base",
+    "cost": 5,
+    "attack": 5,
+    "defense": 5,
+    "keywords": [
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Supreme"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldFollowerMinCost",
+          "trait": "Machina",
+          "minCost": 6,
+          "count": 1
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryFieldFollowers",
+              "filter": {
+                "trait": "Machina"
+              },
+              "minCost": 6
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "buriedExactCost",
+                "cost": 6
+              },
+              "then": {
+                "op": "summon",
+                "tokenCardNo": "BP12-T04EN",
+                "tokenName": "Assault Tentacle",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "buriedExactCost",
+                "cost": 7
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 4,
+                    "followersOnly": true
+                  },
+                  {
+                    "op": "buffFieldTrait",
+                    "trait": "Machina",
+                    "atk": 2,
+                    "def": 2,
+                    "excludeSelf": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "manual",
+    "cardNo": "BP17-040EN"
+  },
+  "Belphomet, Worldreaver": {
+    "printingType": "base",
+    "cost": 6,
+    "attack": 5,
+    "defense": 5,
+    "evolvesTo": "Belphomet, Worldreaver Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Supreme"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenCardNo": "BP12-T03EN",
+          "tokenName": "Armored Tentacle",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "hand",
+        "cost": {
+          "pp": 3,
+          "banishFromExArea": {
+            "trait": "Machina"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveSourceToExArea"
+            },
+            {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Armored Tentacle",
+                  "effect": {
+                    "op": "summon",
+                    "tokenCardNo": "BP12-T03EN",
+                    "tokenName": "Armored Tentacle",
+                    "count": 1,
+                    "zone": "field"
+                  }
+                },
+                {
+                  "label": "Assault Tentacle",
+                  "effect": {
+                    "op": "summon",
+                    "tokenCardNo": "BP12-T04EN",
+                    "tokenName": "Assault Tentacle",
+                    "count": 1,
+                    "zone": "field"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "review",
+    "cardNo": "BP12-035EN"
+  },
+  "Cerberus, Hellfire Unleashed": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 4,
+    "attack": 3,
+    "defense": 3,
+    "cardType": "follower",
+    "traits": [
+      "Demon"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Mimi, Right Paw Hellhound",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Coco, Left Paw Hellhound",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "selfFollower",
+                "filter": {
+                  "identityName": "Mimi, Right Paw Hellhound"
+                }
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "selfFollower",
+                "filter": {
+                  "identityName": "Coco, Left Paw Hellhound"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "cardNo": "BP16-077EN"
+  },
+  "Chris, Beyond the Patch": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 4,
+    "attack": 4,
+    "defense": 4,
+    "cardType": "follower",
+    "traits": [
+      "Departed",
+      "Cutthroat"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 5,
+                  "excludeIdentityName": "Chris, Beyond the Patch"
+                },
+                "to": "field"
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "ward",
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "cardNo": "BP13-077EN"
+  },
+  "Clash of Heroes": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "spell",
+    "traits": [
+      "Arena"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "clash"
+        }
+      }
+    ],
+    "cardNo": "BP06-112EN"
+  },
+  "Corruption Guardian": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 5,
+    "attack": 3,
+    "defense": 6,
+    "cardType": "follower",
+    "traits": [
+      "Fallen Angel"
+    ],
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Angel or Fallen Angel card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "traitsAny": [
+                "Angel",
+                "Fallen Angel"
+              ]
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 3
+              },
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "recoverPp",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "cardNo": "BP10-121EN"
+  },
+  "Dead to Rights": {
     "class": "abyss",
     "printingType": "base",
     "cost": 1,
@@ -2305,10 +942,232 @@
           }
         }
       }
-    ]
+    ],
+    "cardNo": "BP11-075EN"
   },
-  "BP12-075EN": {
-    "name": "Friends Forever",
+  "Delta Cannon": {
+    "printingType": "base",
+    "cost": 1,
+    "keywords": [
+      "quick"
+    ],
+    "cardType": "spell",
+    "traits": [
+      "Machina",
+      "Golem"
+    ],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "activateFrom": "cemetery",
+        "filter": {
+          "identityName": "Tetra, Sapphire Rebel"
+        },
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "manual",
+    "cardNo": "BP07-041EN"
+  },
+  "Device Diviner": {
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 3,
+    "keywords": [
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Golem"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenCardNo": "BP12-T01EN",
+          "tokenName": "Assembly Droid",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "trait": "Machina"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "manual",
+    "cardNo": "BP12-048EN"
+  },
+  "Disciple of Usurpation": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 3,
+    "attack": 3,
+    "defense": 2,
+    "cardType": "follower",
+    "traits": [
+      "Omen",
+      "Thief"
+    ],
+    "keywords": [
+      "storm",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "millOpponent",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "opponentCemeteryMin",
+                "count": 10
+              },
+              "then": {
+                "op": "buff",
+                "atk": 2,
+                "def": 0,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP05-025EN"
+  },
+  "Fallen Shot": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "spell",
+    "traits": [
+      "Fallen Angel"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "trait": "Angel",
+                "cardType": "follower"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "moveToExArea",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP10-114EN"
+  },
+  "Fount of Angels": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "amulet",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Angel",
+              "Fallen Angel"
+            ]
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "condition": {
+          "type": "fieldFollowerTraitAnyMin",
+          "traits": [
+            "Angel",
+            "Fallen Angel"
+          ],
+          "count": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryFieldFollowers",
+              "sourceOnly": true
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP09-137EN"
+  },
+  "Friends Forever": {
     "class": "abyss",
     "printingType": "base",
     "cost": 5,
@@ -2332,33 +1191,463 @@
           "maxTotalCost": 5
         }
       }
-    ]
+    ],
+    "cardNo": "BP12-075EN"
   },
-  "BP12-082EN": {
-    "name": "Roly-Poly Mk I",
-    "class": "abyss",
+  "Front Desk Frog": {
+    "class": "sword",
     "printingType": "base",
-    "cost": 1,
-    "attack": 1,
-    "defense": 3,
+    "cost": 2,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "Front Desk Frog Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
     "cardType": "follower",
     "traits": [
-      "Machina",
-      "Demon"
+      "Festive",
+      "Thief",
+      "Beast"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "autoEvolveIf",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Jiemon, Thief Lord"
+              },
+              "triggerOnEvolve": true
+            }
+          ]
+        }
+      },
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      }
+    ],
+    "cardNo": "BP14-030EN"
+  },
+  "Front Desk Frog Evolved": {
+    "class": "sword",
+    "printingType": "evolved",
+    "attack": 3,
+    "defense": 3,
+    "evolvesFrom": "Front Desk Frog",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Festive",
+      "Thief",
+      "Beast"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaTraitMin",
+                "trait": "Festive",
+                "count": 3
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP14-031EN"
+  },
+  "Fumika Sagisawa [Cinderella Girl] Evolved": {
+    "printingType": "evolved",
+    "attack": 3,
+    "defense": 3,
+    "evolvesFrom": "Fumika Sagisawa [Cinderella Girl]",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "(1) Select an enemy follower on the field and deal it 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "(2) bury and tutor Fumika",
+              "effect": {
+                "op": "optionalCost",
+                "cost": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "spendPp",
+                      "amount": 4
+                    },
+                    {
+                      "op": "burySelf"
+                    }
+                  ]
+                },
+                "then": {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityNameContains": "Fumika Sagisawa"
+                  },
+                  "to": "field"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "class": "dragon",
+    "parseConfidence": "manual",
+    "cardNo": "ECP02-038EN"
+  },
+  "Ginne, Bewitching Courtesan": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 3,
+    "defense": 2,
+    "keywords": [],
+    "cardType": "follower",
+    "traits": [
+      "Festive"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Jiemon, Thief Lord"
+          },
+          "then": {
+            "op": "chooseMultiple",
+            "min": 0,
+            "max": 3,
+            "options": [
+              {
+                "label": "Engage enemy follower (no refresh next turn)",
+                "effect": {
+                  "op": "engage",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  },
+                  "skipRefreshNextStart": true
+                }
+              },
+              {
+                "label": "Draw a card and put a hand card on deck",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "draw",
+                      "count": 1
+                    },
+                    {
+                      "op": "putHandCardOnDeck"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Add 2 Glittering Gold",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Glittering Gold",
+                  "count": 2,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "chooseMultiple",
+            "min": 0,
+            "max": 2,
+            "options": [
+              {
+                "label": "Engage enemy follower (no refresh next turn)",
+                "effect": {
+                  "op": "engage",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  },
+                  "skipRefreshNextStart": true
+                }
+              },
+              {
+                "label": "Draw a card and put a hand card on deck",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "draw",
+                      "count": 1
+                    },
+                    {
+                      "op": "putHandCardOnDeck"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Add 2 Glittering Gold",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Glittering Gold",
+                  "count": 2,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "cardNo": "BP16-022EN"
+  },
+  "Glistering Angel": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "Glistering Angel Evolved",
+    "evolveCost": 1,
+    "cardType": "follower",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": ["ward", "fanfare"],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Angel",
+            "count": 5
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "cardNo": "BP14-108EN"
+  },
+  "Glistering Angel Evolved": {
+    "class": "neutral",
+    "printingType": "evolved",
+    "attack": 3,
+    "defense": 3,
+    "evolvesFrom": "Glistering Angel",
+    "cardType": "follower",
+    "traits": [
+      "Angel"
     ],
     "keywords": [
       "ward"
     ],
     "abilities": [
       {
-        "timing": "passive",
-        "condition": {
-          "type": "namedFollowerOnFieldByName",
-          "identityName": "Aenea, Amethyst Rebel"
-        },
+        "timing": "onEvolve",
         "effect": {
-          "op": "damageCap",
-          "maxPerHit": 1
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Angel",
+              "Fallen Angel"
+            ]
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "cardNo": "BP14-109EN"
+  },
+  "Gold Rush Ghost": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 2,
+    "cardType": "follower",
+    "traits": [
+      "Wasteland",
+      "Departed"
+    ],
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "enteredFromCemetery"
+          },
+          "then": {
+            "op": "chooseMultiple",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Summon Arcane Personnel Carrier; heal leader 1",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "summon",
+                      "tokenName": "Arcane Personnel Carrier",
+                      "count": 1,
+                      "zone": "field"
+                    },
+                    {
+                      "op": "healLeader",
+                      "amount": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Bury the top 2 cards of your deck",
+                "effect": {
+                  "op": "mill",
+                  "count": 2
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon Arcane Personnel Carrier; heal leader 1",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "summon",
+                      "tokenName": "Arcane Personnel Carrier",
+                      "count": 1,
+                      "zone": "field"
+                    },
+                    {
+                      "op": "healLeader",
+                      "amount": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Bury the top 2 cards of your deck",
+                "effect": {
+                  "op": "mill",
+                  "count": 2
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "startOfOpponentEnd",
+        "effect": {
+          "op": "burySelf"
+        }
+      }
+    ],
+    "cardNo": "BP16-080EN"
+  },
+  "Gremory, Death Teller": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 3,
+    "cardType": "follower",
+    "traits": [
+      "Demon"
+    ],
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
         }
       },
       {
@@ -2368,57 +1657,964 @@
           "pp": 1
         },
         "condition": {
-          "type": "namedFollowerOnFieldByName",
-          "identityName": "Aenea, Amethyst Rebel"
+          "type": "ownCemeteryMin",
+          "count": 10
         },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Gremory, Death Teller"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "reviveSelfFromCemetery"
+              },
+              {
+                "op": "grantLastWords",
+                "effect": {
+                  "op": "banishSelf"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "manual",
+    "cardNo": "BP12-U05EN"
+  },
+  "Haggler's Gambit": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "spell",
+    "traits": [
+      "Merchant"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "exAreaTraitMin",
+          "trait": "Loot",
+          "count": 3
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
         "effect": {
           "op": "sequence",
           "steps": [
             {
-              "op": "reviveSelfFromCemetery"
+              "op": "draw",
+              "count": 1
             },
             {
-              "op": "buff",
-              "atk": 1,
-              "def": 0,
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP14-035EN"
+  },
+  "Hero of the Hunt": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 3,
+    "cardType": "spell",
+    "traits": [
+      "Festive",
+      "Commander"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
               "targets": {
-                "type": "self"
+                "type": "enemyFollower",
+                "count": 1
               }
             },
             {
-              "op": "grantLastWords",
-              "effect": {
-                "op": "banishSelf"
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMinBeforeSourceEnters",
+                "trait": "Festive",
+                "count": 5
+              },
+              "then": {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Taketsumi, Aconite Paladin"
+                },
+                "to": "field"
+              },
+              "else": {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryClassMinBeforeSourceEnters",
+                  "cardClass": "sword",
+                  "count": 10
+                },
+                "then": {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityName": "Taketsumi, Aconite Paladin"
+                  },
+                  "to": "field"
+                }
               }
             }
           ]
         }
       }
     ],
-    "parseConfidence": "manual"
+    "cardNo": "BP14-025EN"
   },
-  "BP17-077EN": {
-    "name": "Aenea, Creative Amethyst",
-    "class": "abyss",
+  "Hoverboard Mercenary": {
+    "class": "neutral",
     "printingType": "base",
     "cost": 2,
     "attack": 1,
     "defense": 1,
-    "evolvesTo": "BP17-078EN",
+    "evolvesTo": "Hoverboard Mercenary Evolved",
     "evolveCost": 1,
     "keywords": [
+      "fanfare",
       "evolve"
     ],
     "cardType": "follower",
     "traits": [
       "Machina",
-      "Demon"
+      "Mercenary"
     ],
     "abilities": [
-    ]
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Assembly Droid",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP17-113EN"
   },
-  "BP17-079EN": {
-    "name": "Nicola, Enduring Steward",
+  "Hoverboard Mercenary Evolved": {
+    "class": "neutral",
+    "printingType": "evolved",
+    "attack": 2,
+    "defense": 2,
+    "evolvesFrom": "Hoverboard Mercenary",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Machina",
+      "Mercenary"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Assembly Droid",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP17-114EN"
+  },
+  "Iceschillendrig, Gilded Autocrat": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 5,
+    "attack": 5,
+    "defense": 5,
+    "evolveCost": 1,
+    "cardType": "follower",
+    "traits": [
+      "Wasteland",
+      "Departed",
+      "Demon"
+    ],
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "namedCardNotOnFieldByName",
+          "identityName": "Magitrain"
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magitrain",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "onBecomeEngaged",
+        "effect": {
+          "op": "opponentDiscardEach",
+          "count": 1
+        }
+      }
+    ],
+    "evolvesTo": "Iceschillendrig, Gilded Autocrat Evolved",
+    "cardNo": "BP11-069EN"
+  },
+  "Iceschillendrig, Gilded Autocrat Evolved": {
+    "class": "abyss",
+    "printingType": "evolved",
+    "attack": 6,
+    "defense": 6,
+    "cardType": "follower",
+    "traits": [
+      "Wasteland",
+      "Departed",
+      "Demon"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardType": "follower"
+                },
+                "to": "hand"
+              },
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardType": "follower"
+                },
+                "to": "hand"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "onBecomeEngaged",
+        "effect": {
+          "op": "opponentDiscardEach",
+          "count": 1
+        }
+      },
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "evolvesFrom": "Iceschillendrig, Gilded Autocrat",
+    "specialType": "evolved",
+    "cardNo": "BP11-070EN"
+  },
+  "Itsurugi, Eager Admirer": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 3,
+    "defense": 2,
+    "cardType": "follower",
+    "traits": [
+      "Festive",
+      "Demon",
+      "Beast"
+    ],
+    "keywords": [
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Wolfling's Struggle",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Festive",
+            "count": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishSelf"
+              },
+              {
+                "op": "summonFromEvolveDeck",
+                "filter": {
+                  "identityName": "Itsurugi, End of Paradise"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryClassMin",
+              "cardClass": "abyss",
+              "count": 10
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "banishSelf"
+                },
+                {
+                  "op": "summonFromEvolveDeck",
+                  "filter": {
+                    "identityName": "Itsurugi, End of Paradise"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "cardNo": "BP14-070EN"
+  },
+  "Itsurugi, End of Paradise": {
+    "class": "abyss",
+    "printingType": "evolved",
+    "cost": 4,
+    "attack": 6,
+    "defense": 5,
+    "cardType": "follower",
+    "traits": [
+      "Festive",
+      "Demon",
+      "Beast"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": 5,
+          "secondaryAmount": 2,
+          "maxTargets": 3,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      },
+      {
+        "timing": "onEnemyFollowerLeaveField",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP14-071EN"
+  },
+  "Jiemon, Thief Lord": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 4,
+    "attack": 3,
+    "defense": 4,
+    "evolvesTo": "Jiemon, Thief Lord Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Festive",
+      "Commander",
+      "Thief"
+    ],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "storm",
+          "trait": "Festive",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Glittering Gold",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "cardNo": "BP14-022EN"
+  },
+  "Jiemon, Thief Lord Evolved": {
+    "class": "sword",
+    "printingType": "evolved",
+    "attack": 4,
+    "defense": 5,
+    "evolvesFrom": "Jiemon, Thief Lord",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Festive",
+      "Commander",
+      "Thief"
+    ],
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "storm",
+          "trait": "Festive",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromExArea",
+              "filter": {
+                "identityName": "Glittering Gold"
+              },
+              "count": 2
+            },
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Festive",
+                "maxCost": 3
+              },
+              "lookAt": 5,
+              "to": "exArea",
+              "optional": true,
+              "playCostReduction": 3,
+              "remainderTo": "deckBottom"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "triggerAbilities",
+          "timing": "onEvolve"
+        }
+      }
+    ],
+    "cardNo": "BP14-023EN"
+  },
+  "Kako Takafuji": {
+    "printingType": "base",
+    "cost": 1,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "Kako Takafuji Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
+    "abilities": [],
+    "class": "haven",
+    "parseConfidence": "keyword-only",
+    "cardNo": "CSD02b-007EN"
+  },
+  "Koume Shirasaka [Haunted Gown]": {
+    "printingType": "base",
+    "cost": 3,
+    "attack": 2,
+    "defense": 2,
+    "keywords": [
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 3
+          },
+          "then": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "trait": "Cool",
+              "cardType": "follower",
+              "maxCost": 3,
+              "excludeIdentityName": "Koume Shirasaka [Haunted Gown]"
+            },
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Last Daylight"
+              },
+              "to": "exArea",
+              "reveal": true
+            },
+            {
+              "op": "playCostReduction",
+              "amount": 2
+            }
+          ]
+        },
+        "cost": {
+          "pp": 1,
+          "banishFromExArea": {
+            "trait": "Magical Item"
+          },
+          "banishCount": 1,
+          "engage": true
+        }
+      }
+    ],
+    "class": "abyss",
+    "parseConfidence": "manual",
+    "cardNo": "ECP02-058EN"
+  },
+  "Leah, Bellringer Angel": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 1,
+    "attack": 0,
+    "defense": 3,
+    "cardType": "follower",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP16-119EN"
+  },
+  "Masterful Musician": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 3,
+    "attack": 3,
+    "defense": 3,
+    "evolvesTo": "Masterful Musician Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Festive",
+      "Thief"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Jiemon, Thief Lord"
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 3
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP14-026EN"
+  },
+  "Masterful Musician Evolved": {
+    "class": "sword",
+    "printingType": "evolved",
+    "attack": 4,
+    "defense": 4,
+    "evolvesFrom": "Masterful Musician",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Festive",
+      "Thief"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onExAreaEntry",
+        "filter": {
+          "identityName": "Glittering Gold"
+        },
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 3,
+          "leaderAmount": 1
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Glittering Gold",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "cardNo": "BP14-027EN"
+  },
+  "Mono, Garnet Rebel": {
+    "class": "abyss",
+    "printingType": "base",
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Mono, Garnet Rebel Evolved",
+    "evolveCost": 1,
+    "parseConfidence": "manual",
+    "abilities": [
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Machina",
+          "count": 5
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 0,
+          "banishFromCemetery": {
+            "trait": "Machina"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assembly Droid",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "cardNo": "BP07-069EN"
+  },
+  "Mono, Garnet Rebel Evolved": {
+    "class": "abyss",
+    "printingType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "parseConfidence": "manual",
+    "abilities": [
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 2,
+          "banishFromCemetery": {
+            "identityName": "Alpha Drive"
+          },
+          "banishCount": 1
+        },
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Machina",
+          "atk": 2,
+          "def": 2,
+          "keyword": "rush"
+        }
+      }
+    ],
+    "cardNo": "BP07-070EN"
+  },
+  "Mukan, Shadowcrypt Ward": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 3,
+    "attack": 3,
+    "defense": 3,
+    "evolveCost": 1,
+    "cardType": "follower",
+    "traits": [
+      "Necromancer",
+      "Demon"
+    ],
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "evolvesTo": "Mukan, Shadowcrypt Ward Evolved",
+    "cardNo": "BP16-081EN"
+  },
+  "Mukan, Shadowcrypt Ward Evolved": {
+    "class": "abyss",
+    "printingType": "evolved",
+    "attack": 4,
+    "defense": 4,
+    "cardType": "follower",
+    "traits": [
+      "Necromancer",
+      "Demon"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Departed",
+          "cardType": "follower"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Departed",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1,
+          "maxTotalCost": 3
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Departed",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "count": 1,
+              "maxTotalCost": 3
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "evolvesFrom": "Mukan, Shadowcrypt Ward",
+    "specialType": "evolved",
+    "cardNo": "BP16-082EN"
+  },
+  "Nahtnaught, Cursed Queen": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 4,
+    "attack": 3,
+    "defense": 5,
+    "keywords": [
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Wasteland",
+      "Commander"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "sword",
+            "maxCost": 1
+          },
+          "to": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "box",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "cardNo": "BP11-018EN"
+  },
+  "Nicola, Enduring Steward": {
     "class": "abyss",
     "printingType": "base",
     "cost": 2,
@@ -2502,10 +2698,767 @@
           }
         }
       }
-    ]
+    ],
+    "cardNo": "BP17-079EN"
   },
-  "BP17-080EN": {
-    "name": "Steeled Hopes",
+  "Nicola, Forbidden Strength": {
+    "class": "abyss",
+    "printingType": "base",
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "parseConfidence": "auto",
+    "evolvesTo": "Nicola, Forbidden Strength Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      }
+    ],
+    "cardNo": "BP07-076EN"
+  },
+  "Nicola, Forbidden Strength Evolved": {
+    "class": "abyss",
+    "printingType": "evolved",
+    "attack": 4,
+    "defense": 4,
+    "evolvesFrom": "Nicola, Forbidden Strength",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Machina",
+      "Departed"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "exArea",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "cardNo": "BP07-077EN"
+  },
+  "Night on the Town": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "spell",
+    "traits": [
+      "Festive",
+      "Commander",
+      "Thief"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 2 damage and add Gold",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Glittering Gold",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deal 4 if 3+ Festive in EX",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Festive",
+                  "count": 3
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP14-034EN"
+  },
+  "Odile, Black Swan": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 5,
+    "attack": 6,
+    "defense": 4,
+    "cardType": "follower",
+    "traits": [
+      "Fable"
+    ],
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 20
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2
+        }
+      }
+    ],
+    "cardNo": "BP03-076EN"
+  },
+  "Olivia, Heroic Dark Angel": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 5,
+    "attack": 4,
+    "defense": 4,
+    "evolvesTo": "Olivia, Heroic Dark Angel Evolved",
+    "evolveCost": 1,
+    "cardType": "follower",
+    "traits": [
+      "Fallen Angel"
+    ],
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "cardNo": "BP16-113EN"
+  },
+  "Olivia, Heroic Dark Angel Evolved": {
+    "class": "neutral",
+    "printingType": "evolved",
+    "attack": 5,
+    "defense": 5,
+    "evolvesFrom": "Olivia, Heroic Dark Angel",
+    "cardType": "follower",
+    "traits": [
+      "Fallen Angel"
+    ],
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 3
+            },
+            {
+              "op": "recoverPp",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "cardNo": "BP16-114EN"
+  },
+  "One-Winged Traitor": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "One-Winged Traitor Evolved",
+    "evolveCost": 1,
+    "cardType": "follower",
+    "traits": [
+      "Fallen Angel"
+    ],
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Angel",
+              "Fallen Angel"
+            ]
+          },
+          "lookAt": 1,
+          "to": "hand",
+          "optional": true,
+          "reveal": true
+        }
+      }
+    ],
+    "cardNo": "BP10-115EN"
+  },
+  "One-Winged Traitor Evolved": {
+    "class": "neutral",
+    "printingType": "evolved",
+    "attack": 3,
+    "defense": 3,
+    "evolvesFrom": "One-Winged Traitor",
+    "cardType": "follower",
+    "traits": [
+      "Fallen Angel"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "traitsAny": [
+                "Angel",
+                "Fallen Angel"
+              ]
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "cardNo": "BP10-116EN"
+  },
+  "Paradise Vanguard": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 3,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "Paradise Vanguard Evolved",
+    "evolveCost": 1,
+    "cardType": "follower",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Angel",
+            "count": 5
+          },
+          "then": {
+            "op": "banish",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "cardNo": "BP09-126EN"
+  },
+  "Paradise Vanguard Evolved": {
+    "class": "neutral",
+    "printingType": "evolved",
+    "attack": 3,
+    "defense": 3,
+    "evolvesFrom": "Paradise Vanguard",
+    "cardType": "follower",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "maxCost": 4
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "cardNo": "BP09-127EN"
+  },
+  "Planetary Fracture": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 8,
+    "cardType": "spell",
+    "traits": [
+      "Deity",
+      "Archfiend",
+      "Cutthroat"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishAllFieldAndEx"
+            },
+            {
+              "op": "millToBanish",
+              "count": 10
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP13-107EN"
+  },
+  "Ranko Kanzaki Evolved": {
+    "printingType": "evolved",
+    "attack": 4,
+    "defense": 4,
+    "evolvesFrom": "Ranko Kanzaki",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "iM@S CG"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "cemetery"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost01], Lesson (2)",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "spendPp",
+                "amount": 1
+              },
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "trait": "Magical Item"
+                },
+                "count": 2
+              }
+            ]
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "cardNo": "CP02-070EN"
+  },
+  "Rin Shibuya [Cinderella Girl]": {
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 1,
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "iM@S CG",
+      "Cool"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (2)",
+          "cost": {
+            "op": "banishFromExArea",
+            "filter": {
+              "trait": "Magical Item"
+            },
+            "count": 2
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Cool",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "class": "sword",
+    "parseConfidence": "review",
+    "cardNo": "ECP02-012EN"
+  },
+  "Roly-Poly Mk I": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 1,
+    "attack": 1,
+    "defense": 3,
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Demon"
+    ],
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Aenea, Amethyst Rebel"
+        },
+        "effect": {
+          "op": "damageCap",
+          "maxPerHit": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1
+        },
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Aenea, Amethyst Rebel"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "reviveSelfFromCemetery"
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantLastWords",
+              "effect": {
+                "op": "banishSelf"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "manual",
+    "cardNo": "BP12-082EN"
+  },
+  "Roly-Poly Mk II": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 1,
+    "defense": 3,
+    "keywords": [
+      "fanfare",
+      "ward"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Demon"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Machina"
+          },
+          "lookAt": 2,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "cemetery"
+        }
+      }
+    ],
+    "cardNo": "BP17-083EN"
+  },
+  "Seraphic Blade": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 2,
+    "cardType": "spell",
+    "traits": [
+      "Angel"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Destroy enemy card (cost 2 or less)",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFieldCard",
+                  "maxCost": 2
+                }
+              }
+            },
+            {
+              "label": "Pay 2 PP — destroy enemy card (cost 6 or less)",
+              "additionalPpCost": 2,
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFieldCard",
+                  "maxCost": 6
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP12-106EN"
+  },
+  "Soul Conversion": {
+    "class": "abyss",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "spell",
+    "traits": [
+      "Departed"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "excludeSelf": false
+              }
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP01-116EN"
+  },
+  "Spartacus": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 5,
+    "attack": 4,
+    "defense": 6,
+    "cardType": "follower",
+    "traits": [
+      "Commander"
+    ],
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "discardOptionalDraw",
+              "drawBonus": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownDeckMax",
+                "count": 1
+              },
+              "then": {
+                "op": "winGame"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "cardNo": "BP09-020EN"
+  },
+  "Stay in Paradise": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 1,
+    "cardType": "spell",
+    "traits": [
+      "Festive"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Festive"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "cardNo": "BP14-115EN"
+  },
+  "Steeled Hopes": {
     "class": "abyss",
     "printingType": "base",
     "cost": 1,
@@ -2573,343 +3526,176 @@
           ]
         }
       }
-    ]
+    ],
+    "cardNo": "BP17-080EN"
   },
-  "BP17-083EN": {
-    "name": "Roly-Poly Mk II",
-    "class": "abyss",
+  "Stone Merchant": {
     "printingType": "base",
     "cost": 2,
-    "attack": 1,
-    "defense": 3,
-    "keywords": [
-      "fanfare",
-      "ward"
-    ],
+    "attack": 2,
+    "defense": 2,
     "cardType": "follower",
     "traits": [
-      "Machina",
-      "Demon"
+      "Merchant"
     ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "searchDeckChoose",
-          "filter": {
-            "trait": "Machina"
-          },
-          "lookAt": 2,
-          "to": "hand",
-          "optional": true
-        }
-      }
-    ]
-  },
-  "BP17-113EN": {
-    "name": "Hoverboard Mercenary",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 1,
-    "defense": 1,
-    "evolvesTo": "BP17-114EN",
-    "evolveCost": 1,
     "keywords": [
-      "fanfare",
-      "evolve"
-    ],
-    "cardType": "follower",
-    "traits": [
-      "Machina",
-      "Mercenary"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summon",
-              "tokenCardNo": "BP17-T17EN",
-              "count": 1,
-              "zone": "field"
-            },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP17-T18EN",
-              "count": 1,
-              "zone": "exArea"
-            }
-          ]
-        }
-      },
-      {
-        "timing": "evolve",
-        "effect": {
-          "op": "passiveKeywords",
-          "keywords": []
-        }
-      }
-    ]
-  },
-  "BP07-069EN": {
-    "name": "Mono, Garnet Rebel",
-    "class": "abyss",
-    "printingType": "base",
-    "keywords": [
-      "evolve"
-    ],
-    "parseConfidence": "manual",
-    "abilities": [
-      {
-        "timing": "evolve",
-        "condition": {
-          "type": "fieldTraitMin",
-          "trait": "Machina",
-          "count": 5
-        },
-        "effect": {
-          "op": "passiveKeywords",
-          "keywords": []
-        }
-      },
-      {
-        "timing": "activated",
-        "oncePerTurn": true,
-        "cost": {
-          "pp": 0,
-          "banishFromCemetery": {
-            "trait": "Machina"
-          },
-          "banishCount": 2
-        },
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP07-T01EN",
-          "count": 1,
-          "zone": "field"
-        }
-      }
-    ]
-  },
-  "BP17-076EN": {
-    "name": "Mono, Immortal Garnet",
-    "class": "abyss",
-    "printingType": "base",
-    "keywords": [
-      "storm",
-      "strike",
       "fanfare"
     ],
-    "parseConfidence": "manual",
     "abilities": [
       {
         "timing": "fanfare",
         "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP17-T17EN",
-          "count": 1,
-          "zone": "field"
-        }
-      }
-    ]
-  },
-  "BP07-077EN": {
-    "name": "Nicola, Forbidden Strength Evolved",
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
-    "evolvesFrom": "BP07-P22EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Departed"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "tutorFromCemetery",
-          "filter": {
-            "trait": "Machina",
-            "cardType": "follower",
-            "maxCost": 2
-          },
-          "to": "exArea",
-          "playCostReduction": 2
-        }
-      }
-    ]
-  },
-  "BP07-070EN": {
-    "name": "Mono, Garnet Rebel Evolved",
-    "class": "abyss",
-    "printingType": "evolved",
-    "keywords": [
-      "storm",
-      "rush"
-    ],
-    "parseConfidence": "manual",
-    "abilities": [
-      {
-        "timing": "activated",
-        "oncePerTurn": true,
-        "cost": {
-          "pp": 2,
-          "banishFromCemetery": {
-            "cardNo": "BP07-075EN"
-          },
-          "banishCount": 1
-        },
-        "effect": {
-          "op": "buffFieldTrait",
-          "trait": "Machina",
-          "atk": 2,
-          "def": 2,
-          "keyword": "rush"
-        }
-      }
-    ]
-  },
-  "BP17-078EN": {
-    "name": "Aenea, Creative Amethyst Evolved",
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 2,
-    "defense": 2,
-    "evolvesFrom": "BP17-077EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Demon"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "tutorFromDeck",
-          "filter": {
-            "cardNo": "BP17-083EN"
-          },
-          "to": "field"
-        }
-      },
-      {
-        "timing": "onSuperEvolve",
-        "effect": {
-          "op": "tutorFromCemetery",
-          "filter": {
-            "trait": "Machina"
-          },
-          "to": "exArea",
-          "playCostReduction": 3
-        }
-      }
-    ]
-  },
-  "BP17-114EN": {
-    "name": "Hoverboard Mercenary Evolved",
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 2,
-    "defense": 2,
-    "evolvesFrom": "BP17-113EN",
-    "cardType": "follower",
-    "specialType": "evolved",
-    "traits": [
-      "Machina",
-      "Mercenary"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summon",
-              "tokenCardNo": "BP17-T17EN",
-              "count": 1,
-              "zone": "field"
+          "op": "optionalCost",
+          "label": "Discard a Swordcraft card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "cardClass": "sword"
             },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP17-T18EN",
-              "count": 1,
-              "zone": "exArea"
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP16-119EN": {
-    "name": "Leah, Bellringer Angel",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "attack": 0,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "lastWords",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "healLeader",
-              "amount": 1
+            "count": 1
+          },
+          "then": {
+            "op": "if",
+            "condition": {
+              "type": "discardedCardType",
+              "cardType": "spell"
             },
-            {
+            "then": {
+              "op": "draw",
+              "count": 2
+            },
+            "else": {
               "op": "draw",
               "count": 1
             }
-          ]
+          }
         }
       }
-    ]
-  },
-  "BP09-137EN": {
-    "name": "Fount of Angels",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "amulet",
-    "traits": [
-      "Angel"
     ],
-    "keywords": [],
+    "class": "sword",
+    "parseConfidence": "manual",
+    "cardNo": "BP17-033EN"
+  },
+  "Taketsumi, Aconite Paladin": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 3,
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Festive",
+      "Commander"
+    ],
     "abilities": [
       {
         "timing": "fanfare",
         "effect": {
-          "op": "searchDeckChoose",
-          "filter": {
-            "traitsAny": [
-              "Angel",
-              "Fallen Angel"
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            },
+            {
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Festive",
+            "count": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishSelf"
+              },
+              {
+                "op": "summonFromEvolveDeck",
+                "filter": {
+                  "identityName": "Taketsumi, Creator of Paradise"
+                }
+              }
             ]
           },
-          "lookAt": 3,
-          "to": "hand",
-          "optional": true,
-          "remainderTo": "deckBottom",
-          "reveal": true
+          "else": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryClassMin",
+              "cardClass": "sword",
+              "count": 10
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "banishSelf"
+                },
+                {
+                  "op": "summonFromEvolveDeck",
+                  "filter": {
+                    "identityName": "Taketsumi, Creator of Paradise"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "cardNo": "BP14-018EN"
+  },
+  "Taketsumi, Creator of Paradise": {
+    "class": "sword",
+    "printingType": "base",
+    "cost": 4,
+    "attack": 5,
+    "defense": 6,
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "cardType": "follower",
+    "specialType": "advanced",
+    "traits": [
+      "Festive",
+      "Commander"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Sootspawn",
+              "count": 2,
+              "zone": "field"
+            }
+          ]
         }
       },
       {
@@ -2918,59 +3704,196 @@
           "pp": 0,
           "engage": true
         },
-        "condition": {
-          "type": "fieldFollowerTraitAnyMin",
-          "traits": [
-            "Angel",
-            "Fallen Angel"
-          ],
-          "count": 2
-        },
         "effect": {
           "op": "sequence",
           "steps": [
             {
-              "op": "buryFieldFollowers",
-              "sourceOnly": true
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
             },
             {
-              "op": "healLeader",
-              "amount": 1
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyLeader"
+              }
             }
           ]
         }
       }
-    ]
-  },
-  "BP01-159EN": {
-    "name": "Bellringer Angel",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "attack": 0,
-    "defense": 2,
-    "evolvesTo": "BP01-160EN",
-    "evolveCost": 2,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
     ],
+    "cardNo": "BP14-019EN"
+  },
+  "Tetra, Sapphire Rebel": {
+    "printingType": "base",
+    "cost": 3,
+    "attack": 3,
+    "defense": 3,
+    "evolvesTo": "Tetra, Sapphire Rebel Evolved",
+    "evolveCost": 1,
     "keywords": [
       "evolve",
-      "ward"
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Golem"
     ],
     "abilities": [
       {
-        "timing": "lastWords",
+        "timing": "fanfare",
         "effect": {
-          "op": "draw",
-          "count": 1
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
         }
       }
-    ]
+    ],
+    "class": "rune",
+    "parseConfidence": "auto",
+    "cardNo": "BP07-035EN"
   },
-  "BP03-117EN": {
-    "name": "Winged Inversion",
+  "Tetra, Sapphire Rebel Evolved": {
+    "printingType": "evolved",
+    "attack": 4,
+    "defense": 4,
+    "evolvesFrom": "Tetra, Sapphire Rebel",
+    "cardType": "follower",
+    "specialType": "evolved",
+    "traits": [
+      "Machina",
+      "Golem"
+    ],
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "filter": {
+          "trait": "Machina"
+        },
+        "effect": {
+          "op": "exAreaPlayCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "trait": "Machina"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "maxPerTurn": 4
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "manual",
+    "cardNo": "BP07-036EN"
+  },
+  "Tetra, Serene Sapphire": {
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 2,
+    "evolvesTo": "Tetra, Serene Sapphire Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Machina",
+      "Golem"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "class": "rune",
+    "parseConfidence": "auto",
+    "cardNo": "BP17-041EN"
+  },
+  "Torchbearing Guide": {
+    "class": "neutral",
+    "printingType": "base",
+    "cost": 2,
+    "attack": 2,
+    "defense": 3,
+    "keywords": [
+      "fanfare"
+    ],
+    "cardType": "follower",
+    "traits": [
+      "Festive",
+      "Mercenary"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Put a Festive card from your hand into your EX area",
+          "cost": {
+            "op": "selectFromHand",
+            "filter": {
+              "trait": "Festive"
+            },
+            "to": "exArea"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Festive",
+                  "count": 3
+                },
+                "then": {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 1,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "cardNo": "BP14-118EN"
+  },
+  "Winged Inversion": {
     "class": "neutral",
     "printingType": "base",
     "cost": 1,
@@ -3038,908 +3961,10 @@
           ]
         }
       }
-    ]
+    ],
+    "cardNo": "BP03-117EN"
   },
-  "BP10-114EN": {
-    "name": "Fallen Shot",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Fallen Angel"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "tutorFromCemetery",
-              "filter": {
-                "trait": "Angel",
-                "cardType": "follower"
-              },
-              "to": "exArea"
-            },
-            {
-              "op": "moveToExArea",
-              "targets": {
-                "type": "enemyFollower",
-                "count": 1
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP10-115EN": {
-    "name": "One-Winged Traitor",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "BP10-116EN",
-    "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
-    "keywords": [
-      "evolve"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "searchDeckChoose",
-          "filter": {
-            "traitsAny": [
-              "Angel",
-              "Fallen Angel"
-            ]
-          },
-          "lookAt": 1,
-          "to": "hand",
-          "optional": true,
-          "reveal": true
-        }
-      }
-    ]
-  },
-  "BP14-108EN": {
-    "name": "Glistering Angel",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "BP14-109EN",
-    "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [
-      "evolve",
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "ownCemeteryTraitMin",
-            "trait": "Angel",
-            "count": 5
-          },
-          "then": {
-            "op": "healLeader",
-            "amount": 2
-          }
-        }
-      }
-    ]
-  },
-  "BP12-106EN": {
-    "name": "Seraphic Blade",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 2,
-    "cardType": "spell",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "choose",
-          "min": 1,
-          "max": 1,
-          "options": [
-            {
-              "label": "Destroy enemy card (cost 2 or less)",
-              "effect": {
-                "op": "destroy",
-                "targets": {
-                  "type": "enemyFieldCard",
-                  "maxCost": 2
-                }
-              }
-            },
-            {
-              "label": "Pay 2 PP — destroy enemy card (cost 6 or less)",
-              "additionalPpCost": 2,
-              "effect": {
-                "op": "destroy",
-                "targets": {
-                  "type": "enemyFieldCard",
-                  "maxCost": 6
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP09-126EN": {
-    "name": "Paradise Vanguard",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 2,
-    "defense": 2,
-    "evolvesTo": "BP09-127EN",
-    "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [
-      "evolve"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "ownCemeteryTraitMin",
-            "trait": "Angel",
-            "count": 5
-          },
-          "then": {
-            "op": "banish",
-            "targets": {
-              "type": "enemyFollower",
-              "count": 1
-            }
-          }
-        }
-      }
-    ]
-  },
-  "BP06-112EN": {
-    "name": "Clash of Heroes",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Arena"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "clash"
-        }
-      }
-    ]
-  },
-  "BP14-110EN": {
-    "name": "Angel's Blessing",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 3,
-    "cardType": "spell",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "quick": true,
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "healLeader",
-              "amount": 2
-            },
-            {
-              "op": "draw",
-              "count": 2
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP10-121EN": {
-    "name": "Corruption Guardian",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 3,
-    "defense": 6,
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
-    "keywords": [
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "optionalCost",
-          "label": "Discard an Angel or Fallen Angel card",
-          "cost": {
-            "op": "discardFromHand",
-            "filter": {
-              "traitsAny": [
-                "Angel",
-                "Fallen Angel"
-              ]
-            },
-            "count": 1
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "healLeader",
-                "amount": 3
-              },
-              {
-                "op": "draw",
-                "count": 1
-              },
-              {
-                "op": "recoverPp",
-                "amount": 2
-              }
-            ]
-          }
-        }
-      }
-    ]
-  },
-  "BP09-020EN": {
-    "name": "Spartacus",
-    "class": "sword",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 4,
-    "defense": 6,
-    "cardType": "follower",
-    "traits": [
-      "Commander"
-    ],
-    "keywords": [
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "startOfEnd",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "discardOptionalDraw",
-              "drawBonus": 1
-            },
-            {
-              "op": "if",
-              "condition": {
-                "type": "ownDeckMax",
-                "count": 1
-              },
-              "then": {
-                "op": "winGame"
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP16-113EN": {
-    "name": "Olivia, Heroic Dark Angel",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 4,
-    "defense": 4,
-    "evolvesTo": "BP16-114EN",
-    "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
-    "keywords": [
-      "evolve",
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "draw",
-          "count": 1
-        }
-      }
-    ]
-  },
-  "BP13-107EN": {
-    "name": "Planetary Fracture",
-    "class": "neutral",
-    "printingType": "base",
-    "cost": 8,
-    "cardType": "spell",
-    "traits": [
-      "Deity",
-      "Archfiend",
-      "Cutthroat"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "banishAllFieldAndEx"
-            },
-            {
-              "op": "millToBanish",
-              "count": 10
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP01-160EN": {
-    "name": "Bellringer Angel Evolved",
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 0,
-    "defense": 2,
-    "evolvesFrom": "BP01-159EN",
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "dealDamage",
-          "amount": 2,
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      },
-      {
-        "timing": "lastWords",
-        "effect": {
-          "op": "draw",
-          "count": 1
-        }
-      }
-    ],
-    "specialType": "evolved"
-  },
-  "BP10-116EN": {
-    "name": "One-Winged Traitor Evolved",
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
-    "evolvesFrom": "BP10-115EN",
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "buff",
-          "atk": 1,
-          "def": 1,
-          "targets": {
-            "type": "selfFollower",
-            "count": 1,
-            "filter": {
-              "traitsAny": [
-                "Angel",
-                "Fallen Angel"
-              ]
-            },
-            "excludeSelf": true
-          }
-        }
-      }
-    ],
-    "specialType": "evolved"
-  },
-  "BP14-109EN": {
-    "name": "Glistering Angel Evolved",
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
-    "evolvesFrom": "BP14-108EN",
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "searchDeckChoose",
-          "filter": {
-            "traitsAny": [
-              "Angel",
-              "Fallen Angel"
-            ]
-          },
-          "lookAt": 4,
-          "to": "hand",
-          "optional": true,
-          "remainderTo": "deckBottom",
-          "reveal": true
-        }
-      }
-    ],
-    "specialType": "evolved"
-  },
-  "BP09-127EN": {
-    "name": "Paradise Vanguard Evolved",
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 3,
-    "defense": 3,
-    "evolvesFrom": "BP09-126EN",
-    "cardType": "follower",
-    "traits": [
-      "Angel"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "banish",
-          "targets": {
-            "type": "enemyFollower",
-            "maxCost": 4
-          }
-        }
-      }
-    ],
-    "specialType": "evolved"
-  },
-  "BP16-114EN": {
-    "name": "Olivia, Heroic Dark Angel Evolved",
-    "class": "neutral",
-    "printingType": "evolved",
-    "attack": 5,
-    "defense": 5,
-    "evolvesFrom": "BP16-113EN",
-    "cardType": "follower",
-    "traits": [
-      "Fallen Angel"
-    ],
-    "keywords": [
-      "ward"
-    ],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "dealDamage",
-          "amount": 5,
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      },
-      {
-        "timing": "onSuperEvolve",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "healLeader",
-              "amount": 3
-            },
-            {
-              "op": "recoverPp",
-              "amount": 3
-            }
-          ]
-        }
-      }
-    ],
-    "specialType": "evolved"
-  },
-  "BP01-116EN": {
-    "name": "Soul Conversion",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 1,
-    "cardType": "spell",
-    "traits": [
-      "Departed"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "spell",
-        "quick": true,
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "destroy",
-              "targets": {
-                "type": "selfFollower",
-                "count": 1,
-                "excludeSelf": false
-              }
-            },
-            {
-              "op": "draw",
-              "count": 2
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP14-070EN": {
-    "name": "Itsurugi, Eager Admirer",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 3,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Demon",
-      "Beast"
-    ],
-    "keywords": [
-      "advanced"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP14-T05EN",
-          "count": 1,
-          "zone": "exArea"
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "pp": 4
-        },
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "ownCemeteryTraitMin",
-            "trait": "Festive",
-            "count": 5
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "banishSelf"
-              },
-              {
-                "op": "summonFromEvolveDeck",
-                "filter": {
-                  "identityName": "Itsurugi, End of Paradise"
-                }
-              }
-            ]
-          },
-          "else": {
-            "op": "if",
-            "condition": {
-              "type": "ownCemeteryClassMin",
-              "cardClass": "abyss",
-              "count": 10
-            },
-            "then": {
-              "op": "sequence",
-              "steps": [
-                {
-                  "op": "banishSelf"
-                },
-                {
-                  "op": "summonFromEvolveDeck",
-                  "filter": {
-                    "identityName": "Itsurugi, End of Paradise"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      }
-    ]
-  },
-  "BP16-080EN": {
-    "name": "Gold Rush Ghost",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 2,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed"
-    ],
-    "keywords": [
-      "storm"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "enteredFromCemetery"
-          },
-          "then": {
-            "op": "chooseMultiple",
-            "min": 1,
-            "max": 2,
-            "options": [
-              {
-                "label": "Summon Arcane Personnel Carrier; heal leader 1",
-                "effect": {
-                  "op": "sequence",
-                  "steps": [
-                    {
-                      "op": "summon",
-                      "tokenCardNo": "BP11-T05EN",
-                      "count": 1,
-                      "zone": "field"
-                    },
-                    {
-                      "op": "healLeader",
-                      "amount": 1
-                    }
-                  ]
-                }
-              },
-              {
-                "label": "Bury the top 2 cards of your deck",
-                "effect": {
-                  "op": "mill",
-                  "count": 2
-                }
-              }
-            ]
-          },
-          "else": {
-            "op": "choose",
-            "min": 1,
-            "max": 1,
-            "options": [
-              {
-                "label": "Summon Arcane Personnel Carrier; heal leader 1",
-                "effect": {
-                  "op": "sequence",
-                  "steps": [
-                    {
-                      "op": "summon",
-                      "tokenCardNo": "BP11-T05EN",
-                      "count": 1,
-                      "zone": "field"
-                    },
-                    {
-                      "op": "healLeader",
-                      "amount": 1
-                    }
-                  ]
-                }
-              },
-              {
-                "label": "Bury the top 2 cards of your deck",
-                "effect": {
-                  "op": "mill",
-                  "count": 2
-                }
-              }
-            ]
-          }
-        }
-      },
-      {
-        "timing": "startOfOpponentEnd",
-        "effect": {
-          "op": "burySelf"
-        }
-      }
-    ]
-  },
-  "BP12-U05EN": {
-    "name": "Gremory, Death Teller",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 2,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Demon"
-    ],
-    "keywords": [
-      "ward",
-      "fanfare"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "mill",
-          "count": 2
-        }
-      },
-      {
-        "timing": "activated",
-        "activateFrom": "cemetery",
-        "cost": {
-          "pp": 1
-        },
-        "condition": {
-          "type": "ownCemeteryMin",
-          "count": 10
-        },
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "namedCardNotOnFieldByName",
-            "identityName": "Gremory, Death Teller"
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "reviveSelfFromCemetery"
-              },
-              {
-                "op": "grantLastWords",
-                "effect": {
-                  "op": "banishSelf"
-                }
-              }
-            ]
-          }
-        }
-      }
-    ],
-    "parseConfidence": "manual"
-  },
-  "BP09-091EN": {
-    "name": "Arcus, Plagiotomic",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 2,
-    "attack": 5,
-    "defense": 5,
-    "cardType": "follower",
-    "traits": [
-      "Departed",
-      "Necromancer"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "passive",
-        "effect": {
-          "op": "cannotAttack"
-        }
-      },
-      {
-        "timing": "startOfMain",
-        "condition": {
-          "type": "ownCemeteryMin",
-          "count": 10
-        },
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP16-T18EN",
-          "count": 1,
-          "zone": "field"
-        }
-      },
-      {
-        "timing": "activated",
-        "oncePerTurn": true,
-        "cost": {
-          "buryFromField": {
-            "cardType": "follower"
-          },
-          "buryFieldCount": 1,
-          "excludeSelfFromBury": true
-        },
-        "effect": {
-          "op": "choose",
-          "min": 1,
-          "max": 1,
-          "options": [
-            {
-              "label": "Deal 3 damage to all enemy followers",
-              "effect": {
-                "op": "dealDamageAllEnemies",
-                "amount": 3,
-                "followersOnly": true
-              }
-            },
-            {
-              "label": "Destroy an enemy follower",
-              "effect": {
-                "op": "destroy",
-                "targets": {
-                  "type": "enemyFollower",
-                  "count": 1
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  "BP11-076EN": {
-    "name": "Wretch",
+  "Wretch": {
     "class": "abyss",
     "printingType": "base",
     "cost": 3,
@@ -3975,7 +4000,7 @@
           "steps": [
             {
               "op": "summon",
-              "tokenCardNo": "BP11-T04EN",
+              "tokenName": "Bullet Bike",
               "count": 1,
               "zone": "field"
             },
@@ -3987,301 +4012,10 @@
         }
       }
     ],
-    "evolvesTo": "BP11-077EN"
+    "evolvesTo": "Wretch Evolved",
+    "cardNo": "BP11-076EN"
   },
-  "BP16-081EN": {
-    "name": "Mukan, Shadowcrypt Ward",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
-    "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Necromancer",
-      "Demon"
-    ],
-    "keywords": [
-      "evolve"
-    ],
-    "abilities": [],
-    "evolvesTo": "BP16-082EN"
-  },
-  "BP13-077EN": {
-    "name": "Chris, Beyond the Patch",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 4,
-    "defense": 4,
-    "cardType": "follower",
-    "traits": [
-      "Departed",
-      "Cutthroat"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "if",
-          "condition": {
-            "type": "necrocharge",
-            "count": 10
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "tutorFromCemetery",
-                "filter": {
-                  "cardClass": "abyss",
-                  "cardType": "follower",
-                  "maxCost": 5,
-                  "excludeIdentityName": "Chris, Beyond the Patch"
-                },
-                "to": "field"
-              },
-              {
-                "op": "grantKeyword",
-                "keyword": "ward",
-                "targets": {
-                  "type": "lastSummoned"
-                }
-              }
-            ]
-          },
-          "else": {
-            "op": "tutorFromCemetery",
-            "filter": {
-              "cardClass": "abyss",
-              "cardType": "follower",
-              "maxCost": 5,
-              "excludeIdentityName": "Chris, Beyond the Patch"
-            },
-            "to": "hand"
-          }
-        }
-      }
-    ]
-  },
-  "BP16-077EN": {
-    "name": "Cerberus, Hellfire Unleashed",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 4,
-    "attack": 3,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Demon"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summon",
-              "tokenCardNo": "BP16-T04EN",
-              "count": 1,
-              "zone": "field"
-            },
-            {
-              "op": "summon",
-              "tokenCardNo": "BP16-T05EN",
-              "count": 1,
-              "zone": "field"
-            }
-          ]
-        }
-      },
-      {
-        "timing": "fanfare",
-        "condition": {
-          "type": "ownCemeteryMin",
-          "count": 10
-        },
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "grantKeyword",
-              "keyword": "storm",
-              "targets": {
-                "type": "selfFollower",
-                "filter": {
-                  "cardNo": "BP16-T04EN"
-                }
-              }
-            },
-            {
-              "op": "grantKeyword",
-              "keyword": "storm",
-              "targets": {
-                "type": "selfFollower",
-                "filter": {
-                  "cardNo": "BP16-T05EN"
-                }
-              }
-            }
-          ]
-        }
-      },
-      {
-        "timing": "activated",
-        "cost": {
-          "engage": true,
-          "buryFromField": {
-            "cardType": "follower"
-          },
-          "buryFieldCount": 1,
-          "excludeSelfFromBury": true
-        },
-        "effect": {
-          "op": "dealDamage",
-          "amount": 2,
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      }
-    ]
-  },
-  "BP11-069EN": {
-    "name": "Iceschillendrig, Gilded Autocrat",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 5,
-    "defense": 5,
-    "evolveCost": 1,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
-    ],
-    "keywords": [
-      "evolve"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "condition": {
-          "type": "namedCardNotOnFieldByName",
-          "identityName": "Magitrain"
-        },
-        "effect": {
-          "op": "summon",
-          "tokenCardNo": "BP11-T02EN",
-          "count": 1,
-          "zone": "field"
-        }
-      },
-      {
-        "timing": "onBecomeEngaged",
-        "effect": {
-          "op": "opponentDiscardEach",
-          "count": 1
-        }
-      }
-    ],
-    "evolvesTo": "BP11-070EN"
-  },
-  "BP03-076EN": {
-    "name": "Odile, Black Swan",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 5,
-    "attack": 6,
-    "defense": 4,
-    "cardType": "follower",
-    "traits": [
-      "Fable"
-    ],
-    "keywords": [
-      "strike"
-    ],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "dealDamageAllEnemies",
-          "amount": 2
-        }
-      },
-      {
-        "timing": "fanfare",
-        "condition": {
-          "type": "ownCemeteryMin",
-          "count": 20
-        },
-        "effect": {
-          "op": "grantKeyword",
-          "keyword": "storm",
-          "targets": {
-            "type": "self"
-          }
-        }
-      },
-      {
-        "timing": "strike",
-        "effect": {
-          "op": "dealDamageAllEnemies",
-          "amount": 2
-        }
-      }
-    ]
-  },
-  "BP11-074EN": {
-    "name": "Greatpick Corpse",
-    "class": "abyss",
-    "printingType": "base",
-    "cost": 3,
-    "attack": 3,
-    "defense": 3,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "optionalCost",
-          "label": "Bury another card",
-          "cost": {
-            "op": "buryFromFieldSelect",
-            "excludeSelf": true
-          },
-          "then": {
-            "op": "dealDamage",
-            "amount": 4,
-            "targets": {
-              "type": "enemyFollower",
-              "count": 1
-            }
-          }
-        }
-      },
-      {
-        "timing": "onTokenLeaveField",
-        "oncePerTurn": true,
-        "effect": {
-          "op": "summonSameNameToken"
-        }
-      }
-    ]
-  },
-  "BP11-077EN": {
-    "name": "Wretch Evolved",
+  "Wretch Evolved": {
     "class": "abyss",
     "printingType": "evolved",
     "attack": 4,
@@ -4314,7 +4048,7 @@
           "steps": [
             {
               "op": "summon",
-              "tokenCardNo": "BP11-T04EN",
+              "tokenName": "Bullet Bike",
               "count": 1,
               "zone": "field"
             },
@@ -4326,188 +4060,8 @@
         }
       }
     ],
-    "evolvesFrom": "BP11-076EN",
-    "specialType": "evolved"
-  },
-  "BP16-082EN": {
-    "name": "Mukan, Shadowcrypt Ward Evolved",
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 4,
-    "defense": 4,
-    "cardType": "follower",
-    "traits": [
-      "Necromancer",
-      "Demon"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onAllyFollowerEnter",
-        "filter": {
-          "trait": "Departed",
-          "cardType": "follower"
-        },
-        "effect": {
-          "op": "healLeader",
-          "amount": 1
-        }
-      },
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "summonFromCemetery",
-          "filter": {
-            "trait": "Departed",
-            "cardType": "follower",
-            "maxCost": 3
-          },
-          "count": 1,
-          "maxTotalCost": 3
-        }
-      },
-      {
-        "timing": "onSuperEvolve",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "summonFromCemetery",
-              "filter": {
-                "trait": "Departed",
-                "cardType": "follower",
-                "maxCost": 3
-              },
-              "count": 1,
-              "maxTotalCost": 3
-            },
-            {
-              "op": "grantKeyword",
-              "keyword": "assail",
-              "targets": {
-                "type": "selfFollower",
-                "count": 1,
-                "excludeSelf": true
-              }
-            }
-          ]
-        }
-      }
-    ],
-    "evolvesFrom": "BP16-081EN",
-    "specialType": "evolved"
-  },
-  "BP11-070EN": {
-    "name": "Iceschillendrig, Gilded Autocrat Evolved",
-    "class": "abyss",
-    "printingType": "evolved",
-    "attack": 6,
-    "defense": 6,
-    "cardType": "follower",
-    "traits": [
-      "Wasteland",
-      "Departed",
-      "Demon"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "onEvolve",
-        "effect": {
-          "op": "optionalCost",
-          "label": "Discard a card",
-          "cost": {
-            "op": "discard",
-            "count": 1
-          },
-          "then": {
-            "op": "sequence",
-            "steps": [
-              {
-                "op": "tutorFromCemetery",
-                "filter": {
-                  "cardType": "follower"
-                },
-                "to": "hand"
-              },
-              {
-                "op": "tutorFromCemetery",
-                "filter": {
-                  "cardType": "follower"
-                },
-                "to": "hand"
-              }
-            ]
-          }
-        }
-      },
-      {
-        "timing": "onBecomeEngaged",
-        "effect": {
-          "op": "opponentDiscardEach",
-          "count": 1
-        }
-      },
-      {
-        "timing": "onDiscard",
-        "effect": {
-          "op": "engage",
-          "targets": {
-            "type": "enemyFollower",
-            "count": 1
-          }
-        }
-      }
-    ],
-    "evolvesFrom": "BP11-069EN",
-    "specialType": "evolved"
-  },
-  "BP14-071EN": {
-    "name": "Itsurugi, End of Paradise ADVANCED",
-    "class": "abyss",
-    "printingType": "evolved",
-    "cost": 4,
-    "attack": 6,
-    "defense": 5,
-    "cardType": "follower",
-    "traits": [
-      "Festive",
-      "Demon",
-      "Beast"
-    ],
-    "keywords": [],
-    "abilities": [
-      {
-        "timing": "fanfare",
-        "effect": {
-          "op": "dealDamageSplit",
-          "primaryAmount": 5,
-          "secondaryAmount": 2,
-          "maxTargets": 3,
-          "targets": {
-            "type": "enemyFollower"
-          }
-        }
-      },
-      {
-        "timing": "onEnemyFollowerLeaveField",
-        "effect": {
-          "op": "sequence",
-          "steps": [
-            {
-              "op": "dealDamage",
-              "amount": 1,
-              "targets": {
-                "type": "enemyLeader"
-              }
-            },
-            {
-              "op": "healLeader",
-              "amount": 1
-            }
-          ]
-        }
-      }
-    ]
+    "evolvesFrom": "Wretch",
+    "specialType": "evolved",
+    "cardNo": "BP11-077EN"
   }
 }
