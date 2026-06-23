@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from batch_utils import BATCHES_DIR, extract_response_text, make_client, resolve_path
+from batch_utils import BATCHES_DIR, extract_response_text, format_batch_errors, make_client, resolve_path
 
 
 def load_metadata(metadata_path: Path) -> dict:
@@ -138,6 +138,12 @@ def print_batch_status(batch: object) -> None:
         f"failed={counts.get('failed', '-')}"
     )
 
+    error_text = format_batch_errors(batch)
+    if error_text:
+        print("  errors:")
+        for line in error_text.splitlines():
+            print(f"    {line}")
+
 
 def download_batch(
     batch_id: str,
@@ -151,7 +157,10 @@ def download_batch(
 
     if batch.status != "completed":
         print()
-        print(f"Batch is not complete yet (status={batch.status}).")
+        if batch.status == "failed":
+            print("Batch validation or processing failed.")
+        else:
+            print(f"Batch is not complete yet (status={batch.status}).")
         print("Run this script again once the batch has finished.")
         return
 
@@ -194,6 +203,30 @@ def download_batch(
     print(f"  failure_count:   {len(failures)}")
 
 
+def download_manifest(manifest_path: Path, output_root: Path | None = None) -> None:
+    manifest = load_metadata(manifest_path)
+    batches = manifest.get("batches", [])
+    if not batches:
+        raise ValueError(f"No batches listed in manifest: {manifest_path}")
+
+    print(f"Manifest: {manifest_path}")
+    print(f"  chunk_count:   {manifest.get('chunk_count', len(batches))}")
+    print(f"  request_count: {manifest.get('request_count', '-')}")
+    print()
+
+    for batch_info in batches:
+        batch_id = batch_info["batch_id"]
+        chunk_index = batch_info.get("chunk_index")
+        chunk_label = f"part {chunk_index}" if chunk_index is not None else batch_id
+        print(f"=== {chunk_label} ===")
+        metadata_path = resolve_path(batch_info["local_metadata_path"])
+        output_dir = None
+        if output_root is not None:
+            output_dir = output_root / batch_id
+        download_batch(batch_id, output_dir=output_dir, metadata_path=metadata_path)
+        print()
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Download output from a completed OpenAI Batch job."
@@ -208,6 +241,10 @@ def parse_args() -> argparse.Namespace:
         help="Path to a local .batch.json metadata file created by submit scripts.",
     )
     parser.add_argument(
+        "--manifest",
+        help="Path to a .manifest.json file created by submit_all_batches.py.",
+    )
+    parser.add_argument(
         "--output-dir",
         help="Directory to write downloaded batch files (default: batches/output/<batch_id>).",
     )
@@ -216,6 +253,13 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+
+    if args.manifest:
+        manifest_path = resolve_path(args.manifest)
+        output_root = resolve_path(args.output_dir) if args.output_dir else None
+        download_manifest(manifest_path, output_root=output_root)
+        return
+
     metadata_path = resolve_path(args.metadata) if args.metadata else None
     batch_id, metadata_path = resolve_batch_id(args.batch_id, metadata_path)
     output_dir = resolve_path(args.output_dir) if args.output_dir else None

@@ -17,6 +17,11 @@ CARD_BATCHES_DIR = ROOT / "scraped-card-text" / "cards-by-name-batches"
 SECRETS_PATH = ROOT / "secrets.json"
 MODEL = "gpt-5.4-mini"
 RESPONSES_ENDPOINT = "/v1/responses"
+# OpenAI enqueued prompt token limit per model/org (gpt-5.4-mini defaults to 2M).
+DEFAULT_MAX_ENQUEUED_TOKENS = 1_900_000
+_CHARS_PER_TOKEN_ESTIMATE = 4
+
+_PROMPT_FORMAT_CACHE: str | None = None
 
 
 def load_api_key() -> str:
@@ -48,9 +53,12 @@ def resolve_path(path: str | Path) -> Path:
 
 
 def load_prompt_format() -> str:
-    if not PROMPT_FORMAT_PATH.exists():
-        raise FileNotFoundError(f"Missing prompt context file: {PROMPT_FORMAT_PATH}")
-    return PROMPT_FORMAT_PATH.read_text(encoding="utf-8")
+    global _PROMPT_FORMAT_CACHE
+    if _PROMPT_FORMAT_CACHE is None:
+        if not PROMPT_FORMAT_PATH.exists():
+            raise FileNotFoundError(f"Missing prompt context file: {PROMPT_FORMAT_PATH}")
+        _PROMPT_FORMAT_CACHE = PROMPT_FORMAT_PATH.read_text(encoding="utf-8")
+    return _PROMPT_FORMAT_CACHE
 
 
 def load_prompt(prompt_body_filename: str | Path) -> str:
@@ -67,6 +75,44 @@ def build_prompt_from_card_batch(card_batch_path: Path) -> str:
     card_batch_json = card_batch_path.read_text(encoding="utf-8").strip()
     prompt_body = f"<INPUT_CARDS>\n{card_batch_json}\n</INPUT_CARDS>"
     return load_prompt_format() + "\n" + prompt_body
+
+
+def estimate_prompt_tokens(prompt: str) -> int:
+    return max(1, len(prompt) // _CHARS_PER_TOKEN_ESTIMATE)
+
+
+def estimate_card_batch_tokens(card_batch_path: Path) -> int:
+    return estimate_prompt_tokens(build_prompt_from_card_batch(card_batch_path))
+
+
+def chunk_card_batch_files(
+    card_batch_files: list[Path],
+    max_enqueued_tokens: int = DEFAULT_MAX_ENQUEUED_TOKENS,
+) -> list[list[Path]]:
+    chunks: list[list[Path]] = []
+    current_chunk: list[Path] = []
+    current_tokens = 0
+
+    for card_batch_path in card_batch_files:
+        request_tokens = estimate_card_batch_tokens(card_batch_path)
+        if request_tokens > max_enqueued_tokens:
+            raise RuntimeError(
+                f"{card_batch_path.name} alone exceeds the enqueued token budget "
+                f"({request_tokens:,} estimated tokens > {max_enqueued_tokens:,})."
+            )
+
+        if current_chunk and current_tokens + request_tokens > max_enqueued_tokens:
+            chunks.append(current_chunk)
+            current_chunk = []
+            current_tokens = 0
+
+        current_chunk.append(card_batch_path)
+        current_tokens += request_tokens
+
+    if current_chunk:
+        chunks.append(current_chunk)
+
+    return chunks
 
 
 def build_batch_request_line(custom_id: str, prompt: str) -> dict[str, Any]:
@@ -136,6 +182,25 @@ def batch_info_dict(
     return info
 
 
+def format_batch_errors(batch: object) -> str | None:
+    errors = getattr(batch, "errors", None)
+    if not errors:
+        return None
+
+    data = getattr(errors, "data", None) or []
+    if not data:
+        return None
+
+    lines = []
+    for item in data:
+        code = getattr(item, "code", None) or item.get("code")
+        message = getattr(item, "message", None) or item.get("message")
+        line = getattr(item, "line", None) if hasattr(item, "line") else item.get("line")
+        prefix = f"line {line}: " if line is not None else ""
+        lines.append(f"{prefix}{code}: {message}")
+    return "\n".join(lines)
+
+
 def print_batch_info(info: dict[str, Any]) -> None:
     counts = info.get("request_counts", {})
     print("Batch submitted.")
@@ -161,6 +226,10 @@ def print_batch_info(info: dict[str, Any]) -> None:
         print(f"  custom_ids:          {len(info['custom_ids'])}")
     print(f"  local_input_path:    {info['local_input_path']}")
     print(f"  local_metadata_path: {info['local_metadata_path']}")
+    if info.get("chunk_index") is not None and info.get("chunk_count") is not None:
+        print(f"  chunk:               {info['chunk_index']} of {info['chunk_count']}")
+    if info.get("estimated_enqueued_tokens") is not None:
+        print(f"  estimated_tokens:    {info['estimated_enqueued_tokens']:,}")
 
 
 def extract_response_text(response_body: dict[str, Any]) -> str | None:

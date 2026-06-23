@@ -2,3 +2,4 @@ secrets.json
 .venv
 scraped-card-text
 __pycache__
+batches
