@@ -1,0 +1,217 @@
+{
+  "Vlad, Impaler Evolved": {
+    "keywords": [
+      "storm",
+      "drain"
+    ],
+    "abilities": [],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Vuella, One-Winged Demon": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "putDeckTopToExArea",
+          "ifFilter": {
+            "maxCost": 2
+          },
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Waltzing Fairy": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wandering Chef": {
+    "evolvesTo": "Wandering Chef Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "always"
+        },
+        "effect": {
+          "op": "noop",
+          "label": "If there's a Mount card on your field or in your EX area, give your leader [defense]+2."
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wandering Chef Evolved": {
+    "evolvesFrom": "Wandering Chef",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Wasteland"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "War Hero": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ward of Unkilling": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": -2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Hunter",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wardog": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "always"
+        },
+        "effect": {
+          "op": "noop",
+          "label": "If there's a Commander card on your field, deal 2 damage to each enemy leader."
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wardrobe Raider": {
+    "evolvesTo": "Wardrobe Raider Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Wardrobe Raider Evolved": {
+    "evolvesFrom": "Wardrobe Raider",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Put a follower from your field into its owner's cemetery",
+          "cost": {
+            "op": "buryFromFieldSelect"
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

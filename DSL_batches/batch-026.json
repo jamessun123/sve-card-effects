@@ -1,0 +1,347 @@
+{
+  "BRIGHT:LIGHTS": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "to": "field"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "follower",
+                "maxCost": 1
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "iM@S CG"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Baalt, King of the Elves": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give a Pixie follower on your field [atk]+2/[def]+2",
+              "effect": {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Pixie"
+                  }
+                }
+              }
+            },
+            {
+              "label": "Search your deck for a Pixie follower, reveal it, and add it to your hand",
+              "effect": {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "Pixie",
+                  "cardType": "follower"
+                },
+                "to": "hand",
+                "reveal": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Baby Carbuncle": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "allyFieldCard",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "Beast"
+            }
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Baccherus, Peppy Ghostie": {
+    "evolvesTo": "Baccherus, Peppy Ghostie Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Gargantuan Ghost"
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Baccherus, Peppy Ghostie Evolved": {
+    "evolvesFrom": "Baccherus, Peppy Ghostie",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Badb Catha": {
+    "evolvesTo": "Badb Catha Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give another follower on your field [atk]+1/[def]+1",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "excludeSelf": true
+                }
+              }
+            },
+            {
+              "label": "Give your leader [def]+2",
+              "effect": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            },
+            {
+              "label": "Look at the top 3 cards of your deck and rearrange them",
+              "effect": {
+                "op": "peekDeck",
+                "count": 3,
+                "optionalBury": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Badb Catha Evolved": {
+    "evolvesFrom": "Badb Catha",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Engage each enemy follower on the field",
+              "effect": {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower"
+                }
+              }
+            },
+            {
+              "label": "Deal 2 damage to each enemy leader",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            },
+            {
+              "label": "Put the top card of your deck into your EX area",
+              "effect": {
+                "op": "putDeckTopToExArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Bahamut": {
+    "evolvesTo": "Bahamut Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroyAllFollowers"
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldFollowerMin",
+          "count": 2
+        },
+        "effect": {
+          "op": "grantActRestriction",
+          "exceptEvolve": false,
+          "untilEndOfTurn": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Bahamut Evolved": {
+    "evolvesFrom": "Bahamut",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroyAllAmulets"
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldFollowerMin",
+          "count": 2
+        },
+        "effect": {
+          "op": "grantActRestriction",
+          "exceptEvolve": false,
+          "untilEndOfTurn": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Balance and Obliteration": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Marlone"
+              },
+              "to": "field"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

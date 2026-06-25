@@ -1,0 +1,293 @@
+{
+  "Ironknuckle Nun": {
+    "keywords": [
+      "ward",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ironwrought Defender": {
+    "keywords": [
+      "fanfare",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Heroic",
+            "count": 2
+          },
+          "then": {
+            "op": "buff",
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "ward"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Isabelle, Intrepid Mage": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Isabelle, Intrepid Mage Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select an enemy follower on the field and deal it 3 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Draw a card",
+                "effect": {
+                  "op": "draw",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Isabelle, Intrepid Mage Evolved": {
+    "evolvesFrom": "Isabelle, Intrepid Mage",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Quadra Magic",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Israfil": {
+    "keywords": [
+      "evolve",
+      "fanfare",
+      "strike"
+    ],
+    "evolvesTo": "Israfil Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 4
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Israfil Evolved": {
+    "evolvesFrom": "Israfil",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 5,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "It's a Sweets Buffet!": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Itsurugi, Eager Admirer": {
+    "keywords": [
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Wolfling's Struggle",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Festive",
+                "count": 5
+              },
+              {
+                "type": "ownCemeteryClassMin",
+                "cardClass": "abyss",
+                "count": 10
+              }
+            ]
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishSelf"
+              },
+              {
+                "op": "summonFromEvolveDeck",
+                "filter": {
+                  "identityName": "Itsurugi, Paradise's End"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Itsurugi, Paradise's End ADVANCED": {
+    "keywords": [
+      "fanfare"
+    ],
+    "specialType": "advanced",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": 5,
+          "secondaryAmount": 2,
+          "maxTargets": 3,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      },
+      {
+        "timing": "onEnemyFollowerLeaveField",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ivory Dragon": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolveCost": 0,
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

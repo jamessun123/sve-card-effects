@@ -1,0 +1,381 @@
+{
+  "Yukimi Sajo Evolved": {
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "excludeSelf": true,
+                "filter": {
+                  "trait": "Cool"
+                }
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "rush",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "excludeSelf": true,
+                "filter": {
+                  "trait": "Cool"
+                }
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "excludeSelf": true,
+                "filter": {
+                  "trait": "Cool"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yukimi Sajo [Day by Day, Hand in Hand]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yukishima, Master Biographer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "maxCost": 3
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantNextPlayCostReduction",
+          "amount": 3,
+          "filter": {
+            "maxCost": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yumi Aiba": {
+    "evolvesTo": "Yumi Aiba Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Passion",
+          "count": 3
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yumi Aiba Evolved": {
+    "evolvesFrom": "Yumi Aiba",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "putOnBottomOfDeck",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxDef": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yuna, Occult Hunter": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put 2 Ghost tokens into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Ghost",
+                "count": 2,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Put 2 Forest Bat tokens into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Forest Bat",
+                "count": 2,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yurius, Levin Duke": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "quick": true,
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yuuki Otokura [Ripples of My Heart]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cute",
+            "count": 2
+          },
+          "then": {
+            "op": "buff",
+            "atk": -5,
+            "def": -5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "buff",
+            "atk": -3,
+            "def": -3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Cute",
+          "count": 10
+        },
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Magical Item",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yuuki Otokura [Together with Me]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cute",
+            "count": 2
+          },
+          "then": {
+            "op": "buff",
+            "atk": -5,
+            "def": -5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "buff",
+            "atk": -3,
+            "def": -3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Cute",
+          "count": 10
+        },
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Magical Item",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yuwan, Dimensional Avenger": {
+    "evolvesTo": "Yuwan, Dimensional Avenger Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "cardType": "follower"
+              },
+              "lookAt": 2,
+              "to": "exArea",
+              "optional": true,
+              "remainderTo": "deckBottom"
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

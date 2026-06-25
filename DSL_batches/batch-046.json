@@ -1,0 +1,254 @@
+{
+  "Courtly Dance": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "cardClass": "sword",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "lookAt": 5,
+          "maxTotalCost": 7,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Covenant Mage": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": {
+            "op": "banishedCount"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Craftsman's Pride": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromExArea",
+              "count": 1
+            },
+            {
+              "op": "summon",
+              "tokenName": "Puppet",
+              "count": 3,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Crafty Warlock": {
+    "evolvesTo": "Crafty Warlock Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magic Sediment",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Crafty Warlock Evolved": {
+    "evolvesFrom": "Crafty Warlock",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Magic Sediment",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "addStack",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Craig, Wizard of Mysteria": {
+    "evolvesTo": "Craig, Wizard of Mysteria Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Craig, Wizard of Mysteria Evolved": {
+    "evolvesFrom": "Craig, Wizard of Mysteria",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Craving's Splendor": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Crazed Executioner": {
+    "evolvesTo": "Crazed Executioner Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Crazed Executioner Evolved": {
+    "evolvesFrom": "Crazed Executioner",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "tutorFromHand",
+              "filter": {
+                "cardType": "follower"
+              },
+              "to": "hand"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

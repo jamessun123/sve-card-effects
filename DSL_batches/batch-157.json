@@ -1,0 +1,325 @@
+{
+  "Mr. Full Moon": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": -3,
+          "def": -3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "buff",
+          "atk": -3,
+          "def": -3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mr. Heinlein, Shadow Mage": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 4
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "recoverPp",
+          "amount": {
+            "op": "spellCountInLastMill"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "discardFromHand": {
+            "filter": {
+              "cardType": "spell"
+            },
+            "count": 1
+          }
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ms. Miranda, Adored Academic": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Academic card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ms. Tart Man": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeckAny",
+          "to": "hand",
+          "optional": false,
+          "reveal": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mukan, Shadowcrypt Ward": {
+    "evolvesTo": "Mukan, Shadowcrypt Ward Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Mukan, Shadowcrypt Ward Evolved": {
+    "evolvesFrom": "Mukan, Shadowcrypt Ward",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Departed",
+          "cardType": "follower"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Departed",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1,
+          "maxTotalCost": 3
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Departed",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "count": 1,
+              "maxTotalCost": 3
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Multipart Experiment": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 3 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Summon a Guardform Golem token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Guardform Golem",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mushussu": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 0,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "My Life, My Sounds": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "sanguine"
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mysteria, Magic Founder": {
+    "evolvesTo": "Mysteria, Magic Founder Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Reveal an Academic follower from your hand",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic",
+              "cardType": "follower"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

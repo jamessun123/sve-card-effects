@@ -1,0 +1,320 @@
+{
+  "Mega Enforcer": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "exAreaTraitMin",
+            "trait": "Machina",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assembly Droid",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Megalorca": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Melodious Monody": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "optionalCost",
+          "label": "As an additional cost to play this, you may engage any number of Idolatry cards on your field",
+          "cost": {
+            "op": "noop",
+            "label": "engage any number of Idolatry cards on your field"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "chosenNumber",
+              "min": 0,
+              "max": 99
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Melody's Return": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "optionalCost",
+          "label": "banish a follower with \"Lishenna\" in its name from your cemetery",
+          "cost": {
+            "op": "banishFromCemetery",
+            "filter": {
+              "identityNameContains": "Lishenna"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "Idolatry",
+              "count": 2
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityNameContains": "Lishenna"
+                  },
+                  "to": "field"
+                },
+                {
+                  "op": "shuffleDeck"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Melvie, Princess Witch": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Mage",
+          "count": 5
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 4,
+          "def": 0,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "spellchain",
+          "count": 5
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 0,
+          "def": 4,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mena, Levin Duelist": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Levin",
+          "count": 5
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "assail"
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Levin",
+          "count": 5
+        },
+        "effect": {
+          "op": "grantLastWords",
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Meowskers Ambush!": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "haven",
+            "cardType": "follower"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summonFromHand",
+          "filter": {
+            "identityNameContains": "Meowskers"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Meowskers, Fluffy Consul": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "notEnteredFromHand"
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Meowskers, Ruff-Tuff Major": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyLeader",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Merciless Voiding": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ancient Artifact",
+          "count": {
+            "op": "enemyFieldCount"
+          },
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

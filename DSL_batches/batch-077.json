@@ -1,0 +1,355 @@
+{
+  "Fall from Grace": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banish",
+              "targets": {
+                "type": "anyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fallen Harpist": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "neutral",
+            "cardType": "spell",
+            "maxCost": 1
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fallen Shot": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "trait": "Angel",
+                "cardType": "follower"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "moveToExArea",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fan of Otohime": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Megalorca",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Marine"
+        },
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fangs of Ardent Destruction": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "selfFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fashionista Nelcha": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select another follower on your field and give it [attack]+2/[defense]+2",
+                "effect": {
+                  "op": "buff",
+                  "atk": 2,
+                  "def": 2,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1,
+                    "excludeSelf": true
+                  }
+                }
+              },
+              {
+                "label": "Select an enemy follower on the field and give it [attack]-2/[defense]-2",
+                "effect": {
+                  "op": "buff",
+                  "atk": -2,
+                  "def": -2,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fate's Hand": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 2
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "spellchain",
+                "count": 10
+              },
+              "then": {
+                "op": "recoverPp",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Father Refinement": {
+    "keywords": [
+      "rush",
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 2,
+              "zone": "exArea"
+            },
+            {
+              "op": "recoverPp",
+              "amount": 2
+            }
+          ]
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "exAreaNamedMin",
+            "identityName": "Repair Mode",
+            "count": 5
+          },
+          "then": {
+            "op": "draw",
+            "count": 2
+          },
+          "else": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Faust, Truthseeker": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "amulet",
+                "identityName": "Earth Sigil",
+                "maxCost": 4
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": false
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fay Twinkletoes": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffFieldTrait",
+          "cardClass": "forest",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

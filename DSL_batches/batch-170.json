@@ -1,0 +1,292 @@
+{
+  "Owl Man": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "Beast"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Owl Receptionist": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantNextPlayCostReduction",
+          "filter": {
+            "traitsAny": [
+              "Festive",
+              "Mage"
+            ],
+            "maxCost": 3
+          },
+          "amount": 3
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Yukishima, Master Biographer"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ]
+  },
+  "Owlcat": {
+    "evolvesTo": "Owlcat Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Owlcat Evolved": {
+    "evolvesFrom": "Owlcat",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "banishUpTo",
+          "targets": {
+            "type": "enemyFollower",
+            "maxDef": 1
+          },
+          "maxCount": 1
+        }
+      }
+    ]
+  },
+  "Pact of the Beast Princess": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Holy Tiger"
+        },
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "buryFromField": {
+            "cardType": "amulet"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Tiger",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Paladin of Clemency": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Palla, Student Teacher": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Academic",
+                "count": 5
+              },
+              "then": {
+                "op": "recoverPp",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Panacea Alchemist": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give your leader [defense]+5",
+              "effect": {
+                "op": "healLeader",
+                "amount": 5
+              }
+            },
+            {
+              "label": "Deal 5 damage to each enemy follower on the field",
+              "additionalPpCost": 2,
+              "effect": {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": true
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Panther Scout": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Naterran Great Tree token onto your field",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Put a Naterran Great Tree token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Paper Shikigami": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

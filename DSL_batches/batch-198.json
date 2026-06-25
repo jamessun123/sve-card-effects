@@ -1,0 +1,308 @@
+{
+  "Saintly Core": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Machina"
+          },
+          "lookAt": 2,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Machina",
+          "count": 2
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Saintly Leader": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "banishFromCemetery": {
+            "cardType": "follower",
+            "keyword": "ward"
+          },
+          "banishCount": 3
+        },
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Salefa, Guardian of Water": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "cannotAttack",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "cannotAttack",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Salome": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Salvation Ex Limonia": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Heavenly Aegis",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "identityName": "Heavenly Aegis"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 2
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "trait": "Machina",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "to": "field"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Limonia, Flawed Saint"
+              },
+              "then": {
+                "op": "summon",
+                "tokenName": "Repair Mode",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Salvia Panther": {
+    "evolvesTo": "Salvia Panther Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Salvia Panther Evolved": {
+    "evolvesFrom": "Salvia Panther",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxCost": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sammy, Wizard's Apprentice": {
+    "evolvesTo": "Sammy, Wizard's Apprentice Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "peekDeck",
+          "count": 1,
+          "optionalBury": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sammy, Wizard's Apprentice Evolved": {
+    "evolvesFrom": "Sammy, Wizard's Apprentice",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "handResetDraw"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Samurai": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "bane",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

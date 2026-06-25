@@ -1,0 +1,211 @@
+{
+  "Elusa, Magic Wunderkind": {
+    "evolvesTo": "Elusa, Magic Wunderkind Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Elusa, Magic Wunderkind Evolved": {
+    "evolvesFrom": "Elusa, Magic Wunderkind",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Arcanaform",
+            "cardType": "follower"
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "shuffleDeck"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elven Archery": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Select up to 2 enemy followers on the field and deal them 1 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 2
+                }
+              }
+            },
+            {
+              "label": "Combo (3): Deal 2 damage instead",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "combo",
+                  "count": 3
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 2,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 2
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elven Craftsmanship": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elven Pikeman": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Elven Princess Mage": {
+    "evolvesTo": "Elven Princess Mage Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Elven Princess Mage Evolved": {
+    "evolvesFrom": "Elven Princess Mage",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy Wisp",
+          "count": 2,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elven Sentry": {
+    "keywords": [
+      "rush",
+      "assail"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elven Waitress": {
+    "evolvesTo": "Elven Waitress Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Put a card from your hand on the bottom of your deck",
+          "cost": {
+            "op": "putHandCardOnDeck",
+            "position": "bottom"
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elven Waitress Evolved": {
+    "evolvesFrom": "Elven Waitress",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Festive"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

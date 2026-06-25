@@ -1,0 +1,261 @@
+{
+  "Sibyl of the Waterwyrm": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "increaseMaxPp",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          },
+          "else": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Siegfried": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Siegfried Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Siegfried Evolved": {
+    "evolvesFrom": "Siegfried",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxDef": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silent Purge": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "opponentDiscardEach",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silent Rider": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Silver Automaton": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silver Bolt": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "dealDamage",
+              "amount": {
+                "op": "handCount"
+              },
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Silver Cog Spinner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "handMin",
+            "count": 5
+          },
+          "then": {
+            "op": "recoverPp",
+            "amount": 2
+          },
+          "else": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silverbolt Hunter": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silvercloud Dragonrider": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dragon",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dragon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

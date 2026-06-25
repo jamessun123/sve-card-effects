@@ -1,0 +1,319 @@
+{
+  "Godsent Stride": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "buff",
+          "atk": 3,
+          "def": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Godsworn Alexiel": {
+    "evolvesTo": "Godsworn Alexiel Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "def": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "amulet",
+            "multiplier": 2
+          },
+          "targets": {
+            "type": "selfLeader"
+          }
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Godsworn Alexiel Evolved": {
+    "evolvesFrom": "Godsworn Alexiel",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageFollowerAndLeader",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          },
+          "followerAmount": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "amulet",
+            "multiplier": 2
+          },
+          "leaderAmount": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "amulet",
+            "multiplier": 2
+          }
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Godwood Staff": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "recoverPp",
+              "amount": 1
+            }
+          ]
+        },
+        "parseConfidence": "high"
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gold Mine Necromancer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "trait": "Wasteland",
+                  "cardType": "follower",
+                  "maxCost": 3
+                },
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gold Rush Ghost": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Summon Arcane Personnel Carrier; give your leader [defense]+1",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summon",
+                    "tokenName": "Arcane Personnel Carrier",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "healLeader",
+                    "amount": 1
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bury the top 2 cards of your deck",
+              "effect": {
+                "op": "mill",
+                "count": 2
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "startOfOpponentEnd",
+        "effect": {
+          "op": "burySelf"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goldennote Melody": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give your leader [defense]+3",
+              "effect": {
+                "op": "healLeader",
+                "amount": 3
+              }
+            },
+            {
+              "label": "Draw 2 cards",
+              "effect": {
+                "op": "draw",
+                "count": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Golem Marshal": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Arcane Personnel Carrier",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Wasteland",
+                "cardType": "follower",
+                "maxCost": 6
+              },
+              "count": 1
+            },
+            {
+              "op": "summon",
+              "tokenName": "Arcane Personnel Carrier",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Golem Protection": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Guardform Golem",
+              "count": 2,
+              "zone": "field"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "earthRite",
+                "count": 1
+              },
+              "then": {
+                "op": "buffFieldTrait",
+                "trait": "Golem",
+                "atk": 1,
+                "def": 1,
+                "otherOnly": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Golem's Rampage": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryFieldFollowers",
+              "filter": {
+                "trait": "Golem"
+              },
+              "sourceOnly": false
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 3,
+              "followersOnly": false
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

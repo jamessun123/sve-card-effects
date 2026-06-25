@@ -1,0 +1,282 @@
+{
+  "Star Phoenix": {
+    "evolvesTo": "Star Phoenix Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "cardClass": "dragon",
+          "cardType": "spell"
+        },
+        "effect": {
+          "op": "reviveSelfFromCemetery"
+        },
+        "cost": {
+          "pp": 1
+        },
+        "oncePerTurn": false
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Star Phoenix Evolved": {
+    "evolvesFrom": "Star Phoenix",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Star Priestess": {
+    "evolvesTo": "Star Priestess Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "buryFromField": {
+            "cardType": "amulet"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "evolveOtherFollower",
+          "filter": {
+            "identityName": "Star Priestess"
+          },
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "amulet",
+          "count": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Star Priestess Evolved": {
+    "evolvesFrom": "Star Priestess",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Star Reader Stella": {
+    "keywords": [
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "peekDeck",
+          "count": 4,
+          "optionalBury": true
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "peekDeck",
+          "count": 1,
+          "optionalBury": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Star Torrent": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": true
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "amulet",
+          "count": 1
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Star of the Show": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "optionalCost",
+          "label": "You may play this for 3 more play points",
+          "cost": {
+            "op": "spendPp",
+            "amount": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "always"
+                },
+                "then": {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityNameContains": "Tsukasa Kiryu"
+                  },
+                  "to": "field"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Starbright Deity": {
+    "evolvesTo": "Starbright Deity Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromHand",
+          "filter": {
+            "cardType": "follower"
+          },
+          "to": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Starbright Deity Evolved": {
+    "evolvesFrom": "Starbright Deity",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardType": "follower"
+          },
+          "to": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Starchaser Sprite": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 2
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "Oathless Knight": {
+    "evolvesTo": "Oathless Knight Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Knight",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Oathless Knight Evolved": {
+    "evolvesFrom": "Oathless Knight",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "assail"
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Oceanus": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Give your leader [defense]+1",
+              "effect": {
+                "op": "healLeader",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Octobishop": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buff",
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Octrice, Hollow Usurpation": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Remnant of Hollowness",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "maxPerTurn": 2,
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "banishSelf": true,
+          "banishFromCemetery": {
+            "identityName": "Octrice, Omen of Usurpation"
+          },
+          "banishCount": 1
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Gilded Blade",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Octrice, Omen of Usurpation": {
+    "evolvesTo": "Octrice, Omen of Usurpation Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "millOpponent",
+          "count": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 8
+        },
+        "effect": {
+          "op": "playFromOpponentCemetery",
+          "filter": {
+            "cardType": "card"
+          },
+          "maxCost": null
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Octrice, Omen of Usurpation Evolved": {
+    "evolvesFrom": "Octrice, Omen of Usurpation",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardType": "card"
+          },
+          "to": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 8
+        },
+        "effect": {
+          "op": "playFromOpponentCemetery",
+          "filter": {
+            "cardType": "card"
+          },
+          "maxCost": null
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "opponentCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Odette, White Swan": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "buffFieldTrait",
+              "atk": 0,
+              "def": 2,
+              "otherOnly": true
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "buffFieldTrait",
+              "atk": 0,
+              "def": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Odile, Black Swan": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 20
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ogre Weaponmaster": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 6 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 6,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Deal 3 damage to each enemy follower on the field",
+              "effect": {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

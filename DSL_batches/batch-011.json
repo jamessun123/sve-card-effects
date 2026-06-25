@@ -1,0 +1,416 @@
+{
+  "Ambling Wraith": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Amelia, Silver Captain": {
+    "evolvesTo": "Amelia, Silver Captain Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "choose",
+          "min": 0,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Steelclad Knight, Shield Guardian, or Knight token into your EX area",
+              "effect": {
+                "op": "choose",
+                "min": 1,
+                "max": 1,
+                "options": [
+                  {
+                    "label": "Steelclad Knight",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Steelclad Knight",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  },
+                  {
+                    "label": "Shield Guardian",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Shield Guardian",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  },
+                  {
+                    "label": "Knight",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Knight",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amelia, Silver Captain Evolved": {
+    "evolvesFrom": "Amelia, Silver Captain",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "putDeckTopToExArea"
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 4,
+          "def": 4,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Officer"
+            },
+            "excludeSelf": true
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "choose",
+          "min": 0,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Steelclad Knight, Shield Guardian, or Knight token into your EX area",
+              "effect": {
+                "op": "choose",
+                "min": 1,
+                "max": 1,
+                "options": [
+                  {
+                    "label": "Steelclad Knight",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Steelclad Knight",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  },
+                  {
+                    "label": "Shield Guardian",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Shield Guardian",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  },
+                  {
+                    "label": "Knight",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Knight",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amelia, Silver Paladin": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a follower from your hand onto your field",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardType": "follower",
+                  "maxCost": 3
+                },
+                "to": "field"
+              }
+            },
+            {
+              "label": "Deal 4 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amelia, Sunny Paladin": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Officer"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "choose",
+          "min": 0,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon an Officer follower that costs 2 or less from your hand or EX area",
+              "effect": {
+                "op": "choose",
+                "min": 1,
+                "max": 1,
+                "options": [
+                  {
+                    "label": "From hand",
+                    "effect": {
+                      "op": "selectFromHand",
+                      "filter": {
+                        "trait": "Officer",
+                        "cardType": "follower",
+                        "maxCost": 2
+                      },
+                      "to": "field"
+                    }
+                  },
+                  {
+                    "label": "From EX area",
+                    "effect": {
+                      "op": "summonFromExArea",
+                      "filter": {
+                        "trait": "Officer",
+                        "cardType": "follower",
+                        "maxCost": 2
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amerro, Spear Knight": {
+    "evolvesTo": "Amerro, Spear Knight Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Heroic"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amerro, Spear Knight Evolved": {
+    "evolvesFrom": "Amerro, Spear Knight",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Heroic"
+          },
+          "to": "field",
+          "playCostReduction": 0
+        }
+      },
+      {
+        "timing": "strike",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Heroic"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amethyst Giant": {
+    "keywords": [
+      "fanfare",
+      "rush",
+      "aura",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "aura",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amethyst Lion": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "traitsAny": [
+                "Storm",
+                "Ward"
+              ]
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Amy, Psychopomp Guide": {
+    "evolvesTo": "Amy, Psychopomp Guide Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buryFieldFollowers",
+          "excludeSelf": true,
+          "minCost": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

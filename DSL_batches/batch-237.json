@@ -1,0 +1,449 @@
+{
+  "Uzuki Shimamura": {
+    "evolvesTo": "Uzuki Shimamura Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Uzuki Shimamura Evolved": {
+    "evolvesFrom": "Uzuki Shimamura",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "identityNameContains": "Rin Shibuya"
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 2,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Uzuki Shimamura [Cinderella Girl]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "iM@S CG",
+            "excludeIdentityName": "Uzuki Shimamura [Cinderella Girl]"
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "selectFromHand",
+            "filter": {
+              "trait": "iM@S CG"
+            },
+            "to": "exArea"
+          },
+          "then": {
+            "op": "grantPlayCostReduction",
+            "amount": 5,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "trait": "iM@S CG"
+              }
+            }
+          }
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Uzuki Shimamura [Magical New Me]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "iM@S CG",
+            "excludeIdentityName": "Uzuki Shimamura [Cinderella Girl]"
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "selectFromHand",
+            "filter": {
+              "trait": "iM@S CG"
+            },
+            "to": "exArea"
+          },
+          "then": {
+            "op": "grantPlayCostReduction",
+            "amount": 5,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "trait": "iM@S CG"
+              }
+            }
+          }
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Uzuki Shimamura [P.C.S.]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Cute",
+            "cardType": "follower",
+            "maxCost": 4
+          },
+          "count": 1,
+          "maxTotalCost": 6
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "VI. Milteo, The Lovers": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "peekDeck",
+                "count": 40,
+                "optionalBury": false
+              },
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "cardType": "follower",
+                  "maxCost": 3
+                },
+                "count": 2,
+                "maxTotalCost": 6
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 20
+          },
+          "then": {
+            "op": "evolveOtherFollower",
+            "filter": {
+              "identityName": "VI. Milteo, The Lovers"
+            },
+            "excludeSelf": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "VI. Milteo, The Lovers Evolved": {
+    "evolvesFrom": "VI. Milteo, The Lovers",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroyAllEnemyField"
+            },
+            {
+              "op": "setLeaderDef",
+              "amount": 6
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "VII. Oluon, Runaway Chariot ADVANCED": {
+    "keywords": [
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "cannotAttack"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "rollDie",
+              "sides": 6,
+              "outcomes": [
+                {
+                  "on": [
+                    1,
+                    2
+                  ],
+                  "effect": {
+                    "op": "destroyAllEnemyField"
+                  }
+                },
+                {
+                  "on": [
+                    3,
+                    4
+                  ],
+                  "effect": {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 7,
+                    "followersOnly": false
+                  }
+                },
+                {
+                  "on": [
+                    5,
+                    6
+                  ],
+                  "effect": {
+                    "op": "dealDamage",
+                    "amount": 7,
+                    "targets": {
+                      "type": "selfLeader"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "op": "rollDie",
+              "sides": 6,
+              "outcomes": [
+                {
+                  "on": [
+                    1,
+                    2
+                  ],
+                  "effect": {
+                    "op": "destroyAllEnemyField"
+                  }
+                },
+                {
+                  "on": [
+                    3,
+                    4
+                  ],
+                  "effect": {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 7,
+                    "followersOnly": false
+                  }
+                },
+                {
+                  "on": [
+                    5,
+                    6
+                  ],
+                  "effect": {
+                    "op": "dealDamage",
+                    "amount": 7,
+                    "targets": {
+                      "type": "selfLeader"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "VII. Oluon, The Chariot": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Knight token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Knight",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Give this follower [attack]+1, Rush, and Ward",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "buff",
+                    "atk": 1,
+                    "def": 0,
+                    "targets": {
+                      "type": "self"
+                    }
+                  },
+                  {
+                    "op": "grantKeyword",
+                    "keyword": "rush",
+                    "targets": {
+                      "type": "self"
+                    }
+                  },
+                  {
+                    "op": "grantKeyword",
+                    "keyword": "ward",
+                    "targets": {
+                      "type": "self"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deal 2 damage to each enemy leader",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            },
+            {
+              "label": "Bury this card: You may summon a VII. Oluon, Runaway Chariot from your evolve deck",
+              "effect": {
+                "op": "optionalCost",
+                "cost": {
+                  "op": "burySelf"
+                },
+                "then": {
+                  "op": "summonFromEvolveDeck",
+                  "filter": {
+                    "identityName": "VII. Oluon, Runaway Chariot"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "VIII. Sofina, Strength": {
+    "evolvesTo": null,
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "review"
+  }
+}

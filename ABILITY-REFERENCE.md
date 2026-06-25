@@ -67,6 +67,21 @@ Every ability on a card is an object in `abilities[]`:
 
 ### DeckFilter (used in tutors, searches, discards)
 
+All fields are optional. When multiple fields are set, **every** field must match (logical AND). For example, `{ "trait": "Officer", "printingType": "token" }` matches only Officer token cards.
+
+| Field | Description |
+|-------|-------------|
+| `cardNo` | Match any printing of this card's identity |
+| `identityName` | Match cards with this normalized name (all printings) |
+| `trait` | Card must have this trait |
+| `traitsAny` | Card must have at least one of these traits |
+| `cardClass` | Match class (e.g. `sword`, `forest`) |
+| `cardType` | `follower`, `spell`, `amulet`, or `leader` |
+| `printingType` | Printing role: `base`, `evolved`, or `token` (distinct from `cardType`) |
+| `maxCost` / `minCost` | PP cost bounds |
+| `identityNameContains` | Substring match on normalized name |
+| `excludeIdentityName` | Exclude cards with this identity name |
+
 ```json
 {
   "cardNo": "BP14-T01EN",
@@ -75,11 +90,11 @@ Every ability on a card is an object in `abilities[]`:
   "traitsAny": ["Angel", "Fallen Angel"],
   "cardClass": "sword",
   "cardType": "follower",
+  "printingType": "token",
   "maxCost": 3,
   "minCost": 1,
   "identityNameContains": "Ranko Kanzaki",
-  "excludeIdentityName": "Foo",
-  "excludeCardClass": "neutral"
+  "excludeIdentityName": "Foo"
 }
 ```
 
@@ -371,7 +386,9 @@ Every ability on a card is an object in `abilities[]`:
 
 ### `buffFieldTrait`
 
-**Arguments:** `trait?` or `cardClass?`, `atk?`, `def?`, `keyword?`, `excludeSelf?`, `otherOnly?`
+**Arguments:** `trait?`, `cardClass?`, `printingType?`, `atk?`, `def?`, `keyword?`, `excludeSelf?`, `otherOnly?`, `includeExArea?`
+
+Combine `trait`, `cardClass`, and `printingType` to narrow the field (all set fields must match).
 
 **Syntax:**
 
@@ -385,6 +402,19 @@ Every ability on a card is an object in `abilities[]`:
 }
 ```
 **Example card text:** "Give each other Festive follower on your field [attack]+1/[defense]+1."
+
+**Officer token example:**
+
+```json
+{
+  "op": "buffFieldTrait",
+  "trait": "Officer",
+  "printingType": "token",
+  "atk": 1,
+  "def": 1
+}
+```
+**Example card text:** "Give each Officer token follower on your field [attack]+1/[defense]+1."
 
 ### `buryEachOpponentDeck`
 

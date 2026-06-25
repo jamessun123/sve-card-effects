@@ -1,0 +1,411 @@
+{
+  "Nelcha, Fashion Hazard": {
+    "evolvesTo": "Nelcha, Fashion Hazard Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "if",
+              "condition": {
+                "type": "spellchain",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "buff",
+                    "atk": -2,
+                    "def": -2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "buff",
+                    "atk": 2,
+                    "def": 2,
+                    "targets": {
+                      "type": "self"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nelcha, Fashion Hazard Evolved": {
+    "evolvesFrom": "Nelcha, Fashion Hazard",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "spell"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "spell"
+          },
+          "to": "cemetery",
+          "optional": true
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "if",
+              "condition": {
+                "type": "spellchain",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "buff",
+                    "atk": -2,
+                    "def": -2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "buff",
+                    "atk": 2,
+                    "def": 2,
+                    "targets": {
+                      "type": "self"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nene Kurihara": {
+    "evolvesTo": "Nene Kurihara Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nene Kurihara Evolved": {
+    "evolvesFrom": "Nene Kurihara",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Cute",
+            "cardType": "follower"
+          },
+          "to": "field"
+        },
+        "cost": {
+          "pp": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nephthys": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "cardClass": "abyss",
+            "cardType": "follower",
+            "maxCost": 6
+          },
+          "lookAt": 7,
+          "maxTotalCost": 24,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroyAllFollowers"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Neptune": {
+    "evolvesTo": "Neptune Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Megalorca",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Megalorca"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Neptune Evolved": {
+    "evolvesFrom": "Neptune",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Megalorca",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Megalorca"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Neptune, Tidemistress": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Marine",
+            "cardType": "follower",
+            "excludeIdentityName": "Neptune, Tidemistress"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Marine follower that costs 5 or less from your hand and give it [attack]+2/[defense]+2",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summonLastTutoredFromHand"
+                  },
+                  {
+                    "op": "buff",
+                    "atk": 2,
+                    "def": 2,
+                    "targets": {
+                      "type": "lastSummoned"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Neun, Daybreak Vampire": {
+    "evolvesTo": "Neun, Daybreak Vampire Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon an Assembly Droid token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Summon a Forest Bat token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Forest Bat",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put an Assembly Droid token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Put a Forest Bat token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Forest Bat",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Neun, Daybreak Vampire Evolved": {
+    "evolvesFrom": "Neun, Daybreak Vampire",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": null,
+          "cardClass": null,
+          "atk": 1,
+          "def": 0
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

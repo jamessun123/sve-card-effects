@@ -1,0 +1,290 @@
+{
+  "Fox of Invitation": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fragrantwood Whispers": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Give your leader [defense]+2",
+              "effect": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            },
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frederica Miyamoto": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onCardPlayed",
+        "condition": {
+          "type": "always"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frenzied Corpsmaster": {
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "evolvesTo": "Frenzied Corpsmaster Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "discardSelf": true
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Steelclad Knight token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Steelclad Knight",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Summon a Shield Guardian token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Shield Guardian",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Summon a Knight token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Knight",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frenzied Corpsmaster Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "evolvesFrom": "Frenzied Corpsmaster",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Freshman Lou": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardType": "spell",
+            "maxCost": 1
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Friendly Embrace": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "engage",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 2,
+                "filter": {
+                  "identityName": "Naterran Great Tree"
+                }
+              }
+            },
+            {
+              "op": "playCostReduction",
+              "amount": 2
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Friends Forever": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower"
+          },
+          "count": 2,
+          "maxTotalCost": 5
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Frigid Necromancer": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "cardType": "follower",
+                "maxCost": 8
+              },
+              "to": "field"
+            },
+            {
+              "op": "setStats",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "banishSelf"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frog Cleric": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

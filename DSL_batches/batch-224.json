@@ -1,0 +1,352 @@
+{
+  "Synchronized Slash": {
+    "keywords": [
+      "engage"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "buryFromField": {
+            "cardType": "follower",
+            "filter": {
+              "trait": "Hunter"
+            }
+          },
+          "buryFieldCount": 2,
+          "excludeSelfFromBury": false
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Syoko Hoshi": {
+    "evolvesTo": "Syoko Hoshi Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "cannotAttack"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ]
+  },
+  "Syoko Hoshi Evolved": {
+    "evolvesFrom": "Syoko Hoshi",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": false
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": false
+        }
+      }
+    ]
+  },
+  "Syoko Hoshi [individuals]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardClass": "abyss",
+            "cardType": "follower",
+            "maxCost": 2,
+            "trait": "iM@S CG"
+          },
+          "to": "exArea",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Syuko Shiomi": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 6
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Syuko Shiomi [Cinderella Girl]": {
+    "evolvesTo": "Syuko Shiomi [Cinderella Girl] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an iM@S CG card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "iM@S CG"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Syuko Shiomi"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Taketsumi, Aconite Paladin": {
+    "keywords": [
+      "advanced",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4,
+          "banishSelf": true
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Festive",
+                "count": 5
+              },
+              {
+                "type": "ownCemeteryClassMin",
+                "cardClass": "sword",
+                "count": 10
+              }
+            ]
+          },
+          "then": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Taketsumi, Creator of Paradise ADVANCED"
+            }
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            },
+            {
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Taketsumi, Creator of Paradise ADVANCED": {
+    "specialType": "advanced",
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Sootspawn",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Takumi Mukai": {
+    "evolvesTo": "Takumi Mukai Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Takumi Mukai Evolved": {
+    "evolvesFrom": "Takumi Mukai",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "selfLeader"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

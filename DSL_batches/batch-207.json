@@ -1,0 +1,239 @@
+{
+  "Shin Sato": {
+    "evolvesTo": "Shin Sato Evolved",
+    "evolveCost": 6,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Shin Sato Evolved": {
+    "evolvesFrom": "Shin Sato",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 8
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Shin Sato [Gutsy☆Reporter]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Shinobi Tanuki": {
+    "evolvesTo": "Shinobi Tanuki Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Shinobi Tanuki Evolved": {
+    "evolvesFrom": "Shinobi Tanuki",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "noop",
+          "label": "Intimidate"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shinobu Kudo": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "trait": "iM@S CG",
+            "maxCost": 1
+          },
+          "lookAt": 40,
+          "maxTotalCost": 2,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shion, Immortal Aegis": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantIndestructible",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Mercurial Might",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shipsbane Plesiosaurus": {
+    "evolvesTo": "Shipsbane Plesiosaurus Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish a Naterran Great Tree from your field",
+          "cost": {
+            "op": "banishFromField",
+            "filter": {
+              "identityName": "Naterran Great Tree"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shipsbane Plesiosaurus Evolved": {
+    "evolvesFrom": "Shipsbane Plesiosaurus",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      },
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shiro, Cursed Wings": {
+    "evolvesTo": "Shiro, Cursed Wings Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardType": "follower",
+            "trait": "Ward",
+            "maxCost": 2
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "Master Trainer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Magical Item",
+              "count": 5,
+              "zone": "exArea"
+            },
+            {
+              "op": "recoverPp",
+              "amount": 4
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Master of Draconic Arts": {
+    "keywords": [
+      "assail",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 4,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Masterful Musician": {
+    "evolvesTo": "Masterful Musician Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Jiemon, Thief Lord"
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 3
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Masterful Musician Evolved": {
+    "evolvesFrom": "Masterful Musician",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onExAreaEntry",
+        "filter": {
+          "identityName": "Glittering Gold"
+        },
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 3,
+          "leaderAmount": 1
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Glittering Gold",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mayu Sakuma": {
+    "keywords": [
+      "assail",
+      "bane",
+      "drain"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Mayu Sakuma [Love-Laden Gift]": {
+    "evolvesTo": "Mayu Sakuma [Love-Laden Gift] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mayu Sakuma [Love-Laden Gift] Evolved": {
+    "evolvesFrom": "Mayu Sakuma [Love-Laden Gift]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "handCount"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mechabook Sorcerer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Machina card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Machina"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Repair Mode",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Machina",
+                  "count": 5
+                },
+                "then": {
+                  "op": "recoverPp",
+                  "amount": 1
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mechagun Wielder": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Assembly Droid",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Repair Mode",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Repair Mode",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Machina card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Machina"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mechanical Analyzer": {
+    "evolvesTo": "Mechanical Analyzer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

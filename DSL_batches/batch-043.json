@@ -1,0 +1,240 @@
+{
+  "Chris, Beyond the Patch": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 5,
+                  "excludeIdentityName": "Chris, Beyond the Patch"
+                },
+                "to": "field"
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "ward",
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "Cinderella": {
+    "keywords": [
+      "storm",
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Fable",
+            "count": 2
+          },
+          "then": {
+            "op": "addCounter",
+            "counter": "fable",
+            "amount": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "optionalCost",
+          "label": "remove a Fable counter from this card",
+          "cost": {
+            "op": "removeCounter",
+            "counter": "fable",
+            "amount": 1,
+            "targets": {
+              "type": "self"
+            }
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "cardType": "follower",
+                  "maxCost": 5
+                },
+                "lookAt": 4,
+                "to": "field",
+                "optional": true,
+                "remainderTo": "cemetery"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "Clash of Heroes": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "clash"
+        }
+      }
+    ]
+  },
+  "Classroom Lily": {
+    "keywords": [
+      "fanfare",
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "iM@S CG",
+            "cardType": "follower"
+          },
+          "to": "hand"
+        },
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        }
+      }
+    ]
+  },
+  "Cleric Lancer": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "opponentTurnStrikeBonus",
+          "amount": 4
+        }
+      }
+    ]
+  },
+  "Coco, Infernal Left Paw": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Coco, Left Paw Hellhound": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Coda, Twilight Dragoon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dragon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Colette, Holy Gunner": {
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "evolvesTo": "Colette, Holy Gunner Evolved",
+    "evolveCost": 2
+  },
+  "Colette, Holy Gunner Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buryEachOpponentFollowers",
+          "count": 1
+        }
+      }
+    ],
+    "evolvesFrom": "Colette, Holy Gunner",
+    "specialType": "evolved"
+  }
+}

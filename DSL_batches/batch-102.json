@@ -1,0 +1,248 @@
+{
+  "Hamelin": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "moveToExArea",
+          "targets": {
+            "type": "anyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonSameNameToken"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hammer Dragonewt": {
+    "evolvesTo": "Hammer Dragonewt Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Armed",
+            "cardType": "spell"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Hammer Dragonewt Evolved": {
+    "evolvesFrom": "Hammer Dragonewt",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hamsa": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "peekDeck"
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Happy Pig": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Harbinger of the Night": {
+    "evolvesTo": "Harbinger of the Night Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Harbinger of the Night Evolved": {
+    "evolvesFrom": "Harbinger of the Night",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hardplume Warrior": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Ward",
+            "count": 3
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "excludeSelf": true,
+              "filter": {
+                "cardClass": "haven"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hare of Illusions": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 10,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "destroyAllFollowers"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Harnessed Flame": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryFieldFollowers",
+              "filter": {
+                "identityName": "Harnessed Glass"
+              },
+              "sourceOnly": true
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Flame and Glass"
+              },
+              "to": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

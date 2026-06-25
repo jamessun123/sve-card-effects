@@ -1,0 +1,354 @@
+{
+  "Arcane Personnel Carrier": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "ward",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Wasteland",
+                "count": 1
+              },
+              "then": {
+                "op": "buff",
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Arch Priestess Laelia": {
+    "evolvesTo": "Arch Priestess Laelia Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "defAsAttackAura"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Arch Priestess Laelia Evolved": {
+    "evolvesFrom": "Arch Priestess Laelia",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "defAsAttackAura"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buff",
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Arch Summoner Erasmus": {
+    "keywords": [
+      "fanfare",
+      "engage"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Archangel Reina": {
+    "evolvesTo": "Archangel Reina Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Archangel Reina Evolved": {
+    "evolvesFrom": "Archangel Reina",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "recoverPp",
+          "amount": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "faceup followers in your evolve deck",
+            "multiplier": 1
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Archer": {
+    "evolvesTo": "Archer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Archer Evolved": {
+    "evolvesFrom": "Archer",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 2
+            }
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Arctic Chimera": {
+    "keywords": [
+      "rush",
+      "strike",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "selfAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Arctic Chimera",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "setStats",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Arcus, Spirited Manager": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "cannotAttack"
+        }
+      },
+      {
+        "timing": "startOfMain",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            },
+            {
+              "label": "Summon 2 Ghost tokens",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Ghost",
+                "count": 2,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Bury the top 2 cards of your deck",
+              "effect": {
+                "op": "mill",
+                "count": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

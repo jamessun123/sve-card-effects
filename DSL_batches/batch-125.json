@@ -1,0 +1,372 @@
+{
+  "Kyoko Igarashi Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and engage it",
+              "effect": {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Select an enemy follower on the field and refresh it",
+              "effect": {
+                "op": "refresh",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kyoko Igarashi [Love Letter]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kyoko Igarashi [P.C.S.]": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Cute",
+            "multiplier": -1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "spendPp",
+            "amount": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": -1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ladica, Verdant Claw": {
+    "evolvesTo": "Ladica, Verdant Claw Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Natura"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ladica, Verdant Claw Evolved": {
+    "evolvesFrom": "Ladica, Verdant Claw",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "dealDamage",
+              "amount": {
+                "op": "exAreaNamedMin",
+                "identityName": "Naterran Great Tree",
+                "count": 1
+              },
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "damageFollowerAndLeader",
+              "followerAmount": {
+                "op": "exAreaNamedMin",
+                "identityName": "Naterran Great Tree",
+                "count": 1
+              },
+              "leaderAmount": {
+                "op": "exAreaNamedMin",
+                "identityName": "Naterran Great Tree",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ladica, the Stoneclaw": {
+    "evolvesTo": "Ladica, the Stoneclaw Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "identityName": "Naterran Great Tree"
+          },
+          "effect": {
+            "op": "recoverPp",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ladica, the Stoneclaw Evolved": {
+    "evolvesFrom": "Ladica, the Stoneclaw",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "identityName": "Naterran Great Tree"
+          },
+          "effect": {
+            "op": "recoverPp",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Lance Lizard": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Draconic Weapon",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 1,
+                "followersOnly": false
+              }
+            ]
+          },
+          "maxPerTurn": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lapis, Glorious Seraph": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "drawDynamic",
+          "amount": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "prayer counter",
+            "multiplier": 1
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "addCounter",
+              "counter": "prayer",
+              "amount": 1,
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lapis, Shining Seraph": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "follower"
+          ]
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "identityName": "Enstatued Seraph"
+          },
+          "lookAt": 5,
+          "maxTotalCost": 999,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "addCounter",
+          "counter": "prayer",
+          "amount": 1,
+          "targets": {
+            "type": "allyFieldCard",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

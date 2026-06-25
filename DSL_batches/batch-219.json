@@ -1,0 +1,315 @@
+{
+  "Steelclad Minotaur": {
+    "keywords": [
+      "rush",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageCap",
+          "maxPerHit": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Steeled Hopes": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search Machina to hand",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Machina",
+                      "cardType": "follower"
+                    },
+                    "to": "hand",
+                    "reveal": true
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Summon three Machina from deck",
+              "additionalPpCost": 6,
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Machina",
+                      "cardType": "follower",
+                      "maxCost": 4
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Machina",
+                      "cardType": "follower",
+                      "maxCost": 3
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Machina",
+                      "cardType": "follower",
+                      "maxCost": 2
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Steelwing": {
+    "keywords": [
+      "evolve",
+      "storm",
+      "fanfare"
+    ],
+    "evolvesTo": "Steelwing Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assembly Droid",
+          "count": 2,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Steelwing Evolved": {
+    "keywords": [
+      "storm"
+    ],
+    "evolvesFrom": "Steelwing",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assembly Droid",
+          "count": 2,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Stheno": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Stheno Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Serpent",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Serpent"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Stheno Evolved": {
+    "evolvesFrom": "Stheno",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Serpent",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Serpent"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Stone Merchant": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Swordcraft card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "cardClass": "sword"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "if",
+            "condition": {
+              "type": "discardedCardType",
+              "cardType": "spell"
+            },
+            "then": {
+              "op": "draw",
+              "count": 2
+            },
+            "else": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Storied Falconer": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Storied Falconer Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Falcon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Storied Falconer Evolved": {
+    "evolvesFrom": "Storied Falconer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "identityName": "Holy Falcon"
+                }
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "bane",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "identityName": "Holy Falcon"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Storm Arrow": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 5
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,373 @@
+{
+  "XI. Erntz, Justice Evolved": {
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantIgnoresWard",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "XII. Wolfraud, The Hanged Man": {
+    "evolvesTo": "XII. Wolfraud, The Hanged Man Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantIndestructible",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "damageImmunity",
+              "amount": 99,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost05]",
+          "cost": {
+            "op": "spendPp",
+            "amount": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Treacherous Reversal"
+                },
+                "to": "exArea",
+                "playCostReduction": 8
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "XII. Wolfraud, The Hanged Man Evolved": {
+    "evolvesFrom": "XII. Wolfraud, The Hanged Man",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantIndestructible",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "damageImmunity",
+              "amount": 99,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "condition": {
+          "type": "combo",
+          "count": 3
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "XIV. Luzen, Temperance": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantLeaderDamageShield",
+          "charges": 99
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOpponentRestriction",
+          "restriction": "skipDraw"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "noop",
+          "label": "Each player discards down to 2 cards"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "XXI. Zelgenea, O Great World ADVANCED": {
+    "keywords": [
+      "fanfare"
+    ],
+    "specialType": "advanced",
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "sourceInExArea"
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 10
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "XXI. Zelgenea, The World": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "",
+            "count": 1
+          },
+          "then": {
+            "op": "noop",
+            "label": "Select enemy follower; if there are no other followers on your field, destroy it and draw a card"
+          },
+          "else": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ppMin",
+            "count": 0
+          },
+          "then": {
+            "op": "noop",
+            "label": "If your leader's defense is 10 or less, heal 5"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 10,
+          "banishSelf": true
+        },
+        "effect": {
+          "op": "tutorFromEvolveDeck",
+          "filter": {
+            "identityName": "XXI. Zelgenea, O Great World"
+          },
+          "to": "exArea",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yasuha Okazaki": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Cool",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yggdrasil": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "forest",
+                "cardType": "spell"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "spell"
+          },
+          "to": "exArea",
+          "playCostReduction": 99
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yoshino Yorita [Way of the Warrior]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Young Ogrehunter Momo": {
+    "keywords": [
+      "assail",
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Fable",
+          "count": 2
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "rush",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "noop",
+          "label": "If the enemy follower has 5 defense or less, draw a card, then discard a card"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

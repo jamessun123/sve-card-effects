@@ -1,0 +1,340 @@
+{
+  "King Elephant Evolved": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "handCount"
+          },
+          "def": {
+            "op": "handCount"
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantIgnoresWard",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "King's Might": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "optionalCost",
+              "label": "[engage] 2 cards named Naterran Great Tree on your field",
+              "cost": {
+                "op": "engageSelf"
+              },
+              "then": {
+                "op": "noOp"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "King's Welcome": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Commander"
+              },
+              {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Officer"
+              }
+            ]
+          },
+          "then": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kirari Moroboshi": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "1-cost follower",
+          "count": 1
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "selfFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kiss of Lust": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kiss of the Princess": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Give a follower on your field [attack]+1 and maybe a Fable counter",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "buff",
+                    "atk": 1,
+                    "targets": {
+                      "type": "selfFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "addCounter",
+                    "counter": "fable",
+                    "amount": 1,
+                    "targets": {
+                      "type": "selfFollower",
+                      "count": 1
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Return up to 3 Swordcraft followers in your cemetery to your deck, shuffle, and draw a card",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromCemetery",
+                    "filter": {
+                      "cardClass": "sword",
+                      "cardType": "follower"
+                    },
+                    "to": "deckBottom"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kit, Luxfang Champion": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Knight": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Knight Neilan the Lazy": {
+    "keywords": [
+      "ward",
+      "aura",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "aura",
+          "trait": "1 attack",
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 3 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Search your deck for a Fable follower that costs 2 or less, summon it, then shuffle",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Fable",
+                      "cardType": "follower",
+                      "maxCost": 2
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Knower of History": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ancient Artifact",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Token",
+          "cardType": "follower"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

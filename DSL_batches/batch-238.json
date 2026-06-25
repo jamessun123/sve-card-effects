@@ -1,0 +1,330 @@
+{
+  "VIII. Sofina, Strength Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageCap",
+          "maxPerHit": 3
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Somnolent Strength"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Vagabond Lizard": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put Bullet Bike onto your field",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Bullet Bike",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Put Bullet Bike into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Bullet Bike",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dutiful Steed",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Val, Trusty Getaway Car": {
+    "keywords": [
+      "advanced",
+      "storm",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "maneuver"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true
+        },
+        "effect": {
+          "op": "maneuver"
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Wasteland",
+            "count": 2
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valdain, Cursed Shadow": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Valdain, Cursed Shadow Evolved",
+    "evolveCost": 2,
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Natura",
+          "count": 10
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Natura"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "cemetery",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valdain, Cursed Shadow Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 4 damage, then search for Shadow's Corrosion",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 4,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Shadow's Corrosion"
+                    },
+                    "to": "exArea"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Play Shadow's Corrosion from cemetery for 0 PP",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityName": "Shadow's Corrosion"
+                },
+                "to": "field",
+                "playCostReduction": 0
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Valhorean Dealer": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Valhorean Dealer Evolved",
+    "evolveCost": 3,
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "handMin",
+          "count": 8
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valhorean Dealer Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Valiant Fencer": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Valiant Fencer Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "handMax",
+          "count": 2
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Heroic",
+            "cardType": "follower",
+            "excludeIdentityName": "Valiant Fencer"
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valiant Fencer Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "evolveOtherFollower",
+          "filter": {
+            "trait": "Heroic"
+          },
+          "excludeSelf": true
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "Princess's Strike": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Mistolina, Forest Princess"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 6,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Prism Priestess": {
+    "evolvesTo": "Prism Priestess Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Prism Priestess Evolved": {
+    "evolvesFrom": "Prism Priestess",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "lookAt": 40,
+          "to": "hand",
+          "optional": false,
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Prismaplume Bird": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Holy Falcon token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Holy Falcon",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Select an amulet in your cemetery and add it to your hand",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardType": "amulet"
+                },
+                "to": "hand"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Prismawing Featherfolk": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "traitsAny": [
+                "spell",
+                "amulet"
+              ]
+            },
+            "lookAt": 4,
+            "to": "hand",
+            "optional": true,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Prophetess of Creation": {
+    "keywords": [
+      "ward",
+      "aura"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 10
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantIndestructible",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "discard": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Prototype Warrior": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put an Assembly Droid token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "If there are at least 3 Machina cards in your EX area, give this follower [attack]+1/[defense]+1 and Rush",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Machina",
+                  "count": 3
+                },
+                "then": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "buff",
+                      "atk": 1,
+                      "def": 1,
+                      "targets": {
+                        "type": "self"
+                      }
+                    },
+                    {
+                      "op": "grantKeyword",
+                      "keyword": "rush",
+                      "targets": {
+                        "type": "self"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Prudent General": {
+    "evolvesTo": "Prudent General Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "swordcraft",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Steelclad Knight",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Prudent General Evolved": {
+    "evolvesFrom": "Prudent General",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "swordcraft",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Steelclad Knight",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "buffFieldTrait",
+              "trait": "Steelclad Knight",
+              "atk": 1,
+              "def": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Psychic☆Maiden": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxDef": 4
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 5,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -13,9 +13,10 @@ from openai import OpenAI
 ROOT = Path(__file__).resolve().parent
 PROMPT_FORMAT_PATH = ROOT / "prompt_format.txt"
 BATCHES_DIR = ROOT / "batches"
+DSL_BATCHES_DIR = ROOT / "DSL_batches"
 CARD_BATCHES_DIR = ROOT / "scraped-card-text" / "cards-by-name-batches"
 SECRETS_PATH = ROOT / "secrets.json"
-MODEL = "gpt-5.4-mini"
+MODEL = "gpt-5.4"
 RESPONSES_ENDPOINT = "/v1/responses"
 # OpenAI enqueued prompt token limit per model/org (gpt-5.4-mini defaults to 2M).
 DEFAULT_MAX_ENQUEUED_TOKENS = 1_900_000
@@ -244,3 +245,118 @@ def extract_response_text(response_body: dict[str, Any]) -> str | None:
             if content.get("type") == "output_text" and content.get("text"):
                 return content["text"]
     return None
+
+
+TERMINAL_BATCH_STATUSES = frozenset({"completed", "failed", "expired", "cancelled"})
+
+
+def write_combined_batch_input(
+    card_batch_files: list[Path],
+    *,
+    chunk_index: int,
+    run_timestamp: str,
+    run_label: str = "all-card-batches",
+) -> tuple[Path, list[str], list[str], int]:
+    BATCHES_DIR.mkdir(parents=True, exist_ok=True)
+    input_path = BATCHES_DIR / f"{run_label}-{run_timestamp}-part{chunk_index:03d}.jsonl"
+
+    custom_ids: list[str] = []
+    source_files: list[str] = []
+    estimated_tokens = 0
+
+    with input_path.open("w", encoding="utf-8") as f:
+        for card_batch_path in card_batch_files:
+            custom_id = card_batch_path.stem
+            prompt = build_prompt_from_card_batch(card_batch_path)
+            request_line = build_batch_request_line(custom_id, prompt)
+            f.write(json.dumps(request_line, ensure_ascii=False) + "\n")
+            custom_ids.append(custom_id)
+            source_files.append(str(card_batch_path))
+            estimated_tokens += estimate_prompt_tokens(prompt)
+
+    return input_path, custom_ids, source_files, estimated_tokens
+
+
+def submit_chunk(
+    client: OpenAI,
+    card_batch_files: list[Path],
+    *,
+    chunk_index: int,
+    chunk_count: int,
+    run_timestamp: str,
+    run_label: str = "all-card-batches",
+) -> dict[str, Any]:
+    input_path, custom_ids, source_files, estimated_tokens = write_combined_batch_input(
+        card_batch_files,
+        chunk_index=chunk_index,
+        run_timestamp=run_timestamp,
+        run_label=run_label,
+    )
+    metadata_path = input_path.with_suffix(".batch.json")
+
+    uploaded = client.files.create(file=input_path.open("rb"), purpose="batch")
+    batch = client.batches.create(
+        input_file_id=uploaded.id,
+        endpoint=RESPONSES_ENDPOINT,
+        completion_window="24h",
+        metadata={
+            "source": "cards-by-name-batches",
+            "request_count": str(len(custom_ids)),
+            "chunk_index": str(chunk_index),
+            "chunk_count": str(chunk_count),
+        },
+    )
+
+    info = batch_info_dict(
+        batch,
+        input_path=input_path,
+        metadata_path=metadata_path,
+        custom_ids=custom_ids,
+        source_files=source_files,
+    )
+    info["chunk_index"] = chunk_index
+    info["chunk_count"] = chunk_count
+    info["estimated_enqueued_tokens"] = estimated_tokens
+    metadata_path.write_text(json.dumps(info, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return info
+
+
+def print_batch_progress(batch: object) -> None:
+    request_counts = getattr(batch, "request_counts", None)
+    counts = {}
+    if request_counts is not None:
+        counts = {
+            "total": getattr(request_counts, "total", None),
+            "completed": getattr(request_counts, "completed", None),
+            "failed": getattr(request_counts, "failed", None),
+        }
+
+    print(
+        f"  status={batch.status} "
+        f"total={counts.get('total', '-')} "
+        f"completed={counts.get('completed', '-')} "
+        f"failed={counts.get('failed', '-')}"
+    )
+
+    error_text = format_batch_errors(batch)
+    if error_text:
+        print(f"  errors: {error_text}")
+
+
+def wait_for_batch_completion(
+    client: OpenAI,
+    batch_id: str,
+    *,
+    poll_interval_seconds: int = 60,
+) -> object:
+    import time
+
+    print(f"Waiting for batch {batch_id} to finish...")
+    while True:
+        batch = client.batches.retrieve(batch_id)
+        print_batch_progress(batch)
+
+        if batch.status in TERMINAL_BATCH_STATUSES:
+            return batch
+
+        time.sleep(poll_interval_seconds)

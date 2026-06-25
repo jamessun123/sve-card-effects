@@ -1,0 +1,342 @@
+{
+  "Geno, Machine Artisan Evolved": {
+    "evolvesFrom": "Geno, Machine Artisan",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "amulet"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "cardType": "amulet"
+        },
+        "effect": {
+          "op": "buff",
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Georgius": {
+    "evolvesTo": "Georgius Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 2,
+            "leaderAmount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Georgius Evolved": {
+    "evolvesFrom": "Georgius",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroyAllEnemyField"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Geovore": {
+    "evolvesTo": "Geovore Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "mill",
+              "count": 2
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "conditionAny",
+                "conditions": [
+                  {
+                    "type": "ownCemeteryClassMin",
+                    "cardClass": "dragon",
+                    "count": 1
+                  }
+                ]
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "healLeader",
+                    "amount": 2
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Geovore Evolved": {
+    "evolvesFrom": "Geovore",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish 5 cards from your cemetery",
+          "cost": {
+            "op": "banishFromCemetery",
+            "filter": {},
+            "count": 5
+          },
+          "then": {
+            "op": "buff",
+            "atk": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gerbera Bear": {
+    "evolvesTo": "Gerbera Bear Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnReturnToHand",
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gerbera Bear Evolved": {
+    "evolvesFrom": "Gerbera Bear",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Floral Breeze"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnReturnToHand",
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ghastly Banishment": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Ghost",
+              "count": 2,
+              "zone": "exArea"
+            },
+            {
+              "op": "playCostReduction",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ghastly Treant": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "buryFromField": {
+            "identityName": "Naterran Great Tree"
+          },
+          "buryFieldCount": 1
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ghios, Sparkling Prism": {
+    "evolvesTo": "Ghios, Sparkling Prism Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "discardedThisTurn"
+            }
+          ]
+        },
+        "effect": {
+          "op": "addCounter",
+          "counter": "mana",
+          "amount": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveSourceToExArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "conditionAny",
+                "conditions": [
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Mage",
+                    "count": 5
+                  },
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Mage",
+                    "count": 5
+                  }
+                ]
+              },
+              "then": {
+                "op": "addCounter",
+                "counter": "mana",
+                "amount": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

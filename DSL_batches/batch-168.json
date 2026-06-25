@@ -1,0 +1,318 @@
+{
+  "Onslaught": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Knight",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Opposing Statues": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Holy Fowl of Ivory"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Bury another amulet",
+          "cost": {
+            "op": "buryFromFieldSelect",
+            "excludeSelf": true,
+            "optional": false
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Hexed Fowl of Ebon"
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "Optimistic Beastmaster": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {},
+          "lookAt": 3,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "exAreaDifferentCostCount"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Orator of the Bones": {
+    "evolvesTo": "Orator of the Bones Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Orator of the Bones Evolved": {
+    "evolvesFrom": "Orator of the Bones",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardClass": "abyss",
+            "cardType": "follower"
+          },
+          "to": "hand"
+        }
+      }
+    ]
+  },
+  "Orbed Cancer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 3
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "discard": 1,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "discard this and a Dragoncraft card that costs 7 or more",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "cardClass": "dragon",
+              "minCost": 7
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Orchestral Mage": {
+    "evolvesTo": "Orchestral Mage Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "discardedThisTurn"
+          },
+          "then": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "storm"
+            ]
+          },
+          "else": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "drain"
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Orchestral Mage Evolved": {
+    "evolvesFrom": "Orchestral Mage",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "playedCardsThisTurn",
+            "traitsAny": [
+              "Festive",
+              "Mage"
+            ]
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Orchis, Newfound Heart": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromExArea",
+              "filter": {
+                "identityName": "Puppet"
+              },
+              "count": 2
+            },
+            {
+              "op": "summon",
+              "tokenName": "Lloyd",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Puppetry",
+          "count": 3
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "identityName": "Puppet"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Orchis, Puppet Girl": {
+    "evolvesTo": "Orchis, Resolute Puppet",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Orchis, Resolute Puppet"
+          }
+        }
+      },
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Orchis, Vengeful Puppet"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

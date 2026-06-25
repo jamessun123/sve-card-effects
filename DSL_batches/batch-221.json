@@ -1,0 +1,356 @@
+{
+  "Summon Bloodkin": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Forest Bat",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Forest Bat",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Summoning Drills": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Guardform Golem",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Strikeform Golem",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "buffFieldTrait",
+                "trait": "Golem",
+                "atk": 1,
+                "def": 0
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sun Oracle Pascale": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magic Sediment",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": -2,
+          "def": -2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sunbright Elf": {
+    "evolvesTo": "Sunbright Elf Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Pixie",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sunbright Elf Evolved": {
+    "evolvesFrom": "Sunbright Elf",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromExArea",
+          "filter": {
+            "trait": "Pixie"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sunny Day Encounter": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search Natura follower to hand",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Natura",
+                      "cardType": "follower",
+                      "maxCost": 3
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Search Natura follower to field",
+              "additionalPpCost": 3,
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Natura",
+                      "cardType": "follower",
+                      "maxCost": 6
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Supercharged Guitarist": {
+    "keywords": [
+      "assail",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "recoverPp",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Supersonic Breakthrough": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search Ralmia card to hand",
+              "effect": {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "identityNameContains": "Ralmia"
+                },
+                "lookAt": 40,
+                "to": "hand",
+                "optional": false,
+                "reveal": true,
+                "remainderTo": "deckBottom"
+              }
+            },
+            {
+              "label": "Pay 4 PP — summon up to 2 Ralmia followers",
+              "additionalPpCost": 4,
+              "effect": {
+                "op": "searchDeckSummonMultiple",
+                "filter": {
+                  "identityNameContains": "Ralmia",
+                  "cardType": "follower"
+                },
+                "lookAt": 40,
+                "maxTotalCost": 999,
+                "remainderTo": "deckBottom"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Surefire Bullet": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 3 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Deal 4 damage to an evolved enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Suttungr": {
+    "evolvesTo": "Suttungr Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 2
+          },
+          "skipRefreshNextStart": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

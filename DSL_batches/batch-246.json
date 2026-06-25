@@ -1,0 +1,322 @@
+{
+  "Whitefrost Blizzard": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Filene"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": {
+            "op": "maxPp"
+          },
+          "maxTargets": 99,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Whitefrost Whisper": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Filene, Whitefrost Dragonewt"
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Whole-Souled Swing": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Knight",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wilbert, Grand Knight": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 5,
+            "excludeIdentityName": "Wilbert, Grand Knight"
+          },
+          "lookAt": 5,
+          "maxTotalCost": 5,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "filter": {
+          "cardType": "follower"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wilbert, Luminous Paladin": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "lookAt": 5,
+          "maxTotalCost": 2,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Ward",
+          "count": 3
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wildfang Dragonewt": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "discardedThisTurn"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wildfire Tyrannosaur": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "identityName": "Naterran Great Tree"
+          },
+          "buryFieldCount": 1
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wildwood Matriarch": {
+    "evolvesTo": "Wildwood Matriarch Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "then": {
+            "op": "autoEvolveIf",
+            "condition": {
+              "type": "always"
+            },
+            "triggerOnEvolve": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wildwood Matriarch Evolved": {
+    "evolvesFrom": "Wildwood Matriarch",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Hunter",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 2,
+          "maxTotalCost": 4
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wildwood Warrior": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Beast",
+            "cardType": "follower"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "trait": "Beast",
+            "cardType": "follower",
+            "maxCost": 4
+          },
+          "to": "field",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "Gigahand Golem Evolved": {
+    "evolvesFrom": "Gigahand Golem",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Guardform Golem",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Strikeform Golem",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Golem"
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gilded Blade": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "opponentCemeteryMin",
+                "count": 10
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Gilded Boots": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "opponentCemeteryMin",
+            "count": 10
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "trait": "Thief"
+              }
+            }
+          },
+          "else": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "trait": "Thief"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Gilded Goblet": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "opponentCemeteryMin",
+            "count": 10
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          },
+          "else": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      }
+    ]
+  },
+  "Gilgamesh": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": []
+  },
+  "Gilnelise, Omen of Craving": {
+    "keywords": [
+      "drain",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "pp": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Apostle of Craving"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Craving's Splendor"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "ppMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "draw",
+          "count": 3
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "cardClass": "neutral"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gilnelise, Ravenous Craving": {
+    "evolvesTo": "Gilnelise, Ravenous Craving Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "handMax",
+          "count": 10
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "drain"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gilnelise, Ravenous Craving Evolved": {
+    "evolvesFrom": "Gilnelise, Ravenous Craving",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "handMax",
+          "count": 10
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "drain"
+          ]
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give another follower [atk]+2/[def]-2",
+              "effect": {
+                "op": "buff",
+                "atk": 2,
+                "def": -2,
+                "targets": {
+                  "type": "anyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Put a Ravenous Sweetness token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Ravenous Sweetness",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gingerbread House": {
+    "keywords": [
+      "earthSigil",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ginne, Bewitching Courtesan": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 3,
+          "options": [
+            {
+              "label": "Engage enemy follower and prevent refresh",
+              "effect": {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                },
+                "skipRefreshNextStart": true
+              }
+            },
+            {
+              "label": "Draw a card and put a card from your hand on top or bottom of your deck",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "draw",
+                    "count": 1
+                  },
+                  {
+                    "op": "putHandCardOnDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Put 2 Glittering Gold tokens into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Glittering Gold",
+                "count": 2,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

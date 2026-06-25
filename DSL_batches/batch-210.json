@@ -1,0 +1,338 @@
+{
+  "Silvernail Markswoman": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Silvernail Markswoman Evolved",
+    "evolveCost": 5,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silvernail Markswoman Evolved": {
+    "evolvesFrom": "Silvernail Markswoman",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "damageFollowerAndLeader",
+              "followerAmount": 4,
+              "leaderAmount": 4
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Silversteel Blader": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Evolved",
+            "count": 1
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sincere Masquerade Ghost ADVANCED": {
+    "keywords": [
+      "storm",
+      "lastWords"
+    ],
+    "specialType": "advanced",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Gargantuan Ghost",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "identityNameContains": "Ghost"
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 0,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "rush",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summonFromExArea",
+          "filter": {
+            "identityNameContains": "Masquerade Ghost"
+          },
+          "engaged": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sincere Soul": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 4,
+          "banishSelf": true
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Masquerade Ghost"
+          },
+          "then": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Sincere Masquerade Ghost"
+            }
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Masquerade Ghost"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "ward",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sister Initiate": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Amulet",
+            "count": 1
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sister of Punishment": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Skeleton Dreamer": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Bullet Bike",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Skeleton Fighter": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Skewer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Each opponent buries a follower",
+              "effect": {
+                "op": "buryEachOpponentFollowers",
+                "count": 1
+              }
+            },
+            {
+              "label": "Give your leader [defense]+3",
+              "effect": {
+                "op": "healLeader",
+                "amount": 3
+              }
+            },
+            {
+              "label": "Draw 2 cards",
+              "effect": {
+                "op": "draw",
+                "count": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

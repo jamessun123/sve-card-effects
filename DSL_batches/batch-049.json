@@ -1,0 +1,285 @@
+{
+  "Curate": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 5
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Curse Crafter": {
+    "evolvesTo": "Curse Crafter Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Paper Shikigami",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "trait": "Shikigami",
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Curse Crafter Evolved": {
+    "evolvesFrom": "Curse Crafter",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "trait": "Shikigami",
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Curse of the Black Dragon": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "noop",
+            "label": "This card is in EX area and Overflow isn't active for you, deal 1 damage to your leader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cursed Furor": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "quick"
+          ]
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Cursed Stone": {
+    "evolvesTo": "Cursed Stone Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Cursed Stone Evolved": {
+    "evolvesFrom": "Cursed Stone",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "silence",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Curtain Call of Smiles": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "iM@S CG",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroyAllEnemyField"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Magical Item",
+              "count": 2,
+              "zone": "exArea"
+            },
+            {
+              "op": "healLeader",
+              "amount": 4
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cute Earrings": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Cute Pendant": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

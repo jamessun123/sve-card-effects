@@ -1,0 +1,358 @@
+{
+  "Aki Yamato Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 2
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Akiha Ikebukuro": {
+    "evolvesTo": "Akiha Ikebukuro Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Cute"
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Akiha Ikebukuro Evolved": {
+    "evolvesFrom": "Akiha Ikebukuro",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Cute card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Cute"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Akira Sunazuka": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard up to 3 cards",
+          "cost": {
+            "op": "discard",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "if",
+                "condition": {
+                  "type": "discardedCardType",
+                  "cardType": "follower"
+                },
+                "then": {
+                  "op": "healLeader",
+                  "amount": 2
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "discardedCardType",
+                  "cardType": "follower"
+                },
+                "then": {
+                  "op": "draw",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "discardedCardType",
+                  "cardType": "follower"
+                },
+                "then": {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 2
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "ppMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "draw",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Akira Sunazuka [Online Life]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "iM@S CG"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Cute"
+              },
+              "count": 1
+            },
+            {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Cool"
+              },
+              "count": 1
+            },
+            {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Passion"
+              },
+              "count": 1
+            },
+            {
+              "op": "healLeader",
+              "amount": 3
+            },
+            {
+              "op": "draw",
+              "count": 3
+            },
+            {
+              "op": "recoverPp",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Al-mi'raj Defender": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Beast"
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 4,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Albert, Levin Saber": {
+    "evolvesTo": "Albert, Levin Saber Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Albert, Levin Saber Evolved": {
+    "evolvesFrom": "Albert, Levin Saber",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Albert, Levin Stormsaber": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Levin"
+            },
+            "excludeSelf": true
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "condition": {
+          "type": "ownCemeteryClassMin",
+          "cardClass": "sword",
+          "count": 10
+        },
+        "cost": {
+          "pp": 3
+        },
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Albert, Thunderous Doom": {
+    "evolvesTo": "Albert, Thunderous Doom Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Bury another Levin follower",
+          "cost": {
+            "op": "buryFieldFollowers",
+            "filter": {
+              "trait": "Levin"
+            },
+            "excludeSelf": true,
+            "sourceOnly": false
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

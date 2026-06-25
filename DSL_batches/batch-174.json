@@ -1,0 +1,312 @@
+{
+  "Phildau, Lionheart Ward": {
+    "evolvesTo": "Phildau, Lionheart Ward Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Phildau, Lionheart Ward Evolved": {
+    "evolvesFrom": "Phildau, Lionheart Ward",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFieldCard",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Phoenix Empress": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Decrease your max play points by 1",
+          "cost": {
+            "op": "increaseMaxPp",
+            "amount": -1
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Phoenix Empress",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Phoenix Howl": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Deal 2 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Search your deck for up to X cards named Star Phoenix, give them Rush, then shuffle",
+              "effect": {
+                "op": "searchDeckSummonMultiple",
+                "filter": {
+                  "identityName": "Star Phoenix"
+                },
+                "lookAt": {
+                  "op": "chosenNumber",
+                  "min": 0,
+                  "max": 99
+                },
+                "maxTotalCost": {
+                  "op": "chosenNumber",
+                  "min": 0,
+                  "max": 99
+                },
+                "remainderTo": "deckBottom"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Phoenix Roost": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "playDeckTopFollower",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Piercye, Queen of Frost": {
+    "evolvesTo": "Piercye, Queen of Frost Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "inExArea"
+          },
+          "then": {
+            "op": "evolveOtherFollower",
+            "filter": {
+              "cardClass": "forest"
+            },
+            "excludeSelf": true
+          }
+        }
+      },
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": true
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Piercye, Queen of Frost Evolved": {
+    "evolvesFrom": "Piercye, Queen of Frost",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": true
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Pilgrims' Path": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Falcon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Pinion Prayer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Falcon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Pinion Prince": {
+    "evolvesTo": "Pinion Prince Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "trait": "Fable"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "addCounter",
+              "counter": "fable",
+              "amount": 1,
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

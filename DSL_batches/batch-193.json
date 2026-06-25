@@ -1,0 +1,246 @@
+{
+  "Rookie Succubus": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rookie Trainer": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "iM@S CG"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Room Service Demon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 2
+              },
+              "then": {
+                "op": "recoverPp",
+                "amount": 2
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 0
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rosa, Mech Wing Maiden": {
+    "evolvesTo": "Rosa, Mech Wing Maiden Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Rosa, Mech Wing Maiden Evolved": {
+    "evolvesFrom": "Rosa, Mech Wing Maiden",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rose Deer": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Thorn Burst",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rose Gardener": {
+    "evolvesTo": "Rose Gardener Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Rose Gardener Evolved": {
+    "evolvesFrom": "Rose Gardener",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "condition": {
+          "type": "combo",
+          "count": 3
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rose Queen": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "transform",
+          "tokenName": "Thorn Burst",
+          "targets": {
+            "type": "selfFollower",
+            "count": 99,
+            "filter": {
+              "identityNameContains": "Pixie"
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "recoverPp",
+          "amount": {
+            "op": "exAreaNamedCount",
+            "identityName": "Thorn Burst"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rouge Vampire": {
+    "evolvesTo": "Rouge Vampire Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

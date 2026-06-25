@@ -1,0 +1,303 @@
+{
+  "Disciple of Usurpation": {
+    "keywords": [
+      "storm",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "millOpponent",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "opponentCemeteryMin",
+                "count": 10
+              },
+              "then": {
+                "op": "buff",
+                "atk": 2,
+                "def": 0,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Disdainful Rending": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Displacer Bot": {
+    "evolvesTo": "Displacer Bot Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Machina"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Displacer Bot Evolved": {
+    "evolvesFrom": "Displacer Bot",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Machina",
+            "multiplier": 2
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Disrestan, Ocean Harbinger": {
+    "evolvesTo": "Disrestan, Ocean Harbinger Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Marine card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Marine"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Put the top card of your deck into your EX area.",
+                "count": 3,
+                "zone": "exArea"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Disrestan, Ocean Harbinger Evolved": {
+    "evolvesFrom": "Disrestan, Ocean Harbinger",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buffAllEnemyFollowers",
+          "atk": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Marine",
+            "multiplier": -1
+          },
+          "def": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Marine",
+            "multiplier": -1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 2,
+          "buryFromExArea": {
+            "trait": "Marine"
+          },
+          "buryFieldCount": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Divine Retribution": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Evolved",
+                "count": 1
+              },
+              "then": {
+                "op": "moveSourceToExArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Divine Smithing": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 2,
+            "filter": {
+              "identityName": "Pixie"
+            },
+            "excludeSelf": false
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "condition": {
+          "type": "combo",
+          "count": 3
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Divine Thunder": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamageFollowerAndLeader",
+          "followerAmount": 7,
+          "leaderAmount": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Divine Tiger": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveSourceToExArea"
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

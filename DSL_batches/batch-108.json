@@ -1,0 +1,283 @@
+{
+  "Holy Counterattack": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Ward",
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holy Falcon": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Holy Fowl of Ivory": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Amulet",
+            "count": 1
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holy Lancer": {
+    "evolvesTo": "Holy Lancer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Ward",
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holy Lancer Evolved": {
+    "evolvesFrom": "Holy Lancer",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Holy Sanctuary": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 3 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Give a follower on your field [attack]+1/[defense]+1",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Summon a Holy Tiger token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Holy Tiger",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holy Sentinel": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Holy Tiger",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "ward",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holy Shieldmaiden": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holy Tiger": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Holybright Altar": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Holy Tiger",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "grantLastWords",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "self",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "dealDamageDynamic",
+          "amount": {
+            "op": "targetAttack"
+          },
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

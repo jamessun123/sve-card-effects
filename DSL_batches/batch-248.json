@@ -1,0 +1,350 @@
+{
+  "Winged Gatekeeper": {
+    "evolvesTo": "Winged Gatekeeper Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fox of Invitation",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Winged Gatekeeper Evolved": {
+    "evolvesFrom": "Winged Gatekeeper",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Winged Inversion": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Discard Angel follower — destroy enemy follower",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "discardFromHand",
+                    "filter": {
+                      "trait": "Angel",
+                      "cardType": "follower"
+                    },
+                    "count": 1
+                  },
+                  {
+                    "op": "destroy",
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Discard Fallen Angel follower — leader +3 DEF, draw 1",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "discardFromHand",
+                    "filter": {
+                      "trait": "Fallen Angel",
+                      "cardType": "follower"
+                    },
+                    "count": 1
+                  },
+                  {
+                    "op": "healLeader",
+                    "amount": 3
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Winged Staff Priestess": {
+    "keywords": [
+      "ward",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Winged Staff Priestess"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wings of Desire": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "noop",
+              "label": "Give a follower on your field a Strike ability that deals damage equal to the number of times your leader lost defense this turn"
+            },
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "selfLeader"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wings of Lust": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 2,
+          "options": [
+            {
+              "label": "Select a follower on your field. Give it Rush and deal 1 damage to your leader",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "grantKeyword",
+                    "keyword": "rush",
+                    "targets": {
+                      "type": "selfFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "dealDamage",
+                    "amount": 1,
+                    "targets": {
+                      "type": "selfLeader"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Select an enemy follower on the field. Deal 2 damage to it and 1 damage to your leader",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "dealDamage",
+                    "amount": 1,
+                    "targets": {
+                      "type": "selfLeader"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deal 1 damage to your leader. Draw a card. Discard a card",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 1,
+                    "targets": {
+                      "type": "selfLeader"
+                    }
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  },
+                  {
+                    "op": "discard",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wingy, Chirpy Gemstone": {
+    "evolvesTo": "Wingy, Chirpy Gemstone Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Wingy, Chirpy Gemstone Evolved": {
+    "evolvesFrom": "Wingy, Chirpy Gemstone",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeckAny",
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Winter Night Prayer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banish",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Cute",
+                "count": 1
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 3
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Witch of Calamity, Millie Parfait": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Magic Sediment",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "addStack",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "quick": true,
+        "oncePerTurn": true,
+        "cost": {
+          "earthRite": {
+            "count": 1
+          }
+        },
+        "effect": {
+          "op": "grantNextPlayCostReduction",
+          "filter": {
+            "cardType": "spell"
+          },
+          "amount": 4
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

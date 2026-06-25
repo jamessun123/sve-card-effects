@@ -1,0 +1,283 @@
+{
+  "Apostle of Silence": {
+    "evolvesTo": "Apostle of Silence Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "handMax",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Apostle of Silence Evolved": {
+    "evolvesFrom": "Apostle of Silence",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "handMax",
+            "count": 3
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "handMax",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Apostle of Truth": {
+    "evolvesTo": "Apostle of Truth Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Mage",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "ward",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "Apostle of Truth Evolved": {
+    "evolvesFrom": "Apostle of Truth",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Mage",
+            "multiplier": 2
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Apostle of Unkilling": {
+    "evolvesTo": "Apostle of Unkilling Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Apostle of Unkilling Evolved": {
+    "evolvesFrom": "Apostle of Unkilling",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Hunter",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "field"
+        }
+      }
+    ]
+  },
+  "Apostle of Usurpation": {
+    "evolvesTo": "Apostle of Usurpation Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "millOpponent",
+          "count": 2
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "opponentCemeteryMin",
+            "count": 10
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Apostle of Usurpation Evolved": {
+    "evolvesFrom": "Apostle of Usurpation",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Aqua Nereid": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Megalorca",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "overflow"
+              },
+              "then": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aquascale Stalwart": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "follower",
+              "minCost": 5
+            },
+            "lookAt": 5,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

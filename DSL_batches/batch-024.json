@@ -1,0 +1,221 @@
+{
+  "Automaton Soldier": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Avant Blader": {
+    "evolvesTo": "Avant Blader Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Avant Blader Evolved": {
+    "evolvesFrom": "Avant Blader",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Officer",
+            "cardType": "follower"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Avaritia": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Thief"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Octrice, Omen of Usurpation"
+          },
+          "then": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "self",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Avatar of Fruition": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Awakened Gaia": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": {
+            "op": "cemeteryFilterCount",
+            "filter": {
+              "trait": "Natura"
+            },
+            "divisor": 5
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Awakened Robot": {
+    "evolvesTo": "Awakened Robot Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Awakened Robot Evolved": {
+    "evolvesFrom": "Awakened Robot",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Axe Princess": {
+    "evolvesTo": "Axe Princess Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Axe Princess Evolved": {
+    "evolvesFrom": "Axe Princess",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "Sachiko Koshimizu": {
+    "keywords": [
+      "fanfare",
+      "storm",
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": -2
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "selfLeaderDefMax",
+          "count": 10
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm",
+            "bane"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sachiko Koshimizu [Lunatic Show]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sacred Gavel": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sacred Groundskeeper": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "notEnteredFromHand"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 0,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sacred Plea": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "draw",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sacred Springs Dragon": {
+    "keywords": [
+      "rush",
+      "assail",
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "identityName": "Soothing Dragonspring"
+          },
+          "to": "field"
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "removeCounter",
+              "counter": "divine_water",
+              "amount": 2,
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "grantLeaderDamageShield",
+              "charges": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sacred Stone Apostle": {
+    "keywords": [
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "amulet",
+            "count": 1
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sacrifice": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Chess",
+          "count": 5
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "trait": "Chess"
+                }
+              }
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Chess",
+                "cardType": "follower"
+              },
+              "to": "field",
+              "playCostReduction": {
+                "op": "selfCostPlus",
+                "amount": 2
+              }
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sae Kobayakawa": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "iM@S CG"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sae Kobayakawa [Dancing Flowers]": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Sae Kobayakawa [Dancing Flowers] Evolved",
+    "evolveCost": 1,
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

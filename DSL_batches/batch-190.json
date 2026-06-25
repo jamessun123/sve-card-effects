@@ -1,0 +1,381 @@
+{
+  "Rivaylian Bandit": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Rivaylian Bandit Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          },
+          "label": "Whenever this follower gains attack or defense",
+          "untilEndOfTurn": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rivaylian Bandit Evolved": {
+    "evolvesFrom": "Rivaylian Bandit",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "fieldTraitMin",
+                "trait": "Mount",
+                "count": 2
+              },
+              {
+                "type": "exAreaTraitMin",
+                "trait": "Mount",
+                "count": 2
+              }
+            ]
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          },
+          "label": "Whenever this follower gains attack or defense",
+          "untilEndOfTurn": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rivaylian Deputy": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dutiful Steed",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Mount"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Riven Earth": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Mage",
+            "count": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Robin Hood": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Robofalcon": {
+    "keywords": [
+      "evolve",
+      "storm",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaNamedMin",
+                "identityName": "Repair Mode",
+                "count": 3
+              },
+              "then": {
+                "op": "buff",
+                "atk": 1,
+                "def": 0,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Robofalcon Evolved": {
+    "evolvesFrom": "Robofalcon",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaNamedMin",
+                "identityName": "Repair Mode",
+                "count": 3
+              },
+              "then": {
+                "op": "buff",
+                "atk": 1,
+                "def": 0,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Robogoblin": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Robogoblin Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Robogoblin Evolved": {
+    "evolvesFrom": "Robogoblin",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assembly Droid",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Robowhip Reverend": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "notEnteredFromHand"
+        },
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Machina",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "Okami": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ]
+  },
+  "Old Man and Old Woman": {
+    "keywords": [
+      "bane"
+    ],
+    "abilities": []
+  },
+  "Oldblood King": {
+    "evolvesTo": "Oldblood King Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "Forest Bat",
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "assail",
+          "trait": "Forest Bat",
+          "excludeSelf": false
+        }
+      }
+    ]
+  },
+  "Oldblood King Evolved": {
+    "evolvesFrom": "Oldblood King",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Forest Bat",
+          "atk": 1,
+          "def": 0,
+          "otherOnly": false
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "Forest Bat",
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "assail",
+          "trait": "Forest Bat",
+          "excludeSelf": false
+        }
+      }
+    ]
+  },
+  "Olivia, Heroic Dark Angel": {
+    "evolvesTo": "Olivia, Heroic Dark Angel Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ]
+  },
+  "Olivia, Heroic Dark Angel Evolved": {
+    "evolvesFrom": "Olivia, Heroic Dark Angel",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 3
+            },
+            {
+              "op": "recoverPp",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "One-Tailed Fox": {
+    "keywords": [
+      "rush",
+      "ward"
+    ],
+    "abilities": []
+  },
+  "One-Winged Traitor": {
+    "evolvesTo": "One-Winged Traitor Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Angel",
+              "Fallen Angel"
+            ]
+          },
+          "lookAt": 1,
+          "to": "hand",
+          "optional": true,
+          "reveal": true
+        }
+      }
+    ]
+  },
+  "One-Winged Traitor Evolved": {
+    "evolvesFrom": "One-Winged Traitor",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "traitsAny": [
+                "Angel",
+                "Fallen Angel"
+              ]
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ]
+  },
+  "Onion Patch": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 5
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantLastWords",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

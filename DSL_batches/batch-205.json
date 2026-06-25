@@ -1,0 +1,256 @@
+{
+  "Shadowcrypt Memorial": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "onAllyEvolve"
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shadowed Assassin": {
+    "evolvesTo": "Shadowed Assassin Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Shadowed Assassin Evolved": {
+    "evolvesFrom": "Shadowed Assassin",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Shadowed Memories": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "moveToExArea",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Assassin"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shady Priest": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dutiful Steed",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3
+        },
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shamu & Shama, Posh Felines": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 5
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Shapeshifting Mage": {
+    "evolvesTo": "Shapeshifting Mage Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 3,
+            "def": 3,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Shapeshifting Mage Evolved": {
+    "evolvesFrom": "Shapeshifting Mage",
+    "specialType": "evolved",
+    "keywords": [
+      "assail",
+      "bane"
+    ],
+    "abilities": []
+  },
+  "Shark Warrior": {
+    "evolvesTo": "Shark Warrior Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "enteredFromHand"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Shark Warrior Evolved": {
+    "evolvesFrom": "Shark Warrior",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  }
+}

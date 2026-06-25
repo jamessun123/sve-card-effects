@@ -1,0 +1,362 @@
+{
+  "Desperados' Shot": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 4 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "If you control Bunny & Baron, Specter Duo and Val, Trusty Getaway Car, deal 6 damage instead and deal 2 damage to that follower's leader",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "if",
+                    "condition": {
+                      "type": "conditionAny",
+                      "conditions": [
+                        {
+                          "type": "namedFollowerOnFieldByName",
+                          "identityName": "Bunny & Baron, Specter Duo"
+                        },
+                        {
+                          "type": "namedFollowerOnFieldByName",
+                          "identityName": "Val, Trusty Getaway Car"
+                        }
+                      ]
+                    },
+                    "then": {
+                      "op": "sequence",
+                      "steps": [
+                        {
+                          "op": "dealDamage",
+                          "amount": 6,
+                          "targets": {
+                            "type": "enemyFollower",
+                            "count": 1
+                          }
+                        },
+                        {
+                          "op": "dealDamage",
+                          "amount": 2,
+                          "targets": {
+                            "type": "enemyLeader"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Destruction in Black": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Destruction in White": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Destructive Refrain": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search your deck for Lishenna, Omen of Destruction",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Lishenna, Omen of Destruction"
+                    },
+                    "to": "hand",
+                    "reveal": true
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pay 2 PP — deal X damage to each enemy follower, where X is the number of Idolatry cards on your field",
+              "additionalPpCost": 2,
+              "effect": {
+                "op": "dealDamageAllEnemies",
+                "amount": {
+                  "op": "traitFieldCount",
+                  "trait": "Idolatry",
+                  "multiplier": 1
+                },
+                "followersOnly": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Deus Ex Machina": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Discard your hand. Draw 4 cards",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "discardHand"
+                  },
+                  {
+                    "op": "draw",
+                    "count": 4
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Recover 4 play points",
+              "effect": {
+                "op": "recoverPp",
+                "amount": 4
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Device Diviner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put an Assembly Droid token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Put a Repair Mode token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Repair Mode",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "trait": "Machina"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Devilish Flautist": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a random card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Devoted Dragon": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Aiela, Devoted Knight"
+        },
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Diamond Master": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Diamond Master Evolved",
+    "evolveCost": 3,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give this follower Storm",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "Give this follower Ward",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "ward",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOpponentRestriction",
+          "restriction": "noFollowers"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Diamond Master Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Diamond Master",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "traitsAny": [
+              "Storm",
+              "Ward"
+            ],
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1,
+          "maxTotalCost": 3
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOpponentRestriction",
+          "restriction": "noFollowers"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

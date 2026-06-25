@@ -12,83 +12,12 @@ from batch_utils import (
     BATCHES_DIR,
     CARD_BATCHES_DIR,
     DEFAULT_MAX_ENQUEUED_TOKENS,
-    build_batch_request_line,
-    build_prompt_from_card_batch,
-    batch_info_dict,
     chunk_card_batch_files,
-    estimate_prompt_tokens,
     list_card_batch_files,
     make_client,
     print_batch_info,
+    submit_chunk,
 )
-
-
-def write_combined_batch_input(
-    card_batch_files: list[Path],
-    *,
-    chunk_index: int,
-    run_timestamp: str,
-) -> tuple[Path, list[str], list[str], int]:
-    BATCHES_DIR.mkdir(parents=True, exist_ok=True)
-    input_path = BATCHES_DIR / f"all-card-batches-{run_timestamp}-part{chunk_index:03d}.jsonl"
-
-    custom_ids: list[str] = []
-    source_files: list[str] = []
-    estimated_tokens = 0
-
-    with input_path.open("w", encoding="utf-8") as f:
-        for card_batch_path in card_batch_files:
-            custom_id = card_batch_path.stem
-            prompt = build_prompt_from_card_batch(card_batch_path)
-            request_line = build_batch_request_line(custom_id, prompt)
-            f.write(json.dumps(request_line, ensure_ascii=False) + "\n")
-            custom_ids.append(custom_id)
-            source_files.append(str(card_batch_path))
-            estimated_tokens += estimate_prompt_tokens(prompt)
-
-    return input_path, custom_ids, source_files, estimated_tokens
-
-
-def submit_chunk(
-    client,
-    card_batch_files: list[Path],
-    *,
-    chunk_index: int,
-    chunk_count: int,
-    run_timestamp: str,
-) -> dict:
-    input_path, custom_ids, source_files, estimated_tokens = write_combined_batch_input(
-        card_batch_files,
-        chunk_index=chunk_index,
-        run_timestamp=run_timestamp,
-    )
-    metadata_path = input_path.with_suffix(".batch.json")
-
-    uploaded = client.files.create(file=input_path.open("rb"), purpose="batch")
-    batch = client.batches.create(
-        input_file_id=uploaded.id,
-        endpoint="/v1/responses",
-        completion_window="24h",
-        metadata={
-            "source": "cards-by-name-batches",
-            "request_count": str(len(custom_ids)),
-            "chunk_index": str(chunk_index),
-            "chunk_count": str(chunk_count),
-        },
-    )
-
-    info = batch_info_dict(
-        batch,
-        input_path=input_path,
-        metadata_path=metadata_path,
-        custom_ids=custom_ids,
-        source_files=source_files,
-    )
-    info["chunk_index"] = chunk_index
-    info["chunk_count"] = chunk_count
-    info["estimated_enqueued_tokens"] = estimated_tokens
-    metadata_path.write_text(json.dumps(info, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    return info
 
 
 def submit_all(

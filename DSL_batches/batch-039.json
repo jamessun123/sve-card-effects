@@ -1,0 +1,242 @@
+{
+  "Ceridwen, Eternity Hunter Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Eternal Potion",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "trait": "Forbidden"
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 2
+          },
+          "maxPerTurn": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ceryneian Hind": {
+    "evolvesTo": "Ceryneian Lighthind Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ]
+  },
+  "Ceryneian Lighthind Evolved": {
+    "evolvesFrom": "Ceryneian Hind",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buryFieldFollowers",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "count": 1
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "healLeader",
+          "amount": 4
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Cetus": {
+    "evolvesTo": "Cetus Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Cetus Evolved": {
+    "evolvesFrom": "Cetus",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroyLowestCostEnemyFollowers"
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Chaht, Ringside Announcer": {
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "evolvesTo": "Chaht, Ringside Announcer Evolved",
+    "evolveCost": 1
+  },
+  "Chaht, Ringside Announcer Evolved": {
+    "evolvesFrom": "Chaht, Ringside Announcer",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Arena"
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Chain Lightning": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "burySelf"
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 4,
+              "followersOnly": false
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Mage",
+                "count": 2
+              },
+              "then": {
+                "op": "moveSourceToExArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Chain of Calling": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "rune",
+            "cardType": "follower"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "spellchain",
+            "count": 10
+          },
+          "then": {
+            "op": "recoverPp",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chakram Wizard": {
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Mage"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "evolvesTo": "Chakram Wizard Evolved",
+    "evolveCost": 1,
+    "parseConfidence": "review"
+  }
+}

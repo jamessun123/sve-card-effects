@@ -1,0 +1,414 @@
+{
+  "Mystic Ring": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "putHandCardOnDeck",
+              "position": "bottom"
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mythril Golem": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "spellchain",
+            "count": 15
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": false
+              },
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "if",
+            "condition": {
+              "type": "spellchain",
+              "count": 7
+            },
+            "then": {
+              "op": "dealDamageAllEnemies",
+              "amount": 5,
+              "followersOnly": true
+            },
+            "else": {
+              "op": "dealDamageAllEnemies",
+              "amount": 3,
+              "followersOnly": true
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mánagarmr Scout": {
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1,
+          "banishFromField": {
+            "tokenName": "Naterran Great Tree"
+          },
+          "banishCount": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nagi Hisakawa": {
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish two 1-cost cards from your cemetery",
+          "cost": {
+            "op": "banishFromCemetery",
+            "filter": {
+              "maxCost": 1
+            },
+            "count": 2
+          },
+          "then": {
+            "op": "chooseMultiple",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Destroy an enemy follower",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Deal 2 damage to each enemy leader",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 2,
+                  "targets": {
+                    "type": "enemyLeader"
+                  }
+                }
+              },
+              {
+                "label": "Draw a card. Discard a card.",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "draw",
+                      "count": 1
+                    },
+                    {
+                      "op": "discard",
+                      "count": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "rush",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nagi Hisakawa [Everyday Fairy Tale]": {
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "iM@S CG",
+            "count": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Sparkling☆Days"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "iM@S CG",
+          "count": 10
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Nagi Hisakawa"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Naht's Henchman": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Nahtnaught, Cursed Queen"
+        },
+        "effect": {
+          "op": "exAreaPlayCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Nahtnaught, Cursed Queen"
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nahtnaught, Cursed Queen": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "sword",
+                "maxCost": 1
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "box",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nana Abe": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Nana Abe Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nana Abe Evolved": {
+    "evolvesFrom": "Nana Abe",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "cardType": "amulet",
+            "maxCost": 3
+          },
+          "to": "field",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nana Abe [Cinderella Girl]": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Nana Abe [Cinderella Girl] Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "banishFromExArea",
+            "filter": {
+              "trait": "Magical Item"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "buff",
+            "atk": -1,
+            "def": -1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

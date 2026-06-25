@@ -1,0 +1,243 @@
+{
+  "Garuel, Seraphic Leo Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "cardClass": "neutral"
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Garyu, Supreme Dragonkin": {
+    "evolvesTo": "Garyu, Supreme Dragonkin Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "ward",
+          "trait": "Dragoncraft",
+          "excludeSelf": true
+        }
+      }
+    ]
+  },
+  "Garyu, Supreme Dragonkin Evolved": {
+    "evolvesFrom": "Garyu, Supreme Dragonkin",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "playDeckTopFollower",
+          "optional": true
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "ward",
+          "trait": "Dragoncraft",
+          "excludeSelf": true
+        }
+      }
+    ]
+  },
+  "Gawain of the Round Table": {
+    "evolvesTo": "",
+    "evolveCost": 1,
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Reveal 2 Commander or Arthurian cards in your hand",
+          "cost": {
+            "op": "discard",
+            "count": 0
+          },
+          "then": {
+            "op": "recoverPp",
+            "amount": 2
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantNextPlayCostReduction",
+          "filter": {
+            "cardClass": "sword"
+          },
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gazania Fox": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 1 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Deal 4 damage instead and give this Aura",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 4,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "auraGrantKeyword",
+                    "keyword": "storm",
+                    "excludeSelf": false
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gemstaff Commander": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "sword",
+            "cardType": "follower"
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ]
+  },
+  "Genesis Dragon": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": []
+  },
+  "Genesis Dragon Reborn": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": []
+  },
+  "Genesis of Legend": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "noop",
+          "label": "Each player reveals up to 1 non-spell card from their hand simultaneously. Each player who revealed an X-cost card summons it. X equals the cost of the 2nd card when the revealed cards are ordered from highest cost to lowest."
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Geno, Machine Artisan": {
+    "evolvesTo": "",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "effect": {
+            "op": "buff",
+            "def": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

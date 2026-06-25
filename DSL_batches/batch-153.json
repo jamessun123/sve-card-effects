@@ -1,0 +1,316 @@
+{
+  "Mirror of Truth": {
+    "keywords": [
+      "stack",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Alchemist",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mischievous Zombie": {
+    "evolvesTo": "Mischievous Zombie Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Ghost",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "discardedCardType",
+                  "cardType": "follower"
+                },
+                "then": {
+                  "op": "if",
+                  "condition": {
+                    "type": "discardedCardType",
+                    "cardType": "follower"
+                  },
+                  "then": {
+                    "op": "draw",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mischievous Zombie Evolved": {
+    "evolvesFrom": "Mischievous Zombie",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "bane",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "identityName": "Ghost"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mist Dragon": {
+    "keywords": [
+      "intimidate"
+    ],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "Mist Shaman": {
+    "evolvesTo": "Mist Shaman Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Mist Shaman Evolved": {
+    "evolvesFrom": "Mist Shaman",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "ward",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mistolina & Bayleon": {
+    "evolvesTo": "Mistolina & Bayleon Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mistolina & Bayleon Evolved": {
+    "evolvesFrom": "Mistolina & Bayleon",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Natura",
+            "cardType": "spell",
+            "maxCost": 2
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "playCostReduction": 0
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "recoverPp",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mistolina, Forest Princess": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Select a Princess's Strike in your cemetery and play it for 0 play points",
+          "cost": {
+            "op": "noop",
+            "label": "unsupported play spell from cemetery"
+          },
+          "then": {
+            "op": "noop",
+            "label": "play Princess's Strike from cemetery"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 3,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mithra, Daybreak Deity": {
+    "evolvesTo": "Mithra, Daybreak Deity Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "rollDie",
+              "sides": 6,
+              "outcomes": [
+                {
+                  "on": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "effect": {
+                    "op": "draw",
+                    "count": 2
+                  }
+                },
+                {
+                  "on": [
+                    4,
+                    5,
+                    6
+                  ],
+                  "effect": {
+                    "op": "discard",
+                    "count": 2
+                  }
+                }
+              ]
+            },
+            {
+              "op": "rollDie",
+              "sides": 6,
+              "outcomes": [
+                {
+                  "on": [
+                    1,
+                    2,
+                    3
+                  ],
+                  "effect": {
+                    "op": "draw",
+                    "count": 2
+                  }
+                },
+                {
+                  "on": [
+                    4,
+                    5,
+                    6
+                  ],
+                  "effect": {
+                    "op": "discard",
+                    "count": 2
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

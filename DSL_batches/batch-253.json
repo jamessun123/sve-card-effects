@@ -1,0 +1,292 @@
+{
+  "Yui Ohtsuki": {
+    "evolvesTo": "Yui Ohtsuki Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "banishFromExArea",
+            "filter": {
+              "trait": "Magical Item"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yui Ohtsuki Evolved": {
+    "evolvesFrom": "Yui Ohtsuki",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "spell",
+                "maxCost": 3
+              },
+              "to": "exArea",
+              "playCostReduction": 3
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yui Ohtsuki [Lollipop Darling]": {
+    "evolvesTo": "Yui Ohtsuki [Lollipop Darling] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  },
+  "Yui Ohtsuki [Lollipop Darling] Evolved": {
+    "evolvesFrom": "Yui Ohtsuki [Lollipop Darling]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "(1) Look at the top 2 cards of your deck. You may reveal a Passion card from among them and add it to your hand. Put the rest on the bottom of your deck in any order.",
+              "effect": {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Passion"
+                },
+                "lookAt": 2,
+                "to": "hand",
+                "optional": true,
+                "remainderTo": "deckBottom",
+                "reveal": true
+              }
+            },
+            {
+              "label": "(2) [cost03], bury this: Search your deck for a follower with \"Yui Ohtsuki\" in its name, summon it, then shuffle. Evolve it.",
+              "effect": {
+                "op": "optionalCost",
+                "cost": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "spendPp",
+                      "amount": 3
+                    },
+                    {
+                      "op": "burySelf"
+                    }
+                  ]
+                },
+                "then": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
+                      "filter": {
+                        "identityNameContains": "Yui Ohtsuki",
+                        "cardType": "follower"
+                      },
+                      "to": "field"
+                    },
+                    {
+                      "op": "shuffleDeck"
+                    },
+                    {
+                      "op": "evolveOtherFollower",
+                      "filter": {
+                        "identityNameContains": "Yui Ohtsuki"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yuka Nakano": {
+    "evolvesTo": "Yuka Nakano Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  },
+  "Yuka Nakano Evolved": {
+    "evolvesFrom": "Yuka Nakano",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ppMin",
+            "count": 10
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 4,
+            "followersOnly": true
+          },
+          "else": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yukari Mizumoto": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Destroy an enemy amulet",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFieldCard",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yuki Himekawa [Challengers' Cheer]": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yuki Himekawa [Full Swing☆Cheer]": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yukimi Sajo": {
+    "evolvesTo": "Yukimi Sajo Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost02], Lesson (1)",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "spendPp",
+                "amount": 2
+              },
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "trait": "Magical Item"
+                },
+                "count": 1
+              }
+            ]
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

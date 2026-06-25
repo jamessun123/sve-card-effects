@@ -1,0 +1,246 @@
+{
+  "Samurai Outlaw": {
+    "evolvesTo": "Samurai Outlaw Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Samurai Outlaw Evolved": {
+    "evolvesFrom": "Samurai Outlaw",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Sanae Katagiri": {
+    "keywords": [
+      "rush",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageCap",
+          "maxPerHit": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sanguine Core": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Machina"
+          },
+          "lookAt": 2,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Machina",
+          "count": 5
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assembly Droid",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sanguine Necklace": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sapphire Priestess": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "always"
+            }
+          ]
+        },
+        "effect": {
+          "op": "draw",
+          "count": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sarina Matsumoto": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "cardType": "spell"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sarissa, Luxflash Spear": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "token",
+          "count": 3
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm"
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": -1,
+          "def": -1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Savage Swordsman": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "always"
+              }
+            ]
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Scalebound Plight": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "engage",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "cardClass": "dragon",
+                  "minCost": 7
+                }
+              }
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": false
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

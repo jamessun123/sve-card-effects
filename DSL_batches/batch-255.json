@@ -1,0 +1,338 @@
+{
+  "Yuwan, Dimensional Avenger Evolved": {
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ancient Artifact",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 4,
+          "leaderAmount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yuzu Kitami": {
+    "evolvesTo": "Yuzu Kitami Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "excludeSelf": true,
+              "maxCost": 1
+            }
+          },
+          "then": {
+            "op": "grantActRestriction",
+            "exceptEvolve": true,
+            "untilEndOfTurn": true
+          }
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yuzu Kitami Evolved": {
+    "evolvesFrom": "Yuzu Kitami",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxCost": 2
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (1)",
+          "cost": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "excludeSelf": true,
+              "maxCost": 1
+            }
+          },
+          "then": {
+            "op": "grantActRestriction",
+            "untilEndOfTurn": true
+          }
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yuzuki, Bloodlord": {
+    "evolvesTo": "Yuzuki, Bloodlord Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 10
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1,
+              "maxCost": 2
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Yuzuki, Bloodlord Evolved": {
+    "evolvesFrom": "Yuzuki, Bloodlord",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "maxCost": 2
+          },
+          "lookAt": 2,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 2,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Yuzuki, Righteous Demon": {
+    "keywords": [
+      "bane",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "buryEachOpponentFollowers",
+          "count": 2
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buryEachOpponentFollowers",
+          "count": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "hand",
+        "cost": {
+          "pp": 3
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard this card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "identityName": "Yuzuki, Righteous Demon"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "mill",
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zahar, Stormwave Dragoon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "minCost": 7
+          },
+          "lookAt": 2,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "follower",
+            "excludeIdentityName": "Zahar, Stormwave Dragoon"
+          },
+          "lookAt": 3,
+          "maxTotalCost": 99,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zashiki-Warashi": {
+    "evolvesTo": "Zashiki-Warashi Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  },
+  "Zashiki-Warashi Evolved": {
+    "evolvesFrom": "Zashiki-Warashi",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Yokai card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Yokai"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Zealot of Destruction": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Idolatry",
+          "count": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

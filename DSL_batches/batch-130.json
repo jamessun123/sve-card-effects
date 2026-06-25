@@ -1,0 +1,243 @@
+{
+  "Limonia, Flawed Saint": {
+    "evolvesTo": "Limonia, Flawed Saint Evolved",
+    "evolveCost": 7,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "banishFromExArea": {
+            "trait": "Machina",
+            "identityName": "Repair Mode"
+          },
+          "count": 1
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Limonia, Flawed Saint Evolved": {
+    "evolvesFrom": "Limonia, Flawed Saint",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroyAllEnemyField"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "field"
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Lina & Lena, Twin Souls": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "follower",
+            "count": 3
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lindworm": {
+    "evolveCost": 5,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "recoverPp",
+          "amount": {
+            "op": "cemeteryFilterCount",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "spell"
+            },
+            "divisor": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Linkstaff Necromancer": {
+    "evolvesTo": "Linkstaff Necromancer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Linkstaff Necromancer Evolved": {
+    "evolvesFrom": "Linkstaff Necromancer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Departed",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lishenna, Melodious Destruction": {
+    "evolvesTo": "Lishenna, Melodious Destruction Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Idolatry",
+            "count": 3
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Melodious Monody",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lishenna, Melodious Destruction Evolved": {
+    "evolvesFrom": "Lishenna, Melodious Destruction",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Idolatry"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lishenna, Omen of Destruction": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Destruction in White",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Destruction in Black",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Little Dragon Nanny": {
+    "evolvesTo": "Little Dragon Nanny Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  }
+}

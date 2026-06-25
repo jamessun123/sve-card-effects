@@ -1,0 +1,356 @@
+{
+  "Eleanor, Glorious Flower": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish a Runecraft card from your cemetery",
+          "cost": {
+            "op": "banishFromCemetery",
+            "filter": {
+              "cardClass": "rune"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal it 1 damage if there are at least 5 cards in your banished zone",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryMin",
+                  "count": 5
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 1,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            },
+            {
+              "label": "Deal it 4 damage if there are at least 10 cards in your banished zone",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryMin",
+                  "count": 10
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Electromagical Rhino": {
+    "keywords": [
+      "storm",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 3,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "mill",
+              "count": 4
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 1
+        },
+        "effect": {
+          "op": "triggerAbilities",
+          "timing": "fanfare"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "identityName": "Electromagical Rhino"
+              },
+              "to": "deck"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elegance in Action": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "engage",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elements of Creation": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "spellchain",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 7,
+                "followersOnly": false
+              },
+              {
+                "op": "healLeader",
+                "amount": 7
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elf Bard": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy Wisp",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elf Child May": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onReturnToHand",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elf General": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Fairy",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": false
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "ward",
+          "targets": {
+            "type": "selfFollower",
+            "filter": {
+              "trait": "Fairy"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elf Girl Liza": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraAbilityDamageCap",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elf Healer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elf Knight Cynthia": {
+    "keywords": [
+      "rush",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromExArea",
+              "filter": {
+                "count": 1
+              },
+              "count": 1
+            },
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFieldCard",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 2,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

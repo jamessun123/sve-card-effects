@@ -1,0 +1,249 @@
+{
+  "Glistering Angel Evolved": {
+    "evolvesFrom": "Glistering Angel",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Angel",
+              "Fallen Angel"
+            ]
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ]
+  },
+  "Glittering Gold": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "banishFromExArea": {
+            "identityName": "Glittering Gold"
+          },
+          "banishCount": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Glitz & Glam☆Parade": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Passion",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "count": 1,
+              "maxTotalCost": 2
+            },
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Passion",
+                "cardType": "follower",
+                "maxCost": 1
+              },
+              "count": 1,
+              "maxTotalCost": 1
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Globe of the Starways": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "lookAt": 40,
+          "to": "hand",
+          "optional": false,
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goblin": {
+    "evolvesTo": "Goblin Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Goblin Assault": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Goblinoid card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Goblinoid"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 2
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goblin Evolved": {
+    "evolvesFrom": "Goblin",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Goblin King": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Goblinoid",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goblin Princess": {
+    "evolvesTo": "Goblin Princess Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "neutral",
+            "cardType": "follower",
+            "maxCost": 1
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goblin Princess Evolved": {
+    "evolvesFrom": "Goblin Princess",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Goblin King",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

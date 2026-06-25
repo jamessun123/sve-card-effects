@@ -1,0 +1,222 @@
+{
+  "Berserk Demon": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Berserk Demon Evolved",
+    "evolveCost": 3,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Berserk Demon Evolved": {
+    "evolvesFrom": "Berserk Demon",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Berserker's Pelt": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "discardedThisTurn"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "selfLeader",
+          "count": 1
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Beryl, Nightmare Incarnate": {
+    "keywords": [
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "healLeader",
+          "amount": 5
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Big Soul Hunter": {
+    "evolvesTo": "Big Soul Hunter Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Big Soul Hunter Evolved": {
+    "evolvesFrom": "Big Soul Hunter",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buryEachOpponentFollowers",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Biofabrication": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "turnEvolveDeck",
+              "orientation": "facedown",
+              "count": 1,
+              "filter": {
+                "cardType": "follower"
+              },
+              "allMatching": false
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Birdkeeping Disciple": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Falcon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Blackened Scripture": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxDef": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Bladed Hedgehog": {
+    "evolvesTo": "Bladed Hedgehog Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnEnemyFollowerDestroyed",
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

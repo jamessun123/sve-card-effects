@@ -1,0 +1,251 @@
+{
+  "Kana Imai Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Look at the top card of your deck. You may reveal it and add it to your hand.",
+              "effect": {
+                "op": "searchDeckChoose",
+                "filter": {},
+                "lookAt": 1,
+                "to": "hand",
+                "optional": true,
+                "reveal": true
+              }
+            },
+            {
+              "label": "If you revealed a Cute card, give your leader [defense]+2.",
+              "effect": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Kanade Hayami": {
+    "evolvesTo": "Kanade Hayami Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Kanade Hayami Evolved": {
+    "evolvesFrom": "Kanade Hayami",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Kanade Hayami [Faraway Reflection]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Shiki Ichinose"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kaoru Ryuzaki": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 2
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Passion",
+          "count": 5
+        },
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardType": "follower"
+          },
+          "to": "hand"
+        }
+      }
+    ]
+  },
+  "Karakuri Servant": {
+    "evolvesTo": "Karakuri Servant Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ]
+  },
+  "Karakuri Servant Evolved": {
+    "evolvesFrom": "Karakuri Servant",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "exAreaTraitMin",
+            "trait": "Puppet",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Karen Hojo": {
+    "evolvesTo": "Karen Hojo Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "iM@S CG",
+            "count": 3
+          },
+          "then": {
+            "op": "buff",
+            "def": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Karen Hojo Evolved": {
+    "evolvesFrom": "Karen Hojo",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageCompare",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          },
+          "damageTargetFirst": true
+        }
+      }
+    ]
+  },
+  "Karen Hojo [Cinderella Girl]": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Cool"
+          },
+          "lookAt": 1,
+          "to": "hand",
+          "optional": true,
+          "reveal": true
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magical Item",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

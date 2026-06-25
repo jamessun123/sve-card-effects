@@ -1,0 +1,263 @@
+{
+  "Chitose Kurosaki": {
+    "keywords": [
+      "fanfare",
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantLeaderDamageShield",
+          "charges": 99
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantLeaderDamageShield",
+          "charges": 99,
+          "targets": {
+            "type": "selfFollower"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Chitose Kurosaki [Memento Mori]": {
+    "evolvesTo": "Chitose Kurosaki [Memento Mori] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chitose Kurosaki [Memento Mori] Evolved": {
+    "evolvesFrom": "Chitose Kurosaki [Memento Mori]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "mill",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chivalrous Bandit": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "opponentCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "assail",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Gilded Blade",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "millOpponent",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chivalrous Charge": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": {
+            "op": "selfAttack"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chiyo Shirayuki": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chizuru Matsuo": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "Cool"
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Cool"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chorus of Prayer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardType": "amulet",
+            "maxCost": 5
+          },
+          "count": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Chris Pumpkinhead": {
+    "evolvesTo": "Chris Pumpkinhead Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "Chris Pumpkinhead Evolved": {
+    "evolvesFrom": "Chris Pumpkinhead",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "Orchis, Resolute Puppet Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnLeaveField",
+          "filter": {
+            "trait": "Puppetry"
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Lloyd",
+            "count": 1,
+            "zone": "exArea"
+          },
+          "oncePerTurn": true
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Orthrus, Hellhound Blader": {
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "evolvesTo": "Orthrus, Hellhound Blader Evolved",
+    "evolveCost": 1,
+    "parseConfidence": "high"
+  },
+  "Orthrus, Hellhound Blader Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field. Necrocharge (10) - Deal it 5 damage.",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "necrocharge",
+                  "count": 10
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            },
+            {
+              "label": "Bury the top 2 cards of your deck.",
+              "effect": {
+                "op": "mill",
+                "count": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Otoha Umeki": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onCardPlayed",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "oncePerTurn": false
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Otohime's Bodyguard": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Otohime's Vanguard": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Ouroboros": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 5
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard 2 cards",
+          "cost": {
+            "op": "discard",
+            "count": 2
+          },
+          "then": {
+            "op": "moveSourceToExArea"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Outlaw Gunner": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Bullet Bike",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Overwhelming Crush": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "dragon",
+                "cardType": "follower"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Owen, Knight of Mysteria": {
+    "keywords": [
+      "rush",
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Academic",
+            "count": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "assail",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Mysterian Missile",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "Forge Weaponry": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Forgotten Sanctuary": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Tiger",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Forte, Blackwing Dragoon": {
+    "keywords": [
+      "storm",
+      "intimidate",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ppMin",
+            "count": 10
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Forte, Sovereign Supreme": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "storm",
+          "trait": "Dragon",
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "drain",
+          "trait": "Dragon",
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "choose",
+              "min": 0,
+              "max": 2,
+              "options": [
+                {
+                  "label": "Select an enemy follower on the field and prevent it from attacking enemies during its controller's next turn",
+                  "effect": {
+                    "op": "grantActRestriction",
+                    "exceptEvolve": false,
+                    "untilEndOfTurn": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dragon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fortuna Regina Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "maxCost": 0
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "cemetery"
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select up to 2 enemy followers on the field and deal them 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 2
+                }
+              }
+            }
+          ]
+        },
+        "cost": {
+          "pp": 1
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Fortune Fowl": {
+    "keywords": [
+      "rush",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Falcon",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fount of Angels": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Angel",
+              "Fallen Angel"
+            ]
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Angel",
+          "count": 2
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fox Lancer": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "identityName": "Naterran Great Tree"
+          },
+          "to": "field",
+          "optional": true
+        }
+      }
+    ],
+    "evolvesTo": "Fox Lancer Evolved",
+    "evolveCost": 1,
+    "parseConfidence": "review"
+  },
+  "Fox Lancer Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "evolvesFrom": "Fox Lancer",
+    "parseConfidence": "high"
+  },
+  "Fox of Fortune": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fox of Invitation",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

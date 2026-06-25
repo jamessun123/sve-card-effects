@@ -1,0 +1,210 @@
+{
+  "Hina Araki": {
+    "evolvesTo": "Hina Araki Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Hina Araki Evolved": {
+    "evolvesFrom": "Hina Araki",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "iM@S CG",
+            "cardType": "spell",
+            "maxCost": 2
+          },
+          "to": "field",
+          "playCostReduction": 0
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hinako Kita [True Dream]": {
+    "evolvesTo": "Hinako Kita [True Dream] Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hinako Kita [True Dream] Evolved": {
+    "evolvesFrom": "Hinako Kita [True Dream]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hippocampus": {
+    "evolvesTo": "Hippocampus Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Hippocampus Evolved": {
+    "evolvesFrom": "Hippocampus",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Hiromi Seki [Twinkle in My Eye]": {
+    "evolvesTo": "Hiromi Seki [Twinkle in My Eye] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Cute",
+            "count": 5
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hiromi Seki [Twinkle in My Eye] Evolved": {
+    "evolvesFrom": "Hiromi Seki [Twinkle in My Eye]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Cute",
+            "cardType": "follower"
+          },
+          "to": "hand"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hoarfrost Triceratops": {
+    "evolvesTo": "Hoarfrost Triceratops Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromField",
+              "filter": {
+                "identityName": "Naterran Great Tree"
+              },
+              "count": 1
+            },
+            {
+              "op": "buff",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hoarfrost Triceratops Evolved": {
+    "evolvesFrom": "Hoarfrost Triceratops",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

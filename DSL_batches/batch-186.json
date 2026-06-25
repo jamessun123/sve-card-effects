@@ -1,0 +1,318 @@
+{
+  "Rejuvenating Resurrection": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "identityNameContains": "Amataz"
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Relic Goddess ADVANCED": {
+    "keywords": [
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buffDynamic",
+          "def": {
+            "op": "fieldTraitCount",
+            "trait": "Amulet",
+            "multiplier": 0.5
+          },
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantIndestructible",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraAbilityDamageCap",
+          "amount": 99
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Remi & Rami, Witchy Duo": {
+    "evolvesTo": "Remi & Rami, Witchy Duo Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Remi & Rami, Witchy Duo Evolved": {
+    "evolvesFrom": "Remi & Rami, Witchy Duo",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Strikeform Golem",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "targets": {
+            "type": "lastSummoned"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Remnant of Hollowness": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 3 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Look at the top 3 cards of your deck and add a Thief card",
+              "effect": {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Thief"
+                },
+                "lookAt": 3,
+                "to": "hand",
+                "optional": true,
+                "remainderTo": "deckBottom",
+                "reveal": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rending Blast ADVANCED": {
+    "keywords": [
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 8,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Reno, Luxwing Featherfolk": {
+    "keywords": [
+      "rush",
+      "strike",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": false
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "notEnteredFromHand"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "damageImmunity",
+              "amount": 99,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Repair Mode": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Resentful Blaze": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 4 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Deal 4 damage to 2 enemy followers if you have 15 Academic cards in your cemetery",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Academic",
+                  "count": 15
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 2
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Resolve of the Fallen": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownEvolveDeckFaceupMin",
+            "count": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "recoverPp",
+                "amount": 1
+              }
+            ]
+          },
+          "else": {
+            "op": "if",
+            "condition": {
+              "type": "ownEvolveDeckFaceupMin",
+              "count": 3
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

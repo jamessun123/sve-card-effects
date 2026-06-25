@@ -1,0 +1,339 @@
+{
+  "Whirlwind Pteranodon": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish a Naterran Great Tree from your field",
+          "cost": {
+            "op": "banish",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "filter": {
+                "identityName": "Naterran Great Tree"
+              }
+            }
+          },
+          "then": {
+            "op": "increaseMaxPp",
+            "amount": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Whispers of a Dream": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1,
+                "maxCost": 3
+              }
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "White Eagle Baptism": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Holy Falcon",
+              "count": 2,
+              "zone": "field"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Holy Falcon",
+          "cardType": "follower"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "lastSummoned"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "White General": {
+    "keywords": [
+      "rush",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "White Knight": {
+    "keywords": [
+      "rush",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "review"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "White Paladin": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Shield Guardian",
+          "count": 2,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "White Vanara": {
+    "evolvesTo": "White Vanara Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardType": "follower",
+          "excludeIdentityName": "White Vanara"
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "review"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 2,
+            "def": 2,
+            "targets": {
+              "type": "self"
+            }
+          },
+          "else": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "White Vanara Evolved": {
+    "evolvesFrom": "White Vanara",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "review"
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "ward"
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "review"
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm"
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "review"
+        },
+        "effect": {
+          "op": "grantIgnoresWard",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "selfAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "White Wolf of Eldwood": {
+    "keywords": [
+      "storm",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "follower"
+          },
+          "lookAt": 4,
+          "to": "field",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Whitefang Temple": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "addCounter",
+              "counter": "prayer",
+              "amount": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "startOfMain",
+        "condition": {
+          "type": "review"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "burySelf"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Faith",
+                "cardType": "follower",
+                "maxCost": 4
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

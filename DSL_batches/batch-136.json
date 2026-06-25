@@ -1,0 +1,283 @@
+{
+  "Mach Knight Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Heroic",
+            "count": 2
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Madlance Centaur": {
+    "keywords": [
+      "rush",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Maeve, Guardian of Earth": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Bury an amulet",
+          "cost": {
+            "op": "buryFromFieldSelect",
+            "optional": false
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "healLeader",
+                "amount": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mage of Nightfall": {
+    "keywords": [
+      "intimidate",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Magiblade Witch": {
+    "evolvesTo": "Magiblade Witch Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Magiblade Witch Evolved": {
+    "evolvesFrom": "Magiblade Witch",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Magic Sediment token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Magic Sediment",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Earth Rite: Deal 4 damage divided between up to 2 enemy followers",
+              "effect": {
+                "op": "dealDamageSplit",
+                "primaryAmount": 4,
+                "maxTargets": 2,
+                "targets": {
+                  "type": "enemyFollower"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Magic Illusionist": {
+    "evolvesTo": "Magic Illusionist Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "lastWords",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "reviveToField",
+          "engaged": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Magic Illusionist Evolved": {
+    "evolvesFrom": "Magic Illusionist",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "reviveToField",
+          "engaged": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Magic Missile": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Magic Owl": {
+    "keywords": [
+      "rush",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a spell",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "cardType": "spell"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a spell",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "cardType": "spell"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

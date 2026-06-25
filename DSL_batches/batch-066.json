@@ -1,0 +1,305 @@
+{
+  "Drive Point Evolved": {
+    "keywords": [],
+    "abilities": [],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Dryad": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "buff",
+          "atk": -1,
+          "def": 0,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dual Flames": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Tiger",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Tiger",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dual Rage": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "banishSelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFieldCard",
+                "count": 1
+              }
+            },
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 2
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Armed",
+                "cardType": "follower"
+              },
+              "lookAt": 40,
+              "to": "hand",
+              "optional": false,
+              "reveal": true,
+              "remainderTo": "deckBottom"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "summonFromExArea",
+                "filter": {
+                  "trait": "Armed",
+                  "cardType": "follower"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Durandal the Incorruptible": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select a follower on your field and give it [attack]+1",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "targets": {
+                  "type": "allyFieldCard",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Select a follower on your field and give it [defense]+1",
+              "effect": {
+                "op": "buff",
+                "def": 1,
+                "targets": {
+                  "type": "allyFieldCard",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Grant damage cap 3 until end of turn and during opponent's next turn",
+              "effect": {
+                "op": "grantIndestructible",
+                "targets": {
+                  "type": "allyFieldCard",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dutiful Steed": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "always"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "excludeSelf": false
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dwarf Perfumer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Earthen Dragonewt": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Draconic Duelist"
+          },
+          "lookAt": 1,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Earthen Fist": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "earthRite",
+                "count": 1
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Edelweiss, Sagelight Ward": {
+    "evolvesTo": null,
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

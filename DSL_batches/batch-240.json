@@ -1,0 +1,294 @@
+{
+  "Vania, Nightshade Vampire": {
+    "evolvesTo": "Vania, Nightshade Vampire Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Vania, Kind Queen"
+          }
+        }
+      },
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Vampire",
+          "count": 5
+        },
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Vania, Blood Queen"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Vania, Vampire Princess": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Forest Bat",
+            "multiplier": 1
+          },
+          "def": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Forest Bat",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromExArea",
+              "filter": {
+                "identityName": "Forest Bat"
+              },
+              "count": 1
+            },
+            {
+              "op": "dealDamageFollowerAndLeader",
+              "followerAmount": 3,
+              "leaderAmount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Varmint Hunter": {
+    "evolvesTo": "Varmint Hunter Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "trait": "Mount"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Varmint Hunter Evolved": {
+    "evolvesFrom": "Varmint Hunter",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dutiful Steed",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "trait": "Mount"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Vayle, Mysterian Summoner": {
+    "evolvesTo": "Vayle, Mysterian Summoner Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Vayle, Mysterian Summoner Evolved": {
+    "evolvesFrom": "Vayle, Mysterian Summoner",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Academic",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 2,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Veight, Vampire Noble": {
+    "evolvesTo": "Veight, Vampire Noble Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Veight, Vampire Noble Evolved": {
+    "evolvesFrom": "Veight, Vampire Noble",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Vengeful Radiance": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": 4,
+          "maxTargets": 2,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Vengeful Sniper": {
+    "evolvesTo": "Vengeful Sniper Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "fieldTraitMin",
+                "trait": "Amulet",
+                "count": 2
+              },
+              {
+                "type": "exAreaTraitMin",
+                "trait": "Amulet",
+                "count": 2
+              }
+            ]
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

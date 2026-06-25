@@ -1,0 +1,304 @@
+{
+  "Inverted Manipulation": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select a Puppetry token follower on your field and give it [attack]+2/[defense]+2",
+              "effect": {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Puppetry"
+                  }
+                }
+              }
+            },
+            {
+              "label": "Put 2 Puppet tokens into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Puppet",
+                "count": 2,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Inviolable Verdancy": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "def": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "cardClass": "forest"
+                }
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "combo",
+                "count": 3
+              },
+              "then": {
+                "op": "buff",
+                "atk": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "forest"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy Wisp",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ]
+  },
+  "Irene, Harvest Defender": {
+    "keywords": [
+      "rush",
+      "assail"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "refresh",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Iron Staff Mechanic": {
+    "evolvesTo": "Iron Staff Mechanic Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "maxCost": 1
+          },
+          "to": "exArea",
+          "playCostReduction": 1
+        }
+      }
+    ]
+  },
+  "Iron Staff Mechanic Evolved": {
+    "evolvesFrom": "Iron Staff Mechanic",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "maxCost": 1
+          },
+          "to": "exArea",
+          "playCostReduction": 1
+        }
+      }
+    ]
+  },
+  "Ironcrown Majesty": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Summon a Steelclad Knight, Shield Guardian, and Knight token",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summon",
+                    "tokenName": "Steelclad Knight",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Shield Guardian",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Knight",
+                    "count": 1,
+                    "zone": "field"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Give each Officer token follower on your field [attack]+1/[defense]+1",
+              "effect": {
+                "op": "buffFieldTrait",
+                "trait": "Officer",
+                "atk": 1,
+                "def": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Ironfist Beast Warrior": {
+    "evolvesTo": "Ironfist Beast Warrior Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "top card of your deck",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ]
+  },
+  "Ironfist Beast Warrior Evolved": {
+    "evolvesFrom": "Ironfist Beast Warrior",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "top card of your deck",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "grantNextPlayCostReduction",
+              "amount": 10
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Ironfist Priest": {
+    "evolvesTo": "Ironfist Priest Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": []
+  },
+  "Ironfist Priest Evolved": {
+    "evolvesFrom": "Ironfist Priest",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4,
+          "followersOnly": false
+        }
+      }
+    ],
+    "specialType": "evolved"
+  }
+}

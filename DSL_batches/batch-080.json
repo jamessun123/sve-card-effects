@@ -1,0 +1,239 @@
+{
+  "Fire Drake Whelp": {
+    "keywords": [
+      "intimidate"
+    ],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "Fire Lizard": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fita the Gentle Elf": {
+    "evolvesTo": "Fita the Gentle Elf Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Fita the Gentle Elf Evolved": {
+    "evolvesFrom": "Fita the Gentle Elf",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Flail Knight": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 1,
+          "leaderAmount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Flame Destroyer": {
+    "keywords": [
+      "spellchain",
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "spellchain",
+          "count": 5
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "spellchain",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 6
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "spellchain",
+          "count": 15
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 9
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Flame General's Regalia": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "grantLastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Flame Pillar Dragonewt": {
+    "evolvesTo": "Flame Pillar Dragonewt Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Flame Pillar Dragonewt Evolved": {
+    "evolvesFrom": "Flame Pillar Dragonewt",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Draconic Duelist",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Flame Soldier": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "discardedThisTurn"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

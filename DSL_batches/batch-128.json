@@ -1,0 +1,306 @@
+{
+  "Levon, Scentbound Sword": {
+    "keywords": [
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Hunter",
+                "count": 3
+              },
+              "then": {
+                "op": "selectFromHand",
+                "filter": {
+                  "trait": "Hunter",
+                  "cardType": "follower",
+                  "maxCost": 3
+                },
+                "to": "field",
+                "optional": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Liam, Crazed Creator": {
+    "keywords": [
+      "fanfare",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Puppetry",
+            "maxCost": 3
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 3,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Liam, Master of Puppets": {
+    "keywords": [
+      "fanfare",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Puppetry",
+          "count": 3
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Puppetry"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Liberté, Unchained Wolf": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Liberté, Unchained Wolf Evolved",
+    "evolveCost": 2,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buryFromFieldSelect",
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Liberté, Unchained Wolf Evolved": {
+    "evolvesFrom": "Liberté, Unchained Wolf",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "discardedThisTurn"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Liberté, Werewolf Pup": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Liberté, Werewolf Pup Evolved",
+    "evolveCost": 1,
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Liberté, Werewolf Pup Evolved": {
+    "evolvesFrom": "Liberté, Werewolf Pup",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 2
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lightning Blast": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and banish it",
+              "effect": {
+                "op": "banish",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Banish each enemy follower on the field",
+              "additionalPpCost": 5,
+              "effect": {
+                "op": "destroyAllEnemyField"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lightning Kicker": {
+    "keywords": [
+      "evolve",
+      "rush",
+      "fanfare"
+    ],
+    "evolvesTo": "Lightning Kicker Evolved",
+    "evolveCost": 2,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonFromDeck",
+          "filter": {
+            "trait": "Heroic",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lightning Kicker Evolved": {
+    "evolvesFrom": "Lightning Kicker",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

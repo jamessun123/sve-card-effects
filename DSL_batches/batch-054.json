@@ -1,0 +1,254 @@
+{
+  "Deepwood Wolf": {
+    "evolveCost": 0,
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "trait": "Beast"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveSourceToExArea"
+            },
+            {
+              "op": "moveToExArea",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Delta Cannon": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demon Maestro": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": -2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Demon of Purgatory": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 6,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demon's Epitaph": {
+    "evolvesTo": "Demon's Epitaph Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "evolveOtherFollower",
+            "filter": {
+              "identityName": "Demon's Epitaph"
+            },
+            "excludeSelf": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Demon's Epitaph Evolved": {
+    "evolvesFrom": "Demon's Epitaph",
+    "specialType": "evolved",
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demoncaller": {
+    "evolvesTo": "Demoncaller Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "trait": "Shikigami"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Demoncaller Evolved": {
+    "evolvesFrom": "Demoncaller",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Paper Shikigami",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "trait": "Shikigami"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Demonflame Mage": {
+    "evolvesTo": "Demonflame Mage Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Demonflame Mage Evolved": {
+    "evolvesFrom": "Demonflame Mage",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "Story of a Lifetime": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {},
+              "lookAt": 4,
+              "to": "hand",
+              "optional": false,
+              "remainderTo": "cemetery"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Yukishima, Master Biographer"
+              },
+              "then": {
+                "op": "recoverPp",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Strikeform Golem": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Stringmaster": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Puppet"
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "exArea"
+        },
+        "oncePerTurn": true
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Puppet",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Stroke of Conviction": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "engage",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 2
+              }
+            },
+            {
+              "op": "dealDamageFollowerAndLeader",
+              "followerAmount": 5,
+              "leaderAmount": 2
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Substitution": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "returnToHand",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1,
+                "maxCost": 3
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Puppet",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "SugarSugar☆Mi〜n Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 8
+          },
+          "count": 1
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Sukuna, Brave and Small": {
+    "evolvesTo": "Sukuna, Brave and Small Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Sukuna, Brave and Small Evolved": {
+    "evolvesFrom": "Sukuna, Brave and Small",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          },
+          "else": {
+            "op": "if",
+            "condition": {
+              "type": "combo",
+              "count": 5
+            },
+            "then": {
+              "op": "buff",
+              "atk": 3,
+              "def": 3,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Summer Encounter": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1,
+                "maxCost": 3
+              }
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Summer Sea Breeze": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldFollowerMinCost",
+                "minCost": 5,
+                "count": 1
+              },
+              "then": {
+                "op": "recoverPp",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

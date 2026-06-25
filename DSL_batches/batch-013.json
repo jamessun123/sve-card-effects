@@ -1,0 +1,275 @@
+{
+  "Ancient Elf Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "allyFieldCard",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Ancient Protector": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOpponentRestriction",
+          "restriction": "skipPp"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOpponentRestriction",
+          "restriction": "skipDraw"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "winGame"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Android Artisan": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "notEnteredFromHand"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Machina",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Andromeda": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantIndestructible",
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantIndestructible",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Angel of Chaos": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromCemetery",
+              "filter": {
+                "trait": "Fallen Angel"
+              },
+              "count": 3
+            },
+            {
+              "op": "steal",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "refresh",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Angel of Darkness": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "buryFromField": {
+            "trait": "Fallen Angel"
+          },
+          "buryFieldCount": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Angel of the Iron Steed": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Mystic Artifact",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Angel's Blessing": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Angelic Barrage": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Angelic Maid": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 3,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

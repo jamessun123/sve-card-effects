@@ -1,0 +1,258 @@
+{
+  "Fairy Slugger": {
+    "evolvesTo": "Fairy Slugger Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Fairy Slugger Evolved": {
+    "evolvesFrom": "Fairy Slugger",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Fairy Wisp",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaTraitMin",
+                "trait": "Pixie",
+                "count": 3
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fairy Tamer": {
+    "evolvesTo": "Fairy Tamer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fairy Tamer Evolved": {
+    "evolvesFrom": "Fairy Tamer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Pixie",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fairy Torrent": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Put a Pixie follower on your field into its owner's EX area",
+              "effect": {
+                "op": "moveToExArea",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Pixie"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fairy Whisperer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fairy Wisp": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Fairylight Guide": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost01]",
+          "cost": {
+            "op": "spendPp",
+            "amount": 1
+          },
+          "then": {
+            "op": "if",
+            "condition": {
+              "type": "exAreaTraitMin",
+              "trait": "Festive",
+              "count": 3
+            },
+            "then": {
+              "op": "transform",
+              "tokenName": "Fairy",
+              "targets": {
+                "type": "enemyFieldCard",
+                "count": 1
+              }
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Falise, Innocent Sea Spray": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Mage"
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "trait": "Mage"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Falise, Leonardian Mage": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "spellchain",
+          "count": 7
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

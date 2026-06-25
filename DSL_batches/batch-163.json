@@ -1,0 +1,361 @@
+{
+  "New Generations": {
+    "keywords": [
+      "storm",
+      "bane",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Cute"
+                },
+                "count": 3
+              },
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Cool"
+                },
+                "count": 3
+              },
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Passion"
+                },
+                "count": 3
+              }
+            ]
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 9
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm",
+            "bane",
+            "ward"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "New Wave": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Cute",
+                "count": 5
+              },
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Cool",
+                "count": 5
+              },
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Passion",
+                "count": 5
+              }
+            ]
+          },
+          "then": {
+            "op": "destroyAllEnemyField"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "New Year's Soul Devil": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "noop",
+          "label": "The coming year will be filled with happiness."
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Newfound Allies": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "shuffleDeck"
+            },
+            {
+              "op": "searchDeckSummonMultiple",
+              "filter": {
+                "cardType": "follower"
+              },
+              "lookAt": 2,
+              "maxTotalCost": 99,
+              "remainderTo": "deckBottom"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Nicola, Enduring Steward": {
+    "keywords": [
+      "fanfare",
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Machina",
+          "count": 2
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "rush",
+            "bane"
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "assail",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard 2 Machina cards",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Machina"
+            },
+            "count": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveSourceToExArea"
+              },
+              {
+                "op": "grantPlayCostReduction",
+                "amount": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nicola, Forbidden Strength": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Nicola, Forbidden Strength Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nicola, Forbidden Strength Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Nicola, Forbidden Strength",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "exArea",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Night Horde": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Forest Bat",
+              "count": 2,
+              "zone": "field"
+            },
+            {
+              "op": "dealDamage",
+              "amount": {
+                "op": "namedIdentityFieldCount",
+                "identityName": "Forest Bat",
+                "multiplier": 1
+              },
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Night on the Town": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 2 damage and add Gold",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Glittering Gold",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deal 4 if 3+ Festive in EX",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Festive",
+                  "count": 3
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Night's Way": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "exAreaTraitMin",
+            "trait": "",
+            "count": 0
+          },
+          "then": {
+            "op": "putDeckTopToExArea"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

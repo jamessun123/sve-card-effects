@@ -1,0 +1,328 @@
+{
+  "Lyrial, Archer Throne": {
+    "keywords": [
+      "quick",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lævateinn Dragon": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Lævateinn Dragon Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityNameContains": "Lævateinn Dragon"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lævateinn Dragon Evolved": {
+    "evolvesFrom": "Lævateinn Dragon",
+    "specialType": "evolved",
+    "keywords": [
+      "assail"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Draconic Weapon",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "recoverPp",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lævateinn Dragon, Attack Form Evolved": {
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 4,
+          "leaderAmount": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lævateinn Dragon, Blast Form Evolved": {
+    "specialType": "evolved",
+    "keywords": [
+      "intimidate"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Armed",
+            "multiplier": 2
+          },
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lævateinn Dragon, Defense Form Evolved": {
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageCap",
+          "maxPerHit": 1
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lævateinn Dragon, Dual Form α ADVANCED": {
+    "specialType": "advanced",
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "identityName": "Lævateinn Dragon"
+          },
+          "count": 1,
+          "engaged": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lævateinn Dragon, Dual Form β ADVANCED": {
+    "specialType": "advanced",
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": true
+            },
+            {
+              "op": "healLeader",
+              "amount": 4
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "bury a Draconic Weapon",
+          "cost": {
+            "op": "buryFieldFollowers",
+            "filter": {
+              "identityName": "Draconic Weapon"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Draw a card",
+                "effect": {
+                  "op": "draw",
+                  "count": 1
+                }
+              },
+              {
+                "label": "Summon an Armed follower that costs 3 or less from your hand",
+                "effect": {
+                  "op": "playDeckTopFollower",
+                  "optional": false
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lævateinn Dragon, Dual Form γ ADVANCED": {
+    "specialType": "advanced",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Armed",
+          "count": 5
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "bury a Draconic Weapon",
+          "cost": {
+            "op": "buryFieldFollowers",
+            "filter": {
+              "identityName": "Draconic Weapon"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": true
+              },
+              {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mach Knight": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Mach Knight Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

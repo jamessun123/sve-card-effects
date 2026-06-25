@@ -1,0 +1,313 @@
+{
+  "Managrocer Evolved": {
+    "evolvesFrom": "Managrocer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "handCount"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Manifest Devotion": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "lookAt": 7,
+          "maxTotalCost": 8,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Manifest Malice": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "optionalCost",
+              "label": "Banish 4 cards from your cemetery",
+              "cost": {
+                "op": "banishFromCemetery",
+                "filter": {},
+                "count": 4
+              },
+              "then": {
+                "op": "returnToHand",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Manifestation of Repose": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Marwynn, Omen of Repose"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "def": 2,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "March Hare's Teatime": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "trait": "Fable",
+            "cardType": "follower",
+            "maxCost": 5
+          },
+          "lookAt": 5,
+          "maxTotalCost": 5,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Fable",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1,
+          "maxTotalCost": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "March of the Dragonspring": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "playCostReduction",
+              "amount": 2
+            },
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Marcotte, Heretical Sister": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            },
+            {
+              "label": "Search your deck for any card, add it to your hand, then shuffle your deck",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeckAny",
+                    "to": "hand",
+                    "optional": false
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Marduk": {
+    "evolvesTo": "Marduk Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marduk Evolved": {
+    "evolvesFrom": "Marduk",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryClassMin",
+                "cardClass": "spell",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "healLeader",
+                    "amount": 5
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  }
+                ]
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryClassMin",
+                "cardClass": "amulet",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 5,
+                    "followersOnly": true
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Margarite Mermaid": {
+    "evolvesTo": "Margarite Mermaid Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

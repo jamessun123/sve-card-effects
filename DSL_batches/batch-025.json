@@ -1,0 +1,241 @@
+{
+  "Azazel": {
+    "evolvesTo": "Azazel Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "opponentDiscardEach",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Azazel Evolved": {
+    "evolvesFrom": "Azazel",
+    "specialType": "evolved",
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "setLeaderDef",
+          "amount": 10
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Azi Dahaka": {
+    "evolvesTo": "Azi Dahaka Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "turnEvolveDeck",
+          "orientation": "faceup",
+          "count": 3
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Azi Dahaka Evolved": {
+    "evolvesFrom": "Azi Dahaka",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "dummy"
+          },
+          "then": {
+            "op": "noop",
+            "label": "unimplemented"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Azord, Duke of the Mists": {
+    "evolvesTo": "Azord, Duke of the Mists Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "ward",
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Azord, Duke of the Mists Evolved": {
+    "evolvesFrom": "Azord, Duke of the Mists",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardClass": "sword",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Azuki Momoi": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "iM@S CG",
+          "count": 3
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Azureflame Dragonewt": {
+    "evolvesTo": "Azureflame Dragonewt Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 6,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "discard": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "discardFromHand",
+              "filter": {
+                "cardClass": "dragon",
+                "minCost": 7
+              },
+              "count": 1
+            },
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Azureflame Dragonewt Evolved": {
+    "evolvesFrom": "Azureflame Dragonewt",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 6,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Azurite Maiden": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Faith",
+            "cardType": "follower"
+          },
+          "to": "exArea",
+          "playCostReduction": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

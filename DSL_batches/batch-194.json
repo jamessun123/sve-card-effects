@@ -1,0 +1,398 @@
+{
+  "Rouge Vampire Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "drain",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Round Table Assembly": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search your deck for an Arthurian follower, reveal it, and add it to your hand.",
+              "effect": {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Arthurian",
+                  "cardType": "follower"
+                },
+                "lookAt": 40,
+                "to": "hand",
+                "optional": false,
+                "reveal": true
+              }
+            },
+            {
+              "label": "Select an Arthurian follower on your field and give it [attack]+1/[defense]+2.",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "def": 2,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Arthurian"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rowen, Dragon Lance": {
+    "keywords": [
+      "rush",
+      "assail",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Curse of the Black Dragon",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "overflow"
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Roy, Dragoncleaver": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Roy, Dragoncleaver Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "spell",
+            "maxCost": 2
+          },
+          "to": "exArea",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Roy, Dragoncleaver Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Roy, Dragoncleaver",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal it 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Deal 5 damage instead if it's a Wyrmkin follower",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "always"
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Roy, Dragonreaver": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "rush"
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Draconic Duelist",
+            "count": 3
+          },
+          "then": {
+            "op": "increaseMaxPp",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Royal Banner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffFieldTrait",
+          "cardClass": "sword",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": false
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "sword"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "lastSummoned"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ruby Falcon": {
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "evolvesTo": "Ruby Falcon Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "traitsAny": [
+              "Storm",
+              "Ward"
+            ]
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ruby Falcon Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "evolvesFrom": "Ruby Falcon",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "traitsAny": [
+              "Storm",
+              "Ward"
+            ]
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ruinous Dragon": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "spell",
+            "maxCost": 5
+          },
+          "lookAt": 40,
+          "to": "exArea",
+          "optional": false,
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

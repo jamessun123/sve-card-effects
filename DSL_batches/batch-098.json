@@ -1,0 +1,349 @@
+{
+  "Grasshopper Conductor": {
+    "evolvesTo": "Grasshopper Conductor Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "spellchain",
+            "count": 5
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grasshopper Conductor Evolved": {
+    "evolvesFrom": "Grasshopper Conductor",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "spell",
+            "maxCost": 1
+          },
+          "to": "exArea",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grave Desecration": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Departed",
+            "cardType": "follower"
+          },
+          "to": "hand"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gravikinetic Warrior": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "cardType": "follower"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gravity Grappler": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "ppMin",
+          "count": 2
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Mystic Artifact",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grea the Dragonborn": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Anne, Belle of Mysteria"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Anne, Belle of Mysteria"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 6,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grea's Ember": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 5
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grea, Mysterian Dragoness": {
+    "evolvesTo": "Grea, Mysterian Dragoness Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 10
+          },
+          "then": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 4,
+            "leaderAmount": 1
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 0,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Grea, Mysterian Dragoness Evolved": {
+    "evolvesFrom": "Grea, Mysterian Dragoness",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Grea's Ember"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "grantNextPlayCostReduction",
+              "filter": {
+                "identityName": "Grea's Ember"
+              },
+              "amount": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "trait": "Academic",
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Grea, Scorching Fury": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Academic card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Academic",
+                  "count": 5
+                },
+                "then": {
+                  "op": "summon",
+                  "tokenName": "Resentful Blaze",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

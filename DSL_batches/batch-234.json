@@ -1,0 +1,273 @@
+{
+  "Twinblade Dragonfolk": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Armed card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Armed"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "Armed",
+                  "cardType": "spell"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Twinblade Featherfolk": {
+    "evolvesTo": "Twinblade Featherfolk Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "mill",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "discardedCardType",
+                "cardType": "spell"
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Twinblade Featherfolk Evolved": {
+    "evolvesFrom": "Twinblade Featherfolk",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Twinblade Mage": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 6
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 6
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Twinsword Master": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "self"
+          }
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tycoon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard 3 cards",
+          "cost": {
+            "op": "discard",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 3
+              },
+              {
+                "op": "recoverPp",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tyrant's Order": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Wasteland",
+                "cardType": "follower"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ultimate Hollow": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Gilded Goblet",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Unbodied Witch": {
+    "evolvesTo": "Unbodied Witch Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "drawDynamic",
+          "amount": {
+            "op": "deckCount"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Unbodied Witch Evolved": {
+    "evolvesFrom": "Unbodied Witch",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroyAllFollowers"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "Tsubaki of the Demon Blade": {
+    "keywords": [
+      "fanfare",
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryClassMin",
+            "cardClass": "sword",
+            "count": 5
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tsukasa Kiryu": {
+    "evolvesTo": "Tsukasa Kiryu Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "increaseMaxPp",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tsukasa Kiryu Evolved": {
+    "evolvesFrom": "Tsukasa Kiryu",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ppMin",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Tsukuyomi": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "onBecomeEngaged",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Amaterasu"
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          },
+          "else": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Turquoise Sister": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Faith",
+            "cardType": "follower",
+            "maxDef": 2
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tutankhamun": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "putHandCardOnDeck",
+              "position": "bottom"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "spendPp",
+            "amount": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Tutankhamun"
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tweedle Dum, Tweedle Dee": {
+    "evolvesTo": "Tweedle Dum, Tweedle Dee Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Tweedle Dum, Tweedle Dee Evolved": {
+    "evolvesFrom": "Tweedle Dum, Tweedle Dee",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "maxCost": 1
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Twilight Blade": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "engage",
+              "targets": {
+                "type": "selfFollower",
+                "count": 2,
+                "filter": {
+                  "identityNameAny": [
+                    "Lecia, Sky Saber",
+                    "Nano, the Dawnblade"
+                  ]
+                }
+              }
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 10
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Twin-Headed Dragon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "spendPp",
+            "amount": 3
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Dragon",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "Valkyrie of Chaos": {
+    "evolvesTo": "Valkyrie of Chaos Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "rush"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Valkyrie of Chaos Evolved": {
+    "evolvesFrom": "Valkyrie of Chaos",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Valkyrie of Order": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "withChosenNumber",
+          "min": 0,
+          "max": 99,
+          "then": {
+            "op": "buff",
+            "atk": {
+              "op": "chosenNumber"
+            },
+            "def": {
+              "op": "chosenNumber"
+            },
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valnareik, Lustful Desire": {
+    "evolvesTo": "Valnareik, Lustful Desire Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "selfLeader"
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "always"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 2,
+            "def": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valnareik, Lustful Desire Evolved": {
+    "evolvesFrom": "Valnareik, Lustful Desire",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Wings of Desire token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Wings of Desire",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valnareik, Omen of Lust": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": {
+            "op": "chosenNumber"
+          },
+          "followersOnly": false
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "selfLeader"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Valse, Champion Deadeye": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamageDynamic",
+          "amount": {
+            "op": "selfAttack"
+          },
+          "targets": {
+            "type": "anyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3,
+          "engage": true
+        },
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFieldCard",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Vampiric Bloodbinder": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Vampiric Fortress": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "abyss",
+            "trait": "Vampire"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Forest Bat",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Vania, Kind Queen Evolved": {
+    "evolvesFrom": "Vania, Kind Queen",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "identityName": "Forest Bat"
+            }
+          }
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Forest Bat"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,433 @@
+{
+  "Resolve of the Nine-Tailed Fox": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Give Sekka, Ninefold Blaze +2/+2 and Storm if there are at least 9 banished cards",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "conditionAny",
+                  "conditions": [
+                    {
+                      "type": "ownCemeteryMin",
+                      "count": 9
+                    }
+                  ]
+                },
+                "then": {
+                  "op": "buff",
+                  "atk": 2,
+                  "def": 2,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1,
+                    "filter": {
+                      "identityName": "Sekka, Ninefold Blaze"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "label": "Give a Sekka follower +2/+2 and deal damage equal to its attack",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "buff",
+                    "atk": 2,
+                    "def": 2,
+                    "targets": {
+                      "type": "selfFollower",
+                      "count": 1,
+                      "filter": {
+                        "identityNameContains": "Sekka"
+                      }
+                    }
+                  },
+                  {
+                    "op": "dealDamage",
+                    "amount": {
+                      "op": "targetAttack"
+                    },
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Resplendent Phoenix": {
+    "keywords": [
+      "ward",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "spendPp",
+            "amount": 2
+          },
+          "then": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "shuffleDeck"
+                },
+                {
+                  "op": "putDeckTopToExArea"
+                },
+                {
+                  "op": "playCostReduction",
+                  "amount": 0
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Retracing the Past": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "grantLastWords",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 2
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Reverend Adjudicator": {
+    "evolvesTo": "Reverend Adjudicator Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Reverend Adjudicator Evolved": {
+    "evolvesFrom": "Reverend Adjudicator",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "follower",
+            "trait": "Ward"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 1,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Revolver Eagle": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Bullet Bike",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 6
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 4,
+          "def": 4,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rhinoceroach": {
+    "evolvesTo": "Rhinoceroach Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve",
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "chosenNumber",
+            "min": 0,
+            "max": 99
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rhinoceroach Evolved": {
+    "evolvesFrom": "Rhinoceroach",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give this follower Storm",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "Deal damage equal to this follower's attack",
+              "effect": {
+                "op": "dealDamage",
+                "amount": {
+                  "op": "selfAttack"
+                },
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Riamu Yumemi [Party Night]": {
+    "keywords": [
+      "fanfare",
+      "quick",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 7,
+              "followersOnly": true
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "conditionAny",
+                "conditions": [
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Cute",
+                    "count": 3
+                  },
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Cool",
+                    "count": 3
+                  },
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Passion",
+                    "count": 3
+                  }
+                ]
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "grantKeyword",
+                    "keyword": "storm",
+                    "targets": {
+                      "type": "self"
+                    }
+                  },
+                  {
+                    "op": "recoverPp",
+                    "amount": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "discard": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Riamu Yumemi [Shout It to the World]": {
+    "keywords": [
+      "fanfare",
+      "quick",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 7,
+              "followersOnly": true
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "conditionAny",
+                "conditions": [
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Cute",
+                    "count": 3
+                  },
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Cool",
+                    "count": 3
+                  },
+                  {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Passion",
+                    "count": 3
+                  }
+                ]
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "grantKeyword",
+                    "keyword": "storm",
+                    "targets": {
+                      "type": "self"
+                    }
+                  },
+                  {
+                    "op": "recoverPp",
+                    "amount": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "discard": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

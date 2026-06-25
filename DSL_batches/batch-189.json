@@ -1,0 +1,397 @@
+{
+  "Riley, Astral Shaman Evolved": {
+    "evolvesFrom": "Riley, Hydroshaman",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "withChosenNumber",
+          "min": 0,
+          "max": {
+            "op": "maxPp"
+          },
+          "then": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "Earth Rite",
+              "cardType": "follower",
+              "maxCost": {
+                "op": "chosenNumber"
+              }
+            },
+            "to": "field"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Riley, Hydroshaman": {
+    "evolvesTo": "Riley, Astral Shaman Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "earthRite",
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 3,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 5 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Give this follower [attack]+3",
+              "effect": {
+                "op": "buff",
+                "atk": 3,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "Draw 2 cards",
+              "effect": {
+                "op": "draw",
+                "count": 2
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 6
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "reviveSelfFromCemetery"
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantLastWords",
+              "effect": {
+                "op": "banishSelf"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Rimewind": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "condition": {
+          "type": "spellchain",
+          "count": 10
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Return an unevolved enemy follower to its owner's hand",
+              "effect": {
+                "op": "returnToHand",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Put it on top of its owner's deck instead",
+              "effect": {
+                "op": "putOnTopOfDeck",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rin & Mio": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (2)",
+          "cost": {
+            "op": "spendPp",
+            "amount": 2
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Cool",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rin Shibuya": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Uzuki Shimamura"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Mio Honda"
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 5,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rin Shibuya [Cinderella Girl]": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (2)",
+          "cost": {
+            "op": "spendPp",
+            "amount": 2
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Cool",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rin Shibuya [Triad Primus]": {
+    "keywords": [
+      "storm",
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Cool",
+          "count": 3
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "maxAtk": 3
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rina Fujimoto": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "discardedThisTurn"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Risa Matoba": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "trait": "iM@S CG",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "lookAt": 3,
+          "maxTotalCost": 2,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rite of the Ignorant": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Lhynkal, The Fool"
+              },
+              "then": {
+                "op": "moveSourceToExArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

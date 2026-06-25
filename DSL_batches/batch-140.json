@@ -1,0 +1,258 @@
+{
+  "Maisy, Red Riding Hood": {
+    "evolvesTo": "Maisy, Red Riding Hood Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Fable"
+        },
+        "effect": {
+          "op": "addCounter",
+          "counter": "fable",
+          "amount": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "removeCounter",
+              "counter": "fable",
+              "amount": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Major Prayers": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give your leader [defense]+2. Draw 2 cards.",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "healLeader",
+                    "amount": 2
+                  },
+                  {
+                    "op": "draw",
+                    "count": 2
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Search your deck for up to 2 different cards with \"Meowskers\" in their names, summon them, then shuffle.",
+              "effect": {
+                "op": "searchDeckSummonMultiple",
+                "filter": {
+                  "identityNameContains": "Meowskers"
+                },
+                "lookAt": 40,
+                "maxTotalCost": 999,
+                "remainderTo": "deckBottom"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Malevolent Al-mi'raj": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 1
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "discardedThisTurn"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "bane",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mallet Monkey": {
+    "evolvesTo": "Mallet Monkey Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Mallet Monkey"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mallet Monkey Evolved": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "specialType": "evolved"
+  },
+  "Mammoth God's Colosseum": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroyAllFollowers"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mana Elk": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Pixie"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mana Pistol Merc": {
+    "evolvesTo": "Mana Pistol Merc Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Commander"
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mana Pistol Merc Evolved": {
+    "evolvesFrom": "Mana Pistol Merc",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 6,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Managrocer": {
+    "evolvesTo": "Managrocer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

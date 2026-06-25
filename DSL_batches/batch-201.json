@@ -1,0 +1,310 @@
+{
+  "Seabrand Dragon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sealed Tome": {
+    "keywords": [
+      "activated",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 5,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Secrets of Onmyodo": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "noop",
+              "label": "Reveal 2 Onmyoji cards from hand"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "withChosenNumber",
+          "min": 0,
+          "max": 5,
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "Onmyoji",
+                  "cardType": "follower",
+                  "maxCost": {
+                    "op": "chosenNumber"
+                  }
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "conditionAny",
+                  "conditions": [
+                    {
+                      "type": "spellchain",
+                      "count": 7
+                    },
+                    {
+                      "type": "ownCemeteryTraitMin",
+                      "trait": "Onmyoji",
+                      "count": 7
+                    }
+                  ]
+                },
+                "then": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "summon",
+                      "tokenName": "Paper Shikigami",
+                      "count": 1,
+                      "zone": "exArea"
+                    },
+                    {
+                      "op": "playCostReduction",
+                      "amount": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Seira Mizuki": {
+    "keywords": [
+      "evolve",
+      "storm"
+    ],
+    "evolveCost": 2,
+    "evolvesTo": "Seira Mizuki Evolved",
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Seira Mizuki Evolved": {
+    "keywords": [
+      "storm"
+    ],
+    "evolvesFrom": "Seira Mizuki",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sekhmet": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "buryFromField": {
+            "cardType": "amulet"
+          },
+          "buryFieldCount": 1
+        },
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 4,
+          "leaderAmount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sekka, Fatebound Fox": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3,
+          "banishSelf": true,
+          "banishFromCemetery": {
+            "cardType": "follower"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Sekka, Ninefold Blaze ADVANCED"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sekka, Ninefold Blaze ADVANCED": {
+    "keywords": [
+      "fanfare"
+    ],
+    "specialType": "advanced",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search Resolve of the Nine-Tailed Fox from deck",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Resolve of the Nine-Tailed Fox"
+                    },
+                    "to": "hand",
+                    "reveal": true
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Add Resolve of the Nine-Tailed Fox from cemetery to hand",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityName": "Resolve of the Nine-Tailed Fox"
+                },
+                "to": "hand"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sektor": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolveCost": 3,
+    "evolvesTo": "Sektor Evolved",
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Sektor Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "evolvesFrom": "Sektor",
+    "specialType": "evolved",
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

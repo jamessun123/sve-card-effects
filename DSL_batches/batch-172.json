@@ -1,0 +1,266 @@
+{
+  "Path to Purgatory": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 3
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "selfLeaderDefenseMax",
+                "count": 6
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "engageSelf"
+                  },
+                  {
+                    "op": "burySelf"
+                  },
+                  {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 6,
+                    "followersOnly": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Patrick, Rhiceros Knight": {
+    "evolvesTo": "Patrick, Rhiceros Knight Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Naterran Great Tree token onto your field",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Put a Naterran Great Tree token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Patrick, Rhiceros Knight Evolved": {
+    "evolvesFrom": "Patrick, Rhiceros Knight",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "fieldTraitMin",
+                "trait": "Natura",
+                "count": 5
+              },
+              {
+                "type": "exAreaTraitMin",
+                "trait": "Natura",
+                "count": 5
+              }
+            ]
+          },
+          "then": {
+            "op": "recoverPp",
+            "amount": 5
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Paula, Gentle Warmth Evolved": {
+    "evolvesFrom": "Paula, Gentle Warmth",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "spell"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Paula, Icy Warmth": {
+    "evolvesTo": "Paula, Gentle Warmth Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "Pegasus Knight": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "onCardPlayed",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Holy Falcon",
+          "count": 1,
+          "zone": "field"
+        },
+        "oncePerTurn": true
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "haven"
+        },
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Penelope, Potions Prodigy": {
+    "evolvesTo": "Penelope, Potions Prodigy Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magic Sediment",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Penelope, Potions Prodigy Evolved": {
+    "evolvesFrom": "Penelope, Potions Prodigy",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "addStack",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Penguin Guardian": {
+    "evolvesTo": "Penguin Guardian Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Penguin Guardian Evolved": {
+    "evolvesFrom": "Penguin Guardian",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  }
+}

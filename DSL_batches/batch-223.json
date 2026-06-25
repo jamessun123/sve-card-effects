@@ -1,0 +1,326 @@
+{
+  "Swiftblade Dragonewt Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Armed",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Draconic Weapon",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Sword General": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "chooseMultiple",
+              "min": 0,
+              "max": 2,
+              "options": [
+                {
+                  "label": "Summon an Officer follower from hand",
+                  "effect": {
+                    "op": "selectFromHand",
+                    "filter": {
+                      "cardClass": "sword",
+                      "trait": "Officer",
+                      "cardType": "follower",
+                      "maxCost": 2
+                    },
+                    "to": "field"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Swordflash Panther": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "cardClass": "sword",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "to": "field"
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Swordsman": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Swordsnout Trencher": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Swordwhip Dragoon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 2 damage divided between up to 2 enemy followers",
+              "effect": {
+                "op": "dealDamageSplit",
+                "primaryAmount": 2,
+                "maxTargets": 2,
+                "targets": {
+                  "type": "enemyFollower"
+                }
+              }
+            },
+            {
+              "label": "Deal 4 damage divided between up to 2 enemy followers if Overflow is active",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "overflow"
+                },
+                "then": {
+                  "op": "dealDamageSplit",
+                  "primaryAmount": 4,
+                  "maxTargets": 2,
+                  "targets": {
+                    "type": "enemyFollower"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sylvan Justice": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sylvia, Grand Arbiter": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "triggerAbilities",
+          "timing": "onEvolve"
+        }
+      }
+    ],
+    "evolvesTo": "Sylvia, Grand Arbiter Evolved",
+    "evolveCost": 0,
+    "parseConfidence": "high"
+  },
+  "Sylvia, Grand Arbiter Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "inExArea"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "evolvesFrom": "Sylvia, Grand Arbiter",
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Sylvia, the Condemner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "discard": 1
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxCost": 5
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "Roland the Incorruptible": {
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "evolvesTo": "Roland the Incorruptible Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search your deck for a Durandal the Incorruptible, reveal it, add it to your hand, then shuffle your deck",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Durandal the Incorruptible"
+                    },
+                    "to": "hand",
+                    "reveal": true
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "You may summon a Durandal the Incorruptible from your hand",
+              "effect": {
+                "op": "tutorFromDeckAny",
+                "to": "field",
+                "optional": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Roland the Incorruptible Evolved": {
+    "evolvesFrom": "Roland the Incorruptible",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "refresh",
+          "targets": {
+            "type": "allyFieldCard"
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 3
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Durandal the Incorruptible"
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Roly-Poly Mk I": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Aenea, Amethyst Rebel"
+        },
+        "effect": {
+          "op": "damageCap",
+          "maxPerHit": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1
+        },
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Aenea, Amethyst Rebel"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "reviveSelfFromCemetery"
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantLastWords",
+              "effect": {
+                "op": "banishSelf"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Roly-Poly Mk II": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Machina"
+          },
+          "lookAt": 2,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "cemetery"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Romantic Chanteuse": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Romantic Chanteuse Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Romantic Chanteuse Evolved": {
+    "evolvesFrom": "Romantic Chanteuse",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "cannotAttack",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Romelia, Lightning Striker": {
+    "keywords": [
+      "evolve",
+      "bane",
+      "lastWords"
+    ],
+    "evolvesTo": "Romelia, Lightning Striker Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Aftershock"
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Aftershock",
+            "count": 1,
+            "zone": "field"
+          },
+          "else": {
+            "op": "transferCounters",
+            "counter": "lightning",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 99
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Romelia, Lightning Striker Evolved": {
+    "evolvesFrom": "Romelia, Lightning Striker",
+    "specialType": "evolved",
+    "keywords": [
+      "assail",
+      "bane",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Aftershock"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Aftershock"
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Aftershock",
+            "count": 1,
+            "zone": "field"
+          },
+          "else": {
+            "op": "transferCounters",
+            "counter": "lightning",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 99
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ronavero, Darkhaven Ward": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Ronavero, Darkhaven Ward Evolved",
+    "evolveCost": 1,
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Ronavero, Darkhaven Ward Evolved": {
+    "evolvesFrom": "Ronavero, Darkhaven Ward",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "setStats",
+              "atk": 0,
+              "def": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "engage",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "traitsAny": [
+              "Faith"
+            ],
+            "cardType": "spell"
+          },
+          "to": "exArea",
+          "playCostReduction": 4
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

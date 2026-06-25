@@ -1,0 +1,353 @@
+{
+  "Kagemitsu, Matchless Blade": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "faceup evolved follower",
+            "multiplier": 1
+          },
+          "def": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "faceup evolved follower",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "fieldTraitMin",
+              "trait": "evolved",
+              "count": 3
+            },
+            {
+              "type": "fieldTraitMin",
+              "trait": "evolved",
+              "count": 7
+            }
+          ]
+        },
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 2,
+          "options": [
+            {
+              "label": "Give this follower Assail",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "assail",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "Give this follower 'Strike - Refresh this follower. Perform only once per turn.'",
+              "effect": {
+                "op": "grantLastWords",
+                "effect": {
+                  "op": "noop",
+                  "label": "Strike - Refresh this follower. Perform only once per turn."
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kagero, Swordbound Soul": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "rush",
+            "bane"
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select a Soulstrike in your cemetery and put it into your EX area",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityName": "Soulstrike"
+                },
+                "to": "exArea"
+              }
+            },
+            {
+              "label": "Bury the top 2 cards of your deck",
+              "effect": {
+                "op": "mill",
+                "count": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kaguya": {
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "evolveCost": 2,
+    "evolvesTo": "Kaguya Evolved",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "cardType": "amulet",
+            "maxCost": 3
+          },
+          "to": "field",
+          "optional": true
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "targetAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kaguya Evolved": {
+    "evolvesFrom": "Kaguya",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Ephemeral Moon",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "healLeader",
+              "amount": 3
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "targetAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kako Takafuji": {
+    "evolvesTo": "Kako Takafuji Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  },
+  "Kako Takafuji Evolved": {
+    "evolvesFrom": "Kako Takafuji",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kako Takafuji [Lady Luck]": {
+    "evolvesTo": "Kako Takafuji [Lady Luck] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "noop",
+          "label": "You may reroll each die or dice roll you make once."
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kako Takafuji [Lady Luck] Evolved": {
+    "evolvesFrom": "Kako Takafuji [Lady Luck]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "rollDie",
+          "sides": 6,
+          "outcomes": [
+            {
+              "on": [
+                1
+              ],
+              "effect": {
+                "op": "draw",
+                "count": 2
+              }
+            },
+            {
+              "on": [
+                2
+              ],
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 3,
+                    "followersOnly": false
+                  },
+                  {
+                    "op": "healLeader",
+                    "amount": 3
+                  }
+                ]
+              }
+            },
+            {
+              "on": [
+                3
+              ],
+              "effect": {
+                "op": "buryOpponentMaxAttackFollower"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kallen, Crimson Yaksha": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "increaseMaxPp",
+              "amount": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 3
+          },
+          "else": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kana Imai": {
+    "evolvesTo": "Kana Imai Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  }
+}

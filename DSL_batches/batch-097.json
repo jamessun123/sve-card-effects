@@ -1,0 +1,238 @@
+{
+  "Goliath": {
+    "evolvesTo": "Goliath Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Goliath Evolved": {
+    "evolvesFrom": "Goliath",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Good Fairy of the Pond": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gourmet Emperor Khaiza": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxCost": 2
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Grand Acquisition": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "millOpponent",
+          "count": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grand Archer Selwyn": {
+    "evolvesTo": "Grand Archer Selwyn Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "combo",
+          "count": 4
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grand Archer Selwyn Evolved": {
+    "evolvesFrom": "Grand Archer Selwyn",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFieldCard",
+            "count": 1,
+            "maxCost": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grand Gargoyle": {
+    "keywords": [
+      "ward",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "addStack",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grand Spire": {
+    "keywords": [
+      "stack",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Grand Summoning": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Search a follower that costs 3 or less and summon it",
+                  "effect": {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "cardType": "follower",
+                      "maxCost": 3
+                    },
+                    "to": "field"
+                  }
+                },
+                {
+                  "label": "Search a follower that costs 5 or less and summon it",
+                  "effect": {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "cardType": "follower",
+                      "maxCost": 5
+                    },
+                    "to": "field"
+                  }
+                }
+              ]
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "leader is [runecraft]"
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "cardType": "follower",
+                      "maxCost": 7
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "recoverPp",
+                    "amount": 2
+                  }
+                ]
+              }
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

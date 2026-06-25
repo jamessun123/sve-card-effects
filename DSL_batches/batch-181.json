@@ -1,0 +1,228 @@
+{
+  "Quickblader": {
+    "evolvesTo": "Quickblader Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Quickblader Evolved": {
+    "evolvesFrom": "Quickblader",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Quickdraw Maven": {
+    "evolvesTo": "Quickdraw Maven Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Quickdraw Maven Evolved": {
+    "evolvesFrom": "Quickdraw Maven",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Quixotic Adventurer": {
+    "evolvesTo": "Quixotic Adventurer Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dutiful Steed",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Quixotic Adventurer Evolved": {
+    "evolvesFrom": "Quixotic Adventurer",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put Dutiful Steed, Bullet Bike, and Arcane Personnel Carrier onto your field",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summon",
+                    "tokenName": "Dutiful Steed",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Bullet Bike",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Arcane Personnel Carrier",
+                    "count": 1,
+                    "zone": "field"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Put Dutiful Steed, Bullet Bike, and Arcane Personnel Carrier into your EX area",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summon",
+                    "tokenName": "Dutiful Steed",
+                    "count": 1,
+                    "zone": "exArea"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Bullet Bike",
+                    "count": 1,
+                    "zone": "exArea"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Arcane Personnel Carrier",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Rabbit Ear Attendant": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Fable",
+            "count": 2
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rabbit Mage": {
+    "evolvesTo": "Rabbit Mage Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magic Sediment",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rabbit Mage Evolved": {
+    "evolvesFrom": "Rabbit Mage",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "spell"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Rabbit Necromancer": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

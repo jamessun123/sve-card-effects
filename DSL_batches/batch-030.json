@@ -1,0 +1,385 @@
+{
+  "Bellringer Angel Evolved": {
+    "evolvesFrom": "Bellringer Angel",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Belphomet, Lord of Aiolon": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower"
+          },
+          "lookAt": 5,
+          "maxTotalCost": 6,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Machina",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Belphomet, Ultimate Creator": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldFollowerMinCost",
+          "trait": "Machina",
+          "minCost": 6,
+          "count": 1
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryFieldFollowers",
+              "filter": {
+                "trait": "Machina"
+              },
+              "minCost": 6
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "buriedExactCost",
+                "cost": 6
+              },
+              "then": {
+                "op": "summon",
+                "tokenName": "Assault Tentacle",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "buriedExactCost",
+                "cost": 7
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 4,
+                    "followersOnly": true
+                  },
+                  {
+                    "op": "buffFieldTrait",
+                    "trait": "Machina",
+                    "atk": 2,
+                    "def": 2,
+                    "excludeSelf": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Belphomet, Worldreaver": {
+    "evolvesTo": "Belphomet, Worldreaver Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Armored Tentacle",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3,
+          "banishFromExArea": {
+            "trait": "Machina"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveSourceToExArea"
+            },
+            {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Armored Tentacle",
+                  "effect": {
+                    "op": "summon",
+                    "tokenName": "Armored Tentacle",
+                    "count": 1,
+                    "zone": "field"
+                  }
+                },
+                {
+                  "label": "Assault Tentacle",
+                  "effect": {
+                    "op": "summon",
+                    "tokenName": "Assault Tentacle",
+                    "count": 1,
+                    "zone": "field"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Belphomet, Worldreaver Evolved": {
+    "evolvesFrom": "Belphomet, Worldreaver",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "optionalCost",
+              "label": "Discard a Machina card",
+              "cost": {
+                "op": "discardFromHand",
+                "filter": {
+                  "trait": "Machina"
+                },
+                "count": 1
+              },
+              "then": {
+                "op": "summon",
+                "tokenName": "Assault Tentacle",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "banishFromExArea": {
+            "trait": "Machina"
+          },
+          "banishCount": 1
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Assault Tentacle",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Benevolent Blight": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": true
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Bergent, Layered Sorceress": {
+    "evolvesTo": "Bergent, Layered Sorceress Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "peekDeck",
+          "count": 1,
+          "optionalBury": false
+        }
+      }
+    ]
+  },
+  "Bergent, Layered Sorceress Evolved": {
+    "evolvesFrom": "Bergent, Layered Sorceress",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Onion Patch",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "identityName": "Onion Patch"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      }
+    ]
+  },
+  "Bergent, Onion Patchmaster": {
+    "evolvesTo": "Bergent, Onion Patchmaster Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "identityName": "Onion Patch"
+          },
+          "lookAt": 5,
+          "maxTotalCost": 999,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ]
+  },
+  "Bergent, Onion Patchmaster Evolved": {
+    "evolvesFrom": "Bergent, Onion Patchmaster",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Onion Patch"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "maxPerTurn": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true
+        },
+        "effect": {
+          "op": "searchDeckSummonMultiple",
+          "filter": {
+            "identityName": "Onion Patch"
+          },
+          "lookAt": 999,
+          "maxTotalCost": 999,
+          "remainderTo": "shuffleDeck"
+        }
+      }
+    ]
+  }
+}

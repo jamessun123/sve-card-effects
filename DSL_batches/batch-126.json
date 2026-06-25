@@ -1,0 +1,400 @@
+{
+  "Last Daylight": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "buffFieldTrait",
+              "cardClass": "abyss",
+              "atk": 1,
+              "otherOnly": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Latham, Vanguard Captain": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Laura, Crimson Strife": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 3,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it damage equal to the number of times your leader has lost defense this turn",
+              "effect": {
+                "op": "dealDamage",
+                "amount": {
+                  "op": "leaderLostDefCount"
+                },
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Give this follower [attack]+1/[defense]+1",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "Give this follower Storm",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Layla": {
+    "evolvesTo": "Layla Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Layla Evolved": {
+    "evolvesFrom": "Layla",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Cool",
+                "cardType": "follower"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Passion",
+                "cardType": "follower"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Leah, Bellringer Angel": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lecia, Sky Saber": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Nano, the Dawnblade"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onAllyEvolve",
+        "filter": {
+          "identityName": "Nano, the Dawnblade"
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Twilight Blade token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Twilight Blade",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Give your leader [defense]+2",
+              "effect": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lelouch, Leader of the Black Knights": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "count": 2,
+                "maxTotalCost": 2
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "abyss",
+                "atk": 1,
+                "def": 1,
+                "otherOnly": true
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 20
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "cardClass": "abyss",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "count": 2,
+              "maxTotalCost": 2
+            },
+            {
+              "op": "buffFieldTrait",
+              "cardClass": "abyss",
+              "atk": 3,
+              "def": 3,
+              "otherOnly": true
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "cardClass": "abyss",
+          "excludeSelf": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lelouch, Righteous Emperor": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "count": 2,
+                "maxTotalCost": 2
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "abyss",
+                "atk": 1,
+                "def": 1,
+                "otherOnly": true
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 20
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "cardClass": "abyss",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "count": 2,
+              "maxTotalCost": 2
+            },
+            {
+              "op": "buffFieldTrait",
+              "cardClass": "abyss",
+              "atk": 3,
+              "def": 3,
+              "otherOnly": true
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "cardClass": "abyss",
+          "excludeSelf": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Leod, Moonlit Executioner": {
+    "keywords": [
+      "intimidate",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "enteredFromHand"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "Anne, Belle of Mysteria": {
+    "evolvesTo": "Anne, Belle of Mysteria Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Grea the Dragonborn"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Anne, Belle of Mysteria Evolved": {
+    "evolvesFrom": "Anne, Belle of Mysteria",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Academic",
+            "cardType": "follower",
+            "excludeIdentityName": "Anne, Belle of Mysteria Evolved"
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Anne, Mysterian Imperatrix": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Academic card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Academic",
+                  "count": 5
+                },
+                "then": {
+                  "op": "summon",
+                  "tokenName": "Anne's Summoning",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Academic",
+          "count": 15
+        },
+        "effect": {
+          "op": "tutorFromEvolveDeck",
+          "filter": {
+            "identityName": "Rending Blast"
+          },
+          "to": "field",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Anne, Mysterian Prodigy": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search your deck for an Anne's Sorcery, put it into your EX area, then shuffle your deck. The next Anne's Sorcery you play this turn costs 5 less.",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityNameContains": "Anne's Sorcery"
+                    },
+                    "to": "exArea"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Search your deck for a Grea, Mysterian Dragoness, summon it, then shuffle your deck.",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Grea, Mysterian Dragoness"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Annerose": {
+    "evolvesTo": "Annerose Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Dragonewt"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Annerose Evolved": {
+    "evolvesFrom": "Annerose",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Annihilating Onslaught": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Hunter",
+            "count": 6
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 6,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Antelope Pelt Warrior": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Anvelt, Judgment's Cannon": {
+    "evolvesTo": "Anvelt, Judgment's Cannon Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "choose",
+              "min": 1,
+              "max": 2,
+              "options": [
+                {
+                  "label": "Deal 3 damage to an enemy follower",
+                  "effect": {
+                    "op": "dealDamage",
+                    "amount": 3,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaTraitMin",
+                "trait": "Wasteland",
+                "count": 1
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Anvelt, Judgment's Cannon Evolved": {
+    "evolvesFrom": "Anvelt, Judgment's Cannon",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "choose",
+              "min": 1,
+              "max": 2,
+              "options": [
+                {
+                  "label": "Deal 3 damage to an enemy follower",
+                  "effect": {
+                    "op": "dealDamage",
+                    "amount": 3,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaTraitMin",
+                "trait": "Wasteland",
+                "count": 1
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

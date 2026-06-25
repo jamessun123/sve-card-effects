@@ -1,0 +1,293 @@
+{
+  "Holylight Convert": {
+    "evolvesTo": "Holylight Convert Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "fieldTraitCount",
+            "trait": "Ward",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Holylight Convert Evolved": {
+    "evolvesFrom": "Holylight Convert",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "to": "field"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "fieldTraitCount",
+            "trait": "Ward",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Holylord Eachtar": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardClass": "haven",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 2,
+          "maxTotalCost": 2
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "Havencraft",
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "banishFromCemetery": {
+            "cardClass": "haven"
+          },
+          "banishCount": 3
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "buffFieldTrait",
+          "cardClass": "haven",
+          "atk": 1,
+          "def": 1,
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Homebound Infantryman": {
+    "keywords": [
+      "assail"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Commander card that costs 3 or more"
+        },
+        "effect": {
+          "op": "reviveSelfFromCemetery"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Homecoming": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "returnToHand",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 5
+          },
+          "then": {
+            "op": "putAllEnemyFollowersOnDeck"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Homework Time!": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Academic",
+                "count": 5
+              },
+              "then": {
+                "op": "summon",
+                "tokenName": "Looking Smart!",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Honest Cohort": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Raio, Omen of Truth"
+          },
+          "then": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 6,
+            "leaderAmount": 3
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Honoka Ayase": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "rush",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true,
+            "filter": {
+              "trait": "iM@S CG"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Honorable Thief": {
+    "evolvesTo": "Honorable Thief Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "millOpponent",
+          "count": 2
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "opponentCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "autoEvolveIf",
+          "condition": {
+            "type": "opponentCemeteryMin",
+            "count": 10
+          },
+          "triggerOnEvolve": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Honorable Thief Evolved": {
+    "evolvesFrom": "Honorable Thief",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "Horned Beastie": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardType": "spell",
+            "maxCost": 1
+          },
+          "to": "hand"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hornet Strike": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 3 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Combo (3) - Deal 5 damage instead",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "combo",
+                  "count": 3
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hotaru Shiragiku [Unbreakable]": {
+    "evolvesTo": "Hotaru Shiragiku [Unbreakable] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Cute",
+            "count": 5
+          },
+          "then": {
+            "op": "buff",
+            "def": 2,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hotaru Shiragiku [Unbreakable] Evolved": {
+    "evolvesFrom": "Hotaru Shiragiku [Unbreakable]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "iM@S CG",
+            "cardType": "follower",
+            "maxCost": 1
+          },
+          "to": "hand",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Cute",
+            "count": 5
+          },
+          "then": {
+            "op": "buff",
+            "def": 2,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hoverboard Mercenary": {
+    "evolvesTo": "Hoverboard Mercenary Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Assembly Droid",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hoverboard Mercenary Evolved": {
+    "evolvesFrom": "Hoverboard Mercenary",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Assembly Droid",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Howling Conflagration": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ppMin",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Drache, Fiery Dragonlord"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "grantKeyword",
+                    "keyword": "assail",
+                    "targets": {
+                      "type": "lastSummoned"
+                    }
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Howling Demon": {
+    "evolveCost": 3,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 8,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Howling Demon Evolved": {
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 5
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Hozumi, Enchanting Hostess": {
+    "evolvesTo": "Hozumi, Enchanting Hostess Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantNextPlayCostReduction",
+          "filter": {
+            "trait": "Festive"
+          },
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

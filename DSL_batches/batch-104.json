@@ -1,0 +1,253 @@
+{
+  "Healing Angel Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Heartless Battle": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveToExArea",
+              "targets": {
+                "type": "selfFollower",
+                "count": 2,
+                "filter": {
+                  "identityName": "Puppet"
+                }
+              }
+            },
+            {
+              "op": "transform",
+              "tokenName": "Lloyd",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "identityName": "Puppet"
+                }
+              }
+            },
+            {
+              "op": "transform",
+              "tokenName": "Victoria",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "identityName": "Puppet"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Heavenly Aegis": {
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "evolve"
+          ]
+        }
+      },
+      {
+        "timing": "evolve",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "discard",
+          "count": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Heavenly Aegis Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Heavenly Knight": {
+    "keywords": [
+      "storm",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "amulet",
+            "count": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 2,
+                "def": 0,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Heliodragon": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      },
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        },
+        "maxPerTurn": 1
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hell's Unleasher": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardType": "follower",
+            "minCost": 3
+          },
+          "to": "hand"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hellblaze Demon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "putDeckTopToExArea"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hellfire Hound": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish 6 cards from your cemetery",
+          "cost": {
+            "op": "banishFromCemetery",
+            "count": 6
+          },
+          "then": {
+            "op": "dealDamageSplit",
+            "primaryAmount": 6,
+            "maxTargets": 99,
+            "targets": {
+              "type": "enemyFollower"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Hellflame Dragon": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

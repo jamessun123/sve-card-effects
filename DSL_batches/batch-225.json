@@ -1,0 +1,328 @@
+{
+  "Takumi Mukai [No One Can Stop Me]": {
+    "keywords": [
+      "rush",
+      "assail",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Passion",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "trait": "iM@S CG"
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Talisman Disciple": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Shikigami Summons"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tanzanite Convictor": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldFollowerMin",
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 4,
+            "followersOnly": true
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "selfAttackMin",
+            "count": 3
+          },
+          "then": {
+            "op": "refresh",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Tart Man": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeckAny",
+          "to": "hand",
+          "optional": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tartarus, the Tormentor": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Tartarus, the Tormentor Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Departed",
+          "count": 15
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Departed"
+          },
+          "lookAt": 2,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "cemetery",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tartarus, the Tormentor Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Tartarus, the Tormentor",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Departed",
+            "cardType": "follower"
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Teachings of Creation": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Technolord": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish 3 Machina cards from your cemetery",
+          "cost": {
+            "op": "banishFromCemetery",
+            "filter": {
+              "trait": "Machina"
+            },
+            "count": 3
+          },
+          "then": {
+            "op": "chooseMultiple",
+            "min": 0,
+            "max": 2,
+            "options": [
+              {
+                "label": "Destroy an enemy follower",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Destroy an enemy amulet",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFieldCard",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Deal 3 damage to each enemy leader",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyLeader"
+                  }
+                }
+              },
+              {
+                "label": "Search your deck for a Machina card not named Technolord",
+                "effect": {
+                  "op": "searchDeckChoose",
+                  "filter": {
+                    "trait": "Machina",
+                    "excludeIdentityName": "Technolord"
+                  },
+                  "lookAt": 40,
+                  "to": "hand",
+                  "optional": false,
+                  "reveal": true,
+                  "remainderTo": "deckBottom"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Technomancer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaTraitMin",
+                "trait": "Machina",
+                "count": 3
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Tempered Aether": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "Mark of the Unkilling": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": {
+                "op": "selfDefense"
+              },
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Hunter",
+                "count": 3
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Marlone, Light of Balance": {
+    "evolvesTo": "Marlone, Light of Balance Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Marlone, Light of Balance Evolved": {
+    "evolvesFrom": "Marlone, Light of Balance",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxCost": {
+              "op": "exAreaNamedMin"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Marlone, Peace Advocate": {
+    "evolvesTo": "Marlone, Peace Advocate Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Eschamali Adviser",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Marlone, Peace Advocate Evolved": {
+    "evolvesFrom": "Marlone, Peace Advocate",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Eschamali Constable",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Mars, Belligerent Flame": {
+    "evolvesTo": "Mars, Belligerent Flame Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Mars, Belligerent Flame Evolved": {
+    "evolvesFrom": "Mars, Belligerent Flame",
+    "specialType": "evolved",
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Flame General's Regalia",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Mars, Silent Flame General": {
+    "evolvesTo": "Mars, Silent Flame General Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "sword",
+          "cardType": "follower",
+          "trait": "Officer"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "lastSummoned"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mars, Silent Flame General Evolved": {
+    "evolvesFrom": "Mars, Silent Flame General",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "withChosenNumber",
+          "min": 0,
+          "max": 99,
+          "then": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardClass": "sword",
+              "cardType": "follower",
+              "trait": "Officer",
+              "maxCost": {
+                "op": "chosenNumber"
+              }
+            },
+            "to": "field"
+          }
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "sword",
+          "cardType": "follower",
+          "trait": "Officer"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "lastSummoned"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Marvelously Mad Hatter": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Fable"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "Fable",
+                  "cardType": "follower"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

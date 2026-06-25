@@ -1,0 +1,411 @@
+{
+  "Juggling Moggy": {
+    "evolvesTo": "Juggling Moggy Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "then": {
+            "op": "banish",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1,
+              "maxCost": 4
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Juggling Moggy Evolved": {
+    "evolvesFrom": "Juggling Moggy",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Magic Sediment",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "addStack",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Junk": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 2,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Juno's Secret Laboratory": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Guardform Golem token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Guardform Golem",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Summon a Strikeform Golem token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Strikeform Golem",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magic Sediment",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "earthRite": {
+            "count": 1
+          }
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a Guardform Golem token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Guardform Golem",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Summon a Strikeform Golem token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Strikeform Golem",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Juno, Visionary Alchemist": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "earthRite": {
+            "count": 1
+          }
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Guardian Golem",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "addStack",
+              "amount": 2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kaede Takagaki": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 0
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "selfDefense"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 5
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "aura",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kaede Takagaki [Cinderella Girl]": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 10
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "discard": true
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kaede Takagaki [Nation Blue]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kagemitsu, Lost Samurai": {
+    "keywords": [
+      "evolve",
+      "rush",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "cannotAttack"
+        }
+      },
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "addCounter",
+          "counter": "fighting_spirit",
+          "amount": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "moveToExArea",
+          "targets": {
+            "type": "self",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kagemitsu, Lost Samurai Evolved": {
+    "evolvesFrom": "Kagemitsu, Lost Samurai",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 0
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 5
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        },
+        "cost": {
+          "pp": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

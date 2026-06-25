@@ -1,0 +1,309 @@
+{
+  "Edelweiss, Sagelight Ward Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Strikeform Golem",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Guardform Golem",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "draw",
+          "count": 2
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Golem"
+        },
+        "effect": {
+          "op": "addStack",
+          "amount": 1
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Edgy Elf": {
+    "keywords": [
+      "storm",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "millToBanish",
+              "count": 3
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Edict of Truth": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "identityName": "Raio, Omen of Truth"
+        },
+        "effect": {
+          "op": "recoverPp",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "banishSelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "gainEvolutionPoint",
+              "amount": 1
+            },
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "maxCost": 3
+              },
+              "lookAt": 5,
+              "to": "exArea",
+              "optional": true,
+              "playCostReduction": 3,
+              "remainderTo": "deckBottom"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Eggsplosion": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": {
+            "op": "cemeteryFilterCount",
+            "filter": {
+              "traitsAny": [
+                "Fable"
+              ]
+            },
+            "divisor": 1
+          },
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Eidolon of Madness": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldFollowerMinCost",
+            "cardType": "amulet",
+            "count": 3
+          },
+          "then": {
+            "op": "evolveCostReduction",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Eidolon of Madness Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": false
+        }
+      }
+    ],
+    "specialType": "evolved"
+  },
+  "Elana's Prayer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardType": "follower"
+          },
+          "effect": {
+            "op": "buffFieldTrait",
+            "atk": 1,
+            "def": 1,
+            "otherOnly": false
+          },
+          "oncePerTurn": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elder Tortoise": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "gainEvolutionPoint",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ]
+  },
+  "Eleanor, Cosmic Flower": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a spell",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "cardType": "spell"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Eleanor, Cosmic Flower Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Splendid Conjury"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "spellchain",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      }
+    ],
+    "specialType": "evolved"
+  }
+}

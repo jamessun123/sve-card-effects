@@ -1,0 +1,407 @@
+{
+  "Lookout Elf": {
+    "evolvesTo": "Lookout Elf Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "peekDeck",
+              "count": 1,
+              "optionalBury": true
+            },
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 2,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Lookout Elf Evolved": {
+    "evolvesFrom": "Lookout Elf",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 2,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lord Atomy": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "cardClass": "abyss"
+          },
+          "buryFieldCount": 4
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 9
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "banishFromExArea": {
+            "cardClass": "abyss"
+          },
+          "banishCount": 4
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 9
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lord General Romeo": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Princess Juliet"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Princess Juliet"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lounes, Levin Apprentice": {
+    "evolvesTo": "Lounes, Levin Apprentice Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Levin card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Levin"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "cardClass": "sword",
+                  "identityNameContains": "Albert"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lounes, Levin Apprentice Evolved": {
+    "evolvesFrom": "Lounes, Levin Apprentice",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromHand",
+          "filter": {
+            "cardClass": "sword",
+            "identityNameContains": "Albert",
+            "maxCost": {
+              "op": "maxPp"
+            }
+          },
+          "to": "field",
+          "optional": true
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "sword",
+          "identityNameContains": "Albert"
+        },
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "oncePerTurn": false
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lovely-Heart Monika": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search your deck for a Morra, Monika's Familiar, summon it, then shuffle your deck",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Morra, Monika's Familiar"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "You may summon a Morra, Monika's Familiar from your hand",
+              "effect": {
+                "op": "playDeckTopFollower",
+                "optional": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Loxis, Homestead Pioneer": {
+    "evolvesTo": "Loxis, Homestead Pioneer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "effect": {
+            "op": "recoverPp",
+            "amount": 1
+          },
+          "maxPerTurn": 3
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "buryFromField": {
+            "cardType": "amulet"
+          },
+          "buryFieldCount": 3
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Loxis, Homestead Pioneer Evolved": {
+    "evolvesFrom": "Loxis, Homestead Pioneer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Dutiful Steed",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Bullet Bike",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Arcane Personnel Carrier",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "cardType": "amulet"
+          },
+          "buryFieldCount": 3
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and destroy it",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Select another follower on your field and give it [attack]+3/[defense]+3",
+              "effect": {
+                "op": "buff",
+                "atk": 3,
+                "def": 3,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "excludeSelf": true
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Loyal Sea Serpent": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost04]",
+          "cost": {
+            "op": "spendPp",
+            "amount": 4
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Dragon",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "dragon"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

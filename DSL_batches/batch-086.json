@@ -1,0 +1,300 @@
+{
+  "Frogbat": {
+    "evolvesTo": "Frogbat Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "buryFieldFollowers",
+          "filter": {
+            "cardClass": "abyss"
+          },
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frogbat Evolved": {
+    "evolvesFrom": "Frogbat",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buff",
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Front Desk Frog": {
+    "evolvesTo": "Front Desk Frog Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Glittering Gold",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "autoEvolveIf",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Jiemon, Thief Lord"
+              },
+              "triggerOnEvolve": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Front Desk Frog Evolved": {
+    "evolvesFrom": "Front Desk Frog",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaTraitMin",
+                "trait": "Festive",
+                "count": 3
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Frontguard General": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Steelclad Knight",
+              "count": 2,
+              "zone": "field"
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "ward",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Frontline Instructor": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "withChosenNumber",
+          "min": 0,
+          "max": 99,
+          "then": {
+            "op": "summon",
+            "tokenName": "Steelclad Knight",
+            "count": {
+              "op": "chosenNumber",
+              "min": 0,
+              "max": 99
+            },
+            "zone": "field"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardClass": "sword"
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "rush",
+              "assail"
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frontline Ramparts": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Frostbite Dragon": {
+    "evolvesTo": "Frostbite Dragon Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "banishUpTo",
+          "targets": {
+            "type": "enemyFollower"
+          },
+          "maxCount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Frostbite Dragon Evolved": {
+    "evolvesFrom": "Frostbite Dragon",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "cardType": "follower"
+          },
+          "effect": {
+            "op": "refresh",
+            "targets": {
+              "type": "enemyFollower"
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Frostfire": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 5 damage to one enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Engage the other enemy follower",
+              "effect": {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

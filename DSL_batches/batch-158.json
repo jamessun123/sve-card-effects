@@ -1,0 +1,305 @@
+{
+  "Mysteria, Magic Founder Evolved": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesFrom": "Mysteria, Magic Founder",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "exAreaPlayCostReduction",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mysterian Knowledge": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "optionalCost",
+              "label": "Reveal 2 Academic cards from your hand",
+              "cost": {
+                "op": "discardFromHand",
+                "filter": {
+                  "trait": "Academic"
+                },
+                "count": 2
+              },
+              "then": {
+                "op": "noop",
+                "label": "pay reveal 2 Academic cards"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "summon",
+              "tokenName": "Mysterian Missile",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mysterian Missile": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Academic",
+                "count": 10
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mysterian Whitewyrm Evolved": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Mysterian Wisdom": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "optionalCost",
+              "label": "Reveal an Academic card from your hand and put it on the bottom of your deck",
+              "cost": {
+                "op": "discardFromHand",
+                "filter": {
+                  "trait": "Academic"
+                },
+                "count": 1
+              },
+              "then": {
+                "op": "putHandCardOnDeck",
+                "position": "bottom"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mysterian Wyrmist": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolveCost": 2,
+    "evolvesTo": "Mysterian Whitewyrm Evolved",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "You may discard an Academic card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mystic Absorption": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Mage",
+                "count": 2
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mystic Artifact": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mystic King": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Mystic King Evolved",
+    "evolveCost": 2,
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "cardType": "follower",
+            "trait": "Chess",
+            "excludeSelf": true
+          },
+          "buryFieldCount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mystic King Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Mystic King",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Chess",
+            "cardType": "follower",
+            "maxCost": 4
+          },
+          "count": 4
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "cardType": "follower",
+            "trait": "Chess",
+            "excludeSelf": true
+          },
+          "buryFieldCount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

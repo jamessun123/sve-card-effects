@@ -1,0 +1,325 @@
+{
+  "Fruits of Wisdom": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "peekDeck",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "putDeckTopToExArea",
+                    "ifFilter": {
+                      "trait": "Machina"
+                    }
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Assembly Droid",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Full Bloom Panorama": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "banishUpTo",
+          "targets": {
+            "type": "enemyFollower"
+          },
+          "maxCount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Full Moon Leap": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "cardClass": "abyss"
+                }
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 0
+              },
+              "then": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "abyss"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Fulminating Berserker": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fumika Sagisawa": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "to": "field"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardType": "follower",
+                "maxCost": 1
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "iM@S CG"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fumika Sagisawa [Cinderella Girl]": {
+    "evolvesTo": "Fumika Sagisawa [Cinderella Girl] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Fumika Sagisawa [Cinderella Girl] Evolved": {
+    "evolvesFrom": "Fumika Sagisawa [Cinderella Girl]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Search your deck for a follower with \"Fumika Sagisawa\" in its name, summon it, then shuffle",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "optionalCost",
+                    "cost": {
+                      "op": "spendPp",
+                      "amount": 4
+                    },
+                    "then": {
+                      "op": "sequence",
+                      "steps": [
+                        {
+                          "op": "burySelf"
+                        },
+                        {
+                          "op": "tutorFromDeck",
+                          "filter": {
+                            "identityNameContains": "Fumika Sagisawa"
+                          },
+                          "to": "field"
+                        },
+                        {
+                          "op": "shuffleDeck"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Furtive Fangs": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "grantLastWords",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "selfAttack"
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gabriel": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 4,
+          "def": 3,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gale Arrow": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

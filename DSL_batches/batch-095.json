@@ -1,0 +1,309 @@
+{
+  "Goblin Queen": {
+    "keywords": [
+      "fanfare",
+      "fanfare",
+      "fanfare",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Goblinoid"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "banishFromCemetery": {
+            "trait": "Goblinoid"
+          },
+          "banishCount": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goblin Warpack": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Goblinmount Demon": {
+    "evolvesTo": "Goblinmount Demon Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Goblinmount Demon Evolved": {
+    "evolvesFrom": "Goblinmount Demon",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "God Bullet Golem": {
+    "keywords": [
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "targetAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "targetAttack"
+          },
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Goddess by the Sunlit Sea": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldFollowerMinCost",
+                "minCost": 5,
+                "count": 1
+              },
+              "then": {
+                "op": "recoverPp",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Goddess of Rebirth": {
+    "keywords": [
+      "ward",
+      "fanfare",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 7
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4,
+          "discard": true
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Godfire Phoenix": {
+    "evolvesTo": "Godfire Phoenix Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Godfire Phoenix Evolved": {
+    "evolvesFrom": "Godfire Phoenix",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "ppMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banish",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 3
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gods' Loving Smite": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Bury an amulet",
+          "cost": {
+            "op": "buryFromFieldSelect",
+            "optional": true
+          },
+          "then": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 3 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Deal 5 damage instead",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

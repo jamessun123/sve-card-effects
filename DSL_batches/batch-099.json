@@ -1,0 +1,376 @@
+{
+  "Great Mother's Embrace": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Destroy an enemy follower",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Search your deck for Viridia Magna and summon it",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityName": "Viridia Magna"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Turn 2 faceup evolved Natura followers in your evolve deck facedown, then draw a card and recover 2 play points",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "turnEvolveDeck",
+                    "orientation": "facedown",
+                    "count": 2,
+                    "filter": {
+                      "trait": "Natura"
+                    }
+                  },
+                  {
+                    "op": "draw",
+                    "count": 1
+                  },
+                  {
+                    "op": "recoverPp",
+                    "amount": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Great Testimony": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Mjerrabaine, Great One"
+              },
+              "then": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Greatpick Corpse": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Bury another card",
+          "cost": {
+            "op": "buryFromFieldSelect",
+            "excludeSelf": true,
+            "optional": false
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "enteredFromHand"
+              }
+            ]
+          },
+          "then": {
+            "op": "summonSameNameToken"
+          }
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Greenbrier Elf": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish a Pixie token from your EX area",
+          "cost": {
+            "op": "banishFromExArea",
+            "filter": {
+              "identityName": "Pixie"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardClass": "forest"
+            },
+            "lookAt": 4,
+            "to": "hand",
+            "optional": true,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Greenglen Axeman": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "discardedCardType",
+          "cardType": "spell"
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 4 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Deal 2 damage to each enemy leader",
+              "effect": {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Greenwood Guardian": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "mill",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Hunter",
+                "count": 3
+              },
+              "then": {
+                "op": "buff",
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gremory, Death Teller": {
+    "evolvesTo": "Gremory, Death Teller",
+    "evolveCost": 1,
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1
+        },
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Gremory, Death Teller"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "reviveSelfFromCemetery"
+              },
+              {
+                "op": "grantLastWords",
+                "effect": {
+                  "op": "banishSelf"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Grimnir, Voidwrought Wind": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "inExArea"
+          },
+          "then": {
+            "op": "dealDamageSplit",
+            "primaryAmount": 5,
+            "secondaryAmount": 3,
+            "maxTargets": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Grimnir, War Cyclone": {
+    "evolvesTo": "Grimnir, War Cyclone Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Grimnir, War Cyclone Evolved": {
+    "evolvesFrom": "Grimnir, War Cyclone",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

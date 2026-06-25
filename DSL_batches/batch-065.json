@@ -1,0 +1,188 @@
+{
+  "Dragonsoul Princess": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Wyrmkin",
+            "cardType": "follower"
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 3,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragontamer": {
+    "evolvesTo": "Dragontamer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Dragontamer Evolved": {
+    "evolvesFrom": "Dragontamer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a card",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Wyrmkin",
+              "cardType": "follower"
+            },
+            "to": "hand"
+          }
+        }
+      }
+    ]
+  },
+  "Dragoon Medic": {
+    "evolvesTo": "Dragoon Medic Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Dragoon Medic Evolved": {
+    "evolvesFrom": "Dragoon Medic",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ]
+  },
+  "Dragoon Scyther": {
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Drakewing Assassin": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "cemeteryFilterCount",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "spell"
+            },
+            "divisor": 1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dramatic Retreat": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "moveToExArea",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dread Dragon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 7,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ]
+  },
+  "Dream Come True": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "follower"
+          },
+          "lookAt": 40,
+          "to": "exArea",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "Treant": {
+    "evolvesTo": "Treant Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 0
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Treant Evolved": {
+    "evolvesFrom": "Treant Evolved",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Treasure Map": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "follower"
+          },
+          "lookAt": 7,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Tree of Wonders": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "exAreaTraitMin",
+          "trait": "Pixie",
+          "count": 3
+        },
+        "effect": {
+          "op": "draw",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Trial of the Gorgons": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Venomfang Medusa"
+              },
+              "to": "field"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Stheno"
+              },
+              "to": "field"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Euryale"
+              },
+              "to": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Tribunal of Good and Evil": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Trick Dullahan": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 3,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Trident Merman": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Megalorca",
+          "count": 2,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Trinity Dragon": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "Tristan of the Round Table": {
+    "evolvesTo": null,
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

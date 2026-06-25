@@ -1,0 +1,266 @@
+{
+  "Ghios, Sparkling Prism Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Mage",
+            "cardType": "spell",
+            "maxCost": 3
+          },
+          "to": "exArea",
+          "playCostReduction": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ghost": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "banishSelf"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ghost Maid": {
+    "evolvesTo": "Ghost Maid Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ghost Maid Evolved": {
+    "evolvesFrom": "Ghost Maid",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Ghost",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ghostwriter": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 2,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "bane",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "identityName": "Ghost"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ghoul": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryFieldFollowers",
+              "filter": {
+                "trait": "Departed"
+              },
+              "excludeSelf": true
+            },
+            {
+              "op": "draw",
+              "count": 2
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Giant Chimera": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "spellchain",
+          "count": 10
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 5
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Giant Pastures": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Bullet Bike",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Arcane Personnel Carrier",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": {
+                "op": "exAreaNamedMin",
+                "identityName": "Mount",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gift for Bloodkin": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Forest Bat",
+              "count": 2,
+              "zone": "field"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "namedFollowerOnFieldByName",
+                "identityName": "Vania"
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gigahand Golem": {
+    "evolvesTo": "Gigahand Golem Evolved",
+    "evolveCost": 5,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Magic Sediment",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Golem"
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

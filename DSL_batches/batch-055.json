@@ -1,0 +1,385 @@
+{
+  "Demonic Drummer": {
+    "keywords": [
+      "ward",
+      "fanfare",
+      "lastWords"
+    ],
+    "evolvesTo": "Demonic Drummer Evolved",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "pp": 2
+        },
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "identityName": "Demonic Drummer"
+          },
+          "to": "field"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonic Hedonist": {
+    "evolvesTo": "Demonic Hedonist Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonic Hedonist Evolved": {
+    "evolvesFrom": "Demonic Hedonist",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": false
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonic Procession": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Yokai",
+            "cardType": "follower"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonic Simulacrum": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonic Strike": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFieldCard",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonium, Clash Devil": {
+    "keywords": [
+      "bane",
+      "drain",
+      "fanfare",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "rush",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "selfAttack"
+          },
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Demonium, Punk Devil": {
+    "keywords": [
+      "ward",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "Give your leader [defense]-2",
+          "cost": {
+            "op": "healLeader",
+            "amount": -2
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "bane",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Demonlord Eachtar": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "cardClass": "abyss",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "count": 2,
+              "maxTotalCost": 2
+            },
+            {
+              "op": "buffFieldTrait",
+              "cardClass": "abyss",
+              "atk": 1,
+              "def": 1,
+              "excludeSelf": true
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 20
+        },
+        "effect": {
+          "op": "buffFieldTrait",
+          "cardClass": "abyss",
+          "atk": 3,
+          "def": 3,
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "Abysscraft",
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Desert Pathfinder": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Naterran Great Tree token onto your field",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Put a Naterran Great Tree token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "fieldTraitMin",
+              "trait": "Natura",
+              "count": 5
+            },
+            {
+              "type": "exAreaTraitMin",
+              "trait": "Natura",
+              "count": 5
+            }
+          ]
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Natura"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "Celia, Hope's Strategist Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Shield Guardian",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Celia, Sky Commander": {
+    "evolvesTo": "Celia, Hope's Strategist Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Celia, Hope's Strategist"
+          }
+        }
+      },
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Celia, Despair's Messenger"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Center Street": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Passion",
+                "count": 1
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Cerberus": {
+    "evolvesTo": "Cerberus Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Mimi, Infernal Right Paw or Coco, Infernal Left Paw token into your EX area",
+              "effect": {
+                "op": "choose",
+                "min": 1,
+                "max": 1,
+                "options": [
+                  {
+                    "label": "Mimi, Infernal Right Paw",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Mimi, Infernal Right Paw",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  },
+                  {
+                    "label": "Coco, Infernal Left Paw",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Coco, Infernal Left Paw",
+                      "count": 1,
+                      "zone": "exArea"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cerberus Evolved": {
+    "evolvesFrom": "Cerberus",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Mimi, Infernal Right Paw",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Coco, Infernal Left Paw",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Cerberus, Hellfire Unleashed": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Mimi, Right Paw Hellhound",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Coco, Left Paw Hellhound",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "selfFollower",
+                "filter": {
+                  "identityName": "Mimi, Right Paw Hellhound"
+                },
+                "count": 1
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "selfFollower",
+                "filter": {
+                  "identityName": "Coco, Left Paw Hellhound"
+                },
+                "count": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ceres, Blue Rose Maiden": {
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 5
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm"
+          ]
+        }
+      },
+      {
+        "timing": "onDamaged",
+        "effect": {
+          "op": "opponentDiscardEach",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ceres, Bride of the Night": {
+    "evolvesTo": "Ceres, Bride of the Night Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "bane",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ceres, Bride of the Night Evolved": {
+    "evolvesFrom": "Ceres, Bride of the Night",
+    "specialType": "evolved",
+    "keywords": [
+      "bane",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Darkest Desire",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ceridwen, Eternity Hunter": {
+    "evolvesTo": "Ceridwen, Eternity Hunter Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Instant Poison",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

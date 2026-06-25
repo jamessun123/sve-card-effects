@@ -1,0 +1,310 @@
+{
+  "Bladed Hedgehog Evolved": {
+    "evolvesFrom": "Bladed Hedgehog",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "cardType": "follower"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Bladerights Lieutenant": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Shield Guardian",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Knight",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Steelclad Knight",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Blazing Breath": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Blessed Fairy Dancer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Pixie",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Blessings of Creation": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "spellchain",
+                "count": 5
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Blitz": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Magical Pawn",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Blood Arts": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 1
+            },
+            {
+              "op": "buffFieldTrait",
+              "trait": "Aluzard, Timeworn Vampire",
+              "atk": 1,
+              "def": 0,
+              "keyword": "drain"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaNamedMin",
+                "identityName": "Aluzard, Timeworn Vampire",
+                "count": 3
+              },
+              "then": {
+                "op": "buffFieldTrait",
+                "trait": "Aluzard, Timeworn Vampire",
+                "atk": 3,
+                "def": 3
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Blood Moon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Beast",
+            "cardType": "follower"
+          },
+          "lookAt": 40,
+          "to": "hand",
+          "optional": true,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "includeLeaders": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Bloodstained Berserker": {
+    "evolvesTo": "Bloodstained Berserker Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Bloodstained Berserker",
+            "multiplier": 1
+          },
+          "def": {
+            "op": "namedIdentityFieldCount",
+            "identityName": "Bloodstained Berserker",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Bloodstained Berserker Evolved": {
+    "evolvesFrom": "Bloodstained Berserker",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

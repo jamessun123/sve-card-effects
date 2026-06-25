@@ -1,0 +1,336 @@
+{
+  "Ginsetsu, Great Fox": {
+    "evolvesTo": "Ginsetsu, Great Fox Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "One-Tailed Fox",
+          "count": 5,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ginsetsu, Great Fox Evolved": {
+    "evolvesFrom": "Ginsetsu, Great Fox",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Yokai",
+          "atk": 1,
+          "def": 0,
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ginsetsu, Terror Banquet": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "One-Tailed Fox",
+              "count": 2,
+              "zone": "exArea"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "spendPp",
+            "amount": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "One-Tailed Fox",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "buffFieldTrait",
+                "trait": "Yokai",
+                "atk": 1,
+                "def": 0,
+                "excludeSelf": true
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "dealDamageFollowerAndLeader",
+          "followerAmount": 1,
+          "leaderAmount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Giselle, Mermaid Healer": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "Marine",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "assail",
+          "trait": "Marine",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Giving Gourmet": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Search your deck for a Chef follower that costs 3 or less, summon it, then shuffle",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Chef",
+                      "cardType": "follower",
+                      "maxCost": 3
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Glade, Fragrantwood Ward": {
+    "evolvesTo": "Glade, Fragrantwood Ward Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Glade, Fragrantwood Ward Evolved": {
+    "evolvesFrom": "Glade, Fragrantwood Ward",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 2,
+              "zone": "field"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": {
+            "op": "handExAreaTotal"
+          },
+          "maxTargets": 99,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Gliesaray": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal it 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Banish it instead",
+              "effect": {
+                "op": "banish",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Glint Dragon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Glistering Angel": {
+    "evolvesTo": "Glistering Angel Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Angel",
+            "count": 5
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

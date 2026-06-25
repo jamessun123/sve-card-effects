@@ -1,0 +1,355 @@
+{
+  "Robowing Precant": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Repair Mode",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "exAreaNamedMin",
+                "identityName": "Repair Mode",
+                "count": 3
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "identityName": "Repair Mode"
+        },
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Repair Mode"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "bane",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Robozombie": {
+    "keywords": [
+      "assail",
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Machina",
+          "count": 2
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "rush"
+          ]
+        }
+      }
+    ]
+  },
+  "Roc": {
+    "evolvesTo": "Roc Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ]
+  },
+  "Roc Evolved": {
+    "evolvesFrom": "Roc",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ]
+  },
+  "Rock Whale": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Marine card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Marine"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 2
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "enteredFromHand"
+                },
+                "else": {
+                  "op": "recoverPp",
+                  "amount": 3
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rockback Ankylosaurus": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost01], discard a card",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "spendPp",
+                "amount": 1
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rodeo, Anathema of Judgment": {
+    "evolvesTo": "Rodeo, Anathema of Judgment Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Amulet",
+            "count": 2
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rodeo, Anathema of Judgment Evolved": {
+    "evolvesFrom": "Rodeo, Anathema of Judgment",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "amulet",
+            "maxCost": 3
+          },
+          "lookAt": 40,
+          "to": "field",
+          "optional": false,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "amulet",
+            "maxCost": 5
+          },
+          "lookAt": 40,
+          "to": "field",
+          "optional": false,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Amulet",
+            "count": 2
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rola, Inferno Dragoon": {
+    "evolvesTo": "Rola, Inferno Dragoon Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "notEnteredFromHand"
+        },
+        "effect": {
+          "op": "evolveOtherFollower",
+          "excludeSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rola, Inferno Dragoon Evolved": {
+    "evolvesFrom": "Rola, Inferno Dragoon",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it damage equal to the number of Machina followers on your field",
+              "effect": {
+                "op": "dealDamage",
+                "amount": {
+                  "op": "traitFieldCount",
+                  "trait": "Machina",
+                  "multiplier": 1
+                },
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Give this follower Storm",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

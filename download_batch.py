@@ -7,7 +7,14 @@ import argparse
 import json
 from pathlib import Path
 
-from batch_utils import BATCHES_DIR, extract_response_text, format_batch_errors, make_client, resolve_path
+from batch_utils import (
+    BATCHES_DIR,
+    DSL_BATCHES_DIR,
+    extract_response_text,
+    format_batch_errors,
+    make_client,
+    resolve_path,
+)
 
 
 def load_metadata(metadata_path: Path) -> dict:
@@ -96,12 +103,14 @@ def write_extracted_outputs(
     output_dir: Path,
     successes: list[dict],
     failures: list[dict],
-) -> None:
-    extracted_dir = output_dir / "extracted"
-    extracted_dir.mkdir(parents=True, exist_ok=True)
+    *,
+    dsl_batches_dir: Path | None = None,
+) -> Path:
+    dsl_dir = resolve_path(dsl_batches_dir) if dsl_batches_dir else DSL_BATCHES_DIR
+    dsl_dir.mkdir(parents=True, exist_ok=True)
 
     for item in successes:
-        out_path = extracted_dir / f"{item['custom_id']}.json"
+        out_path = dsl_dir / f"{item['custom_id']}.json"
         out_path.write_text(item["text"], encoding="utf-8")
 
     summary = {
@@ -109,11 +118,13 @@ def write_extracted_outputs(
         "failure_count": len(failures),
         "successes": [item["custom_id"] for item in successes],
         "failures": failures,
+        "dsl_batches_dir": str(dsl_dir),
     }
     (output_dir / "summary.json").write_text(
         json.dumps(summary, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
+    return dsl_dir
 
 
 def print_batch_status(batch: object) -> None:
@@ -149,6 +160,7 @@ def download_batch(
     batch_id: str,
     *,
     output_dir: Path | None = None,
+    dsl_batches_dir: Path | None = None,
     metadata_path: Path | None = None,
 ) -> None:
     client = make_client()
@@ -181,7 +193,12 @@ def download_batch(
         save_jsonl(error_path, error_content)
 
     successes, failures = parse_output_jsonl(raw_output)
-    write_extracted_outputs(output_dir, successes, failures)
+    dsl_dir = write_extracted_outputs(
+        output_dir,
+        successes,
+        failures,
+        dsl_batches_dir=dsl_batches_dir,
+    )
 
     if metadata_path and metadata_path.exists():
         info = load_metadata(metadata_path)
@@ -189,6 +206,7 @@ def download_batch(
         info["output_file_id"] = batch.output_file_id
         info["error_file_id"] = batch.error_file_id
         info["local_output_dir"] = str(output_dir)
+        info["local_dsl_batches_dir"] = str(dsl_dir)
         metadata_path.write_text(json.dumps(info, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     print()
@@ -197,13 +215,18 @@ def download_batch(
     print(f"  raw_output:      {output_dir / 'batch_output.jsonl'}")
     if error_path:
         print(f"  raw_errors:      {error_path}")
-    print(f"  extracted_dir:   {output_dir / 'extracted'}")
+    print(f"  dsl_batches_dir: {dsl_dir}")
     print(f"  summary:         {output_dir / 'summary.json'}")
     print(f"  success_count:   {len(successes)}")
     print(f"  failure_count:   {len(failures)}")
 
 
-def download_manifest(manifest_path: Path, output_root: Path | None = None) -> None:
+def download_manifest(
+    manifest_path: Path,
+    output_root: Path | None = None,
+    *,
+    dsl_batches_dir: Path | None = None,
+) -> None:
     manifest = load_metadata(manifest_path)
     batches = manifest.get("batches", [])
     if not batches:
@@ -223,7 +246,12 @@ def download_manifest(manifest_path: Path, output_root: Path | None = None) -> N
         output_dir = None
         if output_root is not None:
             output_dir = output_root / batch_id
-        download_batch(batch_id, output_dir=output_dir, metadata_path=metadata_path)
+        download_batch(
+            batch_id,
+            output_dir=output_dir,
+            dsl_batches_dir=dsl_batches_dir,
+            metadata_path=metadata_path,
+        )
         print()
 
 
@@ -246,7 +274,11 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--output-dir",
-        help="Directory to write downloaded batch files (default: batches/output/<batch_id>).",
+        help="Directory for raw batch downloads (default: batches/output/<batch_id>).",
+    )
+    parser.add_argument(
+        "--dsl-dir",
+        help="Directory for extracted card batch JSON (default: DSL_batches/).",
     )
     return parser.parse_args()
 
@@ -254,16 +286,27 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
 
+    dsl_batches_dir = resolve_path(args.dsl_dir) if args.dsl_dir else None
+
     if args.manifest:
         manifest_path = resolve_path(args.manifest)
         output_root = resolve_path(args.output_dir) if args.output_dir else None
-        download_manifest(manifest_path, output_root=output_root)
+        download_manifest(
+            manifest_path,
+            output_root=output_root,
+            dsl_batches_dir=dsl_batches_dir,
+        )
         return
 
     metadata_path = resolve_path(args.metadata) if args.metadata else None
     batch_id, metadata_path = resolve_batch_id(args.batch_id, metadata_path)
     output_dir = resolve_path(args.output_dir) if args.output_dir else None
-    download_batch(batch_id, output_dir=output_dir, metadata_path=metadata_path)
+    download_batch(
+        batch_id,
+        output_dir=output_dir,
+        dsl_batches_dir=dsl_batches_dir,
+        metadata_path=metadata_path,
+    )
 
 
 if __name__ == "__main__":

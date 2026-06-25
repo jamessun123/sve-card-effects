@@ -1,0 +1,294 @@
+{
+  "Adherent of Screams Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon a follower named Rulenye from your cemetery",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityNameContains": "Rulenye",
+                  "cardType": "follower"
+                },
+                "to": "field"
+              }
+            },
+            {
+              "label": "Deal 2 damage to an enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "mill",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aenea, Amethyst Rebel": {
+    "evolvesTo": "Aenea, Creative Amethyst Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Machina",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aenea, Creative Amethyst": {
+    "evolvesTo": "Aenea, Creative Amethyst Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Aenea, Creative Amethyst Evolved": {
+    "evolvesFrom": "Aenea, Creative Amethyst",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Roly-Poly Mk II"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Machina"
+          },
+          "to": "exArea",
+          "playCostReduction": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aerial Craft": {
+    "evolvesTo": "Aerial Craft Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aerial Craft Evolved": {
+    "evolvesFrom": "Aerial Craft",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "enteredFromHand"
+          },
+          "then": {
+            "op": "selectFromHand",
+            "filter": {
+              "trait": "Machina",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "field",
+            "optional": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Aerial Slash": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1,
+          "banishSelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Heroic",
+          "count": 5
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": false
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aerin, Crystalian Frostward": {
+    "evolvesTo": "Aerin, Crystalian Frostward Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantActRestriction",
+          "untilEndOfTurn": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Aerin, Crystalian Frostward Evolved": {
+    "evolvesFrom": "Aerin, Crystalian Frostward",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Crystalian",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Aether of the Warrior Wing": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "traitsAny": [
+              "Commander",
+              "Officer"
+            ]
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": false,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "buffFieldTrait",
+          "cardClass": "sword",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "Arisa, Evergreen Arrow": {
+    "evolvesTo": "Arisa, Evergreen Arrow Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Gale Arrow token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Gale Arrow",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Put a Storm Arrow token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Storm Arrow",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "spellchain",
+              "count": 5
+            }
+          ]
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Forest Guardian's Bow"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Arisu Tachibana": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "iM@S CG",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "maxCost": 1,
+                  "cardType": "spell"
+                },
+                "lookAt": 40,
+                "to": "hand",
+                "optional": true,
+                "remainderTo": "deckBottom",
+                "reveal": true
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Arisu Tachibana [Ikenai GO AHEAD]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Armor Burst": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveToExArea",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Draconic Weapon",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Armor of the Stars": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 2,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "aura",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Armored Goblin": {
+    "evolvesTo": "Armored Goblin Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": []
+  },
+  "Armored Goblin Evolved": {
+    "evolvesFrom": "Armored Goblin",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Armored Tentacle": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 4
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Arriet, Soothing Harpist": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "engaged": true
+                }
+              }
+            },
+            {
+              "op": "refresh",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "engaged": true
+                }
+              }
+            },
+            {
+              "op": "grantActRestriction",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "engaged": true
+                }
+              },
+              "untilEndOfTurn": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Arsène Lupin": {
+    "evolvesTo": "Arsène Lupin Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "millOpponent",
+          "count": 1
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 2,
+          "options": [
+            {
+              "label": "Put a Gilded Blade token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Gilded Blade",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Put a Gilded Goblet token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Gilded Goblet",
+                "count": 1,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

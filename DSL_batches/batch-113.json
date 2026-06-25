@@ -1,0 +1,307 @@
+{
+  "Imprisoned Dragon": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "cannotAttack"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Inauspicious Puppeteer": {
+    "evolvesTo": "Inauspicious Puppeteer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Puppet",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "enteredFromHand"
+            }
+          ]
+        },
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "buff",
+            "atk": -1,
+            "def": -1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Inauspicious Puppeteer Evolved": {
+    "evolvesFrom": "Inauspicious Puppeteer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Puppet",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Puppet",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "condition": {
+          "type": "conditionAny",
+          "conditions": [
+            {
+              "type": "enteredFromHand"
+            }
+          ]
+        },
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "buff",
+            "atk": -1,
+            "def": -1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Infernal Orchestration": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": -1
+            },
+            {
+              "op": "grantOnAllyFollowerEnter",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              "untilEndOfTurn": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Insane Dark Elf": {
+    "evolvesTo": "Insane Dark Elf Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy Wisp",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Insane Dark Elf Evolved": {
+    "evolvesFrom": "Insane Dark Elf",
+    "specialType": "evolved",
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy Wisp",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "refresh",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Insatiable Desire": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        },
+        "cost": {
+          "banishSelf": true
+        }
+      },
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": -2
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Insight": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Instant Poison": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 4,
+          "leaderAmount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Intertwined Resolve": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Natura card from your field into its owner's EX area: Select an enemy follower on the field and deal it 3 damage.",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Summon 2 Fairy tokens.",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Fairy",
+                "count": 2,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

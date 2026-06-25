@@ -1,0 +1,294 @@
+{
+  "Viking": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Vile Violet Dragon": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "rush",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "onDamaged",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "draw",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Vincent, the Peacekeeper": {
+    "evolvesTo": "Vincent, the Peacekeeper Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        },
+        "condition": {
+          "type": "always"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Wasteland"
+              },
+              "lookAt": 40,
+              "to": "cemetery",
+              "optional": false
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Vincent, the Peacekeeper Evolved": {
+    "evolvesFrom": "Vincent, the Peacekeeper",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 3
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 9,
+                "followersOnly": true
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 12
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Violent Soldier": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Viper Lash": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Serpent",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Serpent",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Viridia Magna": {
+    "evolvesTo": "Viridia Magna Evolved",
+    "keywords": [
+      "rush",
+      "assail",
+      "bane",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish a Naterran Great Tree from your field or EX area",
+          "cost": {
+            "op": "banishFromExArea",
+            "filter": {
+              "identityName": "Naterran Great Tree"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "reviveToField",
+                "engaged": true
+              },
+              {
+                "op": "transform",
+                "tokenName": "Viridia Magna Evolved",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Viridia Magna Evolved": {
+    "evolvesFrom": "Viridia Magna",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Virtuous Lindworm Evolved": {
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 6
+            },
+            {
+              "op": "draw",
+              "count": 3
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Vlad, Impaler": {
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

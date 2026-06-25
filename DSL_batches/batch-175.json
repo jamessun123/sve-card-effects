@@ -1,0 +1,246 @@
+{
+  "Pinion Prince Evolved": {
+    "keywords": [
+      "assail"
+    ],
+    "abilities": [],
+    "specialType": "evolved"
+  },
+  "Piquant Potioneer": {
+    "evolvesTo": "Piquant Potioneer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ]
+  },
+  "Piquant Potioneer Evolved": {
+    "evolvesFrom": "Piquant Potioneer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Discard a Runecraft card: Give your leader [defense]+5",
+              "effect": {
+                "op": "optionalCost",
+                "cost": {
+                  "op": "discardFromHand",
+                  "filter": {
+                    "cardClass": "rune"
+                  },
+                  "count": 1
+                },
+                "then": {
+                  "op": "healLeader",
+                  "amount": 5
+                }
+              }
+            },
+            {
+              "label": "Discard a non-Runecraft card: Deal 5 damage to an enemy follower",
+              "effect": {
+                "op": "optionalCost",
+                "cost": {
+                  "op": "discardFromHand",
+                  "filter": {
+                    "excludeCardClass": "rune"
+                  },
+                  "count": 1
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Planetary Fracture": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishAllFieldAndEx"
+            },
+            {
+              "op": "millToBanish",
+              "count": 10
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Playful Necromancer": {
+    "evolvesTo": "Playful Necromancer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Playful Necromancer Evolved": {
+    "evolvesFrom": "Playful Necromancer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ghost",
+          "count": 3,
+          "zone": "field"
+        }
+      }
+    ]
+  },
+  "Plucky Treasure Hunter": {
+    "evolvesTo": "Plucky Treasure Hunter Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Plucky Treasure Hunter Evolved": {
+    "evolvesFrom": "Plucky Treasure Hunter",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "rollDie",
+            "sides": 6,
+            "outcomes": [
+              {
+                "on": [
+                  4,
+                  5,
+                  6
+                ],
+                "effect": {
+                  "op": "draw",
+                  "count": 3
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "Poisonous Dilophosaurus": {
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Naterran Great Tree"
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Pollux": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "fieldTraitMin",
+                "trait": "non-Swordcraft",
+                "count": 1
+              }
+            ]
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "rush",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

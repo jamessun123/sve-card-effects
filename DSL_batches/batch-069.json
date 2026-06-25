@@ -1,0 +1,277 @@
+{
+  "Elf Metallurgist": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elf Queen of Abundant Life": {
+    "evolvesTo": "Elf Queen of Abundant Life Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elf Queen of Abundant Life Evolved": {
+    "evolvesFrom": "Elf Queen of Abundant Life",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamageSplit",
+            "primaryAmount": 4,
+            "maxTargets": 2,
+            "targets": {
+              "type": "enemyFollower"
+            }
+          },
+          "else": {
+            "op": "dealDamageSplit",
+            "primaryAmount": 2,
+            "maxTargets": 2,
+            "targets": {
+              "type": "enemyFollower"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elf Song": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Fairy",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "combo",
+                "count": 3
+              },
+              "then": {
+                "op": "buffFieldTrait",
+                "trait": "Forestcraft",
+                "atk": 1,
+                "def": 1,
+                "otherOnly": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elf Sorcerer": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": -5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamage",
+          "amount": -5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elf Twins' Assault": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": {
+            "op": "exAreaCount"
+          },
+          "maxTargets": 2,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elf Wanderer": {
+    "keywords": [
+      "assail"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantIgnoresWard",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Elimination Unleashed": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Omen",
+            "cardType": "follower"
+          },
+          "count": 3,
+          "maxTotalCost": 9
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elios, Loyal Dragoon": {
+    "evolvesTo": "Elios, Loyal Dragoon Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "healLeader",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Elios, Loyal Dragoon Evolved": {
+    "evolvesFrom": "Elios, Loyal Dragoon",
+    "specialType": "evolved",
+    "keywords": [
+      "storm",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "healLeader",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

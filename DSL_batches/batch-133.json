@@ -1,0 +1,369 @@
+{
+  "Lucifer": {
+    "evolvesTo": "Lucifer Evolved",
+    "evolveCost": 0,
+    "keywords": [
+      "evolve",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "healLeader",
+          "amount": 4
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Lucifer Evolved": {
+    "evolvesFrom": "Lucifer",
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 4,
+          "followersOnly": false
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Lucille, Keeper of Relics": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Summon an Ancient Artifact",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Ancient Artifact",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Summon a Mystic Artifact",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Mystic Artifact",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "banishFromExArea": {
+            "count": 5
+          },
+          "banishCount": 5
+        },
+        "effect": {
+          "op": "summonFromEvolveDeck",
+          "filter": {
+            "identityName": "Spinaria & Lucille, Keepers"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lumbering Carapace": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "combo",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Lumbering Carapace"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Luminous Commander": {
+    "evolvesTo": "Luminous Commander Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Luminous Commander Evolved": {
+    "evolvesFrom": "Luminous Commander",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Knight",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Steelclad Knight",
+                  "effect": {
+                    "op": "summon",
+                    "tokenName": "Steelclad Knight",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                },
+                {
+                  "label": "Shield Guardian",
+                  "effect": {
+                    "op": "summon",
+                    "tokenName": "Shield Guardian",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Officer token",
+          "count": 3
+        },
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 3,
+          "leaderAmount": 3
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Luminous Knight": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Luminous Lancetrooper": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Steelclad Knight",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Officer token",
+          "count": 3
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 0,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Officer token"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Luminous Magus": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Shield Guardian",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Shield Guardian",
+                "count": 1,
+                "zone": "field"
+              }
+            },
+            {
+              "label": "Knight",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Knight",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Officer token",
+          "count": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Luna's Doll": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

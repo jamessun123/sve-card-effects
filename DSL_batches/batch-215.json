@@ -1,0 +1,341 @@
+{
+  "Spinaria & Lucille, Keepers ADVANCED": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 6
+            },
+            {
+              "op": "searchDeckChoose",
+              "filter": {},
+              "lookAt": 2,
+              "to": "exArea",
+              "optional": true,
+              "remainderTo": "cemetery"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Spinaria, Keeper of Enigmas": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "forest"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "combo",
+          "count": 3
+        },
+        "effect": {
+          "op": "recoverPp",
+          "amount": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Spinaria, Keeper of the End": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "banishFromCemetery": {
+            "count": 3
+          },
+          "banishCount": 3
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Keenedge Artifact",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Mystic Artifact",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Spinaria, Wavering Will": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyEvolve",
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "cardClass": "forest",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "exArea",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Spirit Curator": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Ghost token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Ghost",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Look at the top 3 cards of your deck. You may reveal an Abysscraft card from among them and add it to your hand. Put the rest on the bottom of your deck in any order.",
+              "effect": {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "cardClass": "abyss"
+                },
+                "lookAt": 3,
+                "to": "hand",
+                "optional": true,
+                "remainderTo": "deckBottom"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Spirit of the Spring": {
+    "keywords": [
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "putDeckTopToExArea"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "returnToHand",
+              "targets": {
+                "type": "anyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "selectFromHand",
+              "filter": {},
+              "to": "exArea"
+            }
+          ]
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Spiritshine": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give a Pixie token +2/+2",
+              "effect": {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "anyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Put 2 Fairy tokens into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Fairy",
+                "count": 2,
+                "zone": "exArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Spiritual Blow": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Spiteful Screams": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardClass": "abyss",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Splendid Conjury": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 3 damage divided between up to 3 enemy followers",
+              "effect": {
+                "op": "dealDamageSplit",
+                "primaryAmount": 3,
+                "secondaryAmount": 0,
+                "maxTargets": 3,
+                "targets": {
+                  "type": "enemyFollower"
+                }
+              }
+            },
+            {
+              "label": "If there's an Eleanor, Cosmic Flower on your field, deal 5 damage divided between them instead",
+              "effect": {
+                "op": "dealDamageSplit",
+                "primaryAmount": 5,
+                "secondaryAmount": 0,
+                "maxTargets": 3,
+                "targets": {
+                  "type": "enemyFollower"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

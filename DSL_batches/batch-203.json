@@ -1,0 +1,234 @@
+{
+  "Serpent": {
+    "keywords": [
+      "bane"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Serpent Wrath": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "overflow"
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Serration Wave": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 2,
+          "options": [
+            {
+              "label": "Select an enemy follower on the field and deal it 2 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Select a Kagemitsu, Lost Samurai on your field or in your EX area and place a fighting spirit counter on it",
+              "effect": {
+                "op": "addCounter",
+                "counter": "fighting_spirit",
+                "amount": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Servant of Cocytus": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Servant of Destruction": {
+    "evolvesTo": "Servant of Destruction Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Idolatry",
+            "count": 3
+          },
+          "then": {
+            "op": "evolveCostReduction",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Servant of Destruction Evolved": {
+    "evolvesFrom": "Servant of Destruction",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "damageFollowerAndLeader",
+          "followerAmount": 2,
+          "leaderAmount": 2
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Servant of Disdain": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "self",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          },
+          "opponentTurnOnly": false,
+          "oncePerTurn": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Servant of Lust": {
+    "evolvesTo": "Servant of Lust Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Servant of Lust Evolved": {
+    "evolvesFrom": "Servant of Lust",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "countLeaderDefLossThisTurn"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Servant of Repose": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

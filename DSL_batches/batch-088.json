@@ -1,0 +1,363 @@
+{
+  "Gallant Dragonewt": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Armed"
+              },
+              "lookAt": 2,
+              "to": "hand",
+              "optional": true,
+              "reveal": true,
+              "remainderTo": "deckBottom"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Armed",
+                "count": 3
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summon",
+                    "tokenName": "Draconic Weapon",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "recoverPp",
+                    "amount": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Galmieux, Ardent Disdain": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fangs of Ardent Destruction",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Omen"
+            },
+            "lookAt": 2,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 3,
+            "remainderTo": "deckBottom"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Galmieux, Omen of Disdain": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolvesTo": "Galmieux, Omen of Disdain Evolved",
+    "evolveCost": 2,
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 0
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Galmieux, Omen of Disdain Evolved": {
+    "evolvesFrom": "Galmieux, Omen of Disdain",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Omen",
+            "cardType": "spell",
+            "maxCost": 2
+          },
+          "to": "field",
+          "playCostReduction": 0
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnDamaged",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Galua of Two Breaths": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost02]",
+          "cost": {
+            "op": "spendPp",
+            "amount": 2
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      }
+    ]
+  },
+  "Gambit": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Magical Pawn",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "lastSummoned"
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "rush",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Chess",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "trait": "Chess",
+                      "cardType": "follower",
+                      "maxCost": 4
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Gargantuan Ghost": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "banishSelf"
+        }
+      }
+    ]
+  },
+  "Gargouille": {
+    "keywords": [
+      "rush",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Draconic Duelist",
+            "count": 3
+          },
+          "then": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      }
+    ]
+  },
+  "Garnet Waltz": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 2 damage to each enemy leader and 1 damage to your own",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyLeader"
+                    }
+                  },
+                  {
+                    "op": "dealDamage",
+                    "amount": 1,
+                    "targets": {
+                      "type": "selfLeader"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Summon Assembly Droid and put one into EX area",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "summon",
+                    "tokenName": "Assembly Droid",
+                    "count": 1,
+                    "zone": "field"
+                  },
+                  {
+                    "op": "summon",
+                    "tokenName": "Assembly Droid",
+                    "count": 1,
+                    "zone": "exArea"
+                  },
+                  {
+                    "op": "if",
+                    "condition": {
+                      "type": "namedFollowerOnFieldByName",
+                      "identityName": "Mono, Garnet Rebel"
+                    },
+                    "then": {
+                      "op": "summon",
+                      "tokenName": "Assembly Droid",
+                      "count": 1,
+                      "zone": "field"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Garuel, Seraphic Leo": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolveCost": 1,
+    "evolvesTo": "Garuel, Seraphic Leo Evolved",
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "withChosenNumber",
+          "min": 0,
+          "max": 0,
+          "then": {
+            "op": "selectFromHand",
+            "filter": {
+              "cardClass": "neutral",
+              "cardType": "follower",
+              "maxCost": {
+                "op": "maxPp"
+              }
+            },
+            "to": "field",
+            "optional": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "Little Dragon Nanny Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Dragon's Nest"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Dragon's Nest"
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fire Drake Whelp",
+            "count": 1,
+            "zone": "field"
+          },
+          "oncePerTurn": true
+        }
+      }
+    ],
+    "parseConfidence": "review",
+    "specialType": "evolved"
+  },
+  "Liu Feng, Goldennote Ward": {
+    "evolvesTo": "Liu Feng, Goldennote Ward Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Liu Feng, Goldennote Ward Evolved": {
+    "evolvesFrom": "Liu Feng, Goldennote Ward",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "onSuperEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "increaseMaxPp",
+              "amount": 1
+            },
+            {
+              "op": "healLeader",
+              "amount": 2
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Lizardman": {
+    "keywords": [
+      "assail"
+    ],
+    "abilities": []
+  },
+  "Lloyd": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ]
+  },
+  "Loathing Desire": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "traitsAny": [
+                  "Omen",
+                  "Demon"
+                ]
+              },
+              "lookAt": 4,
+              "to": "hand",
+              "optional": true,
+              "remainderTo": "deckBottom",
+              "reveal": true
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "conditionAny",
+                "conditions": [
+                  {
+                    "type": "discardedThisTurn"
+                  },
+                  {
+                    "type": "always"
+                  }
+                ]
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Lococo's Teddy Bear": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "selfLeader"
+          }
+        }
+      }
+    ]
+  },
+  "Lococo, Little Puppeteer": {
+    "evolvesTo": "Lococo, Little Puppeteer Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": []
+  },
+  "Lococo, Little Puppeteer Evolved": {
+    "evolvesFrom": "Lococo, Little Puppeteer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroyAllFollowers"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Lococo's Teddy Bear",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Looking Smart!": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

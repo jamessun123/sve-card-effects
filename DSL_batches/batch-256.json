@@ -1,0 +1,260 @@
+{
+  "Zealot of Disdain": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageOtherFollowers",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "onDamaged",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zealot of Lust": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "maxPerTurn": 2,
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": -1
+            },
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zealot of Repose": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxDef": 4
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zealot of Silence": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "reviveSelfFromCemetery"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zealot of Truth": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Mage",
+            "count": 5
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Zealot of Unkilling": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Hunter",
+            "count": 3
+          },
+          "then": {
+            "op": "buff",
+            "atk": -4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Zealot of Usurpation": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buryEachOpponentDeck",
+              "count": 1
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "opponentCemeteryMin",
+                "count": 10
+              },
+              "then": {
+                "op": "putDeckTopToExArea"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Zell, Windreader": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ppMin",
+            "count": 10
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "cardClass": "dragon",
+                "cardType": "follower"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Zeno, Paradoxical Shield": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "follower"
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Ward",
+          "count": 3
+        },
+        "effect": {
+          "op": "buff",
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Zirconia, Ironcrown Ward": {
+    "evolvesTo": "Zirconia, Ironcrown Ward Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "keyword-only"
+  }
+}

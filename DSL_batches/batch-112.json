@@ -1,0 +1,379 @@
+{
+  "Icyclone": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal it 1 damage",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "If there's another Heroic follower on your field, deal 4 damage instead",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "fieldTraitMin",
+                  "trait": "Heroic",
+                  "count": 2
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                },
+                "else": {
+                  "op": "dealDamage",
+                  "amount": 1,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Heroic"
+          },
+          "lookAt": 1,
+          "to": "exArea",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ignominious Samurai": {
+    "keywords": [
+      "assail",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Illganeau, Horror Astray": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Necrocharge (10) - You may summon it. If you do, banish this card.",
+          "cost": {
+            "op": "if",
+            "condition": {
+              "type": "necrocharge",
+              "count": 10
+            },
+            "then": {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Wasteland",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "count": 1,
+              "maxTotalCost": 3
+            }
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishSelf"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "moveSourceToExArea"
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Illusions of Comfort": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "sourceInExArea"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Hozumi, Enchanting Hostess"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "returnToHand",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ilmisuna, Discord Hawker": {
+    "keywords": [
+      "fanfare",
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Merchant",
+            "count": 2
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "else": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Imperator of Magic": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolvesTo": "Imperator of Magic Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "trait": "Golem",
+            "cardType": "follower",
+            "maxCost": 6
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Imperator of Magic Evolved": {
+    "evolvesFrom": "Imperator of Magic",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "rush",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Golem"
+            }
+          }
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "assail",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Golem"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Imperial Dragoon": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": {
+                "op": "handCount"
+              }
+            },
+            {
+              "op": "discardHand"
+            }
+          ]
+        }
+      }
+    ],
+    "evolvesTo": "Imperial Dragoon Evolved",
+    "parseConfidence": "high"
+  },
+  "Imperial Dragoon Evolved": {
+    "evolvesFrom": "Imperial Dragoon",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "draw",
+          "count": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Impious Bishop": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Zealot",
+            "maxCost": 2
+          },
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 2,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "condition": {
+          "type": "always"
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "enteredFromHand"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

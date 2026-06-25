@@ -1,0 +1,287 @@
+{
+  "Ernesta, Weapons Hawker": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 0,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "cardClass": "sword"
+            },
+            "excludeSelf": true
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Merchant follower not named Ernesta, Weapons Hawker"
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Erosive Annihilation": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "grantOnEnemyFollowerLeaveField",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ersatz Elimination": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "traitsAny": [
+              "Omen",
+              "Mage"
+            ],
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Eschamali Adviser": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Eschamali Constable": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Eternal Contract": {
+    "keywords": [
+      "act"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromCemetery",
+              "filter": {
+                "identityName": "Paracelise, Demon of Greed"
+              },
+              "to": "deck"
+            },
+            {
+              "op": "turnEvolveDeck",
+              "orientation": "facedown",
+              "count": 1,
+              "filter": {
+                "identityName": "Paracelise, Demon of Greed"
+              }
+            }
+          ]
+        },
+        "cost": {
+          "pp": 1,
+          "banishSelf": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Eternal Potion": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summonFromCemetery",
+              "filter": {
+                "cardClass": "rune",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "count": 1
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "rush",
+              "targets": {
+                "type": "lastSummoned"
+              }
+            },
+            {
+              "op": "grantLastWords",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "self",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Eternal Whale": {
+    "keywords": [
+      "ward",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "enteredFromHand"
+        },
+        "effect": {
+          "op": "recoverPp",
+          "amount": 4
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": false
+            },
+            {
+              "op": "putOnTopOfDeck",
+              "targets": {
+                "type": "self",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Europa": {
+    "evolvesTo": "Europa Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "turnEvolveDeck",
+              "orientation": "facedown",
+              "count": 1,
+              "filter": {
+                "identityName": "Europa"
+              }
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Europa Evolved": {
+    "evolvesFrom": "Europa",
+    "specialType": "evolved",
+    "keywords": [
+      "storm",
+      "bane",
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

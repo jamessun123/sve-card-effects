@@ -1,0 +1,240 @@
+{
+  "Water Fairy": {
+    "evolvesTo": "Water Fairy Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Water Fairy Evolved": {
+    "evolvesFrom": "Water Fairy",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fairy",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Waters of the Megalorca": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Megalorca",
+            "count": 2,
+            "zone": "field"
+          },
+          "else": {
+            "op": "summon",
+            "tokenName": "Megalorca",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wavecrest Angler": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Marine"
+          },
+          "lookAt": 3,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wayfaring Illustrator": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardType": "follower"
+          },
+          "to": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "shuffleDeck"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "We've Got a Case!": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Westmuenster Abbey": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardType": "follower",
+          "maxCost": 2
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wheel of Misfortune": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "X. Slaus, Wheel of Fortune"
+        },
+        "effect": {
+          "op": "addCounter",
+          "counter": "calamity",
+          "amount": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "addCounter",
+          "counter": "calamity",
+          "amount": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "noop",
+          "label": "Destroy each enemy follower with cost equal to this card's calamity counters"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Whims of Chaos": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "noop",
+          "label": "Each player gives control of a selected follower to another player"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Whimsical Mermaid": {
+    "keywords": [
+      "ward",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Marine",
+            "cardType": "follower",
+            "excludeIdentityName": "Whimsical Mermaid"
+          },
+          "to": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "Dragonfolk Stoker Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "effect": {
+          "op": "draw",
+          "count": 1
+        },
+        "cost": {
+          "pp": 0,
+          "removeCounter": {
+            "counter": "divine water",
+            "amount": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Dragonguard": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "evolvesTo": "Dragonguard Evolved",
+    "evolveCost": 0,
+    "parseConfidence": "high"
+  },
+  "Dragonplate Warrior": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "recoverPp",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragonrearer Matilda": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "lookAt": 3,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        },
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragonrend Quake": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "dealDamageCompare",
+          "targets": {
+            "type": "anyFollower",
+            "count": 2
+          },
+          "damageTargetFirst": true
+        },
+        "condition": {
+          "type": "always"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragonrider": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dragon",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "evolvesTo": "Dragonrider Evolved",
+    "evolveCost": 1,
+    "parseConfidence": "high"
+  },
+  "Dragonrider Evolved": {
+    "evolvesFrom": "Dragonrider",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 0,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dragonskull Bludgeoner": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dragonslayer Spear": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "noop",
+          "label": "Prevent damage to Rowen, Dragon Lance this turn"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragonsong Flute": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Hellflame Dragon",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Hellflame Dragon",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        },
+        "cost": {
+          "pp": 3
+        }
+      },
+      {
+        "timing": "activated",
+        "condition": {
+          "type": "overflow"
+        },
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "discard": 1
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Hellflame Dragon",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

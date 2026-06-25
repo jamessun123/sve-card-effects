@@ -1,0 +1,345 @@
+{
+  "Wretch": {
+    "evolveCost": 1,
+    "keywords": [
+      "rush",
+      "evolve",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "evolve",
+        "condition": {
+          "type": "enteredFromCemetery"
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": []
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Bullet Bike",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "mill",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "evolvesTo": "Wretch Evolved",
+    "parseConfidence": "high"
+  },
+  "Wretch Evolved": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Bullet Bike",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "mill",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "evolvesFrom": "Wretch",
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Wretched Tryst": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "then": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "trait": "Wasteland",
+              "cardType": "follower",
+              "maxCost": 3
+            },
+            "count": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wyrm God of the Skies": {
+    "evolvesTo": "Wyrm God of the Skies Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "exArea",
+        "cost": {
+          "pp": 2,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 4,
+              "def": 4,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "grantActRestriction",
+              "untilEndOfTurn": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wyrm God of the Skies Evolved": {
+    "evolvesFrom": "Wyrm God of the Skies",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "healLeader",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "moveSourceToExArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wyrm Spire": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "rush",
+          "trait": "Dragon"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "anyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Dragon",
+              "count": 1,
+              "zone": "field"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Wyrmfire Engineer": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Bullet Bike",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Wyvern Cavalier": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "putDeckTopToExArea",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "X. Slaus, Wheel of Fortune": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost02]",
+          "cost": {
+            "op": "spendPp",
+            "amount": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Wheel of Misfortune"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "onExAreaEntry",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[engage]",
+          "cost": {
+            "op": "engageSelf"
+          },
+          "then": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "XI. Erntz, Justice": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "putDeckTopToExArea"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "always"
+          },
+          "then": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Evolve this follower",
+                "effect": {
+                  "op": "autoEvolveIf",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "triggerOnEvolve": true
+                }
+              },
+              {
+                "label": "Return it to its owner's hand",
+                "effect": {
+                  "op": "returnToHand",
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "condition": {
+          "type": "always"
+        }
+      },
+      {
+        "timing": "onLeaveField",
+        "effect": {
+          "op": "healLeader",
+          "amount": 8
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "Cassiopeia": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": {
+            "op": "handExAreaTotal"
+          },
+          "maxTargets": 99,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Castle in the Sky": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "keyword": "storm",
+            "cardType": "follower"
+          },
+          "lookAt": 40,
+          "to": "hand",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "keyword": "storm"
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 10,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "summonFromHand",
+          "filter": {
+            "keyword": "storm",
+            "cardType": "follower"
+          },
+          "to": "field",
+          "allMatching": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Castor": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "identityName": "Castor"
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cat Admiral": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Steelclad Knight",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Shield Guardian",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardClass": "sword"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cat Cannoneer": {
+    "evolvesTo": "Cat Cannoneer Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Cat Cannoneer Evolved": {
+    "evolvesFrom": "Cat Cannoneer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Ancient Artifact",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Cat Summoner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "traitsAny": [
+              "Beast",
+              "Arcanaform"
+            ],
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Celestial Dragoon": {
+    "evolvesTo": "Celestial Dragoon Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        },
+        "cost": {
+          "engage": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Celestial Dragoon Evolved": {
+    "evolvesFrom": "Celestial Dragoon",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "maxCost": 7
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      },
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        },
+        "cost": {
+          "engage": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Celestial Shikigami": {
+    "keywords": [
+      "aura"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "auraAbilityDamageCap",
+          "amount": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

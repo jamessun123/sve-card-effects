@@ -1,0 +1,349 @@
+{
+  "Touching Thoughts": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "overflow"
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "healLeader",
+                    "amount": 1
+                  },
+                  {
+                    "op": "recoverPp",
+                    "amount": 1
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Tower Root Giant": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "engage",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          },
+          "skipRefreshNextStart": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Traditional Sorcerer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Shikigami",
+          "cardType": "follower"
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "ward",
+          "targets": {
+            "type": "lastSummoned"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Spell",
+                "count": 7
+              },
+              {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Onmyoji",
+                "count": 7
+              }
+            ]
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Paper Shikigami",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Trail of Light": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onDiscard",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Trainer": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Give another iM@S CG follower on your field Bane",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "bane",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "excludeSelf": true,
+                  "filter": {
+                    "trait": "iM@S CG"
+                  }
+                }
+              }
+            },
+            {
+              "label": "Give another iM@S CG follower on your field Drain",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "drain",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "excludeSelf": true,
+                  "filter": {
+                    "trait": "iM@S CG"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Trampling Terror": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 3,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Transcendent Simulacrum": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Golem",
+            "cardType": "follower"
+          },
+          "to": "hand"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "trait": "Golem"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Transmogrified Wyrm": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "transform",
+          "tokenName": "Dragon",
+          "targets": {
+            "type": "anyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Travelers' Respite": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "traitsAny": [
+                  "Wasteland",
+                  "Natura"
+                ]
+              },
+              "lookAt": 3,
+              "to": "hand",
+              "optional": true,
+              "remainderTo": "deckBottom",
+              "reveal": true
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "conditionAny",
+                "conditions": [
+                  {
+                    "type": "namedFollowerOnFieldByName",
+                    "identityName": "Wasteland"
+                  },
+                  {
+                    "type": "inExArea"
+                  }
+                ]
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Treacherous Reversal": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroyAllFollowers"
+            },
+            {
+              "op": "buryFieldFollowers",
+              "sourceOnly": true
+            },
+            {
+              "op": "discardHand"
+            },
+            {
+              "op": "searchDeckChoose",
+              "filter": {},
+              "lookAt": 5,
+              "to": "exArea",
+              "optional": true,
+              "remainderTo": "cemetery"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

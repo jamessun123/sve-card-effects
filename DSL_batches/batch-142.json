@@ -1,0 +1,272 @@
+{
+  "Margarite Mermaid Evolved": {
+    "evolvesFrom": "Margarite Mermaid",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Marine"
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marian the Mummy": {
+    "evolvesTo": "Marian the Mummy Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marian the Mummy Evolved": {
+    "evolvesFrom": "Marian the Mummy",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 7
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "assail"
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "necrocharge",
+          "count": 15
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm",
+            "bane"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marie, Flowery Magician": {
+    "evolvesTo": "Marie, Flowery Magician Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "mill",
+              "count": 2
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "discardedCardType",
+                "cardType": "nonRunecraft"
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Marie, Flowery Magician Evolved": {
+    "evolvesFrom": "Marie, Flowery Magician",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marion, Elegant Dragonewt": {
+    "evolvesTo": "Marion, Elegant Dragonewt Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "follower"
+          },
+          "lookAt": 3,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marion, Elegant Dragonewt Evolved": {
+    "evolvesFrom": "Marion, Elegant Dragonewt",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "cardClass": "dragon"
+            },
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Marion, Ravishing Dragonewt": {
+    "evolvesTo": null,
+    "evolveCost": null,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 4
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mark Unleashed": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Faith",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mark of the Six": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "grantLeaderDamageShield",
+          "charges": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

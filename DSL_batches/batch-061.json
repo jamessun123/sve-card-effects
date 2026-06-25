@@ -1,0 +1,237 @@
+{
+  "Dragon": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Dragon Aficionado": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "cardClass": "dragon",
+                  "cardType": "follower",
+                  "maxCost": 1
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dragon Breeder": {
+    "evolvesTo": "Dragon Breeder Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Dragon Breeder Evolved": {
+    "evolvesFrom": "Dragon Breeder",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "lookAt": 4,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 0,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragon Chef": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "always"
+          },
+          "then": {
+            "op": "healLeader",
+            "amount": 2
+          },
+          "else": {
+            "op": "healLeader",
+            "amount": 4
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragon Emissary": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "minCost": 5
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dragon Empress Otohime": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Otohime's Vanguard",
+            "count": 3,
+            "zone": "field"
+          },
+          "else": {
+            "op": "summon",
+            "tokenName": "Otohime's Vanguard",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "cardClass": "dragon"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 1,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        },
+        "oncePerTurn": false
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Dragon Impact": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "putDeckTopToExArea"
+            },
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 4,
+              "followersOnly": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dragon Oracle": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Increase your max play points by 1",
+              "effect": {
+                "op": "increaseMaxPp",
+                "amount": 1
+              }
+            },
+            {
+              "label": "Draw a card",
+              "effect": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Dragon Spawning": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "follower"
+          },
+          "lookAt": 3,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 2,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

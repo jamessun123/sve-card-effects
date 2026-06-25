@@ -1,0 +1,354 @@
+{
+  "#UNICUS": {
+    "keywords": [
+      "fanfare",
+      "storm",
+      "bane",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Cute"
+                },
+                "count": 3
+              },
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Cool"
+                },
+                "count": 3
+              },
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Passion"
+                },
+                "count": 3
+              }
+            ]
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 9
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm",
+            "bane",
+            "ward"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "* (Asterisk)": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "0. Lhynkal, The Fool": {
+    "evolvesTo": "0. Lhynkal, The Fool Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Arcana",
+            "cardType": "spell"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "0. Lhynkal, The Fool Evolved": {
+    "evolvesFrom": "0. Lhynkal, The Fool",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "trait": "Arcana",
+          "cardType": "spell"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "A Hellish Banquet": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "hand",
+        "cost": {
+          "banishFromCemetery": {
+            "identityName": "One-Tailed Fox"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "One-Tailed Fox"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "A Horrible Night": {
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "A Single Vessel": {
+    "keywords": [
+      "fanfare",
+      "lastWords",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "discard": 1
+        },
+        "effect": {
+          "op": "burySelf"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "A Sweet Romantic Summer": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "iM@S CG follower"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "identityNameContains": "Shin Sato"
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Abby the Axe Girl": {
+    "keywords": [
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Absolute Tolerance": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "handMax",
+          "count": 2
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 15
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 5
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

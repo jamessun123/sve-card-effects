@@ -1,0 +1,233 @@
+{
+  "Caladrius": {
+    "evolvesTo": "Caladrius Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buryFieldFollowers",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "minCost": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Call of Cocytus": {
+    "keywords": [
+      "quick"
+    ],
+    "abilities": [
+      {
+        "timing": "spell",
+        "quick": true,
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "neutral",
+                "cardType": "follower"
+              },
+              "to": "hand",
+              "reveal": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Calydonian Boar": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "onLeaveField"
+        },
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Candelabra of Prayers": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          },
+          "oncePerTurn": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Captain Meteo": {
+    "evolvesTo": "Captain Meteo Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 4,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Captain Meteo Evolved": {
+    "evolvesFrom": "Captain Meteo",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Carbuncle's Sparkle": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Return a follower to hand",
+              "effect": {
+                "op": "returnToHand",
+                "targets": {
+                  "type": "anyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Give your leader [defense]+4",
+              "effect": {
+                "op": "healLeader",
+                "amount": 4
+              }
+            },
+            {
+              "label": "Draw 2 cards",
+              "effect": {
+                "op": "draw",
+                "count": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Carbuncle, Immortal Jewel": {
+    "evolvesTo": "Carbuncle, Immortal Jewel Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Carbuncle's Sparkle",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Carbuncle, Immortal Jewel Evolved": {
+    "evolvesFrom": "Carbuncle, Immortal Jewel",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Carbuncle's Sparkle",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantPlayCostReduction",
+          "amount": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Carrot Evolved": {
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "Rulenye, Echoing Scream": {
+    "keywords": [
+      "rush",
+      "assail"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Rulenye, Omen of Silence": {
+    "evolvesTo": "Rulenye, Omen of Silence Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "necrocharge",
+          "count": 10
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxCost": 3
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "playCostIncrease",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rulenye, Omen of Silence Evolved": {
+    "evolvesFrom": "Rulenye, Omen of Silence",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "opponentDiscardEach",
+          "count": 1
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "playCostIncrease",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rulenye, Screaming Silence": {
+    "keywords": [
+      "rush",
+      "assail",
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Omen",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Scream Diffusion",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "mill",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ruler of Cocytus": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "selfLeader"
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Silent Rider",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Servant of Cocytus",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Demon of Purgatory",
+              "count": 1,
+              "zone": "exArea"
+            },
+            {
+              "op": "summon",
+              "tokenName": "Astaroth's Reckoning",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Rune Blade Summoner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 2,
+          "options": [
+            {
+              "label": "Spellchain (5) - Give this follower [attack]+4/[defense]+4",
+              "effect": {
+                "op": "buff",
+                "atk": 4,
+                "def": 4,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "SC (10) - Give this follower Storm",
+              "effect": {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Runic Guardian": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Earth Rite - Give this follower [attack]+1/[defense]+2",
+              "effect": {
+                "op": "buff",
+                "atk": 1,
+                "def": 2,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            },
+            {
+              "label": "Summon a Magic Sediment token",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Magic Sediment",
+                "count": 1,
+                "zone": "field"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Runie, Resolute Diviner": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 4,
+          "options": [
+            {
+              "label": "Spellchain (5) - Deal 3 damage to up to 1 enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "SC (10) - Deal 2 damage to each enemy leader",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            },
+            {
+              "label": "Give your leader [defense]+2",
+              "effect": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            },
+            {
+              "label": "SC (15) - Put each Runie, Resolute Diviner from your cemetery into your EX area",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityName": "Runie, Resolute Diviner"
+                },
+                "to": "exArea"
+              }
+            },
+            {
+              "label": "SC (20) - Give each Runie, Resolute Diviner on your field and in your EX area [attack]+2/[defense]+2",
+              "effect": {
+                "op": "buffFieldTrait",
+                "trait": "Mage",
+                "atk": 2,
+                "def": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Rusty, Luxcard Trickster": {
+    "keywords": [
+      "storm",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Rusty, Luxcard Trickster"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Ryo Matsunaga": {
+    "keywords": [
+      "ward",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "iM@S CG",
+            "cardType": "spell"
+          },
+          "to": "hand"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

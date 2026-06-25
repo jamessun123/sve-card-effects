@@ -1,0 +1,255 @@
+{
+  "Suttungr Evolved": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 2,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Suzuho Ueda": {
+    "evolvesTo": "Suzuho Ueda Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "peekDeck",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Suzuho Ueda Evolved": {
+    "evolvesFrom": "Suzuho Ueda",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "selfAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Sweet Sentiments": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "buffFieldTrait",
+              "cardClass": "any",
+              "atk": 1,
+              "otherOnly": true
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sweet-Tooth Medusa": {
+    "evolvesTo": "Sweet-Tooth Medusa Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "maxCost": 2
+          },
+          "lookAt": 40,
+          "to": "hand",
+          "optional": false,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "onEnemyFollowerLeaveField",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Serpent",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sweet-Tooth Medusa Evolved": {
+    "evolvesFrom": "Sweet-Tooth Medusa",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "dealDamageSplit",
+          "primaryAmount": 5,
+          "secondaryAmount": 0,
+          "maxTargets": 2,
+          "targets": {
+            "type": "enemyFollower"
+          }
+        }
+      },
+      {
+        "timing": "onEnemyFollowerLeaveField",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Serpent",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "effect": {
+          "op": "optionalCost",
+          "label": "Bury 2 cards named Serpent",
+          "cost": {
+            "op": "mill",
+            "count": 2
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 2
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Sweet-Tooth Sleuth": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "noop",
+          "label": "Select an opponent. They reveal their hand."
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Swift Infiltrator": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Swift Tigress": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "noop",
+          "label": "[engage] a Naterran Great Tree on your field: Give this follower Storm."
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Swiftblade Dragonewt": {
+    "evolvesTo": "Swiftblade Dragonewt Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Armed",
+            "count": 3
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Draconic Weapon",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": false
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

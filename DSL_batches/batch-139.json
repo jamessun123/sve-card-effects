@@ -1,0 +1,277 @@
+{
+  "Maid Leader": {
+    "evolvesTo": "Maid Leader Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Maid Leader Evolved": {
+    "evolvesFrom": "Maid Leader",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "follower"
+          },
+          "lookAt": 40,
+          "to": "hand",
+          "optional": true,
+          "reveal": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mainyu": {
+    "evolvesTo": "Mainyu Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "aura"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Mainyu Evolved": {
+    "evolvesFrom": "Mainyu",
+    "keywords": [
+      "aura"
+    ],
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "aura"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mainyu, Darkdweller": {
+    "keywords": [
+      "aura"
+    ],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "aura"
+          ]
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "effect": {
+          "op": "buff",
+          "atk": 1,
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Maiser, Neighborhood Hero": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Dutiful Steed",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityName": "Rapid Fire"
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "spellchain",
+          "count": 5
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "onCardPlayed",
+        "filter": {
+          "cardType": "spell"
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Maisha, Hero of Purgation": {
+    "evolvesTo": "Maisha, Hero of Purgation Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "playFromOpponentCemetery",
+          "filter": {
+            "cardClass": "neutral",
+            "cardType": "spell",
+            "maxCost": 3
+          },
+          "maxCost": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Maisha, Hero of Purgation Evolved": {
+    "evolvesFrom": "Maisha, Hero of Purgation",
+    "specialType": "evolved",
+    "keywords": [
+      "storm",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "mill",
+              "count": 5
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "playFromOpponentCemetery",
+          "filter": {
+            "cardClass": "neutral",
+            "cardType": "spell",
+            "maxCost": 3
+          },
+          "maxCost": 3
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Maisha, Purgation's Vessel": {
+    "evolvesTo": "Maisha, Purgation's Vessel Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Maisha, Purgation's Vessel Evolved": {
+    "evolvesFrom": "Maisha, Purgation's Vessel",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryMin",
+          "count": 10
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "oncePerTurn": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "cemeteryFilterCount",
+            "filter": {
+              "cardType": "follower"
+            },
+            "divisor": 5
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

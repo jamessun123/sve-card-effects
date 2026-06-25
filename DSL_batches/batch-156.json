@@ -1,0 +1,276 @@
+{
+  "Moonrise Werewolf": {
+    "evolvesTo": "Moonrise Werewolf Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Moonrise Werewolf Evolved": {
+    "evolvesFrom": "Moonrise Werewolf",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Moonshade Mage": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 3
+            },
+            {
+              "op": "discard",
+              "count": 2
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "discard": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 6,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mordecai the Duelist": {
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "reviveToField",
+          "engaged": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Moriae Encomium": {
+    "keywords": [
+      "fanfare",
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1,
+            "maxDef": 3
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Moriana the Bejeweled": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "sanguine"
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 3
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Morra, Monika's Familiar": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Morton the Manipulator": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "They can't draw a card during their next start phase",
+              "effect": {
+                "op": "grantOpponentRestriction",
+                "restriction": "skipDraw"
+              }
+            },
+            {
+              "label": "They can't increase their maximum play points by 1 during their next start phase",
+              "effect": {
+                "op": "grantOpponentRestriction",
+                "restriction": "skipPp"
+              }
+            },
+            {
+              "label": "They can't play followers during their next main phase",
+              "effect": {
+                "op": "grantOpponentRestriction",
+                "restriction": "noFollowers"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mountain Gigas": {
+    "keywords": [
+      "rush",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 7,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mr. Bertrand, Magic Mentor": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Mysterian Missile token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Mysterian Missile",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Select an Academic spell in your cemetery and, if there are at least 5 Academic cards in your cemetery, add it to your hand",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryMin",
+                  "count": 5
+                },
+                "then": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "trait": "Academic",
+                    "cardType": "spell"
+                  },
+                  "to": "hand"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

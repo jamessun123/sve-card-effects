@@ -1,0 +1,422 @@
+{
+  "Karen Hojo [Song for Life]": {
+    "evolvesTo": "Karen Hojo [Song for Life] Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 2
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "self",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 3
+        },
+        "effect": {
+          "op": "buffFieldTrait",
+          "trait": "Cool",
+          "atk": 1,
+          "def": 0
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Karin Domyoji": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Cute card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Cute"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 0,
+                "def": 2,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Karula, Arts Master": {
+    "evolvesTo": "Karula, Arts Master Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "chooseMultiple",
+          "min": 0,
+          "max": 3,
+          "options": [
+            {
+              "label": "If you have at least 2 play points, deal 2 damage to each enemy leader",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ppMin",
+                  "count": 2
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 2,
+                  "targets": {
+                    "type": "enemyLeader"
+                  }
+                }
+              }
+            },
+            {
+              "label": "If you have at least 4 play points, draw a card",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ppMin",
+                  "count": 4
+                },
+                "then": {
+                  "op": "draw",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "If you have at least 6 play points, destroy an enemy follower",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ppMin",
+                  "count": 6
+                },
+                "then": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Karula, Arts Master Evolved": {
+    "evolvesFrom": "Karula, Arts Master",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "recoverPp",
+              "amount": 2
+            },
+            {
+              "op": "chooseMultiple",
+              "min": 0,
+              "max": 3,
+              "options": [
+                {
+                  "label": "If you have at least 2 play points, deal 2 damage to each enemy leader",
+                  "effect": {
+                    "op": "if",
+                    "condition": {
+                      "type": "ppMin",
+                      "count": 2
+                    },
+                    "then": {
+                      "op": "dealDamage",
+                      "amount": 2,
+                      "targets": {
+                        "type": "enemyLeader"
+                      }
+                    }
+                  }
+                },
+                {
+                  "label": "If you have at least 4 play points, draw a card",
+                  "effect": {
+                    "op": "if",
+                    "condition": {
+                      "type": "ppMin",
+                      "count": 4
+                    },
+                    "then": {
+                      "op": "draw",
+                      "count": 1
+                    }
+                  }
+                },
+                {
+                  "label": "If you have at least 6 play points, destroy an enemy follower",
+                  "effect": {
+                    "op": "if",
+                    "condition": {
+                      "type": "ppMin",
+                      "count": 6
+                    },
+                    "then": {
+                      "op": "destroy",
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kasha": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Deal 1 damage to an enemy follower and bury the top card of your deck",
+              "effect": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "dealDamage",
+                    "amount": 1,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "mill",
+                    "count": 1
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Return a Yokai follower from your cemetery to your hand",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "trait": "Yokai",
+                  "cardType": "follower",
+                  "excludeIdentityName": "Kasha"
+                },
+                "to": "hand"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Katakura Kojuro": {
+    "evolvesTo": "Katakura Kojuro Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "overflow"
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "trait": "Draconic Duelist"
+              },
+              "excludeSelf": true
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Katakura Kojuro Evolved": {
+    "evolvesFrom": "Katakura Kojuro",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Draconic Duelist"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "reveal": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Keenedge Artifact": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "rush",
+            "drain"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Killer Instincts": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "identityName": "Erika, Loyal Swordsavant"
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "King Elephant": {
+    "evolvesTo": "King Elephant Evolved",
+    "evolveCost": 4,
+    "keywords": [
+      "evolve",
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "returnToHand",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 99
+              }
+            },
+            {
+              "op": "buffDynamic",
+              "atk": {
+                "op": "handCount"
+              },
+              "def": {
+                "op": "handCount"
+              },
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

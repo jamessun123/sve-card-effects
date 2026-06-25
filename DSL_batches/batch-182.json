@@ -1,0 +1,302 @@
+{
+  "Radiance Angel": {
+    "evolvesTo": "Radiance Angel Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Radiance Angel Evolved": {
+    "evolvesFrom": "Radiance Angel",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Radical Gunslinger": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Dutiful Steed",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "engage": true,
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 2
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFieldCard",
+            "count": 1
+          }
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Raio, Omen of Truth": {
+    "evolvesTo": "Raio, Omen of Truth Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard a Mage card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Mage"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 9,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Raio, Omen of Truth Evolved": {
+    "evolvesFrom": "Raio, Omen of Truth",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "maxCost": 3
+          },
+          "lookAt": 9,
+          "to": "exArea",
+          "optional": true,
+          "playCostReduction": 3,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Raio, Truthful Elimination": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "always"
+        },
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 9
+        },
+        "parseConfidence": "review"
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "maxCost": 3
+          },
+          "lookAt": 3,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0,
+          "discardFromHand": {
+            "identityName": "Raio, Omen of Truth"
+          },
+          "discardCount": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 9,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "summon",
+              "tokenName": "Ersatz Elimination",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ralmia, Astrowing": {
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldFollowerMin",
+            "count": 5
+          },
+          "then": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": true
+          }
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Ralmia, Sonic Racer": {
+    "evolvesTo": "Ralmia, Sonic Racer Evolved",
+    "evolveCost": 3,
+    "keywords": [
+      "evolve",
+      "rush"
+    ],
+    "abilities": [],
+    "parseConfidence": "review"
+  },
+  "Ralmia, Sonic Racer Evolved": {
+    "evolvesFrom": "Ralmia, Sonic Racer",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "fieldFollowerCount"
+          },
+          "def": {
+            "op": "fieldFollowerCount"
+          },
+          "targets": {
+            "type": "self",
+            "count": 1
+          }
+        },
+        "parseConfidence": "review"
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "review"
+  },
+  "Rana, Dual Cannon Abbess": {
+    "keywords": [
+      "fanfare",
+      "activated"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardClass": "haven",
+            "excludeIdentityName": "Rana, Dual Cannon Abbess",
+            "maxCost": 6
+          },
+          "lookAt": 40,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "playCostReduction": 0
+        },
+        "parseConfidence": "review"
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Bullet Bike",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 0
+        },
+        "oncePerTurn": true,
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 1,
+          "followersOnly": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

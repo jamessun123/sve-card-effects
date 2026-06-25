@@ -1,0 +1,377 @@
+{
+  "Kotoka Saionji [Pure Euphoria]": {
+    "evolvesTo": "Kotoka Saionji [Pure Euphoria] Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Lesson (2)",
+          "cost": {
+            "op": "banishFromExArea",
+            "filter": {
+              "trait": "Magical Item"
+            },
+            "count": 2
+          },
+          "then": {
+            "op": "banish",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kotoka Saionji [Pure Euphoria] Evolved": {
+    "evolvesFrom": "Kotoka Saionji [Pure Euphoria]",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "banish",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Koume Shirasaka [Haunted Gown]": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 3
+          },
+          "then": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "trait": "Cool",
+              "cardType": "follower",
+              "maxCost": 3,
+              "excludeIdentityName": "Koume Shirasaka [Haunted Gown]"
+            },
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Last Daylight"
+              },
+              "to": "exArea",
+              "reveal": true
+            },
+            {
+              "op": "playCostReduction",
+              "amount": 2
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        },
+        "cost": {
+          "pp": 1,
+          "banishFromExArea": {
+            "trait": "Magical Item"
+          },
+          "banishCount": 1,
+          "engage": true
+        }
+      }
+    ],
+    "parseConfidence": "manual"
+  },
+  "Krampus": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "buryFromField": {
+            "cardType": "follower"
+          },
+          "buryFieldCount": 1,
+          "excludeSelfFromBury": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "mill",
+              "count": 2
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kudlak": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Vampire",
+            "cardType": "card",
+            "maxCost": 6
+          },
+          "to": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Vampire",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kumiko Matsuyama": {
+    "evolvesTo": "Kumiko Matsuyama Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Kumiko Matsuyama Evolved": {
+    "evolvesFrom": "Kumiko Matsuyama",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Passion",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Kuon, Founder of Onmyodo": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": {
+            "op": "cemeteryFilterCount",
+            "filter": {
+              "traitsAny": [
+                "Spell",
+                "Onmyoji"
+              ]
+            },
+            "divisor": 1
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedCardNotOnFieldByName",
+            "identityName": "Celestial Shikigami"
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Celestial Shikigami",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "selfFollower",
+            "count": 2,
+            "filter": {
+              "trait": "Shikigami"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kuon, Wuxing Master": {
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 4
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "conditionAny",
+            "conditions": [
+              {
+                "type": "ownCemeteryMin",
+                "count": 7
+              }
+            ]
+          },
+          "then": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Noble Shikigami"
+            }
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 1
+            },
+            {
+              "op": "discard",
+              "count": 1
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Onmyoji",
+            "cardType": "follower",
+            "maxCost": 4
+          },
+          "count": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Kyoko Igarashi": {
+    "evolvesTo": "Kyoko Igarashi Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "ward",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 3
+            },
+            {
+              "op": "draw",
+              "count": 2
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

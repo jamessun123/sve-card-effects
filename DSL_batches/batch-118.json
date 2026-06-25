@@ -1,0 +1,319 @@
+{
+  "Jeno, Levin Vanguard Evolved": {
+    "evolvesFrom": "Jeno, Levin Vanguard",
+    "specialType": "evolved",
+    "keywords": [
+      "assail"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Levin",
+            "cardType": "follower",
+            "excludeIdentityName": "Jeno, Levin Vanguard Evolved"
+          },
+          "lookAt": 4,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Jerva of Draconic Mail": {
+    "evolvesTo": "Jerva of Draconic Mail Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "discardHand"
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 5,
+              "followersOnly": true
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Jerva of Draconic Mail Evolved": {
+    "evolvesFrom": "Jerva of Draconic Mail",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 5,
+              "followersOnly": true
+            },
+            {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Jerva, Wyrm Transcendent": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamageAllEnemies",
+              "amount": 6,
+              "followersOnly": true
+            },
+            {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "exArea",
+        "cost": {
+          "pp": 3,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 6,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Jetbroom Witch": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Repair Mode",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Jeweled Priestess": {
+    "evolvesTo": "Jeweled Priestess Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Jeweled Priestess Evolved": {
+    "evolvesFrom": "Jeweled Priestess",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "optionalCost",
+          "label": "You may summon an amulet that costs 2 or less from your hand",
+          "cost": {
+            "op": "selectFromHand",
+            "filter": {
+              "cardType": "amulet",
+              "maxCost": 2
+            },
+            "to": "field",
+            "optional": true
+          },
+          "then": {
+            "op": "noop",
+            "label": "summon selected amulet"
+          }
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "cardType": "amulet"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Jiemon, Thief Lord": {
+    "evolvesTo": "Jiemon, Thief Lord Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "evolve"
+    ],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "storm",
+          "trait": "Festive",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Glittering Gold",
+          "count": 1,
+          "zone": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Jiemon, Thief Lord Evolved": {
+    "evolvesFrom": "Jiemon, Thief Lord",
+    "specialType": "evolved",
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "aura",
+        "effect": {
+          "op": "auraGrantKeyword",
+          "keyword": "storm",
+          "trait": "Festive",
+          "excludeSelf": true
+        }
+      },
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "banishFromExArea",
+              "filter": {
+                "identityName": "Glittering Gold"
+              },
+              "count": 2
+            },
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Festive",
+                "maxCost": 3
+              },
+              "lookAt": 5,
+              "to": "exArea",
+              "optional": true,
+              "playCostReduction": 3,
+              "remainderTo": "deckBottom"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1
+        },
+        "effect": {
+          "op": "triggerAbilities",
+          "timing": "onEvolve"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Joy of Destruction": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Lishenna, Omen of Destruction"
+        },
+        "effect": {
+          "op": "draw",
+          "count": 1
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Idolatry"
+        },
+        "effect": {
+          "op": "recoverPp",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

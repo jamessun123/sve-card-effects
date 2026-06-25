@@ -1,0 +1,293 @@
+{
+  "Cool Tiara": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "healLeader",
+              "amount": 1
+            },
+            {
+              "op": "draw",
+              "count": 1
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Coral Shark": {
+    "keywords": [
+      "rush",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "buffDynamic",
+          "atk": {
+            "op": "traitFieldCount",
+            "trait": "Marine",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "self"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Corrosive Thorns": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "trait": "Pixie",
+            "cardType": "token"
+          },
+          "to": "exArea",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Corruption Guardian": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard an Angel or Fallen Angel card",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "traitsAny": [
+                "Angel",
+                "Fallen Angel"
+              ]
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 3
+              },
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "recoverPp",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Cosmic Angel": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Angel",
+                "excludeIdentityName": "Cosmic Angel"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "ownCemeteryTraitMin",
+                "trait": "Angel",
+                "count": 5
+              },
+              "then": {
+                "op": "healLeader",
+                "amount": 2
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cosmos Fang": {
+    "keywords": [
+      "evolve",
+      "fanfare"
+    ],
+    "evolveCost": 1,
+    "evolvesTo": "Cosmos Fang Evolved",
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "returnToHand": {
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "excludeSelf": true
+            }
+          }
+        },
+        "effect": {
+          "op": "evolveOtherFollower",
+          "filter": {
+            "cardType": "follower"
+          },
+          "excludeSelf": false
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Beast",
+                "cardType": "follower"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "always"
+              },
+              "then": {
+                "op": "noop",
+                "label": "You may put it onto your field instead if it costs 2 or less"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cosmos Fang Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Cosmos Fang",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Return an enemy follower to hand",
+              "effect": {
+                "op": "returnToHand",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            },
+            {
+              "label": "Destroy it if it's evolved",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Cougar Pelt Warrior": {
+    "keywords": [
+      "evolve"
+    ],
+    "evolveCost": 1,
+    "evolvesTo": "Cougar Pelt Warrior Evolved",
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Cougar Pelt Warrior Evolved": {
+    "keywords": [],
+    "evolvesFrom": "Cougar Pelt Warrior",
+    "specialType": "evolved",
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "identityName": "Cougar Pelt Warrior"
+          },
+          "to": "field",
+          "reveal": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Countersolari Survivor": {
+    "keywords": [
+      "intimidate",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Assassin",
+            "excludeIdentityName": "Countersolari Survivor"
+          },
+          "to": "exArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}
