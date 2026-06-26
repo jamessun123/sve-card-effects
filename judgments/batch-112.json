@@ -1,0 +1,55 @@
+{
+  "Icyclone": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded as a player choice between two damage modes, but the card has no choice; replace the choose effect with a single conditional effect that deals 4 damage if there is another Heroic follower on your field, otherwise 1 damage, to the selected enemy follower.",
+      "Last Words is encoded as searchDeckChoose over the top 1 card, which does not preserve 'look at the top card' semantics; encode it as peeking at the top card and, if that card has the Heroic trait, optionally put it into your EX area."
+    ]
+  },
+  "Ignominious Samurai": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Illganeau, Horror Astray": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should first select a Wasteland follower that costs 3 or less in your cemetery, then under Necrocharge (10) you may summon that selected card; the current summonFromCemetery encoding does not model selecting the specific target before the Necrocharge clause.",
+      "Fanfare uses optionalCost incorrectly; Necrocharge (10) is a condition, not a paid cost. Encode the ability as a targeted cemetery selection with a conditional optional summon, and if you do, banish this card."
+    ]
+  },
+  "Illusions of Comfort": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ilmisuna, Discord Hawker": {
+    "verdict": "fail",
+    "issues": [
+      "Keywords incorrectly include fanfare; remove the extra 'fanfare' keyword because the card only has an activated [act] ability."
+    ]
+  },
+  "Imperator of Magic": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Imperator of Magic Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve targets are encoded with an unsupported filter inside targets; the effect should target a Golem follower on your field and grant it Rush and Assail. Add engine support for target selectors that can filter field targets by trait/card properties, or a dedicated operation to grant multiple keywords to a filtered allied follower."
+    ]
+  },
+  "Imperial Dragoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Imperial Dragoon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Impious Bishop": {
+    "verdict": "fail",
+    "issues": [
+      "The triggered ability timing is wrong; it should trigger when your leader gains defense, not onCardPlayed. Replace it with an ability that triggers on leader healing/defense gain and deals 4 damage to an enemy follower once per turn.",
+      "The current conditional enteredFromHand clause is unrelated to the source text and should be removed from the once-per-turn damage ability."
+    ]
+  }
+}

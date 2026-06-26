@@ -1,0 +1,57 @@
+{
+  "Bat Usher": {
+    "verdict": "fail",
+    "issues": [
+      "Remove printed keyword \"storm\" from keywords; Storm is conditional and should only be granted by the fanfare ability when hand count is 0."
+    ]
+  },
+  "Battlefield Inquisitor": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target/effect should allow selecting up to 2 enemy cards and destroying them, not use choose with min 1/max 2 duplicated single-destroy options; encode as a single destroy effect targeting enemyFieldCard with count up to 2 if supported."
+    ]
+  },
+  "Bayle, Luxglaive Warrior": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play restriction \"This can't be played unless a follower you control has left the field this turn\" is left as noop. It should be encoded as a real play restriction condition; implement an ability/op for play restrictions based on a follower you controlled leaving the field this turn."
+    ]
+  },
+  "Bayleon, Sovereign Light": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"You may put a Naterran Great Tree token onto your field or into your EX area\"; current choose requires exactly one option. Make the choice optional so you may choose neither destination."
+    ]
+  },
+  "Bayleon, Sovereign Light Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve should let you put up to 2 Natura cards from the top 4 into your EX area, but searchDeckChoose only selects one. Encode selection of up to 2 cards and implement support for multi-pick search-from-top effects with remainder to bottom.",
+      "The activated cost is incorrectly encoded as cost.banishFromField/banishCount, which is not in the implemented cost schema. It should banish 2 cards named Naterran Great Tree from your field as an activation cost; implement a valid activated cost form for banishing cards from field by filter.",
+      "The activated ability should target a Natura follower on your field, but the target filter is incorrectly nested inside targets for selfFollower. Use a supported target selector/filter form for a Natura follower you control, or implement filtered field target support for target selectors."
+    ]
+  },
+  "Bazooka Goblins": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bazooka Goblins Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Beachside Memories": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bear Pelt Warrior": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" and \"lastWords\" from keywords; these are timings and should be represented by abilities, not printed keywords.",
+      "Strike is misencoded as dealDamageAllEnemies. It should deal 1 damage to each leader, i.e. both leaders, not all enemy followers and leader."
+    ]
+  },
+  "Beastcall Aria": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

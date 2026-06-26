@@ -1,0 +1,59 @@
+{
+  "Last Daylight": {
+    "verdict": "fail",
+    "issues": [
+      "The second step is incorrectly encoded as buffing Abysscraft followers and using otherOnly. It should buff each follower that costs 1 or less on your field by +1 attack; encode a field buff targeting your followers with maxCost 1 and no exclude-self restriction."
+    ]
+  },
+  "Latham, Vanguard Captain": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Laura, Crimson Strife": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The ability is misencoded as a passive chooseMultiple effect. It should trigger during your turn whenever your leader loses defense, and you choose exactly one option you haven't chosen this turn. Encode this as a triggered ability for leader-defense-loss with per-turn memory of chosen options; add engine support for a timing/trigger like 'onLeaderLoseDefenseDuringYourTurn' and a choose effect that tracks 'not chosen this turn' exclusions.",
+      "Option (1) uses an unsupported dynamic amount {\"op\":\"leaderLostDefCount\"}. It should deal damage equal to the number of times your leader has lost defense this turn; add engine support for a dynamic amount such as leaderLostDefenseCountThisTurn."
+    ]
+  },
+  "Layla": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Layla Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Leah, Bellringer Angel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lecia, Sky Saber": {
+    "verdict": "fail",
+    "issues": [
+      "The onAllyEvolve ability incorrectly places the evolved-card restriction in a top-level 'filter' field. It should trigger only when a Nano, the Dawnblade on your field evolves; encode the restriction in a supported way rather than an unsupported wrapper field, so the ability only triggers from that named ally's evolve."
+    ]
+  },
+  "Lelouch, Leader of the Black Knights": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as two separate abilities, causing the NC(20) version to also stack with the NC(10) version. It should be a single fanfare that summons up to 2 qualifying followers, then gives each other follower on your field +3/+3 if Necrocharge (20), otherwise +1/+1 if Necrocharge (10).",
+      "summonFromCemetery incorrectly uses maxTotalCost: 2. The source says up to 2 followers that each cost 2 or less, not total cost 2; remove maxTotalCost.",
+      "The buff step incorrectly limits the buff to Abysscraft followers. It should give each other follower on your field +1/+1 or +3/+3 regardless of class.",
+      "The passive Rush aura is encoded with cardClass at the top level of auraGrantKeyword, which is not a supported field for that operation. It should grant Rush to each Abysscraft follower on your field using a supported filtering field."
+    ]
+  },
+  "Lelouch, Righteous Emperor": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as two separate abilities, causing the NC(20) version to also stack with the NC(10) version. It should be a single fanfare that summons up to 2 qualifying followers, then gives each other follower on your field +3/+3 if Necrocharge (20), otherwise +1/+1 if Necrocharge (10).",
+      "summonFromCemetery incorrectly uses maxTotalCost: 2. The source says up to 2 followers that each cost 2 or less, not total cost 2; remove maxTotalCost.",
+      "The buff step incorrectly limits the buff to Abysscraft followers. It should give each other follower on your field +1/+1 or +3/+3 regardless of class.",
+      "The passive Rush aura is encoded with cardClass at the top level of auraGrantKeyword, which is not a supported field for that operation. It should grant Rush to each Abysscraft follower on your field using a supported filtering field."
+    ]
+  },
+  "Leod, Moonlit Executioner": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

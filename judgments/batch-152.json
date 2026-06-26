@@ -1,0 +1,70 @@
+{
+  "Mio Honda [Cinderella Girl] Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is only approximately encoded: it should look at the top 2 cards, optionally reveal an iM@S CG card among them and add it to hand, then put the rest on the bottom in any order. `searchDeckChoose` is not correct because it searches/filter-selects rather than handling a fixed top-2 reveal-and-take pattern; implement an effect for 'look at top N, optionally reveal/add one matching card, put remainder on bottom'.",
+      "On Super-Evolve is missing/incorrectly encoded as `summonFromHand`, which is not in the ability reference. It should be an optional summon of a Passion follower that costs 6 or less from your hand; implement a hand-to-field summon selector effect for this."
+    ]
+  },
+  "Mio Honda [Mermaid Star]": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword.",
+      "The Fanfare effect incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; the card says you may summon a Passion follower from among the top 2 cards with no cost limit, so it should summon at most 1 matching Passion follower from the looked-at cards and bury the rest.",
+      "The activated ability is missing the Lesson (2) cost. In addition to paying 2 PP, it should require banishing 2 Magical Item tokens/cards from your EX area.",
+      "The activated ability also incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; it should summon at most 1 Passion follower from among the top 2 cards, then bury the rest."
+    ]
+  },
+  "Mio Honda [Positive Passion]": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword.",
+      "The Fanfare effect incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; the card says you may summon a Passion follower from among the top 2 cards with no cost limit, so it should summon at most 1 matching Passion follower from the looked-at cards and bury the rest.",
+      "The activated ability is missing the Lesson (2) cost. In addition to paying 2 PP, it should require banishing 2 Magical Item tokens/cards from your EX area.",
+      "The activated ability also incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; it should summon at most 1 Passion follower from among the top 2 cards, then bury the rest."
+    ]
+  },
+  "Mirei Hayasaka": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword.",
+      "The Fanfare effect is encoded incorrectly: `putHandCardOnDeck` puts a card from hand on top of deck, but the source says to look at the top 3 cards of your deck, put one of those on top of your deck, and bury the rest. Implement an effect for rearranging/reselecting among looked-at top-deck cards, such as 'look at top N, choose one to top, bury remainder'."
+    ]
+  },
+  "Mirei Hayasaka [individuals]": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `storm` from `keywords`; Storm is conditional here ('While there are at least 10 iM@S CG cards in your cemetery, this has Storm') and should only be represented by the passive conditional ability.",
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword."
+    ]
+  },
+  "Miria Akagi": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Miria Akagi Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Miriam, Mutinous Being": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is completely misencoded. It should trigger during your turn whenever a follower is put from your field into the cemetery, and deal 1 damage to each enemy leader. The current `grantOnAllyFollowerEnter`/`dealDamageAllEnemies` encodes the wrong trigger and wrong target. Implement a trigger for 'when an ally follower is put from field into cemetery / leaves field to cemetery during your turn' and a damage effect that hits each enemy leader."
+    ]
+  },
+  "Miriam, Mutinous Being Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incomplete: after burying another follower, it should summon a Keenedge Artifact token. Add the token summon after the burial.",
+      "The On Evolve ability should be modeled as 'Bury another follower: Summon a Keenedge Artifact token' with the summon contingent on paying the bury cost; if the engine cannot express this exact cost-result linkage on On Evolve, implement support for it.",
+      "The passive ability is completely misencoded. It should trigger during your turn whenever a follower is put from your field into the cemetery, and deal 1 damage to each enemy leader. The current `grantOnAllyFollowerEnter`/`dealDamageAllEnemies` encodes the wrong trigger and wrong target. Implement a trigger for 'when an ally follower is put from field into cemetery / leaves field to cemetery during your turn' and a damage effect that hits each enemy leader."
+    ]
+  },
+  "Mirror Witch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered damage effect targets the wrong recipients. It should deal 2 damage to each enemy leader, not `dealDamageAllEnemies` to followers and leader. Implement or use an effect that damages each enemy leader only.",
+      "The passive trigger should represent 'During each opponent's turn, whenever this follower takes damage' directly. If `grantOnDamaged` on self during opponent turn is the intended pattern, the resulting effect still must hit each enemy leader only."
+    ]
+  }
+}

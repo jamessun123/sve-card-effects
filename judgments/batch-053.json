@@ -1,0 +1,54 @@
+{
+  "Dazzling Healer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dead to Rights": {
+    "verdict": "fail",
+    "issues": [
+      "The activated cemetery ability cost is encoded incorrectly. It should use a cemetery-banish cost object matching 'Banish this card and an Iceschillendrig, Gilded Autocrat from your cemetery', e.g. banishSelf plus banishFromCemetery with filter {\"identityName\":\"Iceschillendrig, Gilded Autocrat\"} and count 1, not a non-reference shape with separate banishCount."
+    ]
+  },
+  "Death Sentence": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The 'This card is put onto the field engaged' clause is encoded incorrectly as a passive engageSelf ability, which would repeatedly engage the card instead of applying only on entry. It should be encoded as an enters-the-field-engaged property or a dedicated enter-engaged ability; implement engine support for cards that enter the field engaged."
+    ]
+  },
+  "Death the Nyctophile": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect must keep the same selected enemy follower for both clauses: destroy that follower and deal 3 damage to its leader. Replace the sequence of destroy enemy follower + deal 3 to enemy leader with a single linked effect such as damageFollowerAndLeader using followerAmount 0/linked destroy semantics or another implementation that targets one enemy follower and then damages its leader."
+    ]
+  },
+  "Death's Breath": {
+    "verdict": "fail",
+    "issues": [
+      "The spell should put a follower from your cemetery onto your field, not add it to hand. Replace tutorFromCemetery to hand/field-like tutoring with an effect that summons or revives a selected follower from your cemetery to the field, then grant Ward to that summoned follower."
+    ]
+  },
+  "Deathbringer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Deathbringer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Deathscythe Nun": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Deepwood Anomaly": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The ability 'When this follower deals attack damage to an enemy leader, you win the game' is missing. Add a trigger for dealing attack damage to the enemy leader with effect winGame; implement engine support for a combat-damage-to-leader trigger if not available."
+    ]
+  },
+  "Deepwood Anomaly Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive winGame ability is incorrect. It should trigger only when this follower deals attack damage to an enemy leader, not continuously while on the field. Replace it with a combat-damage-to-enemy-leader trigger that resolves winGame; implement engine support for that trigger timing if missing."
+    ]
+  }
+}

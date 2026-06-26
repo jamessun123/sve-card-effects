@@ -1,0 +1,56 @@
+{
+  "Ginsetsu, Great Fox": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ginsetsu, Great Fox Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost reduction is incorrectly encoded as an unconditional self `playCostReduction`. It should apply only to Yokai followers you play, e.g. a trait-filtered aura or grant-play-cost-reduction effect for allied Yokai followers/cards; implement an ability such as `auraPlayCostReduction` or filtered `grantPlayCostReduction` for Yokai followers.",
+      "The second passive is incorrectly encoded as `buffFieldTrait` +1 attack. The source says Yokai followers on your field deal +1 damage, not gain +1 attack. It should be a Yokai damage-boost aura; implement an ability such as `auraDamageDealtModifier` filtered by trait `Yokai` with amount 1.",
+      "The leave-field trigger is missing its condition. It should trigger only when another Yokai follower you control leaves the field, not whenever this card leaves the field. Encode as `timing: \"onLeaveField\"` with a condition/filter for another allied Yokai follower leaving, and buff self +1 attack; implement a leave-field trigger condition/filter for other allied trait followers if unsupported."
+    ]
+  },
+  "Ginsetsu, Terror Banquet": {
+    "verdict": "fail",
+    "issues": [
+      "The first fanfare incorrectly summons 2 One-Tailed Fox tokens into the EX area. It should summon 2 One-Tailed Fox tokens onto your field (`zone: \"field\"`).",
+      "The optional [cost02] fanfare incorrectly summons the extra One-Tailed Fox token into the EX area. It should summon that token onto your field (`zone: \"field\"`).",
+      "The last ability is encoded with the wrong timing and missing restrictions/targeting. It should trigger when another Yokai follower you control leaves the field, not on this card's own `onLeaveField`, and it should select an enemy follower, then deal 1 damage to it and its leader.",
+      "The last ability uses invalid/inaccurate effect encoding. Replace `dealDamageFollowerAndLeader`/`dealDamageOtherFollowers` style with `damageFollowerAndLeader` including the required enemy follower selection, or equivalent correct targeting structure supported by the DSL."
+    ]
+  },
+  "Giselle, Mermaid Healer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Giving Gourmet": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Glade, Fragrantwood Ward": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Glade, Fragrantwood Ward Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Super-Evolve damage amount is incorrectly encoded as `handExAreaTotal`. The source says X equals the total number of cards on your field and in your hand. It should use a field+hand total dynamic amount; implement a `fieldHandTotal`/similar DamageAmount and use that in `dealDamageSplit`."
+    ]
+  },
+  "Gliesaray": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as an unconditional `choose` between dealing 2 damage and banishing. It should always select an enemy follower and deal it 2 damage, then if there is a Gilnelise, Omen of Craving on your field, banish that selected follower instead.",
+      "The card is missing the named-follower condition. Encode the banish clause with a condition like `namedFollowerOnFieldByName` for `Gilnelise, Omen of Craving` after selecting the target."
+    ]
+  },
+  "Glint Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Glistering Angel": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

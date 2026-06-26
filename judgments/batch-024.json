@@ -1,0 +1,51 @@
+{
+  "Automaton Soldier": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Avant Blader": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Avant Blader Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is encoded incorrectly as searchDeckChoose with \"lookAt\": 5 and a single optional pick; it should search the full deck for up to 2 Officer followers, reveal them, and add them to your hand, e.g. encode a deck tutor/search that can select up to 2 matching cards rather than looking at only the top 5."
+    ]
+  },
+  "Avaritia": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The return-to-hand clause is encoded with the wrong condition: it should trigger if you revealed an \"Octrice, Omen of Usurpation\" with this spell's search effect, not based on a field-state condition like namedCardNotOnFieldByName. This should be encoded as a conditional tied to the revealed chosen card's identity, then return this spell to hand.",
+      "The needed condition 'if the card revealed/chosen by the preceding search has identityName X' is not available in the ability reference. Implement a condition/result-tracking primitive for checking the identity of a card revealed or chosen by a previous effect step, then use it before returnToHand targeting self."
+    ]
+  },
+  "Avatar of Fruition": {
+    "verdict": "fail",
+    "issues": [
+      "The passive cost reduction is too broad: playCostReduction on this card makes the source cheaper, but the text says any \"Naterran Great Tree\" you play costs 1 less while this is on your field. It should be encoded as a passive aura/effect that reduces the play cost of Naterran Great Tree cards you play, not this card itself."
+    ]
+  },
+  "Awakened Gaia": {
+    "verdict": "fail",
+    "issues": [
+      "The passive playCostReduction amount is incorrect: the text says this card costs 5 less to play for every 5 Natura cards in your cemetery, but the current cemeteryFilterCount/divisor 5 only yields 1 reduction per 5 cards. It should multiply that count by 5, e.g. a dynamic amount equal to 5 × floor(Natura cards in your cemetery / 5)."
+    ]
+  },
+  "Awakened Robot": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Awakened Robot Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Axe Princess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Axe Princess Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

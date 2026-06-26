@@ -1,0 +1,50 @@
+{
+  "Elusa, Magic Wunderkind": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elusa, Magic Wunderkind Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elven Archery": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is incorrectly encoded as a choose effect; it should be a single spell ability that deals damage to up to 2 enemy followers, with the amount determined by Combo (3). Encode it as an if/condition on combo that changes the damage amount instead of presenting separate player choices.",
+      "The targeting is incorrect for 'up to 2 enemy followers'; using dealDamage with targets.count 2 implies exactly 2 targets. It should be encoded with an operation that supports selecting up to 2 targets or equivalent split/multi-target handling, not as exactly 2 targets.",
+      "The Combo (3): 'Deal 2 damage instead' clause is misrepresented as a separate optional choice. It should replace the base 1 damage when the combo condition is met, not be an independently chosen mode."
+    ]
+  },
+  "Elven Craftsmanship": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elven Pikeman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elven Princess Mage": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elven Princess Mage Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elven Sentry": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cost reduction is incorrectly encoded as a flat playCostReduction amount 1. It should reduce this card's cost by the number of Fairy followers on your field. Encode it as a dynamic reduction based on Fairy count on your field; implement a dynamic amount/condition for counting named or trait-filtered followers for play cost reduction if not currently supported."
+    ]
+  },
+  "Elven Waitress": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect incorrectly uses healLeader 2. 'Give your leader [defense]+2' should be encoded as increasing the leader's defense by 2, not recovery. Use the appropriate leader defense increase effect rather than healing."
+    ]
+  },
+  "Elven Waitress Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

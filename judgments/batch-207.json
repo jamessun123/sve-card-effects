@@ -1,0 +1,58 @@
+{
+  "Shin Sato": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shin Sato Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shin Sato [Gutsy☆Reporter]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shinobi Tanuki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shinobi Tanuki Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is missing the Intimidate keyword/effect. Replace the noop stub with a proper Intimidate encoding when supported; implement an Intimidate keyword or passive ability in the engine and encode it in `keywords` or as a dedicated passive effect instead of `noop`."
+    ]
+  },
+  "Shinobu Kudo": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded incorrectly as `searchDeckSummonMultiple` with `maxTotalCost: 2`, which allows any combination totaling 2 instead of specifically up to two 1-cost iM@S CG followers and/or amulets with different names. It should search/summon up to 2 cards matching trait `iM@S CG`, cost 1, card types follower or amulet, with a different-names restriction, then shuffle the deck. Implement engine support for multi-card search/summon with 'different names' and mixed card-type selection from deck."
+    ]
+  },
+  "Shion, Immortal Aegis": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive damage reduction is encoded incorrectly as `damageImmunity` for self only. The source says 'If this or your leader would take damage, they take that much minus 1 instead,' so it should apply to both this follower and your leader as damage reduction by 1, not immunity/cap. Implement a damage-reduction-by-N passive that can affect both self and leader."
+    ]
+  },
+  "Shipsbane Plesiosaurus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare cost is encoded with `banishFromField`, which is not an implemented effect. It should banish a Naterran Great Tree from your field, then draw a card; implement a field-banish selector effect (for allied field cards by filter) and use that instead of an unsupported op.",
+      "The discard-triggered ability is encoded incorrectly as targeting only an enemy follower. The source says 'select an enemy leader or enemy follower on the field and deal it 2 damage.' It should allow either enemy leader or enemy follower as the target. Implement a target selector/effect pattern for 'enemy leader or enemy follower' choice.",
+      "The discard-triggered ability is also missing the 'During your turn' condition. Add a controller-turn condition if supported; otherwise implement support for turn-restricted triggered abilities."
+    ]
+  },
+  "Shipsbane Plesiosaurus Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded as `optionalCost`, but 'Discard a card: Give your leader [defense]+2' is a required cost/effect clause, not optional. It should be a mandatory discard-then-heal sequence for the On Evolve ability. Implement support for mandatory paid subcosts within triggered abilities if needed.",
+      "The discard-triggered ability is encoded incorrectly as targeting only an enemy follower. The source says 'select an enemy leader or enemy follower on the field and deal it 2 damage.' It should allow either enemy leader or enemy follower as the target. Implement a target selector/effect pattern for 'enemy leader or enemy follower' choice.",
+      "The discard-triggered ability is also missing the 'During your turn' condition. Add a controller-turn condition if supported; otherwise implement support for turn-restricted triggered abilities."
+    ]
+  },
+  "Shiro, Cursed Wings": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare summon filter is incorrect: `trait: \"Ward\"` does not represent 'a follower in your cemetery with Ward'. It should summon a follower that has the Ward keyword and costs 2 or less. Implement filtering by printed/current keyword (e.g. keyword `ward`) in cemetery search/summon effects."
+    ]
+  }
+}

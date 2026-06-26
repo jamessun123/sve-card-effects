@@ -1,0 +1,59 @@
+{
+  "Touching Thoughts": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing discard-triggered ability: encode \"When this is discarded, you may put it into your EX area\" as an `onDiscard` ability using `moveSourceToExArea` with optional handling; implement an optional self-to-EX-area discard trigger if needed."
+    ]
+  },
+  "Tower Root Giant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Traditional Sorcerer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The ally-enter trigger is incorrectly encoded with a top-level `filter`; it should target only the follower that entered. Encode this as a granted trigger or an on-ally-enter ability that filters Shikigami followers and gives Ward to that entered follower; implement top-level trigger filtering for `onAllyFollowerEnter` or support a condition for the entering follower if needed.",
+      "The fanfare cemetery condition is wrong: \"at least 7 spells and Onmyoji cards in your cemetery\" means a combined count, not 7 of each or either one. Encode a single condition for combined cards matching spell or trait Onmyoji; implement a cemetery-count condition that can count cards matching class/type/trait unions if needed."
+    ]
+  },
+  "Trail of Light": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Trainer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare is encoded as choosing a keyword first and then selecting a target, but the text is \"Select another iM@S CG follower on your field and give it Bane or Drain.\" It should select one eligible follower, then choose Bane or Drain for that same target. Encode as target-then-choose, or add engine support for choosing among keywords for a preselected target."
+    ]
+  },
+  "Trampling Terror": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Transcendent Simulacrum": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability target encoding is incorrect: `selfFollower` does not support a nested `filter` in the reference. It should encode selection of a Golem follower on your field using a supported filtered target selector or by adding target-filter support for `selfFollower`."
+    ]
+  },
+  "Transmogrified Wyrm": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare target is wrong: the source says \"Select a card in an EX area,\" but the parsed target is `anyFollower`. It should transform a card in an EX area into a Dragon token; implement a target selector for cards in either EX area and use that with `transform`."
+    ]
+  },
+  "Travelers' Respite": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The healing condition is incorrect: \"If there's a Wasteland card on your field or in your EX area\" is not represented by `namedFollowerOnFieldByName: Wasteland` or plain `inExArea`. It should check for any Wasteland card on your field or any Wasteland card in your EX area; implement conditions for field/EX-area card trait presence and encode the OR with `conditionAny`."
+    ]
+  },
+  "Treacherous Reversal": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first effect is incomplete: \"Destroy each card on the field\" should destroy followers and amulets, not just followers. Encode as full-field destruction; implement an effect for destroying all cards on the field if `destroyAllFollowers`/existing ops are insufficient.",
+      "The EX-area clause is missing/incorrect: \"Each player buries each card in their EX area\" is not represented by `buryFieldFollowers`. Encode a mass bury of both players' EX areas; implement an operation for burying all cards from both EX areas.",
+      "The last clause is wrong: after looking at the top 5 cards, you may put any number into your EX area, then bury the rest. `searchDeckChoose` only chooses a single card. Encode selecting any number from the looked-at cards to EX area and send the rest to cemetery; implement a multi-select deck-look effect if needed."
+    ]
+  }
+}

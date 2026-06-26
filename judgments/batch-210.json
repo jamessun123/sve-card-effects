@@ -1,0 +1,60 @@
+{
+  "Silvernail Markswoman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Silvernail Markswoman Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve damage effect is missing the required target selection. Encode it so it selects an enemy follower on the field, then deals 4 damage to that selected follower and 4 damage to its leader."
+    ]
+  },
+  "Silversteel Blader": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as fieldTraitMin with trait \"Evolved\". It should check whether there is an evolved follower on your field; add an implemented condition for allied evolved follower count/presence and use that condition before buffing this follower +1/+1."
+    ]
+  },
+  "Sincere Masquerade Ghost ADVANCED": {
+    "verdict": "fail",
+    "issues": [
+      "The passive trigger should apply only when another follower with \"Ghost\" in its name enters your field. Add exclusion of this card itself to the grantOnAllyFollowerEnter filter/trigger so it matches \"another follower\"."
+    ]
+  },
+  "Sincere Soul": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cemetery activated ability checks the wrong zone. It should check whether there is a Masquerade Ghost in your EX area, not on your field; add an implemented condition for named card presence in EX area and use that condition.",
+      "The cemetery activated ability is missing the optional choice. It should be optional to summon a Sincere Masquerade Ghost from your evolve deck; encode the summon as optional.",
+      "The spell ability should search your deck for a Masquerade Ghost and summon it, but the current tutorFromDeck to field may not represent summon wording accurately. If summon-from-deck semantics differ in your engine, add a dedicated deck search/summon implementation or confirm tutorFromDeck to field is treated as summon."
+    ]
+  },
+  "Sister Initiate": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as fieldTraitMin with trait \"Amulet\". It should check whether there is an amulet on your field; add an implemented condition for allied amulet count/presence and use that before healing your leader 2."
+    ]
+  },
+  "Sister of Punishment": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger timing is too broad. It should trigger once per turn when an amulet you control leaves the field, not whenever this card leaves the field; add an implemented trigger for allied amulet leaves-field events and use that with oncePerTurn true."
+    ]
+  },
+  "Skeleton Dreamer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is encoded with onDamaged, but the source text triggers whenever this follower gains attack or defense. Replace it with a trigger for stat gain that grants this follower Storm; add an implemented timing/effect hook for when a follower is buffed or its stats increase."
+    ]
+  },
+  "Skeleton Fighter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Skewer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The choice structure is incorrect. By default this spell should choose exactly 1 option, and only if there are at least 5 Chess cards in your cemetery should you choose up to 2 instead; encode this with a conditional switching between choose(max 1) and chooseMultiple(max 2), and add a cemetery trait-count condition for Chess cards if not implemented."
+    ]
+  }
+}

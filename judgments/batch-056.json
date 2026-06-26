@@ -1,0 +1,58 @@
+{
+  "Desperados' Shot": {
+    "verdict": "fail",
+    "issues": [
+      "The spell should not be encoded as a player choice between two modes. Replace the root `choose` with a single targeted damage effect that selects one enemy follower, then uses an `if` checking that both Bunny & Baron, Specter Duo and Val, Trusty Getaway Car are on your field to deal 6 damage and 2 damage to that follower's leader; otherwise deal 4 damage to the selected follower.",
+      "The condition for the upgraded effect is wrong: `conditionAny` means either named follower, but the source requires both named followers on your field. Encode this as a condition requiring both cards, not either.",
+      "The upgraded effect loses linkage to the originally selected follower and instead retargets any enemy follower plus the enemy leader. It should damage the same selected follower for 6 and that selected follower's leader for 2."
+    ]
+  },
+  "Destruction in Black": {
+    "verdict": "fail",
+    "issues": [
+      "The effect is 'deal 2 damage to each enemy leader', but `dealDamageAllEnemies` also affects followers. Encode this as damage only to enemy leader(s), not all enemy cards."
+    ]
+  },
+  "Destruction in White": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Destructive Refrain": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Deus Ex Machina": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Device Diviner": {
+    "verdict": "fail",
+    "issues": [
+      "The triggered heal ability incorrectly puts `filter` at the ability root for `timing: onCardPlayed`. Encode the Machina restriction as an implemented wrapper shape, such as a granted on-card-play trigger with `filter`, or another supported representation where the trigger itself is filtered to Machina cards."
+    ]
+  },
+  "Devilish Flautist": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost is mandatory, not optional. Replace `optionalCost` with an effect that discards 1 random card, then gives this follower +1 attack and Drain.",
+      "The fanfare is missing 'Give this follower Drain.' Add a `grantKeyword` effect for `drain` to this follower after the discard."
+    ]
+  },
+  "Devoted Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Diamond Master": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is encoded as `grantOpponentRestriction: noFollowers`, which is unrelated to the source text. It should instead mean 'Whenever an opponent is selecting cards for an ability, if they can select this card, they must select it.' Replace this with a targeting-forcing passive; implement a new passive/aura operation for mandatory targeting redirection or taunt-for-abilities, since no suitable ability exists in the current reference."
+    ]
+  },
+  "Diamond Master Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve cemetery filter is incorrect: `traitsAny: [\"Storm\", \"Ward\"]` checks card traits, but the source asks for a follower with the Storm or Ward keyword. Encode a cemetery summon filter by keyword (Storm or Ward) and cost 3 or less. This requires implementing keyword-based cemetery/deck filters because the current reference does not support filtering by printed/granted keyword.",
+      "The passive ability is encoded as `grantOpponentRestriction: noFollowers`, which is unrelated to the source text. It should instead mean 'Whenever an opponent is selecting cards for an ability, if they can select this card, they must select it.' Replace this with a targeting-forcing passive; implement a new passive/aura operation for mandatory targeting redirection or taunt-for-abilities, since no suitable ability exists in the current reference."
+    ]
+  }
+}

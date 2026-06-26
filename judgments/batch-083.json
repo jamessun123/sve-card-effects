@@ -1,0 +1,55 @@
+{
+  "Forest Gigas": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare buff uses unsupported dynamic amount {\"op\":\"exAreaCardCount\"}; it should give this follower [attack]+X where X equals the number of cards in your EX area, requiring implementation of an EX-area card count dynamic amount (for example a DamageAmount like exAreaCount) and then encode the fanfare with that amount."
+    ]
+  },
+  "Forest Gigas Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forest Guardian's Bow": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is encoded as a single noop; replace it with a fanfare ability that, if Arisa, Evergreen Arrow is on your field, adds 2 arrow counters to this using an if condition with a named-follower-on-field check and addCounter. This needs support for the specific named follower/card reference if cardNo is unavailable.",
+      "The once-per-turn trigger 'when a Forestcraft follower is put onto your field, place an arrow counter on this' is missing; encode it as an onAllyFollowerEnter ability with oncePerTurn true and a Forestcraft follower filter, using addCounter. This requires grant/trigger filtering on ally follower entry by card class if not already supported on the timing itself.",
+      "The activated ability '[engage], bury this: ... deal it X damage. X equals the number of arrow counters this had' is missing; encode it as timing activated with cost {\"engage\":true,\"burySelf\":true} and effect dealDamage to an enemy follower for a dynamic amount equal to this card's arrow counters. This requires implementation of a dynamic amount that reads counters on the source/last known information when buried."
+    ]
+  },
+  "Forest Hatcheteer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forest Hatcheteer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forest Hermit": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forest Hermit Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor filter is incorrect: source says 'Select a Natura card in your cemetery', not only a Natura follower. Change tutorFromCemetery filter to match any card with trait \"Natura\" and remove \"cardType\": \"follower\"."
+    ]
+  },
+  "Forest Oracle Pascale": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is incorrect: it should put the selected enemy follower on top of its owner's deck, not return it to hand. Replace returnToHand with putOnTopOfDeck targeting an enemy follower.",
+      "The start-of-end buff is too broad: source says 'each other follower on your field', but buffFieldTrait without a trait/class filter can affect non-followers. Encode the buff so it applies only to your other followers on the field."
+    ]
+  },
+  "Forestclaw Sentinel": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare zone is incorrect: 'Summon a Naterran Great Tree token' means summon it onto the field, not into the EX area. Change summon zone from \"exArea\" to \"field\"."
+    ]
+  },
+  "Forestclaw Sentinel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

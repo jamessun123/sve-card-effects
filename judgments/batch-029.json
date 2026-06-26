@@ -1,0 +1,54 @@
+{
+  "Beastfaced Mage": {
+    "verdict": "fail",
+    "issues": [
+      "Remove incorrect keywords \"fanfare\" and \"lastWords\" from keywords; the card has no Fanfare, and Last Words should remain only as an ability."
+    ]
+  },
+  "Beastfolk Harvester": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Beastfolk Harvester Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Beastly Vow": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove incorrect keyword \"fanfare\" from keywords; the card has no Fanfare.",
+      "Add the clause \"This card is put onto the field engaged.\" The current DSL is missing the enters-engaged behavior; this would require implementing support for a card entering the field engaged or a dedicated passive/entry-state ability for amulets."
+    ]
+  },
+  "Beating of the Dragonwings": {
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is encoded incorrectly as buryFieldFollowers with sourceOnly:true, which buries this card instead of a Dragonewt follower on your field. Encode the play cost as selecting and burying a Dragonewt follower you control, e.g. a cost/effect using buryFromFieldSelect filtered to trait Dragonewt and cardType follower."
+    ]
+  },
+  "Beauty and the Beast": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is encoded incorrectly. It must remove any number of Fable counters from this card, then give this follower +X/+X where X equals the number removed; the current chosenNumber buff does not pay/remove counters. Encode it as a counter-removal-based variable buff. This needs engine support for choosing any number of counters to remove and exposing \"number removed\" as a dynamic amount."
+    ]
+  },
+  "Beetle Warrior": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Beginner Dragoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bejeweled Shrine": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove incorrect keyword \"fanfare\" from keywords; the card has no Fanfare.",
+      "The target restriction is encoded incorrectly. It should target a follower on your field with the keyword Storm or Ward, not use traitsAny [\"Storm\",\"Ward\"]. Encode the buff target as a selfFollower selector restricted by having keyword Storm or Ward. This requires engine support for target selectors filtered by current keyword(s)."
+    ]
+  },
+  "Bellringer Angel": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

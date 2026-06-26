@@ -1,0 +1,58 @@
+{
+  "Synchronized Slash": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated cost is encoded incorrectly as engaging and burying Hunter followers; it should require engaging 2 Hunter followers on your field as the cost, not putting them into the cemetery. Encode the effect as an activated ability that selects and deals 4 damage to an enemy follower, and implement a cost capability for engaging multiple matching followers on your field."
+    ]
+  },
+  "Syoko Hoshi": {
+    "verdict": "fail",
+    "issues": [
+      "The passive ability is too broad: \"This follower can't attack enemies\" does not mean it can't attack at all. Replace the current cannotAttack encoding with an effect that only prevents attacks against enemy followers/leaders, not all attacks."
+    ]
+  },
+  "Syoko Hoshi Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Both abilities are encoded as dealDamageAllEnemies, which damages enemy followers and the enemy leader. The source says \"deal 1 damage to each enemy leader,\" so each ability should instead deal 1 damage only to enemy leaders."
+    ]
+  },
+  "Syoko Hoshi [individuals]": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost incorrectly includes burySelf; the source cost is only [cost01], Lesson (2), [engage]. Remove burySelf from the cost.",
+      "The activated ability condition is encoded as ownCemeteryMin 10, but Lesson (2) is not the same as having 10 cards in your cemetery. Replace this with the correct Lesson (2) condition/cost handling."
+    ]
+  },
+  "Syuko Shiomi": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction ability is incomplete: \"When playing this card, discard 3 iM@S CG cards: This card costs 6 less to play\" is optional and gated by discarding exactly 3 matching cards while playing this card. Do not encode this as an unconditional passive playCostReduction; encode a play-time optional discard-3-iM@S-CG cost that grants cost reduction, and implement support for play-time optional costs / alternate additional play costs if missing."
+    ]
+  },
+  "Syuko Shiomi [Cinderella Girl]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Taketsumi, Aconite Paladin": {
+    "verdict": "fail",
+    "issues": [
+      "The ADVANCED activated ability should only be usable if the cemetery condition is met. Move the condition to the ability's condition field instead of resolving it with an in-effect if.",
+      "The summon-from-evolve-deck filter is incorrect: it should reference the actual card name/identity \"Taketsumi, Creator of Paradise ADVANCED\" exactly as a summon target from the evolve deck."
+    ]
+  },
+  "Taketsumi, Creator of Paradise ADVANCED": {
+    "verdict": "fail",
+    "issues": [
+      "The activated damage ability is encoded incorrectly: the source says \"Select an enemy follower on the field. Deal 5 damage to it and 3 damage to its leader.\" The 3 damage must go to that follower's leader, not always the enemy leader in a separate untargeted step. Encode this with damageFollowerAndLeader using the selected enemy follower."
+    ]
+  },
+  "Takumi Mukai": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Takumi Mukai Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

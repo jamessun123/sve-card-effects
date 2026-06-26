@@ -1,0 +1,60 @@
+{
+  "Euryale": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing continuous effect \"While this card is on your field, each Venomfang Medusa and Stheno on your field has Aura.\" It should be encoded as a passive/aura ability that grants Aura to allied followers with identityName Venomfang Medusa and Stheno; implement an aura/grant operation that can target specific named allied followers if not currently supported."
+    ]
+  },
+  "Eve Santaclaus [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded incorrectly as searching for iM@S CG cards among the top 2 cards. It should only look at the top 2 cards and reorder them, putting any number on top and the rest on bottom; implement a deck reorder/look operation for fixed top-N cards rather than `searchDeckChoose` with a trait filter.",
+      "The activated ability cost is incorrect. \"Lesson (2)\" should not be encoded as `cost.pp: 0`; it should be encoded with the proper Lesson (2) cost, which is not available in the current ability reference and should be implemented as an activated cost/condition.",
+      "The activated ability is encoded incorrectly as choosing an iM@S CG card from the top 1 card and moving remainder to deck bottom. It should look at the top card, and only if that card is an iM@S CG card, you may reveal it and add it to your hand; otherwise it stays on top. Implement a peek/reveal-top-card conditional add-to-hand operation."
+    ]
+  },
+  "Eve Santaclaus [Holy Night Miracle]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded incorrectly as searching for iM@S CG cards among the top 2 cards. It should only look at the top 2 cards and reorder them, putting any number on top and the rest on bottom; implement a deck reorder/look operation for fixed top-N cards rather than `searchDeckChoose` with a trait filter.",
+      "The activated ability cost is incorrect. \"Lesson (2)\" should not be encoded as `cost.pp: 0`; it should be encoded with the proper Lesson (2) cost, which is not available in the current ability reference and should be implemented as an activated cost/condition.",
+      "The activated ability is encoded incorrectly as choosing an iM@S CG card from the top 1 card and moving remainder to deck bottom. It should look at the top card, and only if that card is an iM@S CG card, you may reveal it and add it to your hand; otherwise it stays on top. Implement a peek/reveal-top-card conditional add-to-hand operation."
+    ]
+  },
+  "Execution": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Expert Trainer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Exterminus Weapon": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect is encoded incorrectly as `dealDamageAllEnemies` for 4 damage. It should deal 4 damage only to each enemy leader; replace it with an effect that targets enemy leaders only, such as leader-only damage in multiplayer."
+    ]
+  },
+  "Extreme Carrot": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words optional cost is incomplete: it requires banishing a Naterran Great Tree from your field or EX area, but the encoding only banishes from EX area. Change the cost to allow selecting and banishing Naterran Great Tree from either your field or your EX area."
+    ]
+  },
+  "Eyfa, Windrider": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing keyword `intimidate`. Add Intimidate to the card's keywords; if Intimidate is not yet supported by the engine, implement it as a keyword."
+    ]
+  },
+  "Eyfa, Windrider Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing keyword `intimidate`. Add Intimidate to the card's keywords; if Intimidate is not yet supported by the engine, implement it as a keyword."
+    ]
+  },
+  "Fafnir": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

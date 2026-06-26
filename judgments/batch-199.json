@@ -1,0 +1,58 @@
+{
+  "Samurai Outlaw": {
+    "verdict": "fail",
+    "issues": [
+      "Do not encode the printed evolve cost line as a keyword. Remove \"evolve\" from keywords and encode the evolve linkage only with evolvesTo and evolveCost."
+    ]
+  },
+  "Samurai Outlaw Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sanae Katagiri": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sanguine Core": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded as searchDeckChoose over the top 2 cards, but the source says to look at the top 2 cards of your deck, reveal a Machina card from among them, add it to your hand, and put the rest on the bottom in any order. This should be encoded as a top-of-deck reveal/choose effect rather than a generic deck search. Implement an ability for 'look at top N cards, optionally reveal a matching card and add it to hand, remainder to bottom' and use that here."
+    ]
+  },
+  "Sanguine Necklace": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sapphire Priestess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The startOfEnd ability is missing the condition 'if your followers attacked at least 3 times this turn'. Replace the placeholder always/conditionAny condition with an attack-count-this-turn condition. Implement a condition type for follower attack count this turn, then gate the draw 3 effect with count 3."
+    ]
+  },
+  "Sarina Matsumoto": {
+    "verdict": "fail",
+    "issues": [
+      "The spell trigger is encoded with a top-level filter field, but card-play triggers should gate with a condition/filter supported by the wrapper/effect model. Encode 'Whenever you play a spell' as an onCardPlayed ability that correctly restricts the trigger to spells, then deal 2 damage to an enemy follower."
+    ]
+  },
+  "Sarissa, Luxflash Spear": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Storm condition is encoded incorrectly as fieldTraitMin with trait \"token\", but the source says 'While there are at least 3 cards on your field, this has Storm.' This should count all cards on your field, not token-trait cards. Implement a condition type for total cards on your field (or total field cards) and use it to grant Storm while count is at least 3."
+    ]
+  },
+  "Savage Swordsman": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is missing. Replace the placeholder always condition with 'If there's a token follower on your field' before giving this follower +1/+1. Implement a condition type for presence/count of token followers on your field, then use that condition to gate the self buff."
+    ]
+  },
+  "Scalebound Plight": {
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is encoded as part of the spell effect sequence, but the source says it is an additional cost to play the card. Move the engage-a-7-cost-or-more Dragoncraft follower requirement out of the resolving effect and encode it as a play/additional cost restriction for the spell.",
+      "The additional cost target restriction is malformed: the target selector should not contain a nested filter object here. The selected ally follower must be restricted to Dragoncraft and cost 7 or more using supported target fields or a proper cost-target encoding.",
+      "The damage effect is incorrect. 'Deal 2 damage to each enemy leader' should damage only the enemy leader, not all enemy followers and leaders. Replace dealDamageAllEnemies with the correct leader-only damage effect."
+    ]
+  }
+}

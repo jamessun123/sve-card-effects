@@ -1,0 +1,57 @@
+{
+  "Rivaylian Bandit": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as grantOnCardPlayed; it should trigger whenever this follower gains attack or defense and give it Storm. Encode this with a dedicated trigger for stat gains (for example, an implemented timing/effect pair like onStatGained -> grantKeyword storm to self), which is currently missing from the ability reference.",
+      "The evolve ability is represented as a no-op passiveKeywords wrapper; the actual evolve line is already captured by evolveCost/evolvesTo, so the extra evolve ability should be removed."
+    ]
+  },
+  "Rivaylian Bandit Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is wrong: 'at least 2 Mount cards on your field and/or in your EX area' means a combined total across both zones, not field OR ex area separately. It should check a summed Mount count across field and EX area before dealing 2 damage to the selected enemy follower. Implement a condition that counts matching cards across multiple zones (for example, fieldAndExAreaTraitMin).",
+      "The passive ability is incorrectly encoded as grantOnCardPlayed; it should trigger whenever this follower gains attack or defense and give it Storm. Encode this with a dedicated trigger for stat gains (for example, onStatGained -> grantKeyword storm to self), which is currently missing from the ability reference."
+    ]
+  },
+  "Rivaylian Deputy": {
+    "verdict": "fail",
+    "issues": [
+      "The second ability uses an unsupported top-level 'filter' field and should instead encode the trigger condition in a supported way; it should trigger once per turn when a Mount card is put onto your field, then draw 1 and discard 1."
+    ]
+  },
+  "Riven Earth": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Robin Hood": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Robofalcon": {
+    "verdict": "fail",
+    "issues": [
+      "The keyword list incorrectly includes 'strike'; Strike is a triggered ability timing, not a keyword, so remove 'strike' from keywords and keep only the strike ability in abilities.",
+      "The evolve ability is represented as a no-op passiveKeywords wrapper; the actual evolve line is already captured by evolveCost/evolvesTo/evolveCost 1, so the extra evolve ability should be removed.",
+      "The base card is missing evolve linkage fields; add evolvesTo: 'Robofalcon Evolved' and evolveCost: 1 to match '[evolve] [cost01]: Evolve this follower.'"
+    ]
+  },
+  "Robofalcon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Robogoblin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Robogoblin Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Robowhip Reverend": {
+    "verdict": "fail",
+    "issues": [
+      "The +1/+1 to each Machina follower should be part of the same fanfare ability after putting a Repair Mode token into your EX area; combine these into a single fanfare sequence with the summon first, then an if-condition checking notEnteredFromHand for the buff.",
+      "The condition for the buff is incorrect: 'If this card was put onto the field by an ability' does not mean notEnteredFromHand. It should only apply when this follower entered the field by an ability, so replace the condition with a dedicated 'enteredByAbility' style condition rather than notEnteredFromHand."
+    ]
+  }
+}

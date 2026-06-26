@@ -1,0 +1,59 @@
+{
+  "Vania, Nightshade Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The two [evolve] abilities are encoded incorrectly as summonFromEvolveDeck abilities with no costs. They should represent evolving this follower into specific evolved forms with costs 1 and 3, with the second gated by at least 5 Vampire cards in your cemetery. Implement support for an evolve ability that selects a specific evolvesTo target/card from the evolve deck or card identity and carries its own cost/condition.",
+      "evolvesTo is incorrect/incomplete because the card has two distinct evolve destinations (Vania, Kind Queen and Vania, Blood Queen), not just \"Vania, Nightshade Vampire Evolved\". Encode both evolve routes once engine support for multiple evolve targets exists."
+    ]
+  },
+  "Vania, Vampire Princess": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is wrong: it should require both paying 1 PP and putting a Forest Bat token from your field into its owner's cemetery, not banishing a Forest Bat from your EX area. Encode the extra cost using a field-bury cost/effect that selects your Forest Bat on the field.",
+      "The damage effect is encoded with the wrong operation and is missing the required selected enemy follower target. It should select an enemy follower, deal 3 damage to that follower, and 1 damage to its leader using op \"damageFollowerAndLeader\"."
+    ]
+  },
+  "Varmint Hunter": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability is encoded incorrectly as grantOnCardPlayed for Mount cards. The source text triggers when a Mount card is put into your EX area during your turn, not when you play a Mount card. Implement a trigger/effect for \"whenever a card matching a filter is put into your EX area\" with a during-your-turn restriction, then encode the 3 damage to an enemy follower from that trigger."
+    ]
+  },
+  "Varmint Hunter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is encoded incorrectly as grantOnCardPlayed for Mount cards. The source text triggers when a Mount card is put into your EX area during your turn, not when you play a Mount card. Implement a trigger/effect for \"whenever a card matching a filter is put into your EX area\" with a during-your-turn restriction, then encode the 3 damage to an enemy follower from that trigger."
+    ]
+  },
+  "Vayle, Mysterian Summoner": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vayle, Mysterian Summoner Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incomplete: the card lets you put up to 2 Academic cards that cost 2 or less from among the top 5 into your EX area, but searchDeckChoose only encodes a single optional choice. Encode up to 2 cards from among those 5 with cost reduction 2 and put the rest on the bottom. Implement support for multi-pick search-from-top-N effects such as a searchDeckChooseMultiple/maxChoices variant."
+    ]
+  },
+  "Veight, Vampire Noble": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Veight, Vampire Noble Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vengeful Radiance": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is missing the restriction \"This card can't be played during your turn.\" Encode a play restriction preventing use on your own turn. Implement a passive/playability restriction ability for cards in hand such as \"cannotPlayOnOwnTurn\" or a generic play restriction condition."
+    ]
+  },
+  "Vengeful Sniper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is incorrect. The source checks whether there are at least 2 amulets on your field and/or in your EX area combined, but the parsed conditionAny means either 2 on field or 2 in EX area separately. It should count amulets across both zones together. Implement a combined zone count condition for amulets/cards across field and EX area.",
+      "The fanfare effect is incorrect. It should deal 2 damage to each enemy leader, not to all enemies including followers. Encode leader-only damage for each opponent; implement a dedicated effect such as dealDamageAllEnemyLeaders if not available."
+    ]
+  }
+}

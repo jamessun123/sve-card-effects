@@ -1,0 +1,68 @@
+{
+  "Resolve of the Nine-Tailed Fox": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Option 1 is encoded with the wrong condition and misses Storm. It should check whether there are at least 9 cards in your banished zone, not ownCemeteryMin/conditionAny, then buff a Sekka, Ninefold Blaze on your field by +2/+2 and grant it Storm. Suggest implementing a banished-zone count condition such as {\"type\":\"ownBanishedMin\",\"count\":9}.",
+      "Option 1 target selection is too loose/incorrectly shaped. It should select a Sekka, Ninefold Blaze on your field; the current target uses selfFollower with an unsupported filter field. Use a target/filter mechanism that can select a specific allied follower by name, or implement target filter support for selfFollower selectors.",
+      "Option 2 is encoded incorrectly because the damage must be dealt to the selected enemy follower equal to the first selected Sekka follower's attack. The current dealDamage with targetAttack on only the enemy follower does not link the first selected follower's attack to the damage. It should select both followers and deal damage to the second equal to the first's attack after buffing the first. Suggest implementing an effect for 'deal damage to target B equal to selected target A's attack' or a multi-target selector/damage amount that references another selected target.",
+      "Option 2 target selection should require a follower with \"Sekka\" in its name on your field plus an enemy follower. The current encoding uses unsupported target filtering by identityNameContains on selfFollower; implement ally target filtering by name substring or another selector that can choose a named allied follower."
+    ]
+  },
+  "Resplendent Phoenix": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"lastWords\" from keywords; they are timings and should be represented only in abilities.",
+      "The fanfare effect's cost reduction is encoded incorrectly. After putting the top card into your EX area, that card should cost 0 to play this turn, not apply a generic playCostReduction effect on this follower/source. Encode this with putDeckTopToExArea and playCostReduction: 99 (or equivalent reduction to 0 for the moved card) on the card put into EX area.",
+      "The Last Words effect should give your leader +2 defense as written; if the engine distinguishes this from healing, use the correct leader-defense gain encoding rather than healLeader."
+    ]
+  },
+  "Retracing the Past": {
+    "verdict": "fail",
+    "issues": [
+      "The spell must select a follower on your field and give that selected follower the Last Words ability. The current grantLastWords effect has no target. It should target a selfFollower count 1."
+    ]
+  },
+  "Reverend Adjudicator": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Reverend Adjudicator Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve search filter is incorrect. 'Follower with Ward' is not the same as trait: 'Ward'. It should search for a follower card that has the Ward keyword. Suggest implementing deck search/filter support for card keywords, e.g. a filter field like {\"hasKeyword\":\"ward\"}."
+    ]
+  },
+  "Revolver Eagle": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; it is a timing and should be represented only by the fanfare ability."
+    ]
+  },
+  "Rhinoceroach": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" from keywords; it is a timing and should be represented only by the fanfare ability.",
+      "The fanfare buff amount is encoded incorrectly. X should equal the number of cards you've played this turn, excluding this card, not an arbitrary chosen number. It should be a dynamic amount based on cards played this turn excluding this source. Suggest implementing a DamageAmount like {\"op\":\"cardsPlayedThisTurnExcludingSelf\"}."
+    ]
+  },
+  "Rhinoceroach Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Riamu Yumemi [Party Night]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" and \"act\" from keywords; they are timings and should be represented only in abilities.",
+      "The cemetery condition is wrong. The card requires all three conditions to be true (at least 3 Cute, 3 Cool, and 3 Passion cards in your cemetery), but the encoding uses conditionAny, which means any one is enough. It should use an AND-style condition. Suggest implementing a condition combinator such as {\"type\":\"conditionAll\",\"conditions\":[...]} if not available.",
+      "The activated ability cost is encoded incorrectly. The source requires Quick, [act] [cost01], Lesson (1), discard this. The current cost only includes pp and a non-reference discard field, and it misses the Lesson requirement and that the card itself is discarded. It should be an activated ability with quick: true, activateFrom: \"hand\", cost including pp:1 and a proper discard/bury-self style cost for this card, plus the Lesson (1) requirement if supported. Suggest implementing Lesson as an activation condition/cost and a hand self-discard cost."
+    ]
+  },
+  "Riamu Yumemi [Shout It to the World]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" and \"act\" from keywords; they are timings and should be represented only in abilities.",
+      "The cemetery condition is wrong. The card requires all three conditions to be true (at least 3 Cute, 3 Cool, and 3 Passion cards in your cemetery), but the encoding uses conditionAny, which means any one is enough. It should use an AND-style condition. Suggest implementing a condition combinator such as {\"type\":\"conditionAll\",\"conditions\":[...]} if not available.",
+      "The activated ability cost is encoded incorrectly. The source requires Quick, [act] [cost01], Lesson (1), discard this. The current cost only includes pp and a non-reference discard field, and it misses the Lesson requirement and that the card itself is discarded. It should be an activated ability with quick: true, activateFrom: \"hand\", cost including pp:1 and a proper discard/bury-self style cost for this card, plus the Lesson (1) requirement if supported. Suggest implementing Lesson as an activation condition/cost and a hand self-discard cost."
+    ]
+  }
+}

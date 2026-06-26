@@ -1,0 +1,62 @@
+{
+  "Poltergeist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Polyphonic Roar": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger filter is not encoded in a supported location; encode the once-per-turn trigger as timing \"onAllyFollowerEnter\" with a condition/filter for the entering follower being a Dragon token, rather than a top-level unsupported \"filter\" field.",
+      "The damage target is incorrect; replace targets {\"type\":\"choose\"} with a valid selector that lets you choose an enemy leader or enemy follower."
+    ]
+  },
+  "Pompous Princess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pompous Summons": {
+    "verdict": "fail",
+    "issues": [
+      "The field condition is encoded incorrectly; \"if there's a Princess follower on your field\" should check for a follower with the Princess trait, not named \"Princess follower\". Use a trait-based field condition for Princess followers on your field."
+    ]
+  },
+  "Poseidon": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search/summon effect is encoded incorrectly; it should search the deck for up to 2 Draconic Duelist followers with different names and summon them, then shuffle, not look at the top 5 cards with total cost 4 and put the rest on the bottom.",
+      "The encoded effect is missing the \"different names\" restriction on the 2 summoned followers."
+    ]
+  },
+  "Powerforge": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The target selection is incorrect; the second selected card should be a follower on your field or in your EX area, not a second enemy follower. Encode this as dealing damage to an enemy follower equal to a separately selected allied/EX follower's attack.",
+      "The current engine lacks a target selector/effect pattern for choosing a follower from your field or EX area and using that chosen card's attack as the damage amount; implement mixed-zone target selection and a damage amount based on another chosen card's attack."
+    ]
+  },
+  "Precious Bloodfangs": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first choose option uses an unsupported dynamic count; it should summon X Forest Bat tokens where X is the number of enemy cards on the field. Implement a dynamic amount/count for enemy field card count and use it for summon count.",
+      "The second choose option is encoded incorrectly; it should buff Forest Bat token followers on your field, not cards with trait \"Forest Bat\". Encode this with a filter by the Forest Bat card identity/token rather than trait."
+    ]
+  },
+  "Precocious Little Devil": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Presto Chango": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second clause is not implemented; after putting the enemy card on the bottom of its owner's deck, that card's controller may summon a follower or amulet from their hand.",
+      "Replace the noop stub with a real effect once available; implement an operation for the targeted card's controller to optionally play/summon a follower or amulet from hand."
+    ]
+  },
+  "Price of Magic": {
+    "verdict": "fail",
+    "issues": [
+      "The card is missing the Stack keyword/effect; encode the amulet's printed Stack ability in addition to the fanfare banish effect.",
+      "The fanfare ability is wrapped in an unnecessary always-if; encode it directly as a banish effect targeting an enemy follower with maxDef 4."
+    ]
+  }
+}

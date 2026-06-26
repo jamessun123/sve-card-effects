@@ -1,0 +1,51 @@
+{
+  "Pulsefire Assault": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incorrectly encoded as a player choice between dealing 3 or 4 damage; it should target a single enemy follower and deal 3 damage, or 4 damage instead if that target is evolved. Encode this as a conditional damage effect based on the selected target's evolved state. The current engine lacks a condition/effect form for 'if target is evolved' or target-state-based dynamic damage, so implement support for checking selected target properties (such as evolved) in conditions or damage amounts."
+    ]
+  },
+  "Pumpkin Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is incorrect: it is not just [cost02] plus a generic discard. It should require discarding this card and a Dragoncraft card that costs 7 or more from your hand. Encode the paid cost/effect so both specific discards are required before healing 5. The current engine lacks an activated cost/effect pattern for discarding the source card from hand plus discarding another hand card matching a filter, so implement support for hand-activation costs with source discard and filtered additional discard."
+    ]
+  },
+  "Pumpkin Necromancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Puppet": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pure Metamorphosis": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pure-Voiced Dragoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Purehearted Singer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pureshot Angel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pureshot Angel Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is missing the target selection for the enemy follower. It should select an enemy follower, deal 3 damage to that follower, and 3 damage to its leader. Encode the target explicitly in the effect. The current `damageFollowerAndLeader` operation has no target selector, so implement support for selecting the enemy follower tied to the split follower/leader damage effect."
+    ]
+  },
+  "Puresong Priest": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incomplete: it should give both the selected follower and your leader +4 defense, but the parsed encoding only buffs the follower. Add a leader-heal/healLeader 4 effect after buffing the chosen follower.",
+      "The activated ability cost is incorrect: it should be a quick activated ability with [cost01] and discarding this card, not a generic discard cost. Encode activation from hand with quick timing and require discarding this card as the cost/effect before healing 2. The current engine lacks proper support for activated hand abilities that discard the source card from hand as a cost, so implement support for activateFrom: 'hand' with source-discard cost handling."
+    ]
+  }
+}

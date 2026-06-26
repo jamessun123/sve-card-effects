@@ -1,0 +1,60 @@
+{
+  "Sachiko Koshimizu": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove printed keywords \"storm\" and \"bane\" from keywords; they are conditional and should only be granted by the passive ability while your leader's defense is 10 or less.",
+      "The fanfare is encoded as healLeader amount -2, but it should be encoded as damage to your leader; use a dedicated self-leader damage effect if implemented.",
+      "The passive condition uses unsupported condition type \"selfLeaderDefMax\"; it should check \"while your leader's defense is 10 or less\" with a leader-defense-threshold condition, so implement a condition for leader defense at or below N.",
+      "The passive correctly grants Storm and Bane conditionally, but because the required leader-defense-threshold condition is not in the ability reference, add support for that condition."
+    ]
+  },
+  "Sachiko Koshimizu [Lunatic Show]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sacred Gavel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sacred Groundskeeper": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sacred Plea": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the keyword \"fanfare\" from keywords; the source card has no Fanfare ability."
+    ]
+  },
+  "Sacred Springs Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should search your deck for a Soothing Dragonspring, summon it, then shuffle; add a shuffleDeck step after tutorFromDeck to fully match the text.",
+      "The Strike ability must remove 2 divine water counters from a Soothing Dragonspring on your field as a cost/requirement before the rest happens; restrict the removeCounter target to Soothing Dragonspring specifically.",
+      "The final Strike effect is encoded as grantLeaderDamageShield, but the text says \"The next time this would take damage this turn, it doesn't,\" which should protect this follower, not your leader; implement a self damage-prevention effect for the next hit this turn."
+    ]
+  },
+  "Sacred Stone Apostle": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is encoded as fieldTraitMin with trait \"amulet\", but the text checks whether there's an amulet on your field; use a field card-type condition for amulets instead, so implement a condition that checks for a minimum number of allied field cards of cardType amulet."
+    ]
+  },
+  "Sacrifice": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell should select a Chess follower on your field, destroy that selected follower, then summon an X-cost Chess follower where X equals the selected follower's cost plus 2; the current tutorFromDeck with playCostReduction selfCostPlus does not represent this. Implement support for using a selected target's cost in deck filtering, such as a dynamic maxCost/exact cost based on selected follower cost plus 2.",
+      "The target selector for the destroyed follower includes a filter field not documented in the target selector reference; encode the selection using supported targeting/filtering semantics or implement filtered field-target selectors."
+    ]
+  },
+  "Sae Kobayakawa": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare target selector includes a filter field on selfFollower, but filtered target selectors are not defined in the reference; encode this as selecting another iM@S CG follower on your field using supported target filtering, or implement target-selector filtering for field followers."
+    ]
+  },
+  "Sae Kobayakawa [Dancing Flowers]": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

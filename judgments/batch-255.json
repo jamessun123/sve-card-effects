@@ -1,0 +1,59 @@
+{
+  "Yuwan, Dimensional Avenger Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve is missing the required enemy follower selection; encode it as a targeted effect that selects 1 enemy follower, then deals 4 damage to that follower and 2 damage to its leader, rather than an untargeted damageFollowerAndLeader effect."
+    ]
+  },
+  "Yuzu Kitami": {
+    "verdict": "fail",
+    "issues": [
+      "The activated Lesson (1) ability is encoded with cost.pp: 0, but Lesson (1) means the activated ability itself should have cost {\"pp\":1} rather than using optionalCost with a free activation.",
+      "The activated Lesson (1) ability incorrectly uses optionalCost for returning another 1-cost-or-less card; that return is mandatory as part of the effect, not an optional additional cost, so encode it as a sequence/effect that returns another card on your field with maxCost 1.",
+      "The self-restriction after Lesson (1) should be 'this card's [act] abilities except [evolve] can't be activated' until end of turn; the current structure should use grantActRestriction with exceptEvolve true as part of the activated effect after the return."
+    ]
+  },
+  "Yuzu Kitami Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The activated Lesson (1) ability is encoded with cost.pp: 0, but Lesson (1) means the activated ability itself should have cost {\"pp\":1}.",
+      "The activated Lesson (1) ability incorrectly uses optionalCost for returning another 1-cost-or-less card; that return is mandatory effect text, not an optional cost, so encode it as a normal activated effect that returns another card on your field with maxCost 1.",
+      "The self-restriction after Lesson (1) is overbroadly/incorrectly encoded; evolved Yuzu says 'this card's [act] abilities can't be activated' this turn, so encode grantActRestriction without exceptEvolve, applied after the return."
+    ]
+  },
+  "Yuzuki, Bloodlord": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is incorrect: the source requires 'if there are at least ten 2-cost cards in your cemetery', but parsed uses ownCemeteryMin count 10, which counts all cards. It should check cemetery cards filtered by cost 2 before destroying the selected enemy follower. Implement a new condition such as ownCemeteryFilterMin or ownCemeteryCostMin to support counting 2-cost cards in cemetery, then use that condition while targeting any enemy follower."
+    ]
+  },
+  "Yuzuki, Bloodlord Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yuzuki, Righteous Demon": {
+    "verdict": "fail",
+    "issues": [
+      "The base fanfare effect should be 'Each opponent buries a follower. Necrocharge (10) - They bury 2 instead.' but parsed encodes two separate fanfare abilities, causing both to resolve when Necrocharge (10) is met. Replace with a single conditional fanfare using if/necrocharge so it buries 2 instead of 1, not in addition to 1."
+    ]
+  },
+  "Zahar, Stormwave Dragoon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onDiscard effect should look at the top 2 cards and choose a qualifying Dragoncraft card from among them, but searchDeckChoose searches the deck generally rather than only the looked-at cards. Encode it as a top-of-deck selection among the 2 revealed cards to hand with reveal true, and implement a new effect for choosing from the top N cards to hand/ex area if needed.",
+      "The fanfare effect should 'You may summon a Dragoncraft follower not named Zahar, Stormwave Dragoon from among' the top 3 cards, meaning at most 1 follower, but searchDeckSummonMultiple can summon multiple followers. Encode it as a choose-one-from-top-3 summon effect, and implement a new effect for selecting up to 1 matching card from the top N cards to field if needed."
+    ]
+  },
+  "Zashiki-Warashi": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zashiki-Warashi Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zealot of Destruction": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

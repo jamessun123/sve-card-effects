@@ -1,0 +1,53 @@
+{
+  "Courtly Dance": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Covenant Mage": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction uses dynamic amount {\"op\":\"banishedCount\"}, but this dynamic amount is not in the ability reference. It should encode \"This costs X less to play. X equals the number of cards in your banished zone\" with a supported dynamic banished-zone count amount; implement a new DamageAmount such as banishedCount for this.",
+      "The fanfare's second step is incorrect: the source says \"Banish a card from your hand,\" not discard a card. It should be encoded as a hand-to-banish effect after drawing. Since the ability reference has no implemented operation for banishing a chosen card from hand, implement a new effect such as banishFromHand(count/filter) and use that here instead of {\"op\":\"discard\",\"count\":1}."
+    ]
+  },
+  "Craftsman's Pride": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost \"banish a card from your EX area\" is encoded as part of the spell effect instead of as an additional play cost; it should be represented as a required cast cost before resolution. Since the ability reference has no spell additional-cost wrapper, implement support for spell play costs/additional costs and move the EX-area banish there.",
+      "The banishFromExArea step is incomplete because it omits the required filter field in the implemented shape. It should specify a valid filter or, if any EX-area card may be banished, support an any-card EX-area selector in the engine."
+    ]
+  },
+  "Crafty Warlock": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crafty Warlock Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Craig, Wizard of Mysteria": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Craig, Wizard of Mysteria Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Craving's Splendor": {
+    "verdict": "fail",
+    "issues": [
+      "The EX-area cost reduction is missing the condition \"If there is a Gilnelise, Omen of Craving on your field\". Add a named-follower-on-field condition along with the existing in-EX-area condition so the reduction applies only while this card is in your EX area and Gilnelise, Omen of Craving is on your field."
+    ]
+  },
+  "Crazed Executioner": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crazed Executioner Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second part of On Evolve is encoded incorrectly as tutorFromHand. The source says the opponent reveals their hand, you select a card in it, and that opponent discards that selected card. It should be encoded as a targeted opponent-hand discard effect after revealing hand information.",
+      "The engine lacks an implemented operation for \"opponent reveals hand; choose a card from it; opponent discards that card.\" Implement a new effect such as opponentRevealHandSelectDiscard (or equivalent reveal-opponent-hand plus targeted-discard-from-opponent-hand sequence) and use it after dealing 2 damage to your leader."
+    ]
+  }
+}

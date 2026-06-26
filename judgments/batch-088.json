@@ -1,0 +1,55 @@
+{
+  "Gallant Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Galmieux, Ardent Disdain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive triggered ability is encoded incorrectly: it should trigger only during your turn when this follower takes ability damage. Add an opponentTurnOnly/yourTurnOnly-style restriction to grantOnDamaged or a turn-gated condition so it does not trigger outside your turn.",
+      "The deck-look effect is encoded incorrectly: it should let you put any one of the top 2 cards into your EX area, and only if the chosen card is an Omen card should it cost 3 less to play this turn. The current searchDeckChoose filter limits the choice to Omen cards only. This needs an implemented ability that can choose from the top N cards, move one to EX area, then conditionally apply play cost reduction based on the chosen card's trait, with the rest buried."
+    ]
+  },
+  "Galmieux, Omen of Disdain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive triggered ability is encoded incorrectly: it should trigger only during your turn when this follower takes ability damage. Add a turn restriction to grantOnDamaged or an equivalent condition.",
+      "The effect after taking ability damage is encoded incorrectly: it should change this follower's evolve cost to 0 for the rest of the turn, not apply playCostReduction amount 0. It should be represented as an effect that sets/reduces this card's evolve cost for the turn; implement a set-evolve-cost-to-value or dynamic evolve cost override ability if evolveCostReduction alone cannot express setting cost to exactly 0."
+    ]
+  },
+  "Galmieux, Omen of Disdain Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly: 'play an Omen card that costs 2 play points or less in your cemetery for 0 play points' is not the same as tutorFromCemetery to field, and it should not be restricted to spells. It should target any Omen card with cost 2 or less in your cemetery and play it for 0 PP. Implement a play-from-cemetery ability that supports non-follower card types and 0-PP play timing.",
+      "The passive triggered ability is encoded incorrectly: it should trigger only during your turn when this follower takes ability damage. Add a turn restriction to grantOnDamaged or an equivalent condition.",
+      "The damage target is encoded incorrectly: it should target an enemy leader or an enemy follower, but enemyFieldCard cannot target leaders. Encode a choice between enemyLeader and enemyFollower, or implement a combined enemy leader-or-follower target selector."
+    ]
+  },
+  "Galua of Two Breaths": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gambit": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gargantuan Ghost": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gargouille": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Garnet Waltz": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Garuel, Seraphic Leo": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is encoded incorrectly: withChosenNumber min/max 0 is unrelated to the card text and should be removed. The follower to put onto the field should have max cost equal to your maximum play points directly.",
+      "The summoned hand follower is missing the granted ability 'At the start of your end phase, put this card on the bottom of its owner's deck.' Encode this as a granted delayed trigger on the selected follower; implement a grantStartOfEnd effect wrapper or similar support for granting a start-of-end-phase triggered ability that puts the card on the bottom of its owner's deck."
+    ]
+  }
+}

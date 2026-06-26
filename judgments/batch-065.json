@@ -1,0 +1,54 @@
+{
+  "Dragonsoul Princess": {
+    "verdict": "fail",
+    "issues": [
+      "The EX area cost reduction is incorrectly unconditional. Encode the Overflow requirement so the chosen Wyrmkin follower costs 3 less only if Overflow is active for you."
+    ]
+  },
+  "Dragontamer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragontamer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragoon Medic": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing 'When this card is discarded, you may put it into your EX area.' It should be an onDiscard ability that optionally moves this card to your EX area; implement support for an onDiscard ability using moveSourceToExArea behind an optional wrapper if needed.",
+      "Missing 'At the start of your end phase, give your leader [defense]+1.' It should be a startOfEnd ability with healLeader amount 1."
+    ]
+  },
+  "Dragoon Medic Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragoon Scyther": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing continuous ability 'While there's another Draconic Duelist card on your field, this follower has Storm.' It should be encoded as a passive conditional self-grant of Storm, but the engine lacks a condition for checking another allied card with a given trait/name on field; implement such a field condition and encode grantKeyword storm to self under it."
+    ]
+  },
+  "Drakewing Assassin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dramatic Retreat": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing restriction 'This card can't be played during your turn.' The spell effect itself is correct, but encode a play restriction limiting it to opponent turn only; implement an ability/condition for play timing restriction by turn if not available."
+    ]
+  },
+  "Dread Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dream Come True": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The main effect is incorrectly encoded as a deck search for a follower. It should repeatedly put the top card of your deck into your EX area until your EX area is full; implement a repeat-until-full EX area operation or looped top-deck-to-EX effect.",
+      "Missing 'This turn, the next card you play that was put into your EX area this way costs 0.' It should grant a one-time play cost reduction specifically to a card moved to EX area by this spell; implement tracking for cards put into EX area by the resolving effect and a corresponding next-play cost reduction."
+    ]
+  }
+}

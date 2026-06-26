@@ -1,0 +1,60 @@
+{
+  "Juggling Moggy": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare ability is missing the [cost04] activation requirement; encode the fanfare with a 4 PP cost in addition to the Earth Rite condition."
+    ]
+  },
+  "Juggling Moggy Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Junk": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Juno's Secret Laboratory": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Juno, Visionary Alchemist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kaede Takagaki": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Start-of-end ability is incorrectly encoded with irrelevant cemetery and selfDefense conditions; it should trigger at the start of your end phase only if your leader's defense is 5 or less, then heal your leader by 5 and draw 1. Implement a leader-defense-threshold condition such as condition.type 'selfLeaderDefMax' with count 5.",
+      "Activated ability is incorrectly encoded as [cost01], engage; the source text is [cost01], Lesson (1). Encode the correct Lesson cost instead of engage. Since Lesson cost is not available in the reference, implement an activated cost field for Lesson, e.g. cost.lesson: 1."
+    ]
+  },
+  "Kaede Takagaki [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare should always select an enemy follower first, then destroy it only if there are at least 10 iM@S CG cards in your cemetery; parsed effect makes the target exist only inside the condition and also uses the wrong cemetery condition. Encode a target-first conditional destroy, and implement a condition for cemetery trait count such as condition.type 'ownCemeteryTraitMin' with trait 'iM@S CG' and count 10.",
+      "Activated ability cost is encoded incorrectly as pp 1, engage, discard; the source text is Lesson (1), engage, discard a card. Replace pp 1 with the proper Lesson cost. Since Lesson cost is not available in the reference, implement an activated cost field for Lesson, e.g. cost.lesson: 1.",
+      "Activated ability uses unsupported cost field 'discard'; encode the discard-a-card cost using an implemented hand-discard cost shape, or add support for a generic activated discard cost such as cost.discardFromHand/count 1."
+    ]
+  },
+  "Kaede Takagaki [Nation Blue]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kagemitsu, Lost Samurai": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Passive text 'This can't be played from the EX area' is missing; encode a passive restriction preventing play from EX area. Since no such ability exists in the reference, implement a passive op such as 'cannotPlayFromExArea'.",
+      "Parsed passive 'cannotAttack' is incorrect; the source does not say this follower can't attack. Remove that ability.",
+      "On-ally-evolve ability should work while this card is in your EX area, but parsed ability has no EX-area condition/activation source and adds the counter to self on field. Encode it to function from EX area, e.g. with activateFrom 'exArea' and condition/sourceInExArea.",
+      "On-ally-evolve ability is incomplete; after placing a fighting spirit counter, if this has at least 2 fighting spirit counters, you may summon it and, if you do, evolve it. Add the conditional summon-from-EX-area and evolve sequence. Since the reference lacks a counter-threshold condition, implement one such as condition.type 'selfCounterMin' with counter 'fighting_spirit' and count 2.",
+      "Last Words is encoded with moveToExArea targeting self, but the correct implemented form for 'Put this into its owner's EX area' should use moveSourceToExArea."
+    ]
+  },
+  "Kagemitsu, Lost Samurai Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "First activated ability is missing its cost; it should remove 1 fighting spirit counter from this. Encode the cost with removeCounter on this card, and since activated costs do not currently support removeCounter, implement a counter-removal activated cost shape such as cost.removeCounter.",
+      "Second activated ability is missing its cost; it should remove 5 fighting spirit counters from this. Encode the cost with removeCounter amount 5 on this card, and since activated costs do not currently support removeCounter, implement a counter-removal activated cost shape such as cost.removeCounter."
+    ]
+  }
+}

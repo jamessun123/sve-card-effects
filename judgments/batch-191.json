@@ -1,0 +1,53 @@
+{
+  "Robowing Precant": {
+    "verdict": "fail",
+    "issues": [
+      "The 'Whenever you play a Repair Mode' ability is encoded incorrectly. Replace the current onCardPlayed/grantOnCardPlayed structure with a direct triggered ability that triggers when you play a card named Repair Mode and grants Bane to a selected follower on your field.",
+      "The triggered ability to grant Bane is missing the actual target-selection form from the source. It should target a follower on your field (for example with targets.type 'selfFollower' or 'anyFollower' as appropriate to your controller-only field targeting), not wrap the effect as a granted future trigger."
+    ]
+  },
+  "Robozombie": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Roc": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Roc Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rock Whale": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rockback Ankylosaurus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rodeo, Anathema of Judgment": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The end phase condition is encoded incorrectly as fieldTraitMin with trait 'Amulet'. It should check whether there are at least 2 amulets on your field; add an implemented condition for counting field cards by cardType/amulet (or a dedicated amulet-field-count condition) and use that instead."
+    ]
+  },
+  "Rodeo, Anathema of Judgment Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve deck search is encoded incorrectly with searchDeckChoose/lookAt 40/remainderTo deckBottom. It should search the deck for an amulet that costs 3 or less, summon it, then shuffle; use tutorFromDeck with filter {cardType:'amulet', maxCost:3}, to:'field', plus shuffleDeck, or implement a dedicated search-and-summon-with-shuffle pattern.",
+      "The On Super-Evolve deck search is encoded incorrectly with searchDeckChoose/lookAt 40/remainderTo deckBottom. It should search the deck for an amulet that costs 5 or less, summon it, then shuffle; use tutorFromDeck with filter {cardType:'amulet', maxCost:5}, to:'field', plus shuffleDeck, or implement a dedicated search-and-summon-with-shuffle pattern.",
+      "The end phase condition is encoded incorrectly as fieldTraitMin with trait 'Amulet'. It should check whether there are at least 2 amulets on your field; add an implemented condition for counting field cards by cardType/amulet (or a dedicated amulet-field-count condition) and use that instead."
+    ]
+  },
+  "Rola, Inferno Dragoon": {
+    "verdict": "fail",
+    "issues": [
+      "The second fanfare ability is encoded with the wrong effect. If this card was put onto the field by an ability, it should evolve itself; replace evolveOtherFollower excludeSelf:true with an effect that evolves this follower."
+    ]
+  },
+  "Rola, Inferno Dragoon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "Water Fairy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Water Fairy Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Waters of the Megalorca": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wavecrest Angler": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wayfaring Illustrator": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incorrectly encoded as an unconditional tutor for any follower plus shuffle. It should first select an enemy follower, then search your deck for a follower with cost equal to the selected follower's cost, put it into your EX area, then shuffle. Implement support for using a selected target's cost as a deck-filter cost value (for example a dynamic filter based on selected target cost) and encode the whole fanfare as a single targeted tutor sequence."
+    ]
+  },
+  "We've Got a Case!": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incorrectly encoded as simply draw 1. It should declare a card name, reveal the top card of your deck, then draw 2 if it has the declared name, otherwise draw 1. Implement abilities for declaring a card name and revealing/checking the top card of the deck against that declared name, then encode the conditional draw."
+    ]
+  },
+  "Westmuenster Abbey": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability target is encoded incorrectly as only an enemy follower. It should target an enemy leader or enemy follower and deal 1 damage. Implement a target selector that can choose either enemy leader or enemy follower, then use that selector in the onAllyFollowerEnter ability."
+    ]
+  },
+  "Wheel of Misfortune": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second activated ability is left as noop. It should be [act] [engage], bury this card: destroy each enemy follower with cost equal to the number of calamity counters this card had. Implement support for destroying all enemy followers matching a dynamic cost value based on counters on the source, then replace the noop with that effect."
+    ]
+  },
+  "Whims of Chaos": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is left as noop. It should have each player choose a follower on their field and then transfer control of it to another player of their choice, starting with the active player. Implement support for control-changing effects on selected followers, including multiplayer choice/order handling, then replace the noop with the real effect."
+    ]
+  },
+  "Whimsical Mermaid": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

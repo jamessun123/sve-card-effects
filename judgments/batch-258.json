@@ -1,0 +1,19 @@
+{
+  "Zwei, Murderous Puppet Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded with target type selfFollower, but the source says \"Select a Victoria on your field,\" which should target an allied Victoria specifically; encode it as a target selector for an allied follower/card filtered by identityName \"Victoria\" rather than selfFollower. Suggest implementing filter support on selfFollower/allyFieldCard targets or a dedicated target selector for allied named followers.",
+      "The effect says the selected Victoria \"doesn't take damage this turn,\" but parsed uses damageImmunity with amount 99, which only represents ability-damage immunity in this engine and does not correctly encode all damage prevention. This should be encoded as full damage prevention for the chosen target until end of turn; suggest implementing a grant/prevent-all-damage effect for a target until end of turn."
+    ]
+  },
+  "miroir": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is incorrectly placed in keywords; remove \"fanfare\" from keywords and keep it only as the ability timing.",
+      "The fanfare optional cost says \"Banish two 1-cost cards from your cemetery,\" but the banishFromCemetery filter only has maxCost: 1; it should require exactly 1-cost cards, not 0- or 1-cost cards.",
+      "Choice (2) says \"Deal 2 damage to each enemy leader,\" but the parsed effect uses dealDamageAllEnemies, which hits enemy field/leader scope rather than leaders only; encode this as damage to enemy leaders specifically.",
+      "The activated ability is missing the engage cost from \"[act] [cost01], Lesson (1)\"; add engage: true to the activated cost if Lesson (1) corresponds to engaging this card plus the lesson payment.",
+      "The activated ability's Lesson (1) cost is encoded as banishFromExArea of a Magical Item, but the source text does not specify a Magical Item banish here; replace this with the correct Lesson (1) cost encoding rather than an unsupported inferred cost."
+    ]
+  }
+}

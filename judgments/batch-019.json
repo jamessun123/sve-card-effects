@@ -1,0 +1,63 @@
+{
+  "Arcane Personnel Carrier": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the printed keyword \"ward\" from keywords; the source does not say this amulet itself has Ward, it grants Ward to a selected follower with its activated ability.",
+      "The conditional buff is encoded incorrectly: it should check whether the selected follower is a Wasteland follower, not whether there is any Wasteland card on your field. Encode the target selection once and apply Ward plus [defense]+1 to that same target only if that target has the Wasteland trait."
+    ]
+  },
+  "Arch Priestess Laelia": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Arch Priestess Laelia Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Arch Summoner Erasmus": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"engage\" from keywords; [engage] here is only the cost of the activated ability, not a printed card keyword.",
+      "The damage ability is encoded incorrectly: \"Select an enemy follower on the field. Deal 6 damage to it and 2 damage to its leader\" should target the selected follower's leader. Encode this as op \"damageFollowerAndLeader\" with followerAmount 6 and leaderAmount 2, or otherwise preserve the linkage to the chosen follower's controller."
+    ]
+  },
+  "Archangel Reina": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Archangel Reina Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly: X should equal the number of faceup followers in your evolve deck, not a field count using namedIdentityFieldCount. Encode recovery from the count of faceup follower cards in your evolve deck, then turn those cards facedown.",
+      "The clause \"Turn them facedown\" is missing. Add an effect to turn all counted faceup follower cards in your evolve deck facedown after recovering PP. The engine needs a dynamic amount/condition for counting faceup evolve-deck followers and a turnEvolveDeck mode that can turn all matching faceup follower cards facedown."
+    ]
+  },
+  "Archer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger should be \"Whenever another follower is put onto your field\" but the encoding lacks the 'another' restriction. It should exclude this card from satisfying the enter trigger. The engine needs support in grantOnAllyFollowerEnter for excluding the source card or a condition for 'another follower enters'."
+    ]
+  },
+  "Archer Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The damage ability should say \"select up to 2 enemy followers\" but the encoding uses a required target count of 2. Encode this as an effect that can target 0 to 2 enemy followers, such as dealDamageSplit with primaryAmount 1 and maxTargets 2, or otherwise make the two targets optional."
+    ]
+  },
+  "Arctic Chimera": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" and \"lastWords\" from keywords; they are ability timings and should not be listed as printed keywords.",
+      "The Last Words re-entry is encoded incorrectly: \"Put this onto its owner's field\" should revive the same card, not summon a token copy named Arctic Chimera. Use reviveToField or equivalent to return this specific card.",
+      "The Last Words stat change and Storm grant should apply to the returned card itself. The current selfFollower targeting after summoning a token does not faithfully represent that linkage; encode the revive of this card followed by setting this card's stats to 2/2 and granting it Storm."
+    ]
+  },
+  "Arcus, Spirited Manager": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" from keywords; the source has no Fanfare ability.",
+      "The passive is encoded too broadly as cannotAttack, but the source says \"This follower can't attack enemies.\" It should still be able to attack the enemy leader. The engine needs a distinct passive restriction for 'can't attack followers/enemies' rather than the existing full cannotAttack effect.",
+      "The activated cost should be encoded as burying another follower on your field using the documented cost shape for buryFromField. The current cost object does not match the ability reference; encode a bury-from-field cost that selects 1 follower with excludeSelf true."
+    ]
+  }
+}

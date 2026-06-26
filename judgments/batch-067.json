@@ -1,0 +1,66 @@
+{
+  "Edelweiss, Sagelight Ward Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The 'Whenever a Golem follower is put onto your field' ability is encoded incorrectly: the ally-enter trigger should target only Golem followers, but the DSL places `filter` at the ability root where it is unsupported. Encode this as an `onAllyFollowerEnter` ability with a supported follower filter/condition so it only triggers for Golem followers."
+    ]
+  },
+  "Edgy Elf": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `strike` from `keywords`; Strike is a triggered ability timing and should only be represented as the `timing: \"strike\"` ability, while only Storm belongs in `keywords`."
+    ]
+  },
+  "Edict of Truth": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery trigger is encoded with the wrong effect and timing separation: 'When a Raio, Omen of Truth is put onto your field, banish this card from your cemetery: Gain 1 Evolution Point.' should be a triggered ability from the cemetery (`timing: \"onAllyFollowerEnter\"`, `activateFrom: \"cemetery\"`) whose effect/cost banishes this card and gains 1 evolution point, not an on-field trigger that recovers PP.",
+      "The spell effect is missing from `timing: \"spell\"`: the top-level spell ability should look at the top 5 cards of your deck and let you put up to 2 cards that cost 3 or less into your EX area with cost reduction 3, then put the rest on the bottom of your deck.",
+      "The current `searchDeckChoose` under the activated cemetery ability is incomplete because the source allows up to 2 qualifying cards, not just a single optional card; the spell effect should be encoded as a top-5 selection of up to 2 cards to EX area with `playCostReduction: 3` and the remainder to the bottom."
+    ]
+  },
+  "Eggsplosion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage effect is encoded incorrectly: it should deal X damage to each follower on the field and each enemy leader, not just enemy followers. A correct encoding would need an effect that damages all followers on both sides plus the enemy leader.",
+      "The dynamic amount is encoded incorrectly: X should equal the number of cards named 'Eggsplosion' or 'Humpty Dumpty' in your cemetery plus 1, excluding this card. The current `cemeteryFilterCount` by trait Fable does not match the named-card count or the +1 modifier. Implement a dynamic amount/counting primitive that can count cemetery cards by multiple identity names and add a constant offset, with support for excluding the source card while resolving a spell."
+    ]
+  },
+  "Eidolon of Madness": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve ability is not encoded correctly: `[evolve] [cost02]: Evolve this follower.` should be represented by the card's evolve linkage/cost (`evolveCost: 2`) rather than placeholder keywords or a no-op evolve ability.",
+      "The fanfare condition is encoded with an unsupported and incorrect condition type. It should check whether there are at least 3 amulets on your field, then reduce this follower's evolve cost to 0 this turn. Implement a field-count condition that can count allied field cards by `cardType: \"amulet\"`, then use `evolveCostReduction` amount 2."
+    ]
+  },
+  "Eidolon of Madness Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words ability is encoded incorrectly: it should deal 3 damage to each enemy leader, not to all enemies. Replace `dealDamageAllEnemies` with an effect that deals 3 damage to the enemy leader only."
+    ]
+  },
+  "Elana's Prayer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered condition is encoded incorrectly: the source says 'Once per turn, when your leader gains defense,' not 'when you play a follower.' This should be a once-per-turn trigger on leader healing/gaining defense.",
+      "The buff effect should give each follower on your field +1/+1, which `buffFieldTrait` can express without a trait filter, but it must be attached to the correct trigger. Implement a trigger timing for 'when your leader gains defense/is healed' so this card can be encoded faithfully."
+    ]
+  },
+  "Elder Tortoise": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Eleanor, Cosmic Flower": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is not encoded correctly: `[evolve] [cost01]: Evolve this follower.` should be represented by evolve linkage/cost (`evolveCost: 1`) instead of adding `evolve`/`fanfare` to `keywords` and using a placeholder passiveKeywords ability.",
+      "Remove `evolve` and `fanfare` from `keywords`; these are not printed keywords and should not appear there."
+    ]
+  },
+  "Eleanor, Cosmic Flower Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (10) clause is attached incorrectly as a passive self cost reduction. In the source, 'Spellchain (10) - It costs 2 less to play this turn.' refers to the searched 'Splendid Conjury' put into your EX area during On Evolve, so the cost reduction should be applied conditionally to that tutored card as part of the On Evolve effect, not as a passive ability on Eleanor herself."
+    ]
+  }
+}

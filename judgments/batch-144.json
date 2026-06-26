@@ -1,0 +1,62 @@
+{
+  "Marwynn, Omen of Repose": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is incorrectly encoded as grantActRestriction. It should encode the printed evolve payment options: one standard evolve ability with cost {\"pp\":4} that evolves this follower, and a second evolve ability that uses skip your next turn as the cost to evolve this follower."
+    ]
+  },
+  "Marwynn, Omen of Repose Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marwynn, Repose of Despair": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is incorrect. It should check whether there are at least 3 followers on an opponent's field, not an unrestricted fieldFollowerMin condition. Add a condition type for opponent field follower count, such as opponentFieldFollowerMin, and use that before summoning a Torrent of Despair token to the EX area.",
+      "The startOfMain ability is missing the 'each opponent's main phase' restriction and currently triggers on your main phase too. It should trigger only during each opponent's main phase; implement a way to mark startOfMain triggers as opponent-turn-only (for example opponentTurnOnly on the ability wrapper)."
+    ]
+  },
+  "Marwynn, Repose of Despair Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onEvolve effect destroys all followers, but the source says 'Destroy each other follower on the field.' It should destroy all followers except this one; implement an effect variant or flag for destroyAllFollowers excluding self.",
+      "The startOfMain ability is missing the 'each opponent's main phase' restriction and currently triggers on your main phase too. It should trigger only during each opponent's main phase; implement a way to mark startOfMain triggers as opponent-turn-only (for example opponentTurnOnly on the ability wrapper)."
+    ]
+  },
+  "Masamune, Raging Dragon": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect incorrectly puts Storm inside a buff effect. It should grant +2/+2 to this follower and separately grant this follower Storm, typically as a sequence of buff then grantKeyword targeting self."
+    ]
+  },
+  "Masked Puppet": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous ability is encoded as triggering when an ally follower enters the field, but the source says 'During your turn, whenever a follower is put from your field into the cemetery.' It should trigger on allied followers leaving your field to the cemetery during your turn and then give this follower +1 attack. Implement a trigger/effect for allied follower sent from field to cemetery, ideally with a turn restriction."
+    ]
+  },
+  "Masked Puppet Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous ability is encoded as triggering when an ally follower enters the field, but the source says 'During your turn, whenever a follower is put from your field into the cemetery.' It should trigger on allied followers leaving your field to the cemetery during your turn and then give this follower +1 attack. Implement a trigger/effect for allied follower sent from field to cemetery, ideally with a turn restriction."
+    ]
+  },
+  "Masquerade Ghost": {
+    "verdict": "fail",
+    "issues": [
+      "The passive trigger buffs this card itself, but the source says 'Whenever a Ghost is put onto your field, give it [attack]+1.' The buff target should be the Ghost that entered, not this follower; use the entering follower as the target (for example lastSummoned) for the +1 attack buff."
+    ]
+  },
+  "Masquerade Ghost Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive trigger buffs this card itself, but the source says 'Whenever a Ghost is put onto your field, give it [attack]+1.' The buff target should be the Ghost that entered, not this follower; use the entering follower as the target (for example lastSummoned) for the +1 attack buff.",
+      "The 'Whenever a Ghost you control leaves the field, summon a Gargantuan Ghost token' ability is incorrectly encoded as onLeaveField on this card itself. It should trigger when any Ghost you control leaves the field. Implement a trigger for allied named follower leaving the field, filtered to identityName Ghost, and summon a Gargantuan Ghost token.",
+      "The Last Words effect moves the source card to the EX area, but after Last Words the source is no longer on the field. It should put this card into its owner's EX area from the cemetery/last known object; implement a dedicated effect for moving the destroyed source card to EX area on Last Words."
+    ]
+  },
+  "Master Samurai": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

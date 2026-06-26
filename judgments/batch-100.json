@@ -1,0 +1,54 @@
+{
+  "Grimoire Sorcerer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grimoire Sorcerer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grudge Teller": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect targets the wrong recipients: encode damage to enemy leaders only, not all enemies/followers. Replace dealDamageAllEnemies with an effect that deals 1 damage to each enemy leader, or 3 instead if Sanguine is active."
+    ]
+  },
+  "Guardform Golem": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Guardian Golem": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Guardian Nun": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is encoded incorrectly as fieldTraitMin with trait 'amulet'; it should check whether there is an amulet on your field. Encode this as a field card-type condition if available, and add engine support for a condition such as fieldCardTypeMin/cardType:'amulet', count:1."
+    ]
+  },
+  "Guardian Nun Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Guardian Sun": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability should not require engaging this card; source text is '[act][cost02], [engage], put this card into its owner's cemetery', where [engage] refers to the chosen follower with Ward, not the amulet itself. Encode the cost as pp 2 and burySelf only, then engage the selected Ward follower as part of the effect before buffing it. Add engine support for targeting a follower by keyword and for an effect sequence that engages the chosen target then buffs that same target."
+    ]
+  },
+  "Guild Assembly": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost is too broad: it must turn a facedown evolved follower in your evolve deck face up, not any evolve-deck card. Encode turnEvolveDeck with a filter for an evolved follower/facedown card if supported, and add engine support for filtering turnEvolveDeck by printingType:'evolved' and facedown state."
+    ]
+  },
+  "Gullias, Silverbeast Lord": {
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage: the base follower has an '[evolve] [cost01]' line, so it should include the evolve keyword/evolve ability linkage rather than omitting it. Add the evolve keyword or proper evolve metadata for this base card.",
+      "The activated ability cost is encoded incorrectly: source text does not include [engage], so remove engage from the cost.",
+      "The activated ability cost should banish 2 cards named Repair Mode from your EX area using the implemented cost shape. Encode banishFromExArea as a cost object with filter identityName 'Repair Mode' and count 2."
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "Little Dragon Nanny Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The once-per-turn triggered ability is encoded with timing passive + grantOnCardPlayed for Dragon's Nest being played, but the source says \"when a Dragon's Nest is put from your field into the cemetery\". It should trigger on Dragon's Nest leaving your field / entering your cemetery, not on card played. Encode it as an appropriate leave-field or cemetery trigger keyed to Dragon's Nest; implement a new ability/effect support for \"when a named card is put from your field into the cemetery\" if needed."
+    ]
+  },
+  "Liu Feng, Goldennote Ward": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Liu Feng, Goldennote Ward Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lizardman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lloyd": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incorrectly duplicated in keywords. Keep only the triggered ability for the fanfare heal; keywords should include Ward but not Fanfare.",
+      "The passive clause \"While this card is on the field, its name is also Puppet\" is missing. Encode a passive name-changing/alias effect for this card while on the field; implement a new passive ability op for gaining an additional name/identity if the engine does not support name aliases."
+    ]
+  },
+  "Loathing Desire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The deck search filter is wrong: \"with both the Omen and Demon traits\" requires matching both traits, not traitsAny. It should be encoded with a filter that requires both traits; implement support for multi-trait AND matching in DeckFilter if unavailable.",
+      "The final conditional heal is incorrectly encoded as an always-true conditionAny using discardedThisTurn/always. It should heal only if the card revealed by this effect was a follower with \"Valnareik\" in its name. Encode a condition based on the revealed chosen card's type/name; implement support for checking properties of the card revealed/added by searchDeckChoose if needed."
+    ]
+  },
+  "Lococo's Teddy Bear": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lococo, Little Puppeteer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lococo, Little Puppeteer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve effect incorrectly uses destroyAllFollowers, which destroys this follower too. The source says \"Destroy each other follower on the field,\" so it should destroy all followers except this one.",
+      "The token summon is incorrect and incomplete: the source says \"Each player summons a Lococo's Teddy Bear token for every follower on their field destroyed this way,\" not a single token total. Encode token counts based on the number of followers each player had destroyed by this effect; implement support for \"destroy all other followers\" and for summoning tokens proportional to cards destroyed this way for each player if unavailable."
+    ]
+  },
+  "Looking Smart!": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

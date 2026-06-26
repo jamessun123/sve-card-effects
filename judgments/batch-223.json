@@ -1,0 +1,61 @@
+{
+  "Swiftblade Dragonewt Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sword General": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented only as a timing on the ability, while Ward remains in keywords.",
+      "The fanfare's \"You may summon up to 2 Officer followers that cost 2 or less from your hand\" is not faithfully encoded by chooseMultiple with one repeated option. It should allow selecting up to 2 matching followers from hand and putting them onto the field. Implement an ability for multi-selecting cards from hand to field (for example, a selector like selectMultipleFromHand with count/max and filter) and encode the summon-from-hand clause with that."
+    ]
+  },
+  "Swordflash Panther": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing only, while Rush stays in keywords.",
+      "The fanfare incorrectly uses tutorFromCemetery to field; the card text says to summon a follower from your cemetery. Encode this as summonFromCemetery with filter {\"cardClass\":\"sword\",\"cardType\":\"follower\",\"maxCost\":2}, count 1, then buff the lastSummoned follower with atk +1."
+    ]
+  },
+  "Swordsman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Swordsnout Trencher": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Swordwhip Dragoon": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing only.",
+      "The fanfare is encoded as a player choice between 2 damage and conditional 4 damage, but the card has no choice. Encode it as an if effect: if Overflow is active, dealDamageSplit with primaryAmount 4 to up to 2 enemy followers; otherwise dealDamageSplit with primaryAmount 2 to up to 2 enemy followers."
+    ]
+  },
+  "Sylvan Justice": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sylvia, Grand Arbiter": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Evolve this follower,\" but the encoding only triggers On Evolve abilities. Encode the fanfare as actually evolving this follower (for example using an evolve/self-evolve effect rather than triggerAbilities onEvolve), so it properly changes to the evolved state and links to Sylvia, Grand Arbiter Evolved."
+    ]
+  },
+  "Sylvia, Grand Arbiter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is incorrectly encoded as inExArea. It should be conditioned on \"if there are at least 5 faceup evolved followers in your evolve deck,\" then deal 5 damage to an enemy follower.",
+      "To encode this correctly, add engine support for a condition that counts faceup evolved followers/cards in the evolve deck (for example, evolveDeckFaceupMin with cardType/printingType filtering), then use that condition in an if effect before dealDamage to an enemy follower."
+    ]
+  },
+  "Sylvia, the Condemner": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing only.",
+      "The fanfare should destroy the selected enemy follower and deal 5 damage to its leader; encode this as damageFollowerAndLeader with followerAmount 999 or as a sequence that preserves the selected follower's leader linkage if supported, rather than separate destroy plus generic enemyLeader damage. If leader-of-selected-follower targeting is not implemented, add engine support for dealing damage to that follower's leader.",
+      "The activated ability cost is incorrect: \"discard this card\" is not a supported cost field and should be encoded as activating from hand with a cost that discards/buries this card itself. Add engine support for a hand-activation self-discard/self-bury cost, then encode the ability from hand with pp 2 and self-discard.",
+      "The activated ability target restriction is wrong: it should target an enemy follower that costs 5 or more, not maxCost 5. Encode the destroy target as enemyFollower with minCost 5."
+    ]
+  }
+}

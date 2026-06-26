@@ -1,0 +1,69 @@
+{
+  "Imprisoned Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is too broad: source says \"This follower can't attack enemies,\" not \"can't attack\". It should restrict attacks only against enemy followers/leader, but the engine only has `cannotAttack` for a total attack prohibition. Implement a more specific attack-restriction ability such as `cannotAttackEnemies` or a passive attack target restriction."
+    ]
+  },
+  "Inauspicious Puppeteer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous triggered ability is encoded incorrectly as `onLeaveField` with `enteredFromHand`/`grantOnAllyFollowerEnter`. It should be a during-your-turn trigger for when a token follower is put from your field into the cemetery, then give an enemy follower -1/-1. The current timing, condition, and trigger event are all wrong.",
+      "To encode the missing clause correctly, the engine needs support for a trigger like \"when an ally follower matching filter leaves your field and is put into the cemetery\" with a turn restriction and token filter, e.g. an `onAllyFollowerLeaveField`/`onAllyFollowerPutIntoCemetery` timing or equivalent granted trigger."
+    ]
+  },
+  "Inauspicious Puppeteer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous triggered ability is encoded incorrectly as `onLeaveField` with `enteredFromHand`/`grantOnAllyFollowerEnter`. It should be a during-your-turn trigger for when a token follower is put from your field into the cemetery, then give an enemy follower -1/-1. The current timing, condition, and trigger event are all wrong.",
+      "To encode the missing clause correctly, the engine needs support for a trigger like \"when an ally follower matching filter leaves your field and is put into the cemetery\" with a turn restriction and token filter, e.g. an `onAllyFollowerLeaveField`/`onAllyFollowerPutIntoCemetery` timing or equivalent granted trigger."
+    ]
+  },
+  "Infernal Orchestration": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first step should deal 1 damage to your leader, not `healLeader` for -1. It should be encoded as leader self-damage; the current encoding uses healing with a negative amount.",
+      "The second step is too broad: source says \"The next time you put a follower onto your field this turn by playing it, give it +1/+1.\" The parsed `grantOnAllyFollowerEnter` lacks the restriction to followers entering by being played and does not clearly limit it to only the next time. It should trigger once on an ally follower entering from hand/play, buff that entering follower, then expire.",
+      "The engine lacks a direct self-leader damage operation and a trigger condition for \"when a follower enters your field by playing it / from hand\" on the entering follower. Implement a `dealDamage` target for `selfLeader` or `damageSelfLeader`, plus an enter trigger/filter using `enteredFromHand` or equivalent and single-use `grantOnAllyFollowerEnter` behavior."
+    ]
+  },
+  "Insane Dark Elf": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Insane Dark Elf Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second ability is encoded as `grantOnDamaged`, but source says \"During your turn, whenever this follower deals combat damage, refresh it.\" This should trigger when this follower deals combat damage, not when it takes damage.",
+      "The ability also misses the during-your-turn restriction. It should only refresh during your turn after this follower deals combat damage.",
+      "The engine needs a trigger for \"when this follower deals combat damage\" (or strike damage dealt) with optional turn restriction, such as `onDealCombatDamage`."
+    ]
+  },
+  "Insatiable Desire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cemetery activated ability is missing its condition: it can be activated only if there's a XIV. Luzen, Temperance on your field. Add a field-name condition checking for that follower.",
+      "The printed spell side deals 2 damage to your leader, but it is encoded as `healLeader` for -2. It should be encoded as leader self-damage instead.",
+      "The card is incorrectly given `quick` in `keywords`, and the spell ability is incorrectly marked `quick: true`; source text does not have [quick]. Remove quick.",
+      "The engine lacks a direct self-leader damage operation; implement support for dealing damage to `selfLeader` or a `damageSelfLeader` effect. If exact named-card condition support for XIV. Luzen, Temperance is unavailable by identity, ensure `namedFollowerOnFieldByName` can be used for the activated cemetery ability."
+    ]
+  },
+  "Insight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Instant Poison": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell should select an enemy follower, deal 4 damage to that selected follower, and 2 damage to its leader. The parsed `damageFollowerAndLeader` ability does not include the required follower target selection, and the reference notes this op should correspond to selecting an enemy follower. It should include a target or use an implemented targeted version.",
+      "The engine/reference is inconsistent here: `damageFollowerAndLeader` needs explicit target selection support, e.g. `targets: {\"type\":\"enemyFollower\",\"count\":1}`."
+    ]
+  },
+  "Intertwined Resolve": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Choice (1) is incomplete: source requires \"Put a Natura card from your field into its owner's EX area\" as a cost/effect before dealing 3 damage to an enemy follower. The parsed option only deals 3 damage and omits moving a Natura card from your field to EX area.",
+      "The engine lacks an operation to move a selected ally field card matching a trait to EX area. Implement something like `moveToExArea` for `allyFieldCard`/`self field card` targets with filter support so option (1) can be encoded as a sequence: move a Natura card from your field to EX area, then deal 3 damage to an enemy follower."
+    ]
+  }
+}

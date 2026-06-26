@@ -1,0 +1,61 @@
+{
+  "Albert, Thunderous Doom Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Strike ability encodes the buff amount incorrectly. It should give this follower +X/+X where X equals the number of followers put from the field into the cemetery this turn, not traitFieldCount with trait \"field\". Encode the destroy as optional up to 1 enemy follower, and add support for a dynamic amount such as followersLeftFieldToCemeteryThisTurn to represent the printed X value.",
+      "Strike destroy target is not properly optional 'up to 1'. It should allow selecting 0 or 1 enemy follower rather than a required destroy target with count 1."
+    ]
+  },
+  "Alchemical Lore": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Alchemist's Workshop": {
+    "verdict": "fail",
+    "issues": [
+      "Stack is encoded incorrectly as part of the fanfare sequence. 'Stack' should be represented as a keyword/passive card property, while the fanfare should only summon a Strikeform Golem token."
+    ]
+  },
+  "Aldis, Trendsetting Seraph": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aldis, Trendsetting Seraph Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Last Words effect is encoded as dealDamageAllEnemies, but the card says 'Deal 3 damage to each enemy leader.' It should deal 3 damage only to enemy leaders, not to followers or other enemies."
+    ]
+  },
+  "Alexander": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Assail is not represented correctly. It should be a keyword on the card, not a passive grantKeyword ability to itself.",
+      "The refresh ability is encoded with the wrong timing. It should trigger during your turn whenever this follower deals combat damage, not onCardPlayed. Add engine support for a trigger such as onDealCombatDamage with a condition restricting it to your turn, then refresh this follower."
+    ]
+  },
+  "Alice's Adventure": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare tutor is encoded as searchDeckChoose looking at 40 cards, but the card says to search your deck for a Fable card, reveal it, and add it to your hand. It should be encoded as tutorFromDeck with filter trait Fable, to hand, reveal true, and then shuffle if required by engine flow.",
+      "Activated ability target selection is incomplete. The card targets a Fable follower on your field and give it Rush and Assail, but the parsed target selector uses selfFollower with an unsupported filter field and cannot target EX area wording from other cards' patterns. It should target a Fable follower on your field only; if target filtering on selfFollower is not implemented, add filter support to target selectors or a dedicated grantKeyword-to-filtered-self-follower operation.",
+      "Activated ability grants Rush and Assail via two separate target selections. Both keywords should be granted to the same selected Fable follower with a single selection; if the engine cannot bind one chosen target across sequential effects, add support for reusing the same selected target in a sequence."
+    ]
+  },
+  "Alice, Golden Afternoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Alice, Wonderland Explorer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability target is encoded only as allyFieldCard with a Fable filter, but the card says 'Select a Fable follower on your field or in your EX area.' The targeting should include both field and EX area. Add engine support for selecting a follower in either your field or EX area, or a combined zone target selector."
+    ]
+  },
+  "Alice, Wonderland Explorer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve effect is incomplete. The card says 'You may put up to 2 Fable cards from among them into your EX area,' but searchDeckChoose can only choose one card. It should allow choosing up to 2 cards from the top 4; add engine support for a multi-select deck choose operation with max selections.",
+      "Activated ability target is encoded only as allyFieldCard with a Fable filter, but the card says 'Select a Fable follower on your field or in your EX area.' The targeting should include both field and EX area. Add engine support for selecting a follower in either your field or EX area, or a combined zone target selector."
+    ]
+  }
+}

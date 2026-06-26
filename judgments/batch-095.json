@@ -1,0 +1,68 @@
+{
+  "Goblin Queen": {
+    "verdict": "fail",
+    "issues": [
+      "Remove keywords entries for \"fanfare\" and \"act\"; these are timings and should only be represented as abilities, not in keywords.",
+      "The activated ability should use a single selected enemy follower for both clauses; encode it as destroying the selected enemy follower and dealing 3 damage to that follower's leader with a linked effect such as damageFollowerAndLeader, not as separate destroy-any-follower plus 3 damage to enemy leader."
+    ]
+  },
+  "Goblin Warpack": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the play restriction \"This card can only be played if there are at least 3 Goblinoid followers on your field.\" The parser omitted this condition entirely; the engine needs a playable-condition ability/condition such as a field trait minimum with cardType follower.",
+      "The spell effect should destroy the selected enemy follower and deal 2 damage to its leader as one linked effect off the same target, not as two separate spell abilities. Encode as a single spell ability using a sequence or dedicated damageFollowerAndLeader-style operation after selecting one enemy follower."
+    ]
+  },
+  "Goblinmount Demon": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is targeted incorrectly: it should deal 2 damage to each other follower on your field, not to each enemy follower. Replace dealDamageAllEnemies with dealDamageOtherFollowers or an equivalent self-field-only effect excluding this follower.",
+      "Remove \"evolve\" and \"fanfare\" from keywords; they are timings/evolve metadata, not keywords."
+    ]
+  },
+  "Goblinmount Demon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "God Bullet Golem": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the passive restriction \"This follower can't attack enemy leaders.\" The parser omitted this clause; the engine needs a passive operation for 'can't attack leaders' or attack target restriction.",
+      "The activated ability's damage amount is wrong: X should equal the attack of the follower you put into the cemetery, not the selected target's attack. Implement a dynamic amount that references the buried card's attack or last paid-cost card stats.",
+      "The activated ability should target an enemy leader or an enemy follower in a single ability. Current encoding splits it into two duplicate abilities; use one target selector supporting leader-or-follower targeting if available, or add such a selector to the engine."
+    ]
+  },
+  "Goddess by the Sunlit Sea": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition \"If there's a follower that costs 5 or more on your field\" is encoded with unsupported condition type fieldFollowerMinCost. To be correct, use a field condition checking for at least 1 follower with minCost 5; the engine needs an implemented condition for field follower cost thresholds."
+    ]
+  },
+  "Goddess of Rebirth": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" and \"act\" from keywords; they are timings and should not be listed as keywords.",
+      "The quick activated ability is missing quick: true and activateFrom: \"hand\"; [q][act] with \"discard this card\" means it activates from hand during quick timing.",
+      "The activated cost is encoded incorrectly as {\"discard\": true}; it should discard this card from hand as part of the cost, which requires an implemented hand-activation self-discard cost or equivalent engine support."
+    ]
+  },
+  "Godfire Phoenix": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the evolve restriction \"Activate only if Overflow is active for you.\" The evolve ability is missing a condition {\"type\":\"overflow\"}; if evolve conditions are not currently supported on metadata-only evolve lines, the engine should support conditioned evolve abilities.",
+      "Add the passive restriction \"This follower can't attack enemies.\" The parser omitted this clause; the engine needs a passive attack restriction operation for 'can't attack followers' / 'can't attack enemies'.",
+      "Remove \"evolve\" from keywords; evolve is represented by evolve metadata, not as a keyword."
+    ]
+  },
+  "Godfire Phoenix Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gods' Loving Smite": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The optional additional cost is encoded incorrectly: buryFromFieldSelect should be restricted to an amulet, but the current cost can bury any follower/card. Encode a field-select bury effect filtered to amulets; if not available, implement filter support on buryFromFieldSelect.",
+      "The damage amount should depend on whether the additional cost was paid, not be a free player choice between 3 and 5. Replace choose with conditional resolution based on optionalCost being paid; if the engine cannot track optional-cost-paid state, add support for that state in optionalCost/if handling."
+    ]
+  }
+}

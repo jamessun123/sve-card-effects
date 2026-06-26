@@ -1,0 +1,67 @@
+{
+  "Cute Tiara": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect is encoded incorrectly: \"Give your leader [defense]+1\" is not recover defense, so `healLeader` should not be used. This should be encoded as a leader max-defense increase effect plus `draw 1`; implement a new ability such as `buffLeaderDef` or `increaseLeaderDef` for permanent leader defense increase.",
+      "The start-of-game clause is missing: \"At the start of the game, if your deck is based on the THE IDOLM@STER CINDERELLA GIRLS universe, put 5 Magical Item tokens into your EX area.\" Add a start-of-game ability with the proper deck/universe condition and `summon` 5 Magical Item tokens to `exArea`; implement a new timing/condition for start-of-game deck-based setup if needed."
+    ]
+  },
+  "Cyclical Fate": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cyclone Blade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incomplete: it must first select a Commander follower on your field, and X must equal that selected follower's attack. The current encoding uses `targetAttack` without representing the required ally Commander selection. Encode this as selecting a self follower filtered to trait `Commander` and then dealing damage to each enemy follower equal to the selected follower's attack; implement support for targeting an allied follower and reusing that selected target's attack as a dynamic amount for a later effect if the engine cannot currently express it."
+    ]
+  },
+  "Cynthia, the Queen's Blade": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare buff is encoded incorrectly: \"Give each Pixie token on your field [attack]+2\" should affect all Pixie tokens, not `otherOnly: true`. Remove the exclusion and restrict to Pixie tokens rather than all Pixie-trait followers if token filtering is available.",
+      "The continuous Storm and Assail clause is encoded at the wrong timing and with the wrong semantics. \"While this card is on your field, each Pixie token on your field has Storm and Assail\" should be a passive/aura ability, not part of fanfare, and should continuously affect Pixie tokens on your field.",
+      "The continuous Storm and Assail clause targets are incorrect: it should apply to Pixie tokens on your field, not `selfFollower` with `excludeSelf: true` and a trait filter. Use an aura/passive field-wide grant to matching Pixie token followers.",
+      "The last clause is encoded incorrectly: \"Whenever a Pixie token is put onto your field, give it [attack]+2\" should be this card's own triggered ability on ally follower entry, not a fanfare effect granting a trigger. Encode it as a separate `onAllyFollowerEnter` ability filtered to Pixie tokens that buffs the entering follower."
+    ]
+  },
+  "Dance of Death": {
+    "verdict": "fail",
+    "issues": [
+      "The effect op is invalidly encoded as `dealDamageFollowerAndLeader`; per the engine reference it should be `damageFollowerAndLeader` with the same `followerAmount` 5 and `leaderAmount` 2."
+    ]
+  },
+  "Dance of Usurpation": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded as a player choice, but the card does not choose modes. It should always deal divided damage to enemy followers, using 8 instead of 4 if opponents' cemeteries have at least 10 cards, rather than `choose` between separate options.",
+      "The 20-cards clause is encoded incorrectly: \"If there are at least 20, deal 8 damage to each enemy leader\" should damage enemy leaders only, not all enemies via `dealDamageAllEnemies`.",
+      "The 20-cards clause should be additional to the divided-damage effect, not a separate mutually exclusive option. Encode the spell as a sequence: divided damage with conditional amount, then an additional conditional leader-damage effect if cemetery count is at least 20."
+    ]
+  },
+  "Dancing in the Rain": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Daria, Dimensional Witch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded incorrectly: after discarding your hand, the card should put the top card of your deck into your EX area repeatedly until your EX area is full. The current encoding uses `playDeckTopFollower`, which is the wrong operation and wrong destination. Encode repeated `putDeckTopToExArea`; implement loop/repeat-until-full support if needed.",
+      "The passive Spellchain text is missing/incorrect. \"While this card is on your field, include both spells and [runecraft] followers in your cemetery when counting your Spellchain\" is not represented by `playCostIncrease` and needs a dedicated passive modifying Spellchain counting. Implement a new passive ability for custom Spellchain-count rules."
+    ]
+  },
+  "Daria, Dimensional Witch Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first On Evolve effect is encoded incorrectly: it should select a follower in your EX area and make it cost 5 less to play this turn. The current target is `selfFollower` on field. Encode an EX-area follower target with temporary play cost reduction; implement EX-area card targeting for `grantPlayCostReduction` if missing.",
+      "The second On Evolve effect is encoded incorrectly: it should select a spell in your EX area and make it cost 5 less to play this turn. The current encoding again targets `selfFollower` instead of an EX-area spell. Encode a separate EX-area spell target with temporary play cost reduction; implement EX-area targeting and non-follower card targets for this effect if needed.",
+      "The passive Spellchain text is missing/incorrect. \"While this card is on your field, include both spells and [runecraft] followers in your cemetery when counting your Spellchain\" is not represented by `playCostIncrease` and needs a dedicated passive modifying Spellchain counting. Implement a new passive ability for custom Spellchain-count rules."
+    ]
+  },
+  "Daria, Infinity Witch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incomplete: it should look at the top 3 cards and allow adding up to 1 Mage follower and up to 1 Mage spell, not just up to 1 card with trait `Mage`. Encode separate limits for one follower and one spell from among the looked-at cards; implement a search/look-at effect that supports taking multiple cards with distinct category constraints if needed."
+    ]
+  }
+}

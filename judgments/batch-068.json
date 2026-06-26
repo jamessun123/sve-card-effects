@@ -1,0 +1,61 @@
+{
+  "Eleanor, Glorious Flower": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is encoded incorrectly as a choose between 1-damage and 4-damage modes; it should be a single ability that selects an enemy follower, then deals 4 damage if there are at least 10 cards in your banished zone, otherwise 1 damage if there are at least 5. Add engine support for banished-zone count conditions (for example `banishedZoneMin`) and encode this as a conditional sequence, not a player choice.",
+      "The activated ability uses `ownCemeteryMin` for checking banished-zone size; this should check the number of cards in your banished zone instead. Implement a banished-zone condition and replace both incorrect conditions.",
+      "The activated ability should always select an enemy follower first, then conditionally deal damage to that selected follower; the current separate options each retarget independently and do not model the 'and, if ...' structure."
+    ]
+  },
+  "Electromagical Rhino": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The repeated fanfare clause is encoded incorrectly: `ownCemeteryMin: 1` does not represent 'If an Electromagical Rhino was put into your cemetery by this ability, repeat this fanfare.' It should specifically check whether the immediately preceding mill put a card named Electromagical Rhino into your cemetery. Implement a condition/effect hook for 'milled named card by this ability' and use that to trigger `triggerAbilities` on `fanfare`.",
+      "The Last Words ability is encoded incorrectly as `tutorFromCemetery` to deck, which only moves one matching card and is not a supported destination in the reference. It should return any number of cards named Electromagical Rhino in your cemetery, including this one, to your deck, then shuffle. Implement an effect for selecting multiple named cards from cemetery and returning them to deck."
+    ]
+  },
+  "Elegance in Action": {
+    "verdict": "fail",
+    "issues": [
+      "The card is incorrectly given the `quick` keyword; the source text does not include Quick, so remove `quick` from `keywords`."
+    ]
+  },
+  "Elements of Creation": {
+    "verdict": "fail",
+    "issues": [
+      "The damage effect is encoded as `dealDamageAllEnemies`, which deals damage to enemy followers (and possibly the leader) rather than to each enemy leader. It should deal 7 damage to each enemy leader; encode this using the correct leader-targeting damage effect supported by the engine for enemy leaders."
+    ]
+  },
+  "Elf Bard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elf Child May": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elf General": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare should summon 2 Fairy tokens and then give those summoned Fairies +1/+1 and Ward; the current `buffFieldTrait` with `trait: \"Fairy\"` is incorrect because Fairy is not a trait filter and it can affect unrelated Fairy followers already on your field. It should target the summoned Fairy followers specifically, e.g. the last summoned followers.",
+      "The Ward-granting effect is encoded incorrectly with `grantKeyword` targeting `selfFollower` plus a nested filter not supported by the target selector reference. It should grant Ward specifically to the 2 Fairy tokens summoned by this Fanfare, not to an arbitrary self follower."
+    ]
+  },
+  "Elf Girl Liza": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive effect is encoded incorrectly as `auraAbilityDamageCap`, which sets damage taken from abilities to 1 per hit rather than reducing damage to your followers from enemy abilities by 1. This should be encoded as an aura reducing ability damage to allied followers by 1; implement an engine ability for allied damage reduction from enemy abilities."
+    ]
+  },
+  "Elf Healer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elf Knight Cynthia": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Strike ability's cost is encoded incorrectly: `banishFromExArea` uses an invalid `filter` with `count` inside it. It should simply banish 1 card from your EX area as part of the Strike resolution.",
+      "The damage target is encoded incorrectly as `enemyFieldCard`, but the source allows 'an enemy leader or enemy follower on the field.' It should target either the enemy leader or an enemy follower. Implement a target selector that can choose enemy leader or enemy follower, or an equivalent flexible target mode."
+    ]
+  }
+}

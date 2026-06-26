@@ -1,0 +1,55 @@
+{
+  "Karen Hojo [Song for Life]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove unsupported keywords \"fanfare\" and \"advanced\"; the source text has neither keyword.",
+      "The start-of-end ability is encoded with the opposite condition. It should trigger if there are no other Cool followers on your field, not if there are at least 2 Cool followers. Encode it as an if-condition for 'no other Cool followers' dealing 1 damage to self; this specific 'no other matching followers on your field' condition is not available in the current ability reference and should be implemented.",
+      "The activated ability is missing Lesson (1). It should require both [cost03] and Lesson (1) as activation requirements; a Lesson/N-cost condition or cost mechanic is not available in the current ability reference and should be implemented.",
+      "The activated ability targets are wrong. It should give each follower on your field +1 attack, not each Cool follower on your field. Encode a field-wide ally follower buff rather than filtering by trait; a generic 'buff all allied followers' operation is not available in the current ability reference and should be implemented."
+    ]
+  },
+  "Karin Domyoji": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Karula, Arts Master": {
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end effect should resolve all applicable clauses in sequence, not let the player choose any subset. Replace the chooseMultiple wrapper with a sequence of conditional effects: if PP >= 2 deal 2 damage to the enemy leader, then if PP >= 4 draw 1, then if PP >= 6 destroy up to 1 enemy follower."
+    ]
+  },
+  "Karula, Arts Master Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "After recovering 2 play points, the remaining start-of-end effect should resolve all applicable clauses in sequence, not let the player choose any subset. Replace the chooseMultiple wrapper with sequential conditional checks for PP >= 2, PP >= 4, and PP >= 6."
+    ]
+  },
+  "Kasha": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Katakura Kojuro": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Katakura Kojuro Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve search filter is incomplete. It should only allow a Draconic Duelist follower from among the top 4 cards, so add \"cardType\": \"follower\" to the searchDeckChoose filter."
+    ]
+  },
+  "Keenedge Artifact": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Killer Instincts": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "King Elephant": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare incorrectly returns all allied field cards by using count 99. It should return any number of cards on your field chosen by you. Encode an optional variable-count self-field return effect; a target selector/effect for 'select any number of allied field cards' is not available in the current ability reference and should be implemented."
+    ]
+  }
+}

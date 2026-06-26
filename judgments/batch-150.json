@@ -1,0 +1,58 @@
+{
+  "Mika & Rika": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare cost reduction is encoded as a standalone playCostReduction on this follower; it should reduce the cost of the spell put into your EX area this turn, e.g. encode the deck tutor with playCostReduction: 3 or otherwise apply the reduction to the tutored EX-area card.",
+      "The activated ability is missing the Lesson keyword/cost representation; encode the activation cost as cost.pp: 1 rather than wrapping it in optionalCost, since Lesson (1) is the act cost here."
+    ]
+  },
+  "Mika Jougasaki [My★Style]": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare cost reduction is encoded as a standalone playCostReduction on this follower; it should reduce the cost of the spell put into your EX area this turn, e.g. encode the deck tutor with playCostReduction: 3 or otherwise apply the reduction to the tutored EX-area card.",
+      "The activated ability is missing the Lesson keyword/cost representation; encode the activation cost as cost.pp: 1 rather than wrapping it in optionalCost, since Lesson (1) is the act cost here."
+    ]
+  },
+  "Miku Maekawa": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability omits the Lesson (1) cost requirement; encode the full act cost to include Lesson (1) in addition to cost.pp: 1."
+    ]
+  },
+  "Miku Maekawa [Meownderful World]": {
+    "verdict": "fail",
+    "issues": [
+      "keywords incorrectly includes 'lastWords'; Last Words should be represented as an ability with timing 'lastWords', not as a keyword.",
+      "Last Words tutor is missing the follower restriction; the deck filter should include cardType: 'follower' in addition to identityNameContains: 'Miku Maekawa'.",
+      "The Last Words ability omits the Lesson (1) cost/requirement; encode the full Last Words text to include Lesson (1) before the tutor effect."
+    ]
+  },
+  "Miku Maekawa [Summer Cat Rendezvous]": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability omits the Lesson (1) cost requirement; encode the full act cost to include Lesson (1) in addition to cost.pp: 1."
+    ]
+  },
+  "Milady, Mystic Queen": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Milady, Mystic Queen Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mileka, Celestial Seer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mileka, Celestial Seer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is encoded incorrectly as ownCemeteryMin 6; it should check for at least 6 cards with different base costs in your cemetery. Add an implemented condition for 'ownCemeteryDifferentBaseCostsMin' (or equivalent), then use that condition before the damage/draw/discard sequence."
+    ]
+  },
+  "Mimi, Infernal Right Paw": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

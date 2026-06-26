@@ -1,0 +1,58 @@
+{
+  "Boost Kicker": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability incorrectly omits the required optional/payable [costX] clause. It should be encoded as a fanfare with a variable PP payment tied to the chosen number, then deal that much damage to each enemy follower. The current engine supports choosing X via withChosenNumber and spending fixed PP via spendPp, but lacks a way to spend a chosen variable amount as a cost; implement support for variable PP costs such as spendPp with amount {\"op\":\"chosenNumber\"} or activated/fanfare cost.ppX linked to chosenNumber."
+    ]
+  },
+  "Bouquet Fairy": {
+    "verdict": "fail",
+    "issues": [
+      "The activated cost incorrectly restricts the banished EX-area card to cardType:follower. The source says 'banish a card from your EX area', so the cost should banish any card from your EX area, not only followers."
+    ]
+  },
+  "Brand New Beat": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onLeaveField condition is wrong: it uses discardedThisTurn, but the source requires 'if a Magical Item was banished from your EX area this turn'. This should be encoded with a specific turn-state condition tracking whether a Magical Item card was banished from your EX area this turn. The current engine lacks such a condition; implement a condition like exAreaBanishedThisTurn with an optional filter {\"trait\":\"Magical Item\"}."
+    ]
+  },
+  "Brave Buccaneer": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target count is encoded as exactly 2 enemy followers, but the source says 'Select up to 2 enemy followers'. It should allow choosing 0 to 2 targets, so the engage effect should be optional/up-to-2 rather than exactly 2."
+    ]
+  },
+  "Brave Goblin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Brave Goblin Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Breakneck Draw": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is missing its additional cost '[engage] a Swordcraft follower on your field'. It should require engaging one of your Swordcraft followers before destroying an enemy follower. The current engine has engage as an effect and engageSelf as self-cost, but lacks spell/optional cost support for engaging another matching follower as a cost; implement a selectable engage cost such as cost.engageTarget with a filter or an effect/cost op that engages a chosen allied follower matching {\"cardClass\":\"sword\",\"cardType\":\"follower\"}."
+    ]
+  },
+  "Briared Vampire": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Briared Vampire Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The first On Evolve step is incorrect: it uses mill 1, which puts the top card of your deck into your cemetery, but the source says to put the top card of your deck into your EX area. Replace the mill step with putDeckTopToExArea."
+    ]
+  },
+  "Brothers United": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is split into two separate spell abilities, but the source is one sequential effect. It should be a single spell ability that first buffs the chosen Bayleon follower, then offers the Naterran Great Tree placement option.",
+      "The target selector for the buff is invalid/inaccurate: selfFollower does not support a filter here and should target a follower on your field with 'Bayleon' in its name. Use a selector/effect form that correctly filters your own follower by identityNameContains 'Bayleon'.",
+      "The second effect is encoded as mandatory choose one, but the source says 'you may put ... onto your field or into your EX area', making the whole token placement optional. It should allow declining entirely, e.g. an optional choose between field/exArea or equivalent optional wrapper."
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "Anzu Futaba": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare condition is encoded incorrectly: source says \"if there are 2 iM@S CG followers or less on your field,\" but parsed uses fieldTraitMin count 2 (at least 2). It should check 2 or fewer iM@S CG followers on your field; this needs an engine condition for a field trait maximum/count-at-most condition.",
+      "Missing continuous clause from fanfare result: after engaging itself, \"This card doesn't refresh during your start phase\" should also be encoded. This needs engine support for a passive self refresh restriction / skip self refresh during your start phase.",
+      "Start-of-main ability cost is encoded with optionalCost incorrectly. The source is a mandatory activated payment at that timing, \"At the start of your main phase, [cost02]: Refresh this card.\" It should be represented as a startOfMain triggered optional payment of 2 PP to refresh this card; this needs engine support for triggered abilities with PP payment choices, or optionalCost should accept PP costs."
+    ]
+  },
+  "Apollo, Heaven's Envoy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Apollo, Heaven's Envoy Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Apostle of Craving": {
+    "verdict": "fail",
+    "issues": [
+      "Passive cost reduction is missing the named-follower condition. It should only apply if there is a Gilnelise, Omen of Craving on your field, so add condition type namedFollowerOnFieldByName with identityName \"Gilnelise, Omen of Craving\" alongside the EX area condition.",
+      "Passive cost reduction should use exAreaPlayCostReduction rather than generic playCostReduction, because the source says this card costs 3 less to play from the EX area."
+    ]
+  },
+  "Apostle of Craving Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve target is encoded incorrectly. Source says \"Select another follower on the field,\" so the target should be anyFollower with exclude-self behavior, not enemyFollower.",
+      "On Evolve buff target is encoded incorrectly. After dealing 3 damage to the selected follower, that same selected follower should get [attack]+3; parsed incorrectly buffs self instead."
+    ]
+  },
+  "Apostle of Disdain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing passive ability: \"During your turn, whenever this follower takes ability damage, give it [attack]+1 and Storm.\" This should be encoded as an onDamaged ability limited to your turn that checks ability damage, then buffs self and grants Storm. Engine needs support for an onDamaged trigger restricted to ability damage and/or controller turn only on a standalone card ability."
+    ]
+  },
+  "Apostle of Disdain Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly. Source says \"discard a card\" as a cost before the deck effect; parsed uses choose with no discard. It should require a discard cost, then resolve the deck search.",
+      "On Evolve search effect is incomplete. Source says \"you may reveal up to 2 Omen cards and add them to your hand\" from the top 5, but parsed searchDeckChoose only allows choosing one card. It should allow selecting up to 2 matching cards from the looked-at cards; engine needs support for search/top-of-deck choose-multiple with a max selection count.",
+      "Missing passive ability: \"During your turn, whenever this follower takes ability damage, give it [attack]+1 and Storm.\" This should be encoded as an onDamaged ability limited to your turn that checks ability damage, then buffs self and grants Storm. Engine needs support for an onDamaged trigger restricted to ability damage and/or controller turn only on a standalone card ability."
+    ]
+  },
+  "Apostle of Lust": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is incomplete. Source says \"[engage], give your leader [defense]-1\" but parsed only includes engage. Add the leader self-damage/heal-negative-1 cost before the cemetery summon effect.",
+      "Activated ability uses the wrong operation. It should put a selected follower that costs 2 play points or less from your cemetery onto your field, so use summonFromCemetery with filter cardType follower and maxCost 2, not tutorFromCemetery to field.",
+      "Triggered heal ability is missing its condition. Source says \"Whenever another Demon follower is put onto your field,\" so the trigger should filter for Demon followers entering and exclude this card itself; parsed currently heals on any ally follower entering."
+    ]
+  },
+  "Apostle of Repose": {
+    "verdict": "fail",
+    "issues": [
+      "Keywords are incorrect. The source has no Fanfare keyword, so remove \"fanfare\" from keywords.",
+      "Start-of-main recovery is incomplete. Source says \"At the start of each opponent's main phase,\" but parsed triggers at startOfMain with no opponent-phase restriction. It should be limited to each opponent's main phase."
+    ]
+  },
+  "Apostle of Repose Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve banish target is incomplete. Source says \"Select a reserved enemy follower on the field and banish it,\" but parsed allows any enemy follower. It should target only a reserved enemy follower; engine needs target-selector/filter support for reserved followers.",
+      "Start-of-main recovery is incomplete. Source says \"At the start of each opponent's main phase,\" but parsed triggers at startOfMain with no opponent-phase restriction. It should be limited to each opponent's main phase; engine needs support for opponent-phase-only startOfMain triggers if not already available."
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Ambling Wraith": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is encoded as dealDamageAllEnemies with followersOnly false, which deals damage only to enemy side and cannot represent 'each leader'. It should deal 1 damage to both leaders; implement an ability/effect that can target both leaders or all leaders, then encode the fanfare with that effect."
+    ]
+  },
+  "Amelia, Silver Captain": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Amelia, Silver Captain Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve should be able to target any Officer follower on your field, but parsed target has excludeSelf: true. Remove excludeSelf so Amelia herself can be selected if she is an Officer follower."
+    ]
+  },
+  "Amelia, Silver Paladin": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare option (1) is incorrectly encoded as tutorFromCemetery to field. It should select a follower that costs 3 play points or less in your hand and put it onto your field. Implement an effect to select and put a follower from hand onto the field, then replace this option with that effect."
+    ]
+  },
+  "Amelia, Sunny Paladin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Amerro, Spear Knight": {
+    "verdict": "fail",
+    "issues": [
+      "Strike condition is incorrect. 'If there is another Heroic follower on your field' should check for at least one other follower with trait Heroic on your field, not namedFollowerOnFieldByName with identityName 'Heroic'. Encode with a field trait-count style condition that checks Heroic followers on your field and excludes this card."
+    ]
+  },
+  "Amerro, Spear Knight Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrectly encoded as tutorFromCemetery to field with playCostReduction 0. The text says to select a Heroic card in your cemetery and play it for 0 play points. This needs an effect that plays a selected card from cemetery, not adds/summons it via tutorFromCemetery; implement a 'play from cemetery' effect for general cards, then use it here with a Heroic filter.",
+      "Strike condition is incorrect. 'If there is another Heroic follower on your field' should check for at least one other follower with trait Heroic on your field, not namedFollowerOnFieldByName with identityName 'Heroic'. Encode with a field trait-count style condition that checks Heroic followers on your field and excludes this card."
+    ]
+  },
+  "Amethyst Giant": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare incorrectly grants Aura unconditionally in a separate ability. The text is 'Discard a card: Give this follower Rush and Aura,' so both Rush and Aura must be granted only if the discard cost is paid. Move the Aura grant inside the optionalCost 'then' effect together with Rush."
+    ]
+  },
+  "Amethyst Lion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare target filter is incorrect. 'Another follower with Storm or Ward on your field' is encoded using traitsAny ['Storm','Ward'], but Storm and Ward are keywords, not traits. It should target another allied follower with either the Storm keyword or the Ward keyword; implement target filtering by keyword(s), then use that filter here."
+    ]
+  },
+  "Amy, Psychopomp Guide": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is incomplete. '[fanfare] Bury another follower: Draw 2 cards.' should be encoded as a cost/effect sequence where you bury another follower and then draw 2 cards. Replace the current buryFieldFollowers effect with an optional or required bury-another-follower cost followed by draw 2."
+    ]
+  }
+}

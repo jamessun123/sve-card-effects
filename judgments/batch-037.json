@@ -1,0 +1,60 @@
+{
+  "Cassiopeia": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Castle in the Sky": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare search is incorrectly encoded as searchDeckChoose with filter.keyword, but DeckFilter does not support keyword matching. It should search your deck for a follower with Storm, reveal it, and add it to your hand; implement DeckFilter keyword support or a tutor/search operation that can filter by printed keyword.",
+      "The first activated ability target filter is incorrectly encoded with targets.filter.keyword, which is not supported, though the timing and costs are otherwise appropriate. It should select a follower with Storm on your field and give it +1 attack; implement target filtering by keyword or a target selector that can require Storm.",
+      "The second activated ability is incorrectly encoded as summonFromHand, which is not an implemented operation, and it also omits the follow-up buff of +2/+2 to the followers put onto your field. It should put any number of followers with Storm from your hand onto your field, then give those followers +2/+2; implement an operation to summon/play multiple matching followers from hand and support referencing those summoned cards for a follow-up buff."
+    ]
+  },
+  "Castor": {
+    "verdict": "fail",
+    "issues": [
+      "Last Words is missing its [cost02] requirement. It should be encoded as a lastWords ability with a 2 PP cost before putting this follower onto its owner's field.",
+      "The resurrection effect is encoded as summonFromCemetery filtering by identity name, but the card text specifically returns this follower itself. It should instead revive this exact card to the field, e.g. using reviveToField/self-resummon semantics tied to the source."
+    ]
+  },
+  "Cat Admiral": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is missing the optional/required [cost03] gate. It should only summon a Steelclad Knight token and a Shield Guardian token if the 3 PP fanfare cost is paid.",
+      "The two token summons are split into separate fanfare abilities instead of one costed fanfare sequence. They should be combined into a single fanfare ability that, after paying 3 PP, summons both tokens.",
+      "The triggered damage ability is too broad: it triggers on any Swordcraft follower entering your field, but the source requires a Swordcraft token follower and only during your turn. It should be restricted to your turn and to Swordcraft token followers entering your field; implement support for onAllyFollowerEnter filters including printingType: token and turn-based conditions if those are not currently available on this trigger."
+    ]
+  },
+  "Cat Cannoneer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cat Cannoneer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cat Summoner": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Celestial Dragoon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The discard-triggered draw is encoded with timing onDiscard, which means only this card being discarded, but the source says 'Whenever you discard a card' while this follower is on the field. It should be a field-based trigger that watches your card discards and, on each such event, allows/causes [engage]: draw a card; implement a timing/trigger for player discarding cards while this card is on the field, with an engage cost on resolution."
+    ]
+  },
+  "Celestial Dragoon Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve search uses maxCost: 7, but the source requires a Dragoncraft card that costs 7 or more. It should use minCost: 7.",
+      "The discard-triggered draw is encoded with timing onDiscard, which means only this card being discarded, but the source says 'Whenever you discard a card' while this follower is on the field. It should be a field-based trigger that watches your card discards and, on each such event, allows/causes [engage]: draw a card; implement a timing/trigger for player discarding cards while this card is on the field, with an engage cost on resolution."
+    ]
+  },
+  "Celestial Shikigami": {
+    "verdict": "fail",
+    "issues": [
+      "The card text only has the keyword Aura, but the parsed ability invents an unsupported continuous effect reducing ability damage to 0. Remove the passive auraAbilityDamageCap ability and keep only the Aura keyword."
+    ]
+  }
+}

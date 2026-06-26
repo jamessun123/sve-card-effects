@@ -1,0 +1,58 @@
+{
+  "Adherent of Desire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare self-damage is encoded correctly, but the auto-evolve condition is incorrect: use a condition matching 'if there's a follower on your field with \"Valnareik\" in its name' rather than {\"type\":\"namedFollowerOnFieldByName\",\"identityNameContains\":\"Valnareik\"}. This should be encoded as a name-contains field condition; implement a field condition such as namedFollowerOnFieldBySubstring or allow identityNameContains on namedFollowerOnFieldByName."
+    ]
+  },
+  "Adherent of Desire Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly as a buff with a keyword field; it should grant Drain to a selected follower on your field with both the Omen and Demon traits, using grantKeyword with keyword 'drain'.",
+      "The target filter is wrong: traitsAny matches either trait, but the card requires a follower with both Omen and Demon traits. This needs support for an AND trait filter such as traitsAll on target selectors or filters."
+    ]
+  },
+  "Adherent of Despair": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous ability 'At the start of each opponent's main phase, select an enemy follower on the field. If this is reserved, the selected follower can't attack enemies this turn.' is completely missing. It should be encoded as a start-of-opponent-main trigger that selects an enemy follower and applies a temporary attack restriction if this card is reserved.",
+      "The engine currently lacks timing/support for 'each opponent's main phase' and a way to check 'if this is reserved' plus an effect to prevent the selected follower from attacking enemies this turn; implement opponent-main-phase trigger timing, a reserved-state condition, and a temporary target attack restriction effect."
+    ]
+  },
+  "Adherent of Despair Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is incorrect: it should check whether there is a follower on your field or in your cemetery with 'Marwynn' in its name, not just any card in your cemetery. Replace the cemetery clause with a named-in-cemetery name-contains condition for Marwynn.",
+      "The current field condition also uses exact identityName 'Marwynn', but the card says 'with \"Marwynn\" in its name'; use a name-contains field condition instead.",
+      "The continuous ability 'At the start of each opponent's main phase, select an enemy follower on the field. If this is reserved, the selected follower can't attack enemies this turn.' is missing and should be added.",
+      "The engine lacks implemented support for checking for a named follower in cemetery by substring, as well as the reserved-state/opponent-main-phase temporary attack restriction ability needed for the continuous clause."
+    ]
+  },
+  "Adherent of Elimination": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Adherent of Elimination Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Adherent of Hollowness": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Adherent of Hollowness Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The once-per-turn trigger should only activate when you play a Loot card, but the parsed onCardPlayed ability has no Loot filter. Add a card-play filter matching Loot cards.",
+      "The engine reference does not provide a trait/card-name filter field on onCardPlayed conditions directly in this encoding; implement or use grantOnCardPlayed-style filtering for onCardPlayed triggers so it can match 'when you play a Loot card'."
+    ]
+  },
+  "Adherent of Melody": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Adherent of Screams": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

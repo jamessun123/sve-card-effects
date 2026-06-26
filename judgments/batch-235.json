@@ -1,0 +1,56 @@
+{
+  "Unbound Emotion": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is encoded as dealDamageAllEnemies with followersOnly:true, but the source says \"Deal 7 damage to each follower on the field.\" It should damage all followers on both fields, e.g. use dealDamageOtherFollowers with amount 7 and also include the source follower set as needed so every follower on the field is hit."
+    ]
+  },
+  "Unbridled Fury": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage amount uses an unsupported dynamic amount {\"op\":\"fieldFollowerCount\"}. It should be encoded as X equals the number of followers on your field, but that dynamic amount is not implemented in the ability reference. Add support for a DamageAmount like fieldFollowerCount (or an equivalent selector-based follower count) and use it for this spell."
+    ]
+  },
+  "Undead King": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Select up to 2 followers in your cemetery and add them to your hand,\" but tutorFromCemetery is encoded without a count/max selection limit. It should allow selecting up to 2 follower cards from your cemetery and adding them to hand."
+    ]
+  },
+  "Underworld Watchman Khawy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Undying Resentment": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Undying Resolve": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The discard/banish-from-hand trigger is incomplete and incorrect. The source says \"When this is discarded or banished from your hand, select an [abysscraft] follower on your field and give it Bane.\" The parsed ability only uses timing onDiscard, misses the banished-from-hand case, and does not restrict the target to an Abysscraft follower. It should target a selfFollower with a class filter for abyss, and the engine needs a trigger for \"when this is banished from your hand\".",
+      "The spell effect should select a Festive follower in your cemetery that costs 2 or less and summon it; the current ownCemeteryTraitMin condition is unnecessary and does not represent selection. Encode it directly as summonFromCemetery with the existing filter and count 1.",
+      "The clause \"and, if it's an Anisage, Lost Forsaken, give it [attack]+1 and Storm\" is missing. It should apply a conditional buff and grantKeyword to the summoned follower if the selected card's identity is Anisage, Lost Forsaken. The engine needs support for checking the summoned/selected card's identity and then applying effects to that summoned card."
+    ]
+  },
+  "Unicorn Altar": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition \"if there are at least 3 amulets on your field\" is encoded as fieldTraitMin with trait \"Amulet\", but Amulet is a card type, not a trait. It should check the number of amulets on your field. The engine needs a condition for field card-type count (for example, fieldCardTypeMin with cardType:\"amulet\")."
+    ]
+  },
+  "Unicorn Dancer Unica": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Unicorn Dancer Unica Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Unidentified Subject": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The printed ability \"Whenever you draw a card outside of your start phase, give this follower [attack]+1/[defense]+1\" is missing. The current passive ability with condition notEnteredFromHand is unrelated and should be removed. This card needs a trigger for drawing a card outside the start phase that buffs self by +1/+1. The engine needs an onDraw-type trigger with a condition excluding the start phase."
+    ]
+  }
+}

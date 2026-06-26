@@ -1,0 +1,61 @@
+{
+  "Frogbat": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is encoded incorrectly as burying field followers; it should banish 2 cards from your cemetery as the evolve cost, e.g. an `evolve` ability with cost `{ \"banishFromCemetery\": { \"filter\": { \"cardClass\": \"abyss\" }, \"count\": 2 } }` or equivalent cemetery-banish encoding, not `buryFieldFollowers`."
+    ]
+  },
+  "Frogbat Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end ability is incomplete; it buffs only this follower, but the source says to give this follower and your leader +1 defense. It should be encoded as a sequence that buffs self and also grants +1 defense to your leader. The current engine lacks a leader-defense buff operation, so implement a leader stat/heal-like permanent defense increase effect or a generic buff-to-leader ability."
+    ]
+  },
+  "Front Desk Frog": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Front Desk Frog Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Frontguard General": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Last Words ability is incomplete; after summoning 2 Steelclad Knight tokens and giving them Ward, it is missing 'You may engage any number of them.' It should additionally allow engaging any number of the summoned tokens. The current engine lacks a selector/effect for engaging any number of chosen allied followers, so implement an effect like `engageChosenAllies` or a generic 'select any number of targets and apply effect' wrapper."
+    ]
+  },
+  "Frontline Instructor": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is missing the [costX] payment linkage; choosing X and summoning X tokens should be tied to paying X PP, not just a free chosen-number effect. Encode the fanfare with an X-cost payment and then summon X Steelclad Knight tokens.",
+      "The activated ability is encoded incorrectly; it should give each Swordcraft follower currently on your field Rush and Assail for the rest of this turn, not grant a trigger for future card plays. Replace `grantOnCardPlayed` with an immediate field-wide grant/buff effect applying Rush and Assail to your current Swordcraft followers until end of turn."
+    ]
+  },
+  "Frontline Ramparts": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing `quick: true` on the ability itself. The source is `[q][act]`, so the activated ability should be marked as quick, not only by putting `quick` in `keywords`."
+    ]
+  },
+  "Frostbite Dragon": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is encoded incorrectly as banishing up to 2 enemy followers; it should engage up to 2 enemy followers. Replace `banishUpTo` with an `engage` effect targeting up to 2 enemy followers."
+    ]
+  },
+  "Frostbite Dragon Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly; it should cause each enemy follower on the field to not refresh during its controller's next start phase, not grant an ally-follower-enter trigger that refreshes enemy followers. Replace it with an effect that engages/marks all enemy followers to skip their next refresh. The current engine lacks an 'all enemy followers skip next refresh' operation, so implement a field-wide version of `engage`/status application such as `engageAllEnemyFollowers` with `skipRefreshNextStart: true` or a generic mass status effect.",
+      "The Last Words ability is encoded incorrectly and incompletely; it should destroy each engaged enemy follower on the field, not destroy a single arbitrary enemy follower. Encode a destroy-all-matching effect for engaged enemy followers. The current engine lacks a filtered mass-destroy operation by engagement state, so implement a `destroyMatchingFollowers` or similar effect with a filter for engaged enemy followers."
+    ]
+  },
+  "Frostfire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect is encoded incorrectly as a choice between dealing damage or engaging; the source requires selecting 2 enemy followers, then dealing 5 damage to one and engaging the other. It should be a sequence or paired-target effect, not `choose`.",
+      "The passive cost reduction is missing; this card costs 3 less to play if there's an Archfiend follower on your field. It should include a conditional passive `playCostReduction` tied to having an Archfiend follower on your field. The current engine lacks a condition type for 'named/trait/class follower on your field' using a trait like Archfiend in a general way, so implement an appropriate field-presence condition if needed."
+    ]
+  }
+}

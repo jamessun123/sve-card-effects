@@ -1,0 +1,63 @@
+{
+  "Whitefrost Blizzard": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction condition is encoded incorrectly: source says any follower on your field with \"Filene\" in its name, but parsed uses namedFollowerOnFieldByName with exact identityName \"Filene\". It should match a partial-name condition such as a new condition for a follower on your field whose name contains a string like \"Filene\".",
+      "The damage effect is acceptable, but the engine lacks an exact source-side condition type for \"with 'Filene' in its name\"; implement a condition like namedFollowerOnFieldNameContains or similar to encode this correctly."
+    ]
+  },
+  "Whitefrost Whisper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell should target an engaged enemy follower, but parsed targets any enemy follower. It should restrict the target selector to engaged enemy followers; implement an engaged-only target filter for enemyFollower selectors.",
+      "The second clause should deal 2 damage to the selected follower's leader, but parsed deals 2 damage to the enemy leader without linking to the destroyed target's controller. It should use a target-linked leader damage effect; implement support for 'selected follower's leader' targeting or an effect like damageFollowerAndLeader/linked leader targeting based on the chosen follower."
+    ]
+  },
+  "Whole-Souled Swing": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wilbert, Grand Knight": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Keywords are encoded incorrectly: Fanfare should not be in keywords; keep only \"ward\" in keywords and represent Fanfare only as an ability timing.",
+      "The fanfare search/summon effect is missing the requirement that the summoned follower have Ward. It should filter for followers with Ward, but the engine has no deck filter for printed keywords/ability text; implement deck-search filtering by keyword.",
+      "The leave-field trigger is encoded incorrectly: source says whenever a follower with Ward is put from your field into the cemetery, but parsed uses timing onLeaveField on this card itself. It should trigger for allied Ward followers leaving your field for the cemetery; implement a trigger for allied follower put from field into cemetery with trait/keyword filtering.",
+      "The last effect should deal 1 damage to each enemy leader, but parsed targets a single enemyLeader. It should hit all opposing leaders, requiring multiplayer leader-all targeting if supported."
+    ]
+  },
+  "Wilbert, Luminous Paladin": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Keywords are encoded incorrectly: Fanfare should not be in keywords; keep only \"ward\" in keywords and represent Fanfare only as an ability timing.",
+      "The fanfare search/summon effect is missing the requirement that the summoned follower have Ward. It should filter for followers with Ward that cost 2 or less, but the engine has no deck filter for printed keywords/ability text; implement deck-search filtering by keyword.",
+      "The activated ability condition is encoded incorrectly: source requires at least 3 followers on your field with Ward, but parsed uses fieldTraitMin with trait \"Ward\". It should count allied followers with the Ward keyword; implement a condition type for field followers with a given keyword."
+    ]
+  },
+  "Wildfang Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wildfire Tyrannosaur": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly: source says banish a Naterran Great Tree from your field, but parsed uses buryFromField. It should use a banish-from-field cost/filter for a Naterran Great Tree on your field."
+    ]
+  },
+  "Wildwood Matriarch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wildwood Matriarch Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability should summon up to 2 Hunter followers that cost 2 or less from your cemetery, but parsed incorrectly adds maxTotalCost: 4. Remove maxTotalCost so any 2 matching followers may be summoned."
+    ]
+  },
+  "Wildwood Warrior": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability should let you summon a Beast follower that costs 4 or less from your hand, but parsed uses selectFromHand to field, which is not a defined implemented destination in the reference. It should be encoded with a hand-to-field summon effect; implement an ability like summonFromHand/filter or extend selectFromHand to support to: \"field\"."
+    ]
+  }
+}

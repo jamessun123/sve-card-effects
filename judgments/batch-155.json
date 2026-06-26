@@ -1,0 +1,64 @@
+{
+  "Momoka Sakurai Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mona, Levin Mage": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be encoded as an ability timing, not a printed keyword."
+    ]
+  },
+  "Mono, Garnet Rebel": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is incorrectly encoded as a no-op passiveKeywords effect; it should encode the actual evolve payment ability/effect for \"[evolve] [cost01]: Evolve this follower\" with the fieldTraitMin Machina 5 condition.",
+      "The activated ability cost is malformed; encode the cemetery banish cost using the implemented activated cost shape with banishFromCemetery filter {\"trait\":\"Machina\"} and count 2, instead of unsupported fields \"banishFromCemetery\" + \"banishCount\" at the top level."
+    ]
+  },
+  "Mono, Garnet Rebel Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is malformed; encode the cemetery banish cost using the implemented activated cost shape with banishFromCemetery filter {\"identityName\":\"Alpha Drive\"} and count 1, instead of unsupported fields \"banishFromCemetery\" + \"banishCount\" at the top level."
+    ]
+  },
+  "Mono, Immortal Garnet": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"strike\" from keywords; these are ability timings and should not be listed as printed keywords.",
+      "The Strike damage amount is incorrect; it should deal damage equal to the number of other Machina followers on your field, so the amount must exclude this follower rather than count all Machina followers.",
+      "The activated ability is incomplete; it must also grant this follower Storm in addition to +1/+1."
+    ]
+  },
+  "Monochromatic Destruction": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Monochrome Duel": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"activated\" from keywords; activated is not a printed keyword and should only be represented by an activated ability timing.",
+      "The spell effect incorrectly searches by traitsAny for card names; it should summon Queen Hemera the White and Queen Magnus the Black specifically, using identity/name-based filters so both exact cards are found.",
+      "The spell effect should summon both named followers, not a single card selected by tutorFromDeck.",
+      "The +1/+1 buff should be applied specifically to the summoned Queen Hemera the White and Queen Magnus the Black, not any 2 followers chosen with anyFollower.",
+      "The activated cemetery ability should banish this card from your cemetery, so the ability should specify activation from cemetery in addition to the banish-self cost."
+    ]
+  },
+  "Moon Al-mi'raj": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Moon and Sun": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"activated\" from keywords; activated is not a printed keyword and should only be represented by an activated ability timing.",
+      "The activated cemetery ability should summon both Amaterasu and Tsukuyomi from your cemetery, but the current filter only matches Amaterasu.",
+      "The spell effect should search for and summon an Amaterasu or Tsukuyomi, but the current filter only matches Amaterasu.",
+      "The activated cemetery ability should banish this card from your cemetery, so the ability should specify activation from cemetery in addition to the banish-self cost."
+    ]
+  },
+  "Moonlight Assassin": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

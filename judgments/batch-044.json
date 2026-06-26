@@ -1,0 +1,57 @@
+{
+  "Colorful Cook": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Colossal Construct": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare cost is encoded incorrectly as tutorFromCemetery to deck with a follower filter; it should return exactly 5 cards from your cemetery to your deck, then shuffle, as the cost before dealing 5 damage to an enemy follower. Implement an ability for selecting and returning a fixed number of cards from your cemetery to deck (with shuffle), then encode the fanfare as an optionalCost using that cemetery-to-deck return effect plus shuffle."
+    ]
+  },
+  "Colossal Grudge": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cost-reduction condition is encoded incorrectly as exAreaNamedMin identityName 'Ghost'; the source says 'if there's a follower with \"Ghost\" in its name in your EX area', which requires matching a follower whose name contains Ghost, not a card exactly named Ghost. Implement a condition for EX area cards by name substring and/or card filter, then use that to apply playCostReduction 3.",
+      "The spell effect should target an enemy follower and deal 4 damage to it and 2 damage to its leader; damageFollowerAndLeader has no target encoded here. Encode it with explicit enemy follower selection if supported, or implement targeted follower-and-leader split damage."
+    ]
+  },
+  "Colosseum on High": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare is encoded incorrectly: the rest of the looked-at cards should be buried, not put on the bottom of the deck. Implement an effect for 'each player looks at the top N cards, may summon a follower from among them, bury the rest' or add a search/peek operation with remainderTo cemetery, then encode both players' resolution accordingly.",
+      "The passive ability is incorrect; grantActRestriction does not represent 'if a follower on the field can attack a follower, it can't attack leaders.' This needs a continuous attack-targeting restriction effect. Implement a passive aura that prevents leader attacks while a follower has any legal follower attack, then encode that instead."
+    ]
+  },
+  "Concentration": {
+    "verdict": "fail",
+    "issues": [
+      "Earth Rite is encoded incorrectly: the current parse draws 1 card unconditionally and then draws 2 more on Earth Rite, but the source means draw 1 normally or draw 2 instead if Earth Rite is active. Encode the spell as healLeader 3, then an if with condition earthRite(1) that draws 2 in the then branch and draws 1 in the else branch."
+    ]
+  },
+  "Conflagration": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is incorrect: it should deal 5 damage to each follower on the field, not just enemy followers. Encode it as dealDamageOtherFollowers with includeLeaders false plus damage to self if needed, or preferably implement/use an effect that deals damage to all followers on both fields."
+    ]
+  },
+  "Confront Adversity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is incorrect: condition type enemyFollower is not a valid Condition and does not capture 'if there is an enemy follower that costs at least 6 play points on the field'. Implement a condition for enemy follower presence with minCost 6, then use that condition for the bonus clause.",
+      "The buff is incorrect: buffFieldTrait cardClass sword buffs all Swordcraft followers on your field, but the source says to give the summoned tokens +3/+3. Encode the buff to affect only the two summoned tokens, such as targeting lastSummoned entries or specific token identities; if the engine cannot reference both summoned tokens, implement an effect to buff summoned tokens from this effect."
+    ]
+  },
+  "Conjure Golem": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cool Earrings": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cool Pendant": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

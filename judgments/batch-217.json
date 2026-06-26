@@ -1,0 +1,66 @@
+{
+  "Star Phoenix": {
+    "verdict": "fail",
+    "issues": [
+      "The revive ability is missing the condition \"During your turn\"; add an appropriate turn restriction/condition so it only triggers on your turn when you play a Dragoncraft spell.",
+      "The triggered ability is incorrectly encoded with a cost on timing \"onCardPlayed\"; it should be an on-card-play trigger for Dragoncraft spells that then pays [cost01] to put this card from your cemetery onto your field, not a generic trigger with an activated-style cost field."
+    ]
+  },
+  "Star Phoenix Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Star Priestess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve ability is encoded as an activated ability that engages and buries instead of an evolve ability that banishes 1 amulet on your field; it should be an evolve-cost line for this follower, but the engine lacks an evolve-cost form for banishing a selected field card, so implement support for custom evolve costs such as banishing a matching card from your field.",
+      "The evolve ability incorrectly uses evolveOtherFollower on Star Priestess; it should evolve this follower itself.",
+      "The fanfare cost is wrong: the source says \"[engage] 2 amulets on your field\" as a cost, but the parsed version uses a field-count condition and no engage cost; encode an actual cost to engage 2 amulets on your field, which requires engine support for engaging multiple selected allied amulets as a cost.",
+      "The fanfare condition/filter is wrong: \"amulet\" is not a trait-based field condition; the effect should require selecting and engaging 2 amulets you control, not merely checking a fieldTraitMin condition."
+    ]
+  },
+  "Star Priestess Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Star Reader Stella": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incomplete: it should look at the top 4 cards of your deck, then specifically add one to hand, put one into your cemetery, put one on top of your deck, and put one on the bottom; peekDeck with optionalBury does not represent these required distinct placements. Implement a top-N deck arrangement/split-selection effect that supports distributing viewed cards among hand, cemetery, top, and bottom."
+    ]
+  },
+  "Star Torrent": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage effect is overbroad: it should deal 3 damage only to engaged enemy followers, not to each enemy follower. Encode a target/filter for engaged enemy followers only; if the engine cannot target only engaged followers in dealDamageAllEnemies, implement support for engaged-state filtering on field-wide damage.",
+      "The heal clause uses a fieldTraitMin condition with trait \"amulet\", but an amulet is a card type, not a trait; it should check whether you have an amulet on your field with a card-type-based condition, so implement a condition for allied field card type/count if needed."
+    ]
+  },
+  "Star of the Show": {
+    "verdict": "fail",
+    "issues": [
+      "The extra 3 PP clause is encoded incorrectly: the card always destroys an enemy follower, and only if you played it for 3 more play points do you search and summon Tsukasa Kiryu; move the destroy effect outside the optional-cost \"then\" branch so it always happens.",
+      "The conditional follow-up is wrong: the parsed card uses condition type \"always\", causing the deck search to always occur. It should occur only if this spell was played for 3 more play points.",
+      "The deck search should summon a follower with \"Tsukasa Kiryu\" in its name and then shuffle; ensure the search is conditional on the extra-cost payment and includes the required shuffle after searching."
+    ]
+  },
+  "Starbright Deity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incorrectly encoded as tutorFromHand; the source says to reveal a follower from your hand, then search your deck for a follower with the revealed follower's name and put it into your EX area. This requires a reveal-from-hand plus mirrored-name search flow, which is not represented here; implement support for revealing a selected hand card and using its identity as a dynamic search filter."
+    ]
+  },
+  "Starbright Deity Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as tutorFromCemetery; it should banish a follower from your cemetery, then search your deck for up to 2 followers with the banished follower's name and put them into your EX area. Implement support for using a banished cemetery card's identity as a dynamic deck-search filter and for searching up to 2 matching cards to EX area.",
+      "The On Evolve ability is missing the cost/action \"Banish a follower from your cemetery\" before searching."
+    ]
+  },
+  "Starchaser Sprite": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is missing its cost: the source requires \"[engage] 2 amulets on your field\" to draw 2 cards and discard a card. Encode this as a fanfare with a cost to engage 2 allied amulets; if unavailable, implement support for engaging multiple selected allied amulets as a cost."
+    ]
+  }
+}

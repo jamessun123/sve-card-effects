@@ -1,0 +1,56 @@
+{
+  "Azazel": {
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword \"bane\"; add it to `keywords` for the printed Bane ability."
+    ]
+  },
+  "Azazel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Azi Dahaka": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is conditional on turning 3 facedown evolved followers in your evolve deck face up; encode it as a single gated/paid effect (not two separate unconditional fanfare abilities), so the destroy only happens if that evolve-deck action is performed."
+    ]
+  },
+  "Azi Dahaka Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Strike ability is incorrectly encoded as a dummy `if` with `namedCardNotOnFieldByName` and `noop`; it should encode: if there are at least 5 faceup evolved followers in your evolve deck, heal your leader 3, and if there are at least 8, deal 3 damage to each enemy leader. Implement missing condition support for counting faceup evolved followers in evolve deck (e.g. `evolveDeckFaceupMin`) to represent both thresholds."
+    ]
+  },
+  "Azord, Duke of the Mists": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Azord, Duke of the Mists Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Azuki Momoi": {
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword \"ward\"; add it to `keywords` for the printed Ward ability."
+    ]
+  },
+  "Azureflame Dragonewt": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability cost is encoded incorrectly as `cost: { \"pp\": 1, \"discard\": 1 }`; it should require paying 1 PP, discarding this card, and discarding a Dragoncraft card that costs 7 or more from hand. Use an activated cost including self-discard/bury plus the hand discard, and implement a missing activated-cost form for discarding this card from hand (or equivalent hand self-discard cost support).",
+      "The discarded Dragoncraft card filter should match cards that cost 7 or more; the current `discardFromHand` step uses `minCost: 7` correctly, but the self-discard portion of the card text is missing and must be included in the cost/effect."
+    ]
+  },
+  "Azureflame Dragonewt Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Azurite Maiden": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing its cost; add `cost: { \"pp\": 1 }` to the fanfare ability to represent `[fanfare] [cost01]`.",
+      "The cemetery effect is encoded incorrectly as `tutorFromCemetery` with `playCostReduction: 1`; it should put a Faith follower from your cemetery into your EX area, then give that moved card [attack]+1, not reduce its play cost."
+    ]
+  }
+}

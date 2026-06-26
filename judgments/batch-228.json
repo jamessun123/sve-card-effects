@@ -1,0 +1,58 @@
+{
+  "Thunder God of the Tempest": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Choose up to 2,\" so the root effect should use chooseMultiple with min 0 and max 2, not choose with min 1 and max 2.",
+      "Option 1 should target an enemy amulet on the field, but the parsed destroy effect uses enemyFieldCard and can hit followers; restrict the target to enemy amulets specifically."
+    ]
+  },
+  "Thundering Roar": {
+    "verdict": "fail",
+    "issues": [
+      "The spell says \"Choose one\" and only becomes \"Choose up to 2\" with Necrocharge (10); encode a base choice of exactly 1 plus a Necrocharge (10) conditional that changes the choice count to up to 2, instead of always allowing up to 2."
+    ]
+  },
+  "Thunderous Roar": {
+    "verdict": "fail",
+    "issues": [
+      "The spell has an optional additional cost of discarding a Dragoncraft card that costs 7 or more; this is missing and should be encoded with an optionalCost/discardFromHand branch tied to the upgraded effect.",
+      "The parsed choose between 3 damage and 4 damage + draw is incorrect because the player does not choose the mode independently; the effect should deal 3 damage by default, or 4 damage and draw a card only if the additional cost was paid."
+    ]
+  },
+  "Tico, Mysterian Spellnerd": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tidal Tyranny": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tilting at Windmills": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The granted delayed effect is wrong: the card says to give the follower \"At the start of your end phase, destroy this card,\" but the parse grants Last Words destroy instead. It should grant a startOfEnd triggered self-destroy ability to the follower that was put onto the field. Implement an ability-granting operation for triggered abilities such as grantTriggeredAbility or grantStartOfEnd effect targeting the selected follower."
+    ]
+  },
+  "Tin Soldier": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability should deal 2 damage to an enemy leader or an enemy follower, but the parsed effect only targets enemy followers. It should support a target selector that can choose either enemyLeader or enemyFollower for a single damage effect; implement a mixed target selector such as enemyLeaderOrFollower."
+    ]
+  },
+  "Tiniest Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tiniest Dragon Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve says \"Deal 5 damage to each follower on the field,\" but the parsed effect uses dealDamageAllEnemies and only damages enemy followers. It should damage all followers on both sides; encode an all-followers damage effect instead."
+    ]
+  },
+  "Tinkering Shopkeeper": {
+    "verdict": "fail",
+    "issues": [
+      "The condition is \"if there are at least 3 cards in your EX area,\" but the parsed condition checks for at least 3 Puppet-trait cards in EX area. It should check total EX area card count, not trait-specific count."
+    ]
+  }
+}

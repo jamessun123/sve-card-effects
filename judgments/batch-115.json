@@ -1,0 +1,64 @@
+{
+  "Ironknuckle Nun": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"lastWords\" from keywords; they are timings and are already correctly represented as abilities."
+    ]
+  },
+  "Ironwrought Defender": {
+    "verdict": "fail",
+    "issues": [
+      "Ward is conditional on the fanfare cemetery check, but parsed as an unconditional passive keyword; encode Ward inside the fanfare conditional together with the +1 defense effect, not as a standalone passive ability.",
+      "Remove \"fanfare\" from keywords; it is a timing, not a keyword."
+    ]
+  },
+  "Isabelle, Intrepid Mage": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect makes discarding a card mandatory to perform the choose-one effect, but parsed as optionalCost; encode it as a required discard followed by choose 1.",
+      "Remove \"evolve\" and \"fanfare\" from keywords; they are not keywords and are represented by evolveCost/evolvesTo and ability timing."
+    ]
+  },
+  "Isabelle, Intrepid Mage Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Israfil": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\", \"fanfare\", and \"strike\" from keywords; they are not card keywords and are already represented by evolve data and ability timings."
+    ]
+  },
+  "Israfil Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; it is a timing, not a keyword, and is already represented by the strike ability."
+    ]
+  },
+  "It's a Sweets Buffet!": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing Stack keyword/effect; this card has \"Stack.\" in the source text. Add support for a Stack keyword or a passive/keyword encoding for Earth Sigil stack-bearing amulets, then encode it on this card.",
+      "Remove \"fanfare\" from keywords; it is a timing, not a keyword."
+    ]
+  },
+  "Itsurugi, Eager Admirer": {
+    "verdict": "fail",
+    "issues": [
+      "The activated [adv] ability is missing the self-banish cost in cost; encode banishing this card as part of the activated cost (e.g. cost includes banishSelf) rather than as an effect step after the condition check."
+    ]
+  },
+  "Itsurugi, Paradise's End ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second ability is encoded with unsupported timing \"onEnemyFollowerLeaveField\" and misses the condition \"During your turn\" plus the restriction that the enemy follower must be put from the field into the cemetery. Implement a timing/trigger for enemy follower sent from field to cemetery, with a controller-turn-only condition, then encode the effect as deal 1 damage to the enemy leader and heal your leader 1."
+    ]
+  },
+  "Ivory Dragon": {
+    "verdict": "fail",
+    "issues": [
+      "Missing evolvesTo linkage for this base follower with an evolve cost line; set evolvesTo to the evolved card name.",
+      "Remove \"evolve\" from keywords; it is not a keyword and should be represented by evolveCost/evolvesTo."
+    ]
+  }
+}

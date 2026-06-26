@@ -1,0 +1,56 @@
+{
+  "Horned Beastie": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hornet Strike": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is incorrectly encoded as a player choice between 3 damage and a conditional 5-damage option; encode it as a single conditional effect that deals 5 damage if Combo (3) is active, otherwise 3 damage, to the same selected enemy follower."
+    ]
+  },
+  "Hotaru Shiragiku [Unbreakable]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hotaru Shiragiku [Unbreakable] Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor filter is wrong: the source says 'an iM@S CG follower with 1 attack', but parsed uses maxCost 1; change the search to match 1 attack instead of cost 1.",
+      "The start-of-end ability targets are too narrow: the source says 'select a follower on your field', but parsed uses selfFollower; change the target selector to any allied follower on your field, including this card."
+    ]
+  },
+  "Hoverboard Mercenary": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hoverboard Mercenary Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Howling Conflagration": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The optional extra 3 play point mode is not encoded. This should be represented as an optional additional PP payment that marks the spell as 'played for 3 more play points' for its later conditional check; implement an ability/effect pattern for optional additional PP costs on spells and a condition to test whether that optional kicker cost was paid.",
+      "The conditional follow-up is incorrectly encoded as checking ppMin 5, which does not mean 'if you played this card for 3 more play points'; replace this with a condition keyed to whether the optional additional 3 PP cost was paid when casting this spell, requiring engine support for tracking optional paid kicker costs.",
+      "The deck search to summon Drache should still be followed by a shuffle regardless of whether the card is found/resolved from the deck search; once the kicker-paid condition is implemented, keep the search/summon, grant Assail to the summoned card, then shuffle."
+    ]
+  },
+  "Howling Demon": {
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage for a base follower with an evolve cost line; add evolvesTo: 'Howling Demon Evolved'.",
+      "The printed evolve ability should not be represented only as a keyword; include proper evolve linkage rather than keywords.fanfare only."
+    ]
+  },
+  "Howling Demon Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage for the evolved form; add evolvesFrom: 'Howling Demon'."
+    ]
+  },
+  "Hozumi, Enchanting Hostess": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

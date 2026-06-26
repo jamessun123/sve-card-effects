@@ -1,0 +1,50 @@
+{
+  "Margarite Mermaid Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marian the Mummy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marian the Mummy Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marie, Flowery Magician": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare conditional draw is encoded incorrectly: after milling 2, it should check whether at least one of the buried cards was a non-Runecraft card, not use condition.type \"discardedCardType\" with cardType \"nonRunecraft\". Encode the fanfare as mill 2, then a conditional draw based on milled-card class information. This requires a new implemented condition/effect support such as a condition for \"buriedCardClass\" or \"milledContainsNonClass\" to detect whether a non-Runecraft card was buried by this effect."
+    ]
+  },
+  "Marie, Flowery Magician Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marion, Elegant Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marion, Elegant Dragonewt Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete/incorrect: it should target another Dragoncraft follower on your field or in your EX area and give it +1/+1, but the parsed target only selects a field follower. Encode this as a buff to a Dragoncraft follower in either field or EX area, excluding self. This needs new target-selector or effect support for selecting follower cards in EX area (or a combined field-or-EX-area target), since the current target selectors do not support EX area targets."
+    ]
+  },
+  "Marion, Ravishing Dragonewt": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability condition is encoded incorrectly: it should activate only if there are at least 4 Dragoncraft cards in your cemetery that cost 7 or more, not merely if you have at least 4 cards in your cemetery. Encode the condition as a filtered cemetery count with cardClass \"dragon\" and minCost 7. This requires a new implemented condition such as \"ownCemeteryFilterMin\" that can count cards in your cemetery matching a DeckFilter."
+    ]
+  },
+  "Mark Unleashed": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction is encoded with the wrong timing and missing condition: it should be a passive playCostReduction ability active only if there's a follower on your field with \"Marlone\" in its name, not a spell-timing effect. Encode it as timing \"passive\" with op \"playCostReduction\" amount 1 gated by a named-on-field condition matching a follower whose identity name contains \"Marlone\". This requires a new condition implementation such as a field-name-contains check (for example, \"namedFollowerOnFieldContains\")."
+    ]
+  },
+  "Mark of the Six": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

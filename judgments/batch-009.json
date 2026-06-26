@@ -1,0 +1,61 @@
+{
+  "All-Feeling Divine": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability should set \"activateFrom\": \"cemetery\" because the source says \"banish this from your cemetery\".",
+      "Activated ability cost is incorrectly encoded with both \"banishSelf\" and malformed \"banishFromCemetery\" fields; encode the cost as banishing this card from cemetery rather than as a field/self banish cost.",
+      "The buff effect should affect each Fox of Invitation on your field, including the token just summoned; remove \"otherOnly\": true.",
+      "The buff targeting is incorrect: \"buffFieldTrait\" with \"trait\": \"Fox of Invitation\" does not match card name text. It should target Fox of Invitation by identity/name rather than trait."
+    ]
+  },
+  "All-Feeling Divine Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Allure of Shadows": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the \"fanfare\" keyword; this is a Spell and the source text does not have Fanfare.",
+      "Necrocharge clause should summon Luna, Soul Keeper from the deck, then shuffle. \"tutorFromDeck\" to field is incorrect; use a deck-to-field summon implementation and include the shuffle step if required by the engine/card conventions."
+    ]
+  },
+  "Alouette, Doomwright Ward": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Alpha Drive": {
+    "verdict": "fail",
+    "issues": [
+      "The second choose option should summon Mono, Garnet Rebel from your cemetery, not add it to hand/field via \"tutorFromCemetery\". Use a cemetery-to-field summon effect for the selected named card."
+    ]
+  },
+  "Altered Fate": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Alterplane Arbiter": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is encoded incorrectly: after declaring a number and milling 5, the card should deal X damage to each enemy follower, where X equals the number of cards buried this way with the declared cost. The current encoding deals damage to only one enemy follower and uses an unrelated cemetery count filter.",
+      "To encode this correctly, the engine needs support for counting cards milled by this effect that match a chosen cost/value, e.g. a dynamic amount like \"milledThisEffectMatchingChosenCostCount\", plus an effect to deal damage to all enemy followers using that dynamic amount."
+    ]
+  },
+  "Alterplane Arbiter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrectly encoded as a generic \"tutorFromCemetery\" with an invalid filter. The source requires selecting exactly 3 cards with different names in your cemetery, then adding them to hand only if all 3 have the same cost.",
+      "To encode this correctly, the engine needs support for multi-select from cemetery with uniqueness-by-name and a conditional check that selected cards share the same cost before moving them to hand."
+    ]
+  },
+  "Alucard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aluzard, Timeworn Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing passive ability: \"This card can't be played from the EX area while there are dormancy counters on it.\" The parsed card does not encode this restriction. The engine needs a passive EX-area play restriction based on counters on this card.",
+      "Start-of-main ability is left as a noop. It should, while this card is in your EX area, remove a dormancy counter from this card, and if there are no dormancy counters on it after that, summon it. The engine needs support for counter-based conditional remove-and-then-summon from EX area for the source card."
+    ]
+  }
+}

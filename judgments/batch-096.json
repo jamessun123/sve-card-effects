@@ -1,0 +1,56 @@
+{
+  "Godsent Stride": {
+    "verdict": "fail",
+    "issues": [
+      "Missing Rush grant. The spell should be encoded as a sequence that buffs the selected follower +3/+2 and grants it Rush, e.g. add a grantKeyword effect with keyword \"rush\" targeting the same selfFollower target."
+    ]
+  },
+  "Godsworn Alexiel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded incorrectly. It should recover your leader's defense by 2 times the number of amulets on your field, not buff the leader with buffDynamic using namedIdentityFieldCount \"amulet\". Encode it as healLeader with a dynamic amount counting amulets on your field; this requires implementing a DamageAmount for counting field cards by cardType \"amulet\" (or a general field-card-count filter amount).",
+      "Keywords are incorrect. \"evolve\" and \"fanfare\" should not be listed in keywords; keep only the printed keyword \"ward\" and represent the evolve line with evolveCost/evolvesTo plus the fanfare ability."
+    ]
+  },
+  "Godsworn Alexiel Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onEvolve damage effect uses an invalid op and incorrect dynamic amount source. It should deal damage to a selected enemy follower and its leader equal to 2 times the number of amulets on your field; encode using op \"damageFollowerAndLeader\" with followerAmount and leaderAmount based on a dynamic count of your field amulets. This requires implementing a DamageAmount for counting field cards by cardType \"amulet\" (or a general field-card-count filter amount)."
+    ]
+  },
+  "Godwood Staff": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gold Mine Necromancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gold Rush Ghost": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare choice count is encoded incorrectly. Normally it should choose exactly 1, and only if this was put onto the field from the cemetery should it choose up to 2. Encode this with a conditional between choose and chooseMultiple/max 2; this requires implementing a condition for 'entered from cemetery' or more generally tracking entry zone/origin.",
+      "The delayed self-bury timing is missing/incorrect. 'At the start of each opponent's end phase, bury this' is not representable with the listed timings; implement a timing such as startOfOpponentEnd (or a turn-scoped opponent-phase trigger) and use burySelf there."
+    ]
+  },
+  "Goldennote Melody": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is encoded as choose exactly 1, but it should choose up to 2 instead if a follower on your field evolved this turn. Encode a conditional between choose and chooseMultiple/max 2. This requires implementing a condition for 'a follower on your field evolved this turn' or a generic 'ally evolved this turn' condition."
+    ]
+  },
+  "Golem Marshal": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Golem Protection": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Golem's Rampage": {
+    "verdict": "fail",
+    "issues": [
+      "The cost/effect is encoded incorrectly. The card says 'Bury a Golem follower' as a required single sacrifice, but the current effect buries Golem followers broadly with buryFieldFollowers. Encode the spell so it buries exactly one Golem follower on your field as the cost/effect, using a single-target bury operation such as an activated/spell-compatible select-and-bury of one matching follower before dealing 3 damage to all enemies."
+    ]
+  }
+}

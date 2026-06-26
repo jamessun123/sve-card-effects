@@ -1,0 +1,71 @@
+{
+  "Enchanted Knight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Enchanted Knight Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is encoded incorrectly as fieldTraitMin with trait \"Ward\"; it should check for at least 4 followers with Ward on your field. Encode this with a condition/filter for followers having the Ward keyword. The current engine lacks a condition for counting followers by keyword, so implement a condition such as fieldKeywordMin { keyword: \"ward\", count: 4 }."
+    ]
+  },
+  "Enchanted Slippers": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect 'Give your leader [defense]+1' is encoded as healLeader 1, but leader defense increase is not the same as healing damage. It should be encoded as a leader max-defense/stat increase effect, not healing. Implement a dedicated ability such as buffLeaderDef or increaseLeaderDef to represent permanent leader defense increases.",
+      "The start-of-game clause that puts 5 Magical Item tokens into your EX area if your deck is based on THE IDOLM@STER CINDERELLA GIRLS universe is missing. Add a start-of-game/deck-construction-gated effect for summoning 5 Magical Item tokens to the EX area; this timing/condition is not present in the engine, so implement a startOfGame timing and a deck universe/archetype condition."
+    ]
+  },
+  "Enforcer": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect is incomplete: after giving this follower [attack]+3, it should also give this follower Assail. Add a grantKeyword effect for keyword \"assail\" targeting self within the Fanfare resolution."
+    ]
+  },
+  "Enlightenment": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is not a choice card. It should target a follower on your field, give it +1/+1, and if that target is Mjerrabaine, Omen of One, give +3/+3 and Assail instead plus 'This follower doesn't take damage' for the rest of the turn. Replace the choose effect with a single targeted effect plus a conditional branch based on the chosen target's name; the engine lacks a way to test the selected target's identity, so implement a target identity conditional such as selectedTargetIsName.",
+      "The target selector is wrong: the spell should select a follower on your field, not any follower. Change targets from anyFollower to selfFollower/count 1.",
+      "The Mjerrabaine branch buffs the target by +3/+3 only, but the text says '+3/+3 instead' of the normal +1/+1. Ensure the conditional branch applies the correct total buff instead of presenting it as a separate optional mode.",
+      "The protection clause is encoded incorrectly as grantIndestructible, but 'This follower doesn't take damage' is damage immunity, not indestructibility. Encode it as damageImmunity targeting the chosen follower for the turn."
+    ]
+  },
+  "Enstatued Seraph": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end-phase check is encoded as condition always, but it should check whether this card has at least 4 prayer counters after adding one. Encode a counter-threshold condition on this card. The engine lacks a condition type for counters on source, so implement something like sourceCounterMin { counter: \"prayer\", count: 4 }.",
+      "When the prayer-counter condition is met, the card should put itself into its owner's cemetery before the rest of the effect. This self-bury clause is missing; add a move-to-cemetery/self-bury effect. The engine lacks a non-cost self-bury operation for amulets/cards in play, so implement a general putSelfIntoCemetery effect or allow burySelf as a normal effect.",
+      "The deck search is incomplete: the card should search your deck for up to 2 cards and put them into your EX area, but the parsed effect only allows choosing up to 1 card. Encode selection of up to 2 cards.",
+      "The searched cards should cost 0 play points to play, but searchDeckChoose with playCostReduction 0 does not represent setting their cost to 0. Encode an effect that sets the chosen cards' play cost to 0 in the EX area. The engine lacks a set-play-cost-to-fixed-value effect, so implement something like setPlayCost { amount: 0 } for moved cards."
+    ]
+  },
+  "Ephemera, Sword Angel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as fieldTraitMin with trait \"Unknown\"; it should check whether there are at least 3 cards on an opponent's field. Encode a condition counting opponent field cards. The engine lacks a condition for opponent field size, so implement something like opponentFieldCardMin { count: 3 }.",
+      "The Fanfare effect is incomplete: after giving this follower [attack]+1, it should also give this follower Assail. Add a grantKeyword effect for keyword \"assail\" targeting self."
+    ]
+  },
+  "Ephemeral Moon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive effect is encoded incorrectly as grantIndestructible to Kaguya followers, but the text says your followers named Kaguya don't take damage during your turn. This should be damage immunity, not indestructibility, and it should apply only during your turn. Encode a passive aura granting damage immunity to allied followers named Kaguya during your turn. The engine lacks an aura/selector for named allied followers plus turn restriction on passive damage prevention, so implement support for named-follower aura targeting and turn-limited passive damage immunity."
+    ]
+  },
+  "Erika, Loyal Swordsavant": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare effect is incomplete: it should summon a Steelclad Knight, Shield Guardian, or Knight token, but the parsed effect summons only Steelclad Knight. Encode a choice/random selection among the three listed tokens; if the choice is player-selected, use choose. If no suitable token-choice primitive exists for token summons, implement one.",
+      "The Strike ability is missing. Add a strike-timing ability that checks whether there are 5 Swordcraft cards on your field and, if so, gives this follower [attack]+2.",
+      "The Strike condition should count Swordcraft cards on your field, not a trait. The engine lacks a condition for counting field cards by class regardless of type, so implement a condition such as fieldClassMin { cardClass: \"sword\", count: 5 }."
+    ]
+  },
+  "Eris, Atoned Priestess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated [adv] ability is missing its activation condition: it can be activated only if there are at least 4 amulets on your field. Add that condition to the activated ability. The engine lacks a condition for counting amulets on your field, so implement something like fieldCardTypeMin { cardType: \"amulet\", count: 4 }.",
+      "The Fanfare max banish count is encoded incorrectly as traitFieldCount with trait \"Amulet\" and multiplier 0. It should be up to 1 enemy follower for every 2 amulets on your field. Encode a dynamic amount equal to floor(number of amulets on your field / 2). The engine lacks a dynamic amount for counting field cards by type with divisor, so implement something like fieldCardTypeCount { cardType: \"amulet\", divisor: 2 }."
+    ]
+  }
+}

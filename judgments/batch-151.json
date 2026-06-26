@@ -1,0 +1,53 @@
+{
+  "Mimi, Right Paw Hellhound": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mina, Levin Vice Leader": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mina, Levin Vice Leader Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Minami Nitta [Goddess by the Sunlit Sea]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is encoded as {\"pp\":0,\"engage\":true}, but the source says \"Lesson (1), [engage]\"; encode the additional Lesson (1) cost correctly once the engine supports Lesson costs, rather than using pp:0 as a placeholder."
+    ]
+  },
+  "Minami Nitta [Water's Edge Bride]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is encoded as {\"pp\":0,\"engage\":true}, but the source says \"Lesson (1), [engage]\"; encode the additional Lesson (1) cost correctly once the engine supports Lesson costs, rather than using pp:0 as a placeholder."
+    ]
+  },
+  "Mind Splitter": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is incorrect: {\"type\":\"fieldTraitMin\",\"trait\":\"any\",\"count\":4} does not faithfully mean \"if there are at least 4 followers on your field\"; encode this with a proper field follower count condition once the engine supports counting followers without requiring a trait.",
+      "The fanfare effect is incorrect: it uses moveSourceToExArea, which moves this card to the EX area, but the source says to put the top card of your deck into your EX area; encode this as the top card of your deck moving to EX area once the engine supports that operation without the follower-cost-reduction rider used by putDeckTopToExArea."
+    ]
+  },
+  "Mini Soul Devil": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger timing/effect is encoded with an unreferenced grantOnAllyEvolve passive wrapper; the card should directly trigger when one of your followers evolves and deal 2 damage to each enemy leader. Encode this with an onAllyEvolve trigger targeting enemy leaders once the engine supports a direct onAllyEvolve ability or a damage-all-enemy-leaders operation."
+    ]
+  },
+  "Mino, Shrewd Reaper": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mio Honda": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mio Honda [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is missing the \"Lesson (1)\" requirement; the draw-then-discard sequence should be gated by paying Lesson (1). Encode the fanfare with the proper Lesson (1) condition/cost once the engine supports Lesson on non-activated abilities."
+    ]
+  }
+}

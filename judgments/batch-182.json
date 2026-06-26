@@ -1,0 +1,63 @@
+{
+  "Radiance Angel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Radiance Angel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Radical Gunslinger": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is encoded incorrectly: it should require engaging this card and 2 Mount cards on your field, not burying 2 followers. Replace the cost with an engage-self-plus-2-Mount-engage cost representation instead of buryFromField/buryFieldCount.",
+      "Activated ability target is encoded too broadly: it should target an enemy leader or an enemy follower, not any enemy field card. Encode the damage target as enemy leader or enemy follower only."
+    ]
+  },
+  "Raio, Omen of Truth": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Raio, Omen of Truth Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve effect is incomplete: it should let you put up to 3 cards that cost 3 or less from among the top 9 cards into your EX area, but the encoding only supports choosing one. Encode selection of up to 3 qualifying cards from the 9 looked at cards.",
+      "On Evolve effect is missing duration on the cost reduction: the chosen cards should cost 3 less to play this turn, not permanently."
+    ]
+  },
+  "Raio, Truthful Elimination": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Play-cost reduction ability is encoded incorrectly: it should be a conditional 'when playing this, bury 3 Mage followers that cost 2 or more' optional/additional cost that makes this card cost 9 less to play, not an unconditional passive playCostReduction 9. Implement support for play-time additional costs with a conditional play cost reduction tied to burying cards from hand/cemetery as specified by the card text.",
+      "Fanfare effect is encoded incorrectly: it should let you put one of the top 3 cards of your deck into your EX area with no cost restriction, but the parser incorrectly filters to maxCost 3. Remove the maxCost filter.",
+      "Activated ability cost is encoded with a non-reference cost shape. It should be modeled as discarding a card named 'Raio, Omen of Truth' from hand; implement or use a valid activated cost form for discardFromHand/selected hand discard costs instead of custom discardFromHand/discardCount fields under cost."
+    ]
+  },
+  "Ralmia, Astrowing": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Strike condition is encoded with unsupported condition type fieldFollowerMin. It should mean 'if there are 5 followers on your field'; implement a condition for minimum allied follower count on field, then use it to gate the strike damage effect."
+    ]
+  },
+  "Ralmia, Sonic Racer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "This card is missing its evolve cost reduction ability: 'This card's [evolve] costs 1 less for every other follower on your field.' Add an ability encoding this dynamic evolve cost reduction, and implement a dynamic evolve-cost-reduction operation/amount based on the number of other followers you control if the engine does not yet support it."
+    ]
+  },
+  "Ralmia, Sonic Racer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve ability is missing its cost: the source says 'On Evolve - [cost03]: ...'. Add a 3 PP cost requirement to the onEvolve ability, or implement support for costs on onEvolve abilities if the engine currently only supports costs on activated abilities.",
+      "On Evolve buff amount is encoded incorrectly: it should give +1/+1 for every other follower on your field, but the encoding uses total field follower count and does not exclude this follower. Encode the amount as allied follower count excluding self, and implement a supported dynamic amount for other allied followers on field if missing.",
+      "On Evolve buff uses unsupported dynamic amount fieldFollowerCount. Replace it with a supported dynamic amount, or implement field follower count / other allied follower count as a dynamic amount operation."
+    ]
+  },
+  "Rana, Dual Cannon Abbess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare search effect is encoded incorrectly: it should search your deck for up to 2 Wasteland cards not named Rana, Dual Cannon Abbess that cost a total of 6 or less, put them into your EX area, shuffle, and they cost 0 to play this turn. The current searchDeckChoose only chooses one card and uses cardClass instead of the Wasteland trait. Encode selection of up to 2 cards with a max total cost of 6 and filter by trait Wasteland excluding this card's name; implement a deck search operation that supports multiple chosen cards with total-cost cap if missing.",
+      "Fanfare search effect is missing the shuffle-after-search clause. Add shuffleDeck after searching, or ensure the tutor/search operation shuffles as required by the card text."
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "Starry Elf": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is encoded with searchDeckChoose over the top 40 cards and remainderTo deckBottom, but the source says to search your deck for an amulet, reveal it, and add it to your hand. This should be encoded as tutorFromDeck with filter {\"cardType\":\"amulet\"}, to \"hand\", and reveal true. Implement reveal support on tutorFromDeck if needed."
+    ]
+  },
+  "Starry-Eyed Penguin Wizard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Starry-Eyed Penguin Wizard Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Starseer's Telescope": {
+    "verdict": "fail",
+    "issues": [
+      "The card is missing the printed Stack keyword/effect. Add an ability or keyword representing Stack, such as a passive addStack-compatible Earth Sigil stack implementation, in addition to the fanfare peek effect."
+    ]
+  },
+  "Stay in Paradise": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Steadfast Samurai": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as cannotAttack, but the source says this follower doesn't take combat damage. Replace it with a combat-damage-immunity passive effect. This ability is not present in the reference, so implement a passive operation for immunity to combat damage taken."
+    ]
+  },
+  "Steel Demolitionist": {
+    "verdict": "fail",
+    "issues": [
+      "The damage target is encoded as enemyFieldCard, which excludes the enemy leader. The source says 'enemy leader or enemy follower'. Change the effect to target either enemy leader or enemy follower, e.g. with a choose effect or a target selector that supports leader-or-follower targeting."
+    ]
+  },
+  "Steelcap Pachycephalosaurus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Steelcap Pachycephalosaurus Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect is incomplete. The source says to deal 2 damage to an enemy follower, or 4 damage instead if you've discarded a card this turn. Encode this with an if condition {\"type\":\"discardedThisTurn\"} that deals 4 damage in the then branch and 2 damage in the else branch to the selected enemy follower."
+    ]
+  },
+  "Steelclad Knight": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

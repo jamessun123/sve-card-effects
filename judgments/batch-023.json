@@ -1,0 +1,61 @@
+{
+  "Assembly Droid": {
+    "verdict": "fail",
+    "issues": [
+      "Activated cost is encoded incorrectly: it should bury 3 Machina followers, not 3 arbitrary followers excluding self. Change the cost to banish/bury from field with a Machina follower filter and do not add excludeSelf unless the source says 'other'."
+    ]
+  },
+  "Astaroth's Reckoning": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Astral Projection": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Astrologist of the Mist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare effect target is too broad/underspecified: the source says 'Give each follower on your field +1/+1', but parsed uses buffFieldTrait with no field restriction semantics. Encode this as a buff to all allied followers only. If the engine lacks an operation/selector for 'all allied followers', implement an ability for buffing all followers on your field."
+    ]
+  },
+  "Asuka Ninomiya [Blossoming Jewel]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Asuka Ninomiya [Gentle Evening]": {
+    "verdict": "fail",
+    "issues": [
+      "Do not list 'storm' in keywords as a printed keyword; the source gives Storm only conditionally. Keep Storm only in the passive ability.",
+      "Fanfare cost/effect is encoded incorrectly after tutoring: 'It costs 4 less to play this turn' applies to the card put into your EX area, not this source card. Change the final step to apply a 4-cost reduction to the tutored card in EX area, not a generic/self playCostReduction."
+    ]
+  },
+  "Asuka Ninomiya [Sweet & Charming]": {
+    "verdict": "fail",
+    "issues": [
+      "Do not list 'storm' in keywords as a printed keyword; the source gives Storm only conditionally. Keep Storm only in the passive ability.",
+      "Fanfare cost/effect is encoded incorrectly after tutoring: 'It costs 4 less to play this turn' applies to the card put into your EX area, not this source card. Change the final step to apply a 4-cost reduction to the tutored card in EX area, not a generic/self playCostReduction."
+    ]
+  },
+  "Augmentation Bestowal": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aurelia, Regal Saber": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare condition is encoded incorrectly: it should check whether the selected enemy leader has at least 3 cards on their field, not fieldTraitMin with trait 'any'. Change the condition to an opponent field-count condition tied to the chosen enemy leader; if the engine lacks such a condition, implement a condition for enemy field card count.",
+      "Fanfare is missing 'select an enemy leader' linkage from the source text. The ability should explicitly select the enemy leader before checking their field count or otherwise encode the opponent-side reference correctly; if unsupported, implement targetable opponent/leader-side conditional referencing.",
+      "Fanfare is missing 'and Aura'. After the buff, this follower should gain Aura. Encode an additional effect granting Aura/passive untargetability as supported by the engine; if Aura is not implemented, add engine support for the Aura keyword/effect."
+    ]
+  },
+  "Automachina Maiden": {
+    "verdict": "engine-missing",
+    "issues": [
+      "First activated ability is missing its condition: it can activate only if there are 5 Machina cards in your EX area. Add an EX-area Machina-count condition; if the engine lacks a condition for EX area card count by trait, implement one.",
+      "First activated ability should summon this specific card from your EX area; using summonFromExArea with a name filter from the field card is incorrect/underspecified. Encode it as activating from EX area on the source card itself; if source-in-EX-area activated abilities are not fully supported for this pattern, implement that support.",
+      "Second activated cost is encoded incorrectly: the source says '[cost01], put this from your hand into your EX area', not bury from field. Change it to an activated ability from hand with cost pp 1 and effect moveSourceToExArea plus the deck-look effect, or equivalent hand-activation encoding.",
+      "Second activated effect is encoded incorrectly: the source says 'Look at the top card of your deck. If it's a Machina card, you may reveal it and add it to your hand.' Parsed searchDeckChoose lets you choose from the looked-at card too generically. Encode a top-deck peek with an if-it-matches optional add-to-hand effect; if the engine lacks a 'peek top card then reveal/add if matching' operation, implement that ability."
+    ]
+  }
+}

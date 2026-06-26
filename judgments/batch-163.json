@@ -1,0 +1,63 @@
+{
+  "New Generations": {
+    "verdict": "fail",
+    "issues": [
+      "The play-cost reduction ability is encoded with timing \"fanfare\", but \"When playing this card ... this card costs 9 less to play\" must be a play-time cost-modification ability, not a Fanfare trigger. Encode it as a passive/while-in-hand-or-playing cost reduction gated by paying the banish cost.",
+      "The printed keywords Storm, Bane, and Ward are duplicated in both `keywords` and a passive `passiveKeywords` ability; keep them only in `keywords`."
+    ]
+  },
+  "New Wave": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition for \"Lesson (5)\" is incorrectly encoded as `conditionAny` of 5 Cute / 5 Cool / 5 Passion in cemetery. It should be a Lesson(5) condition, then destroy each enemy card on the field. Implement a Lesson condition type (or equivalent iM@S lesson-counter/check support) and use that instead.",
+      "The card has `keywords: [\"fanfare\"]`, but Fanfare should be represented by the ability timing only, not as a keyword."
+    ]
+  },
+  "New Year's Soul Devil": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare text is flavor text and should not be encoded as a gameplay ability with `noop`. Remove the `noop` ability entirely; if flavor/support text retention is needed, implement a non-rules metadata field rather than an ability op.",
+      "The card has `keywords: [\"fanfare\"]`, but Fanfare should not be listed in `keywords`; there is no implementable rules effect here."
+    ]
+  },
+  "Newfound Allies": {
+    "verdict": "fail",
+    "issues": [
+      "The final zone for the non-summoned cards is wrong. \"Bury the rest\" should put the remaining looked-at cards into the cemetery, not the bottom of the deck; replace `remainderTo: \"deckBottom\"` with cemetery handling."
+    ]
+  },
+  "Nicola, Enduring Steward": {
+    "verdict": "fail",
+    "issues": [
+      "The card has `keywords: [\"fanfare\", \"rush\"]`, but Fanfare is not a keyword and Rush is conditional rather than always printed. Remove these from `keywords` and keep the conditional Rush/Bane only in the passive ability.",
+      "The Last Words cost reduction is applied to `targets: {\"type\":\"self\"}` after moving the card to EX area, but the source text gives the moved card in EX area \"This costs 1 less to play.\" Encode the reduction so it applies to this card in EX area / future plays of this card, not a field self-target buff."
+    ]
+  },
+  "Nicola, Forbidden Strength": {
+    "verdict": "fail",
+    "issues": [
+      "The card has `keywords: [\"evolve\", \"fanfare\"]`, but neither Evolve nor Fanfare should be listed as keywords. Keep `evolveCost: 1` and the Fanfare ability only."
+    ]
+  },
+  "Nicola, Forbidden Strength Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve target filter is too narrow. The source says \"Select a Machina card that costs 2 or less in your cemetery,\" not a follower specifically; remove `cardType: \"follower\"` from the cemetery filter."
+    ]
+  },
+  "Night Horde": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Night on the Town": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Night's Way": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition for \"If there are no cards in your EX area\" is encoded incorrectly as `exAreaTraitMin` with empty trait and count 0. This should be an EX-area-empty condition. Implement a condition such as `exAreaCount`/`exAreaMax`/`exAreaEmpty` and use it here.",
+      "The card has `keywords: [\"fanfare\"]`, but it has no Fanfare; remove that keyword."
+    ]
+  }
+}

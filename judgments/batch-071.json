@@ -1,0 +1,56 @@
+{
+  "Embodiment of Cocytus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Embracing Wings": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery retrieval should be optional ('select up to 1'); encode the last step as an optional cemetery tutor rather than a mandatory tutorFromCemetery to hand."
+    ]
+  },
+  "Emerald Maiden": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare buff is incorrectly encoded as def equal to this follower's defense; it should give this follower [defense]+X where X equals the number of other followers with Ward on your field. This requires a dynamic amount for counting field followers by keyword/keyword-with-exclude-self, which is not implemented; add a DamageAmount/selector for counting allied followers with a given keyword (excluding self) and use that in buffDynamic."
+    ]
+  },
+  "Emerald Wildfox": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be listed in keywords; keep the fanfare ability only and remove 'fanfare' from keywords."
+    ]
+  },
+  "Emmylou, Witch of Wonder": {
+    "verdict": "fail",
+    "issues": [
+      "The second choice is missing the Earth Rite condition/cost; encode option 2 so it only resolves with Earth Rite (1), e.g. using an if/removeCounter style Earth Rite implementation before dealing 3 damage."
+    ]
+  },
+  "Emperor's Command": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Empress of Serenity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The paid fanfare is incorrectly represented with an ability cost field on timing 'fanfare'; it should be an optional additional [cost03] tied to the fanfare that, if paid, gives each follower with Ward on your field +1/+2. The buff target is also incorrect: trait 'Ward' is not a trait filter. This needs engine support for optional additional PP payment on triggered abilities and for buffing followers by keyword (Ward) rather than trait; implement support for optional fanfare extra costs and keyword-based field filtering, then encode the conditional buff correctly."
+    ]
+  },
+  "Empyreal Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should let you add any number of matching cards from among the top 5, but searchDeckChoose only selects a single card; encode a multi-select top-5 reveal/add-to-hand effect for any number of Dragoncraft cards costing 7 or more, then put the rest on the bottom. This requires an implemented operation for searching a looked-at subset and choosing any number of matches."
+    ]
+  },
+  "Empyreal Swordsman": {
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end ability is incomplete; after dealing 4 damage to the selected enemy follower, it should also deal 2 damage to that follower's leader. Encode this with damageFollowerAndLeader or an equivalent sequence that includes both damages."
+    ]
+  },
+  "Enchanted Dress": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

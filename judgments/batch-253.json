@@ -1,0 +1,56 @@
+{
+  "Yui Ohtsuki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yui Ohtsuki Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incomplete: it should search your deck for a spell that costs 3 or less or an amulet that costs 3 or less, put it into your EX area, then shuffle; the parsed filter only allows spells. Encode both spell and amulet options, but this needs engine support for OR filters in DeckFilter or a choose/tutor pattern that preserves a single search among mixed card types.",
+      "The searched card should cost 3 less to play this turn after being put into your EX area; current playCostReduction on tutorFromDeck is fine if it applies to the chosen card."
+    ]
+  },
+  "Yui Ohtsuki [Lollipop Darling]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yui Ohtsuki [Lollipop Darling] Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Option (1) is not faithfully encoded: it should look at the top 2 cards, and you may reveal a Passion card from among them and add it to your hand, then put the rest on the bottom. The parser uses searchDeckChoose with filter trait Passion, but DeckFilter is AND-only and cannot match the source trait string \"iM@S CG / Passion\" as the Passion subgroup reliably. Implement trait-subtrait or traitContains matching to support subgroup trait searches like Passion.",
+      "Option (2) should search your deck for a follower with \"Yui Ohtsuki\" in its name, summon it, then evolve that summoned follower. The current evolveOtherFollower filter can hit any matching follower on your field instead of specifically the one just summoned. It should evolve the summoned card, which would require an effect like evolveLastSummoned or a way to target the card just put onto the field by the preceding tutor/summon effect."
+    ]
+  },
+  "Yuka Nakano": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yuka Nakano Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yukari Mizumoto": {
+    "verdict": "fail",
+    "issues": [
+      "Option (1) is too broad: it should destroy an enemy amulet on the field, not any enemy field card. Change the target/effect to an amulet-only destruction effect; if no amulet-only target selector exists, the engine should add one and this card should use it."
+    ]
+  },
+  "Yuki Himekawa [Challengers' Cheer]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incomplete: after dealing 4 damage to each enemy follower, it should deal 8 damage instead if the total cost of Passion cards on your field is 10 or more. Encode this with a condition based on total cost of matching cards on your field, but the engine lacks a condition for summed field cost by trait.",
+      "Fanfare is incomplete: if the total cost of Passion cards on your field is 20 or more, it should also deal 4 damage to each enemy leader. Encode an additional conditional leader damage effect, but the engine lacks both a summed field cost by trait condition and an effect for dealing damage to each enemy leader in multiplayer."
+    ]
+  },
+  "Yuki Himekawa [Full Swing☆Cheer]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incomplete: after dealing 4 damage to each enemy follower, it should deal 8 damage instead if the total cost of Passion cards on your field is 10 or more. Encode this with a condition based on total cost of matching cards on your field, but the engine lacks a condition for summed field cost by trait.",
+      "Fanfare is incomplete: if the total cost of Passion cards on your field is 20 or more, it should also deal 4 damage to each enemy leader. Encode an additional conditional leader damage effect, but the engine lacks both a summed field cost by trait condition and an effect for dealing damage to each enemy leader in multiplayer."
+    ]
+  },
+  "Yukimi Sajo": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

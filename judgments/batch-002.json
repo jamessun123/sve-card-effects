@@ -1,0 +1,60 @@
+{
+  "Absolute Zeroblade": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ace Dragoon": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented only as the ability timing, while Rush remains in keywords.",
+      "The fanfare should select another follower on the field and give this follower attack equal to that selected follower's attack; encode the chosen target explicitly instead of using buffDynamic with targetAttack and no target selector."
+    ]
+  },
+  "Acid Golem": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line belongs in evolveCost and Fanfare belongs as ability timing, not keywords.",
+      "The fanfare target is \"an enemy leader or enemy follower\"; change targets from enemyFieldCard to a selector/effect structure that can hit either the enemy leader or an enemy follower."
+    ]
+  },
+  "Acid Golem Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Acolyte's Light": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Actress Feria": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; this card has only an activated [act][engage] ability and no Fanfare."
+    ]
+  },
+  "Adept Thief": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Adherent of Annihilation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should first select an enemy follower, then if there are at least 3 Hunter cards in your cemetery deal 2 damage to that selected follower; the current encoding makes the target exist only inside the conditional. Implement support for selecting a target before a conditional and reusing that selected target in a later effect.",
+      "The second clause is not this follower's onLeaveField ability. It should create a delayed effect on the enemy follower selected by the fanfare: when that follower is put from the field into the cemetery this turn, heal your leader by 2. Replace the current onLeaveField self trigger with a granted delayed trigger on the selected enemy follower; implement support for granting temporary \"when this leaves the field to cemetery this turn\" triggers to chosen targets."
+    ]
+  },
+  "Adherent of Ardor": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line belongs in evolveCost and Fanfare belongs as ability timing, not keywords.",
+      "The fanfare says \"Select up to 2 followers on your field\"; do not encode it as dealDamageOtherFollowers to all other followers. It should target up to 2 followers you choose on your field, then if Overflow is active deal 1 damage to those selected followers. Implement support for targeting multiple chosen allied followers up to a maximum count.",
+      "The damage-triggered ability should be during your turn only and only when this follower takes ability damage. The current grantOnDamaged lacks the during-your-turn restriction and does not restrict the damage source to abilities. Encode those conditions correctly; implement support for onDamaged conditions such as controller turn only and ability-damage-only if needed."
+    ]
+  },
+  "Adherent of Ardor Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve should select up to 2 followers on your field and deal them 1 damage, not dealDamageOtherFollowers to all other followers. Encode chosen targets up to 2 on your field; implement support for targeting multiple chosen allied followers up to a maximum count.",
+      "The damage-triggered ability should be during your turn only and only when this follower takes ability damage. The current grantOnDamaged lacks the during-your-turn restriction and does not restrict the damage source to abilities. Encode those conditions correctly; implement support for onDamaged conditions such as controller turn only and ability-damage-only if needed."
+    ]
+  }
+}

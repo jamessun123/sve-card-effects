@@ -1,0 +1,63 @@
+{
+  "Hermit of Destruction": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hermit of Disdain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing passive ability for \"During your turn, whenever this takes ability damage, look at the top card of your deck. If it's an Omen card, you may reveal it and add it to your hand.\" It should be encoded as an onDamaged ability limited to your turn and to ability damage, resolving a peek/search-add effect for the top card if it has the Omen trait; add engine support for a condition/flag restricting onDamaged to ability damage and for checking/revealing the top card and moving it to hand only if it matches a filter."
+    ]
+  },
+  "Hermit of Lust": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is incomplete: after giving your leader defense -1, it should also give this follower Intimidate. Add a second step granting the Intimidate keyword to self.",
+      "Activated ability cost is encoded incorrectly as {\"pp\":0}; the cost is \"Give your leader [defense]-1\" and should not use a 0-PP activated cost. Encode the leader defense loss as part of the effect before the buff.",
+      "The activated ability should give this follower [attack]+1 once per turn, which is correct in part, but it is missing no other text; only remove the incorrect 0-PP cost and keep the self buff after the leader defense loss."
+    ]
+  },
+  "Hermit of Repose": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-main ability is encoded incorrectly: it should deal damage equal to this follower's attack to each enemy follower, not a single enemy follower. Encode it as damage to all enemy followers with dynamic amount selfAttack; add engine support for dealDamageAllEnemies using a dynamic amount object such as {\"op\":\"selfAttack\"} and for restricting the trigger to each opponent's main phase if not already supported."
+    ]
+  },
+  "Hermit of Silence": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hermit of Truth": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery filter is incomplete: the selected follower must have both the Omen and Mage traits, not just Omen. Encode the filter so it requires both traits.",
+      "The play cost reduction is conditional: \"If this wasn't put onto the field from hand, the selected follower costs 3 less to play this turn.\" Do not apply playCostReduction unconditionally on tutorFromCemetery; gate it with condition {\"type\":\"notEnteredFromHand\"}."
+    ]
+  },
+  "Hermit of Unkilling": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare changes only the selected enemy follower's defense to 1. It should not set attack to 0. Replace the setStats effect with an effect that only changes defense to 1."
+    ]
+  },
+  "Hermit of Unkilling Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve search filter is incomplete: it should search for a follower with \"Izudia\" in its name. Add \"cardType\":\"follower\" to the filter.",
+      "The search effect is encoded with searchDeckChoose/lookAt 40 and remainderTo deckBottom, but the card text is a full-deck search then shuffle. Encode it as tutorFromDeck with reveal true to hand, then shuffle, rather than a top-of-deck selection effect."
+    ]
+  },
+  "Hermit of Usurpation": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hero of Antiquity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Evolve linkage is incomplete: this base card has an [evolve] line and should link to its evolved card with evolvesTo instead of null.",
+      "Missing printed keyword Aura in keywords. Add \"aura\" to keywords to match the card text.",
+      "The second aura ability is incorrect: it grants Bane, but the source says \"This card can't be destroyed or banished by abilities.\" Remove the Bane grant.",
+      "The protection is incomplete: grantIndestructible covers \"can't be destroyed by abilities\" but the card also can't be banished by abilities. Encode both protections; add engine support for an ability like grantCannotBeBanishedByAbilities or equivalent passive protection against banish effects."
+    ]
+  }
+}

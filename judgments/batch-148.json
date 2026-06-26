@@ -1,0 +1,64 @@
+{
+  "Mercurial Might": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage-reduction clause is left as noop and should be encoded as a real temporary leader damage reduction effect for this turn; implement an ability/effect for 'if your leader would take damage this turn, it takes that much minus 1 instead' rather than using noop."
+    ]
+  },
+  "Merlin": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search is incorrectly encoded with searchDeckChoose; it should use tutorFromDeck with filter {\"cardType\":\"spell\"}, to \"hand\", and reveal true to represent searching your deck for any spell and adding it to your hand."
+    ]
+  },
+  "Merlin Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded as tutorFromCemetery to field, but the source says to select a spell in your cemetery and play it for 0 play points; this should be encoded as a cemetery-play effect for a spell with maxCost 3, which is not available in the current ability reference and should be implemented."
+    ]
+  },
+  "Mermaid Archer": {
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has the keyword fanfare; remove that keyword because the source only has an activated ability.",
+      "The activated ability is incorrectly set to activateFrom \"hand\"; it should activate from the field.",
+      "The cost should require putting a Marine card from your hand into your EX area, not an optional additional cost; encode the hand-to-EX action as part of the activated ability's required cost/effect sequence rather than optionalCost."
+    ]
+  },
+  "Mermaid Guide": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mermaid Guide Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mermaid Song": {
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has the keyword quick; remove it because the source does not have [quick].",
+      "The cost-reduction clause is encoded as a spell ability with optionalCost and engageSelf, but it should target and engage a Marine follower on your field when playing this card; engageSelf is incorrect and this is not a separate spell effect.",
+      "The main spell effect should not have quick: true.",
+      "The cost-reduction mechanic 'When playing this, engage a Marine follower on your field: This costs 2 less to play' is not faithfully represented as a play-time cost modifier tied to engaging a Marine follower."
+    ]
+  },
+  "Mermaid of Punishment": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be 'another Marine follower' entering your field; add exclusion so this card does not trigger on itself.",
+      "The triggered effect is incorrect: dealDamageAllEnemies damages enemy followers and leader, but the source says to deal 1 damage to each enemy leader only; encode damage only to enemy leaders."
+    ]
+  },
+  "Mermaid of Punishment Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve says you may put up to 2 Marine cards from the top 5 into your EX area, but searchDeckChoose only selects one; encode selection of up to 2 cards from among the top 5.",
+      "The trigger should be 'another Marine follower' entering your field; add exclusion so this card does not trigger on itself.",
+      "The triggered effect is incorrect: dealDamageAllEnemies damages enemy followers and leader, but the source says to deal 1 damage to each enemy leader only; encode damage only to enemy leaders."
+    ]
+  },
+  "Messenger of the Skies": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

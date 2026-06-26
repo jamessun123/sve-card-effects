@@ -1,0 +1,52 @@
+{
+  "Steelclad Minotaur": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as damageCap maxPerHit 2, which means ability damage is limited to 2 per hit; the source says combat damage this follower would take is reduced by 2 instead. Replace this with a combat-damage reduction passive. Implement a new passive ability such as combatDamageReduction with amount 2 targeting self."
+    ]
+  },
+  "Steeled Hopes": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Steelwing": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Steelwing Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Stheno": {
+    "verdict": "fail",
+    "issues": [
+      "The Serpent-triggered ability is malformed: identityName filter is placed at the ability top level, but the engine reference supports filtering this trigger via condition/filter only on grant effects, not directly here. Encode the trigger so it only fires when a Serpent enters your field using an implemented trigger/filter shape, or otherwise restructure to a supported filtered onAllyFollowerEnter representation."
+    ]
+  },
+  "Stheno Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Serpent-triggered ability is malformed: identityName filter is placed at the ability top level, but the engine reference supports filtering this trigger via condition/filter only on grant effects, not directly here. Encode the trigger so it only fires when a Serpent enters your field using an implemented trigger/filter shape, or otherwise restructure to a supported filtered onAllyFollowerEnter representation."
+    ]
+  },
+  "Stone Merchant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Storied Falconer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Storied Falconer Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect should target a single Holy Falcon once, then give that same target +1 attack and Bane. The current sequence selects independently twice, allowing different Holy Falcons. Encode this as one chosen target receiving both effects, or add an engine-supported sequence that preserves a single selected target across both buff and grantKeyword."
+    ]
+  },
+  "Storm Arrow": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect incorrectly uses dealDamageAllEnemies with followersOnly false, which would damage enemy followers and leader; the source says deal 2 damage to each enemy leader only. Replace the then effect with damage to enemy leaders only, using an implemented enemy-leader-wide effect if available."
+    ]
+  }
+}

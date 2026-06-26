@@ -1,0 +1,57 @@
+{
+  "Anne, Belle of Mysteria": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Anne, Belle of Mysteria Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor excludes the wrong name. 'with a different name from this card' on the evolved card means it should exclude identityName 'Anne, Belle of Mysteria', not 'Anne, Belle of Mysteria Evolved'."
+    ]
+  },
+  "Anne, Mysterian Imperatrix": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is encoded as tutoring Rending Blast from the evolve deck to the field, but the source says 'You may play a Rending Blast from your evolve deck.' It should be encoded as playing/casting that specific card from the evolve deck rather than tutoring it to the field."
+    ]
+  },
+  "Anne, Mysterian Prodigy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should let you choose one option, or choose up to 2 instead if there are at least 10 Academic cards in your cemetery. The parsed card only encodes choose 1; it should conditionally use chooseMultiple with max 2 when ownCemeteryTraitMin Academic 10 is met.",
+      "Option (1) is incomplete: after putting Anne's Sorcery into your EX area and shuffling, it should also make the next Anne's Sorcery you play this turn cost 5 less. Add a next-play cost reduction effect filtered to identityName 'Anne's Sorcery'; if this is not supported for a specific card name, implement support for grantNextPlayCostReduction with identityName filtering."
+    ]
+  },
+  "Annerose": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Annerose Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Annihilating Onslaught": {
+    "verdict": "fail",
+    "issues": [
+      "The spell should deal 6 damage to each enemy leader only, but the parsed effect uses dealDamageAllEnemies with followersOnly false, which would also hit followers. Replace it with damage targeted only at enemy leaders."
+    ]
+  },
+  "Antelope Pelt Warrior": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Anvelt, Judgment's Cannon": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says 'Select up to 2 enemy followers on the field and deal them 3 damage,' but the parsed choose effect has min 1, forcing at least one target. It should allow 0 to 2 targets.",
+      "The conditional damage should hit each enemy leader only, but the parsed effect uses dealDamageAllEnemies with followersOnly false, which also damages followers. Replace it with damage to enemy leaders only."
+    ]
+  },
+  "Anvelt, Judgment's Cannon Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect says 'Select up to 2 enemy followers on the field and deal them 3 damage,' but the parsed choose effect has min 1, forcing at least one target. It should allow 0 to 2 targets.",
+      "The conditional damage should hit each enemy leader only, but the parsed effect uses dealDamageAllEnemies with followersOnly false, which also damages followers. Replace it with damage to enemy leaders only."
+    ]
+  }
+}

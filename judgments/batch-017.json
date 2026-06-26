@@ -1,0 +1,53 @@
+{
+  "Apostle of Silence": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end ability is missing the card-specific condition 'there are 3 cards or less in its controller's hand'; the current `handMax` condition checks only the defending player's own hand and cannot reference the selected enemy leader's controller. It should target the enemy leader first, then conditionally deal 3 damage based on that target controller's hand size. Implement support for a condition that checks the selected target's controller hand size, such as `targetControllerHandMax`."
+    ]
+  },
+  "Apostle of Silence Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly: the card always deals 3 damage to the selected enemy follower, and if there are 3 cards or less in that follower's controller's hand, destroy that same follower instead. The current `if/else` makes it destroy instead of dealing damage, rather than replacing the outcome after selection with the proper target-controller hand check. It should select one enemy follower, then apply either `destroy` or `dealDamage 3` to that same target based on its controller's hand size. Implement support for a condition that checks the selected target's controller hand size, such as `targetControllerHandMax`, and support reusing the same chosen target across the conditional branches.",
+      "The start-of-end ability is missing the card-specific condition 'there are 3 cards or less in its controller's hand'; the current `handMax` condition checks only the defending player's own hand and cannot reference the selected enemy leader's controller. It should target the enemy leader first, then conditionally deal 3 damage based on that target controller's hand size. Implement support for a condition that checks the selected target's controller hand size, such as `targetControllerHandMax`."
+    ]
+  },
+  "Apostle of Truth": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Apostle of Truth Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Apostle of Unkilling": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Apostle of Unkilling Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability searches a follower from the deck to the field but omits the required deck shuffle afterward. Encode it as a `sequence` with `tutorFromDeck` to `field` followed by `shuffleDeck`."
+    ]
+  },
+  "Apostle of Usurpation": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare is split into two separate `fanfare` abilities, which does not preserve the required order 'Then, if...'. Encode this as a single `fanfare` ability using `sequence`: first mill each opponent for 2, then check `opponentCemeteryMin: 10`, then draw 1."
+    ]
+  },
+  "Apostle of Usurpation Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aqua Nereid": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aquascale Stalwart": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare ability is missing the required reveal clause: the chosen Dragoncraft follower from the top 5 must be revealed before being added to hand. The current use of `searchDeckChoose` includes `reveal`, but `reveal` is not part of the implemented `searchDeckChoose` ability reference. It should be encoded as the same top-5 optional selection to hand with reveal semantics. Implement `reveal` support on `searchDeckChoose`, or a dedicated effect for revealing the chosen card before moving it to hand."
+    ]
+  }
+}

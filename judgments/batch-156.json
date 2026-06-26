@@ -1,0 +1,52 @@
+{
+  "Moonrise Werewolf": {
+    "verdict": "fail",
+    "issues": [
+      "Missing the card's [evolve] ability in abilities[]. Encode it as a timing \"evolve\" ability with cost {\"pp\":1} and effect {\"op\":\"noop\",\"label\":\"Evolve this follower\"} or equivalent evolve-payment representation, rather than only putting \"evolve\" in keywords."
+    ]
+  },
+  "Moonrise Werewolf Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Moonshade Mage": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly. Replace cost {\"pp\":0,\"engage\":true,\"discard\":1} with a supported representation using cost {\"engage\":true} and effect {\"op\":\"optionalCost\",\"cost\":{\"op\":\"discard\",\"count\":1},\"then\":{\"op\":\"dealDamage\",\"amount\":6,\"targets\":{\"type\":\"enemyFollower\",\"count\":1}}}, or another valid supported discard-cost encoding."
+    ]
+  },
+  "Mordecai the Duelist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Last Words ability is incomplete: it is missing \"Give your leader [defense]-3\" before returning this follower to the field. It should be encoded as a sequence that first deals 3 damage to your leader, then revives this follower. The engine lacks a supported way to deal damage to your own leader, so implement a self-leader damage effect or a generic leader damage target to encode this correctly."
+    ]
+  },
+  "Moriae Encomium": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Moriana the Bejeweled": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Morra, Monika's Familiar": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Morton the Manipulator": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The choice is assigned to the wrong player. The source says an opponent chooses one of the listed restrictions, but parsed uses a normal choose effect controlled by this card's controller. It should be encoded as an opponent-choice effect that lets an opponent pick one restriction; the engine currently lacks an ability for opponent-chosen modal selection, so implement an effect like opponentChoose/chooseByOpponent and use it here with the three grantOpponentRestriction options."
+    ]
+  },
+  "Mountain Gigas": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mr. Bertrand, Magic Mentor": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery-count condition on option (2) is incorrect. It should check for at least 5 Academic cards in your cemetery, not at least 5 cards of any kind. Replace condition {\"type\":\"ownCemeteryMin\",\"count\":5} with {\"type\":\"ownCemeteryTraitMin\",\"trait\":\"Academic\",\"count\":5}."
+    ]
+  }
+}

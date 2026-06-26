@@ -1,0 +1,62 @@
+{
+  "Ivory Dragon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ivory Sword Dance": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage amount is encoded incorrectly as targetAttack. It should be the highest attack among followers on your field, not a selected target's attack. Encode this as dealDamageSplit with a dynamic amount representing highest ally field follower attack; add engine support for a DamageAmount like {\"op\":\"maxAttackOnOwnField\"}."
+    ]
+  },
+  "Ivy Spellbomb": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Izudia, Omen of Unkilling": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is incomplete. After selecting an enemy follower and changing it into an amulet, it must also gain \"[act] [cost02]: Put this card into its owner's cemetery.\" Encode the full transformation plus granted activated ability; add engine support for transforming a follower into an amulet while preserving abilities and for granting an activated ability with a PP cost and self-bury effect to the transformed card.",
+      "The transform target is encoded incorrectly as tokenName \"Amulet\", which does not capture 'change it into an amulet' with retained abilities. It should be encoded as a card-type change to amulet on the selected enemy follower; add engine support for card-type-changing transforms or type mutation."
+    ]
+  },
+  "Izudia, Omen of Unkilling Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is encoded incorrectly as dealDamageAllEnemies to all enemies. It should deal 6 damage only to each enemy leader with at least 10 defense. Encode a targeted/all-opponents leader-only damage effect with a defense threshold condition; add engine support for leader-target filtering by current defense (e.g. 'each enemy leader with at least N defense')."
+    ]
+  },
+  "Izudia, Unkilling Annihilation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect changes only the selected enemy follower's defense to 1, but parsed setStats sets both attack and defense. It should preserve attack and only change defense to 1. Encode this as a defense-only stat set; add engine support for changing only one stat without overwriting the other.",
+      "The activated ability is encoded incorrectly with condition discardedThisTurn. The card should create a delayed trigger for the specific damaged follower: when that follower is put from the field into the cemetery this turn, put an Annihilating Onslaught token into your EX area. Encode a marked-target delayed trigger tied to that follower leaving field to cemetery this turn; add engine support for delayed triggered effects on a selected target until end of turn."
+    ]
+  },
+  "Jabberwock": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is left as noop after the burial cost. It should repeatedly reveal cards from the top of your deck until a follower with higher cost than the buried follower is revealed, put that follower onto your field, then shuffle the remaining revealed cards and put them on the bottom of your deck. Add engine support for reveal-until with comparison against a paid-cost target's cost, summoning the matching revealed follower, and bottoming/shuffling the remaining revealed cards."
+    ]
+  },
+  "Jackshovel Gravedigger": {
+    "verdict": "fail",
+    "issues": [
+      "Keyword is incorrect: the card has Bane, not Ward. Replace \"ward\" in keywords with \"bane\".",
+      "The fanfare effect is encoded incorrectly as refresh self. It should evolve this follower if it wasn't put onto the field from hand. Replace the then effect with {\"op\":\"autoEvolveIf\",\"condition\":{\"type\":\"notEnteredFromHand\"}} or equivalently encode the fanfare to evolve this follower under that condition."
+    ]
+  },
+  "Jackshovel Gravedigger Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Keyword is incorrect: the card has Bane, not Ward. Replace \"ward\" in keywords with \"bane\"."
+    ]
+  },
+  "Jadelong Tactician": {
+    "verdict": "fail",
+    "issues": [
+      "Keyword handling is incorrect: Strike should not be listed in keywords because it is already represented as a strike-timing ability. Remove \"strike\" from keywords.",
+      "The strike effect is encoded with the wrong condition. The card checks whether the selected follower is Garyu, Supreme Dragonkin, not whether any Garyu is on your field. Encode selection of another follower on your field, then give it +1/+1, or +2/+2 instead if the selected target's identity is Garyu, Supreme Dragonkin."
+    ]
+  }
+}

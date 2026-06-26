@@ -1,0 +1,56 @@
+{
+  "Maid Leader": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Maid Leader Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is missing the restriction \"with [evolve]\"; the current searchDeckChoose/tutor encoding searches any follower. It should search your deck for a follower with the evolve ability, reveal it, and add it to your hand. Implement DeckFilter support for cards with [evolve] (for example a hasKeyword/hasAbilityLine filter) so this clause can be encoded correctly."
+    ]
+  },
+  "Mainyu": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mainyu Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mainyu, Darkdweller": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger is encoded as onAllyFollowerEnter, but the card says \"Whenever an amulet is put onto your field\"; it should trigger from an ally field card/amulet entering your field, not only a follower entering. Implement a timing/filter that can detect an ally amulet or any ally field card entering play, then buff this follower +1 attack."
+    ]
+  },
+  "Maiser, Neighborhood Hero": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onCardPlayed ability is missing the restriction \"that originally costs 1 or less\"; the current filter matches any spell. It should trigger only when you play a spell whose original cost is 1 or less. Implement support in card-play trigger filters for original printed cost (for example originalMaxCost) and use it with cardType: \"spell\", originalMaxCost: 1."
+    ]
+  },
+  "Maisha, Hero of Purgation": {
+    "verdict": "fail",
+    "issues": [
+      "Strike is encoded with playFromOpponentCemetery, but the card plays a neutral spell from your cemetery. Replace this with an effect that selects a neutral spell that costs 3 or less in your cemetery and plays it for 0 play points."
+    ]
+  },
+  "Maisha, Hero of Purgation Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is missing the printed cost gate \"[cost05]\"; the current onEvolve ability always mills 5 and grants Storm. It should require paying 5 PP as part of the On Evolve ability before those effects happen. Implement cost support on triggered abilities (not only activated abilities), or an optional/required paid trigger-cost wrapper for On Evolve abilities.",
+      "Strike is encoded with playFromOpponentCemetery, but the card plays a neutral spell from your cemetery. Replace this with an effect that selects a neutral spell that costs 3 or less in your cemetery and plays it for 0 play points."
+    ]
+  },
+  "Maisha, Purgation's Vessel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Maisha, Purgation's Vessel Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability's once-per-turn limit is placed inside cost as \"oncePerTurn\": true, but oncePerTurn belongs on the ability wrapper. Move oncePerTurn: true to the top level of the activated ability.",
+      "The activated ability's damage amount is incorrect. The card says \"deal it 4 damage for every 5 followers in your cemetery,\" but the encoding uses cemeteryFilterCount divisor 5 without multiplying by 4. It should deal 4 × floor(number of followers in your cemetery / 5). Implement multiplier support for cemeteryFilterCount or another dynamic amount form that can scale by 4."
+    ]
+  }
+}

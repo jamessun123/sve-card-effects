@@ -1,0 +1,73 @@
+{
+  "Kyoko Igarashi Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded as a mandatory choose-one effect, but the source says \"Select up to 1 enemy follower... and engage or refresh it,\" so the target selection must be optional and may choose no target; encode as an optional targeted engage/refresh effect if supported, or implement optional target selection for choose/engage/refresh.",
+      "The passive \"During your turn, this follower doesn't take damage\" is encoded as unconditional damage immunity; it should apply only during your turn. Encode it with a turn-restricted passive damage immunity, or implement a condition/effect support for \"during your turn\" damage prevention."
+    ]
+  },
+  "Kyoko Igarashi [Love Letter]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kyoko Igarashi [P.C.S.]": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the fanfare-timed ability, not as a keyword.",
+      "The fanfare debuff is encoded as dealDamage, but the source gives the selected enemy follower [attack]-1/[defense]-1 for every Cute follower on your field. Encode this as a stat reduction effect on the target with dynamic atk and def equal to negative Cute follower count.",
+      "The activated ability cost is incorrect: Lesson (1) should be represented as an activated ability with a 1 PP cost, not cost.pp 0 plus optionalCost/spendPp.",
+      "The activated ability effect is encoded as dealDamage -1, but it should give the selected enemy follower [attack]-1/[defense]-1. Encode it as a target buff/stat reduction with atk -1 and def -1.",
+      "The activated ability is missing the once-per-turn restriction from \"Activate only once per turn.\" Add oncePerTurn: true to the activated ability."
+    ]
+  },
+  "Ladica, Verdant Claw": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line should be represented by evolveCost/evolvesTo and Fanfare by the fanfare ability, not keyword entries."
+    ]
+  },
+  "Ladica, Verdant Claw Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage amount is encoded with op \"exAreaNamedMin\", which is a condition type, not a valid dynamic amount. It should be damage equal to the number of cards in your EX area named Naterran Great Tree; encode with a proper named-card EX area count amount, or implement a dynamic amount op for counting named cards in EX area.",
+      "On Super-Evolve should deal damage to the selected follower and its leader, but damageFollowerAndLeader has no target and the selected enemy follower is not linked. Encode a targeted follower-and-leader damage effect, or implement a version of damageFollowerAndLeader that selects an enemy follower target and damages that follower plus its leader."
+    ]
+  },
+  "Ladica, the Stoneclaw": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve ability has a missing condition: \"Activate only if you've played at least 5 cards this turn.\" Add the proper condition to the evolve line if supported, or implement a condition type for cards played this turn.",
+      "The Naterran Great Tree trigger is encoded with grantOnAllyFollowerEnter, but Naterran Great Tree can be put onto your field as a card and the source says \"Whenever a Naterran Great Tree is put onto your field\" rather than specifically a follower entering. Encode with a trigger that watches a named card entering your field, or implement a generic on-ally-card-enter/on-card-enter-field grant operation."
+    ]
+  },
+  "Ladica, the Stoneclaw Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Naterran Great Tree trigger is encoded with grantOnAllyFollowerEnter, but the source says \"Whenever a Naterran Great Tree is put onto your field\" and is not limited to followers. Encode with a trigger that watches a named card entering your field, or implement a generic on-ally-card-enter/on-card-enter-field grant operation."
+    ]
+  },
+  "Lance Lizard": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the fanfare-timed ability, not as a keyword.",
+      "The second ability is misencoded as grantOnCardPlayed, but the source is \"Once on each of your turns, when this follower is selected for an ability\". Encode it as a trigger on this follower being selected by an ability, or implement a timing/trigger for \"when this follower is selected for an ability.\"",
+      "The second ability should deal 1 damage to each enemy leader, but the encoding uses dealDamageAllEnemies with followersOnly false, which damages enemy followers and leader. Encode damage only to enemy leader(s), or implement an operation for dealing damage to each enemy leader.",
+      "The second ability should be limited to once on each of your turns, but maxPerTurn is placed inside the grant effect and the trigger timing itself is wrong. Encode the once-per-turn restriction on the correct trigger once the proper trigger is implemented."
+    ]
+  },
+  "Lapis, Glorious Seraph": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The leave-field draw count is encoded using namedIdentityFieldCount on \"prayer counter\", which does not represent counters on this card. It should draw a card for every prayer counter on this card. Encode with a dynamic amount based on counters on source, or implement a dynamic amount op for source counter count.",
+      "The source says \"When this card leaves the field,\" but onLeaveField may not preserve the card's counters after leaving. The effect should reference the number of prayer counters that were on this card as it left; implement support for last-known counter values on leave-field triggers if needed."
+    ]
+  },
+  "Lapis, Shining Seraph": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive \"While this has at least 4 prayer counters, it's a follower\" is encoded as unconditional passiveKeywords follower. It should only apply while this has at least 4 prayer counters. Encode with a counter-based condition if supported, or implement a condition/effect for card type change based on counters.",
+      "Strike is encoded as searchDeckSummonMultiple looking at 5 cards, but the source says \"Search your deck for an Enstatued Seraph, summon it, then shuffle,\" which is a full-deck tutor for a specific card. Encode as tutorFromDeck to field plus shuffle if supported, or implement summoning a named card directly from deck.",
+      "The start-of-main ability is incomplete: it should select any number of other cards on your field and place a prayer counter on them and this, but the encoding only places one prayer counter on a single allyFieldCard and does not add one to this card. Encode a multi-target addCounter plus addCounter to self, or implement targeting any number of allied field cards."
+    ]
+  }
+}

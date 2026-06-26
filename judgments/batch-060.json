@@ -1,0 +1,52 @@
+{
+  "Drache, Fiery Dragonlord Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Draco Marionette": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dracomancer's Rites": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end ability targets the wrong objects: source says \"select an enemy leader or enemy follower,\" but parsed targets only anyFollower and cannot hit the enemy leader. It should be encoded as a choice between dealing 2 damage to the enemy leader or to an enemy follower. Implement a target/effect form that supports \"enemy leader or enemy follower\" selection, or a choose mode that presents those two target classes.",
+      "The fanfare healing effect is semantically \"give your leader [defense]+1\" rather than recover defense, though healLeader is likely the intended implementation and is acceptable if the engine treats both the same."
+    ]
+  },
+  "Draconic Armor": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is not a player choice. Replace the choose effect with a sequence or if effect that always summons 1 Draconic Weapon, and if Overflow is active, summons 1 additional Draconic Weapon instead."
+    ]
+  },
+  "Draconic Call": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The source says \"you may reveal up to 2\" qualifying cards from the top 5, but parsed searchDeckChoose can only take one card. It should allow choosing 0 to 2 Dragoncraft cards that cost 7 or more from among the top 5, reveal them, add them to hand, and put the rest on the bottom of the deck. Implement a multi-pick top-of-deck search operation with a max chosen count."
+    ]
+  },
+  "Draconic Fervor": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Draconic Smash": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Draconic Weapon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card incorrectly has the keyword \"fanfare\"; remove it because the source has only an activated ability.",
+      "The activated ability is missing \"and the Armed trait.\" In addition to giving a Dragoncraft follower +0/+1, it should also grant or add the Armed trait. Implement an effect operation to grant a trait to a target follower."
+    ]
+  },
+  "Draconir, Knuckle Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Draconir, Knuckle Dragon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

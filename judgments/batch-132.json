@@ -1,0 +1,67 @@
+{
+  "Lookout Elf": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare's first step is encoded incorrectly: \"Look at the top card of your deck. You may put it on the bottom of your deck.\" should not use peekDeck with optionalBury. Encode it as an effect that lets you look at the top card and optionally put that card on the bottom of your deck."
+    ]
+  },
+  "Lookout Elf Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lord Atomy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cost reduction ability is encoded as two activated abilities, but the source text is a play-condition/cost-modification effect: when playing this card, you may either put 4 Abysscraft cards from your field into their owners' cemeteries or banish 4 Abysscraft cards in your EX area to make this card cost 9 less to play. It should be encoded as a conditional play-cost reduction with an alternative cost choice, not as generic activated abilities.",
+      "The first alternative cost is incomplete/incorrect: the source requires putting 4 Abysscraft cards from your field into their owners' cemeteries specifically as part of playing this card. Implement/support a play-time alternative cost ability that can consume buryFromField with count 4 tied to reducing this card's play cost.",
+      "The second alternative cost is likewise a play-time alternative cost, not an activated ability. Implement/support a play-time alternative cost ability that can banish 4 Abysscraft cards from your EX area tied to reducing this card's play cost."
+    ]
+  },
+  "Lord General Romeo": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lounes, Levin Apprentice": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare tutor filter is incomplete: it should search for a Swordcraft follower with \"Albert\" in its name, so add \"cardType\": \"follower\" to the tutorFromDeck filter."
+    ]
+  },
+  "Lounes, Levin Apprentice Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability uses an unimplemented op \"tutorFromHand\". It should encode \"You may summon a Swordcraft follower with \\\"Albert\\\" in its name that costs X or less from your hand. X equals your max play points.\" as a hand-to-field selection/summon effect. Implement a hand summon/select-from-hand-to-field ability that supports cardClass, identityNameContains, and dynamic maxCost based on maxPp.",
+      "The triggered damage ability is missing the source condition \"During your turn\". It should only trigger during your turn when a Swordcraft follower with \"Albert\" in its name enters your field.",
+      "The triggered damage ability is missing that the [cost01] is paid when the trigger occurs; this timing is not a normal activated ability. Implement/support optional paid costs on triggered abilities (for onAllyFollowerEnter) so the effect becomes: whenever an Albert Swordcraft follower enters your field during your turn, you may pay 1 PP to deal 3 damage to an enemy follower."
+    ]
+  },
+  "Lovely-Heart Monika": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second fanfare option is encoded incorrectly as playDeckTopFollower. It should be \"You may summon a Morra, Monika's Familiar from your hand.\" Implement/support a hand-to-field optional summon effect for a named card.",
+      "The activated ability cost is incomplete: the source requires engaging this card and a Morra, Monika's Familiar on your field. The parsed cost only engages this card. It should also require engaging a named ally follower; implement/support activated costs that engage an additional selected ally follower matching a filter/name."
+    ]
+  },
+  "Loxis, Homestead Pioneer": {
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly includes the keyword \"fanfare\" even though the source text has no fanfare ability; remove \"fanfare\" from keywords.",
+      "The activated ability cost is encoded incorrectly: the source says \"[act] [engage] 3 amulets on your field,\" which means engaging 3 amulets, not putting them into the cemetery. Replace the buryFromField cost with a cost that engages 3 amulets on your field."
+    ]
+  },
+  "Loxis, Homestead Pioneer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first ability triggers incorrectly on this card leaving the field. The source says \"Once on each of your turns, when a Mount card you control leaves the field\"; it should trigger when one of your Mount cards leaves the field, not when this card leaves. Implement/support an on-ally-card-leaves trigger with filtering by trait/name/card type and turn restriction/maxPerTurn.",
+      "The first ability is missing both \"Once on each of your turns\" and the filter for \"a Mount card you control\". It should be limited to once per turn and only trigger from your Mount cards leaving the field.",
+      "The activated ability cost is encoded incorrectly: the source says \"Banish 3 amulets from your field,\" but the parsed cost uses buryFromField. It should banish 3 amulets from your field; implement/support a field-banish cost for selected cards you control."
+    ]
+  },
+  "Loyal Sea Serpent": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is incorrectly encoded as an optionalCost. \"[fanfare] [cost04]: Summon a Dragon token.\" is a fanfare with a required additional 4 PP cost to activate, so encode the ability with a fanfare cost of 4 PP rather than an optional payment.",
+      "The trigger filter is too broad: it should trigger whenever a Dragoncraft token follower is put onto your field, so add the token restriction (for example printingType: \"token\") to the onAllyFollowerEnter filter."
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "Whirlwind Pteranodon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Whispers of a Dream": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "White Eagle Baptism": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability for \"Whenever a Holy Falcon is put onto your field, give it [attack]+1/[defense]+1\" is encoded at the top level with a `filter` field outside the effect wrapper, which is not supported by the ability schema. It should be encoded as a granted or intrinsic on-enter trigger filtered to Holy Falcon, but the engine lacks a native card-specific `onAllyFollowerEnter` trigger filter field at the ability level. Implement support for `abilities[].filter` on `timing: \"onAllyFollowerEnter\"`, or add a condition type for the entered follower's identity/traits, then encode the trigger to buff the entered Holy Falcon."
+    ]
+  },
+  "White General": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "White Knight": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction ability is encoded with `condition: { \"type\": \"review\" }`, but the source requires \"If your leader's defense is 5 or less, this card costs 5 less to play.\" This should be a passive `playCostReduction` gated by a leader-defense-at-most-5 condition. The engine is missing a condition type for your leader's current defense threshold; implement a condition such as `leaderDefMax` and use it here with count 5."
+    ]
+  },
+  "White Paladin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "White Vanara": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger \"Whenever another follower is put onto your field\" is represented with a non-schema top-level `filter` field on the ability. It should be encoded as an `onAllyFollowerEnter` trigger that excludes this card, but the engine lacks supported filtering on the entered follower at the ability level. Implement support for `abilities[].filter` on `timing: \"onAllyFollowerEnter\"` or an equivalent entered-card condition.",
+      "The Beast rider clause is encoded with `condition: { \"type\": \"review\" }`. It should check whether the follower that entered is a Beast follower and then give this follower +2/+2 instead of +1/+1. The engine is missing a condition that can inspect traits of the triggering entered follower; implement a condition such as `triggeringFollowerHasTrait` and use it in the `if` effect."
+    ]
+  },
+  "White Vanara Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The three threshold passives are encoded with `condition: { \"type\": \"review\" }`. They should be conditional passive abilities based on this follower's current attack: at least 4 grants Ward, at least 7 grants Storm, and at least 10 grants ignores Ward. The engine is missing a self-stat threshold condition such as `selfAttackMin`; implement that condition and use it on each passive ability."
+    ]
+  },
+  "White Wolf of Eldwood": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Whitefang Temple": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-main ability is encoded with `condition: { \"type\": \"review\" }`, but the source requires \"if this card has at least 3 prayer counters\". It should be a `startOfMain` trigger conditioned on this card having 3 or more prayer counters before burying itself and tutoring. The engine is missing a counter-threshold condition on the source card; implement a condition such as `selfCounterMin` with `counter: \"prayer\"` and `count: 3`."
+    ]
+  }
+}

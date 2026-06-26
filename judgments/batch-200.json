@@ -1,0 +1,52 @@
+{
+  "Scaled Berserker": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Scavenge": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Scorching Blast": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Scorpius": {
+    "verdict": "fail",
+    "issues": [
+      "Strike ability is encoded incorrectly as dealDamageAllEnemies 1, which damages all enemy followers and the enemy leader; it should deal 1 damage to each leader, so replace it with an effect that damages both leaders rather than enemy followers."
+    ]
+  },
+  "Scourge of the Omniscient": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the clause 'This card can't be played from the EX area'; this should be encoded as a passive restriction preventing play from EX area, but no implemented ability in the reference represents 'cannot be played from EX area', so add engine support for a passive play restriction from EX area.",
+      "The spell effect's 'put this card into its owner's EX area' is encoded incorrectly with moveToExArea targeting selfFollower; because this is a spell card, it should move the spell source itself to the EX area after resolution, so use a source-moving effect instead (engine support is needed for moving a spell source to EX area from spell resolution, or extend moveSourceToExArea to cover this case).",
+      "Both damage clauses are encoded as dealDamageAllEnemies with followersOnly false, which damages enemy followers and the enemy leader; the source says 'each enemy leader', so these should be encoded as damage to enemy leaders only. The engine lacks a direct effect for damaging each enemy leader without followers, so add an ability for leader-only all-opponents damage and use that here."
+    ]
+  },
+  "Scream Diffusion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Spell effect is incomplete: it always summons 1 Rulenye, Echoing Scream token, but it should summon a number equal to every 5 cards in your cemetery. Encode summon count as a dynamic cemetery-based amount; this requires engine support for dynamic summon counts based on cemetery count with division by 5."
+    ]
+  },
+  "Scroll Wizard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Scroll Wizard Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sea Queen Otohime": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sea Queen Otohime Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly as a choose between field and EX area summons; the source is not a choice. It should summon 3 Otohime's Bodyguard tokens, and if the field becomes full from this effect, put any remaining tokens into your EX area. Encode this as a single sequential partial-summon effect, but the engine lacks support for 'summon up to field capacity, remainder to EX area', so add an effect for overflow token placement."
+    ]
+  }
+}

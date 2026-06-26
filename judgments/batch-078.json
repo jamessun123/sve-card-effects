@@ -1,0 +1,59 @@
+{
+  "Feather Sanctuary": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare summon is encoded to zone \"exArea\", but \"Summon a Holy Falcon token\" should summon it to the field; change the summon zone to \"field\".",
+      "Activated ability summon is encoded to zone \"exArea\", but \"Summon a Holy Falcon token\" should summon it to the field; change the summon zone to \"field\"."
+    ]
+  },
+  "Feena, Dynamite Daredevil": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fen Sprite": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is incorrectly encoded as an on-card-play act restriction on Fen Sprite. It should target an enemy follower on the field and apply \"During its controller's next turn, it can't attack enemies.\" This requires a new implemented ability/effect to apply a temporary attack restriction to a selected follower lasting through its controller's next turn (for example, a targetable \"can't attack\" or \"can't attack followers/leader\" status with duration)."
+    ]
+  },
+  "Fencer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fenrir": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage-triggered ability is missing the condition \"During your turn\"; it is currently encoded as always active. It should only trigger when this follower takes damage during your turn. This would need engine support for a turn-based trigger condition such as a passive or grantOnDamaged limited to controller turn only."
+    ]
+  },
+  "Fenrir Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage-triggered ability is missing the condition \"During your turn\"; it is currently encoded as always active. It should only trigger when this follower takes damage during your turn. This would need engine support for a turn-based trigger condition such as a passive or grantOnDamaged limited to controller turn only."
+    ]
+  },
+  "Feral Aether": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as a choose-one effect. It should resolve automatically: summon 1 Naterran Great Tree token normally, and if Overflow is active, summon 3 instead. Encode this as an if/else or equivalent automatic conditional, not player choice."
+    ]
+  },
+  "Fertile Aether": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as a choose-one effect. It should resolve automatically: put 1 Naterran Great Tree token into your EX area normally, and if Combo (3) is active, put 2 instead and heal your leader 2. Encode this as an if/else or equivalent automatic conditional, not player choice."
+    ]
+  },
+  "Fervent Machine Soldier": {
+    "verdict": "fail",
+    "issues": [
+      "The searched card is incorrectly restricted to followers. The source says \"Search your deck for a Commander card,\" so remove the \"cardType\": \"follower\" restriction from the tutor filter."
+    ]
+  },
+  "Fervid Soldier": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be \"Whenever another follower is put onto your field,\" but the current grantOnAllyFollowerEnter effect does not exclude this card itself. Add the equivalent of \"another\" so the trigger only applies when a different follower enters your field."
+    ]
+  }
+}

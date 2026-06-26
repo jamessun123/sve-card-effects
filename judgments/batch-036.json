@@ -1,0 +1,60 @@
+{
+  "Caladrius": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded incorrectly as an unconditional buryFieldFollowers effect. It should be an optional-cost style fanfare that buries an amulet on your field and then gives this follower Storm.",
+      "The Storm granted by the fanfare is missing. Add a fanfare effect that, after burying an amulet, uses grantKeyword with keyword \"storm\" targeting self.",
+      "The bury target is wrong. Do not use buryFieldFollowers for an amulet; encode the cost as burying an ally field card filtered to cardType \"amulet\"."
+    ]
+  },
+  "Call of Cocytus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Calydonian Boar": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability is encoded with timing \"passive\" plus an invalid condition and the wrong effect op. It should be a once-per-turn trigger for when an amulet you control leaves the field, then buff this follower +2/+2 and give it Assail.",
+      "The Assail gain is missing. After the +2/+2 buff, add grantKeyword with keyword \"assail\" targeting self.",
+      "The engine is missing a proper trigger timing/selector for 'when an amulet you control leaves the field'. Implement an onAllyFieldCardLeave or similar leave-field trigger with a cardType/trait filter so this card can be encoded correctly."
+    ]
+  },
+  "Candelabra of Prayers": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger is encoded with grantOnAllyFollowerEnter, but the source text triggers when another amulet is put onto your field, not when a follower enters. It should be a once-per-turn trigger for another ally amulet entering your field that heals your leader by 1.",
+      "The 'another' restriction is missing. The entering amulet must exclude this card itself.",
+      "The engine is missing a trigger for ally amulets or non-follower field cards entering play. Implement an onAllyFieldCardEnter or similar trigger with cardType filtering and excludeSelf support."
+    ]
+  },
+  "Captain Meteo": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Captain Meteo Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Carbuncle's Sparkle": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Carbuncle, Immortal Jewel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Carbuncle, Immortal Jewel Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The second On Evolve clause is missing from the onEvolve ability. The On Evolve effect should be a sequence that both puts a Carbuncle's Sparkle token into your EX area and gives each Carbuncle's Sparkle in your EX area \"This card costs 2 less to play.\"",
+      "The passive grantPlayCostReduction targeting self is incorrect. The cost reduction should apply to each card named Carbuncle's Sparkle in your EX area, not to this evolved follower."
+    ]
+  },
+  "Carrot Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card text is omitted entirely. Add encoding for the deckbuilding rule 'You can put up to 10 of this card into your evolve deck.'",
+      "The effect 'You can serve a Carrot to an Umamusume follower to race it' is also omitted. If this is implementable in the DSL, it should be added; otherwise the engine needs support for Umamusume race/serve mechanics and deckbuilding-limit metadata."
+    ]
+  }
+}

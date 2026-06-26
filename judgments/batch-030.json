@@ -1,0 +1,62 @@
+{
+  "Bellringer Angel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Belphomet, Lord of Aiolon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Belphomet, Ultimate Creator": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction condition is encoded with unsupported condition type `fieldFollowerMinCost`; it should mean 'if there's a Machina follower on your field that costs 6 or more, this costs 5 less to play.' Implement a field condition that checks for at least 1 allied follower matching trait Machina and minCost 6, then use `playCostReduction` 5.",
+      "The fanfare bury effect correctly targets Machina followers that cost 6 or more, but the follow-up checks use unsupported condition type `buriedExactCost`; it should track whether a 6-cost Machina follower was buried to summon an Assault Tentacle and whether a 7-cost Machina follower was buried to also deal 4 damage to each enemy follower and buff each other Machina follower +2/+2. Implement conditions/effect memory for cards buried by the immediately preceding effect, including exact cost checks."
+    ]
+  },
+  "Belphomet, Worldreaver": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly; `banishFromExArea` must be a cost object with both filter and count, e.g. `\"banishFromExArea\": { \"filter\": { \"trait\": \"Machina\", \"printingType\": \"token\" }, \"count\": 2 }`, because the card requires banishing 2 Machina tokens from your EX area.",
+      "The activated ability is missing `activateFrom: \"hand\"`; the source says 'put this card from your hand into your EX area', so the [act] ability must activate from hand.",
+      "The activated ability's banish filter is too broad; it should require Machina tokens from your EX area, not any Machina cards."
+    ]
+  },
+  "Belphomet, Worldreaver Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly; `banishFromExArea` must include both filter and count, e.g. `\"banishFromExArea\": { \"filter\": { \"trait\": \"Machina\", \"printingType\": \"token\" }, \"count\": 1 }`, because the card requires banishing a Machina token from your EX area.",
+      "The activated ability's banish filter is too broad; it should require a Machina token from your EX area, not any Machina card."
+    ]
+  },
+  "Benevolent Blight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bergent, Layered Sorceress": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive clause 'This can't be played from the EX area' is missing; implement a passive restriction ability for prohibiting play from EX area, then encode it on this card.",
+      "The end-phase EX-area ability is encoded only as a generic `peekDeck`; it should specifically look at the top card, optionally summon it if it is Onion Patch, otherwise let you put it on the top or bottom of your deck. Implement support for conditional reveal/top-card handling with identity-name check and top-or-bottom redecking."
+    ]
+  },
+  "Bergent, Layered Sorceress Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words ability is missing the optionality; it should be optional, i.e. 'You may put this into its owner's EX area,' not mandatory `moveSourceToExArea`."
+    ]
+  },
+  "Bergent, Onion Patchmaster": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded too loosely; it should summon up to 2 cards named Onion Patch from among the top 5 cards, not any number via `maxTotalCost: 999`. Change it to an effect that limits the number of Onion Patch cards summoned from the looked-at cards to 2."
+    ]
+  },
+  "Bergent, Onion Patchmaster Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as a once-per-turn trigger when an Onion Patch is played; the source is a continuous damage modifier: 'if an Onion Patch on your field would deal damage, it deals that much plus 1 instead.' Replace this with a continuous aura that increases damage dealt by allied Onion Patch cards, and implement a damage-modifier aura operation since it is not in the current ability reference.",
+      "The activated ability searches the whole deck correctly, but it should summon up to 2 cards named Onion Patch, not any number. Add support to `searchDeckSummonMultiple` or another search/summon effect for a maximum card count, then encode this as up to 2 Onion Patch cards and shuffle the deck."
+    ]
+  }
+}

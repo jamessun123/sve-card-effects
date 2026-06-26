@@ -1,0 +1,53 @@
+{
+  "Owl Man": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Targeting is too broad: the Fanfare should select another Beast follower on your field, but `selfFollower` in the reference has no implemented `filter` support. It should target another allied Beast follower only; implement trait filtering on `selfFollower`/field target selectors, then encode the buff with `targets: { \"type\": \"selfFollower\", \"count\": 1, \"excludeSelf\": true, \"filter\": { \"trait\": \"Beast\" } }`."
+    ]
+  },
+  "Owl Receptionist": {
+    "verdict": "fail",
+    "issues": [
+      "The cost-reduction filter is incorrect. \"Festive card that costs 3 or less or Mage card that costs 3 or less\" should not be encoded as `traitsAny: [\"Festive\", \"Mage\"]`, because Mage is a card type/trait family and the OR structure matters. Encode the next-play reduction as an OR between (trait Festive, maxCost 3) and (trait Mage, maxCost 3), or otherwise narrow it so it does not match any card with either trait incorrectly."
+    ]
+  },
+  "Owlcat": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Owlcat Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve banish target restriction is incomplete and slightly misencoded. It should select exactly 1 enemy follower with 1 attack or less OR 1 defense or less, not `banishUpTo` with only `maxDef: 1`. Change to a single-target banish with both allowed stat conditions represented if supported."
+    ]
+  },
+  "Pact of the Beast Princess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability should fire specifically when a Holy Tiger is put onto your field. The current `onAllyFollowerEnter` ability places `filter` at the ability level, but ability-level trigger filtering is not defined in the reference. Implement trigger filtering for `onAllyFollowerEnter` by name/identity, then encode the engage effect to trigger only for `Holy Tiger`.",
+      "The activated cost encoding uses unsupported cost fields: `buryFromField` must use the implemented activated cost shape with a matching filter, but `buryFieldCount` and `excludeSelfFromBury` are not in the reference. Encode the cost as bury 1 other amulet from your field using the supported bury-from-field cost shape, and if excluding self is not supported in cost filters, add support for `excludeSelf` on activated `buryFromField` costs."
+    ]
+  },
+  "Paladin of Clemency": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Palla, Student Teacher": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Panacea Alchemist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Panther Scout": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare is optional ('You may put...'), but the parsed `choose` effect forces one of the two options. Encode it as optional by allowing no selection, such as `choose` with `min: 0, max: 1`, or another optional construct that permits declining both field and EX area placement."
+    ]
+  },
+  "Paper Shikigami": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

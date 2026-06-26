@@ -1,0 +1,59 @@
+{
+  "Aether of the White Wing": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare tutor incorrectly uses maxCost equal to your maximum play points; it should search for a Havencraft follower with cost less than your maximum play points, so encode the cost bound as strictly less than max PP rather than equal-or-less."
+    ]
+  },
+  "Aftershock": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first activated ability's condition is wrong: it checks ppMin 5, but the card requires this card to have at least 5 lightning counters. It should be encoded as a counter-based condition on this card; implement a condition type for source counter minimum (for example, sourceCounterMin with counter 'lightning' and count 5).",
+      "The first activated ability's target filter is misplaced inside targets.filter, which is not supported by the reference. It should target a self follower and the Dragoncraft follower restriction must be represented by extending TargetSelector to support class/trait/cardType filters on selfFollower targets.",
+      "The second activated ability's condition is wrong: it checks ppMin 10, but the card requires this card to have at least 10 lightning counters. It should be encoded as a counter-based condition on this card; implement a condition type for source counter minimum (for example, sourceCounterMin with counter 'lightning' and count 10).",
+      "The second activated ability is encoded as destroy then deal 3 damage to the enemy leader, but the card says 'deal 3 damage to its leader,' meaning the controller of the destroyed enemy follower. This should use a dedicated operation like damageFollowerAndLeader or a new effect that targets an enemy follower and then damages that follower's leader for 3."
+    ]
+  },
+  "Aiela, Devoted Knight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aiela, Dragon Knight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aiko Takamori": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aiko Takamori Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly as summoning a Passion follower that costs 3 or less from your cemetery; it should instead optionally put a Passion follower that costs 3 or less from your hand onto your field."
+    ]
+  },
+  "Aiko Takamori [Handmade Happiness]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activation cost is encoded incorrectly as burying 3 followers; the card says to engage 3 Passion followers on your field. It should use an activated cost that engages three matching followers, so implement a cost form for engaging selected field followers with filters/count.",
+      "The summoned follower is encoded with grantLastWords returnToHand, but the card grants 'At the start of your end phase, return this card to its owner's hand.' It should instead grant a delayed start-of-end triggered return-to-hand ability to the summoned follower; implement an effect such as grantStartOfEnd with an embedded returnToHand effect.",
+      "The effect uses optionalCost with selectFromHand to field, but selectFromHand moves a card rather than summoning it and does not clearly bind the granted delayed ability to the chosen card. The encoding should support choosing a matching hand follower, putting it onto your field, and then granting that chosen follower the delayed end-phase return ability."
+    ]
+  },
+  "Aiolon's Remains": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Airi Totoki [Anniversary Princess]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare optional cost is incomplete: it encodes [cost01] and discarding a Passion card, but omits Lesson (1). It should include the Lesson (1) requirement/cost as part of the optional cost; implement support for Lesson costs/conditions in the engine."
+    ]
+  },
+  "Airi Totoki [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare optional cost is incomplete: it encodes [cost01] and discarding a Passion card, but omits Lesson (1). It should include the Lesson (1) requirement/cost as part of the optional cost; implement support for Lesson costs/conditions in the engine."
+    ]
+  }
+}

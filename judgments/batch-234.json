@@ -1,0 +1,53 @@
+{
+  "Twinblade Dragonfolk": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Twinblade Featherfolk": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare order/targeting is wrong: it should first select an enemy follower, then bury the top card of your deck, and if the buried card was a non-Havencraft card, deal 4 damage to the selected follower. The current condition `discardedCardType: spell` is unrelated and incorrect. This needs a conditional based on the class of the milled card and retention of the originally selected target; implement support for checking properties of the card buried by `mill` (for example a condition like `milledCardClassIsNot`) and/or a way to bind a selected target across later steps."
+    ]
+  },
+  "Twinblade Featherfolk Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Twinblade Mage": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cost-reduction condition is incorrect: the source requires 'at least 6 cards in your cemetery with different base costs', not merely 6 cards in your cemetery. Encode this with a distinct-cemetery-cost condition; implement a condition such as `ownCemeteryDistinctBaseCostMin` if missing.",
+      "The fanfare is overbroad: it should select up to 2 enemy followers and deal 3 damage to each selected follower, not deal 3 damage to all enemies. Encode this as multi-target selected damage (for example `dealDamageSplit` is not correct because the damage is not divided). Implement an effect that deals fixed damage to up to N selected targets, such as `dealDamageMultiple` with `targets.type: enemyFollower` and `maxCount: 2`, if missing."
+    ]
+  },
+  "Twinsword Master": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tycoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tyrant's Order": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell should target 'up to 1 Boxed enemy follower on the field'; the current encoding destroys any enemy follower and loses both the Boxed restriction and the optionality. Encode the destroy target with a Boxed-status restriction and optional selection. Since target selectors do not support Boxed filtering, implement a target filter/status field for selected followers such as `boxed: true` and optional target selection."
+    ]
+  },
+  "Ultimate Hollow": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Unbodied Witch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare draw amount is incorrect: it should draw X where X equals the number of cards in your deck minus 5, not your full deck count. Encode this with a dynamic amount representing deck count minus 5; implement a DamageAmount like `deckCountMinus` or a generic arithmetic amount operator if missing."
+    ]
+  },
+  "Unbodied Witch Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrect: the source says 'Put each other card on the field into its owner's cemetery,' which affects all other followers and amulets on both sides while excluding this card. `destroyAllFollowers` only destroys followers and does not match 'put into cemetery' or include amulets. Encode an effect that buries all other field cards; implement an operation such as `buryAllFieldCards` with `excludeSelf: true` if missing."
+    ]
+  }
+}

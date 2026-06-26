@@ -1,0 +1,59 @@
+{
+  "Amy, Psychopomp Guide Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Anastasia": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability after fanfare is encoded incorrectly: it should trigger whenever you play any card during your turn, not only followers. Remove `filter: {\"cardType\":\"follower\"}` from `grantOnCardPlayed`.",
+      "The '3rd card you've played this turn, recover 2 play points' clause is not represented correctly. It should be encoded as a granted on-card-played effect that checks play-count-equals-3 and then uses `recoverPp` 2. Implement engine support for a condition tracking the Nth card played this turn.",
+      "The '5th card you've played this turn, give each follower on your field [attack]+1/[defense]+1' clause is missing/incorrect. It should be encoded as a separate or branched granted on-card-played effect that checks play-count-equals-5 and buffs all your followers +1/+1. Implement engine support for buffing all allied followers and for a condition tracking the Nth card played this turn.",
+      "The current `conditionAny` with `discardedThisTurn`/`always` and `noop` placeholders is incorrect and should be replaced with real effects for the 3rd and 5th card-play milestones."
+    ]
+  },
+  "Anastasia [All-Out Vacation]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability after fanfare is encoded incorrectly: it should trigger whenever you play any card during your turn, not only followers. Remove `filter: {\"cardType\":\"follower\"}` from `grantOnCardPlayed`.",
+      "The '3rd card you've played this turn, recover 2 play points' clause is missing. It should be encoded as a granted on-card-played effect that checks play-count-equals-3 and then uses `recoverPp` 2. Implement engine support for a condition tracking the Nth card played this turn.",
+      "The '5th card you've played this turn, give each follower on your field [attack]+1/[defense]+1' clause is missing. It should be encoded as a granted on-card-played effect that checks play-count-equals-5 and buffs all your followers +1/+1. Implement engine support for buffing all allied followers and for a condition tracking the Nth card played this turn.",
+      "The `noop` placeholder 'track 3rd and 5th card played this turn' should be replaced with implementable triggered effects once support for play-count milestones exists."
+    ]
+  },
+  "Anastasia [Seize the Light]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Anastasia [Seize the Light] Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ancient Alchemist": {
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage: add `evolvesTo: \"Ancient Alchemist Evolved\"` and `evolveCost: 3` to match `[evolve][cost03]: Evolve this follower.`"
+    ]
+  },
+  "Ancient Alchemist Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost reduction is encoded too broadly. It should reduce the play cost of your Golem followers only, not this card generally. Encode it as a trait-filtered allied follower cost reduction; implement engine support for passive play-cost reduction limited by follower trait/class/filter.",
+      "The damage trigger target is encoded incorrectly. It should target an enemy leader or an enemy follower, not only an enemy follower. Encode this as a choice/selector that can hit either target; implement engine support for a target selector covering 'enemy leader or enemy follower'."
+    ]
+  },
+  "Ancient Amplifier": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded incorrectly. It should target a token follower on your field, not an allied field card with trait `Supreme`. Change the target to a self follower selector filtered to token printings, e.g. `targets: {\"type\":\"selfFollower\",\"count\":1,\"filter\":{\"printingType\":\"token\"}}`."
+    ]
+  },
+  "Ancient Artifact": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ancient Elf": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

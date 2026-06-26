@@ -1,0 +1,64 @@
+{
+  "Snake Priestess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sneer of Disdain": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery ability is incorrectly encoded as an activated ability with an invalid cost; it should be a triggered ability for when a \"Galmieux, Omen of Disdain\" is put onto your field, activating from cemetery with banishSelf as the cost.",
+      "The cemetery ability incorrectly requires banishing \"Galmieux, Omen of Disdain\" from the cemetery; the source text only says to banish this card from your cemetery.",
+      "The trigger condition \"When a Galmieux, Omen of Disdain is put onto your field\" is missing; encode it as a triggered ability gated by that named follower entering your field."
+    ]
+  },
+  "Snowman Army": {
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (10) silence should apply to the same selected enemy follower whose stats were changed to 1/1, but the parsed JSON creates a new target selection; encode this as a single target reused for both effects."
+    ]
+  },
+  "Snowman King": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as grantActRestriction, but the source says followers that cost 3 or less on the field can't attack enemies; this should be encoded as a continuous attack restriction affecting all low-cost followers on the field. Implement an ability such as a passive/aura effect to prevent selected followers from attacking enemy followers/leaders based on cost."
+    ]
+  },
+  "Sol Sister": {
+    "verdict": "fail",
+    "issues": [
+      "The keyword \"evolve\" should not be in keywords; represent the evolve line with evolveCost/evolvesTo only, while keeping \"ward\" as the printed keyword."
+    ]
+  },
+  "Sol Sister Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve damage amount is incorrect; it should be the number of amulets on your field plus 1, but the parsed amount only counts amulets and omits the +1. Encode as a dynamic amount with +1, or implement a DamageAmount form that adds a constant to trait/card-type field count.",
+      "The damage count uses traitFieldCount with trait \"Amulet\", but amulet is a card type, not a trait; it should count amulets on your field by card type. Implement a field-count DamageAmount for cardType if needed."
+    ]
+  },
+  "Somnolent Strength": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Select up to 2 followers on your field,\" but the parsed chooseMultiple has min 1; it should allow selecting 0, 1, or 2 followers.",
+      "The fanfare should target followers on your field generally, but selfFollower may exclude amulet/follower ambiguity depending on engine semantics; ensure it can select your followers on field up to 2 times as stated."
+    ]
+  },
+  "Sonata of Silence": {
+    "verdict": "fail",
+    "issues": [
+      "The first effect is incorrectly encoded as tutorFromCemetery to field; it should summon the selected \"Rulenye, Omen of Silence\" from your cemetery, e.g. with summonFromCemetery filtered to that identity."
+    ]
+  },
+  "Soothing Dragonspring": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end-phase ability is incomplete; after removing a divine water counter, it should check whether this has no divine water counters, then bury this card and deal 5 damage to each enemy follower on the field. Replace the noop with that conditional resolution.",
+      "The parsed card incorrectly adds an activated ability with pp 1, engage, and burySelf to deal 5 damage to one enemy follower; no such activated ability exists in the source and it should be removed.",
+      "The missing \"if this has no divine water counters\" condition is not supported by the listed conditions; implement a condition for source counter count / no counters remaining so the end-phase effect can be encoded correctly."
+    ]
+  },
+  "Sootspawn": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

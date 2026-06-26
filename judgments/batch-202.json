@@ -1,0 +1,61 @@
+{
+  "Selena, Sugarkiss Assassin": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded incorrectly: it should allow putting up to 1 Wasteland card and up to 1 follower that costs 2 or less from the top 4 cards into your EX area, but the current filter requires a single card to be both Wasteland and cost 2 or less. Encode this as a two-pick effect from the top 4 with separate filters for a Wasteland card and for a follower with maxCost 2, then put the rest on the bottom."
+    ]
+  },
+  "Self-Proclaimed Fan Favorite": {
+    "verdict": "fail",
+    "issues": [
+      "The spell's modal structure is encoded incorrectly: the source says 'Choose 1. If there are at least 5 Cute cards in your cemetery, choose up to 2 instead.' but parsed always uses choose exactly 1. Encode this with an if-condition on ownCemeteryTraitMin trait Cute count 5, using chooseMultiple min 1 max 2 when true and choose min 1 max 1 otherwise."
+    ]
+  },
+  "Selfless Noble": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Send 'Em Packing": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is missing its Combo (5) clause. After buffing a Ladica, the Stoneclaw on your field, it should also, if combo count is at least 5, deal damage equal to that selected follower's attack to each enemy follower on the field. This should be encoded as a conditional second step, but the engine lacks an implemented effect for dealing damage to all enemy followers using a chosen target's attack as the amount; add support for a dynamic amount like selected target attack with dealDamageAllEnemies followersOnly true, or a dedicated operation for 'deal selected follower's attack to all enemy followers'."
+    ]
+  },
+  "Sentry Gate": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The ability is encoded with the wrong timing and as noop. It should trigger whenever an enemy follower attacks, then that follower's controller may pay 2 PP to destroy this amulet; if they do not, deal 2 damage to the attacking follower. Encode this with an attack-triggered ability and an opponent optional payment branch, but the engine lacks a timing for 'when an enemy follower attacks' and lacks an effect for 'that follower's controller may pay PP; if they don't, do X'. Implement an attack trigger and an optional opponent-pay-cost effect to support this card."
+    ]
+  },
+  "Sera, Maiden of the Dawn": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability targets are encoded incorrectly: 'Your token followers don't take ability damage' should affect your token followers, not this follower itself. Encode this as an aura/passive granting ability-damage immunity to allied token followers, but the engine lacks an aura operation to grant damage immunity to a filtered group of followers; implement a filtered aura damage-immunity effect.",
+      "The Officer trigger is missing the 'During your turn' restriction. Add a controller-turn-only condition to the onAllyFollowerEnter ability for Officer followers; the engine currently has no condition for 'during your turn', so implement a turn-state condition."
+    ]
+  },
+  "Sera, Maiden of the Dawn Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability targets are encoded incorrectly: 'Your token followers don't take ability damage' should affect your token followers, not this follower itself. Encode this as an aura/passive granting ability-damage immunity to allied token followers, but the engine lacks an aura operation to grant damage immunity to a filtered group of followers; implement a filtered aura damage-immunity effect.",
+      "The Officer trigger is missing the 'During your turn' restriction. Add a controller-turn-only condition to the onAllyFollowerEnter ability for Officer followers; the engine currently has no condition for 'during your turn', so implement a turn-state condition."
+    ]
+  },
+  "Seraph of Sin": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare target is encoded incorrectly: the source can target an enemy leader or an enemy follower, but parsed targets only enemy field cards. Encode the damage target as enemy leader or enemy follower, for example with a choose between enemyLeader and enemyFollower if no combined target selector exists."
+    ]
+  },
+  "Seraphic Blade": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Serene Sanctuary": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare tutor is encoded incorrectly: 'Search your deck for a Luminary amulet, reveal it, add it to your hand, then shuffle' should search the whole deck, not look at only 1 card and put the remainder on the bottom. Encode it with tutorFromDeck filter trait Luminary and cardType amulet to hand with reveal true.",
+      "The activated ability condition is missing: it should activate only if this amulet has a prayer counter, not unconditionally. Add the proper counter-based condition to the activated burySelf ability."
+    ]
+  }
+}

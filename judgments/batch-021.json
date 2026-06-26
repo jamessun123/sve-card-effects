@@ -1,0 +1,58 @@
+{
+  "Arisa, Evergreen Arrow": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability condition is encoded incorrectly as spellchain 5 / conditionAny. It should require 'you've played at least 5 cards this turn.' Encode it with a proper played-cards-this-turn condition; implement a new condition type such as `cardsPlayedThisTurnMin` with `count: 5`."
+    ]
+  },
+  "Arisu Tachibana": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search effect is incomplete: it only searches for a 1-cost spell, but the source says 'a 1-cost spell or 1-cost amulet.' Encode the search with a choice covering both card types, or another valid representation that allows either a spell or an amulet.",
+      "The fanfare search effect is encoded with `searchDeckChoose`/`lookAt: 40`/`remainderTo: deckBottom`, which does not match 'search your deck ... then shuffle your deck.' It should use a deck-search effect like `tutorFromDeck` to hand with reveal, followed by `shuffleDeck`."
+    ]
+  },
+  "Arisu Tachibana [Ikenai GO AHEAD]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Armor Burst": {
+    "verdict": "fail",
+    "issues": [
+      "The first target is encoded too broadly as any self follower. It should specifically target an Armed follower on your field, so add a target/filter restriction for trait `Armed`.",
+      "The summoned Draconic Weapon token is encoded to the field, but the source only says 'summon a Draconic Weapon token' and Draconic Weapon is an amulet token that should enter as a field card/amulet via the correct token summon handling. Use the exact token summon representation for that token rather than a generic field follower summon if needed."
+    ]
+  },
+  "Armor of the Stars": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell correctly gives +1/+2, but 'and Aura' is not faithfully represented. `grantKeyword` with `aura` is not supported by the reference keyword set. Encode the buff plus a new implementable grant for Aura on the chosen follower; implement support for granting the Aura keyword/status to a target follower."
+    ]
+  },
+  "Armored Goblin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Armored Goblin Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded as full-turn ability damage immunity (`damageImmunity amount 99`), but the source says 'The next time this follower would take damage this turn, it doesn't.' This should be a one-time prevention shield for any damage instance this turn. Encode it with a dedicated one-shot damage prevention effect; implement a new effect such as `grantNextDamagePrevention` or equivalent."
+    ]
+  },
+  "Armored Tentacle": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Arriet, Soothing Harpist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The last step is encoded as `grantActRestriction`, but the source says 'For the rest of this turn, it can't attack enemies.' This is an attack restriction, not an act restriction. Encode a targeted until-end-of-turn cannot-attack-enemies effect on the chosen follower; implement a new effect for attack restriction such as `grantCannotAttackEnemies`."
+    ]
+  },
+  "Arsène Lupin": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare token generation is encoded as an unconditional player choice with `chooseMultiple`, but the source makes each token conditional on what card type was buried from opponents' decks. It should only create Gilded Blade if a follower was buried this way, and only create Gilded Goblet if a spell or amulet was buried this way. Encode this with result-aware conditional checks on the milled cards; implement new conditions/effects to inspect cards buried by the immediately preceding mill effect, such as `buriedByPreviousEffectCardType`."
+    ]
+  }
+}

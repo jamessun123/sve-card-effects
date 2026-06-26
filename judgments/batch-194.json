@@ -1,0 +1,65 @@
+{
+  "Rouge Vampire Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Round Table Assembly": {
+    "verdict": "fail",
+    "issues": [
+      "Option 2 target encoding is incorrect: `buff.targets` should target an Arthurian follower on your field using a supported selector, e.g. `{\"type\":\"selfFollower\",\"count\":1,\"trait\":\"Arthurian\"}` or equivalent supported target restriction, not an unsupported nested `filter` on targets."
+    ]
+  },
+  "Rowen, Dragon Lance": {
+    "verdict": "fail",
+    "issues": [
+      "Do not include `fanfare` in `keywords`; Fanfare should be represented only as a `timing: \"fanfare\"` ability.",
+      "The activated ability should encode 'deal 3 damage to it and 1 damage to its leader' as a single linked effect using `damageFollowerAndLeader`, not as two separate `dealDamage` steps that can hit different targets."
+    ]
+  },
+  "Roy, Dragoncleaver": {
+    "verdict": "fail",
+    "issues": [
+      "Do not include `evolve` in `keywords`; the evolve line should be represented by `evolveCost`/evolve linkage, not as a keyword.",
+      "Do not include `fanfare` in `keywords`; Fanfare should be represented only as a `timing: \"fanfare\"` ability.",
+      "The fanfare tutor destination is wrong: the searched 2-cost Dragoncraft spell should be added to your hand (`to: \"hand\"`), not put into your EX area."
+    ]
+  },
+  "Roy, Dragoncleaver Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as a player `choose`; it should select one enemy follower and deal 2 damage, or 5 damage instead if that selected follower has the Wyrmkin trait. Implement support for conditional checks on the selected target's trait (e.g. a condition/effect that can test target trait and set damage accordingly), then encode as a single targeted damage effect rather than two player-chosen options."
+    ]
+  },
+  "Roy, Dragonreaver": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Rush should not be an unconditional keyword. It should be a passive effect only while there's an amulet on your field. Implement a condition for 'while you have an amulet on your field' (or a passive op that grants a keyword based on allied amulet presence), then encode the Rush gain under that condition instead of `keywords` plus incorrect `inExArea` condition."
+    ]
+  },
+  "Royal Banner": {
+    "verdict": "fail",
+    "issues": [
+      "Do not include `fanfare` in `keywords`; Fanfare should be represented only as a `timing: \"fanfare\"` ability.",
+      "The triggered buff should fire whenever a Swordcraft follower is put onto your field, not only when one enters by summon. Encode this as a granted/triggered effect for any ally follower entering your field with the matching class, and the filter must be placed in a supported location rather than as a top-level `filter` field on the ability."
+    ]
+  },
+  "Ruby Falcon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Do not include `evolve` in `keywords`; the evolve line should be represented by `evolveCost`/evolve linkage, not as a keyword.",
+      "The last ability is misencoded: it should trigger whenever another follower you control with Storm or Ward attacks, not when an ally follower enters the field. Implement a trigger for 'when another ally follower attacks' plus support for checking whether that attacking follower has a keyword (Storm or Ward), then deal 1 damage to the enemy leader."
+    ]
+  },
+  "Ruby Falcon Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The last ability is misencoded: it should trigger whenever another follower you control with Storm or Ward attacks, not when an ally follower enters the field. Implement a trigger for 'when another ally follower attacks' plus support for checking whether that attacking follower has a keyword (Storm or Ward), then deal 1 damage to the enemy leader."
+    ]
+  },
+  "Ruinous Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare tutor is incomplete and incorrect: it should search for either a Dragoncraft spell that costs 5 or less or a non-Dragoncraft spell that costs 2 or less, put it into your EX area, then it costs 5 less to play this turn. Implement support for OR deck filters (e.g. one of two filter clauses, including negation of class) and for applying a temporary play-cost reduction to the tutored EX-area card, then encode the full effect."
+    ]
+  }
+}

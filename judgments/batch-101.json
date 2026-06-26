@@ -1,0 +1,51 @@
+{
+  "Gullias, Silverbeast Lord Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is encoded incorrectly. Replace the nonstandard cost fields with a valid activated cost using banishFromExArea, e.g. {\"cost\":{\"banishFromExArea\":{\"filter\":{\"identityName\":\"Repair Mode\"},\"count\":2}}}, while keeping the effect that grants this follower Storm."
+    ]
+  },
+  "Gunner Maid Seria": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gunslinger Automaton": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gunslinger Automaton Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Guren Revolt": {
+    "verdict": "fail",
+    "issues": [
+      "The upgraded mode should banish each enemy follower on the field, but it is encoded as a normal single-target banish with no count limit. Change the second choose option effect to use banishUpTo with maxCount large enough to cover all enemy followers, or another implemented all-enemy-follower banish encoding, while keeping additionalPpCost: 5."
+    ]
+  },
+  "Haggler's Gambit": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hagoromo Komachi": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction is incorrect because it is unconditional. The source text requires an optional additional play-time cost of discarding 3 iM@S CG cards to make this card cost 6 less to play. This should be encoded as a conditional/optional play-cost modification tied to discarding 3 matching hand cards, but the current ability reference has no implemented operation for 'when playing this card, discard N matching cards: this card costs X less to play.' Add an ability/op to support optional additional play costs for playing a card, including discardFromHand of filtered cards as the cost and temporary playCostReduction as the payoff."
+    ]
+  },
+  "Hajime Fujiwara [Pink Blossom Dream]": {
+    "verdict": "fail",
+    "issues": [
+      "Keywords incorrectly include quick; the source text does not give this card Quick. Remove \"quick\" from keywords.",
+      "The fanfare is encoded too broadly. It should look only at the top card of your deck and add it to hand only if that specific card is a Cool card; the current searchDeckChoose could take any Cool card from the looked-at cards. Encode the top-card check so only the top card can be revealed and added."
+    ]
+  },
+  "Hakrabi": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hallowed Dogma": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

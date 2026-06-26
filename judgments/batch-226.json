@@ -1,0 +1,57 @@
+{
+  "Tempestuous Alchemist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Temple Defender": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive damage-reduction ability is encoded incorrectly as damageCap maxPerHit 1, which means damage from abilities is reduced to 1 per hit, not 'Reduce damage dealt to this follower by 1.' It should be encoded as a general damage reduction passive affecting all damage to this follower by 1. Add an implemented ability for fixed damage reduction (for example, a passive reduceDamageToSelf amount 1) and use that instead."
+    ]
+  },
+  "Temple Healer": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare optional discard cost is missing the Ward requirement. Change discardFromHand filter from only {\"cardType\":\"follower\"} to a filter that specifically requires a follower with Ward.",
+      "The evolve linkage is incomplete for a card with an explicit [evolve] ability line. Add the corresponding evolve ability entry if your schema expects evolve timing abilities rather than only keywords/evolveCost."
+    ]
+  },
+  "Temple Healer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Temple Windbear": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Temple Windbear Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition for 'If there are at least 2 amulets on your field' is encoded incorrectly as fieldTraitMin with trait 'amulet'. It should check the number of amulets on your field, not followers with a trait. Replace it with a field card-type/count condition for amulets. Add an implemented condition such as fieldCardTypeMin with cardType 'amulet' and count 2, then use that condition."
+    ]
+  },
+  "Tenko's Shrine": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger timing is wrong. The card triggers whenever your leader gains defense, not whenever you play a card. It should be an on-heal/gain-defense trigger rather than grantOnCardPlayed. Add an implemented timing or granted trigger for 'when your leader gains defense'.",
+      "The effect is wrong. The parsed effect engages an enemy follower, but the card says '[engage]: Select an enemy leader or enemy follower on the field and deal it 2 damage.' It should engage this amulet as a cost, then deal 2 damage to either an enemy leader or an enemy follower.",
+      "The target selector is incomplete. The effect must be able to target either the enemy leader or an enemy follower, but the parsed encoding only targets an enemy follower. Add support for a mixed selector such as enemyLeaderOrFollower and use it in the damage effect."
+    ]
+  },
+  "Terra Nova": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Terrorformer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first activated ability cost is encoded incorrectly. 'Put this card from your hand into your EX area' is not a supported cost field; moveSourceToExArea should be part of the effect sequence, and the ability should activate from hand. Encode this as timing activated with activateFrom 'hand', cost {\"pp\":2}, and effect sequence including moveSourceToExArea then putDeckTopToExArea.",
+      "The second activated ability cost is encoded incorrectly. The source text says 'Banish 2 other cards from your EX area', but the parsed cost uses an invalid banishFromExArea structure and incorrectly restricts it to followers. It should banish 2 other cards from your EX area with no follower restriction. Use the implemented activated cost form banishFromExArea with an appropriate filter/count shape if supported; otherwise add support for a generic EX-area banish cost.",
+      "The second activated ability effect targets the wrong object. The card says 'Give this follower in your EX area [attack]+2', but the parsed effect buffs a selfFollower on the field. It should buff this card while in the EX area. Add support for targeting the source card in EX area, or an EX-area self target selector, and use that for the buff."
+    ]
+  },
+  "Terrorformer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "Charming Gentlemouse Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve damage amount is encoded with traitFieldCount using trait \"Charming Gentlemouse\", but the source counts cards named Charming Gentlemouse on your field. Encode the amount with namedIdentityFieldCount { \"identityName\": \"Charming Gentlemouse\", \"multiplier\": 2 } instead."
+    ]
+  },
+  "Check": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Checkmate": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability incorrectly lists keyword \"activated\" in keywords; activated abilities should be represented only in abilities, so remove that keyword entry.",
+      "The activated ability's target selector is incorrect: it uses selfFollower with a nested filter, but the source says to select a Mystic King on your field. Target a self follower matching Mystic King correctly.",
+      "The spell damage effect is correct in substance, but if using cemeteryFilterCount for Chess cards in your cemetery, ensure it counts your cemetery's Chess cards exactly as written."
+    ]
+  },
+  "Cheshire Cat": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare target is wrong: the source says enemy leader or enemy follower, but the encoding only targets anyFollower. It should target either the enemy leader or an enemy follower; implement a target/effect pattern that supports choosing between enemyLeader and enemyFollower for dealDamage.",
+      "The fanfare condition is reversed from the source wording. The source says deal 1 damage, and if this card wasn't put onto the field from hand, deal 2 damage instead. Encode using condition notEnteredFromHand with 2 damage in the then branch and 1 damage in the else/default branch.",
+      "The activated ability cost is wrong: the source says put this card on the bottom of its owner's deck, but the encoding uses burySelf. It should use a self-to-bottom-of-deck cost/effect; implement an ability/cost operation to move the source card to the bottom of its owner's deck.",
+      "The activated ability target is incomplete: the source allows selecting a Fable follower on your field or in your EX area, but the encoding only targets a self follower on the field. It should support choosing a Fable follower in either field or EX area; implement a target selector that can select qualifying cards from field or EX area."
+    ]
+  },
+  "Chie Sasaki [Step to the Future]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chieri Ogata [Happiness Tune]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chieri Ogata [Happiness Tune] Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve tutor is incorrect: the source says search your deck for an iM@S CG spell, reveal it, add it to your hand, then shuffle, but the encoding uses searchDeckChoose with lookAt 4 and remainderTo deckBottom. It should be an unrestricted deck search to hand with reveal and shuffle; implement reveal support on tutorFromDeck or another full-deck tutor operation that searches the entire deck and then shuffles.",
+      "The activated ability is missing Lesson (1) in its cost/condition handling. It should require Lesson (1) in addition to paying 1 PP; implement Lesson/Nina-style resource cost support in activated ability costs or conditions."
+    ]
+  },
+  "Chika Yokoyama": {
+    "verdict": "fail",
+    "issues": [
+      "Ward is encoded as a printed keyword, but the source grants Ward only if there are at least 5 Cute cards in your cemetery on fanfare. Remove ward from keywords and add a conditional grantKeyword { \"keyword\": \"ward\", \"targets\": { \"type\": \"self\" } } in the fanfare effect alongside the buff."
+    ]
+  },
+  "Chipper Skipper": {
+    "verdict": "fail",
+    "issues": [
+      "The passive ability is missing the Rush grant. Add grantKeyword { \"keyword\": \"rush\", \"targets\": { \"type\": \"lastSummoned\" } } together with the +1/+1 buff whenever a Mercenary follower enters your field.",
+      "The extra timing \"evolve\" ability with passiveKeywords [] is spurious and should be removed."
+    ]
+  },
+  "Chipper Skipper Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The passive ability is missing the Rush grant. Add grantKeyword { \"keyword\": \"rush\", \"targets\": { \"type\": \"lastSummoned\" } } together with the +1/+1 buff whenever a Mercenary follower enters your field."
+    ]
+  }
+}

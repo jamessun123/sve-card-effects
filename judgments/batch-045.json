@@ -1,0 +1,62 @@
+{
+  "Cool Tiara": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect is encoded incorrectly as healLeader 1; it should represent 'Give your leader [defense]+1' as a leader max-defense increase, not recovery. Implement a leader defense increase/set-max-defense style ability and replace healLeader with that effect.",
+      "The start-of-game clause that puts 5 Magical Item tokens into your EX area if your deck is based on THE IDOLM@STER CINDERELLA GIRLS universe is missing. Add a start-of-game/deck-construction conditional ability to summon 5 Magical Item tokens to the EX area; this requires implementing a start-of-game timing and a deck-universe/deck-theme condition."
+    ]
+  },
+  "Coral Shark": {
+    "verdict": "fail",
+    "issues": [
+      "Remove 'fanfare' from keywords; Fanfare should be represented by the ability timing, not as a keyword entry.",
+      "The Fanfare buff counts all Marine followers on your field, but the source says 'other Marine followers'; encode the dynamic attack increase excluding this follower, e.g. by subtracting self or adding support for an excludeSelf variant on traitFieldCount."
+    ]
+  },
+  "Corrosive Thorns": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The parsed spell effect is completely incorrect; it should select any number of Pixie tokens on your field and grant them an activated ability until end of turn, not move cards from hand to EX area.",
+      "To encode this card correctly, implement support for targeting multiple followers by name/token identity on the field and a grant-activated-ability-until-end-of-turn effect (specifically granting '[act] [engage]: select an enemy follower, deal 3 damage to it and 1 damage to its leader')."
+    ]
+  },
+  "Corruption Guardian": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cosmic Angel": {
+    "verdict": "fail",
+    "issues": [
+      "Remove 'fanfare' from keywords; Fanfare should only appear as the ability timing."
+    ]
+  },
+  "Cosmos Fang": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve ability is encoded incorrectly as an activated ability that evolves another follower; it should be an evolve-timing/self-evolve payment ability: [evolve][cost01], return another follower on your field to its owner's hand: Evolve this follower.",
+      "The return-another-follower cost is placed in an unsupported cost shape; encode this as a proper evolve ability/cost that returns another self follower excluding this card, and implement cost support for returnToHand as an activated/evolve cost if needed.",
+      "The Fanfare is incomplete: after searching for a Beast follower, if it costs 2 or less you may put it onto your field instead. Replace the noop with the actual conditional choice. This likely needs engine support to tutor a card with a 'hand or field instead if maxCost 2' resolution tied to the found card."
+    ]
+  },
+  "Cosmos Fang Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded as a player choice between returning or destroying, but the source requires selecting one enemy follower, then returning it unless it is evolved, in which case destroy it instead.",
+      "Encode this as a single targeted effect with a conditional based on whether the selected enemy follower is evolved; implement a target-state condition such as 'targetPrintingType/targetIsEvolved' if the engine lacks it."
+    ]
+  },
+  "Cougar Pelt Warrior": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cougar Pelt Warrior Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect should put Cougar Pelt Warrior onto your field engaged, but the parsed tutorFromDeck to field does not encode the engaged state. Change it to an effect that summons/puts the tutored card onto the field engaged and include the shuffle."
+    ]
+  },
+  "Countersolari Survivor": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

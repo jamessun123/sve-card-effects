@@ -1,0 +1,70 @@
+{
+  "Great Mother's Embrace": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell says \"Choose up to 2,\" so the root effect should use chooseMultiple with min 0 and max 2, not choose with min 1 and max 2.",
+      "Option 3 is missing the \"You may\" / \"If you do\" structure. It should be encoded as an optional cost or conditional effect where turning 2 faceup evolved Natura followers in your evolve deck facedown is optional, and draw 1 plus recover 2 PP happens only if that turn action succeeds.",
+      "Option 3 should specifically require 2 faceup evolved Natura followers in the evolve deck; the current turnEvolveDeck filter only checks trait Natura and cannot express faceup evolved follower filtering. Implement evolve-deck filtering for evolved/faceup cards to encode this correctly."
+    ]
+  },
+  "Great Testimony": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Greatpick Corpse": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The once-per-turn trigger is encoded with timing onLeaveField on this card, but the source says \"when a 1-cost token card you control leaves the field\"; it should trigger off another controlled card leaving the field, not this card itself.",
+      "The leave-field trigger condition is wrong: enteredFromHand does not represent \"a 1-cost token card you control.\" It should check that the card that left your field was a token with cost 1 and then summon a token of the same name.",
+      "The parser has an incorrect keyword: this card does not have printed Fanfare as a standalone keyword entry if you are already encoding the fanfare ability this way. Remove the unnecessary keyword duplication if your conventions avoid duplicating triggered keywords.",
+      "The engine lacks a trigger/condition for \"when another card matching filter leaves your field\" and an effect to summon a token copy of that departed card's name. Implement an ally-card-leaves-field trigger with card filters (such as cost 1 and printingType token) and a same-name-token-from-triggered-card summon effect."
+    ]
+  },
+  "Greenbrier Elf": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost should banish a Pixie token from your EX area; the filter should include printingType token in addition to identityName Pixie.",
+      "The search effect should reveal and add a Forestcraft card from among the top 4 cards, but searchDeckChoose in the reference does not support reveal. Remove the unsupported reveal field from this encoding."
+    ]
+  },
+  "Greenglen Axeman": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first ability is not a passive static effect; it should be a once-on-each-of-your-turn trigger for when you discard a Forestcraft spell, then draw a card.",
+      "The first ability is missing the Forestcraft class restriction; it should trigger only when the discarded card is a Forestcraft spell.",
+      "The first ability is missing the once-per-turn limit; it should be encoded with oncePerTurn or equivalent trigger cap.",
+      "The activated ability cost is incomplete: it should require both engage and discard a card. Encode the discard as part of the activation cost or as an explicit required additional cost before the choose effect.",
+      "Option 2 is wrong: \"Deal 2 damage to each enemy leader\" should damage only enemy leaders, not all enemies. The current dealDamageAllEnemies would also hit enemy followers.",
+      "The engine lacks a dedicated trigger for \"when you discard a card matching class/type\" and lacks an effect for \"deal damage to each enemy leader\" in multiplayer wording. Implement an on-discarded-card trigger with discard filters and a dealDamageAllEnemyLeaders operation."
+    ]
+  },
+  "Greenwood Guardian": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gremory, Death Teller": {
+    "verdict": "fail",
+    "issues": [
+      "The activated cemetery ability should activate only if there are at least 10 cards in your cemetery and no cards named Gremory, Death Teller on your field. The current encoding does the opposite by placing the namedFollowerOnFieldByName check in an if-then that revives only when a Gremory is on your field. Invert this so revival happens only when no such card is on your field.",
+      "The cemetery ability should summon this card from your cemetery and then give it \"Last Words: Banish this card.\" The revive effect should be encoded consistently as the summon/revive action from cemetery, but the main correctness issue is the missing \"no cards named Gremory, Death Teller on your field\" restriction."
+    ]
+  },
+  "Grimnir, Voidwrought Wind": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should always select an enemy follower first, then only if there are at least 3 faceup evolved followers in your evolve deck, deal 5 damage to it and 3 damage to its leader. The current condition inExArea is unrelated and incorrect.",
+      "The damage effect is encoded incorrectly with dealDamageSplit. This card deals 5 to the selected enemy follower and 3 to that follower's leader; it should use damageFollowerAndLeader or an equivalent targeted follower-plus-leader effect.",
+      "The condition \"at least 3 faceup evolved followers in your evolve deck\" is missing entirely. Implement a condition that counts faceup evolved followers in the evolve deck so the fanfare can be encoded correctly."
+    ]
+  },
+  "Grimnir, War Cyclone": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grimnir, War Cyclone Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is missing its cost. It should be encoded as timing onEvolve with a cost of 4 PP before dealing 4 damage to each enemy leader and enemy follower on the field."
+    ]
+  }
+}

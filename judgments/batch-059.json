@@ -1,0 +1,52 @@
+{
+  "Djeana, the Stouthearted": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Djeana, the Stouthearted Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve is incorrectly encoded as searchDeckChoose with no way to take up to 2 cards; it should allow revealing and adding up to 2 Natura cards from the top 4 to hand, then put the rest on the bottom."
+    ]
+  },
+  "Dogged Detective": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare filter is incorrect: tutorFromCemetery uses filter.keyword, but DeckFilter does not support keyword and the card specifically wants a follower with [evolve] in your cemetery; encode this with an implemented card-identifying filter if possible, otherwise add DeckFilter support for printed keyword/evolve-line matching.",
+      "The trigger condition is too broad: onAllyEvolve means only ally followers evolve, but the source says whenever a follower on your field evolves, so it should trigger from any follower on your field, including this one; add an implemented timing/condition for 'when a follower on your field evolves' or a self-inclusive ally-evolve trigger."
+    ]
+  },
+  "Dolorblade Demon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Doomwright Resurgence": {
+    "verdict": "fail",
+    "issues": [
+      "Spell effect is incomplete and untargeted: summonSameNameToken should target a Supreme token follower on your field that costs 5 or less, not summon from source without selection."
+    ]
+  },
+  "Doting Dragoneer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Doting Dragoneer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Doublame, Duke and Dame": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Doublame, Duke and Dame Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Drache, Fiery Dragonlord": {
+    "verdict": "fail",
+    "issues": [
+      "evolvesTo is incorrect; it should link to the evolved form card name, not to the base card name.",
+      "Fanfare filter is too broad: grantNextPlayCostReduction is set to any Dragoncraft card, but it should apply only to the next Draconic Duelist card you play this turn, so filter by trait 'Draconic Duelist' instead."
+    ]
+  }
+}

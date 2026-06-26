@@ -1,0 +1,50 @@
+{
+  "Vlad, Impaler Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vuella, One-Winged Demon": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability checks the wrong cost condition. \"If it's a 2-cost card\" should be encoded with \"ifFilter\": {\"minCost\": 2, \"maxCost\": 2} instead of only {\"maxCost\": 2}."
+    ]
+  },
+  "Waltzing Fairy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wandering Chef": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is left as noop. It should encode \"If there's a Mount card on your field or in your EX area, give your leader [defense]+2\" as a conditional healLeader amount 2, but this needs an implemented condition for checking a named trait/card in field or EX area."
+    ]
+  },
+  "Wandering Chef Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "War Hero": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ward of Unkilling": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wardog": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is left as noop. It should encode a conditional effect that checks whether there is a Commander card on your field, then deals 2 damage to the enemy leader; this needs an implemented condition for checking a trait/card on your field."
+    ]
+  },
+  "Wardrobe Raider": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wardrobe Raider Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve cost is incorrectly encoded as optionalCost. \"Put a follower from your field into its owner's cemetery\" is mandatory, so it should be a sequence with buryFromFieldSelect followed by destroy, not an optional cost that may be declined."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "Adherent of Screams Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aenea, Amethyst Rebel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aenea, Creative Amethyst": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aenea, Creative Amethyst Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aerial Craft": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aerial Craft Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incorrectly gated by condition {\"type\":\"enteredFromHand\"}; remove that condition because the source text simply says \"On Evolve - You may summon a Machina follower that costs 2 or less from your hand.\"",
+      "The card is missing the optional summon-from-hand effect as a direct On Evolve ability; encode it as an optional hand selection to field of a Machina follower with maxCost 2 without any extra condition."
+    ]
+  },
+  "Aerial Slash": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the \"fanfare\" keyword; this is a spell with no Fanfare in the source text.",
+      "The activated cemetery ability's condition is wrong: it should require at least 5 other Heroic cards in your cemetery, so the encoded condition needs to exclude this card rather than counting any 5 Heroic cards.",
+      "The activated cemetery ability is encoded as dealDamageAllEnemies for 3, but the source says \"Deal 3 damage to each enemy leader\"; encode damage to enemy leaders only instead of all enemy followers and leaders."
+    ]
+  },
+  "Aerin, Crystalian Frostward": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare ability is incorrectly encoded as grantActRestriction on this card until end of turn; it should target an enemy follower and apply \"It can't attack enemies during its controller's next turn.\" Implement a dedicated operation for attack restriction against enemies on a targeted follower lasting through its controller's next turn, then encode the Fanfare with that target and duration."
+    ]
+  },
+  "Aerin, Crystalian Frostward Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve deck search is incorrect: the source says search your deck for a Crystalian follower that costs 2 or less, put it into your EX area, then shuffle. Replace searchDeckChoose/lookAt 5/remainderTo deckBottom with a full-deck tutor effect to EX area followed by shuffleDeck, with playCostReduction 2."
+    ]
+  },
+  "Aether of the Warrior Wing": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare ability is encoded as searchDeckChoose lookAt 5, but the source says search your deck for a Commander or Officer card, reveal it, add it to your hand, then shuffle your deck. Encode this as a full-deck tutor to hand with reveal true for a card matching either Commander or Officer, followed by shuffleDeck.",
+      "The start-of-end-phase ability is missing its condition; add condition {\"type\":\"ownCemeteryClassMin\",\"cardClass\":\"sword\",\"count\":7} so it only applies if there are at least 7 Swordcraft followers in your cemetery.",
+      "The start-of-end-phase buff target is too broad: buffFieldTrait with cardClass \"sword\" buffs only Swordcraft followers, but the source says \"give each follower on your field +1/+1.\" Encode a buff affecting all followers on your field, not only Swordcraft followers."
+    ]
+  }
+}

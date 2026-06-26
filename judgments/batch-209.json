@@ -1,0 +1,48 @@
+{
+  "Sibyl of the Waterwyrm": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Siegfried": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Siegfried Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Silent Purge": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Silent Rider": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Silver Automaton": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Silver Bolt": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage target is encoded too narrowly as an enemy follower; it should target an enemy leader or enemy follower. Encode the spell as draw 1, then deal X damage to a selected enemy leader or enemy follower. This requires either extending TargetSelector to support a mixed selector like enemyLeaderOrFollower, or implementing a choose/targeting pattern that preserves the single selected target across both possibilities."
+    ]
+  },
+  "Silver Cog Spinner": {
+    "verdict": "fail",
+    "issues": [
+      "The else branch is incorrect: the source says 'If there are 5 or less cards, draw a card,' but the parsed card uses else for all cases below 5. It should only draw when hand size is exactly 5 while recovering 2 PP when hand size is at least 5, causing both clauses to apply at exactly 5. Encode as a sequence of two conditional checks, one with handMin 5 -> recoverPp 2 and one with handMax 5 -> draw 1."
+    ]
+  },
+  "Silverbolt Hunter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Silvercloud Dragonrider": {
+    "verdict": "fail",
+    "issues": [
+      "The discard-triggered ability is missing its trigger timing and is incorrectly encoded as a generic activated ability. It should be an ability with timing 'onDiscard' and cost {\"pp\":2} that summons a Dragon token to the field."
+    ]
+  }
+}

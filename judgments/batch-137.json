@@ -1,0 +1,63 @@
+{
+  "Magic Sediment": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove the incorrect fanfare summon ability; Magic Sediment's text does not have a Fanfare and token cards should not summon themselves on entry.",
+      "Remove the incorrect passive damageCap ability; Stack does not mean this amulet takes only 1 damage per hit.",
+      "Remove the incorrect passive grantIndestructible ability; Stack means 'when this card would leave the field, remove 1 Stack counter instead' and 'when its Stack count reaches 0, destroy it,' not indestructible.",
+      "The activated ability should target another amulet with Stack on your field, not any ally field card; encode a target restriction for another allied Stack amulet. If the engine cannot target allied amulets by Stack trait/counter, implement a target selector or filter for allied field amulets with Stack."
+    ]
+  },
+  "Magical Augmentation": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as a free choose between normal mode and Earth Rite mode. Encode it as deal 2 damage by default, with an Earth Rite (2) conditional replacing that with deal 4 damage and draw 1 card."
+    ]
+  },
+  "Magical Bishop": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end condition is wrong; it should check whether there is another Chess follower on your field, not whether Magical Bishop is on your field. Encode a condition for another allied Chess follower. If unavailable, implement a condition such as fieldTraitMin with excludeSelf or an equivalent 'another allied follower with trait' check.",
+      "The damage effect is wrong; it should deal 1 damage to each enemy leader, not to each enemy follower and leader. Encode damage to enemy leaders only. If multiplayer 'each enemy leader' is unsupported, implement an effect for dealing damage to all opposing leaders."
+    ]
+  },
+  "Magical Fairy, Lilac": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magical Gunslinger": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability timing/filter is wrong; it should trigger during your turn whenever a Mount card is put onto your field, not whenever a Mount card is played. Encode an allied field-entry trigger limited to your turn for Mount cards. If unavailable, implement a timing/condition for 'when a card with trait X is put onto your field' and a 'your turn only' restriction."
+    ]
+  },
+  "Magical Gunslinger Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is incorrect; 'at least 6 cards with different base costs in your cemetery' is not spellchain. Encode the actual cemetery diversity-by-base-cost condition. If unavailable, implement a condition for counting distinct base costs among cards in your cemetery.",
+      "The triggered ability timing/filter is wrong; it should trigger during your turn whenever a Mount card is put onto your field, not whenever a Mount card is played. Encode an allied field-entry trigger limited to your turn for Mount cards. If unavailable, implement a timing/condition for 'when a card with trait X is put onto your field' and a 'your turn only' restriction."
+    ]
+  },
+  "Magical Knight": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be 'whenever another Chess follower is put onto your field'; add excludeSelf so this does not trigger on itself entering.",
+      "The trigger should apply to any other Chess follower put onto your field, not just the last summoned follower; encode the entered follower as the target in a way that works for all field-entry cases."
+    ]
+  },
+  "Magical Knight Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be 'whenever another Chess follower is put onto your field'; add excludeSelf so this does not trigger on itself entering.",
+      "The trigger should apply to any other Chess follower put onto your field, not just the last summoned follower; encode the entered follower as the target in a way that works for all field-entry cases."
+    ]
+  },
+  "Magical Pawn": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magical Reserves": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

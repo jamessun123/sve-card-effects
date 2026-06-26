@@ -1,0 +1,63 @@
+{
+  "Serpent": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Serpent Wrath": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Serration Wave": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card says \"Choose up to 2,\" so the root effect should be encoded as chooseMultiple with min 0 and max 2, not choose with min 1. Change the root effect to {\"op\":\"chooseMultiple\",\"min\":0,\"max\":2,...}.",
+      "Option 2 is encoded incorrectly as adding a counter to self. It should target a selected \"Kagemitsu, Lost Samurai\" on your field or in your EX area and place a fighting spirit counter on that card. Add engine support for a target selector that can select a named card in field-or-EX-area, then encode addCounter on that selected card."
+    ]
+  },
+  "Servant of Cocytus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Servant of Destruction": {
+    "verdict": "fail",
+    "issues": [
+      "Do not encode printed Fanfare/Evolve as keywords. Remove \"evolve\" and \"fanfare\" from keywords; keep evolveCost/evolvesTo and the fanfare ability only.",
+      "The fanfare condition is wrong. The source says \"If there are at least 3 Idolatry cards on your field,\" not trait-min followers only. Encode the condition to check Idolatry cards on your field; if the engine cannot count non-follower field cards by trait, this should be handled with an engine condition for field card trait count.",
+      "The fanfare should change this card's evolve cost to 0 for the rest of this turn. The current evolveCostReduction by 2 is only correct if it is guaranteed to apply only to this card for the rest of the turn; encode it explicitly as this card's evolve-cost change for the turn."
+    ]
+  },
+  "Servant of Destruction Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should select an enemy follower and deal 2 damage to it and its leader. The encoded damageFollowerAndLeader effect is missing the required selected enemy follower target. Add target selection for one enemy follower to the onEvolve effect."
+    ]
+  },
+  "Servant of Disdain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Do not encode printed Fanfare as a keyword. Remove \"fanfare\" from keywords and keep the fanfare ability.",
+      "The fanfare target is wrong. The source says \"select another follower on the field,\" which can be any other follower, not only one of your followers. Change the first damage target to an anyFollower selector with excludeSelf true.",
+      "The passive trigger is missing the condition \"During your turn\" and the restriction to ability damage. Encode this as a damaged trigger that only works during your turn and only when this follower takes ability damage. Add engine support for a grantOnDamaged/self-damaged trigger condition that distinguishes ability damage and controller turn."
+    ]
+  },
+  "Servant of Lust": {
+    "verdict": "fail",
+    "issues": [
+      "Do not encode printed Fanfare/Evolve as keywords. Remove \"evolve\" and \"fanfare\" from keywords; keep evolveCost/evolvesTo and the fanfare ability only."
+    ]
+  },
+  "Servant of Lust Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete: it must include the cost \"give your leader [defense]-1\" before dealing damage. Encode the self-leader defense loss as part of the onEvolve effect before the damage effect; add an engine operation for leader defense loss/payment if needed.",
+      "The damage amount uses an unsupported dynamic amount countLeaderDefLossThisTurn. X should equal the number of times your leader has lost defense this turn. Add engine support for this dynamic amount, then use it in the dealDamage effect.",
+      "If On Evolve is treated as a keyword elsewhere, do not place it in keywords; it should remain an onEvolve ability only."
+    ]
+  },
+  "Servant of Repose": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The source specifies \"At the start of each opponent's main phase,\" but the encoding uses an unconditional startOfMain trigger. Add engine support for a startOfMain trigger restricted to opponent turns, then encode healLeader(1) with that opponent-main-phase timing condition."
+    ]
+  }
+}

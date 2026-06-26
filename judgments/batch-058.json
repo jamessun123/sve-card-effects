@@ -1,0 +1,64 @@
+{
+  "Disciple of Usurpation": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; Strike should be represented only as a timinged ability, while the printed keyword here is just Storm."
+    ]
+  },
+  "Disdainful Rending": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Displacer Bot": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line should be represented by evolveCost/evolvesTo and Fanfare by the ability timing, while only Ward is a printed keyword."
+    ]
+  },
+  "Displacer Bot Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve damage amount is encoded incorrectly as namedIdentityFieldCount on the field with identityName \"Machina\"; it should deal damage equal to 2 times the number of Machina cards in your EX area. Add a dynamic amount implementation for EX-area card count by trait (for example exAreaTraitCount) and use that with multiplier 2."
+    ]
+  },
+  "Disrestan, Ocean Harbinger": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line should be represented by evolveCost/evolvesTo and Fanfare by the ability timing, not as keywords.",
+      "The Fanfare result is encoded incorrectly as summoning a token named \"Put the top card of your deck into your EX area.\"; after discarding a Marine card, it should put the top card of your deck into your EX area three times. Encode this as a sequence of three putDeckTopToExArea effects."
+    ]
+  },
+  "Disrestan, Ocean Harbinger Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve debuff amount is encoded incorrectly as namedIdentityFieldCount on the field with identityName \"Marine\"; it should give each enemy follower -X/-X where X equals the number of Marine cards in your EX area. Add a dynamic amount implementation for EX-area card count by trait (for example exAreaTraitCount) and use that as the negative atk/def amount.",
+      "The activated ability cost is encoded incorrectly; the source says \"[cost02], bury a Marine card from your EX area\", but the cost uses unsupported/incorrect buryFromExArea and buryFieldCount fields. Implement an activated cost for selecting and burying a matching card from EX area, then use that cost with trait Marine and count 1.",
+      "The activated ability is missing \"and Storm\"; after paying the cost, the effect should also grant this follower Storm, for example by sequencing the buff with grantKeyword keyword storm targeting self."
+    ]
+  },
+  "Divine Retribution": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition for moving this card to the EX area is encoded incorrectly as fieldTraitMin trait \"Evolved\"; it should check whether there is an evolved follower on your field. Implement a condition for evolved follower count on your field (for example fieldPrintingTypeMin with printingType \"evolved\" or fieldSpecialTypeMin) and use that before moveSourceToExArea."
+    ]
+  },
+  "Divine Smithing": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first effect is encoded incorrectly; it should select up to 2 Pixie followers on your field or in your EX area and give them +1 attack, but the current target selector only covers followers on your field and does not support up to/ex-area selection. Implement a target/effect that can choose matching followers from field and EX area, then apply +1 attack to up to 2 cards named Pixie."
+    ]
+  },
+  "Divine Thunder": {
+    "verdict": "fail",
+    "issues": [
+      "The effect op is incorrect; use the implemented op \"damageFollowerAndLeader\" with followerAmount 7 and leaderAmount 3 instead of the nonexistent \"dealDamageFollowerAndLeader\"."
+    ]
+  },
+  "Divine Tiger": {
+    "verdict": "fail",
+    "issues": [
+      "The discard trigger is missing and the spell effect is conflated; encode \"When this card is discarded, you may put it into your EX area\" as a separate onDiscard ability with moveSourceToExArea, and keep the spell ability as only \"deal 3 damage to an enemy follower.\"",
+      "The spell ability should not automatically move this card to the EX area when played; moveSourceToExArea must be removed from the spell effect."
+    ]
+  }
+}

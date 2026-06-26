@@ -1,0 +1,70 @@
+{
+  "Sae Kobayakawa [Dancing Flowers] Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve condition is encoded with conditionAny, but the source requires all three cemetery traits (Cute, Cool, and Passion) to be present. Change it to a conjunction of the three trait checks rather than an OR-style condition."
+    ]
+  },
+  "Sae Kobayakawa [Pastel-Pink Love]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Safira, Synthetic Beast": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing, not as a keyword entry.",
+      "The Fanfare buff counts all Runecraft cards in cemetery, but the source specifies Runecraft followers. Change the cemetery filter to include both cardClass: \"rune\" and cardType: \"follower\"."
+    ]
+  },
+  "Sagacious Core": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing, not as a keyword entry.",
+      "The activated effect is encoded as dealDamageAllEnemies, which would hit enemy followers as well. The source says to deal 1 damage to each enemy leader only, so encode leader-only damage instead."
+    ]
+  },
+  "Sage Commander": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing, not as a keyword entry.",
+      "The Fanfare effect should buff each other follower on your field, but buffFieldTrait without a filter does not correctly specify all allied followers. Encode this as an effect targeting all other followers you control, not a trait-based field buff with no filter."
+    ]
+  },
+  "Sagelight Teachings": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is missing the conditional upgrade \"If a follower on your field evolved this turn, choose up to 2 instead.\" It should be encoded as a conditional choice effect that uses chooseMultiple with max 2 when that condition is true and normal choose otherwise. Implement an engine condition for \"a follower on your field evolved this turn\" if unavailable."
+    ]
+  },
+  "Sahaquiel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; evolve cost lines and Fanfare should not be duplicated as keywords.",
+      "The Fanfare is encoded incorrectly: it should optionally summon a Neutral follower from your hand, not tutor a Neutral follower from cemetery. Encode a hand-to-field summon of a Neutral follower.",
+      "The summoned follower is missing the granted delayed ability \"At the start of your end phase, return this card to its owner's hand.\" Encode granting that follower a startOfEnd return-to-hand ability. If the engine cannot grant a delayed triggered ability to a summoned target, implement support for granting timed triggered abilities to selected summoned cards."
+    ]
+  },
+  "Sahaquiel & Israfil": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; evolve cost lines and Fanfare should not be duplicated as keywords.",
+      "The Fanfare is encoded incorrectly: it should optionally summon a follower that costs 6 or less from your hand, not tutor one from your deck. Encode a hand-to-field summon with maxCost 6.",
+      "The summoned follower is missing the granted delayed ability \"At the start of your end phase, return this card to its owner's hand.\" Encode granting that follower a startOfEnd return-to-hand ability. If the engine cannot grant a delayed triggered ability to a summoned target, implement support for granting timed triggered abilities to selected summoned cards."
+    ]
+  },
+  "Sahaquiel & Israfil Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve target is encoded as enemyFieldCard, but the source says another follower on the field, which can be allied or enemy and excludes this card. Change the target selector to any other follower on the field.",
+      "The effect should only summon the moved follower if you put it into your EX area, but the parsed sequence always summons from EX area. Encode this as a conditional branch based on whether the chosen follower entered your EX area.",
+      "The effect needs to summon the specific card just moved into your EX area engaged, not an arbitrary card from EX area. Implement support for moving a chosen follower to EX area and then summoning that same moved card conditionally."
+    ]
+  },
+  "Sahaquiel Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve effect is incomplete: it gives your field Rush only, but the source gives each follower on your field both Rush and Assail.",
+      "Encode the effect as granting both keywords to each follower on your field. If the engine lacks an \"assail\" keyword or a way to grant multiple keywords to all allied followers, implement support for the Assail keyword and mass keyword granting."
+    ]
+  }
+}

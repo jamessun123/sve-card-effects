@@ -1,0 +1,48 @@
+{
+  "Shiro, Cursed Wings Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve damage amount is encoded incorrectly as traitFieldCount with trait \"Ward\"; it should count the number of other followers on your field with Ward, excluding this follower. Encode it as damage equal to allied Ward followers excluding self, and implement a dynamic amount/count function for field followers by keyword with excludeSelf support if missing."
+    ]
+  },
+  "Shizuku Oikawa": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Show of Loyalty": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shrine Knight Maiden": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shrouded Assassin": {
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword \"bane\"; add \"bane\" to keywords."
+    ]
+  },
+  "Shrouded Assassin Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shuten-Doji": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded incorrectly; it should banish 2 Yokai cards from your cemetery as a cost/effect and then evolve this follower, not check cemetery count and evolve another Yokai follower. Replace with a fanfare ability that banishes 2 Yokai cards from your cemetery and evolves this follower."
+    ]
+  },
+  "Shuten-Doji Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Si Long, Draconic God-Queen": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Si Long, Draconic God-Queen Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "Gigahand Golem Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated Earth Rite ability is encoded with condition.type \"earthRite\", but Earth Rite is a cost/consumption, not a trigger condition here. It should be an activated ability with a cost like {\"earthRite\":{\"count\":1}} or an equivalent consume-stack cost. Add engine support for Earth Rite as an activated cost if not already usable outside condition gates.",
+      "The activated buff targets \"another Golem follower on your field\", but the target selector incorrectly includes a nested filter on selfFollower, which is not supported by the reference. It should target another ally follower with a Golem restriction using a supported selector/filter combination; add target-filter support for field selectors or a dedicated selector for allied followers by trait."
+    ]
+  },
+  "Gilded Blade": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gilded Boots": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gilded Goblet": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gilgamesh": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gilnelise, Omen of Craving": {
+    "verdict": "fail",
+    "issues": [
+      "The card should not include \"fanfare\" in keywords; Fanfare should be represented by abilities with timing \"fanfare\", not as a keyword.",
+      "The second Fanfare condition is wrong: \"If each player has 10 maximum play points\" is not equivalent to condition.type \"ppMin\" count 10. It should check both players' maximum play points; encode with an appropriate both-players-max-PP condition instead.",
+      "The triggered ability says \"deal 1 damage to each enemy leader,\" but the encoding only deals 1 damage to a single enemy leader target. It should hit each enemy leader simultaneously; add/use an effect that damages all enemy leaders or supports multiplayer leader-wide damage.",
+      "The onCardPlayed ability puts the card restriction at the ability root as \"filter\", which is not a valid ability wrapper field in the reference. The neutral-card restriction should be encoded using a supported card-play trigger filter mechanism."
+    ]
+  },
+  "Gilnelise, Ravenous Craving": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive Drain condition is incorrectly encoded as handMax 10, but the source says \"While your leader's defense is 10 or less\". It should use a leader-defense-at-most-10 condition. Add engine support for conditions based on your leader's current defense."
+    ]
+  },
+  "Gilnelise, Ravenous Craving Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive Drain condition is incorrectly encoded as handMax 10, but the source says \"While your leader's defense is 10 or less\". It should use a leader-defense-at-most-10 condition. Add engine support for conditions based on your leader's current defense.",
+      "On Evolve option (1) should target \"another follower on the field\", but the encoding targets anyFollower without excluding self. It should exclude this follower from valid targets; add excludeSelf support for anyFollower selectors if needed."
+    ]
+  },
+  "Gingerbread House": {
+    "verdict": "fail",
+    "issues": [
+      "The card should not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability only.",
+      "The source has \"Stack.\", but the encoding only uses keyword \"earthSigil\" and omits the stack implementation. It should include the Earth Sigil/Stack representation used by the engine, such as an addStack/passive stack-related encoding if required by your card model."
+    ]
+  },
+  "Ginne, Bewitching Courtesan": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare choose count is wrong: it is encoded as choose up to 3 unconditionally, but the source says choose up to 2, or up to 3 only if there's a Jiemon, Thief Lord on your field. It should be conditional on namedFollowerOnFieldByName \"Jiemon, Thief Lord\" with max 2 otherwise and max 3 if true.",
+      "The draw-and-put-back option uses putHandCardOnDeck without the required position, but the source says \"on the top or bottom of your deck\". It should let the player choose top or bottom. Add engine support for a choice between positions, or encode as a choose between two putHandCardOnDeck effects with positions \"top\" and \"bottom\".",
+      "The card should not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability only."
+    ]
+  }
+}

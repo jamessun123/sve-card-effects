@@ -1,0 +1,56 @@
+{
+  "Story of a Lifetime": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first effect is encoded incorrectly as searchDeckChoose to hand with remainderTo cemetery, which only chooses 1 card and does not capture 'reveal 2 and add them to your hand; bury the rest.' It should encode looking at the top 4, selecting exactly 2 to hand with reveal, and burying the remaining cards. This likely needs a new ability such as a top-deck multi-pick effect that supports lookAt, chooseCount, reveal, destination hand, and bury remainder."
+    ]
+  },
+  "Strikeform Golem": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Stringmaster": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect 'fanfare' keyword; the source text does not include Fanfare.",
+      "The trigger ability should put 2 Puppet tokens into your EX area when a Puppet is put onto your field, but the trigger filter is placed at the ability root instead of inside a supported condition/effect structure. Re-encode this using a valid onAllyFollowerEnter implementation that restricts the entering follower to identityName 'Puppet' while keeping oncePerTurn true."
+    ]
+  },
+  "Stroke of Conviction": {
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is wrong: it must engage exactly 2 cards named Naterran Great Tree on your field, not any 2 ally field cards. Re-encode the engage targets to restrict to identityName 'Naterran Great Tree'.",
+      "The damage effect uses an invalid operation name. Replace dealDamageFollowerAndLeader with the implemented op damageFollowerAndLeader.",
+      "The damage effect is incomplete because it does not target 'an enemy follower on the field.' Re-encode the damage step so it selects 1 enemy follower and deals it 5 damage and 2 damage to its leader.",
+      "The buff effect targets the wrong set of cards. It should target up to 1 Natura follower on your field, not any selfFollower. Re-encode the buff targets to your field with a Natura trait filter and make the selection optional."
+    ]
+  },
+  "Substitution": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "SugarSugar☆Mi〜n Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sukuna, Brave and Small": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sukuna, Brave and Small Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Combo thresholds are encoded in the wrong order. Combo (5) should take precedence and give this follower +3/+3 instead of the Combo (3) bonus; re-encode as if combo 5 then buff +3/+3, else if combo 3 then buff +1/+1."
+    ]
+  },
+  "Summer Encounter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Summer Sea Breeze": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition uses unsupported condition type fieldFollowerMinCost. It should encode 'If there's a follower on your field that costs 5 or more, recover 1 play point' after drawing a card. Add support for a field condition that checks for at least one allied follower matching a minimum cost, then use that condition before recoverPp 1."
+    ]
+  }
+}

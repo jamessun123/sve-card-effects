@@ -1,0 +1,58 @@
+{
+  "Garuel, Seraphic Leo Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Garyu, Supreme Dragonkin": {
+    "verdict": "fail",
+    "issues": [
+      "The passive Ward aura is encoded with \"trait\": \"Dragoncraft\", but the source says each other Dragoncraft follower on your field has Ward. Encode the aura to target other followers by class, e.g. use \"cardClass\": \"dragon\" (or an equivalent follower/class filter), not a trait string.",
+      "The card should not list \"rush\" as a keyword; the source text only has [fanfare] Draw a card and no printed Rush keyword."
+    ]
+  },
+  "Garyu, Supreme Dragonkin Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as \"playDeckTopFollower\". It should instead optionally summon a Dragoncraft follower that costs 5 or less from your hand. Replace this with an effect that plays/summons from hand with filter {\"cardClass\":\"dragon\",\"cardType\":\"follower\",\"maxCost\":5}. This requires a new implemented ability for selecting and summoning/playing a follower from hand.",
+      "The passive Ward aura is encoded with \"trait\": \"Dragoncraft\", but the source says each other Dragoncraft follower on your field has Ward. Encode the aura to target other followers by class, e.g. use \"cardClass\": \"dragon\" (or an equivalent follower/class filter), not a trait string."
+    ]
+  },
+  "Gawain of the Round Table": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare cost is incorrectly encoded as \"discard\" with count 0. The source says \"Reveal 2 Commander or Arthurian cards in your hand: Recover 2 play points.\" This should be an optional/revealed-hand cost requiring exactly 2 cards in hand matching Commander or Arthurian, then recover 2 PP. Implement a reveal-from-hand cost/effect ability to support this.",
+      "The passive cost reduction is too broad. The source says \"the 1st Commander card you play each turn costs 1 less,\" but the parsed effect reduces the next Swordcraft card you play. It should filter Commander cards, not all Swordcraft cards, and apply only to the first such card each turn. If current engine support cannot track '1st ... each turn' as a passive on the source, add support for first-matching-card-each-turn cost reduction."
+    ]
+  },
+  "Gazania Fox": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction clause is missing. The source says this card costs 1 less to play if a Beast follower not named Gazania Fox was returned to hand from your field this turn. This needs a conditional play cost reduction keyed to a 'returned to hand this turn' event with trait and name exclusion; implement support for that condition if missing.",
+      "The fanfare is incorrectly encoded as a player choice between two modes. The source is not a choice: deal 1 damage to an enemy follower, and if there's a Beast follower that costs 5 or more on your field, deal 4 damage instead and give this follower Aura. Encode this as a conditional replacement/if effect, not a choose effect.",
+      "The boosted fanfare condition is missing. The 4-damage mode and Aura should happen only if there is a Beast follower that costs 5 or more on your field; add that condition. If the engine lacks a field condition checking trait plus minimum cost, implement one.",
+      "The granted keyword is incorrect. The source gives this follower Aura, but the parsed effect grants Storm via auraGrantKeyword. Replace it with an encoding for Aura on this follower. If Aura is not currently represented in keywords/effects, implement support for the Aura keyword."
+    ]
+  },
+  "Gemstaff Commander": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Genesis Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Genesis Dragon Reborn": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Genesis of Legend": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is left as a noop. It should encode: each player reveals up to 1 non-spell card from hand simultaneously; determine X as the cost of the 2nd card after ordering revealed cards from highest to lowest; each player who revealed an X-cost card summons it. Replace noop with a proper multi-player reveal/compare/summon effect. This requires new engine support for simultaneous reveals, sorting/comparing revealed card costs, and conditional summon from hand."
+    ]
+  },
+  "Geno, Machine Artisan": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

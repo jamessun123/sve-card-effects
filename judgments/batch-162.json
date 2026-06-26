@@ -1,0 +1,63 @@
+{
+  "Nelcha, Fashion Hazard": {
+    "verdict": "fail",
+    "issues": [
+      "Strike ability is missing the required target selection before the condition; encode it as a strike effect that selects an enemy follower, then if spellchain(5) applies [attack]-2/[defense]-2 to that selected follower and [attack]+2/[defense]+2 to this follower."
+    ]
+  },
+  "Nelcha, Fashion Hazard Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrectly split and the bury clause is wrong: the source says you may reveal a Forestcraft spell from among the top 5 cards and add it to hand, and you may also bury a Forestcraft spell from among those looked-at cards before putting the rest on the bottom. The parsed `selectFromHand` incorrectly buries from hand. This should be encoded as a single top-of-deck look/search effect that can add one matching card to hand and optionally bury one matching card from the looked-at cards, then bottom the rest. Implement a new ability for choosing and burying a card from among looked-at deck cards, or extend `searchDeckChoose`/`peekDeck` to support multiple selections with one option going to cemetery.",
+      "Strike ability is missing the required target selection before the condition; encode it as a strike effect that selects an enemy follower, then if spellchain(5) applies [attack]-2/[defense]-2 to that selected follower and [attack]+2/[defense]+2 to this follower."
+    ]
+  },
+  "Nene Kurihara": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented by the existing `timing: \"fanfare\"` ability, not as a keyword."
+    ]
+  },
+  "Nene Kurihara Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve ability incorrectly uses `tutorFromCemetery` to `field`; it should summon the selected Cute follower from your cemetery, so encode it with `summonFromCemetery` (filter trait Cute, cardType follower, count 1) and keep the [cost03] payment."
+    ]
+  },
+  "Nephthys": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare summon effect is encoded incorrectly: `searchDeckSummonMultiple` with `maxTotalCost: 24` does not represent 'up to 4 Abysscraft followers with different names that cost 6 or less' from the top 7. It should encode a count limit of 4 and a different-names restriction rather than a total-cost cap. Implement a new look-at-top-and-summon-multiple operation supporting max count and unique names.",
+      "Second fanfare ability `destroyAllFollowers` is wrong; the source says 'Destroy each follower summoned this way,' meaning only the followers summoned by the previous effect should be destroyed. Encode destruction limited to the followers summoned by this effect, and implement support for referring to cards summoned by the immediately preceding effect if needed."
+    ]
+  },
+  "Neptune": {
+    "verdict": "fail",
+    "issues": [
+      "Passive Megalorca-granting ability is encoded incorrectly as `grantOnCardPlayed`; the source is a continuous field effect that all your Megalorca tokens have Rush while this card is on your field. Encode it as an aura/passive keyword grant to your Megalorca followers (for example with `auraGrantKeyword` or equivalent restricted to Megalorca), not only when they are played."
+    ]
+  },
+  "Neptune Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Passive Megalorca-granting ability is encoded incorrectly as `grantOnCardPlayed`; the source is a continuous field effect that all your Megalorca tokens have Storm while this card is on your field. Encode it as an aura/passive keyword grant to your Megalorca followers (for example with `auraGrantKeyword` or equivalent restricted to Megalorca), not only when they are played."
+    ]
+  },
+  "Neptune, Tidemistress": {
+    "verdict": "engine-missing",
+    "issues": [
+      "First fanfare effect should let you reveal up to 2 Marine followers not named Neptune, Tidemistress from among the top 5 and add them to your hand; `searchDeckChoose` currently encodes only a single optional card. Encode up to 2 cards, and implement support for multi-select from looked-at cards if needed.",
+      "Second fanfare effect is encoded incorrectly as `choose` with `summonLastTutoredFromHand`; the source says you may summon a Marine follower that costs 5 or less from your hand and give it [attack]+2/[defense]+2. It should directly select a matching card from hand to play/summon, then buff that summoned follower. Implement an effect for selecting and summoning a follower from hand (or extend `selectFromHand` to support `to: \"field\"`)."
+    ]
+  },
+  "Neun, Daybreak Vampire": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Neun, Daybreak Vampire Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve ability is encoded incorrectly: `buffFieldTrait` with null trait/class buffs the wrong set and does not enforce 'each 1-cost follower on your field and in your EX area' nor the attack-only buff. It should buff all 1-cost followers in both field and EX area by [attack]+1. Implement support for buffing cards by cost with optional includeExArea, or add a dedicated operation/filter for field+EX-area followers by cost."
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "Mechanical Analyzer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mechanical Bowman": {
+    "verdict": "fail",
+    "issues": [
+      "Do not encode Fanfare as a keyword here; remove \"fanfare\" from keywords and keep the effect only as an ability with timing \"fanfare\".",
+      "The optional cost is missing the EX area filter object required by banishFromExArea; encode the cost as banishFromExArea with count 1 and a valid filter matching any card."
+    ]
+  },
+  "Mechanized Lifeform": {
+    "verdict": "fail",
+    "issues": [
+      "Do not encode Fanfare as a keyword here; remove \"fanfare\" from keywords and keep the effect only as an ability with timing \"fanfare\".",
+      "The continuous trigger for playing a Machina card is incorrectly encoded with a top-level filter field; encode it as timing \"onCardPlayed\" with condition/effect support matching 'when you play a Machina card, draw a card' rather than an unsupported top-level filter."
+    ]
+  },
+  "Mechasaw Deathbringer": {
+    "verdict": "fail",
+    "issues": [
+      "Do not encode activated/Last Words as keywords here; remove \"activated\" and \"lastWords\" from keywords and keep them only as abilities with timings \"activated\" and \"lastWords\"."
+    ]
+  },
+  "Mechastaff Sorcerer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Do not encode Fanfare/activated as keywords here; remove \"fanfare\" and \"activated\" from keywords and keep them only as abilities.",
+      "The Fanfare is incomplete: it should put an Assembly Droid or Repair Mode token into your EX area, but the parse only creates Assembly Droid. Encode this as a choice between summoning Assembly Droid or Repair Mode to the EX area; if no EX-area token choice helper exists, implement support for choosing between multiple token summon options.",
+      "The activated cost is incorrectly encoded: banishFromExArea must use a nested filter object for a Machina card in your EX area, not custom fields banishFromExArea/banishCount. Encode the cost as banning 1 EX-area card with filter { trait: \"Machina\" }.",
+      "The damage amount is incorrectly encoded as namedIdentityFieldCount with identityName \"Machina cards\" on the field. It should be damage equal to the number of Machina cards in your EX area. Add a dynamic amount operation for EX area card counts by filter/trait, then use that for this effect."
+    ]
+  },
+  "Mechawing Angel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Do not encode Fanfare/activated as keywords here; remove \"fanfare\" and \"activated\" from keywords and keep them only as abilities.",
+      "The Fanfare is incomplete: it should put an Assembly Droid or Repair Mode token into your EX area, but the parse only creates Assembly Droid. Encode this as a choice between those two token summons; if the engine cannot represent this, implement a token-choice effect helper."
+    ]
+  },
+  "Medusa": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Medusa, Evil-Eyed Serpent": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Do not encode Fanfare/activated as keywords here; remove \"fanfare\" and \"activated\" from keywords and keep them only as abilities.",
+      "The activated cost is incorrect and incomplete: it must bury a Demon token from your field or EX area, but the parse only uses an invalid buryFromField token cost and does not require the Demon trait or allow EX area. Encode a cost that selects 1 Demon token from field or EX area and buries/banishes it appropriately; if the engine lacks a unified cost for selecting a token from field or EX area by trait, implement such a cost ability."
+    ]
+  },
+  "Medusiana": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare healing amount is incorrectly encoded as namedIdentityFieldCount with identityName \"Demon\". It should equal the number of Demon followers on your field. Encode this with a dynamic amount that counts followers on your field by trait Demon; if the engine lacks trait-based follower count for healing amounts, implement one."
+    ]
+  },
+  "Meet the Levin Sisters!": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is misencoded as an optional cost followed by a player choice between the normal and enhanced effects. The base effect should always search for exactly one of Mina, Mona, or Mena and add it to hand, while the 4-extra-PP payment should instead replace that with the enhanced effect.",
+      "The normal search filter is too broad: identityNameContains \"Levin\" can find many wrong cards. It should be restricted to exactly Mina, Levin Vice Leader; Mona, Levin Mage; or Mena, Levin Duelist.",
+      "The normal mode should add the chosen card to hand and shuffle, not use searchDeckChoose with remainderTo deckBottom.",
+      "The enhanced mode is incorrect: it must search for 1 of each of the three specific cards and summon them, not searchDeckSummonMultiple for generic Levin cards with max total cost 12.",
+      "The enhanced mode should only occur if the 4-more-PP optional payment was made, not as one option of a generic choose effect."
+    ]
+  }
+}

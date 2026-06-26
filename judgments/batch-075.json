@@ -1,0 +1,68 @@
+{
+  "Fairy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairy Assault": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The summon effect is encoded incorrectly: \"Summon 2 Fairy tokens\" should summon to the field, not the EX area. Change the first step to {\"op\":\"summon\",\"tokenName\":\"Fairy\",\"count\":2,\"zone\":\"field\"}.",
+      "The damage amount is encoded incorrectly: it should count Pixie tokens on your field, not cards named \"Pixie\". Encode the amount as the number of Fairy/Pixie tokens on your field; this likely requires a new dynamic amount implementation that counts field cards by token/trait/name (for example a field token count or named token field count), since the current reference lacks a way to count Pixie tokens specifically."
+    ]
+  },
+  "Fairy Beast": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword \"fanfare\"; the source card has no Fanfare keyword.",
+      "The activated cost is encoded incorrectly. Replace the custom cost fields with the implemented activated cost shape using banishFromExArea, e.g. {\"banishFromExArea\":{\"filter\":{\"trait\":\"Pixie\",\"cardType\":\"follower\"},\"count\":1}} as the cost."
+    ]
+  },
+  "Fairy Caster": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare effect is encoded incorrectly: \"Summon 3 Fairy tokens. If your field becomes full from this effect, put any remaining tokens into your EX area\" should not put all 3 directly into the EX area. It should summon as many as possible to the field, then place overflow tokens into the EX area.",
+      "To encode this card correctly, the engine needs support for partial summon overflow handling (summon to field up to capacity, then move unsummoned remainder to EX area), which is not available in the current ability reference."
+    ]
+  },
+  "Fairy Circle": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairy Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare buff amount is encoded incorrectly: it should count Pixie tokens on your field and in your EX area, not Pixie trait cards on your field only. Encode the attack gain as the total number of Pixie/Fairy tokens across field and EX area.",
+      "This requires a new dynamic amount implementation that can count cards across field and EX area by token/name/trait, since the current reference does not provide a damage/buff amount for 'number of Pixie tokens on your field and in your EX area'.",
+      "Remove \"fanfare\" and \"lastWords\" from keywords; Ward should remain in keywords, while Fanfare and Last Words are represented by abilities rather than keywords."
+    ]
+  },
+  "Fairy Flowering": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost is encoded incorrectly: \"bury 4 Pixie tokens\" is not the same as milling 4 cards from your deck. This should be an additional play cost requiring you to bury 4 Pixie tokens.",
+      "To encode this correctly, the engine needs support for spell additional costs that bury selected cards/tokens from your field and/or EX area matching a filter such as Pixie token, before resolving the spell."
+    ]
+  },
+  "Fairy Healer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The target filter is encoded incorrectly: the source says \"a token follower from your field\", but the parsed target uses an unsupported embedded filter and uses \"cardType\":\"token\" instead of distinguishing token printings. It should target a token follower on your field, i.e. a follower with printingType \"token\".",
+      "To encode this correctly, the engine needs selector support for targeting ally field cards/followers with filtering such as printingType:\"token\" and cardType:\"follower\", since current target selectors do not expose filter fields in the reference."
+    ]
+  },
+  "Fairy Menhir": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare search is over-encoded with an unsupported/undefined \"reveal\" field on searchDeckChoose. The effect should be encoded as looking at the top 3 cards, optionally adding a Pixie card to hand, and putting the rest on the bottom; explicit reveal handling would require engine support if it matters.",
+      "If reveal is intended to be tracked mechanically, implement reveal support on searchDeckChoose (or a separate reveal step). Otherwise remove the unsupported \"reveal\" field."
+    ]
+  },
+  "Fairy Officer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The order of the Fanfare sequence is incorrect. The card should first put 2 Fairy tokens into your EX area, then deal damage to the selected follower. Swap the two steps in the sequence.",
+      "The damage amount is encoded incorrectly: it should equal the number of Pixie tokens in your EX area, not cards named \"Pixie\" on the field. Encode the amount as a count of Pixie/Fairy tokens in your EX area.",
+      "This requires a new dynamic amount implementation for counting EX area cards by token/name/trait, since the current reference does not support 'number of Pixie tokens in your EX area'."
+    ]
+  }
+}

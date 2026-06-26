@@ -19,7 +19,7 @@ SECRETS_PATH = ROOT / "secrets.json"
 MODEL = "gpt-5.4"
 RESPONSES_ENDPOINT = "/v1/responses"
 # OpenAI enqueued prompt token limit per model/org (gpt-5.4-mini defaults to 2M).
-DEFAULT_MAX_ENQUEUED_TOKENS = 1_900_000
+DEFAULT_MAX_ENQUEUED_TOKENS = 850_000
 _CHARS_PER_TOKEN_ESTIMATE = 4
 
 _PROMPT_FORMAT_CACHE: str | None = None

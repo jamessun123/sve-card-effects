@@ -1,0 +1,62 @@
+{
+  "Priest of the Cudgel": {
+    "verdict": "fail",
+    "issues": [
+      "Missing the printed evolve ability. Add an ability with timing \"evolve\" and cost {\"pp\":1} that represents \"Evolve this follower\"; do not encode \"evolve\" as a keyword only."
+    ]
+  },
+  "Priest of the Cudgel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Priestess of Foresight": {
+    "verdict": "fail",
+    "issues": [
+      "Missing the printed evolve ability. Add an ability with timing \"evolve\" and cost {\"pp\":1} that represents \"Evolve this follower\"; do not encode \"evolve\" as a keyword only.",
+      "Do not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability timing only."
+    ]
+  },
+  "Priestess of Foresight Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should select up to 2 enemy followers, but the encoding requires exactly 2. Change the effect to an operation that supports \"up to 2\" enemy followers."
+    ]
+  },
+  "Prim, Innocent Princess": {
+    "verdict": "fail",
+    "issues": [
+      "Missing the printed evolve ability. Add an ability with timing \"evolve\" and cost {\"pp\":1} that represents \"Evolve this follower\"; do not encode \"evolve\" as a keyword only.",
+      "Do not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability timing only."
+    ]
+  },
+  "Prim, Innocent Princess Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Primal Giant": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The discard-triggered ability is encoded incorrectly as a passive ability with condition {\"type\":\"discardedThisTurn\"}. It should be an onDiscard trigger that puts a Naterran Great Tree token into your EX area. Implement/use a trigger timing or wrapper for \"When this card is discarded\".",
+      "The play cost reduction clause is encoded incorrectly with earthRite. It should require burying 4 Natura cards when playing this card, then reduce its play cost by 4. Implement a play-cost condition/cost ability for \"When playing this card, bury 4 Natura cards: this card costs 4 less to play,\" such as a play-time optional/required cost using bury/banish from cemetery with a trait filter."
+    ]
+  },
+  "Prime Dragon Keeper": {
+    "verdict": "fail",
+    "issues": [
+      "The second ability should trigger only when another Dragoncraft follower that costs 3 or less is put onto your field. The encoding is missing the \"another\" restriction; add excludeSelf handling to the trigger filter or equivalent so this card entering does not trigger itself.",
+      "The second ability is encoded with an invalid operation id. Change \"dealDamageFollowerAndLeader\" to the implemented op \"damageFollowerAndLeader\".",
+      "The second ability must select an enemy follower, then deal 2 damage to it and 1 damage to its leader. Ensure the damage effect includes the required enemy follower target selection."
+    ]
+  },
+  "Princess Juliet": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Princess Snow White": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Do not include \"fanfare\" and \"lastWords\" in keywords; they should be represented by ability timings, while only Ward belongs in keywords.",
+      "The Last Words ability is encoded incorrectly. It should trigger only if this card had a Fable counter, then put this card into its owner's EX area. Replace the placeholder always-true condition with a real counter-check condition, and implement a condition type for checking whether the source has a named counter if the engine lacks one."
+    ]
+  }
+}

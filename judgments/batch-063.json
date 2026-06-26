@@ -1,0 +1,57 @@
+{
+  "Dragonblader Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded with banish targeting an enemyFieldCard, but the source says to select a card in an EX area and banish it. It should target a card in an EX area instead. Implement a target/effect form for selecting and banishing a card from an EX area (either player's EX area), since the current ability reference lacks a direct selector/op for this exact action."
+    ]
+  },
+  "Dragonbond Mage": {
+    "verdict": "fail",
+    "issues": [
+      "The whenever-you-play-a-spell ability is incorrectly encoded with filter at the ability root; the spell restriction should be encoded on the trigger so it only triggers when you play a spell.",
+      "The activated ability cost is incorrect: it should not be pp: 0. The ability's cost is removing 3 spell counters from this card.",
+      "The activated ability should encode removing 3 spell counters as the activation cost (or as a removeCounter effect that must succeed before damage), not as a generic 0-PP activated ability."
+    ]
+  },
+  "Dragonclad Blademaster": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragonclad Lancer": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target should be another follower on your field; encode the damage target as selfFollower with excludeSelf: true, not any self follower including this card."
+    ]
+  },
+  "Dragonewt Fist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onDiscard ability is missing the optional 'you may' clause. It should be encoded as an optional move of this card to your EX area after discard. Implement optional handling for onDiscard self-move effects, or a generic optional wrapper/effect for 'you may' triggered actions."
+    ]
+  },
+  "Dragonewt Needler": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger timing is incorrect: the source says 'Whenever a Dragonewt follower on your field attacks', but it is encoded as onAllyFollowerEnter. It should trigger on ally attack/strike by a Dragonewt follower.",
+      "The effect is incorrect: it should deal 2 damage to each enemy leader, not to all enemies. Encode leader-only damage to each opponent. Implement a trigger for 'when an ally follower attacks' with trait filtering, and an effect/op for dealing damage to each enemy leader in multiplayer."
+    ]
+  },
+  "Dragonewt Princess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragonewt Scholar": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The keyword Intimidate is missing. It should be included in keywords if supported. Implement Intimidate as a supported keyword in the engine/keyword set."
+    ]
+  },
+  "Dragonfolk Artificer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragonfolk Stoker": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

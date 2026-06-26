@@ -1,0 +1,57 @@
+{
+  "Chitose Kurosaki": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove keywords \"fanfare\" and \"quick\"; the source text has neither.",
+      "The passive ability is incorrectly encoded as grantLeaderDamageShield. It should represent 'during your turn, your leader and each other follower on your field don't take ability damage' with a turn-limited damage-immunity aura affecting your leader and other allied followers. Implement a passive/aura operation for preventing ability damage to multiple allied targets during your turn.",
+      "The activated ability is missing 'Lesson (1)' as an activation requirement in addition to [cost01]. Encode the Lesson requirement if supported; otherwise implement a condition/cost primitive for Lesson counters/levels."
+    ]
+  },
+  "Chitose Kurosaki [Memento Mori]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is missing the 'Lesson (1)' requirement. Encode the Lesson requirement if supported; otherwise implement a condition/cost primitive for Lesson counters/levels.",
+      "The second step should be leader defense increase, not healLeader. Encode it as a leader-defense buff/+1 effect; if the engine lacks leader stat buff support, implement an operation for giving your leader [defense]+N."
+    ]
+  },
+  "Chitose Kurosaki [Memento Mori] Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chivalrous Bandit": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chivalrous Charge": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incorrectly encoded as dealDamageAllEnemies with amount selfAttack. It should first select a Commander follower on your field, then deal damage to each enemy follower equal to the selected follower's attack. Implement support for selecting an allied follower and using that selected target's attack as the damage amount for an all-enemy-follower damage effect."
+    ]
+  },
+  "Chiyo Shirayuki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chizuru Matsuo": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chorus of Prayer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chris Pumpkinhead": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is missing its start-of-end-phase ability. It should be encoded as 'At the start of your end phase, Necrocharge (10) - select a follower on your field; give it +1/+1 and Ward, then engage it.' The engine can encode startOfEnd with a necrocharge condition, but needs composition support to both buff and grant Ward to a selected follower and then engage that same selected target in sequence.",
+      "If the engine cannot apply multiple effects to the same chosen target across a sequence, implement target-binding/reuse for a selected follower so buff, grantKeyword(ward), and engage can all affect that chosen target."
+    ]
+  },
+  "Chris Pumpkinhead Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is missing its start-of-end-phase ability. It should be encoded as 'At the start of your end phase, Necrocharge (10) - select a follower on your field; give it +1/+1 and Ward, then engage it.' The engine can encode startOfEnd with a necrocharge condition, but needs composition support to both buff and grant Ward to a selected follower and then engage that same selected target in sequence.",
+      "If the engine cannot apply multiple effects to the same chosen target across a sequence, implement target-binding/reuse for a selected follower so buff, grantKeyword(ward), and engage can all affect that chosen target."
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "Creative Conjurer": {
+    "verdict": "fail",
+    "issues": [
+      "The second choose option is missing the Earth Rite condition/cost; encode it so that option (2) requires Earth Rite (1), e.g. with a conditional/costed effect that consumes 1 stack before dealing damage.",
+      "The second choose option targets the wrong side; 'Deal 2 damage to each enemy leader' should damage only enemy leaders, not all enemies."
+    ]
+  },
+  "Creeping Malice": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crimson Meteor Storm": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect's second damage clause is encoded as damage to all enemies; 'Deal 3 damage to each enemy leader' should damage only enemy leaders."
+    ]
+  },
+  "Crimson Rose Queen": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crimson Rose Queen Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly; 'Reveal your hand. Recover play points equal to the number of 2-cost cards revealed this way' should count 2-cost cards in your revealed hand, not use namedIdentityFieldCount. Add an implemented dynamic amount/effect for counting revealed hand cards by cost, then use recoverPp with that amount.",
+      "The triggered ability filter is too broad; 'Whenever you play a card that originally costs 2' should match exactly originally cost 2, not maxCost 2.",
+      "The second choose option targets the wrong side; 'Deal 2 damage to each enemy leader' should damage only enemy leaders, not all enemies."
+    ]
+  },
+  "Crimson Virtue": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Yuzuki cost-reduction condition is encoded incorrectly; namedFollowerOnFieldByName with identityName 'Yuzuki' checks exact name, but the card says a follower with 'Yuzuki' in its name. Add a condition for name-contains on a follower on your field, then use playCostReduction 1 under that condition.",
+      "The 'When playing this, [engage] two 2-cost followers on your field: This costs 1 less to play' clause is left as noop and should be encoded as an optional additional play cost that engages exactly two of your 2-cost followers to grant this card/play a cost reduction of 1. Add implemented support for play-time optional costs that select and engage matching allied followers, then apply cost reduction before resolution."
+    ]
+  },
+  "Crocus Rat": {
+    "verdict": "fail",
+    "issues": [
+      "The return-to-hand trigger is missing; add an onReturnToHand ability that heals your leader for 1 when this card is returned to hand from your field."
+    ]
+  },
+  "Crossbow Sniper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage target is too narrow; 'Select an enemy leader or enemy follower on the field' should allow either an enemy leader or an enemy follower, not only enemy followers. Add a target selector/effect pattern that can choose either enemy leader or enemy follower, then deal 1 damage to that chosen target before drawing."
+    ]
+  },
+  "Cruel Priestess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crusader's Rallying Cry": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activation condition is encoded incorrectly; 'Activate only if there are at least 3 amulets in your cemetery' should count amulets specifically, not all cards in your cemetery. Add a cemetery condition/filter for cardType amulet count, then gate the activated ability with that condition."
+    ]
+  }
+}

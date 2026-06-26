@@ -1,0 +1,62 @@
+{
+  "Natsuki Kimura [Scarlet Love Song] Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the top-level keywords entry for \"storm\"; the source gives Storm only conditionally while there are at least 10 Passion cards in your cemetery, so it should appear only as the conditional passive ability."
+    ]
+  },
+  "Natur Al'machinus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the missing discard-triggered ability: when this card is discarded, [engage] a Naterran Great Tree on your field to add a Natura card not named Natur Al'machinus from your cemetery to your hand. This is incorrectly folded into the fanfare with a discardedThisTurn condition. It should be a separate onDiscard ability with an engage cost targeting a Naterran Great Tree, but the engine lacks a way to encode activated/triggered costs that engage a selected matching field card and lacks card-name/trait targeting for such a cost."
+    ]
+  },
+  "Nature's Guidance": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Nature's Warden": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The deck search and hand summon filters are incorrect: they use a non-existent filter field \"keywords\": [\"ward\"]. Both effects should search/select a follower with Ward, but DeckFilter/selectFromHand do not support keyword-based filtering. Add engine support for filtering by keyword (for example keyword/keywordsAny) and use that for both abilities."
+    ]
+  },
+  "Navy Lieutenant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Nazuri, Bestial Innkeeper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is encoded incorrectly. 'At least 3 Festive cards on your field and/or in your EX area' means a combined total across both zones, not field>=3 OR exArea>=3. It should check combined field+EX Festive count >= 3. Add an engine condition for combined zone trait count (for example fieldAndExAreaTraitMin) and use that here."
+    ]
+  },
+  "Necrocarnival": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded as two separate spell abilities, causing the base choose-one effect to remain available even when Necrocharge (10) is active. It should be a single spell ability that uses an if condition on necrocharge(10): choose up to 2 if true, otherwise choose 1."
+    ]
+  },
+  "Nefarious Invasion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the missing play restriction: this can't be played unless there are at least 3 Machina cards in your EX area. The parsed card omits this entirely; it should be encoded as a play restriction condition, but the engine has no implemented wrapper/operation for play restrictions on casting cards.",
+      "Add the missing optional extra play cost: 'You may play this for 2 more play points.' The parser instead checks ppMin 5 after resolution, which is incorrect. This should be represented as an optional additional play cost that determines whether the Assault Tentacle is summoned, but the engine lacks support for optional additional spell play costs / tracking whether that extra cost was paid.",
+      "The Belphomet search should search the whole deck and then shuffle, not use searchDeckChoose with lookAt 40 and remainderTo deckBottom. It should be encoded as a full-deck tutor plus shuffle."
+    ]
+  },
+  "Nekhbet": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the missing restriction 'This can't be played from the EX area.' The parsed card omits this, and the engine lacks a way to encode source-zone play restrictions.",
+      "Add the missing evolve ability explicitly: [evolve] [cost01]: Evolve this. This should be represented as the evolve payment ability in addition to evolveCost, but the parsed card only sets evolveCost and keywords.",
+      "The EX-area damage/heal ability is encoded with the wrong timing. It should trigger at the start of each opponent's end phase while this is in your EX area, with an optional [cost02] payment then causing the effect. The parser made it a generic activated ability instead. Encode it as startOfEnd with condition source in EX area and an optional PP cost, but the engine lacks support for opponent-turn/end-phase trigger scoping and for optional costs on triggered abilities.",
+      "The damage effect is wrong: 'Deal 2 damage to each enemy leader' should not be encoded as dealDamageAllEnemies amount 2. It should damage enemy leaders only; the current encoding incorrectly includes followers. Add an effect operation for dealing damage to each enemy leader if needed.",
+      "The final clause is wrong: 'Give your leader [defense]+2' is not heal 2. It should increase your leader's defense stat by 2 rather than recover defense. Add a leader-defense buff operation if needed."
+    ]
+  },
+  "Nekhbet Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

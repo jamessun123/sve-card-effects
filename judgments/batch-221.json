@@ -1,0 +1,57 @@
+{
+  "Summon Bloodkin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Summoning Drills": {
+    "verdict": "fail",
+    "issues": [
+      "Missing Stack keyword/effect. Add the card's Stack ability, e.g. as a passive/addStack representation rather than only fanfare abilities.",
+      "The second fanfare buffs only Golem followers on your field and in your EX area, but parsed buffFieldTrait does not include EX area. Change it to include EX area as well.",
+      "The second fanfare should buff Golem followers specifically; using trait \"Golem\" may be incorrect if the engine distinguishes follower traits from names. Encode the buff so it clearly applies to Golem followers on your field and in your EX area."
+    ]
+  },
+  "Sun Oracle Pascale": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sunbright Elf": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should give +1/+1 only to Pixie token followers in your EX area, but parsed buffFieldTrait affects field cards instead. Encode an effect that buffs Pixie token followers in EX area only."
+    ]
+  },
+  "Sunbright Elf Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should summon up to 2 Pixie token followers from your EX area, but parsed summonFromExArea has no count limit and no token restriction. Change it to summon up to 2 Pixie token followers from your EX area."
+    ]
+  },
+  "Sunny Day Encounter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Supercharged Guitarist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Supersonic Breakthrough": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Option 1 should search your deck for a follower with \"Ralmia\" in its name, reveal it, add it to your hand, then shuffle. Parsed searchDeckChoose incorrectly puts the rest on the bottom instead of shuffling. Encode tutor-to-hand plus shuffle; if unavailable in choose branches, implement support for tutorFromDeck with reveal inside choose or a searchDeckChoose mode that preserves full-deck search and shuffles afterward.",
+      "Option 2 should search your deck for up to 2 differently named followers with \"Ralmia\" in their names and summon them, then shuffle. Parsed searchDeckSummonMultiple does not enforce 'up to 2' or 'differently named' and uses deck-bottom remainder instead of shuffle. Encode a search that selects up to 2 differently named matching followers to field, then shuffle; implement engine support for 'differently named' multi-search/summon from deck if missing."
+    ]
+  },
+  "Surefire Bullet": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is conditional damage to a single selected enemy follower: 3 damage normally, or 4 if that selected follower is evolved. Parsed choose incorrectly lets the player pick either damage mode regardless of target state. Encode a single targeted damage effect with a condition based on whether the selected target is evolved; implement target-state conditional damage if the engine lacks it."
+    ]
+  },
+  "Suttungr": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should select up to 2 enemy followers, but parsed engage requires exactly 2 targets. Change it to an optional/up-to-2 target selection."
+    ]
+  }
+}

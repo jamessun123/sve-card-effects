@@ -1,0 +1,59 @@
+{
+  "Rejuvenating Resurrection": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The effect should summon a follower from your cemetery, not add it to hand. Replace tutorFromCemetery/to:field with a cemetery-to-field summon effect targeting a follower whose name contains \"Amataz\"; implement a generic summon-from-cemetery-by-filter ability or allow tutorFromCemetery to support to:\"field\" as an actual summon."
+    ]
+  },
+  "Relic Goddess ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The end phase heal is encoded incorrectly: it uses buffDynamic with unsupported amount op \"fieldTraitCount\" and trait \"Amulet\". It should recover your leader's defense by the number of amulets on your field divided by 2, rounded down; implement a dynamic amount for counting amulets on your field (or field cardType count with divisor) and use healLeader/buffDynamic on selfLeader correctly.",
+      "The passive ability-damage protection is encoded incorrectly as auraAbilityDamageCap amount 99, which means damage is reduced to 99 per hit, not immunity. It should make this follower unable to take ability damage; encode as damage immunity to self if supported for passive, or implement a passive grant/flag for 'can't take ability damage'."
+    ]
+  },
+  "Remi & Rami, Witchy Duo": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Remi & Rami, Witchy Duo Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Earth Rite clause is encoded as a passive condition, but it is part of the On Evolve ability after summoning the token. It should be inside the onEvolve effect as 'summon a Strikeform Golem token, then if Earth Rite (1), give it +2 attack'; implement an onEvolve sequence with an Earth Rite conditional/removal tied to the summoned token."
+    ]
+  },
+  "Remnant of Hollowness": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell should become 'choose up to 2 instead' if there are at least 10 cards in opponents' cemeteries. The parsed code always chooses exactly 1. It should use a conditional chooseMultiple/max 2 when opponent cemetery count is at least 10; implement support for conditional choice-count modification if needed.",
+      "Option 1 is missing the alternate damage amount. It should deal 3 damage normally, or 8 damage instead if there are at least 10 cards in opponents' cemeteries.",
+      "Option 2 is close, but the engine lacks explicit support for 'reveal a Thief card from among them and add it to your hand' within searchDeckChoose reference; if reveal is not implemented there, add reveal support to searchDeckChoose."
+    ]
+  },
+  "Rending Blast ADVANCED": {
+    "verdict": "fail",
+    "issues": [
+      "The effect should deal 8 damage to each enemy leader only, not to all enemies. Replace dealDamageAllEnemies with a leader-only damage effect targeting enemy leaders."
+    ]
+  },
+  "Reno, Luxwing Featherfolk": {
+    "verdict": "fail",
+    "issues": [
+      "The card should not list \"strike\" and \"fanfare\" in keywords. Keep Rush as a keyword, but represent Strike and Fanfare only as abilities with timing \"strike\" and \"fanfare\"."
+    ]
+  },
+  "Repair Mode": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Resentful Blaze": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Resolve of the Fallen": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The conditions use unsupported type \"ownEvolveDeckFaceupMin\". The card should check for at least 3 and at least 5 faceup evolved followers in your evolve deck; implement a condition type for faceup evolved cards in evolve deck and use it here."
+    ]
+  }
+}

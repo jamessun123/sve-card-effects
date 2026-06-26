@@ -1,0 +1,60 @@
+{
+  "Bubbleborne Mermaid": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bullet Bike": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability incorrectly gives [attack]+1 to a follower unconditionally before granting Rush; it should first select a follower on your field and give it Rush, with no unconditional buff.",
+      "Activated ability targets are inconsistent across steps; the selected follower should be the same follower for both granting Rush and any conditional buff.",
+      "Conditional buff is encoded as checking whether there is any Wasteland follower on your field; it should check whether the selected follower is a Wasteland follower, then give that selected follower [attack]+1."
+    ]
+  },
+  "Bumpkin Recruit": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare condition is encoded as having at least 5 Swordcraft cards in your cemetery; it should require at least 5 Swordcraft followers in your cemetery."
+    ]
+  },
+  "Bunny & Baron, Specter Duo": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bunny & Baron, Specter Duo Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bunny-Eared Administrator": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability discards a random card with `discard`; it should discard this card from hand as part of the cost. Implement a dedicated self-discard-from-hand activated cost/effect for cards with '[act] [cost], discard this card'.",
+      "Activated ability puts the card on the bottom of the deck with `putOnBottomOfDeck`; it should put this card into your deck 3rd from the top. Implement a deck insertion effect that can place the source card at a specified position from the top.",
+      "Activated ability currently sequences discard, heal, and deck movement from the field; it should be encoded as an ability activated from hand that discards this card from hand, then heals your leader 1, then places this card 3rd from the top of your deck. Implement support for `activateFrom: \"hand\"` with self-discard handling tied to the source card."
+    ]
+  },
+  "Burnite, Anathema of Flame": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Play-cost reduction condition is encoded as at least 4 Dragoncraft cards in your cemetery; it should require at least 4 Dragoncraft cards in your cemetery that cost 7 or more. Implement a cemetery-count condition that supports both class and cost filtering.",
+      "Fanfare damage amount is encoded as `targetAttack`; it should be equal to the discarded card's cost. Implement a dynamic amount that reads the cost of the card discarded for an `optionalCost`."
+    ]
+  },
+  "Burnite, Anathema of Flame Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve damage amount is encoded as `targetAttack`; it should be equal to the discarded card's cost. Implement a dynamic amount that reads the cost of the card discarded for an `optionalCost`.",
+      "Start-of-end-phase ability is missing; it should be 'At the start of your end phase, if there are at least 7 Dragoncraft cards in your cemetery that cost 7 or more, deal 7 damage to each enemy leader.' Implement a cemetery-count condition that supports both class and cost filtering, plus an effect for dealing damage to all enemy leaders in multiplayer-compatible form."
+    ]
+  },
+  "C.C., Woodland Witch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cactus Cowboy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Last Words condition is encoded as fieldTraitMin 3 OR exAreaTraitMin 3; it should count Mount cards on your field and/or in your EX area together, requiring a combined total of at least 3. Implement a condition that counts matching cards across multiple zones."
+    ]
+  }
+}

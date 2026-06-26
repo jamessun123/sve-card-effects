@@ -1,0 +1,52 @@
+{
+  "Treant": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare Combo (3) effect is encoded incorrectly as playCostReduction amount 0; it should change this card's evolve cost to 0, using an evolve-cost-changing effect such as evolveCostReduction for 2 or equivalent self-targeted evolve-cost set/reduction logic."
+    ]
+  },
+  "Treant Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "evolvesFrom is incorrect; it should be \"Treant\", not \"Treant Evolved\"."
+    ]
+  },
+  "Treasure Map": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect is incomplete: it only searches for up to 1 follower, but the source also lets you reveal up to 1 amulet and add it to your hand from among the top 7 cards, then put the rest on the bottom. It should encode selecting up to one follower and up to one amulet from the same looked-at cards. Implement an ability to choose multiple cards from a looked-at subset with separate card-type caps (for example, a multi-pick search/look effect supporting up to 1 follower and up to 1 amulet)."
+    ]
+  },
+  "Tree of Wonders": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Trial of the Gorgons": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tribunal of Good and Evil": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Trick Dullahan": {
+    "verdict": "fail",
+    "issues": [
+      "Necrocharge (10): Put 3 instead is encoded as an additional separate summon-3 ability, which would produce 4 Ghosts total. It should be a single Fanfare effect that summons 1 normally, or 3 instead if condition type necrocharge count 10 is met."
+    ]
+  },
+  "Trident Merman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Trinity Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The keyword Intimidate is missing. It should be represented in keywords or passive keyword handling. Implement engine support for the Intimidate keyword if it is not currently supported."
+    ]
+  },
+  "Tristan of the Round Table": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Saintly Core": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Saintly Leader": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is encoded incorrectly. It should banish exactly 3 follower cards with Ward from your cemetery using a cost shape the engine supports; add a cemetery cost/filter form that can require printed keywords (e.g. Ward) in addition to cardType, then keep the effect as banishing an enemy follower."
+    ]
+  },
+  "Salefa, Guardian of Water": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability cost is incorrect: '[engage] an amulet on your field' is not the same as engaging this card. It should use a cost that selects and engages one allied amulet; implement an activated/fanfare cost form for engaging a chosen allied field card matching cardType: amulet.",
+      "The fanfare effect is incorrect: it does not say the target can't attack at all, but that it can't attack enemies during its controller's next turn. Replace the current grantKeyword encoding with an effect/restriction that prevents the targeted enemy follower from attacking followers for that next turn; implement a targeted temporary attack-restriction operation for this clause.",
+      "The activated ability has the same two problems as the fanfare ability: its cost should engage an allied amulet, not self, and its effect should prevent the chosen enemy follower from attacking enemies during its controller's next turn rather than fully preventing attacks."
+    ]
+  },
+  "Salome": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Salvation Ex Limonia": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost discount clause is encoded as a spell-timing optionalCost effect, but 'When playing this card, discard a Heavenly Aegis: This card costs 2 less to play' must function as an alternative additional play cost that reduces the card's own play cost before resolution. Implement a pre-play optional cost / play replacement ability that can discard a named card from hand to reduce this card's play cost by 2.",
+      "The first spell effect should summon a selected Machina follower that costs 3 or less from your cemetery. 'tutorFromCemetery' to field is the wrong operation; use a cemetery-to-field summon/revive selection effect, or implement a targeted single-card summon from cemetery operation.",
+      "The Repair Mode token condition is encoded incorrectly. It should trigger only if the card summoned by this spell is Limonia, Flawed Saint, not merely if a card with that name is on your field afterward. Implement a way to reference the card just summoned/revived by the previous step and check its identity."
+    ]
+  },
+  "Salvia Panther": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive play-cost reduction ability is missing. It should reduce this card's play cost by 2 if a Beast follower other than Salvia Panther was returned to hand from your field this turn; implement a condition for 'a matching card was returned to hand from your field this turn' with support for trait plus excluded identity, then use playCostReduction amount 2.",
+      "The base card is missing the printed Storm keyword/effect granted by its evolve text block. Add Storm in the way your schema represents printed evolve-side keywords on the base/evolved pair, or otherwise ensure the evolve-linked encoding preserves that this follower evolves into a Storm follower."
+    ]
+  },
+  "Salvia Panther Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sammy, Wizard's Apprentice": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sammy, Wizard's Apprentice Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incorrect. 'Each player draws a card' is not hand reset and redraw. Replace 'handResetDraw' with an effect that makes both players draw 1 card; implement a dedicated 'each player draws' / symmetrical draw operation if the engine lacks one."
+    ]
+  },
+  "Samurai": {
+    "verdict": "fail",
+    "issues": [
+      "The card has an incorrect keyword entry: remove 'fanfare' from keywords, since the source text has no Fanfare ability."
+    ]
+  }
+}

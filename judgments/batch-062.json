@@ -1,0 +1,52 @@
+{
+  "Dragon Summoner": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Summoner Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Warrior": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Warrior Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Wings": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded as dealing damage only to enemy followers with dealDamageAllEnemies, but the source says \"each follower on the field\". It should damage all followers on both fields; replace this with an effect that hits all followers, such as dealDamageOtherFollowers plus self damage or an implemented all-followers equivalent."
+    ]
+  },
+  "Dragon's Handspur": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon's Nest": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon-Devouring Dread": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare should banish up to 1 enemy follower for each Dragoncraft card that costs 7 or more in your cemetery, but the parsed banishUpTo uses targets.count: 1, which limits selection to only one follower. It should allow up to X enemy followers, where X is the dynamic cemetery count.",
+      "The activated ability cost is incorrect. The source requires [cost03] and discarding this card and a Dragoncraft card that costs 7 or more; replace cost.discard with a cost/effect encoding that specifically discards this card plus 1 Dragoncraft card with minCost 7 from hand."
+    ]
+  },
+  "Dragon-Drawn Carriage": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is missing entirely. It should be an activated ability with oncePerTurn true that removes 2 divine water counters from a Soothing Dragonspring on your field, then gives this follower +1 attack and Storm. Implement support for removing named counters from another specified allied card (for example removeCounter targeting an allyFieldCard filtered to Soothing Dragonspring) and then sequence buff + grantKeyword(storm) on self.",
+      "The keyword \"advanced\" is incorrect and should be removed; the source text does not grant Advanced."
+    ]
+  },
+  "Dragonblader": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should make each player put a Dragon token into their EX area, but the parsed card has two identical summon effects that both appear to summon only for the controller. It should be encoded as one effect that places a Dragon token into each player's EX area. Implement an ability for summoning to both players' EX areas or an effect variant that targets each player."
+    ]
+  }
+}

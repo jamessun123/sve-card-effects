@@ -1,0 +1,50 @@
+{
+  "Pinion Prince Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Piquant Potioneer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Piquant Potioneer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second On Evolve option is encoded incorrectly: `discardFromHand.filter` uses unsupported `excludeCardClass`. It should discard a non-Runecraft card, which requires implementing negative hand/deck filter support such as `excludeCardClass` (or an equivalent NOT filter), then encode the cost as discarding 1 card matching not Runecraft before dealing 5 damage to an enemy follower."
+    ]
+  },
+  "Planetary Fracture": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incomplete: 'Each player banishes the top 10 cards of their deck' is encoded only as `millToBanish` for the controller. It should affect both players. Implement an effect op for symmetric deck banish such as `eachPlayerMillToBanish`/`banishTopDeckEachPlayer`, then encode the second step to banish the top 10 cards of each player's deck."
+    ]
+  },
+  "Playful Necromancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Playful Necromancer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Plucky Treasure Hunter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Plucky Treasure Hunter Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Poisonous Dilophosaurus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare is encoded incorrectly: the source requires 'Banish a Naterran Great Tree from your field' as a mandatory cost, but the parsed ability only checks for a Naterran Great Tree on your field and then destroys an enemy follower without banishing it. Implement a cost/effect op to banish a selected/allied field card matching a filter (for example `banishFromFieldSelect` with a name filter), then encode the Fanfare as banishing a Naterran Great Tree from your field before destroying an enemy follower."
+    ]
+  },
+  "Pollux": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly: `fieldTraitMin` with trait `non-Swordcraft` does not represent 'If there is a non-Swordcraft follower on your field'. It should check for at least 1 follower on your field whose class is not Swordcraft. Implement a field condition/filter supporting negative class checks (for example `fieldCardMin` with `excludeCardClass: \"sword\"` and `cardType: \"follower\"`), then keep the buff and Rush grant as the `then` effect."
+    ]
+  }
+}

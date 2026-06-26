@@ -1,0 +1,58 @@
+{
+  "Maisy, Red Riding Hood": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare condition is encoded incorrectly as namedFollowerOnFieldByName identityName 'Fable'; it should check for another Fable follower on your field, which requires a trait-based field condition excluding self. Implement a condition for 'another ally follower with trait Fable on your field' and use that instead.",
+      "Activated ability removes a Fable counter as an effect step instead of as part of the activation cost; it should require '[cost01], [engage], remove a Fable counter from this card' before destroying an enemy follower. Implement support for removing counters in activated costs, then encode the effect as only destroying 1 enemy follower."
+    ]
+  },
+  "Major Prayers": {
+    "verdict": "fail",
+    "issues": [
+      "Second choose option is encoded as searchDeckSummonMultiple with remainderTo deckBottom and maxTotalCost 999, but the card says to search your deck for up to 2 different cards with 'Meowskers' in their names, summon them, then shuffle. It should be encoded as tutoring up to 2 distinct matching cards from the whole deck directly to the field and then shuffling, not as a top-of-deck look/summon-multiple effect."
+    ]
+  },
+  "Malevolent Al-mi'raj": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Bane gain condition is encoded incorrectly as discardedThisTurn; the source requires 'If you buried a follower with Ward' from the top card of your deck. It should check the milled card's type and keyword result before granting Bane. Implement a condition/effect hook for checking the characteristics of the card buried by the immediately preceding mill effect, then grantKeyword bane to self if it was a follower with Ward."
+    ]
+  },
+  "Mallet Monkey": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mallet Monkey Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mammoth God's Colosseum": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is encoded incorrectly as destroyAllFollowers; the card says each player buries each follower on their field except for one of their choice. It should preserve one chosen follower per player and bury the rest, not destroy all followers. Implement an effect for 'each player chooses one follower they control; bury the rest' and encode the fanfare with that.",
+      "Last Words ability is missing; it should search your deck for 'Colosseum on High', summon it, then shuffle your deck. Encode this as a lastWords sequence that tutors the named card to the field and then shuffles."
+    ]
+  },
+  "Mana Elk": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Triggered timing is encoded incorrectly as onAllyFollowerEnter, but the source says 'Whenever one of your Pixie followers attacks'. It should trigger on allied Pixie attack, not when a Pixie enters the field. Implement a timing for ally follower attacks (or attack declaration by a filtered allied follower) and use that.",
+      "Targeting is incomplete; the effect should be able to target an enemy leader or an enemy follower, but the parsed ability only targets an enemy follower. Encode the damage target as either enemy leader or enemy follower once the correct attack-trigger timing is implemented."
+    ]
+  },
+  "Mana Pistol Merc": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The alternate evolve clause is encoded incorrectly as a dummy evolve ability with condition namedFollowerOnFieldByName 'Commander' and no meaningful effect. The source gives a second evolve cost line: '[evolve] [cost00]: Evolve this follower. Activate only if there's a Commander card on your field.' It should encode a 0-cost evolve option gated by having a Commander card on your field.",
+      "The Commander condition is encoded incorrectly as namedFollowerOnFieldByName identityName 'Commander'; the source checks for a Commander card by trait, not a card literally named Commander. Implement a field condition for an allied card with trait Commander and use it on the alternate evolve ability."
+    ]
+  },
+  "Mana Pistol Merc Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Managrocer": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

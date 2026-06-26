@@ -1,0 +1,48 @@
+{
+  "Quickblader": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Quickblader Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Quickdraw Maven": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Quickdraw Maven Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Quixotic Adventurer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Quixotic Adventurer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Last Words is encoded incorrectly as a choice between putting all 3 tokens onto your field or all 3 into your EX area. The source says you may put Dutiful Steed, Bullet Bike, and Arcane Personnel Carrier token onto your field or into your EX area, allowing each token to be placed individually. Encode this as an optional effect that places each named token into either zone independently; implement an ability for mixed per-token zone selection if needed."
+    ]
+  },
+  "Rabbit Ear Attendant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rabbit Mage": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rabbit Mage Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve filter is incorrect: it searches for any spell, but the source requires a card with Earth Rite from among the top 4 cards. Encode the search to match cards with Earth Rite rather than cardType spell; implement DeckFilter support for matching cards by keyword/ability text such as Earth Rite if needed."
+    ]
+  },
+  "Rabbit Necromancer": {
+    "verdict": "fail",
+    "issues": [
+      "Last Words is encoded as dealDamageAllEnemies, which damages the opponent's side, but the source says deal 2 damage to each leader. Replace it with an effect that damages both leaders only; implement as a dedicated both-leaders damage effect or equivalent composition instead of dealDamageAllEnemies."
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Unidentified Subject Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as grantOnCardPlayed; it should trigger whenever you draw a card outside of your start phase and buff this follower +1/+1. Replace it with a draw-triggered ability if available. Suggested engine addition: implement a timing/effect hook for 'when you draw a card' with a condition to exclude the start phase."
+    ]
+  },
+  "Unleash the Nightmare": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play cost reduction condition is incorrectly encoded as namedFollowerOnFieldByName identityName 'Vampire'; the source says 'if there's a Vampire card on your field', meaning any card with the Vampire trait on your field, not a card literally named Vampire. Encode as a field trait condition for trait 'Vampire'. Suggested engine addition: implement a condition for 'card with trait on your field' or 'fieldTraitMin' that can count field cards, not just followers."
+    ]
+  },
+  "Unlikely Fellowship": {
+    "verdict": "fail",
+    "issues": [
+      "The second choose option is incorrectly encoded as tutorFromCemetery to field; it should summon a follower from your cemetery with 'Meowskers' in its name. Replace with summonFromCemetery using a filter including cardType 'follower' and identityNameContains 'Meowskers', count 1."
+    ]
+  },
+  "Unnamed Determination": {
+    "verdict": "fail",
+    "issues": [
+      "The spell ability is missing the restriction that the searched card must be a follower. Add cardType 'follower' to the tutorFromDeck filter for the card with 'Maisha' in its name.",
+      "The cost reduction is incorrectly encoded as a passive ability on the spell card itself; the source says the card put into your EX area costs 1 less to play this turn if there are at least 5 followers in your cemetery. Encode the reduction on the tutored EX-area card, conditional on having at least 5 followers in your cemetery."
+    ]
+  },
+  "Unselfish Grace": {
+    "verdict": "fail",
+    "issues": [
+      "The second activated ability's tutor filter is incorrect: it searches for a 7-cost Arcana card, but the parsed filter uses cardType 'follower', cardClass 'neutral', maxCost 7, and identityNameContains 'Arcana'. It should search for a card with trait 'Arcana' and exact cost 7, then reveal it and add it to hand."
+    ]
+  },
+  "Urd": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Urd Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as banish targeting an enemy field card; it should banish a card in an opponent's EX area. Replace with banishFromOpponentExArea count 1."
+    ]
+  },
+  "Urias, Final Vampire": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Urias, Final Vampire Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve mode selection is incorrectly encoded as choose; the source says 'Choose up to 3', so the player may choose multiple modes. Replace choose with chooseMultiple, min 1, max 3."
+    ]
+  },
+  "Usurping Spineblade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The final conditional damage must be dealt to the same selected follower as the first 3 damage, but the parsed encoding reselects an enemy follower for the extra 2 damage. It should reference the originally selected follower. Suggested engine addition: implement target memory/reference so later steps can affect 'the selected follower' from an earlier choice."
+    ]
+  }
+}

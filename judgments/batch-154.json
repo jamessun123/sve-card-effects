@@ -1,0 +1,71 @@
+{
+  "Mithra, Daybreak Deity Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly: it resolves the reward unconditionally with an always condition. It should only resolve if the die result matches the declared number.",
+      "The die-roll clause is encoded incorrectly: rollDie is hardcoded to outcome [1] and ignores the player's declared number from 1 to 6. This should be encoded as 'declare a number from 1 to 6, then if the die matches that chosen number, do the reward'; implement an engine operation/condition for chosen-number declaration and die-result comparison.",
+      "The final recover effect is too loose: 'recover all your play points' should not be modeled as recoverPp 99 unless that is the engine's explicit convention for full recovery."
+    ]
+  },
+  "Miu Yaguchi": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is encoded incorrectly: after milling 1, the source checks whether the milled card's cost is odd, not whether a discarded card was a spell. It should be 'if the buried top card has odd cost, draw 1; otherwise heal your leader 2'; implement an engine condition for the cost parity of the last milled/buried card.",
+      "The Ward keyword text is incomplete: the special engage timing and protection behavior for engaged Ward followers is not represented. Implement support for the Ward engage timing/reminder-text behavior if it is expected to be encoded."
+    ]
+  },
+  "Miyu Mifune [Parfum Géranium]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is incomplete: '[cost01], Lesson (1), [engage]' is encoded only as pp 1 and engage. It should also banish 1 Magical Item card from your EX area as the Lesson (1) cost; add cost.banishFromExArea support or equivalent activated-cost encoding.",
+      "Keywords are incorrect: 'fanfare' should not be listed in keywords, and it is duplicated. Keep Fanfare only as timing on the ability."
+    ]
+  },
+  "Miyu Mifune [Rouge Couture]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is incomplete: '[cost01], Lesson (1), [engage]' is encoded only as pp 1 and engage. It should also banish 1 Magical Item card from your EX area as the Lesson (1) cost; add cost.banishFromExArea support or equivalent activated-cost encoding.",
+      "Keywords are incorrect: 'fanfare' should not be listed in keywords, and it is duplicated. Keep Fanfare only as timing on the ability."
+    ]
+  },
+  "Mizuki Kawashima": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cemetery condition is encoded incorrectly: the source checks for at least 9 cards with different base costs in your cemetery, not merely 9 cards in your cemetery. Implement a condition for distinct base-cost count in cemetery and use that here.",
+      "The damage effect is encoded incorrectly: 'deal 3 damage to each enemy leader and enemy follower on the field' targets enemy leaders and enemy followers only, but dealDamageAllEnemies with followersOnly false would also include other enemy field cards such as amulets. This should be encoded as damage to enemy leader plus each enemy follower only; implement an operation for leader-plus-followers damage or separate combined effects."
+    ]
+  },
+  "Mjerrabaine, Great One": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost is encoded incorrectly as optionalCost. '[fanfare] Discard 3 cards: Put a Great Testimony token into your EX area.' is a mandatory fanfare cost/effect line and should not be optional.",
+      "The activated cost is malformed. It should use the implemented activated cost shape with banishFromCemetery containing both filter and count, e.g. banishing 1 card named 'Mjerrabaine, Omen of One' from your cemetery.",
+      "The activated damage effect is encoded incorrectly: 'Deal 2 damage to each enemy leader' should hit enemy leaders only, not enemy followers. Replace dealDamageAllEnemies with an effect that deals 2 to enemy leaders only."
+    ]
+  },
+  "Mjerrabaine, Omen of One": {
+    "verdict": "fail",
+    "issues": [
+      "The end-phase damage effect is encoded incorrectly: if you have 2 or fewer cards in hand, it should deal 3 damage to each enemy leader only, not to enemy followers as well. Replace that branch with leader-only damage.",
+      "The 0-cards-in-hand clause is nested under else, so it will never apply when you have 0 cards in hand. It should be an additional effect checked independently after the leader-damage clause, since both clauses apply when hand size is 0.",
+      "Keywords are incorrect: 'evolve' should not be listed in keywords. The evolve line should be represented by evolveCost/evolvesTo only."
+    ]
+  },
+  "Mjerrabaine, Omen of One Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The end-phase damage effect is encoded incorrectly: if you have 2 or fewer cards in hand, it should deal 5 damage to each enemy leader only, not to enemy followers as well. Replace that branch with leader-only damage.",
+      "The 0-cards-in-hand clause is nested under else, so it will never apply when you have 0 cards in hand. It should be checked independently after refreshing and the leader-damage clause, since both clauses apply when hand size is 0."
+    ]
+  },
+  "Mode Estivale": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Momoka Sakurai": {
+    "verdict": "fail",
+    "issues": [
+      "Keywords are incorrect: 'evolve' and 'fanfare' should not be listed in keywords. The evolve line should be represented by evolveCost/evolvesTo, and Fanfare should remain only as the ability timing."
+    ]
+  }
+}

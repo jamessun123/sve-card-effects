@@ -1,0 +1,55 @@
+{
+  "Kana Imai Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded as a choose between drawing and healing, but the source is a sequence: look at the top card, you may reveal it and add it to your hand, then if the revealed card is a Cute card, heal your leader 2. It should be encoded as a sequential conditional reveal/add effect rather than a choose. The current engine lacks a way to look at the top card, optionally reveal/add it, and branch based on the revealed card's trait; implement a peek/reveal-top-card conditional ability to support this."
+    ]
+  },
+  "Kanade Hayami": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kanade Hayami Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is missing the 'Lesson (2)' condition/cost gate. It should only deal 4 damage if the Lesson (2) requirement is met. The engine reference has no implemented Lesson condition/cost support, so add support for Lesson thresholds and encode the damage effect under that condition."
+    ]
+  },
+  "Kanade Hayami [Faraway Reflection]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare ability is missing the 'Lesson (1)' condition/cost gate. It should only tutor if the Lesson (1) requirement is met. The engine reference has no implemented Lesson condition/cost support, so add support for Lesson thresholds and encode the tutor under that condition.",
+      "The tutor filter is incomplete: it only matches followers with 'Shiki Ichinose' in the name, but it should match a follower with 'Shiki Ichinose,' 'Syuko Shiomi,' 'Frederica Miyamoto,' or 'Mika Jougasaki' in its name. The engine lacks an OR-name-contains deck filter, so implement a multi-name OR filter or conditionAny-style filter support for tutor filters."
+    ]
+  },
+  "Kaoru Ryuzaki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Karakuri Servant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Karakuri Servant Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The condition is encoded incorrectly as exAreaTraitMin with trait 'Puppet', but the source says 'If there are at least 3 cards in your EX area'. Change it to a condition that checks total cards in your EX area being 3 or more, not Puppet trait cards."
+    ]
+  },
+  "Karen Hojo": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Karen Hojo Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded as dealDamageCompare, which deals damage based on another follower's attack, but the source says 'Deal it and this follower 3 damage.' Replace this with a sequence that deals 3 damage to the selected enemy follower and 3 damage to this follower."
+    ]
+  },
+  "Karen Hojo [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare ability is encoded as searchDeckChoose with a Cool filter, which effectively lets you take the top card only if it is Cool, but the source first looks at the top card and only then allows reveal/add if that specific card is Cool. It should be encoded as a top-card peek with a conditional optional reveal/add based on trait. The current engine lacks a way to inspect the exact top card and branch on its trait; implement a peek-top-card conditional reveal/add effect to support this."
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Mirror of Truth": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare effect is encoded with tutorFromCemetery to field, but the card says to summon an Alchemist follower that costs 3 or less from your cemetery. Encode it as a cemetery-to-field summon/select effect instead; the current engine lacks a direct 'summon selected card from cemetery' or equivalent targeted revival operation, so implement an ability for selecting a matching cemetery follower and summoning it."
+    ]
+  },
+  "Mischievous Zombie": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare optional discard effect checks discardedCardType:follower twice, but the card requires 'If you discarded a Departed card, draw a card.' Replace this with a condition that checks the discarded card's trait is Departed; the engine currently lacks a discarded-card-trait condition, so implement a condition such as discardedCardTrait/ discardedCardMatches(filter)."
+    ]
+  },
+  "Mischievous Zombie Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve target selector adds a filter for identityName Ghost inside targets, but target selectors only support fields like maxCost/maxDef; encode the target as selecting a Ghost on your field with a supported targeting/filter mechanism instead of an invalid target shape."
+    ]
+  },
+  "Mist Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mist Shaman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mist Shaman Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve grants keyword ward, but the source says to give another follower on your field Aura. Change the granted keyword from ward to aura."
+    ]
+  },
+  "Mistolina & Bayleon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incomplete: it only summons a Naterran Great Tree token onto the field, but the source says you may put one onto your field or into your EX area. Encode this as a choice between summoning to field and summoning to EX area; if the engine cannot represent choosing between zones for the same token placement, implement support for a choose/optional zone-placement effect."
+    ]
+  },
+  "Mistolina & Bayleon Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrect: searchDeckChoose with lookAt 5 and maxCost 2 does not match 'Search your deck for up to 2 Natura spells that cost a total of 2 or less, put them into your EX area, then shuffle.' It should search the whole deck, allow up to 2 cards, enforce total cost 2 or less, put them into EX area, then shuffle. The current engine lacks a deck search operation for multiple chosen cards with a total-cost cap, so implement a tutor/search effect supporting up to N chosen cards with max total cost and destination EX area."
+    ]
+  },
+  "Mistolina, Forest Princess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is left as noop placeholders. It should select a Princess's Strike in your cemetery and play it for 0 play points. Implement an operation for selecting and playing a spell from cemetery at modified cost, then replace the noop encoding.",
+      "Activated ability cost is incomplete: '[engage] 2 cards named Naterran Great Tree on your field' is not represented. The ability should require engaging this card and engaging/burying/otherwise paying with 2 Naterran Great Tree cards on your field as specified by the card text; implement a cost form that can engage or otherwise consume matching field cards by name and use it here."
+    ]
+  },
+  "Mithra, Daybreak Deity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare rolls a die twice with both effects applied to the controller, but the source says each player rolls a die and resolves their own result. Encode one die roll for you and one for the opponent with opponent-specific draw/discard resolution; the engine lacks opponent-targeted rollDie outcome effects such as opponentDraw/opponentDiscard, so implement opponent-side hand operations or a controller-targeted rollDie resolver."
+    ]
+  }
+}

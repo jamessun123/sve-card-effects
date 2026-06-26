@@ -1,0 +1,54 @@
+{
+  "Zealot of Disdain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onDamaged ability is missing the restriction \"During your turn\" and \"takes ability damage\". It should trigger only during your turn and only from ability damage, but available conditions/trigger filters do not support turn-specific or damage-source-specific onDamaged gating; implement onDamaged filters such as opponentTurnOnly/controllerTurnOnly and damageSource: ability."
+    ]
+  },
+  "Zealot of Lust": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zealot of Repose": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The startOfMain ability should trigger at the start of each opponent's main phase, not every main phase. Encode it with an opponent-turn-only startOfMain trigger, but the reference lacks a way to restrict startOfMain to opponents only; implement a trigger flag/condition for opponent main phase only."
+    ]
+  },
+  "Zealot of Silence": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onDiscard ability is missing the restrictions \"During your turn\" and \"when an opponent discards a card\". It should activate from cemetery only on your turn when an opponent discards, but available onDiscard support lacks controller/opponent and turn filtering; implement discard-event filters for who discarded and controllerTurnOnly/opponentTurnOnly."
+    ]
+  },
+  "Zealot of Truth": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zealot of Unkilling": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zealot of Usurpation": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zell, Windreader": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target selection is encoded incorrectly. The source says \"Select a Dragoncraft follower on your field and, if you have 10 max play points, give it Storm,\" so the target must always be selected, then the Storm grant happens only if ppMin 10 is true. Move the target selector outside the condition and apply the condition only to the grantKeyword effect."
+    ]
+  },
+  "Zeno, Paradoxical Shield": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is incomplete: it should only allow revealing and adding a follower with Ward from among the top 3 cards, but the parsed filter allows any follower. Encode a deck search filter requiring Ward, but the reference lacks keyword-based DeckFilter support; implement DeckFilter/target filtering by keyword such as keyword: \"ward\".",
+      "The activated ability condition is encoded incorrectly as fieldTraitMin with trait \"Ward\". It should check whether there are at least 3 followers on your field with Ward. Encode a field-count condition for followers with keyword Ward, but the reference lacks field conditions by keyword; implement a condition such as fieldKeywordMin or fieldFollowerKeywordMin.",
+      "The activated ability target is too broad. It should target a follower on your field with Ward, not any self follower. Encode the target selector with a Ward requirement, but the reference lacks target filtering by keyword; implement target selector support for keyword-based filtering such as keyword: \"ward\"."
+    ]
+  },
+  "Zirconia, Ironcrown Ward": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

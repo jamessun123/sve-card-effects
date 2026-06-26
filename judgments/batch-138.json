@@ -1,0 +1,66 @@
+{
+  "Magical Rook": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as {\"type\":\"inExArea\",\"identityName\":\"Magical Pawn\"}; it should check whether there is a card named Magical Pawn in your EX area, but the available condition set does not support a named-in-EX-area presence check of 1. Implement a condition such as exAreaNamedMin/count or namedCardInExArea, then encode the effect as an if with that condition.",
+      "The Fanfare effect incorrectly puts Ward in an else noop branch. If the condition is met, the card should both get +1 defense and gain Ward; encode the then branch as a sequence with buff(def:1,target:self) and grantKeyword(keyword:\"ward\",targets:self)."
+    ]
+  },
+  "Magical Squirrel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magical Squirrel Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is missing target selection for the enemy follower. Encode it as damageFollowerAndLeader with the required selected enemy follower target, or use a sequence that first selects an enemy follower and then deals 1 damage to it and its leader."
+    ]
+  },
+  "Magical Strategy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magitrain": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is incorrectly given the keywords fanfare and strike in keywords; only Rush is a printed keyword here. Remove fanfare and strike from keywords, and keep the Strike effect only as an ability.",
+      "The activated ability cost is incomplete. In addition to 1 PP and engaging this card, it requires engaging any number of followers on your field with total cost 5 or more. The engine has no cost form for engaging selected allied followers with a minimum total cost, so implement such an activated cost selector and encode it on the activated maneuver ability.",
+      "The Strike ability target is encoded too broadly as any enemy follower. It should target an engaged enemy follower on the field. Implement support for a target selector filter like engaged:true on enemyFollower, then use that selector.",
+      "The Strike ability should not be represented as a keyword; it should remain only as a timing:\"strike\" ability."
+    ]
+  },
+  "Magna Legacy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare banish amount is incorrectly encoded as millToBanish count 5. It should banish the top half of your deck, rounded up. Implement a dynamic deck-half-rounded-up amount for banishFromDeck or millToBanish, then encode that amount correctly.",
+      "The damage portion is encoded incorrectly as unconditional 4 damage followed by an additional 8 damage check. The card should deal either 4 damage, or 8 damage instead if at least 15 cards were banished by this ability. Implement a condition that tracks cards banished by this ability/action, then encode a single conditional damage effect with 8 in the true branch and 4 in the false branch.",
+      "The condition using ownCemeteryMin/count 15 is incorrect; the source checks cards banished by this ability, not cards in your cemetery."
+    ]
+  },
+  "Magna Saber": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Festive count condition is incorrectly attached to the Fanfare damage ability. It should gate the [evolve] activation only, not the Fanfare. Remove the condition from the Fanfare ability.",
+      "The evolve activation restriction 'Activate only if there are at least 3 Festive cards on your field and/or in your EX area' is missing. The engine has fieldTraitMin and exAreaTraitMin separately but no combined field-or-EX-area trait count condition. Implement a condition for combined zones, then attach it to the evolve ability/cost line."
+    ]
+  },
+  "Magna Saber Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magna Transformation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare tutor is encoded with searchDeckChoose/lookAt:40/remainderTo:\"shuffleDeck\". It should simply search your deck for a Magna Saber, put it into your EX area, then shuffle. Encode it with tutorFromDeck using filter {\"identityName\":\"Magna Saber\"} and to:\"exArea\"; if explicit shuffle resolution is required after tutorFromDeck, implement or use the correct tutor semantics rather than searchDeckChoose.",
+      "The triggered ability is missing 'bury this' before healing your leader. It should be an onAllyEvolve trigger that, when a Magna Saber on your field evolves, buries this amulet and then heals your leader 1; implement support for filtering on onAllyEvolve by card identity if needed, and encode the effect as a sequence with burySelf then healLeader(1).",
+      "The parsed trigger uses a top-level filter on the ability, but ability wrappers do not support a filter field for onAllyEvolve in the reference. Implement trigger filtering for onAllyEvolve, or provide a condition form that checks the evolving ally's identity."
+    ]
+  },
+  "Magna Zero": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage thresholds are checked with ownCemeteryMin, but the source checks the number of cards in your banished zone. Implement a condition for banished-zone count, then use that instead of ownCemeteryMin.",
+      "The conditional ordering is wrong: the current encoding checks 20 first and places the 30-check in the else branch, making the 30-card condition unreachable. Encode the thresholds so 30+ gives 20 damage, else if 20+ gives 10 damage, else 5 damage."
+    ]
+  }
+}

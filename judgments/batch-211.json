@@ -1,0 +1,58 @@
+{
+  "Skullfane": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Passive trigger is incorrectly encoded with unsupported op `grantOnLeaveField`; it should trigger whenever an amulet you control leaves the field and then deal 2 damage to each enemy leader and enemy follower. Implement a supported leave-field trigger grant/aura for allied amulets (for example a `grantOnLeaveField`/`onAllyAmuletLeaveField` style ability) and encode the effect as `dealDamageAllEnemies` amount 2."
+    ]
+  },
+  "Sky Sprite": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare target restriction is incomplete: it should target another follower on your field that was put onto the field this turn, not any other follower. Encode the buff with a target selector filtered to followers entered this turn; implement target/condition support for 'entered this turn' on `selfFollower` targets."
+    ]
+  },
+  "Sköll Lookout": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated cost uses unsupported `banishFromField` cost shape and must specifically banish a Naterran Great Tree from your field. Encode this as an activated ability with engage cost plus a field-banish cost/filter for a named allied field card; implement activated-cost support for banishing a matching card from your field."
+    ]
+  },
+  "Slade, Blossoming Wolf": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Base card is missing its special evolve ability: `[evolve][cost00]` can be activated only if a card on your field was returned to hand this turn. Encode an `evolve` timing ability or equivalent evolve metadata with cost 0 plus a condition for 'a card on your field returned to hand this turn'; implement a condition for 'ally card returned to hand this turn' if not available."
+    ]
+  },
+  "Slade, Blossoming Wolf Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Slash of the One": {
+    "verdict": "fail",
+    "issues": [
+      "Spell effect is incorrectly encoded as a `choose` between destroying the card and dealing leader damage; both effects should happen in sequence. Replace with a `sequence` that first destroys an enemy field card with cost 4 or less, then an `if` with condition `handMax: 2` that deals 2 damage to the enemy leader."
+    ]
+  },
+  "Slaughtering Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Slaughtering Dragonewt Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve damage amount is encoded incorrectly: it should deal 2 damage for every 5 cards in your banished zone, not count neutral cards in cemetery and not deal only that raw quotient. Encode damage as 2 × floor(banished cards / 5) to all enemies; implement a dynamic amount for banished-zone count with divisor/multiplier support if missing."
+    ]
+  },
+  "Sledgehammer Exorcist": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing its `[cost02]` requirement. Encode the ability as a fanfare with a 2 PP cost before dealing 4 damage to an enemy follower."
+    ]
+  },
+  "Smilecure Priest": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Card is missing the passive clause 'This card can't be played from the EX area.' Encode a passive restriction preventing play from EX area; implement an ability/op for play prohibition from a specific zone such as EX area."
+    ]
+  }
+}

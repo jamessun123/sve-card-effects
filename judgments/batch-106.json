@@ -1,0 +1,60 @@
+{
+  "Hero of Antiquity Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive protection is encoded incorrectly: the source says this card can't be destroyed or banished by abilities, but parsed only grants indestructible. It should also encode protection from banish by abilities; implement a new passive ability such as an ability-banish immunity effect for self.",
+      "The On Evolve ability is encoded incorrectly as a choose effect. It should be a single targeted effect that selects one enemy follower, destroys it, and if that selected follower costs 6 or more, banishes it instead. Implement support for conditional replacement based on the selected target's cost, or a destroy/banish effect with target-cost threshold logic.",
+      "The banish option target restriction is wrong: parsed uses maxCost 6, but the source requires cost 6 or more. It should target the same selected follower with a minCost 6 threshold if encoded separately."
+    ]
+  },
+  "Hero of the Hunt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Heroic Dragonslayer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Heroic Dragonslayer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Heroic Entry": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incomplete: after putting a 3-cost or less Swordcraft follower onto your field, if it's a Heroic follower, it should get +1/+1. Parsed is missing this conditional buff on the summoned card. Implement support for checking the chosen/summoned card's trait and then buffing that selected card (for example, a post-search conditional on the last summoned or chosen card)."
+    ]
+  },
+  "Heroic Fairy Champion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Strike ability is encoded too broadly: damageImmunity makes this follower immune to ability damage, but the source says for the rest of this turn, this doesn't take damage, which includes combat and ability damage. It should grant full no-damage protection for the turn. Implement a general prevent-all-damage-to-self-until-end-of-turn effect."
+    ]
+  },
+  "Heroic Resolve": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second play cost reduction condition is encoded incorrectly: namedFollowerOnFieldByName with identityName 'Setus' checks an exact name, but the source says a follower with 'Setus' in its name. It should use a name-contains condition; implement a condition that matches a follower on your field whose name contains a substring.",
+      "The spell effect is encoded incorrectly: parsed uses dealDamageCompare between two enemy followers, but the source says select an enemy follower and a Beast follower on your field, then deal 4 damage to the first and give +1/+1 to the second. It should be encoded as a two-target sequence with fixed 4 damage to the selected enemy follower and a buff to the selected allied Beast follower. Implement support for spells that select multiple independent targets in sequence or a shared multi-target chooser."
+    ]
+  },
+  "Hexed Fowl of Ebon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly: fieldTraitMin with trait 'Amulet' does not represent 'if there's an amulet on your field.' It should check for an amulet card type on your field; implement a condition for own field card-type minimum or own amulet count.",
+      "The Fanfare effect is encoded incorrectly: dealDamageAllEnemies with followersOnly false would hit enemy followers and leaders, but the source says deal 2 damage to each enemy leader. It should deal 2 damage only to enemy leaders; implement an effect for dealing damage to all enemy leaders."
+    ]
+  },
+  "High Enchantress": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare effect is encoded incorrectly: parsed mills cards to cemeteries, but the source says each player puts the top card of their deck into their EX area twice. It should move the top card of each player's deck to their EX area two times. Implement an effect for putting top deck cards into EX area for both players, or a repeatable both-players top-deck-to-EX-area operation."
+    ]
+  },
+  "High Enchantress Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve damage amount is encoded with exAreaCount, which is not in the implemented dynamic amount reference. It should deal damage equal to the number of cards in your EX area; implement a DamageAmount for EX area card count and use that here."
+    ]
+  }
+}

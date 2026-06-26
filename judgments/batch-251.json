@@ -1,0 +1,60 @@
+{
+  "Wretch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve ability condition is incorrectly encoded as {\"type\":\"enteredFromCemetery\"}, which is not an implemented condition. It should be encoded as an evolve ability that activates only if this follower was put onto the field from the cemetery; implement a condition such as {\"type\":\"notEnteredFromHand\"} or a more specific {\"type\":\"enteredFromCemetery\"} to support this text.",
+      "The card should not list \"lastWords\" in keywords; Last Words should be represented by the lastWords-timing ability only."
+    ]
+  },
+  "Wretch Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wretched Tryst": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wyrm God of the Skies": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous text \"This card can only be played from hand\" is missing. Add a passive ability preventing play from non-hand zones; this requires a new implemented passive restriction ability such as a play-source restriction.",
+      "The activated EX area ability's second clause is wrong: it uses grantActRestriction, but the source says the chosen follower \"can't attack enemies\" for the rest of the turn. Replace that with an attack restriction on the chosen target; this requires a new implemented effect for 'can't attack followers/enemies until end of turn'."
+    ]
+  },
+  "Wyrm God of the Skies Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wyrm Spire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The aura is too broad and inaccurate: it grants Rush to trait \"Dragon\", but the source specifies your Dragon tokens. It should only affect Dragon token cards on your field, e.g. auraGrantKeyword with identity/filter support for the Dragon token; implement token-name/cardNo filtering for auraGrantKeyword if needed.",
+      "The activated ability incorrectly summons a Dragon token under the controller of this amulet after destroying any follower. The source says the destroyed follower's controller summons a Dragon token. Encode the summon for that follower's controller; this requires support for summoning to the selected target's controller."
+    ]
+  },
+  "Wyrmfire Engineer": {
+    "verdict": "fail",
+    "issues": [
+      "The card should not list \"lastWords\" in keywords; Last Words should be represented by the lastWords-timing ability only."
+    ]
+  },
+  "Wyvern Cavalier": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "X. Slaus, Wheel of Fortune": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability timing is incorrectly encoded as \"onExAreaEntry\", which is not an implemented timing. It should be a trigger for \"Whenever a card is put into your EX area\"; implement a timing such as onExAreaEntry/onCardToExArea and use it here.",
+      "The trigger condition is too broad/unspecified in current encoding support. It should trigger specifically whenever a card is put into your EX area, not on unrelated events; implement explicit EX area entry event support."
+    ]
+  },
+  "XI. Erntz, Justice": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare follow-up is missing the condition \"If you put a card that costs 5 or more into your EX area\". The current always/always encoding is incorrect. It should check the card moved by putDeckTopToExArea and only then let you choose to evolve this follower or return it to hand; implement a condition/result hook for the moved card's cost.",
+      "The auto-evolve option is incorrectly wrapped in autoEvolveIf with an always condition. It should simply evolve this follower as one branch of the conditional choice after a 5+ cost card is put into your EX area; implement a direct self-evolve effect if needed.",
+      "The return-to-hand option targets {\"type\":\"self\"}, but returnToHand expects a follower/card target selector that can legally reference this follower on the field. Encode the source card returning to its owner's hand with appropriate self-target support for returnToHand, or implement it if missing."
+    ]
+  }
+}

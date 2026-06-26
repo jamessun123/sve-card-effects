@@ -1,0 +1,72 @@
+{
+  "Uzuki Shimamura": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is missing the Lesson (1) cost gate; it should be encoded as a fanfare ability that requires paying 1 PP before healing your leader 1, but the engine has no fanfare cost wrapper for Lesson costs, so implement support for optional/required PP costs on triggered abilities or a dedicated Lesson cost ability."
+    ]
+  },
+  "Uzuki Shimamura Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve search is incorrect: it should search the entire deck, not only the top 5 cards, and then shuffle; encode as a full-deck tutor/search for a follower with \"Rin Shibuya\" or \"Mio Honda\" in its name to EX area with playCostReduction 2, but the engine lacks a filter that can match one of multiple name substrings and lacks a full-deck choose-to-EX-area tutor with that OR-name condition.",
+      "The filter is incomplete: it should allow a follower with \"Rin Shibuya\" or \"Mio Honda\" in its name, not only \"Rin Shibuya\"."
+    ]
+  },
+  "Uzuki Shimamura [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is incorrect: it should search the deck for an iM@S CG card, not just the top 5 cards; if there are at least 5 Cute cards in your cemetery, it should search for up to 2 instead. Encode as a full-deck tutor to EX area with a conditional increased count, but the engine lacks a full-deck 'up to N' tutor to EX area and lacks a cemetery-trait-count condition for the secondary trait 'Cute' independent of the card's main trait string.",
+      "The activated ability is misencoded: Lesson (1) should cost 1 PP, not use pp 0 with an optionalCost.",
+      "The activated ability targets an iM@S CG card in your EX area, but the parse incorrectly selects an iM@S CG card from hand to EX area as the cost.",
+      "The activated ability should give a selected card in your EX area a 5-cost reduction to play; the parse incorrectly uses grantPlayCostReduction on a selfFollower target instead of targeting a card in EX area, and the engine needs support for targeting EX-area cards with play-cost modification."
+    ]
+  },
+  "Uzuki Shimamura [Magical New Me]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is incorrect: it should search the deck for an iM@S CG card, not just the top 5 cards; if there are at least 5 Cute cards in your cemetery, it should search for up to 2 instead. Encode as a full-deck tutor to EX area with a conditional increased count, but the engine lacks a full-deck 'up to N' tutor to EX area and lacks a cemetery-trait-count condition for the secondary trait 'Cute' independent of the card's main trait string.",
+      "The activated ability is misencoded: Lesson (1) should cost 1 PP, not use pp 0 with an optionalCost.",
+      "The activated ability targets an iM@S CG card in your EX area, but the parse incorrectly selects an iM@S CG card from hand to EX area as the cost.",
+      "The activated ability should give a selected card in your EX area a 5-cost reduction to play; the parse incorrectly uses grantPlayCostReduction on a selfFollower target instead of targeting a card in EX area, and the engine needs support for targeting EX-area cards with play-cost modification."
+    ]
+  },
+  "Uzuki Shimamura [P.C.S.]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incorrect: it should select up to 1 Cute follower that costs 4 or less and up to 1 different Cute follower that costs 2 or less in your cemetery, summon them, and give the summoned followers +1/+1; the parse instead uses a single summonFromCemetery with maxTotalCost 6 and omits the buff. The engine needs support for multi-part cemetery selection with separate cost bands and then buffing the summoned cards.",
+      "The activated ability is missing the Lesson (1) cost; it should cost 1 PP before healing your leader 3, but the parse uses pp 0."
+    ]
+  },
+  "VI. Milteo, The Lovers": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is misencoded: after discarding a card, it should reveal cards from the top of your deck until 2 followers that cost 3 or less are revealed, summon those revealed followers, then shuffle the rest and put them on the bottom of your deck; the parse instead peeks at 40 and summons from cemetery. The engine needs a reveal-until/search-resolve-from-deck operation that summons matching revealed cards and bottoms the rest after shuffle.",
+      "The start-of-end ability should evolve this follower itself on Necrocharge (20); the parse incorrectly uses evolveOtherFollower targeting a matching follower instead of self-evolving. The engine needs a self-evolve effect operation for triggered abilities."
+    ]
+  },
+  "VI. Milteo, The Lovers Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "VII. Oluon, Runaway Chariot ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is too broad: 'This follower can't attack enemies' does not mean 'cannot attack' entirely. It should only prevent attacks against enemy followers/leaders while still allowing attacks where otherwise permitted; the engine needs a more specific attack-restriction ability than cannotAttack.",
+      "The die result for 3 or 4 is wrong: it should deal 7 damage to each enemy leader, but the parse uses dealDamageAllEnemies, which also affects followers and is not leader-specific. The engine needs support for dealing damage to each enemy leader in multiplayer, or equivalent leader-only all-opponents targeting."
+    ]
+  },
+  "VII. Oluon, The Chariot": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Choice (4) is missing the required [cost04]; the parse only includes burySelf as an optional cost. It should require paying 4 PP and burying this card before the summon attempt.",
+      "Choice (4) should summon 'VII. Oluon, Runaway Chariot' from your evolve deck, but the parse uses summonFromEvolveDeck with identityName 'VII. Oluon, Runaway Chariot' while the actual evolved card name is 'VII. Oluon, Runaway Chariot ADVANCED'; if this card text refers to a specific evolve-deck card identity, the target identity must match that card exactly or be represented by card number.",
+      "The engine needs support for composite costs inside choose options that combine PP payment and burying self."
+    ]
+  },
+  "VIII. Sofina, Strength": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive damage-limiting ability is missing: 'If a follower on your field would take more than 3 damage, it takes 3 instead' should be represented as a continuous aura reducing damage per hit to allied followers, but the engine only supports a self-only damage cap / auraAbilityDamageCap and needs an allied-follower damage-cap aura."
+    ]
+  }
+}

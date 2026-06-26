@@ -1,0 +1,57 @@
+{
+  "Path to Purgatory": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The end phase ability is encoded under timing \"fanfare\" but should be a separate ability with timing \"startOfEnd\".",
+      "The condition \"if your leader's defense is 6 or less\" is missing/incorrectly encoded as unsupported condition type \"selfLeaderDefenseMax\"; encode it as a start-of-end ability with that condition once the engine supports a leader-defense-threshold condition such as {\"type\":\"leaderDefenseMax\",\"count\":6,\"controller\":\"self\"}.",
+      "The activated cost \"[engage], put this card into its owner's cemetery\" should be represented on that end phase ability as a required cost/check tied to the trigger, not unconditional steps inside the fanfare sequence; implement support for triggered abilities with engage/self-bury costs if the engine lacks it."
+    ]
+  },
+  "Patrick, Rhiceros Knight": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"You may put a Naterran Great Tree token onto your field or into your EX area\"; encode this as optional. Change the effect from mandatory \"choose\" to an optional choice, e.g. a choose/chooseMultiple form that allows declining, or otherwise mark the selection optional."
+    ]
+  },
+  "Patrick, Rhiceros Knight Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is wrong: \"at least 5 Natura cards on your field and/or in your EX area\" means a combined total across both zones, not field>=5 OR ex area>=5. Encode it with a single combined field+EX-area trait-count condition; implement a condition such as {\"type\":\"fieldAndExAreaTraitMin\",\"trait\":\"Natura\",\"count\":5} because the current reference lacks this combined-zone condition."
+    ]
+  },
+  "Paula, Gentle Warmth Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Paula, Icy Warmth": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve line is incomplete: this follower can evolve into \"Paula, Gentle Warmth\" or \"Paula, Passionate Warmth\", but parsed only links to \"Paula, Gentle Warmth Evolved\". Encode the alternate evolve destination as well, using the engine's supported multi-destination evolve linkage if available."
+    ]
+  },
+  "Pegasus Knight": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first ability is mis-timed and mis-triggered: it should trigger when your leader gains defense, once on each of your turns, not on \"onCardPlayed\". Encode a trigger for leader-heal/leader-defense-gain; implement a timing such as \"onLeaderHealed\" or \"onLeaderDefenseGained\" because this trigger is not in the reference.",
+      "The second ability should trigger only when a Havencraft token follower is put onto your field, but parsed filters only by cardClass \"haven\" and does not restrict to token followers. Change the filter to include follower token criteria, e.g. {\"cardClass\":\"haven\",\"cardType\":\"follower\",\"printingType\":\"token\"}; if grant/on-enter filters cannot currently match printingType here, add that support."
+    ]
+  },
+  "Penelope, Potions Prodigy": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Penelope, Potions Prodigy Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Penguin Guardian": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is missing its cost. Source says \"[fanfare] [cost03]: Give this [attack]+2/[defense]+2.\" Encode the fanfare with a 3 PP cost requirement before the buff, rather than an unconditional buff."
+    ]
+  },
+  "Penguin Guardian Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "Hina Araki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hina Araki Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly as tutorFromCemetery to field with playCostReduction 0; it should play a selected iM@S CG spell that costs 2 or less from your cemetery for 0 play points. Implement an ability such as playFromCemetery/filterable cemetery spell play so spells can be played directly from cemetery."
+    ]
+  },
+  "Hinako Kita [True Dream]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is missing the Lesson (1) condition; the healLeader 1 effect should be gated by the Lesson (1) requirement. Implement a Lesson condition type if the engine does not support it."
+    ]
+  },
+  "Hinako Kita [True Dream] Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hippocampus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hippocampus Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The evolved card is missing Ward; add \"ward\" to keywords to match the base card's printed Ward."
+    ]
+  },
+  "Hiromi Seki [Twinkle in My Eye]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hiromi Seki [Twinkle in My Eye] Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve filter is incorrect: source says select a Cute card in your cemetery and add it to your hand, but parsed restricts to cardType follower. Remove the follower restriction so tutorFromCemetery can target any card with trait \"Cute\"."
+    ]
+  },
+  "Hoarfrost Triceratops": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare uses unsupported op banishFromField; it should banish a Naterran Great Tree from your field, then buff this follower +2/+2. Implement a field-banish operation for allied field cards with filters, or encode with an equivalent supported field-targeted banish ability if added."
+    ]
+  },
+  "Hoarfrost Triceratops Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

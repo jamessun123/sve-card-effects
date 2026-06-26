@@ -1,0 +1,51 @@
+{
+  "Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Aficionado": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Breeder": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Breeder Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incomplete: after putting a 3-cost or less Dragoncraft follower into your EX area, it should also give that card +1/+1. Replace the current `searchDeckChoose` encoding with an effect that applies the +1/+1 buff to the chosen card in EX area, or extend the search effect to support granting stats to the selected card."
+    ]
+  },
+  "Dragon Chef": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as `always`, causing the card to always choose the 2-defense branch. It should check whether there is an amulet on your field, then heal 4 if true and 2 otherwise. Implement a missing condition such as `fieldCardTypeMin`/`allyFieldCardTypeMin` for amulets on your field, and encode the ability using that condition."
+    ]
+  },
+  "Dragon Emissary": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Empress Otohime": {
+    "verdict": "fail",
+    "issues": [
+      "The second ability is encoded with the wrong timing and trigger. It should trigger when another Dragoncraft follower is put from your field into the cemetery during your turn, not whenever you play a Dragoncraft card. Replace `timing: \"onCardPlayed\"` with an appropriate leave-field/to-cemetery trigger for allied Dragoncraft followers.",
+      "The second ability targets are incorrect. It should deal 1 damage to a selected enemy leader or enemy follower, not only the enemy leader. Encode the target as a choice between enemy leader and enemy follower, or an equivalent selector covering both."
+    ]
+  },
+  "Dragon Impact": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Oracle": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dragon Spawning": {
+    "verdict": "fail",
+    "issues": [
+      "The EX area play-cost reduction is unconditional in the parsed ability, but the source says it only applies if Overflow is active for you. Encode the `searchDeckChoose` without `playCostReduction`, then apply the 2-cost reduction only under an `overflow` condition."
+    ]
+  }
+}

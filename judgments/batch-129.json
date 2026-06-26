@@ -1,0 +1,69 @@
+{
+  "Lightning Shooter": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is encoded as a choose between three options, but the source is not optional; it should be a single effect that deals 2 damage to a selected enemy follower, deals 4 instead if Spellchain (5), and additionally deals 2 damage to that follower's leader if Spellchain (10).",
+      "The Spellchain (5) condition is missing; encode the damage amount as conditional on condition {\"type\":\"spellchain\",\"count\":5} rather than as a separate choice.",
+      "The SC (10) bonus damage to that follower's leader is incorrectly encoded as an independent option; it should be an additional conditional effect tied to the same selected follower, not a standalone choice targeting any enemy leader."
+    ]
+  },
+  "Lightning Velociraptor": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is incorrectly encoded as a choose effect; it should always summon 1 Naterran Great Tree, with an Overflow conditional replacing that with up to 2 and granting this follower Rush.",
+      "The base summon and Overflow-enhanced summon are not mutually chosen by the player; encode as a single sequence/conditional fanfare rather than two options.",
+      "The source says \"summon up to 2 instead,\" but the parsed effect forces exactly 2 under Overflow; it should allow summoning 1 or 2 if the engine supports optional count, otherwise this should be represented as closely as possible without using choose."
+    ]
+  },
+  "Lila, Arborist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The discard trigger for the bonus draw is too broad; the source requires discarding a Forestcraft spell, but the parsed condition only checks discarded cardType spell. It should also check the discarded card's class is forest; implement a condition or optional-cost result check for discarded card class/filter.",
+      "The fanfare is encoded as optionalCost, making the discard optional, but the source presents \"Discard a card:\" as a required cost to get the effect. It should be encoded as a required discard cost if the engine supports mandatory fanfare costs; add support for non-optional fanfare costs or mandatory cost wrappers."
+    ]
+  },
+  "Lilanthim, Anathema of Edacity": {
+    "verdict": "fail",
+    "issues": [
+      "The activated Earth Rite ability is encoded with a condition instead of consuming Earth Sigil stacks as a cost; it should use an activated cost with earthRite {\"count\":1} rather than condition {\"type\":\"earthRite\",\"count\":1}.",
+      "The activated Earth Rite ability should not include a meaningless pp cost of 0; remove the pp cost and encode only the Earth Rite cost."
+    ]
+  },
+  "Lilanthim, Anathema of Edacity Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Super-Evolve says \"Select up to 2 enemy followers,\" but the parsed destroy effect forces exactly 2 targets; it should allow 0 to 2 targets. Implement optional/up-to target counts for destroy target selectors.",
+      "The Stack effect is incorrectly encoded as addCounter targeting self; \"Add 2 to a Stack on your field\" should target an Earth Sigil/Stack card on your field, not this follower. It should use an operation that adds stack counters to a chosen allied field card; implement targeted stack-counter addition if needed.",
+      "The activated Earth Rite ability is encoded with a condition instead of consuming Earth Sigil stacks as a cost; it should use cost earthRite {\"count\":1} rather than condition {\"type\":\"earthRite\",\"count\":1}.",
+      "The Last Words Earth Rite ability is encoded as an if-condition, but Earth Rite should be paid/consumed, not merely checked. It should consume 1 stack as part of resolving the Last Words; implement support for Earth Rite costs on non-activated triggered abilities or a consume-stack conditional effect wrapper.",
+      "The Last Words effect is incorrectly encoded as summonFromExArea; the source says to put this card onto its owner's field engaged, so it should return this same card from the appropriate zone/cemetery to the field engaged. Implement a self-revive-to-field effect from Last Words if needed."
+    ]
+  },
+  "Lilith": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lilith Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lilje, Butler of the Mists": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The aura incorrectly filters by trait \"Azord\"; it should affect followers named \"Azord, Duke of the Mists\" specifically, not a trait. Use a name-based field filter; implement auraGrantKeyword support for identityName/cardNo filtering if needed.",
+      "The continuous granted Strike ability (\"Strike - Give this follower [attack]+2/[defense]+2.\") is missing entirely. It should grant the named Azord follower an extra strike-triggered self buff while this card is on the field; implement an aura/grant mechanism for triggered abilities on matching followers."
+    ]
+  },
+  "Lilje, Butler of the Mists Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The aura incorrectly filters by trait \"Azord\"; it should affect followers named \"Azord, Duke of the Mists\" specifically, not a trait. Use a name-based field filter; implement auraGrantKeyword support for identityName/cardNo filtering if needed.",
+      "The continuous granted Strike ability (\"Strike - Give this follower [attack]+2/[defense]+2.\") is missing entirely. It should grant the named Azord follower an extra strike-triggered self buff while this card is on the field; implement an aura/grant mechanism for triggered abilities on matching followers.",
+      "The On Evolve tutor omits the shuffle instruction from \"then shuffle.\" If tutorFromDeck does not inherently shuffle, add an explicit shuffleDeck step; if it does, no issue, but as encoded this is incomplete."
+    ]
+  },
+  "Lily, Crystalian Innocence": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

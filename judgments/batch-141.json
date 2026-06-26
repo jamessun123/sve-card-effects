@@ -1,0 +1,55 @@
+{
+  "Managrocer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Manifest Devotion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is encoded as `searchDeckSummonMultiple` with `maxTotalCost: 8`, but the source requires two separate selections: up to 1 amulet that costs 5 or less and up to 1 amulet that costs 3 or less from among the top 7 cards. This should be encoded as a top-7 search effect that can choose two amulets with independent cost caps rather than a combined total-cost cap. Implement a search/summon ability that supports multiple independent pick slots from the looked-at cards, e.g. 'choose up to 1 matching filter A and up to 1 matching filter B, then put the rest on the bottom'."
+    ]
+  },
+  "Manifest Malice": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The return-to-hand clause is encoded as `returnToHand` targeting `self`, but after a spell resolves it is no longer a field target; the source means to return this spell card to its owner's hand after optional cemetery banish. This should be encoded as a source-card return effect for spells, but no implemented ability supports returning the resolving source spell to hand. Implement an ability such as `returnSourceToHand` or a generic zone-agnostic source return effect."
+    ]
+  },
+  "Manifestation of Repose": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "March Hare's Teatime": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability incorrectly has `activateFrom: \"cemetery\"`; the source [act] ability is activated while this amulet is on the field. Change `activateFrom` to `field` or omit it.",
+      "The fanfare effect is overconstrained as `searchDeckSummonMultiple` with `maxTotalCost: 5`; the source says 'you may put a Fable follower that costs 5 play points or less'—a single optional summon, not a total-cost-based multi-summon. Encode it with a single-card top-5 search/summon effect that optionally puts 1 matching follower onto your field and puts the rest on the bottom."
+    ]
+  },
+  "March of the Dragonspring": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction is encoded inside the spell's resolving `spell` effect, but the source is an alternative additional play condition: 'When playing this, remove 2 divine water counters from a Soothing Dragonspring on your field: This costs 2 less to play.' It should be encoded as an optional play-time cost reduction tied to removing 2 named counters from a specific card on your field, not as a resolving effect. Implement support for optional additional play costs that remove named counters from another field card and apply a temporary reduction to the current card's play cost."
+    ]
+  },
+  "Marcotte, Heretical Sister": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incorrectly encoded as an unconditional `choose` between drawing and tutoring. The source says draw a card, but if there are 5 cards in your EX area, do the tutor effect instead. This should be a conditional fanfare based on exactly having 5 cards in your EX area, not player choice. Implement a condition type for EX area card count equality/threshold without trait restriction, then encode the effect as conditional draw-or-tutor."
+    ]
+  },
+  "Marduk": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marduk Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Both On Evolve conditions are encoded with `ownCemeteryClassMin` using `cardClass: \"spell\"` and `cardClass: \"amulet\"`, but the source checks for card types in your cemetery, not classes. This should be encoded with cemetery card-type count conditions for spells and amulets respectively. Implement condition support for counting cards in your cemetery by `cardType` (e.g. `ownCemeteryCardTypeMin`)."
+    ]
+  },
+  "Margarite Mermaid": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

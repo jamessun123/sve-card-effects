@@ -1,0 +1,63 @@
+{
+  "Holy Counterattack": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The target restriction is incorrect: the spell must select an engaged enemy follower, but parsed targets allow any enemy follower. It should target only engaged enemy followers; implement a target-selector flag/filter for engaged followers.",
+      "The condition is incorrect: \"If there's a follower with Ward on your field\" is not a trait check for \"Ward\". It should check for an allied follower with the Ward keyword; implement a condition for allied field followers with a given keyword.",
+      "The clause \"This card can't be played during your turn\" is missing. It should be encoded as a play restriction limiting this quick spell to the opponent's turn; implement a passive/metadata play-timing restriction for cards that cannot be played during your own turn."
+    ]
+  },
+  "Holy Falcon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Holy Fowl of Ivory": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is incorrect: \"If there's an amulet on your field\" is not a trait check for \"Amulet\". It should check for any allied amulet on the field; implement a condition for allied field card type counts.",
+      "The keyword list incorrectly includes \"fanfare\". Fanfare should be represented by the ability timing only, not as a keyword."
+    ]
+  },
+  "Holy Lancer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is incorrect: it requires another follower with Ward on your field, but parsed checks only for any follower with a fake \"Ward\" trait and does not enforce \"another.\" It should check for another allied follower with the Ward keyword; implement a condition for allied field followers with a given keyword and exclude-self support.",
+      "The keyword list incorrectly includes \"evolve\". The evolve cost line should be represented by evolveCost/evolvesTo, not as a keyword.",
+      "The keyword list incorrectly includes \"fanfare\". Fanfare should be represented by the ability timing only, not as a keyword."
+    ]
+  },
+  "Holy Lancer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Holy Sanctuary": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first passive ability is incorrect: \"This card doesn't refresh during your start phase\" is missing, and the parsed passive instead always refreshes this card. It should encode a no-refresh-during-start-phase restriction plus a separate trigger that refreshes this card whenever your leader gains defense; implement start-phase refresh suppression and a trigger for leader-healed/leader-gains-defense events.",
+      "The activated ability misses \"Choose one that you haven't chosen this turn.\" Parsed choose allows repeating options. It should track which options were chosen this turn and forbid choosing the same one again; implement per-option once-per-turn choice memory for choose abilities."
+    ]
+  },
+  "Holy Sentinel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger is incorrect: it should be \"Once on each of your turns, when another amulet you control leaves the field,\" but parsed uses a generic onLeaveField ability with no check for another allied amulet and no once-per-turn limit. It should trigger only from another allied amulet leaving your field and only once each turn; implement triggered abilities that watch other allied card leaves with card-type filtering and once-per-turn support."
+    ]
+  },
+  "Holy Shieldmaiden": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive is incomplete: \"During your turn, this doesn't take damage\" should apply only during your turn. Parsed damage immunity is unconditional. It should be conditioned to your turn; implement turn-based conditions (for example, controller turn / opponent turn) for passive effects."
+    ]
+  },
+  "Holy Tiger": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Holybright Altar": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The granted ability on the summoned Holy Tiger is encoded incorrectly. The card says \"Give it 'At the start of your end phase, destroy this card.'\" but parsed uses grantLastWords, which destroys it only when it leaves play. It should grant a start-of-end-phase self-destroy trigger to the summoned token; implement an effect to grant a timed triggered ability to a target follower.",
+      "The activated ability is incorrect: it should select a follower on your field and heal your leader equal to that follower's cost. Parsed instead deals dynamic damage to your leader based on target attack and does not target a follower. It should target an allied follower and recover defense equal to its cost; implement a dynamic amount based on selected target cost and allow healLeader to use dynamic amounts."
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "Goliath": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Goliath Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Good Fairy of the Pond": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gourmet Emperor Khaiza": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect should be encoded as a single sequence that destroys the selected enemy follower with maxCost 2 and then heals the enemy leader by 3; the current healLeader effect incorrectly heals your leader and is split from the targeted destruction.",
+      "Change the second Fanfare effect from healLeader amount 3 to deal with the destroyed follower's leader instead; this should target the opponent leader after the destroy step, not your own leader."
+    ]
+  },
+  "Grand Acquisition": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grand Archer Selwyn": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grand Archer Selwyn Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grand Gargoyle": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grand Spire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The printed keyword 'Stack' should not be placed in keywords unless the engine supports it as a real keyword; either omit it or implement Stack keyword support/automatic stack-counter handling for Earth Sigil amulets."
+    ]
+  },
+  "Grand Summoning": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first part is misencoded: the spell should summon both a follower that costs 3 or less and a follower that costs 5 or less, not choose one of those two searches. Encode both searches in sequence; if the engine lacks a way to enforce selecting distinct cards/combined search wording, implement a search-and-summon-multiple primitive for fixed different cost buckets.",
+      "The condition 'If your leader is [runecraft]' is encoded incorrectly as namedFollowerOnFieldByName with identityName 'leader is [runecraft]'; replace it with an appropriate leader/class condition. Since no leader-class condition exists in the reference, implement a condition such as controllerClass/cardClassIs for this clause.",
+      "The base searches should summon from the deck, not merely tutor to field without ensuring the exact pair structure from the text; if current tutorFromDeck cannot faithfully represent this multi-search requirement, implement an operation to search for multiple followers with separate max-cost constraints and summon them.",
+      "The card includes a class-based conditional extra search, summon, and recover 2 PP; the current condition is invalid, so the extra clause does not correctly represent the source. Add proper class-condition support and keep the extra 7-or-less summon plus recoverPp 2 inside that condition."
+    ]
+  }
+}

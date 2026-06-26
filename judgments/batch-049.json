@@ -1,0 +1,61 @@
+{
+  "Curate": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Curse Crafter": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing the clause \"For the rest of this turn, this card's [act] abilities except [evolve] can't be activated.\" It should encode a sequence that deals 4 damage, then applies grantActRestriction with {\"exceptEvolve\": true, \"untilEndOfTurn\": true}.",
+      "The bury cost for the activated ability is not encoded in the supported cost shape. It should use a valid activated cost that buries 1 Shikigami follower from your field."
+    ]
+  },
+  "Curse Crafter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete. It should deal 2 damage to an enemy follower, or 4 damage instead if there are at least 7 spells and Onmyoji cards in your cemetery. Add a conditional damage effect for the cemetery-count requirement; this needs engine support for a condition/count over mixed card categories such as spells and a specific trait in cemetery.",
+      "The activated ability is missing the clause \"For the rest of this turn, this card's [act] abilities can't be activated.\" It should encode a sequence that deals 4 damage, then applies grantActRestriction with {\"untilEndOfTurn\": true}.",
+      "The bury cost for the activated ability is not encoded in the supported cost shape. It should use a valid activated cost that buries 1 Shikigami follower from your field."
+    ]
+  },
+  "Curse of the Black Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play restriction \"This can't be played unless Overflow is active for you\" is missing. It should be encoded as a play permission restriction conditioned on overflow; implement an ability/op for conditional can't-play restrictions.",
+      "The start-of-end ability is encoded with the wrong condition logic. It should trigger if this is in your EX area and Overflow is NOT active for you, then deal 1 damage to your leader, not check overflow and noop. Implement support for negated conditions or an if/else form that can express \"if not overflow\".",
+      "The main spell effect after the separator is completely missing. It should select a Rowen, Dragon Lance on your field and give it \"If this would deal damage, it deals that much plus 1 instead\" for the rest of this turn. Implement an ability/op to grant a temporary damage-boosting replacement effect to a selected follower."
+    ]
+  },
+  "Cursed Furor": {
+    "verdict": "fail",
+    "issues": [
+      "Quick is incorrectly placed in top-level keywords. The source says the card has [quick] only while Overflow is active, so remove \"quick\" from keywords and keep it only as a passive conditional keyword-grant.",
+      "The spell ability is incorrectly marked \"quick\": true unconditionally. Quick should only be granted by the passive Overflow condition, not always on the spell ability."
+    ]
+  },
+  "Cursed Stone": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cursed Stone Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete. It should select an enemy follower, make it lose all abilities, and make it unable to attack enemies for the rest of this turn and during each opponent's next turn. The current encoding only silences it.",
+      "The \"can't attack enemies\" portion is missing. Implement an ability/op that applies a temporary attack restriction to the targeted enemy follower for the stated duration."
+    ]
+  },
+  "Curtain Call of Smiles": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect is encoded as destroyAllEnemyField, but the source says \"Destroy each non-iM@S CG follower on the field.\" It should destroy all followers on both fields that do not have the iM@S CG trait. Implement an ability/op to destroy field followers by inverse trait filter across both players' fields."
+    ]
+  },
+  "Cute Earrings": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cute Pendant": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

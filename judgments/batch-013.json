@@ -1,0 +1,51 @@
+{
+  "Ancient Elf Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect is encoded as two separate mandatory abilities; it should be a single On Evolve ability where returning another card on your field to its owner's hand is the cost or prerequisite for then giving this follower +1/+1."
+    ]
+  },
+  "Ancient Protector": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive abilities are incorrectly encoded as skipPp, skipDraw, and winGame. This card should instead prevent you from losing the game and prevent opponents from winning while it is on your field; implement dedicated passive ops such as preventLoseGame and preventOpponentWin.",
+      "The triggered effect \"When your leader's defense becomes 0 or less, put this card into its owner's cemetery and change your leader's defense to 1\" is missing. It should be encoded as a trigger for leader defense reaching 0 or less that buries this card and sets your leader's defense to 1; implement a timing/trigger for leader defense threshold change and an effect op to set your own leader defense."
+    ]
+  },
+  "Android Artisan": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Andromeda": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The effect is incorrectly encoded as grantIndestructible to your leader and this follower only. It should give immunity to ability damage for the rest of the turn to your leader and each follower currently on your field, including this one; implement support for granting temporary ability-damage immunity to multiple current allied targets including leader and followers."
+    ]
+  },
+  "Angel of Chaos": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability uses an unimplemented steal op and refreshes self instead of the stolen follower. It should banish 3 Fallen Angel cards from your cemetery, steal the selected enemy follower, then refresh that stolen follower; implement a steal effect op that moves the chosen enemy follower to your field and allows subsequent targeting/refresing of that stolen follower."
+    ]
+  },
+  "Angel of Darkness": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Angel of the Iron Steed": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Angel's Blessing": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Angelic Barrage": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Angelic Maid": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

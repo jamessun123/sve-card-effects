@@ -1,0 +1,56 @@
+{
+  "Shadowcrypt Memorial": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability cost is incorrect: it should be only [engage] and bury this, not pp:3. Change cost to {\"engage\":true,\"burySelf\":true}.",
+      "Activated ability condition is incorrect: source says 'Activate only if a follower on your field evolved this turn,' but parsed uses invalid condition {\"type\":\"onAllyEvolve\"}. Encode this with a proper turn-state condition for 'an ally follower evolved this turn'; add engine support for such a condition if missing."
+    ]
+  },
+  "Shadowed Assassin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shadowed Assassin Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve target restriction is missing: it must destroy an engaged enemy follower, not any enemy follower. Add a target selector/filter for engaged followers and encode the destroy target as an engaged enemy follower."
+    ]
+  },
+  "Shadowed Memories": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Play cost reduction is encoded as a spell ability, but source text is a conditional static cost reduction before play. It should be a passive playCostReduction ability gated by 'if you selected a follower on your field with \"Leod\" in its name'; add engine support for this specific prior-selection/name-based condition if missing.",
+      "Spell effect target needs to be an Assassin follower on your field. The parsed target puts a filter inside targets, which is not supported by the reference. Encode with a supported self-field follower selector plus trait restriction support, or add target filtering by trait to the engine."
+    ]
+  },
+  "Shady Priest": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Second ability is missing its trigger condition/timing: it should trigger whenever a Mount card you control leaves the field, not be a free activated ability. Encode this as an on-leave-field style triggered ability tied to your Mount cards leaving the field, with cost {\"pp\":3}; add engine support for triggering on another controlled card with a trait leaving the field if missing."
+    ]
+  },
+  "Shamu & Shama, Posh Felines": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is incomplete: source first says 'Select an enemy follower on the field,' then Combo (5) - deal it 3 damage. Parsed only deals damage conditionally and omits the required target-selection clause outside the condition. Encode the fanfare so it always selects an enemy follower, then conditionally deals 3 damage to that selected target if Combo (5) is active."
+    ]
+  },
+  "Shapeshifting Mage": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shapeshifting Mage Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shark Warrior": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incorrect: source always selects an enemy follower on the field, then deals it 2 damage if this was played from the EX area. Parsed instead gates the whole ability by inExArea and also checks enteredFromHand, which is the opposite of the card text. Encode the fanfare to always target an enemy follower and conditionally deal 2 damage based on 'played from EX area'; add engine support for a condition like 'enteredFromExArea' or equivalent if missing."
+    ]
+  },
+  "Shark Warrior Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

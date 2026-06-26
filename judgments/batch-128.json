@@ -1,0 +1,58 @@
+{
+  "Levon, Scentbound Sword": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability's final clause is encoded with selectFromHand to put a Hunter follower onto the field, but selectFromHand only supports moving to hand or exArea in the reference. It should encode 'you may summon a Hunter follower that costs 3 or less from your hand' with a hand-to-field summon operation gated by ownCemeteryTraitMin 3. Implement a new ability such as summonFromHand/filter+optional to support this."
+    ]
+  },
+  "Liam, Crazed Creator": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is encoded as summon 2 Puppet tokens to exArea, but the source says 'Summon 2 Puppet tokens,' which should put them onto the field. Change zone from exArea to field."
+    ]
+  },
+  "Liam, Master of Puppets": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability uses searchDeckChoose with reveal:true, but reveal is not part of searchDeckChoose in the reference. The correct effect is to look at the top 3 cards, you may reveal a Puppetry card from among them and add it to your hand, then put the rest on the bottom. Add engine support for revealing with searchDeckChoose or a dedicated top-deck tutor/reveal operation."
+    ]
+  },
+  "Liberté, Unchained Wolf": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability only buries another follower, but the source is 'Bury another follower: This card's [evolve] costs 1 less this turn.' Encode this as a costed/conditional sequence or optionalCost where burying another follower is followed by evolveCostReduction amount 1 for this turn."
+    ]
+  },
+  "Liberté, Unchained Wolf Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve condition is encoded as discardedThisTurn, but the source checks whether 'a follower was put from your field into the cemetery this turn,' which is not the same as discarding. Replace with a condition tracking followers sent from your field to cemetery this turn. Implement a new condition type for this specific state, such as ownFollowerLeftFieldToCemeteryThisTurn."
+    ]
+  },
+  "Liberté, Werewolf Pup": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Liberté, Werewolf Pup Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lightning Blast": {
+    "verdict": "fail",
+    "issues": [
+      "The 5-more-PP option is encoded as destroyAllEnemyField, but the source says to banish each enemy follower on the field. Replace that option's effect with banishUpTo or another all-enemy-follower banish encoding that affects all enemy followers rather than destroying enemy field cards and amulets."
+    ]
+  },
+  "Lightning Kicker": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is missing the cost 'Discard 2 Heroic cards' before the deck summon effect. It should require discarding 2 Heroic cards from hand, then search and summon up to 2 Heroic followers that cost 3 or less.",
+      "The fanfare ability omits 'with different names' for the two summoned Heroic followers. Implement support for deck search/summon with a distinct-name constraint, such as a differentNames flag on a multi-summon tutor operation.",
+      "The encoded effect uses summonFromDeck, which is not in the implemented ability reference. Use an implemented tutor/search+summon operation if possible, or add a summon-from-deck operation that supports count, filters, optional up-to selection, distinct names, and shuffle."
+    ]
+  },
+  "Lightning Kicker Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

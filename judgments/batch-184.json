@@ -1,0 +1,58 @@
+{
+  "Ravening Tentacles": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost is encoded incorrectly as optional and as engaging this card itself. It should be a required additional cost to engage a Levin follower on your field; encode it as a mandatory selectable engage cost targeting a self follower with the Levin trait. Implement engine support for required additional play costs and engage-cost target selection/filtering.",
+      "The Yurius condition is encoded incorrectly as namedFollowerOnFieldByName with identityName \"Yurius\", which checks exact name. It should check whether there is a follower on your field with \"Yurius\" in its name. Implement a condition for name-contains on a follower on your field, or a generalized field-name-substring condition."
+    ]
+  },
+  "Ravenous Sweetness": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Razory Claw": {
+    "verdict": "fail",
+    "issues": [
+      "The 3-damage target is encoded as enemyFieldCard, which can include amulets. It should target an enemy leader or enemy follower only; change to a selector/effect that allows enemyLeader or enemyFollower, not enemyFieldCard."
+    ]
+  },
+  "Realm of Repose": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated effect is encoded as damageImmunity amount 4 to your leader, but the text is a damage cap/replacement effect for the rest of the turn: if your leader would take more than 4 damage, it takes 4 instead. Encode it as a temporary leader damage cap effect. Implement engine support for temporary leader damage-cap/replacement effects."
+    ]
+  },
+  "Rebel Against Fate": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The hand-and-cemetery reset is encoded as handResetDraw, but the source says each player returns both hand and cemetery to their deck, shuffles, then draws 5 cards. Encode a full hand+cemetery reset to deck, shuffle, then fixed draw 5 for each player. Implement engine support for returning cemeteries to deck as part of a reset effect.",
+      "The final clause is encoded as passive playCostReduction on this card, but it should make the next card you play this turn cost 7 less. Change it to grantNextPlayCostReduction amount 7 without a restrictive filter."
+    ]
+  },
+  "Reclusive Ponderer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Reclusive Ponderer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Red Ragewyrm": {
+    "verdict": "fail",
+    "issues": [
+      "The card has an incorrect keyword entry \"evolve\". Remove that keyword; the card only has an activated ability and evolve linkage fields."
+    ]
+  },
+  "Red-Hot Ritual": {
+    "verdict": "fail",
+    "issues": [
+      "The printed keyword/effect \"Stack.\" is missing. Add the Stack keyword/effect to the encoding."
+    ]
+  },
+  "Redcap": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is encoded incorrectly as fieldTraitMin trait \"Amulet\", but the text checks whether there's an amulet on your field, not a follower with trait Amulet. Change it to a condition that checks for at least 1 amulet on your field. Implement engine support for field card-type/count conditions such as having an amulet on your field."
+    ]
+  }
+}

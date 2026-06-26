@@ -1,0 +1,60 @@
+{
+  "Tetra, Sapphire Rebel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tetra, Sapphire Rebel Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Passive cost reduction is incorrectly scoped: it should apply only while this card is on your field to Machina cards played from the EX area. Encode the passive ability using effect {\"op\":\"exAreaPlayCostReduction\",\"amount\":1} without an unsupported top-level filter, or otherwise ensure the reduction is limited to Machina cards from EX area.",
+      "The triggered damage ability is missing the source-zone restriction from the English text: it should trigger while this card is on your field when you play a Machina card. Encode it as a field passive/onCardPlayed-style grant tied to this card being on the field.",
+      "The trigger should be '4 times per turn' when you play a Machina card; the current grantOnCardPlayed encoding is acceptable for the count, but the ability should not be a generic passive without clearly representing the field-based trigger condition."
+    ]
+  },
+  "Tetra, Serene Sapphire": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tetra, Serene Sapphire Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incomplete: the source says to look at the top 4 cards and add up to 1 Machina card and up to 1 Delta Cannon to your hand, then put the rest on the bottom. The parsed ability only gets a single Machina card. It should be encoded as a multi-pick search from the top 4 allowing two different filters, but this specific 'up to 1 of A and up to 1 of B from the same looked-at cards' effect is not available in the current ability reference; implement a search effect that supports multiple simultaneous filtered selections from a looked-at subset.",
+      "On Evolve uses the wrong filter for Machina: {\"traitsAny\":[\"Machina\"]} is incorrect for this card text and trait system; it should select Machina cards correctly, and also separately allow Delta Cannon by name.",
+      "On Super-Evolve is encoded incorrectly: the granted ability should be 'Whenever you play a Machina card, deal 1 damage to each enemy leader and enemy follower on the field for the rest of this turn.' The parsed code only deals 1 damage to the enemy leader and incorrectly sets maxPerTurn to 1. It should grant an on-card-played effect until end of turn that hits both the enemy leader and all enemy followers each time a Machina card is played.",
+      "To support the correct On Super-Evolve text cleanly, the engine needs either a sequence targetting enemyLeader plus dealDamageAllEnemies with followersOnly true inside grantOnCardPlayed, or a dedicated effect for 'deal damage to enemy leader and all enemy followers' under a granted trigger."
+    ]
+  },
+  "The Cauldron of Calamity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is missing the implementable Stack keyword/ability. It should be represented in keywords if your schema supports Stack, or with the appropriate stack/counter handling if that is how Stack is modeled.",
+      "The fanfare search is encoded incorrectly: the source says 'a card with Earth Rite' from the top 4, not 'a follower with trait Earth Sigil'. It should search for a card matching the Earth Rite property. Since the ability reference has no filter for cards with the Earth Rite keyword/text, implement a deck filter field for Earth Rite-capable cards or a dedicated search predicate for 'has Earth Rite'."
+    ]
+  },
+  "The Saviors": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Themis's Decree": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Thorn Burst": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The target is encoded incorrectly: the source says 'Select an enemy leader or enemy follower on the field,' but the parsed code targets only any follower. It should allow either enemyLeader or enemyFollower as the damage target. Since the current target selectors do not support a combined 'enemy leader or enemy follower' choice, implement a target selector or choose-wrapper that can select either target class for a single dealDamage effect."
+    ]
+  },
+  "Thornclad Arbiter": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded incorrectly: it should select an amulet on your field, but the parsed target uses allyFieldCard with an unsupported nested filter. Encode it using a valid target/effect combination that correctly restricts the chosen target to an amulet you control and then destroys it."
+    ]
+  },
+  "Threadsnipper Puppet": {
+    "verdict": "fail",
+    "issues": [
+      "The second activated ability cost is encoded incorrectly: banishing a Puppet from your EX area should use the implemented activated cost shape with banishFromExArea containing both filter and count, e.g. {\"engage\":true,\"banishFromExArea\":{\"filter\":{\"identityName\":\"Puppet\"},\"count\":1}} or equivalent valid EX-area Puppet filter, instead of unsupported fields banishCount and a bare trait object."
+    ]
+  }
+}

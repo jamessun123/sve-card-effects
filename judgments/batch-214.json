@@ -1,0 +1,51 @@
+{
+  "Soulstrike": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sparkling☆Days": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spartacus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The end-phase win condition is encoded with unsupported condition type `ownDeckMax`; it should check \"if there's 1 card or less in your deck\" before `winGame`. Add an implemented deck-size condition such as `ownDeckMax`/`deckCountMax` and use that here."
+    ]
+  },
+  "Spartoi Sergeant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spawn of the Abyss Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end ability incorrectly adds a condition requiring this card to be in the EX area or a named follower to be on the field; the source text is unconditional apart from your leader being Abysscraft, so remove that `if` wrapper and encode the effect directly.",
+      "The effect text says \"if your leader is [abysscraft]\" but the parsed condition does not check leader class; replace the current condition with a class check for your leader being Abysscraft.",
+      "The current sequence is nested under an incorrect conditional; the actual effect should simply be: heal your leader 4, draw 2 cards, each opponent discards 2 cards, then each opponent buries 2 followers, gated only by your leader being Abysscraft."
+    ]
+  },
+  "Spectral Wizard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spectral Wizard Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spectre": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spice Shower": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spiderweb Array": {
+    "verdict": "fail",
+    "issues": [
+      "The final clause is encoded incorrectly as `grantOnCardPlayed` with a `noop`; it should be part of the same target engagement effect using `engage` with `skipRefreshNextStart: true` on the selected enemy follower.",
+      "Remove the unimplemented `noop` placeholder and the unrelated `grantOnCardPlayed` wrapper; the spell should resolve as: engage target enemy follower with skip-refresh-next-start, then draw 1 card."
+    ]
+  }
+}

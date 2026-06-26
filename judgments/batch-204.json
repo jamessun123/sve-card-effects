@@ -1,0 +1,63 @@
+{
+  "Servant of Silence": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger is encoded as timing \"onDiscard\", which in the engine means when this card is discarded, but the source says \"Whenever an opponent discards a card\". It should be encoded as a trigger for opponent discards instead; implement a new timing such as \"onOpponentDiscard\" or a generalized discard trigger with controller filtering, then use that timing for the existing sequence effect."
+    ]
+  },
+  "Servant of Unkilling": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Servant of Usurpation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second ability uses non-existent timing \"onEnemyDeckMill\". It should trigger during your turn whenever a card is put from an opponent's deck into the cemetery, then buff this follower +1 attack; implement a new timing such as \"onOpponentDeckToCemetery\" with a turn/controller condition, then keep the buff effect targeting self.",
+      "The second ability is missing the \"During your turn\" restriction. Add a condition restricting the trigger to your turn when encoding the opponent-deck-to-cemetery trigger; if no turn condition exists, implement one."
+    ]
+  },
+  "Set": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is wrong: the source says \"[act] [cost01], discard this card\", but parsed uses an unsupported discard cost object. It should be timing \"activated\" with cost { \"pp\": 1 } and an effect that includes discarding this card from hand as part of resolution; implement an activated ability cost or effect for \"discard this card from hand/self from hand\" and use that before healing 2.",
+      "The activated ability is missing that the discarded card is this card specifically. Encode the source card being discarded from hand, not a generic discard of 1; implement support for self-discard-from-hand if needed."
+    ]
+  },
+  "Set Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Setus, Sunlit Hero": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first ability places the Beast filter at the ability top level, but implemented wrappers use `condition`, not `filter`, for `timing: \"onCardPlayed\"`. It should trigger whenever you play a Beast card and recover 1 PP once each of your turns; implement filtered onCardPlayed triggers or a condition type for card-play filters, then encode the trigger correctly.",
+      "The fanfare is encoded incorrectly as summoning a token named \"top card of your deck\" to the EX area. It should put the actual top card of your deck into your EX area twice; use `putDeckTopToExArea` twice, not `summon`.",
+      "The conditional heal on the fanfare is wrong: it uses an always-true placeholder, but the source says \"If it's a Beast card, give your leader [defense]+2.\" It should be encoded as `putDeckTopToExArea` with an `ifFilter` for trait \"Beast\" and `then` heal 2, repeated twice. If checking the moved top card's trait is not fully supported, implement that linkage."
+    ]
+  },
+  "Setus, the Beastblade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The end-phase conditional is incorrect: parsed uses condition `discardedThisTurn`, but the source says \"if a follower was put from your field into the cemetery this turn\". It should use a dedicated condition for an allied follower leaving your field to cemetery this turn; implement such a condition and use it before buffing self +2/+2."
+    ]
+  },
+  "Setus, the Beastblade Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded with `tutorFromCemetery` to field, but the source says \"Select a follower that costs 3 or less in your cemetery and summon it.\" It should use a summon/revive-style cemetery-to-field effect, e.g. `summonFromCemetery` with filter { \"cardType\": \"follower\", \"maxCost\": 3 } and count 1.",
+      "The end-phase conditional is incorrect: parsed uses condition `discardedThisTurn`, but the source says \"if a follower was put from your field into the cemetery this turn\". It should use a dedicated condition for an allied follower leaving your field to cemetery this turn; implement such a condition and use it before buffing self +2/+2."
+    ]
+  },
+  "Shadow Witch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shadow's Corrosion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive clause \"This card can't be played from the EX area\" is missing. It should be encoded as a passive restriction on playing this card from EX area; implement a new passive op such as `cannotPlayFromExArea` or equivalent.",
+      "The EX-area end-phase damage amount is wrong. The source says \"deal 1 damage to each enemy leader for every 5 Natura cards in your cemetery,\" but parsed uses `traitFieldCount` and damages all enemies. It should target enemy leaders only and use a dynamic amount based on Natura cards in your cemetery divided by 5; implement a suitable damage amount for cemetery trait count with divisor and an effect that damages enemy leaders.",
+      "The spell effect's EX-area move is encoded incorrectly with `moveToExArea` targeting `selfFollower`, but this card is a spell card. It should move the source spell itself to its owner's EX area after resolution; implement a source-card move such as `moveSourceToExArea` that works for spells, then use it under the Valdain condition."
+    ]
+  }
+}

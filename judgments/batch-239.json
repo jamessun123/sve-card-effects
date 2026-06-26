@@ -1,0 +1,58 @@
+{
+  "Valkyrie of Chaos": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Valkyrie of Chaos Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Valkyrie of Order": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare uses withChosenNumber with max 99, but [costX] means X is the PP paid for the ability; encode this as a fanfare ability with a variable PP cost tied to the chosen number instead of an unrestricted chosenNumber range."
+    ]
+  },
+  "Valnareik, Lustful Desire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as {\"type\":\"selfLeader\"} with an always-if wrapper; it should check 'if your leader's defense is 7' and then buff this +2/+2. Add an implemented condition for exact leader defense, such as leaderDefEquals, and use it on the fanfare buff ability.",
+      "The Sanguine continuous Storm clause is acceptable as a passive conditional grant, but Storm should not be listed as an unconditional keyword on the base card."
+    ]
+  },
+  "Valnareik, Lustful Desire Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Storm is encoded as an unconditional keyword, but the source says 'While Sanguine is active for you, this has Storm'; remove 'storm' from keywords and keep only the passive conditional grantKeyword ability."
+    ]
+  },
+  "Valnareik, Omen of Lust": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Strike ability is encoded as dealDamageAllEnemies with chosenNumber, but it should deal X damage only to each enemy leader, where X equals the number of times your leader has lost defense this turn. Add a dynamic amount implementation for leader-defense-lost count this turn, and encode the effect to target enemy leaders only.",
+      "The final clause 'If your leader's defense is 7, give this follower +2/+2' is encoded as a passive ability with invalid condition type selfLeader; it should use an exact leader-defense condition and apply the buff only while that condition is true. Implement a condition such as leaderDefEquals and encode the passive buff with it."
+    ]
+  },
+  "Valse, Champion Deadeye": {
+    "verdict": "fail",
+    "issues": [
+      "The first activated ability should target an enemy leader or enemy follower, but it is encoded as targeting anyFollower only; encode a target/effect that can hit either enemyLeader or enemyFollower.",
+      "The second activated ability should banish an enemy amulet only, but it is encoded as banishing any enemy field card; restrict the target to enemy amulet cards."
+    ]
+  },
+  "Vampiric Bloodbinder": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vampiric Fortress": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vania, Kind Queen Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost reduction for 'any Forest Bat you play costs 1 less' is encoded with playCostReduction using targets, which does not match the implemented schema and does not properly filter played cards; this should be a passive play-cost modifier filtered to cards named Forest Bat. Implement a filtered play cost reduction ability (for example playCostReduction with a card filter, or a new aura-style cost reduction op) and encode the clause with identityName 'Forest Bat'.",
+      "The trigger 'Whenever a Forest Bat is put onto your field, give your leader defense+1' is encoded using a top-level filter on the ability, but ability wrappers do not support filter there; encode it using onAllyFollowerEnter with filtering support in the engine or add wrapper-level trigger filtering for that timing."
+    ]
+  }
+}

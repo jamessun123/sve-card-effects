@@ -1,0 +1,49 @@
+{
+  "Yukimi Sajo Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yukimi Sajo [Day by Day, Hand in Hand]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yukishima, Master Biographer": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost-reduction ability is too broad; `grantNextPlayCostReduction.filter` should restrict to cards that are either Festive and cost 3 or less or Mage and cost 3 or less, not all cards costing 3 or less.",
+      "The triggered damage ability is too broad and has the wrong duration/timing placement; it should only trigger when you play a Festive card that costs 3 or less or a Mage card that costs 3 or less, and it should be represented as a continuous/field trigger rather than granted only by fanfare for this turn."
+    ]
+  },
+  "Yumi Aiba": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yumi Aiba Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yuna, Occult Hunter": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is encoded as a single-choice `choose` between 2 Ghost or 2 Forest Bat, but the text says to put 2 Ghost or Forest Bat tokens into your EX area, allowing any mix totaling 2. This should be encoded as an effect that creates 2 tokens with per-token choice of Ghost or Forest Bat. Implement a new ability op for mixed token choice summoning, such as `summonChoiceTokens` with selectable token identities and total count."
+    ]
+  },
+  "Yurius, Levin Duke": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yuuki Otokura [Ripples of My Heart]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yuuki Otokura [Together with Me]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yuwan, Dimensional Avenger": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare incorrectly makes the discard unconditional; the discard should happen only if you put a follower into your EX area this way."
+    ]
+  }
+}

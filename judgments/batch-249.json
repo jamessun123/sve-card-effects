@@ -1,0 +1,49 @@
+{
+  "Witch of Foresight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Witch of Foresight Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Witch of Sweets": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Witch of Sweets Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Witch's Cauldron": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the printed Stack keyword/counter handling; encode the amulet's Stack using an implemented stack-support mechanism, or add engine support for a Stack keyword/property on amulets so the card's innate Stack is represented.",
+      "The fanfare search filter is incorrect: it uses {\"trait\":\"Earth Rite\"}, but the source says 'a card with Earth Rite'; this should search for cards that have the Earth Rite ability/text, not the Earth Rite trait. Add engine support for filtering deck search targets by keyword/ability text such as Earth Rite, then encode the fanfare with that filter."
+    ]
+  },
+  "Witchbolt": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The conditional draw is incorrectly encoded with condition {\"type\":\"noop\"}; it should be 'if there is an evolved follower on your field, draw a card.' Replace this with a real field-state condition for an allied evolved follower, and add engine support for a condition such as alliedEvolvedFollowerOnField if that condition type is not implemented."
+    ]
+  },
+  "Wizardess of Oz": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wolf Fang Swordsman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wolfling's Struggle": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wood of Brambles": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the continuous effect 'While this card is on your field, your followers have \"Follower Strike: Deal 2 damage to the enemy follower.\"' This should be encoded as an aura granting a strike-triggered damage ability to your followers, but the engine lacks a grantStrike/grantTriggeredAbility-to-followers operation. Add support for granting triggered abilities (especially Strike) via aura, then encode this effect."
+    ]
+  }
+}

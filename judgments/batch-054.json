@@ -1,0 +1,62 @@
+{
+  "Deepwood Wolf": {
+    "verdict": "fail",
+    "issues": [
+      "The passive trigger incorrectly includes this card itself; change the grantOnAllyFollowerEnter filter/effect so it only triggers when another Beast follower enters your field, excluding Deepwood Wolf.",
+      "The activated ability is missing that it can be activated from hand; add \"activateFrom\": \"hand\" to represent \"put this card from your hand into your EX area\"."
+    ]
+  },
+  "Delta Cannon": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery-to-EX ability is missing its trigger condition; encode it as a triggered ability that works only when a Tetra, Sapphire Rebel is put onto your field, rather than an always-available activated ability from cemetery."
+    ]
+  },
+  "Demon Maestro": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing its cost; encode \"Give your leader [defense]-2\" as an activation cost, not as part of the effect sequence with no cost field."
+    ]
+  },
+  "Demon of Purgatory": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be listed in keywords; remove \"fanfare\" from keywords and keep the Fanfare effect only in abilities."
+    ]
+  },
+  "Demon's Epitaph": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is encoded incorrectly; instead of evolving another follower matching this card's name, it should evolve this follower after discarding a card.",
+      "The evolve ability should be a direct paid evolve action, not an optionalCost wrapper; make discarding a card the required cost for the evolve timing effect."
+    ]
+  },
+  "Demon's Epitaph Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect is overbroad; it should deal 2 damage to each enemy leader only, not to all enemies including followers."
+    ]
+  },
+  "Demoncaller": {
+    "verdict": "fail",
+    "issues": [
+      "The Shikigami entry trigger is encoded with the wrong target; the buff should be applied to the entering Shikigami follower, not to Demoncaller itself.",
+      "The triggered buff is incomplete; in addition to +1 attack, it must also give the entering Shikigami follower Rush."
+    ]
+  },
+  "Demoncaller Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Shikigami entry trigger is encoded with the wrong target; the buff should be applied to the entering Shikigami follower, not to Demoncaller Evolved itself.",
+      "The triggered buff is incomplete; in addition to +1 attack, it must also give the entering Shikigami follower Rush."
+    ]
+  },
+  "Demonflame Mage": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonflame Mage Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

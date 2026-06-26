@@ -1,0 +1,64 @@
+{
+  "Rulenye, Echoing Scream": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rulenye, Omen of Silence": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive tax ability is encoded incorrectly as grantOnCardPlayed -> playCostIncrease. It should be a continuous effect that makes only opponent-played spells cost 1 more while this card is on your field; implement an opponent-scoped spell cost increase passive/aura and encode that instead.",
+      "The card has an explicit [evolve] [cost01]: Evolve this follower line in source text. Besides evolveCost, this should be represented with an evolve timing/cost ability if your card definitions track printed evolve abilities; if not supported consistently by the engine, add support for printed evolve cost line encoding."
+    ]
+  },
+  "Rulenye, Omen of Silence Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive tax ability is encoded incorrectly as grantOnCardPlayed -> playCostIncrease. It should be a continuous effect that makes only opponent-played spells cost 1 more while this card is on your field; implement an opponent-scoped spell cost increase passive/aura and encode that instead."
+    ]
+  },
+  "Rulenye, Screaming Silence": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is misencoded: source says 'Select an enemy follower on the field. If there are at least 3 cards on your field named Rulenye, Echoing Scream, destroy it and deal 3 damage to its leader.' The parsed version wrongly destroys the target even if the condition is false. It should target an enemy follower and only destroy it plus deal 3 to its leader if the named-card condition is met; implement a condition for 'field has at least N cards with this identity name' and remove the else destroy clause.",
+      "The fanfare condition is wrong: it checks fieldTraitMin Omen 3, but source requires at least 3 cards on your field named 'Rulenye, Echoing Scream'. Encode a named-identity-on-field count condition instead; add such a condition type to the engine if missing.",
+      "The fanfare's selected target is not preserved through the conditional sequence. It should select an enemy follower first and then apply destroy/damage-to-its-leader based on that selected follower; implement support for conditional effects that reference a preselected target if needed."
+    ]
+  },
+  "Ruler of Cocytus": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare summons the wrong token name: source says 'Silent Rider, Servant of Cocytus' as one token name, plus 'Demon of Purgatory' and 'Astaroth's Reckoning'. Replace the separate 'Silent Rider' and 'Servant of Cocytus' summons with a single summon of 'Silent Rider, Servant of Cocytus'."
+    ]
+  },
+  "Rune Blade Summoner": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as chooseMultiple, but source is not a choice effect. It should be a sequential conditional fanfare: if Spellchain (5), buff this follower +4/+4; then if Spellchain (10), give this follower Storm.",
+      "Add the missing Spellchain conditions: the +4/+4 effect should be gated by condition { type: 'spellchain', count: 5 } and the Storm effect by condition { type: 'spellchain', count: 10 } or equivalent nested ifs."
+    ]
+  },
+  "Runic Guardian": {
+    "verdict": "fail",
+    "issues": [
+      "The first fanfare option is missing its Earth Rite requirement. 'Earth Rite: Give this follower [attack]+1/[defense]+2' should consume 1 Earth Sigil stack, e.g. via removeCounter/earthRite cost or an earthRite condition+payment, rather than being an unconditional buff option."
+    ]
+  },
+  "Runie, Resolute Diviner": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded as chooseMultiple, but source is not a choice effect. It should perform Spellchain thresholds cumulatively: SC(5), then SC(10), then SC(15), then SC(20) as applicable.",
+      "The SC(10) effect is encoded incorrectly as dealDamage to enemyLeader, which only hits one leader. Source says 'Deal 2 damage to each enemy leader. Give your leader [defense]+2.' Use the multiplayer-capable enemy-leader damage operation if available, or add an operation for damaging each opponent leader.",
+      "The SC(15) effect is incomplete: source says 'Put each Runie, Resolute Diviner from your cemetery into your EX area.' tutorFromCemetery selects one card, not each copy. Encode moving all matching copies from cemetery to EX area; add a bulk cemetery-to-EX-area operation if missing.",
+      "The SC(20) effect is wrong: buffFieldTrait Mage buffs all Mage followers on your field and does not affect EX area. It should give +2/+2 only to cards named 'Runie, Resolute Diviner' on your field and in your EX area. Add an identity-name-based field/EX-area buff operation if missing.",
+      "The initial target clause 'Select up to 1 enemy follower on the field' is not modeled as optional targeting for SC(5). The 3-damage effect should allow zero or one enemy follower target, only relevant when Spellchain (5) is performed; add optional target support for enemyFollower if needed."
+    ]
+  },
+  "Rusty, Luxcard Trickster": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ryo Matsunaga": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

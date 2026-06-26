@@ -1,0 +1,52 @@
+{
+  "Luna, Soul Keeper": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lunerian Paladin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lunerian Paladin Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second On Evolve ability is incorrectly encoded as healing based on condition {\"type\":\"discardedThisTurn\"}; it should instead be conditional on whether the follower summoned by the first effect had Ward, then heal your leader by 2. Replace it with an On Evolve effect that checks whether the summoned follower has Ward and then uses {\"op\":\"healLeader\",\"amount\":2}. The engine is missing a condition/effect hook to detect properties of the card summoned by a prior effect in the same resolution (e.g. 'ifSummonedCardHasKeyword' or similar)."
+    ]
+  },
+  "Lupine Axeman": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare is encoded as a mandatory choose-one, but the source says 'You may put a Naterran Great Tree token onto your field or into your EX area.' It should be optional, allowing no token to be placed. Encode as an optional choice or a choose effect with min 0, max 1.",
+      "The activated ability is incorrect: damage should equal the number of cards named Naterran Great Tree engaged this way, not the total number of Naterran Great Tree cards on your field. It also omits engaging any number of Naterran Great Tree on your field as part of the cost/effect. The engine is missing support for selecting and engaging any number of matching allied cards as an activation cost and then counting the number engaged this way for a dynamic damage amount."
+    ]
+  },
+  "Lycaon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lycaon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lycoris, Poisoner Princess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability uses unsupported op \"grantOnEnemyFollowerLeaveField\" and is missing the 'during your turn' restriction. It should encode 'During your turn, whenever an enemy follower is put from the field into the cemetery, deal 1 damage to its leader.' The engine is missing a trigger for enemy follower sent from field to cemetery and a turn restriction such as controllerTurnOnly/opponentTurnOnly on that trigger.",
+      "The activated ability should target another follower on your field, but the selector lacks excludeSelf:true. Change targets to {\"type\":\"selfFollower\",\"count\":1,\"excludeSelf\":true}."
+    ]
+  },
+  "Lymaga, Forest Champion": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lymaga, Forest Champion Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lyrala, Luminous Potionwright": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability condition is too broad: it requires at least 3 Officer token followers on your field with different names, but the parsed condition only checks for 3 Officer cards. It should restrict to followers, token printings, and different names. The engine is missing a condition for 'field cards with different names' and likely a combined field filter/count condition that can enforce token follower Officer cards with unique names."
+    ]
+  }
+}

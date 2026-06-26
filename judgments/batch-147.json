@@ -1,0 +1,62 @@
+{
+  "Mega Enforcer": {
+    "verdict": "fail",
+    "issues": [
+      "The startOfEnd ability incorrectly omits the required target selection before the condition; it should still select an enemy follower on the field, then if there are at least 3 Machina cards in your EX area, deal 3 damage to that selected follower and draw a card."
+    ]
+  },
+  "Megalorca": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Melodious Monody": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incorrectly encoded with optionalCost and a noop/chosenNumber placeholder; it should encode an additional cost that engages any number of Idolatry cards on your field, then deal damage equal to 2 times the number engaged to an enemy follower. Implement engine support for 'engage any number of matching allied cards as an additional cost' and a dynamic amount based on the number paid."
+    ]
+  },
+  "Melody's Return": {
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is mandatory, not optional; replace optionalCost with a mandatory additional-cost encoding so the spell requires banishing a follower with 'Lishenna' in its name from your cemetery to be played.",
+      "The cemetery cost filter is too broad; it should require a follower with 'Lishenna' in its name, so add cardType: 'follower' to the banishFromCemetery filter.",
+      "The deck search filter is too broad; it should search for a follower with 'Lishenna' in its name, so add cardType: 'follower' to the tutorFromDeck filter."
+    ]
+  },
+  "Melvie, Princess Witch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mena, Levin Duelist": {
+    "verdict": "fail",
+    "issues": [
+      "The conditional granted triggered ability is encoded as grantLastWords, but the card gains a Strike ability; replace this with a passive/conditional Strike ability that gives this follower +2/+1 when it attacks."
+    ]
+  },
+  "Meowskers Ambush!": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card incorrectly puts 'fanfare' in keywords; Fanfare should be represented only as a fanfare ability, so remove the keyword entry.",
+      "The activated ability uses summonFromHand, which is not an implemented operation; it should encode 'You may summon a follower with \"Meowskers\" in its name from your hand' as an optional hand-to-field summon effect. Implement an ability such as summonFromHand/filter or selectFromHand with to:'field' to support this effect."
+    ]
+  },
+  "Meowskers, Fluffy Consul": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare condition is wrong; 'If this was put onto the field by an ability' should be encoded as notEnteredFromHand, not merely 'not played from hand' if that is being used loosely. Ensure the condition specifically matches not being put onto the field from hand.",
+      "The Strike ability has a PP cost but is missing an activated/paid strike encoding; represent the Strike ability with its required [cost01] so the damage effect only occurs if 1 PP is paid."
+    ]
+  },
+  "Meowskers, Ruff-Tuff Major": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Strike effect is incorrectly split into two mandatory abilities, causing both leader and follower damage to happen; it should be a single ability that deals 1 damage to a chosen enemy leader or enemy follower. Implement target support for 'enemy leader or enemy follower' or a choose-one targeting mode."
+    ]
+  },
+  "Merciless Voiding": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The summon count uses an unsupported dynamic amount enemyFieldCount; it should summon X Ancient Artifact tokens where X equals the number of enemy followers on the field. Implement a dynamic count operation for enemy follower count and allow summon.count to use that amount."
+    ]
+  }
+}

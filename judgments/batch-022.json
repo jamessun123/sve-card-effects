@@ -1,0 +1,63 @@
+{
+  "Arsène Lupin Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Art Society Magus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare heal amount is encoded incorrectly as {\"op\":\"sourceCost\"}, but the card says X equals the cost of the top card put into your EX area. This should be encoded as a sequence that moves the top card to EX area, then heals your leader by that moved card's cost. The needed dynamic amount 'cost of the card moved to EX area / top card of deck just moved' is not implemented in the ability reference and should be added."
+    ]
+  },
+  "Arthurian Light": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'fanfare' from keywords; the source card has only activated abilities and no Fanfare."
+    ]
+  },
+  "Artistic Arcanist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The [act] Earth Rite ability is encoded as three separate activated abilities, but the source says to select another follower on your field and give it Rush, Bane, or Drain, meaning one activation should choose exactly one of those three keywords. This should be a single activated ability with an Earth Rite condition using a choose effect with three options that each grant one keyword to the same selected other follower.",
+      "The current encoding does not guarantee a single target shared by the chosen keyword option. To represent 'select another follower on your field and give it Rush, Bane, or Drain' correctly, the engine needs support for choosing among keyword grants after selecting one target, or an implemented pattern for 'choose one keyword to grant' tied to one chosen target."
+    ]
+  },
+  "Artistic Arcanist Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The [act] Earth Rite ability is encoded as three separate activated abilities, but the source says to select another follower on your field and give it Rush, Bane, or Drain, meaning one activation should choose exactly one of those three keywords. This should be a single activated ability with an Earth Rite condition using a choose effect with three options that each grant one keyword to the same selected other follower.",
+      "The current encoding does not guarantee a single target shared by the chosen keyword option. To represent 'select another follower on your field and give it Rush, Bane, or Drain' correctly, the engine needs support for choosing among keyword grants after selecting one target, or an implemented pattern for 'choose one keyword to grant' tied to one chosen target."
+    ]
+  },
+  "Aryll, Moonstruck Vampire": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded too broadly as any self follower with trait Vampire. It should target a Vampire token follower on your field, so the target selector/filter should restrict to token followers with trait Vampire.",
+      "The activated ability uses separate target selectors for buff, Rush, and Drain, which can allow different followers to be chosen for each step. It should target the same selected Vampire token follower for all three effects, e.g. by applying the buff and both keyword grants to one chosen target."
+    ]
+  },
+  "Assault Dragoon": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability uses separate target selectors for the buff and Storm grant, which can allow different followers to be chosen for each step. It should target the same selected Dragoncraft follower that costs 2 or less on your field for both effects."
+    ]
+  },
+  "Assault Dragoon Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability uses separate target selectors for the buff and Storm grant, which can allow different followers to be chosen for each step. It should target the same selected Dragoncraft follower that costs 2 or less on your field for both effects."
+    ]
+  },
+  "Assault Jaguar": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'lastWords' from keywords; Last Words should be represented as an ability timing, not as a printed keyword entry."
+    ]
+  },
+  "Assault Tentacle": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'lastWords' from keywords; Last Words should be represented as an ability timing, not as a printed keyword entry."
+    ]
+  }
+}

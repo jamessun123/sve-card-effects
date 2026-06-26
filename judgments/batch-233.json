@@ -1,0 +1,64 @@
+{
+  "Tsubaki of the Demon Blade": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"storm\" from keywords; Storm is conditional, not always active.",
+      "Add a passive ability with condition {\"type\":\"ownCemeteryClassMin\",\"cardClass\":\"sword\",\"count\":10} that grants this follower Storm, e.g. grantKeyword/passiveKeywords gated by that condition."
+    ]
+  },
+  "Tsukasa Kiryu": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card has a second evolve clause, \"[evolve] Lesson (3): Evolve this follower,\" but parsed only captures evolveCost 2 and a no-op evolve ability.",
+      "Encode the Lesson (3) alternate evolve payment as an additional evolve ability/condition if supported; implement engine support for Lesson/Nanahoshi-style alternate evolve conditions or costs, since no Lesson condition/cost exists in the reference.",
+      "Remove the meaningless timing:\"evolve\" ability with passiveKeywords:[]; it does not represent printed text."
+    ]
+  },
+  "Tsukasa Kiryu Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tsukuyomi": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Uses unsupported timing \"onBecomeEngaged\"; the effect should trigger whenever this card becomes engaged. Implement an engage-trigger timing such as onBecomeEngaged/instead of using an undefined timing.",
+      "The effect damages only the enemy leader, but parsed uses dealDamageAllEnemies and would also damage enemy followers. Encode as conditional dealDamage to {\"type\":\"enemyLeader\"} for 1 or 2 damage."
+    ]
+  },
+  "Turquoise Sister": {
+    "verdict": "fail",
+    "issues": [
+      "The tutor filter uses maxDef:2, but source says a Faith follower with 2 attack or less. Change the filter to match attack <= 2 instead of defense <= 2."
+    ]
+  },
+  "Tutankhamun": {
+    "verdict": "fail",
+    "issues": [
+      "Last Words should summon the searched Tutankhamun engaged; parsed tutors to field without the engaged state. Change the effect to summon/search in a way that preserves \"engaged\" on entry."
+    ]
+  },
+  "Tweedle Dum, Tweedle Dee": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tweedle Dum, Tweedle Dee Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "searchDeckChoose includes \"reveal\": true, but reveal is not a supported field for this operation in the reference. Implement reveal support on searchDeckChoose or a dedicated reveal-then-add operation to represent \"You may reveal... and add it to your hand.\""
+    ]
+  },
+  "Twilight Blade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The engagement of Lecia, Sky Saber and Nano, the Dawnblade is an additional cost to play the spell, not part of the spell effect sequence. Encode it as a play/additional cost if supported; implement spell additional-cost support for engaging specific followers if missing.",
+      "The target selector uses unsupported nested filter fields (identityNameAny inside targets). Implement target filtering by specific names for engaged additional costs, or another cost schema that can require engaging exactly those named followers."
+    ]
+  },
+  "Twin-Headed Dragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the passive clause \"This follower deals double attack damage to leaders and double combat damage to followers.\" Add a passive ability representing doubled combat damage.",
+      "Implement engine support for combat-damage multipliers/double strike style effects against leaders and followers, since no existing operation in the reference can encode this clause."
+    ]
+  }
+}

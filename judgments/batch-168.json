@@ -1,0 +1,61 @@
+{
+  "Onslaught": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Opposing Statues": {
+    "verdict": "fail",
+    "issues": [
+      "The second fanfare cost is encoded as buryFromFieldSelect with only excludeSelf:true, but the source says \"Bury another amulet\"; restrict the cost to another amulet on your field rather than any other field card."
+    ]
+  },
+  "Optimistic Beastmaster": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability uses amount {\"op\":\"exAreaDifferentCostCount\"}, but that dynamic amount is not in the ability reference. It should encode damage equal to the number of cards with different base costs in your EX area; implement a new DamageAmount such as exAreaDifferentBaseCostCount and use that here."
+    ]
+  },
+  "Orator of the Bones": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Orator of the Bones Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Orbed Cancer": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is incorrect: it uses an unsupported/incorrect cost field \"discard\":1 and burySelf:true, but the source requires discarding this card and a Dragoncraft card that costs 7 or more. Encode the activation from hand with cost {\"pp\":1} and make the effect a sequence or optionalCost that discards this card from hand plus discardFromHand of a Dragoncraft card with minCost 7, then draw 2 cards."
+    ]
+  },
+  "Orchestral Mage": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is wrong: discardedThisTurn does not represent \"If you've played another Festive card this turn\". It should check whether another Festive card was played this turn.",
+      "The fanfare effect is wrong: the source says \"give this Storm or Drain,\" meaning choose one keyword to grant to this follower, not an if/else that gives Storm on success and Drain otherwise. Encode it as a choose between grantKeyword storm and grantKeyword drain targeting self.",
+      "A condition for \"played another Festive card this turn\" is not available in the ability reference. Implement a condition such as playedCardThisTurn / playedOtherCardThisTurn with a DeckFilter (here trait Festive, excluding this card), then use it to gate the choose effect."
+    ]
+  },
+  "Orchestral Mage Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onEvolve damage amount is incorrect: the source says damage equal to 2 times the number of Festive and/or Mage cards you've played this turn, but the parsed amount only references playedCardsThisTurn with traitsAny and does not apply the ×2 multiplier.",
+      "The dynamic amount \"playedCardsThisTurn\" is not in the ability reference. Implement a DamageAmount for counting cards played this turn with an optional DeckFilter/traitsAny and multiplier, then use it here with traitsAny [\"Festive\",\"Mage\"] and multiplier 2."
+    ]
+  },
+  "Orchis, Newfound Heart": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is incomplete: it only gives the selected Puppet +1/+1, but the source also gives it Storm and Bane. Encode this as a sequence adding buff +1/+1 and grantKeyword storm and grantKeyword bane to the selected Puppet."
+    ]
+  },
+  "Orchis, Puppet Girl": {
+    "verdict": "fail",
+    "issues": [
+      "The card has two distinct evolve options, but evolvesTo/evolveCost only represent the first one. Add the second evolve option correctly, including its [cost04] cost and the cemetery condition for evolving into Orchis, Vengeful Puppet.",
+      "The second evolve ability is missing its activation restriction: it should activate only if there are at least 3 Puppetry cards in your cemetery.",
+      "Both evolve abilities are incorrectly encoded as summonFromEvolveDeck effects with no costs. They should be evolve timing abilities/cost lines that evolve this follower into the specified form, with costs 1 and 4 respectively, rather than generic summonFromEvolveDeck with no evolve cost handling."
+    ]
+  }
+}

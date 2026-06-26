@@ -1,0 +1,62 @@
+{
+  "Aluzard, Timeworn Vampire Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Last Words effect is incomplete: after putting this card and a Blood Arts token into your EX area, it should also place 2 dormancy counters on this card. Encode the existing EX-area moves, then add a counter-placement step for dormancy on the moved source; this requires implementing support for dormancy counters / adding counters to a card in EX area."
+    ]
+  },
+  "Alwida's Command": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Alwida, Pirate Queen": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous attack trigger is encoded incorrectly as an `onAllyFollowerEnter` ability; remove that ability. The card should have a field-granted attack trigger for Thief followers on your field that, when they attack, deals 4 damage to an enemy follower and then makes that follower's controller bury the top card of their deck.",
+      "The `strike` ability is also incorrect because it is attached as if this card itself were the attacker and uses an unsupported `filter` field on the ability wrapper. The effect should instead trigger whenever any Thief follower on your field attacks. This needs an engine ability to grant a strike/on-attack trigger to matching allied followers, ideally analogous to `grantOnAllyFollowerEnter` / `grantOnCardPlayed`, with effect `sequence[dealDamage enemyFollower 4, mill controller-of-damaged-follower 1]`."
+    ]
+  },
+  "Alyaska, War Hawker": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Alyaska, War Hawker Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Amalia, Luxsteel Paladin": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare summon is too broad: it should summon an Officer token follower from your EX area, not any Officer card. Encode the summon with a token-only Officer filter; if `summonFromExArea` cannot currently filter by `printingType: token`, add support for that filter.",
+      "The activated condition is incorrect: it requires at least 3 Officer token followers on your field with different names, not merely 3 Officer followers. Encode a condition checking 3 Officer token followers with unique names; this needs engine support for field conditions involving `printingType: token` and distinct identity-name counting.",
+      "The activated effect is incorrect: `dealDamageAllEnemies` would hit enemy followers too, but the card says 'Deal 4 damage to each enemy leader.' Encode damage only to enemy leaders; this needs a dedicated engine effect for dealing damage to all enemy leaders in multiplayer or equivalent leader-only-all-opponents targeting."
+    ]
+  },
+  "Amataz, Fairy Blader": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The printed keyword `storm` is incorrect and should not be in `keywords`; the card only grants Storm via its activated ability, so remove `storm` from `keywords`.",
+      "The Fanfare buff is encoded incorrectly with `buffFieldTrait`, which affects the field. The source says to give each Pixie follower in your EX area +1/+1. Encode an EX-area buff to matching cards instead; this requires implementing an effect that buffs cards in EX area by trait.",
+      "The activated targeting is incorrect: it should select up to 2 Pixie followers that cost 1 or less on your field. The current target object nests `filter`, which is not supported by the target selector reference, and does not express 'up to 2'. Encode valid filtered field targets with optional selection up to 2; if unsupported, implement target filtering by trait/cost and optional max-count selection for `grantKeyword`."
+    ]
+  },
+  "Amataz, Reverse Blader": {
+    "verdict": "fail",
+    "issues": [
+      "Ward is encoded incorrectly as an `evolve` ability. It is a printed keyword on the base card, so move `ward` into `keywords` and remove the `timing: \"evolve\"` passiveKeywords ability."
+    ]
+  },
+  "Amataz, Reverse Blader Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve destroy condition is incorrect: the card destroys the selected enemy follower if there are at least 3 cards in your EX area, not at least 3 Pixie cards in your EX area. Encode the destroy under a condition for total EX-area card count; this needs an engine condition for generic EX-area size.",
+      "The second clause is missing: after that, if there are at least 3 Pixie cards, deal 2 damage to its leader. Replace the `noop` with the proper damage effect. This also needs an engine condition for counting cards by name/identity (Pixie) in the relevant zone, since `exAreaTraitMin` with trait `Pixie` is not the same as 'Pixie cards' by name."
+    ]
+  },
+  "Amaterasu": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger timing `onBecomeEngaged` is not in the implemented timing reference. The card should trigger whenever this card becomes engaged; add engine support for an engage trigger timing (for example `onBecomeEngaged`) and keep the heal effect gated by whether Tsukuyomi is on your field."
+    ]
+  }
+}

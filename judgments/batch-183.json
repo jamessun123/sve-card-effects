@@ -1,0 +1,70 @@
+{
+  "Ranko Kanzaki": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability is missing the Lesson (2) cost/condition; encode the [act] ability with its PP cost plus a Lesson 2 gate/cost. Implement engine support for Lesson/Natural Lesson conditions or activated costs.",
+      "Activated ability is encoded as chooseMultiple with one option, which does not faithfully mean 'Select up to 2 enemy followers ... and deal them 2 damage'; it should resolve as selecting 0 to 2 enemy followers and dealing 2 damage to each selected follower. Implement engine support for optional multi-target damage to up to N targets, or a target selector that supports min 0 / max 2."
+    ]
+  },
+  "Ranko Kanzaki Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve effect uses searchDeckChoose with remainderTo cemetery, but the card says 'Look at the top 4 cards of your deck. You may put one of them into your EX area. Bury the rest.' This needs a top-of-deck look/select effect that sends unchosen viewed cards to cemetery; implement engine support for search/look effects with remainderTo cemetery or a dedicated peek-and-choose-to-EX-area effect.",
+      "Activated ability is missing the Lesson (2) cost/condition; encode the [act] ability with its PP cost plus a Lesson 2 gate/cost. Implement engine support for Lesson/Natural Lesson conditions or activated costs.",
+      "Activated ability should be 'select up to 2 enemy followers and deal 2 damage to them' rather than forcing exactly 2 targets in a single dealDamage target selector. Implement support for optional up-to-N same-effect targeting, or a target selector with min 0 / max 2."
+    ]
+  },
+  "Ranko Kanzaki [Cinderella Girl]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Necrocharge (5) and NC (10) are part of the fanfare effect, not passive abilities; encode them within the fanfare resolution as conditional branches after destroying an enemy follower.",
+      "NC (10) is mis-encoded as dealDamageAllEnemies, which hits followers too; it should deal 3 damage only to each enemy leader. Implement engine support for multiplayer enemy-leader-only damage, since current ops target one enemy leader or all enemies including followers."
+    ]
+  },
+  "Ranko Kanzaki [Nation Blue]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ranko Kanzaki [Princess in White]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Necrocharge (5) and NC (10) are part of the fanfare effect, not passive abilities; encode them within the fanfare resolution as conditional branches after destroying an enemy follower.",
+      "NC (10) is mis-encoded as dealDamageAllEnemies, which hits followers too; it should deal 3 damage only to each enemy leader. Implement engine support for multiplayer enemy-leader-only damage, since current ops target one enemy leader or all enemies including followers."
+    ]
+  },
+  "Rapid Fire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Spell effect is not a choose effect; it should target an enemy follower and deal 2 damage, or 3 damage instead if there are at least 3 cards named Rapid Fire in your cemetery.",
+      "The cemetery condition is incorrect: ownCemeteryMin counts any cards, but the source requires cards named Rapid Fire. Implement a condition for cemetery named-card minimum, or extend existing conditions to filter by identityName.",
+      "The 5-card clause is incorrect: after dealing increased damage to the selected follower, if there are at least 5 cards named Rapid Fire in your cemetery, deal 4 damage to that follower's leader. The current encoding targets the enemy leader directly as a separate choice and loses the linkage to the selected follower's leader; implement support for 'that follower's leader' targeting and cemetery named-card minimum conditions.",
+      "The text 'You can put up to 6 of this card into your deck' is missing from the encoding; if deck construction rules are represented in this DSL, add support for non-gameplay deck limit metadata, otherwise this is engine-missing metadata support."
+    ]
+  },
+  "Rapunzel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Passive restriction is overbroad: the source says 'If this follower has no Fable counters, it can't attack enemies,' not 'can't attack' at all. Encode a conditional can't-attack-enemies-only restriction based on this follower having 0 Fable counters. Implement engine support for conditions checking counters on source and for 'can't attack enemies' distinct from full cannotAttack."
+    ]
+  },
+  "Raven, Eventide Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated cost is missing 'bury a Forest Bat'; encode the [act] cost as engage this card and bury a Forest Bat from your field. Implement activated cost support for burying a matching follower by identity/name or token name.",
+      "Second choose option is incorrect: 'Deal 2 damage to each enemy leader' should not use dealDamageAllEnemies because that also damages followers; encode enemy-leader-only mass damage. Implement engine support for damage to each enemy leader."
+    ]
+  },
+  "Raven, Midnight Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Triggered ability uses a top-level filter field that is not part of the documented ability wrapper; encode the Forest Bat check in a supported way, or implement trigger filtering on onAllyFollowerEnter by identityName.",
+      "Triggered effect is incorrect: 'deal 1 damage to each enemy leader' should not use dealDamageAllEnemies because that also damages followers. Implement engine support for damage to each enemy leader."
+    ]
+  },
+  "Raven, Noontide Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Triggered ability uses a top-level filter field that is not part of the documented ability wrapper; encode the Forest Bat check in a supported way, or implement trigger filtering on onAllyFollowerEnter by identityName."
+    ]
+  }
+}

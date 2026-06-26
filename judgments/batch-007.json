@@ -1,0 +1,57 @@
+{
+  "Aki Yamato Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrectly encoded as dealDamage to exactly 2 enemy followers; it should be able to select up to 2 enemy followers and deal 5 damage to each. Encode this as a multi-target damage effect with 0-2 or up-to-2 selection if supported; otherwise implement engine support for optional/up-to target counts on enemyFollower targeting or a dedicated up-to-N multi-target damage operation."
+    ]
+  },
+  "Akiha Ikebukuro": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Akiha Ikebukuro Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Akira Sunazuka": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first fanfare cost is incorrectly encoded as discard exactly 3 cards; it should be discard up to 3 cards. Encode the discard as optional/up-to-3 if supported; otherwise implement engine support for optional variable discard counts.",
+      "The first fanfare checks are incorrectly keyed off discardedCardType:follower three times; they should separately check whether at least 1 discarded card had trait Cute, Cool, and Passion, then apply heal 2, draw 1, and deal 2 damage to each enemy leader respectively. Encode with discarded-trait conditions if supported; otherwise implement conditions for checking discarded card traits this effect/turn.",
+      "The Passion payoff is incorrectly encoded as dealDamageAllEnemies 2; it should deal 2 damage to each enemy leader. Encode as damage to all enemy leaders if supported; otherwise implement an effect that damages each opponent leader."
+    ]
+  },
+  "Akira Sunazuka [Online Life]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is missing 'Lesson (1)' before the deck look effect. Encode the Lesson (1) requirement/cost if supported; otherwise implement engine support for Lesson/N counters or payments."
+    ]
+  },
+  "Al-mi'raj Defender": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare search filter is too narrow: the card says you may put one of the top 5 cards into your EX area, not only a Beast card. Encode searchDeckChoose without the Beast filter.",
+      "The play cost reduction condition is incorrect: it should apply only if the chosen card is a Beast follower that costs 4 or less. Encode the EX-area placement with a conditional reduction restricted to Beast follower and maxCost 4, not unconditional reduction on any chosen Beast card."
+    ]
+  },
+  "Albert, Levin Saber": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Albert, Levin Saber Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded as generic damageImmunity, but the text is specifically 'this follower doesn't take combat damage' for the rest of this turn. Encode combat-damage-only immunity if supported; otherwise implement engine support for temporary combat damage immunity distinct from ability damage immunity."
+    ]
+  },
+  "Albert, Levin Stormsaber": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Albert, Thunderous Doom": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare bury cost is encoded as buryFieldFollowers, which would bury all matching Levin followers; it should bury exactly one other Levin follower you choose. Encode the cost as a single selected selfFollower with trait Levin and excludeSelf true, using a one-card bury/select-to-cemetery effect rather than mass bury."
+    ]
+  }
+}

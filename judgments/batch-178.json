@@ -1,0 +1,55 @@
+{
+  "Princess's Strike": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Prism Priestess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Prism Priestess Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded with searchDeckChoose, but this effect is a full-deck search ('Search your deck for an amulet, reveal it, and add it to your hand'). Encode it as tutorFromDeck with filter {\"cardType\":\"amulet\"}, to \"hand\", and reveal true. The engine should support reveal on tutorFromDeck for this exact search-and-add effect."
+    ]
+  },
+  "Prismaplume Bird": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Prismawing Featherfolk": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search filter is incorrect: traitsAny [\"spell\",\"amulet\"] does not represent 'a spell or amulet'. It should filter by card type being spell or amulet, but DeckFilter has no OR support for cardType. Encode as an optional-cost fanfare that looks at top 4 and lets you reveal/add a card whose cardType is spell or amulet, then put the rest on the bottom; engine should implement a DeckFilter OR capability (for example cardTypesAny) or a dedicated search op for mixed card-type selection."
+    ]
+  },
+  "Prophetess of Creation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction condition is incorrect and incomplete. 'When playing this card, banish 10 cards with different base costs ranging from 1 to 10 from your cemetery: This card costs 10 less to play.' is not 'if you have at least 10 cards in your cemetery'. It should be an optional additional play cost requiring banishing exactly 10 cemetery cards with distinct base costs 1-10, then granting playCostReduction 10. Engine should implement a play-time optional cost/check for banishing cards from cemetery with distinct base-cost constraints.",
+      "The activated ability cost is encoded incorrectly as cost {\"pp\":0,\"discard\":1}; discard is not a supported activated cost field. It should be encoded as an activated ability whose cost discards this card from hand, then draws 1 and discards 1. Engine should implement discard-from-hand-of-source-card as an activated cost from hand, or allow activateFrom:\"hand\" with a self-discard cost.",
+      "The [act] ability is missing activateFrom:\"hand\". '[act] Discard this card' means the ability is activated from hand, not from field."
+    ]
+  },
+  "Prototype Warrior": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Prudent General": {
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush aura is encoded incorrectly with trait \"swordcraft\", but the source says 'Each [swordcraft] token on your field has Rush.' It should target Swordcraft token followers, e.g. auraGrantKeyword with an implementation that filters by cardClass \"sword\" and printingType \"token\" (not trait \"swordcraft\")."
+    ]
+  },
+  "Prudent General Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush aura is encoded incorrectly with trait \"swordcraft\", but the source says 'Each [swordcraft] token on your field has Rush.' It should target Swordcraft token followers, e.g. auraGrantKeyword with an implementation that filters by cardClass \"sword\" and printingType \"token\" (not trait \"swordcraft\").",
+      "The On Evolve buff is encoded incorrectly with buffFieldTrait using trait \"Steelclad Knight\". 'Give each Steelclad Knight on your field [attack]+1/[defense]+1' should target cards by name/identity, not by trait. It should be encoded as a field buff filtered to Steelclad Knight tokens/name; engine should support buffing field cards by identityName or cardNo."
+    ]
+  },
+  "Psychic☆Maiden": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

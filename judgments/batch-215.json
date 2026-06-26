@@ -1,0 +1,65 @@
+{
+  "Spinaria & Lucille, Keepers ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare damage is encoded incorrectly as `dealDamageAllEnemies`, which only hits the enemy leader once and enemy followers; it should deal 6 damage to each enemy leader and each enemy follower. Encode this as a sequence that deals 6 to the enemy leader and 6 to all enemy followers. If no direct combined op exists, implement an ability for 'deal damage to each enemy leader and each enemy follower'.",
+      "The deck-look clause is not faithful: `searchDeckChoose` currently implies choosing cards matching a filter from the top 2, but the source says look at the top 2 cards, put up to 2 of them into your EX area, and bury the rest. This should be encoded as a top-deck look/select-up-to-N effect with remainder to cemetery. Implement an ability that supports looking at top N cards, moving up to M chosen cards to EX area, and burying the rest.",
+      "The continuous triggered ability 'Whenever an enemy follower is put onto the field, [engage]: Deal it 6 damage.' is missing. It should be encoded as a passive/on-enemy-follower-enter triggered ability with an engage cost and damage to the entering follower. Implement support for triggers on enemy follower entry and/or granted triggered abilities with activation cost targeting the triggering card.",
+      "The end-phase clause 'At the start of your end phase, refresh this card.' is missing. Add a `startOfEnd` ability with `refresh` targeting `self`."
+    ]
+  },
+  "Spinaria, Keeper of Enigmas": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is incomplete: the source requires looking at the top 4 cards and adding up to 1 Forestcraft follower and up to 1 Forestcraft spell to hand, not just up to 1 Forestcraft card. Encode this as a top-4 dual-pick effect with separate follower and spell limits, then put the rest on the bottom. Implement an ability for multi-category selection from looked-at cards if needed.",
+      "The Combo (3) clause is encoded at the wrong timing. 'Combo (3): Recover 3 play points.' is part of the fanfare resolution, not a passive continuous ability. Move the combo condition under the fanfare ability, typically as a `sequence` with an `if` checking combo 3 and then `recoverPp` 3."
+    ]
+  },
+  "Spinaria, Keeper of the End": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spinaria, Wavering Will": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve trigger is encoded with nonexistent/incorrect support as `grantOnAllyEvolve`. It should be a direct triggered ability for 'Whenever a follower on your field evolves, heal your leader 2.' Encode this as an `onAllyEvolve` ability with `healLeader` 2. If ally-evolve triggers for passive cards are not supported, implement support for `timing: \"onAllyEvolve\"` on cards already on the field."
+    ]
+  },
+  "Spirit Curator": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second choice is missing its condition: it should only be available or resolve if there's a follower with 'Ghost' in its name in your EX area. Encode the option with a condition checking for a named/card-name-contains follower in EX area. Implement a condition type for 'named card in EX area' or 'identityNameContains in EX area' if needed."
+    ]
+  },
+  "Spirit of the Spring": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The end-phase ability is encoded as optional, but the source says 'discard a card: Put the top card of your deck into your EX area,' which is a mandatory costed trigger, not 'you may'. It should require discarding 1 card to resolve the effect, not use `optionalCost`. Implement support for triggered abilities with required additional costs if needed.",
+      "The activated ability cost is wrong: the source cost is 'Return a card in your EX area to its owner's hand', not `[engage]`. Remove the engage cost and encode the return-from-EX-area cost correctly. Implement activated-cost support for returning a card from your EX area to hand if needed.",
+      "The activated ability target for the return is wrong: it currently returns `anyFollower`, but the source specifies a card in your EX area. Encode the cost/target as a card from your EX area, not a field follower. Implement EX-area target selectors if needed.",
+      "The activated ability's second step is too broad: 'Put a card from your hand into your EX area' should select a hand card, not use an unrestricted placeholder filter without clear hand-card semantics. Use a hand-selection effect targeting any hand card to EX area."
+    ]
+  },
+  "Spiritshine": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first choice is missing the required restriction: it must target a Pixie token on your field or in your EX area, not any follower. Encode the buff target as a Pixie token in field/EX area. Implement a target selector that can choose a specific named token from field or EX area if needed."
+    ]
+  },
+  "Spiritual Blow": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Spiteful Screams": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cemetery summon filter is incomplete: the source requires an Abysscraft follower in your cemetery with Last Words that costs 2 or less. Add the Last Words restriction to the filter/effect. Implement deck/cemetery filtering by keyword/ability text such as Last Words if the engine does not support it."
+    ]
+  },
+  "Splendid Conjury": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded incorrectly as a free `choose` between 3 damage and 5 damage modes. The source is conditional, not a choice: it should deal 3 damage divided among up to 3 enemy followers, and if there's an Eleanor, Cosmic Flower on your field, deal 5 instead. Encode this as an `if` with condition `namedFollowerOnFieldByName` for Eleanor, Cosmic Flower, with `dealDamageSplit` 5 in the `then` branch and 3 in the `else` branch."
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "Mysteria, Magic Founder Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Passive cost reduction is encoded incorrectly as exAreaPlayCostReduction on this card itself. It should reduce the play cost of Academic followers you play while this card is on your field, which would require an aura/grant effect for allied Academic follower cards; implement a passive/aura ability that applies play cost reduction 1 to Academic followers you play."
+    ]
+  },
+  "Mysterian Knowledge": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost is encoded as optionalCost with discardFromHand, but the source requires a mandatory reveal of 2 Academic cards from your hand, not discarding them. It should be a mandatory additional-cost reveal-2-from-hand effect; implement a revealFromHand cost/effect and support mandatory spell additional costs instead of optionalCost.",
+      "The token creation should identify the token card precisely as Mysterian Missile; use tokenCardNo BP09-T03EN if available instead of only tokenName."
+    ]
+  },
+  "Mysterian Missile": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mysterian Whitewyrm Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mysterian Wisdom": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost is encoded incorrectly as optionalCost with discardFromHand, but the source requires a mandatory reveal of an Academic card from your hand and putting that revealed card on the bottom of your deck. It should not discard a card, and the bottom-deck action must apply to the revealed Academic card specifically. Implement a mandatory reveal-and-put-selected-revealed-card-on-bottom additional cost / hand-selection operation."
+    ]
+  },
+  "Mysterian Wyrmist": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve line is incomplete: evolvesTo only names Mysterian Whitewyrm Evolved, but the source says this follower can evolve into a Mysterian Whitewyrm or Mysterian Blackwyrm. It should encode a choice between the two evolve destinations; implement support for multiple evolve targets or chosen evolve forms.",
+      "The evolve line is missing its activation condition 'only if there are at least 5 Academic cards in your cemetery.' Add a condition ownCemeteryTraitMin Academic 5 to the evolve ability.",
+      "The fanfare is incomplete. If you do not discard an Academic card, this card should be put into your cemetery. Add the 'else bury this card' branch after the optional discard; this is implementable with optionalCost/if-or-choose style branching."
+    ]
+  },
+  "Mystic Absorption": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mystic Artifact": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mystic King": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing the clause 'For the rest of this turn, this card's [act] abilities except [evolve] can't be activated.' Add grantActRestriction with exceptEvolve true and untilEndOfTurn true after dealing 5 damage.",
+      "The activated ability is incorrectly limited with oncePerTurn. The source does not say once per turn; it becomes unusable for the rest of the turn only after each activation because of the effect itself. Remove oncePerTurn and encode the printed self-restriction effect instead."
+    ]
+  },
+  "Mystic King Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete: the source requires selecting up to 4 Chess followers with different names that cost 4 or less in your cemetery. The parsed summonFromCemetery does not enforce different names. It should encode a uniqueness-by-name restriction; implement support for 'different names' selection in cemetery summon effects.",
+      "The activated ability is missing the clause 'For the rest of this turn, this card's [act] abilities can't be activated.' Add grantActRestriction with untilEndOfTurn true after dealing 5 damage.",
+      "The activated ability is incorrectly limited with oncePerTurn. The source does not say once per turn; remove oncePerTurn and rely on the printed self-restriction effect."
+    ]
+  }
+}

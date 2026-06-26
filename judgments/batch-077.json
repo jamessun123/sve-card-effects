@@ -1,0 +1,54 @@
+{
+  "Fall from Grace": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The leader heal/draw effects are encoded for the caster instead of the selected follower's controller. It should banish the chosen anyFollower, then give that follower's leader defense +2 and have that follower's controller draw 1; this requires controller-relative target/effect support based on the selected target's controller, which is not implemented in the ability reference."
+    ]
+  },
+  "Fallen Harpist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fallen Shot": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fan of Otohime": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'fanfare'; this card has no Fanfare keyword.",
+      "The activation condition is encoded incorrectly as namedFollowerOnFieldByName: 'Marine'. It should require that there is a Marine follower on your field, which should be encoded with a field-trait follower condition; add engine support for a condition like fieldTraitMin with trait 'Marine' scoped to followers if needed."
+    ]
+  },
+  "Fangs of Ardent Destruction": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first spell effect should deal 1 damage to each follower on the field, not just enemies. Replace dealDamageAllEnemies with an all-followers effect such as dealDamageOtherFollowers plus self damage support, or implement a dedicated operation for 'deal damage to each follower on the field.'",
+      "The Overflow clause is encoded with the wrong target. It should give Storm to each 'Galmieux, Ardent Disdain' on your field, not an arbitrary selfFollower; encode it as a field-wide named target grant, and implement support for targeting/granting keywords to all allied followers matching a specific identity name."
+    ]
+  },
+  "Fashionista Nelcha": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fate's Hand": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Father Refinement": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Faust, Truthseeker": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare is incomplete/incorrect. It should search for up to 2 Earth Sigil amulets with total cost 4 or less, put them into your EX area, shuffle, and make those cards cost 0 to play this turn. The current tutorFromDeck fetches only one card, uses identityName 'Earth Sigil' instead of the Earth Sigil amulet classification, and omits the temporary cost reduction; implement support for tutoring multiple cards with a max total cost to EX area and applying a temporary play cost reduction to the tutored cards.",
+      "The end-phase damage effect is encoded incorrectly as dealDamageAllEnemies. The source says 'deal 2 damage to each enemy leader'; in multiplayer this means each opponent leader only, not followers. It should be a leader-only multi-opponent damage effect, which is not implemented and should be added.",
+      "The end-phase buff target is too broad as any selfFollower without reflecting 'Select a follower on your field' across all your followers if non-follower cards can also be on field; use the appropriate allied follower selector if available."
+    ]
+  },
+  "Fay Twinkletoes": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

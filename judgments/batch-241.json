@@ -1,0 +1,52 @@
+{
+  "Vengeful Sniper Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Venomfang Medusa": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Venomous Bite": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Venomous Pucewyrm": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Verdant Rebirth": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the continuous cost reduction clause \"This costs X less to play. X equals the number of cards named Naterran Great Tree that left your field this turn.\" The spell damage ability is correct, but the card also needs a passive play-cost-reduction effect using a dynamic amount based on the number of Naterran Great Tree cards that left your field this turn. Implement support for a dynamic amount/condition tracking named cards that left your field this turn, then encode it with a passive playCostReduction ability."
+    ]
+  },
+  "Veridic Discovery": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Veteran Lancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vice, Death Grip": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded as noop but is implementable in part and should not be left as a stub. Replace the noop with effects that look at the top 5 cards, add up to 2 Machina followers not named Vice, Death Grip to hand, put the rest on the bottom of the deck, then optionally summon up to 2 Machina followers that cost 2 or less from your hand.",
+      "The first half of the fanfare needs new engine support because existing tutor/search operations do not support choosing up to 2 cards from the top 5 to hand while bottoming the rest. Implement a search/peek effect that can reveal and move up to N matching cards from looked-at cards to hand with remainder to deckBottom.",
+      "The last clause \"You may summon up to 2 Machina followers that cost 2 or less from your hand\" is missing and also lacks engine support. Implement an effect to select and summon up to N matching followers from hand to field."
+    ]
+  },
+  "Victoria": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the continuous name-change clause \"While this card is on the field, its name is also Puppet.\" Add a passive ability that grants this card an additional identity/name while on the field. Implement engine support for passive on-field alternate-name effects, then encode this clause as a passive ability."
+    ]
+  },
+  "Victorious Grappler": {
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability is missing the target selection for the enemy follower. Encode it as damageFollowerAndLeader with the required target selector for 1 enemy follower, so the effect matches \"Select an enemy follower on the field. Deal 3 damage to it and its leader.\""
+    ]
+  }
+}

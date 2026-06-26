@@ -1,0 +1,65 @@
+{
+  "Drive Point Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the reminder text effect for Drive: followers with Drive have Rush and Single Drive. This should be represented as a continuous rules linkage from Drive to granted keywords, but the current ability reference has no implemented ability/keyword support for Drive or Single Drive. Add engine support for a Drive keyword/rules marker and its associated granted keywords."
+    ]
+  },
+  "Dryad": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; Strike should be represented by the timing on the ability, not as a printed keyword entry.",
+      "The Strike ability should only give the selected enemy follower [attack]-1; do not encode an unnecessary \"def\": 0 field in the buff effect."
+    ]
+  },
+  "Dual Flames": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"activated\" from keywords; these should be represented by ability timings, not keyword entries."
+    ]
+  },
+  "Dual Rage": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"fanfare\" and \"activated\" from keywords; only the activated cemetery ability and spell ability should be represented via timings.",
+      "The activated cemetery ability targets your own field, not enemy cards: it should destroy a Lævateinn Dragon and 2 cards named Draconic Weapon on your field instead of using enemyFieldCard for the first target.",
+      "The activated cemetery ability is incomplete: after destroying the specified allied cards, it should let you optionally summon an advanced follower with \"Dual Form\" in its name from your evolve deck. This needs an evolve-deck summon/search encoding, likely via tutorFromEvolveDeck or summonFromEvolveDeck, but the current reference cannot filter for advanced followers or names containing \"Dual Form\" cleanly enough for full fidelity; add support for advanced-follower filtering and/or identityNameContains on summonFromEvolveDeck/tutorFromEvolveDeck as needed.",
+      "The spell ability should search the deck, not use searchDeckChoose with remainder placement. It should tutor an Armed follower from your deck to your hand, reveal it, then shuffle; encode with tutorFromDeck plus shuffleDeck.",
+      "The spell ability incorrectly summons from EX area; the text says you may summon an Armed follower from your hand. This requires selecting and summoning from hand, which is not implemented in the ability reference. Add engine support for summoning/playing a follower from hand by filter after a spell resolves."
+    ]
+  },
+  "Durandal the Incorruptible": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"activated\" from keywords; the [act] ability should be represented only by timing \"activated\".",
+      "The first two choose options should target a follower on your field, so use a follower target selector rather than the broader allyFieldCard selector.",
+      "The third choose option is encoded incorrectly as grantIndestructible. It should grant the selected follower a damage cap of 3 ('if this follower would take more than 3 damage, it takes 3 instead') lasting for the rest of this turn and during each opponent's next turn. The current reference only has passive damageCap/self-only style support and no implemented operation to grant a temporary damage-cap status to another target for that duration. Add engine support for granting temporary damageCap to a selected follower with cross-turn duration."
+    ]
+  },
+  "Dutiful Steed": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"activated\" from keywords; the [act] ability should be represented only by timing \"activated\".",
+      "The activated ability is missing its cost: it should require burying this card as the activation cost.",
+      "The effect should select a follower on your field and buff it only if that selected follower is a Wasteland follower. The current encoding buffs any allied field card unconditionally. The current ability reference lacks a condition/check on the chosen target's trait, so add support for target-matches-filter or a conditional buff based on the selected target having trait \"Wasteland\"."
+    ]
+  },
+  "Dwarf Perfumer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Earthen Dragonewt": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare top-deck check is encoded too broadly: it should look at the top card of your deck and, only if that exact card is a Draconic Duelist card, you may reveal it and add it to your hand. Using searchDeckChoose with remainderTo deckBottom incorrectly allows reordering/moving the top card when it does not match."
+    ]
+  },
+  "Earthen Fist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Edelweiss, Sagelight Ward": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "Sharon, Seaside Nymph": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated choice (1) is incorrectly encoded as grantActRestriction. It should encode a temporary effect on the selected enemy follower preventing it from attacking during its controller's next turn; implement a dedicated ability such as a targetable cannotAttack/until-next-turn effect.",
+      "Activated choice (2) is left as noop. It should encode: the next time 1 or more followers enter your field this turn, choose one of those followers and give it +1/+1; implement support for delayed one-shot triggers for ally follower entry with a one-time buff target selection."
+    ]
+  },
+  "Sheena, Maid of the Mists": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shenlong": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shenlong Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shield Guardian": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shiki Ichinose": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded with filter {trait: \"iM@S CG\"}, but the source says you may put one of the top 3 cards into your EX area with no trait restriction. Change the effect to look at the top 3 cards, choose any 1 to put into your EX area, and bury the rest.",
+      "Activated ability cost is incomplete. The source requires '[engage], discard a card'; encode the discard as part of the activated cost instead of as an optionalCost effect so the damage effect is mandatory after paying the cost."
+    ]
+  },
+  "Shiki Ichinose Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is left as noop. It should encode: select up to 1 card in your EX area, deal damage to your leader equal to that card's cost, and make that selected card cost 0 to play this turn; implement support for targeting a card in EX area, using its printed cost as a dynamic damage amount, and granting that specific EX-area card a temporary play-cost reduction to 0.",
+      "Activated ability cost is incomplete. The source requires '[engage], discard a card'; encode the discard as part of the activated cost instead of as an optionalCost effect so the damage effect is mandatory after paying the cost."
+    ]
+  },
+  "Shiki Ichinose [Budding Flower]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Shiki Ichinose [Mystic Elixir]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is encoded as choosing up to 1 generic iM@S CG card from the top 3, but the source allows up to 1 Cute, up to 1 Cool, and up to 1 Passion card from among them to be revealed and added to hand. It should encode three independent trait-limited selections from the looked-at cards, then put the rest on the bottom; implement support for multi-pick search with distinct per-trait quotas from a single revealed set.",
+      "Activated ability is missing the 'Lesson (2)' cost requirement. It should include the Lesson (2) cost together with [engage]; implement a dedicated cost/condition for Lesson counts if not currently supported."
+    ]
+  },
+  "Shikigami Summons": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Cemetery condition is incorrectly encoded as conditionAny(spellchain 7 OR ownCemeteryMin 7). The source requires at least 7 total spells and Onmyoji cards in your cemetery combined. It should be a single combined cemetery-count condition over cards matching spell or trait Onmyoji; implement a cemetery filter count / condition that counts cards by card type and/or trait combination."
+    ]
+  }
+}

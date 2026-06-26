@@ -1,0 +1,57 @@
+{
+  "Elf Metallurgist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elf Queen of Abundant Life": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elf Queen of Abundant Life Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elf Song": {
+    "verdict": "fail",
+    "issues": [
+      "The Combo (3) buff is encoded with buffFieldTrait using trait: \"Forestcraft\", but the source says \"each [forestcraft] follower on your field\"; encode this as a class-based field buff (e.g. buffFieldTrait with cardClass: \"forest\") instead of a trait-based one."
+    ]
+  },
+  "Elf Sorcerer": {
+    "verdict": "fail",
+    "issues": [
+      "Both [fanfare] and [lastwords] abilities are encoded as dealDamage amount -5, but the source gives the target [attack]-5/[defense]-5; replace each with a buff effect on an enemy follower with atk: -5 and def: -5."
+    ]
+  },
+  "Elf Twins' Assault": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage amount is encoded as {\"op\":\"exAreaCount\"}, but that dynamic amount is not in the implemented reference; this should deal X damage divided between up to 2 enemy followers where X equals the number of cards in your EX area. Implement a new DamageAmount op for EX area card count (or equivalent), then use it as the primaryAmount in dealDamageSplit."
+    ]
+  },
+  "Elf Wanderer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Elimination Unleashed": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cemetery summon filter is incomplete: the source requires followers with both the Omen and Mage traits, but the parsed filter only checks trait: \"Omen\". Encode a filter that requires both traits; this needs engine support for multi-trait AND matching in DeckFilter.",
+      "The effect is missing \"give them 'At the start of your end phase, destroy this.'\" After summoning, the summoned followers should gain a delayed self-destruction ability. Implement support for granting a timed trigger such as startOfEnd -> destroy self to summoned cards, then include it after summonFromCemetery."
+    ]
+  },
+  "Elios, Loyal Dragoon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The on-damaged effect is encoded as healing your leader twice, but the source says \"give it and your leader [defense]+1\"; this follower should get +0/+1 and your leader should recover 1 defense. Encode this as a sequence of buff def: 1 to self plus healLeader 1.",
+      "The engine currently lacks a direct way to buff a follower's defense only in response to onDamaged while also healing the leader in the same granted trigger as written here only if parser cannot express it cleanly through grantOnDamaged + sequence + buff/self; ensure support for that composition if missing."
+    ]
+  },
+  "Elios, Loyal Dragoon Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The on-damaged effect is encoded as healing your leader twice, but the source says \"give it and your leader [defense]+1\"; this follower should get +0/+1 and your leader should recover 1 defense. Encode this as a sequence of buff def: 1 to self plus healLeader 1.",
+      "The engine currently lacks a direct way to buff a follower's defense only in response to onDamaged while also healing the leader in the same granted trigger as written here only if parser cannot express it cleanly through grantOnDamaged + sequence + buff/self; ensure support for that composition if missing."
+    ]
+  }
+}

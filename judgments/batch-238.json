@@ -1,0 +1,54 @@
+{
+  "VIII. Sofina, Strength Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive damage-limiting ability is encoded as a generic self `damageCap`, but the source says \"If a follower on your field would take more than 3 damage, it takes 3 instead,\" which applies to all allied followers, not just this card. It should be encoded as an aura/passive effect affecting followers on your field; implement a missing ability such as an aura-style ally follower damage cap (for example, grant a 3-per-hit damage cap to allied followers)."
+    ]
+  },
+  "Vagabond Lizard": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded as mandatory `choose`, but the source says \"You may put a Bullet Bike token onto your field or into your EX area,\" so the whole effect is optional. It should allow declining to place a token; implement support for an optional choose effect (or optional wrapper around `choose`) and encode the two destinations as the available options."
+    ]
+  },
+  "Val, Trusty Getaway Car": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first activated ability's cost is wrong. `[engage] a Bunny & Baron, Specter Duo on your field` means engaging a specific follower on your field, not engaging this amulet. It should use a targeted engage cost for a Bunny & Baron, Specter Duo you control; implement support for activated costs that engage selected allied followers matching a filter.",
+      "The second activated ability's cost is wrong. `[cost01], [engage] 2 followers on your field` is not `{ \"pp\": 1, \"engage\": true }`, which engages this card. It should require engaging 2 followers on your field as part of the cost; implement support for activated costs that engage multiple selected allied followers.",
+      "The `storm` keyword is incorrectly listed as a permanent card keyword. In the source, `Storm.` is part of the second activated ability after maneuvering this card, so it should be granted as part of that activated effect for the turn/follower state rather than existing permanently in `keywords`."
+    ]
+  },
+  "Valdain, Cursed Shadow": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded with `searchDeckChoose` using `remainderTo: \"cemetery\"`, but the source says to look at the top 3 cards, optionally reveal a Natura card and add it to hand, then bury the rest. The implemented search/tutor operations do not support this exact top-of-deck reveal-and-bury remainder pattern. It should be encoded as a top-3 search that adds an optional revealed Natura card to hand and sends the rest to the cemetery; implement support for a `searchDeckChoose`/peek variant whose remainder goes to cemetery."
+    ]
+  },
+  "Valdain, Cursed Shadow Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second On Evolve option is encoded as `tutorFromCemetery` to `field`, but the source says \"Select a Shadow's Corrosion in your cemetery and play it for 0 play points.\" Playing a spell from cemetery is not the same as moving it to the field. It should be encoded as playing/casting the named card from cemetery for 0 PP; implement support for playing a spell from cemetery (or more generally playing a card from cemetery for 0 PP)."
+    ]
+  },
+  "Valhorean Dealer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Valhorean Dealer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Valiant Fencer": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare filter is too narrow. The source says \"Search your deck for a Heroic card with a different name from this card,\" which is any Heroic card, not only a Heroic follower. Remove `\"cardType\": \"follower\"` from the `tutorFromDeck` filter while keeping the Heroic trait, different-name restriction, reveal, and add-to-hand behavior."
+    ]
+  },
+  "Valiant Fencer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded as evolving any other Heroic follower, but the source specifically requires \"a Heroic follower with [evolve] on your field.\" It should restrict the target to Heroic followers that have an evolve ability. Since the engine filter set cannot express \"has [evolve]\", implement support for targeting/filtering followers by possessing an evolve ability (or keyword/ability-presence filter) and use that in `evolveOtherFollower`."
+    ]
+  }
+}

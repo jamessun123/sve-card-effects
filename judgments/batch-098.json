@@ -1,0 +1,57 @@
+{
+  "Grasshopper Conductor": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grasshopper Conductor Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor puts the card in the wrong zone; change `to` from `exArea` to `hand` so it matches 'reveal it, add it to your hand'."
+    ]
+  },
+  "Grave Desecration": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Gravikinetic Warrior": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target is encoded too broadly; it should target a token follower on your field, not any self follower. Restrict the target to token followers (e.g. `printingType: \"token\"`)."
+    ]
+  },
+  "Gravity Grappler": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Grea the Dragonborn": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `activated` from `keywords`; [act] abilities should be represented as an ability with `timing: \"activated\"`, not as a keyword."
+    ]
+  },
+  "Grea's Ember": {
+    "verdict": "fail",
+    "issues": [
+      "The cemetery condition is encoded incorrectly; it should check for at least 5 Academic cards in your cemetery, not 5 cards of any kind. Use `condition: { \"type\": \"ownCemeteryTraitMin\", \"trait\": \"Academic\", \"count\": 5 }`."
+    ]
+  },
+  "Grea, Mysterian Dragoness": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as if it does something when the condition is false, but the source says only to select an enemy follower and then deal damage if you have at least 10 Academic cards in your cemetery. Remove the `else` branch with `dealDamage` 0.",
+      "The cemetery condition is too broad; it should check for at least 10 Academic cards in your cemetery, not 10 cards of any kind. Use `condition: { \"type\": \"ownCemeteryTraitMin\", \"trait\": \"Academic\", \"count\": 10 }`.",
+      "The `damageFollowerAndLeader` effect is missing the required selected enemy follower target; encode the selected enemy follower target so the 4 damage applies to that chosen follower."
+    ]
+  },
+  "Grea, Mysterian Dragoness Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve tutor should reveal/shuffle semantics from the source; add `reveal: true` to the deck tutor if your engine expects reveal to be explicit.",
+      "The passive damage-increase effect is encoded incorrectly as an extra triggered 1 damage to an enemy follower when an Academic spell is played. It should be a continuous modifier: while this card is on your field, damage dealt by your Academic spells is increased by 1. Implement an ability operation for continuous damage modification from matching sources (for example, an aura/passive op that increases damage from your spells matching a filter by a fixed amount)."
+    ]
+  },
+  "Grea, Scorching Fury": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

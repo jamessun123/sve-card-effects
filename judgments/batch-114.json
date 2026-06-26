@@ -1,0 +1,65 @@
+{
+  "Inverted Manipulation": {
+    "verdict": "fail",
+    "issues": [
+      "Choice (1) target is encoded incorrectly: it should target a Puppetry token follower on your field, so use a field target restricted to token followers with the Puppetry trait instead of a generic selfFollower filter lacking token restriction."
+    ]
+  },
+  "Inviolable Verdancy": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the spurious keyword \"fanfare\"; the source card has no Fanfare ability.",
+      "The activated ability buffs are encoded as two separate target selections; Combo (3) should give the same selected Forestcraft follower +1 attack more, so encode the combo bonus as additional buff to the originally selected target rather than selecting again."
+    ]
+  },
+  "Irene, Harvest Defender": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive damage immunity is incomplete: the source says \"During your turn, this follower doesn't take damage,\" but the parsed ability lacks the during-your-turn condition. It should be encoded as a passive self damage immunity gated to your turn. Add engine support for a turn-state condition such as \"yourTurn\" (or equivalent) to represent this correctly."
+    ]
+  },
+  "Iron Staff Mechanic": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the keywords \"evolve\" and \"fanfare\"; these are ability timings/cost lines, not printed keywords on this card."
+    ]
+  },
+  "Iron Staff Mechanic Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ironcrown Majesty": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is encoded as choose max 2 unconditionally, but the source says choose 1, and only if a follower on your field evolved this turn may you choose up to 2 instead. This should be encoded with conditional choose/chooseMultiple logic based on whether an ally follower evolved this turn. Add engine support for a condition tracking \"a follower on your field evolved this turn\" (or equivalent turn-state condition).",
+      "Option (2) is missing the token restriction: it should buff each Officer token follower on your field, so include printingType \"token\" in the buffFieldTrait filter."
+    ]
+  },
+  "Ironfist Beast Warrior": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the keywords \"evolve\" and \"fanfare\"; these are ability timings/cost lines, not printed keywords on this card.",
+      "The onDiscard ability is missing the optionality; the source says \"you may put it into your EX area,\" so it should be encoded as an optional move to EX area rather than mandatory.",
+      "The fanfare effect is encoded incorrectly as summoning a token named \"top card of your deck\"; it should use putDeckTopToExArea to put the top card of your deck into your EX area."
+    ]
+  },
+  "Ironfist Beast Warrior Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The first On Evolve step is encoded incorrectly as summoning a token named \"top card of your deck\"; it should use putDeckTopToExArea to put the top card of your deck into your EX area.",
+      "The cost reduction is too broad: the source says \"The next card you play from the EX area this turn costs 10 less,\" so the reduction should be restricted to the next play from the EX area rather than any next card played this turn."
+    ]
+  },
+  "Ironfist Priest": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the keyword \"evolve\"; this is an evolve cost line, not a printed keyword on the card."
+    ]
+  },
+  "Ironfist Priest Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect is encoded incorrectly: \"Deal 4 damage to each enemy leader\" should target enemy leaders only, not all enemies. Replace dealDamageAllEnemies with leader-only damage to enemy leaders."
+    ]
+  }
+}

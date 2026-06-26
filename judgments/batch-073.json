@@ -1,0 +1,62 @@
+{
+  "Ernesta, Weapons Hawker": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incomplete: it should give the selected other Swordcraft follower both +1 attack and Assail. Keep the buff, and add an effect to grant Assail to the same target; this requires implementing assail as a supported keyword for grantKeyword/keywords.",
+      "Start-of-end ability condition is encoded incorrectly: `namedFollowerOnFieldByName` with identityName `Merchant follower not named Ernesta, Weapons Hawker` is not a valid representation. It should check for a Merchant follower on your field other than this card; implement a condition such as field card present with trait `Merchant` and exclude identity `Ernesta, Weapons Hawker`.",
+      "Start-of-end damage target is wrong: `dealDamageAllEnemies` with `followersOnly: false` damages enemy followers and leader, but the source says to deal 2 damage to each enemy leader only. Encode damage to enemy leaders only; this requires implementing an effect that damages all enemy leaders / each opponent leader."
+    ]
+  },
+  "Erosive Annihilation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing passive cost reduction: the card should cost 1 less to play if there's a follower on your field with `Izudia` in its name. Encode this as a passive playCostReduction gated by a named-substring field condition; this requires implementing a condition for a follower on your field whose name contains a string such as `Izudia`.",
+      "The delayed draw trigger is encoded with unsupported `grantOnEnemyFollowerLeaveField` and is incomplete. It should track the specific damaged enemy follower and draw a card when that follower is put from the field into the cemetery this turn. Encode a delayed trigger linked to the chosen target; this requires implementing a target-linked leave-field-to-cemetery delayed trigger."
+    ]
+  },
+  "Ersatz Elimination": {
+    "verdict": "fail",
+    "issues": [
+      "Cemetery summon filter is too broad: `traitsAny` matches a follower with either Omen or Mage, but the source requires both traits. Change the filter to require both Omen and Mage traits, which needs an AND-style trait filter rather than `traitsAny`."
+    ]
+  },
+  "Eschamali Adviser": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Eschamali Constable": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Eternal Contract": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect after the separator is completely missing: it should do the sequence twice, `Put the top card of your deck into your EX area. Banish a card from your hand.` Add that spell ability, repeating the two steps twice; this requires implementing banishing a selected card from hand.",
+      "The activated cemetery ability is incomplete: it should select up to 3 cards in your cemetery and/or banished zone named `Paracelise, Demon of Greed` and shuffle them into your deck, not tutor a single cemetery card to deck. Encode a multi-zone selective return/shuffle effect for up to 3 named cards; this requires implementing selection from cemetery and banished zone to deck with shuffle.",
+      "The activated cemetery ability should be usable from the cemetery, but `activateFrom` is missing. Add `activateFrom: \"cemetery\"` to the activated ability.",
+      "The evolve-deck clause is under-encoded: `You may turn any faceup cards in your evolve deck named Paracelise, Demon of Greed facedown` means any number of matching faceup cards, not exactly 1. Encode turning all matching faceup Paracelise cards facedown, optionally."
+    ]
+  },
+  "Eternal Potion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The granted delayed destruction is encoded incorrectly as `grantLastWords`, but the source says `At the start of your end phase, destroy this card.` It should grant a start-of-end delayed trigger to the summoned follower that destroys it, not a Last Words ability; this requires implementing a way to grant start-of-end triggered abilities to a target until it leaves field."
+    ]
+  },
+  "Eternal Whale": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare condition is wrong: it should trigger if this card was played from the EX area, not `enteredFromHand`. Change the condition to an EX-area entry/play origin check; this requires implementing a condition for `entered from EX area` or equivalent.",
+      "Last Words damage target is wrong: `dealDamageAllEnemies` with `followersOnly: false` damages enemy followers and leader, but the source says to deal 2 damage to each enemy leader only. Encode damage to enemy leaders only; this requires implementing an effect that damages all enemy leaders / each opponent leader.",
+      "Last Words deck placement is encoded incorrectly: `putOnTopOfDeck` puts this card on top of the deck, but the source says `put this card into its owner's deck 2nd from the top or on the bottom.` Encode a choice between second-from-top and bottom placement; this requires implementing second-from-top deck insertion and player choice between placements."
+    ]
+  },
+  "Europa": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Europa Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

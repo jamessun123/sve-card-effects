@@ -1,0 +1,62 @@
+{
+  "Purgation's Blade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The buff effect targets cards incorrectly: it uses `buffFieldTrait` with `trait: \"Maisha, Hero of Purgation\"`, but the source names a specific follower identity. It should target each follower named \"Maisha, Hero of Purgation\" on your field and give them attack +X, where X is the number of followers in your cemetery. Implement a field-wide buff operation or selector that can match by `identityName`/named follower on field, then encode that named-target buff instead of trait-based buffing."
+    ]
+  },
+  "Pyne, Twisted Justice": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pyne, Twisted Justice Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability encodes `skipRefreshNextStart` inside `targets`, but for `engage` it must be a top-level field on the effect. Change the ability to `{\"timing\":\"onEvolve\",\"effect\":{\"op\":\"engage\",\"targets\":{\"type\":\"enemyFollower\",\"count\":2},\"skipRefreshNextStart\":true}}`."
+    ]
+  },
+  "Python": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Python Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Quadra Magic": {
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (5) clause is a cost reduction, not a condition on whether the spell effect happens. Add a passive/play-cost-reduction ability such as a `playCostReduction` with `condition: {\"type\":\"spellchain\",\"count\":5}` for amount 1, and keep the spell effect unconditional.",
+      "The damage effect should select up to 2 enemy followers and deal 2 damage to them; `dealDamage` with `count: 2` does not represent optional multi-target selection correctly. Encode the targeting as an effect that supports up to 2 selected followers, such as a split/multi-target damage form, rather than conditioning the whole spell."
+    ]
+  },
+  "Queen Hemera the White": {
+    "verdict": "fail",
+    "issues": [
+      "Rush is correctly a keyword, but Strike should not be listed in `keywords`; it should only be represented by the `strike` ability already present. Remove `\"strike\"` from `keywords`.",
+      "The fanfare is not a choice. It should always summon 1 Knight token, and if Queen Magnus the Black is on your field, summon 2 instead. Replace the `choose` ability with a conditional effect such as `if namedFollowerOnFieldByName Queen Magnus the Black then summon 2 else summon 1`."
+    ]
+  },
+  "Queen Magnus the Black": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive aura targets incorrectly: `auraGrantKeyword` uses `trait: \"Queen Hemera the White\"`, but the source refers to followers with a specific name, not a trait. It should grant Assail to each Queen Hemera the White on your field. Implement support for aura targeting by `identityName`/named follower, then encode the aura with that named target filter.",
+      "The activated ability is encoded as a field-wide trait buff using `trait: \"sword\"`, which is incorrect. It should select up to 2 other Swordcraft followers on your field and give only those selected followers +1 attack. Implement support for selecting multiple allied followers with a class filter, or a buff operation that targets selected allies by class, then encode the effect as targeted up-to-2 other Swordcraft followers."
+    ]
+  },
+  "Queen Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is incomplete. The source has `[act][engage], give your leader [defense]-1:` but the parse only includes engage and models the defense loss as an effect step. It should encode leader defense loss as part of the activation cost if possible; add an activated-cost capability for leader defense payment (or generic leader life payment), then use it here.",
+      "The `onAllyFollowerEnter` ability places `filter` at the ability level, but the implemented wrapper does not support a top-level `filter` for this timing. Encode this trigger using an implemented operation such as `grantOnAllyFollowerEnter` or add engine support for trigger filters on `onAllyFollowerEnter`, specifically allowing filtering for `identityName: \"Forest Bat\"`.",
+      "The trigger condition is too broad: the source says 'Whenever a Forest Bat token is put onto your field', but the parse filters by identity only and does not restrict to token printings. The trigger should match Forest Bat tokens specifically; when implementing trigger filters for ally-enter events, include `printingType: \"token\"` in the filter."
+    ]
+  },
+  "Queen Vampire, Sultry Evening": {
+    "verdict": "fail",
+    "issues": [
+      "The end-phase condition should require at least 3 other Vampire cards on your field, but the parse uses `fieldTraitMin` count 3 without excluding this card. Encode the condition as requiring 4 Vampire cards including this one, or otherwise represent '3 other' correctly.",
+      "The end-phase damage effect should deal 3 damage to each enemy leader only, but `dealDamageAllEnemies` with `followersOnly: false` also hits enemy followers. Replace it with damage to enemy leaders only; if multiplayer support is intended, use an effect that targets each enemy leader rather than all enemies."
+    ]
+  }
+}

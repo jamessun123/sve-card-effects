@@ -1,0 +1,61 @@
+{
+  "Nana Abe [Cinderella Girl] Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly: \"Give your leader [defense]+2\" was encoded as healLeader 2. It should increase leader defense/max defense, not recover defense; implement a leader-defense-increase effect and use it after discarding an iM@S CG card, then draw 1.",
+      "On Super-Evolve is encoded incorrectly: \"Change it into an amulet\" was encoded as box on the enemy follower. It should transform the selected enemy follower into an amulet-form card; implement support for transforming a target into an amulet/token with granted abilities.",
+      "On Super-Evolve is missing the granted ability \"At the start of your main phase, deal 2 damage to your leader.\" The parser instead used grantLastWords. It should grant a start-of-main triggered self-damage ability to the transformed card; implement support for granting triggered abilities such as startOfMain to a target.",
+      "On Super-Evolve is encoded incorrectly for \"[act] [cost01], discard 2 cards: Bury this.\" It was encoded as grantLastWords with optionalCost, but this should be a granted activated ability on the transformed card with a 1 PP cost plus discard 2, effect burySelf; implement support for granting activated abilities with costs to another card."
+    ]
+  },
+  "Nano, the Dawnblade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Bane is encoded under a timing \"evolve\" ability instead of as a printed keyword/passive keyword on the card. Move Bane to keywords or a passive passiveKeywords ability.",
+      "Missing continuous clause: \"While there's a Lecia, Sky Saber on your field, this follower has Assail.\" It should be encoded as a passive conditional keyword-grant tied to Lecia, Sky Saber being on your field; implement a condition for a named follower on your field by identity name/card and use it to grant Assail."
+    ]
+  },
+  "Nano, the Dawnblade Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing continuous clause: \"While there's a Lecia, Sky Saber on your field, this follower has Assail.\" It should be encoded as a passive conditional keyword-grant tied to Lecia, Sky Saber being on your field; implement a condition for a named follower on your field by identity name/card and use it to grant Assail."
+    ]
+  },
+  "Nao Kamiya": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the extra keyword \"storm\". The source card only has a fanfare ability and does not have Storm."
+    ]
+  },
+  "Nao Kamiya [Over the Rainbow]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Natalia": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare damage amount is incorrect: it should be equal to the number of other Passion followers on your field, but parsed uses all Passion followers on your field. Encode a count excluding this follower."
+    ]
+  },
+  "Natalia [One Thousand and One Nights]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Naterra's Future": {
+    "verdict": "fail",
+    "issues": [
+      "The first effect is overencoded: \"Look at the top card of your deck. If it's a Natura card, you may reveal it and add it to your hand\" should only operate on the top card, but searchDeckChoose with lookAt 1 can choose that card regardless of whether it is the top card after viewing/filtering semantics. It should be encoded as a top-card peek/check for trait Natura, then optional reveal and add to hand."
+    ]
+  },
+  "Naterran Great Tree": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Natsuki Kimura [Scarlet Love Song]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Storm clause is encoded at timing \"evolve\", but \"While there are at least 10 Passion cards in your cemetery, this has Storm\" is a passive continuous effect. Change it to a passive ability with condition ownCemeteryTraitMin count 10 granting Storm.",
+      "Fanfare condition is encoded with unsupported/incorrect condition type \"fieldFollowerMinCost\". It should check whether there is an iM@S CG follower on your field with cost 5 or more, then evolve this. Implement a field-card-exists condition with trait and minCost filter, then use autoEvolveIf or an equivalent self-evolve effect."
+    ]
+  }
+}

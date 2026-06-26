@@ -1,0 +1,60 @@
+{
+  "Forge Weaponry": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forgotten Sanctuary": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forte, Blackwing Dragoon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is incomplete: after checking if you have 10 max play points, it should give this follower +1 attack and Aura, not just +1 attack. Encode the +1 attack with the existing buff effect and add support for an implemented Aura-granting keyword/effect for self (for example a self grantKeyword/passiveKeywords form supporting \"aura\")."
+    ]
+  },
+  "Forte, Sovereign Supreme": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove the incorrect \"fanfare\" keyword; the source text has no Fanfare ability.",
+      "The start-of-end-phase ability is encoded incorrectly. It should select up to 2 enemy followers, then apply 'during their controller's next turn, they can't attack enemies' to those targets. grantActRestriction is unrelated and untilEndOfTurn is the wrong duration. This needs a target-based attack restriction effect for selected enemy followers lasting through their controller's next turn.",
+      "If the Dragon-granting aura is intended to affect only Dragon followers, verify the filter matches actual Dragon followers on your field; the current trait filter may be acceptable only if the engine's trait matching for 'Dragon' corresponds to the card text."
+    ]
+  },
+  "Fortuna Regina Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly: it should look at the top 4 cards, you may put one of them into your EX area, then bury the rest. searchDeckChoose with filter {maxCost:0} is wrong; it should allow any one of the 4 cards. This needs engine support for 'choose any card from the looked-at cards' with the remainder going to cemetery, or a peek/search operation without a restrictive filter.",
+      "The activated ability is missing the Lesson (2) cost/condition. In addition to [cost01], it should require Lesson (2). Add the proper extra cost/condition encoding for Lesson, or implement a Lesson cost primitive if the engine does not support it.",
+      "The activated damage ability should allow selecting up to 2 enemy followers, but the current choose wrapper forces exactly one option selection and the inner target count is fixed at 2. Encode the effect as dealing 2 damage to up to 2 enemy followers, or add engine support for a target selector with optional up-to count."
+    ]
+  },
+  "Fortune Fowl": {
+    "verdict": "fail",
+    "issues": [
+      "The summon ability is timed incorrectly. It should be a lastWords ability with cost {\"pp\":1}, not a generic activated ability. Change the timing to \"lastWords\" and keep the PP cost on that ability."
+    ]
+  },
+  "Fount of Angels": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability's condition is too narrow. It should activate if there are at least 2 Angel and/or Fallen Angel followers on your field, but the parsed condition checks only trait \"Angel\". This needs a condition supporting combined trait counts (for example a field multi-trait minimum such as Angel or Fallen Angel totaling 2), or another implemented condition form that can represent OR-counting across both traits."
+    ]
+  },
+  "Fox Lancer": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is encoded incorrectly. It should put a Naterran Great Tree token onto your field or into your EX area, but the parsed ability uses selectFromHand and does not create the token. Replace it with an effect that lets the player choose one of two summon options: summon the Naterran Great Tree token to the field or to the EX area."
+    ]
+  },
+  "Fox Lancer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fox of Fortune": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The last ability is encoded incorrectly as a free activated draw. It should trigger whenever your leader gains defense, then require [engage] to draw a card. This needs a trigger for leader healing/defense gain with an optional or required engage-self cost before resolving the draw, which is not available in the current ability reference."
+    ]
+  }
+}

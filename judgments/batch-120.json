@@ -1,0 +1,61 @@
+{
+  "Kagemitsu, Matchless Blade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare buff X is encoded incorrectly using namedIdentityFieldCount on \"faceup evolved follower\" on the field. It should count the number of faceup evolved followers in your evolve deck; encode as a buffDynamic with a dedicated dynamic amount for faceup evolved cards in evolve deck. Implement a new DamageAmount such as {\"op\":\"evolveDeckFaceupEvolvedCount\"}.",
+      "The conditional bonus keywords are encoded incorrectly with conditionAny on fieldTraitMin and a chooseMultiple. The card should automatically give Assail if X is at least 3, and additionally grant a Strike ability if X is at least 7, based on the same evolve-deck count. This needs separate conditional effects tied to the evolve-deck count, not a player choice. Implement a condition such as {\"type\":\"evolveDeckFaceupEvolvedMin\",\"count\":3} and {\"type\":\"evolveDeckFaceupEvolvedMin\",\"count\":7}.",
+      "The 'If X is at least 7, give it \"Strike - Refresh this follower. Perform only once per turn.\"' clause is encoded incorrectly as grantLastWords with noop. It should grant this follower a Strike ability that refreshes itself once per turn. Implement an effect-granting primitive for temporary granted triggered abilities, e.g. grantAbility/grantStrike with {\"timing\":\"strike\",\"oncePerTurn\":true,\"effect\":{\"op\":\"refresh\",\"targets\":{\"type\":\"self\"}}}."
+    ]
+  },
+  "Kagero, Swordbound Soul": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare option to move Soulstrike from your cemetery to your EX area is missing the NC (20) rider. It should grant the selected Soulstrike card a play cost reduction of 2 this turn when Necrocharge (20) is active, e.g. use tutorFromCemetery with playCostReduction: 2 under a necrocharge 20 condition or wrap the option in a sequence/if."
+    ]
+  },
+  "Kaguya": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous trigger is encoded with timing onAllyFollowerEnter, but the source text says 'Whenever an amulet is put onto your field'. It should trigger on allied amulets entering the field, not followers. Implement a trigger timing for allied amulet/card entry such as onAllyAmuletEnter or a generic onAllyCardEnter with filter {\"cardType\":\"amulet\"}.",
+      "The damage amount is encoded incorrectly as targetAttack. X should equal the entering amulet's cost, not the target follower's attack. Implement a dynamic amount referencing the triggering card's cost, e.g. {\"op\":\"triggerCardCost\"}, and use that in dealDamage."
+    ]
+  },
+  "Kaguya Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous trigger is encoded with timing onAllyFollowerEnter, but the source text says 'Whenever an amulet is put onto your field'. It should trigger on allied amulets entering the field, not followers. Implement a trigger timing for allied amulet/card entry such as onAllyAmuletEnter or a generic onAllyCardEnter with filter {\"cardType\":\"amulet\"}.",
+      "The damage amount is encoded incorrectly as targetAttack. X should equal the entering amulet's cost, not the target follower's attack. Implement a dynamic amount referencing the triggering card's cost, e.g. {\"op\":\"triggerCardCost\"}, and use that in dealDamage."
+    ]
+  },
+  "Kako Takafuji": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kako Takafuji Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is missing the [cost03] requirement. It should be encoded as an onEvolve ability with a paid cost of 3 PP before dealing 3 damage to the enemy leader. Implement support for costs on onEvolve abilities, or a dedicated wrapper for optional/paid On Evolve abilities."
+    ]
+  },
+  "Kako Takafuji [Lady Luck]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The static effect 'You may reroll each die or dice roll you make once.' is encoded incorrectly as a fanfare noop. It is not a Fanfare ability; it should be a passive continuous effect on the card. Implement a passive reroll permission effect such as {\"op\":\"rerollDieOnce\"} and encode it with timing \"passive\"."
+    ]
+  },
+  "Kako Takafuji [Lady Luck] Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The static effect 'You may reroll each die or dice roll you make once.' is missing. It should be encoded as a passive continuous effect on the evolved card as well. Implement a passive reroll permission effect such as {\"op\":\"rerollDieOnce\"}.",
+      "The die result 2 effect is encoded incorrectly as dealDamageAllEnemies for 3 damage. The source says 'deal 3 damage to each enemy leader and give your leader [defense]+3', so it should damage enemy leaders only, not enemy followers. Implement a leader-only multi-op such as dealDamageEachEnemyLeader or equivalent multiplayer-safe leader damage effect."
+    ]
+  },
+  "Kallen, Crimson Yaksha": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kana Imai": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

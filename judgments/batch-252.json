@@ -1,0 +1,53 @@
+{
+  "XI. Erntz, Justice Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "XII. Wolfraud, The Hanged Man": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "XII. Wolfraud, The Hanged Man Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "XIV. Luzen, Temperance": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive 'If your leader would take damage, it takes that much minus 1 instead' is incorrectly encoded as grantLeaderDamageShield with 99 charges; it should be encoded as a continuous leader damage reduction effect instead. Implement a new passive ability such as leaderDamageReduction { amount: 1 } or reduceLeaderDamage { amount: 1 }.",
+      "The passive 'Opponents can't draw cards outside of their start phase' is incorrectly encoded as grantOpponentRestriction with restriction 'skipDraw', which prevents normal start-phase draws instead of restricting extra draws. It should be encoded as an opponent draw restriction limited to outside the start phase. Implement a new passive ability such as grantOpponentRestriction { restriction: 'noExtraDraw' } or opponentDrawOnlyAtStartPhase.",
+      "The fanfare 'Each player discards down to 2 cards' is missing and replaced with noop. It should be encoded as a hand-size reduction effect causing each player to discard until they have 2 cards. Implement a new effect such as eachPlayerDiscardDownTo { handSize: 2 }."
+    ]
+  },
+  "XXI. Zelgenea, O Great World ADVANCED": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "XXI. Zelgenea, The World": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first fanfare is encoded with an incorrect condition and reversed branches. It should select an enemy follower, and only if there are no other followers on your field, destroy that selected follower and draw a card. Implement a condition for 'no other followers on your field' such as selfFieldFollowerMax/counting followers excluding self, then use it with destroy + draw instead of the current fieldTraitMin/noop structure.",
+      "The second fanfare 'If your leader's defense is 10 or less, give it [defense]+5' is missing and incorrectly encoded as ppMin 0 with noop. It should be encoded as a conditional leader heal/increase of 5 based on leader defense being 10 or less. Implement a new condition such as leaderDefMax { count: 10 } and use healLeader { amount: 5 }."
+    ]
+  },
+  "Yasuha Okazaki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Yggdrasil": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is incomplete: it should select a Forestcraft spell in your cemetery that costs X or less, where X equals the number of Forestcraft spells with different names in your cemetery, and put it into your EX area with cost 0 this turn. The current encoding ignores the dynamic max-cost restriction and uses playCostReduction 99. Implement support for cemetery selection with a dynamic maxCost based on distinct-name spell count in cemetery, and allow setting play cost to exactly 0 for the chosen card."
+    ]
+  },
+  "Yoshino Yorita [Way of the Warrior]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Young Ogrehunter Momo": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The strike ability is missing and replaced with noop. It should be encoded as 'Strike: If the enemy follower has 5 defense or less, draw a card, then discard a card.' Implement strike-time access to the attack target's defense in conditions, such as attackedFollowerDefMax { count: 5 }, then sequence draw 1 and discard 1."
+    ]
+  }
+}

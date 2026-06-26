@@ -34,6 +34,7 @@ Top-level object with:
 `issues` is a list of short strings describing specific problems. Use an empty list when `verdict` is `pass`.
 If the `verdict` is `fail`, each entry in issues should specify a single erroneous ability encoding (either missing or incorrectly encoded) and how it should be changed to be correct.
 If the `verdict` is `engine-missing`, entry should be the similar to the `fail` verdict entries. Specify which ability is encoded incorrectly and how it should be encoded to be correct. Since this verdict is `engine-missing`, these issues should also include suggestions for abilities that are not implemented in the <ABILITY_REFERENCE> to implement the specific ability.
+Only include an issue in the list if improvements need to be made to the card code. Do not include the issue if you find no issue with the ability or keyword in question.
 </JUDGE_INSTRUCTIONS>
 
 <ABILITY_REFERENCE>

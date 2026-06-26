@@ -1,0 +1,55 @@
+{
+  "Ninja Master": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ninja Trainee": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Nirle, Draconic Prodigy": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is incorrectly gated by Overflow. Remove the outer condition {\"type\":\"overflow\"}; Overflow applies only to the [evolve] ability, not the fanfare.",
+      "The fanfare condition is encoded as checking for a follower named Mount, but the source says 'if there's a Mount card on your field'. It should check for a Mount card on your field rather than namedFollowerOnFieldByName.",
+      "The [evolve] ability is missing. Add the evolve linkage as an ability/cost line that activates only if Overflow is active for you: timing \"evolve\" (or equivalent evolve clause) with condition {\"type\":\"overflow\"} and cost 1."
+    ]
+  },
+  "Nirle, Draconic Prodigy Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete: it should evolve a Wasteland follower on your field with [evolve], not named Nirle, Draconic Prodigy. Current encoding filters trait/name but cannot enforce 'with [evolve]'. Encode with evolveOtherFollower using the Wasteland filter and exclude Nirle, and implement support in evolveOtherFollower/filtering for selecting only followers that have an [evolve] ability."
+    ]
+  },
+  "Noa Takamine": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Noa Takamine Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Noah, Vengeful Puppeteer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered Puppet ability is missing a proper trigger filter location. 'Whenever a Puppet is put onto your field' should be encoded as an onAllyFollowerEnter trigger limited to Puppet followers entering your field; the current top-level 'filter' on the ability is not part of the documented ability wrapper. Encode this with engine support for trigger filtering on onAllyFollowerEnter, or use a grantOnAllyFollowerEnter-style filterable trigger primitive."
+    ]
+  },
+  "Noah, Vengeful Puppeteer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost reduction is incorrect. 'Any Puppet you play costs 1 less' should reduce the play cost of Puppet cards you play, but exAreaPlayCostReduction applies only to this card from the EX area. Encode as a passive play cost reduction for Puppet cards, and implement an aura/filterable play-cost reduction effect for cards by identity/trait.",
+      "The triggered Puppet ability is missing a proper trigger filter location. 'Whenever a Puppet is put onto your field' should be encoded as an onAllyFollowerEnter trigger limited to Puppet followers entering your field; the current top-level 'filter' on the ability is not part of the documented ability wrapper. Encode this with engine support for trigger filtering on onAllyFollowerEnter, or use a grantOnAllyFollowerEnter-style filterable trigger primitive."
+    ]
+  },
+  "Noble Fairy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is incomplete/incorrectly targeted. After destroying the selected enemy follower, the Fairy token must be summoned on that follower's field (your opponent's field), not just summoned to your field. Encode the summon to the destroyed follower's controller's field, and implement support for summoning a token onto the selected target's controller's field."
+    ]
+  },
+  "Noble Instruction": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

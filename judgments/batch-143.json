@@ -1,0 +1,56 @@
+{
+  "Mark of the Unkilling": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage amount is encoded incorrectly as selfDefense; it should deal damage equal to the selected enemy follower's defense minus 1. Encode this as a dynamic amount based on the target's defense with a -1 modifier. Implement a DamageAmount for targetDefense and support arithmetic modifiers such as minus 1."
+    ]
+  },
+  "Marlone, Light of Balance": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare says each player puts a Repair Mode token into their EX area, but the parsed effect summons two tokens without distinguishing controllers, which gives both to the same player. It should create one Repair Mode in your EX area and one in your opponent's EX area. Implement support for summoning/creating tokens in an opponent's EX area or a generic 'each player' token-placement effect."
+    ]
+  },
+  "Marlone, Light of Balance Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve target restriction is encoded incorrectly: maxCost uses an invalid dynamic exAreaNamedMin condition object. It should destroy an enemy follower with cost X or less, where X equals the number of cards in your EX area. Encode maxCost as a dynamic amount based on EX-area card count. Implement a DamageAmount/selector value for EX area card count and allow dynamic maxCost target limits."
+    ]
+  },
+  "Marlone, Peace Advocate": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Marlone, Peace Advocate Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mars, Belligerent Flame": {
+    "verdict": "fail",
+    "issues": [
+      "The printed keyword Bane is missing from keywords; add \"bane\" to keywords."
+    ]
+  },
+  "Mars, Belligerent Flame Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mars, Silent Flame General": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mars, Silent Flame General Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The first ability is timed incorrectly as an activated ability. The source text is 'On Evolve, [cost0X]: ...', so it should be an onEvolve ability with a variable PP cost, not a separate activated ability.",
+      "The On Evolve ability's cost is encoded incorrectly as fixed pp: 0. It should cost X play points, where X is a number of your choice, and the search should be for an Officer follower that costs X or less. Encode the chosen number as both the paid cost and the tutor maxCost."
+    ]
+  },
+  "Marvelously Mad Hatter": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is encoded incorrectly with unsupported namedCardNotOnFieldByName and checks for a card named Fable. It should check whether there is another Fable card on your field. Encode a field condition for another allied field card with trait Fable. Implement a condition for allied field card count by trait/card type, with support for 'other' or excluding self and for matching any field card rather than only followers.",
+      "The optional clause 'You may place a Fable counter on that follower' is missing. After putting the Fable follower into your EX area, the effect should optionally add a Fable counter to that chosen follower. Implement support for targeting the card moved to EX area by the preceding tutor effect, and support optional addCounter on that tutored card."
+    ]
+  }
+}

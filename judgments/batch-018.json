@@ -1,0 +1,57 @@
+{
+  "Aquatic Authority": {
+    "verdict": "fail",
+    "issues": [
+      "The Overflow clause is encoded incorrectly: after putting a Marine card into your EX area, the selected card should get a temporary cost reduction this turn, not this spell itself. Replace the standalone if->playCostReduction with a single searchDeckChoose that includes \"playCostReduction\": 1 and is gated by Overflow for the selected card."
+    ]
+  },
+  "Arael": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Arael Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aragavy the Berserker": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare damage effect is wrong: \"each other follower on the field\" should be encoded with dealDamageOtherFollowers amount 5, not dealDamageAllEnemies followersOnly true.",
+      "The fanfare is missing \"Give this follower Storm\" after the optional [cost05] payment; add a grantKeyword effect for storm targeting self within the paid sequence.",
+      "The end phase ability target is wrong: it should target an enemy leader or enemy follower, but enemyFieldCard cannot hit the leader. Encode this as a choice or equivalent targeting that includes enemyLeader as well as enemyFollower."
+    ]
+  },
+  "Aragavy, Eternal Hunter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aragavy, Eternal Hunter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve effect is encoded incorrectly: secondaryAmount 5 does not represent the conditional 'deal 10 damage divided between them instead if your leader's defense is 10 or less'. It should be an if effect that uses dealDamageSplit with 10 when your leader is at 10 or less defense, otherwise 5. Add an implemented condition type for leader defense threshold (for example selfLeaderDefMax) to support this."
+    ]
+  },
+  "Arcane Auteur": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Arcane Duplication": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is almost entirely misencoded: it should select a card in your cemetery, banish that selected card, then search your deck for a card with the same cost and card type, reveal it, add it to your hand, then shuffle. The current tutorFromCemetery of a spell is unrelated. Implement support for selecting a cemetery card as a remembered reference and a deck tutor that matches the selected card's cost and card type, then encode banish selected cemetery card -> tutor matching deck card to hand with reveal -> shuffle."
+    ]
+  },
+  "Arcane Enlightenment": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell uses noop placeholders for both real effects. It should repeatedly put the top card of your deck into your EX area until your EX area is full, then create a delayed trigger for the start of your next end phase to banish each card in your EX area. Implement a repeat-until-full EX-area operation and a delayed next-end-phase trigger/effect for banishing cards in EX area, then replace both noop entries."
+    ]
+  },
+  "Arcane Item Shop": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is wrong: ownCemeteryMin count 0 is always true, but the source requires 'if there are no followers in your cemetery'. This should check for zero follower cards in your cemetery. Implement a cemetery filter count condition such as ownCemeteryFilterMax/Exact for cardType follower, then gate recoverPp 6 with that condition.",
+      "The triggered damage ability target is wrong: it should target an enemy leader or enemy follower, but enemyFieldCard cannot target the leader. Encode the target as including enemyLeader as well as enemyFollower; if the engine lacks a combined selector, implement a target selector or choose pattern for leader-or-follower targeting."
+    ]
+  }
+}

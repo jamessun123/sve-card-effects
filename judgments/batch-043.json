@@ -1,0 +1,48 @@
+{
+  "Chris, Beyond the Patch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare should include selecting an Abysscraft follower in your cemetery that costs 5 or less and is not named Chris, Beyond the Patch, then under Necrocharge (10) summon that selected card and give it Ward. The current use of tutorFromCemetery to field does not represent selecting and summoning from cemetery correctly. Implement support for selecting a card in your cemetery and summoning that chosen target, then apply grantKeyword ward to that summoned card."
+    ]
+  },
+  "Cinderella": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Clash of Heroes": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as clash. It should deal damage to one chosen follower on your field equal to the chosen enemy follower's attack, then deal damage to that enemy follower equal to the first follower's attack; replace the effect with a two-target damage exchange implementation rather than clash."
+    ]
+  },
+  "Classroom Lily": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing quick timing metadata. Add \"quick\": true to the activated ability to match [q][act]."
+    ]
+  },
+  "Cleric Lancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Coco, Infernal Left Paw": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Coco, Left Paw Hellhound": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Coda, Twilight Dragoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Colette, Holy Gunner": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Colette, Holy Gunner Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

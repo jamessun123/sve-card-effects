@@ -1,0 +1,54 @@
+{
+  "Harnessed Glass": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Haru Yuuki": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect is incomplete: if there's a Risa Matoba on your field, it should both give this follower +1/+1 and grant Storm. Encode the then-effect as a sequence of buff self by 1/1 and grantKeyword storm to self."
+    ]
+  },
+  "Haru Yuuki Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Haru Yuuki [Secret Blue Rose]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Rush and Assail are incorrectly encoded as unconditional keywords. They should be conditional while there are at least 3 Cool followers or a follower with \"Risa Matoba\" in its name on your field; encode as a passive conditional keyword-grant effect. The current engine lacks a condition for counting followers by one trait OR checking followers whose name contains a substring, so implement support for a field-name-contains condition and/or a conditionAny variant that can combine field follower-count conditions with name-based field checks.",
+      "The Fanfare condition is too strict: \"if there's a follower on your field with \\\"Risa Matoba\\\" in its name\" is not the same as requiring an exact card name of Risa Matoba. It should check for a follower whose name contains \"Risa Matoba\". Implement a condition for named followers on field by substring/contains and use that here."
+    ]
+  },
+  "Harvest Festival": {
+    "verdict": "fail",
+    "issues": [
+      "keywords incorrectly includes fanfare, but the card has no Fanfare ability. Remove the fanfare keyword."
+    ]
+  },
+  "Hasty Axeman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Haven Fire": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hazhan, Demonblade Knight": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve abilities are encoded incorrectly. The card has two evolve cost lines: a normal [evolve] [cost03]: Evolve this follower, and an alternate [evolve] [cost01]: Evolve this follower that is usable only if Sanguine is active. Encode evolveCost as 3 and add a conditional evolve ability/cost reduction for Sanguine rather than a passiveKeywords effect on timing evolve.",
+      "Assail, Bane, and Drain are unconditional printed keywords and should remain as keywords, not be represented by an evolve-timing passiveKeywords ability tied to Sanguine. Remove that incorrect ability."
+    ]
+  },
+  "Hazhan, Demonblade Knight Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Strike effect targets are wrong: the source says \"Deal 2 damage to each enemy leader,\" meaning only enemy leaders are damaged, not all enemies. Replace dealDamageAllEnemies with an effect that deals 2 damage to each enemy leader."
+    ]
+  },
+  "Healing Angel": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

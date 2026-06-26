@@ -1,0 +1,59 @@
+{
+  "Fruits of Wisdom": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The top-card effect is encoded incorrectly: the source says \"Look at the top card of your deck. If it's a Machina card, you may put it into your EX area,\" but parsed uses peekDeck plus putDeckTopToExArea without preserving the required optional conditional choice after looking. It should be encoded as a single effect that looks at the top card and optionally moves it to EX area only if it matches a Machina filter; implement a peek/top-card conditional move operation or extend peekDeck to support \"if top card matches, you may move it to EX area.\""
+    ]
+  },
+  "Full Bloom Panorama": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is encoded as banishUpTo 2 enemy followers, but the source says to destroy up to 2 enemy followers. Change the effect to destroy up to 2 enemy followers instead of banishing them."
+    ]
+  },
+  "Full Moon Leap": {
+    "verdict": "fail",
+    "issues": [
+      "The spell targets are encoded incorrectly as selfFollower, which means a follower on your own field matching the selector type rather than the selected ally target generally intended for this spell. The same selected Abysscraft follower should receive both the +1 attack and possible Storm; encode the effect so one chosen ally Abysscraft follower on your field is targeted for both clauses.",
+      "The +1 buff is incomplete: the source says \"Give it [attack]+1\" to the selected Abysscraft follower, but parsed does not clearly preserve the single shared target across both clauses. Use one selected target and apply both effects to that same target.",
+      "The Storm clause should apply to the same selected follower if your hand has 0 cards. Parsed re-selects a selfFollower independently; change it so the conditional grantKeyword applies to the originally selected target."
+    ]
+  },
+  "Fulminating Berserker": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fumika Sagisawa": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search is too broad: the source requires exactly a 3-cost follower and a 1-cost follower, but parsed uses maxCost 3 and maxCost 1. Change the first tutor filter to a follower with cost exactly 3 and the second to a follower with cost exactly 1.",
+      "The triggered ability should be \"Whenever another iM@S CG follower is put onto your field,\" but parsed triggers on any iM@S CG follower entering and does not exclude this card itself. Add exclusion so only another iM@S CG follower entering your field triggers the damage ability."
+    ]
+  },
+  "Fumika Sagisawa [Cinderella Girl]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fumika Sagisawa [Cinderella Girl] Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Furtive Fangs": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The granted ability is encoded incorrectly as grantLastWords, but the source grants a temporary Strike ability to a selected follower until end of turn. It should grant \"Strike: Select an enemy follower and deal it damage equal to this follower's attack\" to the chosen follower for the rest of the turn. Implement an ability-granting operation for temporary triggered abilities such as granting Strike/onEvolve/Last Words wrappers to a target until end of turn."
+    ]
+  },
+  "Gabriel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is incomplete: after giving another follower +4/+3, the source also gives it Assail. Parsed omits Assail. Add granting Assail to the same selected other follower; if Assail is not currently supported as a keyword/effect in the engine, implement support for the Assail keyword and grantKeyword for it."
+    ]
+  },
+  "Gale Arrow": {
+    "verdict": "fail",
+    "issues": [
+      "The Combo (3) condition is missing. The source says \"Select an enemy follower on the field. Combo (3) - Deal it 2 damage,\" so the damage should be gated by condition combo count 3 rather than always happening."
+    ]
+  }
+}

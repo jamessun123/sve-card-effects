@@ -1,0 +1,57 @@
+{
+  "Phildau, Lionheart Ward": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Phildau, Lionheart Ward Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Phoenix Empress": {
+    "verdict": "fail",
+    "issues": [
+      "Last Words revival is encoded incorrectly: after paying the optional cost of decreasing your max play points by 1, this card should return itself to the field engaged, not summon a token copy. Replace the then effect with a self-revival effect such as reviveToField with engaged:true."
+    ]
+  },
+  "Phoenix Howl": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The main choice effect should allow choosing up to 2 options, including 0, so use chooseMultiple with min:0 and max:2 instead of choose with min:1.",
+      "Option (2) is encoded incorrectly: it should search your deck for up to X cards named Star Phoenix, give those found cards Rush, then shuffle; it does not summon cards or use total cost. Replace the current searchDeckSummonMultiple encoding with a deck-search-to-hand/selection effect parameterized by chosen X plus a way to grant searched cards Rush, and implement missing engine support for searching the deck for up to X named cards and applying a keyword modification to cards found in deck/hand before shuffle."
+    ]
+  },
+  "Phoenix Roost": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger applies at the start of each player's main phase to that player, but the parsed ability only represents your own startOfMain trigger. It should be encoded as an each-player/main-phase effect or equivalent, which is not available in the current timing model; implement support for triggering on each player's main phase and resolving from that player's deck."
+    ]
+  },
+  "Piercye, Queen of Frost": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare auto-evolve clause is encoded incorrectly: it should evolve this follower if there are at least 3 faceup evolved followers in your evolve deck, not check inExArea or evolve another Forestcraft follower. Replace with an auto/self-evolve effect conditioned on evolved followers in the evolve deck, and implement a condition for counting faceup evolved followers in the evolve deck if missing.",
+      "The card incorrectly lists fanfare as a keyword. Fanfare should be represented by the fanfare ability only, not included in keywords."
+    ]
+  },
+  "Piercye, Queen of Frost Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is incomplete: after searching your deck for a follower that costs 2 or less, revealing it, and adding it to your hand, the effect must also shuffle your deck. Add a shuffleDeck step after tutorFromDeck."
+    ]
+  },
+  "Pilgrims' Path": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pinion Prayer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Pinion Prince": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare effect is encoded incorrectly: after putting a Fable card from your cemetery into your EX area, putting a Fable counter on it is optional, but the parsed effect makes the counter mandatory. Encode the counter placement as optional, and implement support for optional follow-up effects on selected moved cards in EX area if missing.",
+      "The target for adding the Fable counter is wrong: it should be the card moved from your cemetery to your EX area, not lastSummoned."
+    ]
+  }
+}

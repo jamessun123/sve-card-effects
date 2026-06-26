@@ -1,0 +1,53 @@
+{
+  "Celia, Hope's Strategist Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Celia, Sky Commander": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve linkage is incomplete/incorrect: this card has two distinct evolve options, so `evolvesTo` and a single `evolveCost` do not faithfully represent the source. Remove the single `evolvesTo`/`evolveCost` shortcut and encode both evolve abilities with their respective costs: [cost01] for \"Celia, Hope's Strategist\" and [cost04] for \"Celia, Despair's Messenger\".",
+      "The first `timing: \"evolve\"` ability is missing the required activated cost for [cost01]. Add the evolve cost/payment to this ability so it represents \"[evolve] [cost01]\".",
+      "The second `timing: \"evolve\"` ability is missing the required activated cost for [cost04]. Add the evolve cost/payment to this ability so it represents \"[evolve] [cost04]\"."
+    ]
+  },
+  "Center Street": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cerberus": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is incomplete: it must also encode \"Necrocharge (10) - Put both instead.\" Add a Necrocharge (10) branch/conditional so the fanfare summons both Mimi and Coco into the EX area instead of choosing one when the condition is met."
+    ]
+  },
+  "Cerberus Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cerberus, Hellfire Unleashed": {
+    "verdict": "fail",
+    "issues": [
+      "The Necrocharge (10) fanfare branch targets are encoded incorrectly. \"Give them Storm\" refers to the two tokens just summoned, but the parsed `grantKeyword` targets use unsupported/incorrect target filtering on `selfFollower`. Encode this as granting Storm to the summoned Mimi and Coco correctly, matching the two tokens created by the fanfare.",
+      "The activated ability cost is encoded incorrectly. The source says \"[act] [engage], bury another follower\"; use the implemented activated cost shape with `engage: true` and `buryFromField` matching one follower with `excludeSelf`, rather than custom fields like `buryFieldCount` and `excludeSelfFromBury`."
+    ]
+  },
+  "Ceres, Blue Rose Maiden": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered discard ability is encoded incorrectly. `timing: \"onDamaged\"` means \"when this follower takes damage\", but the source says \"During your turn, whenever this deals damage to an enemy leader\". This should be encoded as a trigger for this follower dealing damage to the enemy leader during your turn; implement a new trigger/effect support for \"when this deals damage to a leader\" (with turn restriction) and use that to apply `opponentDiscardEach` 1."
+    ]
+  },
+  "Ceres, Bride of the Night": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ceres, Bride of the Night Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ceridwen, Eternity Hunter": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

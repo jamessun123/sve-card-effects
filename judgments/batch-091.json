@@ -1,0 +1,55 @@
+{
+  "Ghios, Sparkling Prism Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incompletely encoded: it should select up to X Mage spells with different names that cost 3 or less in your cemetery, where X equals the number of mana counters on this card, put them into your EX area, make the selected spells cost 3 less this turn, then remove all mana counters from this card. Current encoding misses the up-to-X limit, the different-names restriction, and removing all mana counters. Implement support for cemetery selection with dynamic max count based on counters and unique-name restriction, plus removing all counters of a named type from self."
+    ]
+  },
+  "Ghost": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ghost Maid": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ghost Maid Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ghostwriter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ghoul": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should require burying another Departed follower as a cost/requirement before drawing 2 cards and discarding 1 card; current encoding buries all other Departed followers on your field. Change the first step to selecting and burying exactly one other Departed follower on your field, then draw 2 cards and discard a card."
+    ]
+  },
+  "Giant Chimera": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incomplete: at Spellchain (10) it should deal damage to each enemy leader and enemy follower on the field, and the amount should become 10 at SC (20) and 30 at SC (30). Current encoding only handles SC (10) for 5 damage and uses an effect that may not explicitly include leaders. Encode nested spellchain thresholds to replace the damage amount at 20 and 30, and implement an effect op for dealing the same damage to all enemy followers and the enemy leader if the current op cannot do both."
+    ]
+  },
+  "Giant Pastures": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare damage amount is incorrectly encoded: it should deal damage equal to the number of Mount cards in your EX area, but current encoding uses a condition object-like form instead of a supported dynamic amount and does not count Mount cards properly. Encode the two token placements, then deal damage to each enemy leader and enemy follower equal to the number of Mount cards in your EX area. Implement a dynamic amount for counting EX area cards by trait/name category such as Mount, and an op for damaging enemy leader plus all enemy followers together if needed."
+    ]
+  },
+  "Gift for Bloodkin": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing passive cost reduction: this card should cost 2 less to play if there are at least 5 Vampire cards in your cemetery. Add a passive playCostReduction of 2 gated by a cemetery trait-count condition for Vampire cards. Implement a condition type for own cemetery trait count with trait 'Vampire' if not already supported for this trait usage.",
+      "Spell effect condition is wrong: it should check whether there's a follower with \"Vania\" in its name in your cemetery, not on your field. Change the draw condition to a cemetery-name match for a follower whose name contains 'Vania'. Implement a cemetery name/substring condition if needed."
+    ]
+  },
+  "Gigahand Golem": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is encoded incorrectly: Earth Rite should be paid as an activated cost, not as a trigger condition. Change the activated ability to use cost { \"earthRite\": { \"count\": 1 } } with oncePerTurn true, targeting another Golem follower on your field for +1/+1."
+    ]
+  }
+}

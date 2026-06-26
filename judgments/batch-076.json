@@ -1,0 +1,58 @@
+{
+  "Fairy Slugger": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairy Slugger Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairy Tamer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairy Tamer Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly as buffing all other Pixie followers on your field. It should select up to 2 other Pixie followers on your field and/or in your EX area and give only those cards +1/+1. The engine needs support for selecting multiple cards across field and EX area, then applying a buff to the selected cards."
+    ]
+  },
+  "Fairy Torrent": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effect is encoded as a choose effect requiring 1 to 2 selections, but the source says 'Select up to 2 Pixie followers', so 0 to 2 should be allowed.",
+      "The encoded moveToExArea target uses selfFollower with a filter field not supported by the target selector reference; it should target Pixie followers on your field, which requires engine support for filtered field selection or a dedicated selector/effect for choosing up to 2 allied followers by trait.",
+      "The follow-up clause 'If at least 1 Pixie follower was put into an EX area by this ability, give your leader [defense]+2' is missing. It should heal your leader 2 if one or more selected followers were successfully moved to EX area. The engine needs support for checking whether a prior move operation moved at least one card."
+    ]
+  },
+  "Fairy Whisperer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairy Wisp": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fairylight Guide": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is encoded incorrectly as exAreaTraitMin Festive 3, but the source says 'if there are at least 3 cards in your EX area'. It should check total cards in your EX area, which requires a new condition type for EX area card count.",
+      "The target zone is encoded incorrectly as enemyFieldCard, but the source says 'Select a card in an opponent's EX area'. It should target an opponent EX area card; the engine needs a target selector for cards in an opponent's EX area.",
+      "The transform effect should transform the selected opponent EX area card into a Fairy token, not an enemy field card."
+    ]
+  },
+  "Falise, Innocent Sea Spray": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is incomplete. It should allow putting up to 1 Mage follower that costs 3 or less and up to 1 Mage spell that costs 3 or less into your EX area, but the encoding only allows a single generic Mage card with no cost or card-type restrictions.",
+      "The searched cards should cost 3 less to play this turn, but no play cost reduction is encoded for the cards put into the EX area.",
+      "The engine needs support for choosing multiple cards from the looked-at cards with separate per-category limits (up to 1 Mage follower and up to 1 Mage spell) and applying temporary play cost reduction to the chosen cards.",
+      "The triggered damage ability is encoded as a card ability with timing onCardPlayed and filter at the ability root, but the reference wrapper has no filter field there. It should be represented with an implemented trigger shape or the engine should add support for card-play triggers filtered by trait.",
+      "The trigger condition should be 'Whenever you play a Mage card', and the current encoding does not clearly enforce that correctly within supported ability schema."
+    ]
+  },
+  "Falise, Leonardian Mage": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "Flame and Glass": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The strike condition is incorrect: it checks namedFollowerOnFieldByName for Harnessed Flame, but the source requires checking that both Harnessed Flame and Harnessed Glass are in your cemetery. It should be encoded as a cemetery-based condition requiring both names; implement a condition type for named cards in your cemetery (and a way to require both names) and use that to switch between 3 and 7 damage.",
+      "The parsed keywords incorrectly include \"strike\". Strike should not be a keyword here because it is already represented by the ability timing \"strike\"."
+    ]
+  },
+  "Flame and Glass, Duality": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare destroy effect is incorrectly encoded as destroy with targets.count 2 and maxCost 0. It should target up to 2 enemyFieldCard targets without a maxCost restriction, using an optional/up-to targeting form if available.",
+      "The parsed keywords incorrectly include \"fanfare\" and \"activated\". These are timings represented by abilities, not keywords."
+    ]
+  },
+  "Flamewinged Might": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Flashstep Quickblader": {
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"evolve\". The evolve cost line should be represented by evolvesTo/evolveCost, not as a keyword."
+    ]
+  },
+  "Flashstep Quickblader Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete: it only targets an enemy follower, but the source says \"enemy leader or enemy follower\". It should be encoded as a damage effect that can target either the enemy leader or an enemy follower; implement a target selector for leader-or-follower choice if the engine lacks one."
+    ]
+  },
+  "Floral Breeze": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The return effect is too narrow: source says \"Select a card on your field,\" but parsed targets only selfFollower. It should be able to target any ally field card; implement/support a target selector for allied field cards including self if needed, then use that with returnToHand."
+    ]
+  },
+  "Floral Fencer": {
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"evolve\". The evolve cost line should be represented by evolvesTo/evolveCost, not as a keyword."
+    ]
+  },
+  "Floral Fencer Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incomplete: it summons only Steelclad Knight, but it should summon both a Steelclad Knight and a Knight token. Encode this as a sequence with two summon steps."
+    ]
+  },
+  "Flower Doll": {
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"evolve\" and \"fanfare\". Evolve is represented by evolvesTo/evolveCost, and Fanfare is represented by the ability timing, so neither should be in keywords."
+    ]
+  },
+  "Flower Doll Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"lastWords\". Last Words is represented by the ability timing, not as a keyword."
+    ]
+  }
+}

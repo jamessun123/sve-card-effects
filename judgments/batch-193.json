@@ -1,0 +1,47 @@
+{
+  "Rookie Succubus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rookie Trainer": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded incorrectly: it should select another iM@S CG follower on your field, but the target uses an unsupported embedded filter on selfFollower. Encode it with a target selector that correctly restricts to another allied iM@S CG follower, keeping only [attack]+1 and no defense change."
+    ]
+  },
+  "Room Service Demon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rosa, Mech Wing Maiden": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rosa, Mech Wing Maiden Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rose Deer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rose Gardener": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rose Gardener Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rose Queen": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is encoded incorrectly: it should select any number of Pixie followers in your EX area and transform them into Thorn Burst tokens, but the target selector uses selfFollower (field) and identityNameContains instead of EX area Pixie followers. This should be encoded with an effect that targets cards in your EX area by name/trait and transforms multiple selected cards; implement engine support for selecting cards in EX area and transforming cards there.",
+      "The activated ability uses an unsupported dynamic amount exAreaNamedCount. It should recover X play points where X equals the number of Thorn Burst tokens in your EX area. Encode this with a supported EX-area counting dynamic amount if added; implement an amount operator such as exAreaNamedCount or a general exAreaFilterCount."
+    ]
+  },
+  "Rouge Vampire": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Lucifer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lucifer Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end ability is encoded as dealDamageAllEnemies, which deals 4 damage to enemy followers and the enemy leader. It should deal 4 damage only to each enemy leader; encode it as dealDamage with amount 4 and targets {\"type\":\"enemyLeader\"}."
+    ]
+  },
+  "Lucille, Keeper of Relics": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incomplete: after summoning an Ancient Artifact or Mystic Artifact token, it must also put the other token into your EX area. Encode this as a choose between two sequence options: summon one token to the field, then summon the other token to the EX area.",
+      "The activated cost is incorrect: it must banish 5 cards with different base costs from your EX area, but the parsed cost only gives a generic banishFromExArea count without enforcing different base costs. Encode the cost as banishFromExArea with count 5 if possible, and implement engine support for a distinct-base-cost restriction on cards banished from EX area.",
+      "The activated effect says 'You may summon' from your evolve deck, but the parsed summonFromEvolveDeck is not optional. It should be optional; encode optional summoning if supported, or implement an optional flag for summonFromEvolveDeck."
+    ]
+  },
+  "Lumbering Carapace": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Luminous Commander": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Luminous Commander Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability's condition is incorrect: the source requires at least 3 Officer token followers on your field with different names, but the parsed condition only checks a trait minimum of 3. It should encode an Officer token follower count with unique-name requirement, and the engine needs a condition for followers matching a filter with different names.",
+      "The activated ability must select an enemy follower on the field, but damageFollowerAndLeader has no target selector in the parsed ability. It should include selection of 1 enemy follower as the damage target.",
+      "The activated ability's target restriction is not represented correctly: 'Officer token' should be modeled as Officer trait plus token printing, not a single trait string. Use a filter/condition combining trait \"Officer\" and printingType \"token\" where supported."
+    ]
+  },
+  "Luminous Knight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Luminous Lancetrooper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is incomplete: it gives the selected Officer token follower +2 attack and Storm, but the parsed ability only gives +2 attack. It should also grant Storm, e.g. as a sequence of buff and grantKeyword, or with engine support for combining stat buff and keyword grant to the same chosen target.",
+      "The activated ability's target restriction is not represented correctly: 'Officer token follower on your field' should be encoded as a selfFollower target with trait \"Officer\" and printingType \"token\", not filter/trait \"Officer token\".",
+      "The activated ability's condition is incorrect: the source requires at least 3 Officer token followers on your field with different names, but the parsed condition only checks a trait minimum of 3. It should encode the unique-name requirement, and the engine needs a condition for counting matching followers with different names."
+    ]
+  },
+  "Luminous Magus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability's condition is incorrect: the source requires at least 3 Officer token followers on your field with different names, but the parsed condition only checks a trait minimum of 3. It should encode the unique-name requirement, and the engine needs a condition for counting matching followers with different names.",
+      "The activated ability's target restriction is not represented correctly: 'Officer token followers' should be modeled as trait \"Officer\" plus printingType \"token\", not a single trait string."
+    ]
+  },
+  "Luna's Doll": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

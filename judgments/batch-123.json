@@ -1,0 +1,69 @@
+{
+  "King Elephant Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "King's Might": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the spell's actual effect: add a spell ability that deals 4 damage to 1 enemy follower using {\"op\":\"dealDamage\",\"amount\":4,\"targets\":{\"type\":\"enemyFollower\",\"count\":1}}.",
+      "The optional play-cost reduction from engaging 2 cards named Naterran Great Tree is encoded incorrectly: it should not use {\"op\":\"engageSelf\"}; it needs an implemented way to engage 2 allied field cards filtered by identityName \"Naterran Great Tree\" as an optional play cost, then apply a 2-cost reduction while playing this card.",
+      "Missing the passive clause 'This card costs 1 less to play if there's a Bayleon, Sovereign Light on your field.' It should be encoded as a passive conditional playCostReduction 1 gated by Bayleon being on your field; implement a condition/filter for named allied follower on field by identity and support play-cost reduction clauses on cards with play-time optional costs."
+    ]
+  },
+  "King's Welcome": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The field condition is encoded incorrectly: the card requires both a Commander follower and an Officer follower on your field, but parsed uses conditionAny with namedFollowerOnFieldByName 'Commander'/'Officer'. It should check follower traits on your field, not names, and require both simultaneously.",
+      "Implement missing condition support for 'you control a follower with trait X' and conjunction of multiple conditions (e.g. Commander follower AND Officer follower), then encode the spell as drawing 2 only if both trait conditions are met."
+    ]
+  },
+  "Kirari Moroboshi": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Keyword 'fanfare' should not be listed in keywords; keep Ward as a keyword and represent Fanfare only as an ability timing.",
+      "The cost-reduction condition is encoded incorrectly: 'if there's a 1-cost follower on your field' is not a fieldTraitMin on trait '1-cost follower'. It should check for an allied follower with cost 1; implement a condition for allied field follower matching maxCost/minCost or exact cost, then apply playCostReduction 3.",
+      "The Fanfare effect is encoded incorrectly: 'Refresh each follower on your field' should target all your followers, not a single selfFollower target. Encode as an all-allied-followers refresh effect; implement a refresh-all-allied-followers operation or multi-target selector for all self followers."
+    ]
+  },
+  "Kiss of Lust": {
+    "verdict": "fail",
+    "issues": [
+      "Missing the Sanguine clause. After healing 2, the draw should be conditional: draw 2 if Sanguine is active for you, otherwise draw 1. Encode this with an if condition of {\"type\":\"sanguine\"} and then/else draw counts 2 and 1."
+    ]
+  },
+  "Kiss of the Princess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the passive clause 'If there is a Princess follower on your field, this card costs 1 less to play.' It should be a passive conditional playCostReduction 1 based on controlling a Princess follower; implement a condition for allied follower with trait Princess.",
+      "The choose effect is encoded incorrectly: this card says 'Choose one of the following', so choose must be exactly one option with max 1, not max 2.",
+      "Option 1 is encoded incorrectly: the Fable counter is optional and should be applied to the same selected follower that got +1 attack, not selected independently. Encode as buff one self follower, then optionally addCounter to that same target; implement support for optional subeffects and reusing the chosen target within a sequence.",
+      "Option 2 is encoded incorrectly: it should return up to 3 Swordcraft followers from your cemetery to your deck, but parsed uses tutorFromCemetery to deckBottom without count control. Implement/select an effect that moves up to 3 matching cemetery cards to deck, then shuffle, then draw 1."
+    ]
+  },
+  "Kit, Luxfang Champion": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onDiscard effect is incomplete: the source says 'you may put it into your EX area', but parsed makes it mandatory. Encode it as an optional moveSourceToExArea; implement optional handling for triggered effects."
+    ]
+  },
+  "Knight": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Knight Neilan the Lazy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Keyword 'aura' should not be listed as a printed keyword here; the text is a continuous effect granting Aura to certain followers, so represent it only as an ability.",
+      "Keyword 'fanfare' should not be listed in keywords; it should only appear as the ability timing.",
+      "The aura-granting clause is encoded incorrectly: 'Each follower with 1 attack on your field has Aura' is not a trait-based effect with trait '1 attack'. It should target allied followers based on current attack value 1. Implement aura filtering by stats (attack equals 1) and then grant keyword 'aura' to those followers."
+    ]
+  },
+  "Knower of History": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Keyword 'fanfare' should not be listed in keywords; it should only appear as the ability timing.",
+      "The trigger condition is encoded incorrectly: 'Whenever a token follower is put onto your field' should filter by printingType 'token', not trait 'Token'. It should trigger on ally follower entry for token followers. Implement filtering on onAllyFollowerEnter by printingType and encode the 2-damage effect to an enemy follower."
+    ]
+  }
+}

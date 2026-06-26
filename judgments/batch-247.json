@@ -1,0 +1,52 @@
+{
+  "William, Mysterian Student": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wind Blast": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wind Fairy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability should not be encoded as an optional cost; 'discard this' is a required activation cost from hand. Encode it as timing 'activated' with activateFrom 'hand' and a cost that includes pp 1 plus a self-discard/bury-from-hand payment, then return a card on your field to its owner's hand and put a Fairy Wisp token into your EX area. The engine is missing a proper activated cost/effect operation for discarding or revealing the source card from hand as a required self-cost.",
+      "The return target is too narrow: source says 'Select a card on your field,' so it should target an ally field card generally and allow this card if applicable, not be constrained by the current hand-discard workaround. If source card cannot legally be on field because activation is from hand, keep the field target as any ally field card. The engine may need clearer support for hand-activated self-discard costs independent of field targets."
+    ]
+  },
+  "Wind God": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The start-of-end ability is incorrectly encoded as buffFieldTrait with no filter, which does not faithfully express 'give each follower on your field [attack]+1.' It should buff all of your followers, not depend on a trait filter. Implement an ability such as a field-wide ally follower buff op (for example, buffAllAlliedFollowers) or add target support for multiple self followers, then encode the end-phase effect as +1 attack to each follower on your field."
+    ]
+  },
+  "Windfall Fay": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Both triggered abilities are missing the clause 'during your turn.' They should be restricted to your turn on the onCardPlayed trigger. Implement a condition or trigger flag for controller turn only, then apply it to both the 3rd-card and 5th-card triggers."
+    ]
+  },
+  "Windflower Tiger": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The optional return cost is encoded with a target filter inside targets, but target selectors do not support an embedded filter in the reference. It should return another Beast follower on your field not named Windflower Tiger. Implement filtered field target selection for selfFollower/allyFieldCard targets (including trait and excluded identity), then encode the cost with Beast filter plus exclusion of Windflower Tiger.",
+      "The current encoding only uses excludeSelf, which does not fully capture 'not named Windflower Tiger' because another copy of Windflower Tiger would still be illegally selectable. Add target-side identity exclusion support and use excludeIdentityName 'Windflower Tiger' for the returned Beast follower."
+    ]
+  },
+  "Windslasher": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Windswept Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Windswept Lancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Winged Courier": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

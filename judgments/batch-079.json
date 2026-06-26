@@ -1,0 +1,52 @@
+{
+  "Fervid Soldier Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Feybolt Archer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fieran, Havensent Wind God": {
+    "verdict": "fail",
+    "issues": [
+      "The cost reduction is encoded as an unconditional playCostReduction, but the source says this card costs 3 less to play from the EX area; encode it with condition {\"type\":\"sourceInExArea\"} or use exAreaPlayCostReduction amount 3.",
+      "The +1 attack to each other follower is incorrectly placed inside the fanfare sequence; it should be a separate ability with timing \"startOfEnd\" and effect buffFieldTrait with atk 1, otherOnly true."
+    ]
+  },
+  "Fiery Embrace": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fiery Paean": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability targets a Holy Tiger using an unsupported filter inside targets; it should target a follower on your field specifically restricted to Holy Tiger, using a correct target encoding supported by the engine."
+    ]
+  },
+  "Fighter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Filene, Blizzardous Heart": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is encoded incorrectly as grantOpponentRestriction with restriction \"skipPp\"; it should represent \"during each opponent's next turn, any card they play costs 1 more\" under Overflow. Add an implemented ability for increasing the opponent's play costs for their next turn, then encode the fanfare as an if Overflow effect granting that modifier.",
+      "The evolve clause is only partially represented through evolveCost/keyword; it should also link to the evolved form with evolvesTo set to \"Filene, Blizzardous Heart Evolved\" if not already considered sufficient by schema."
+    ]
+  },
+  "Filene, Blizzardous Heart Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded as searchDeckChoose lookAt 5, but the source says search your deck for a card with \"Whitefrost\" in its name, reveal it, add it to your hand, then shuffle; this should be a full-deck search, not top 5. Implement support for full-deck conditional-name search with reveal and shuffle, then encode that instead."
+    ]
+  },
+  "Filene, Whitefrost Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fire Chain": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

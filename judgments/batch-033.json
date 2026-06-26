@@ -1,0 +1,60 @@
+{
+  "Blossom Spirit": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Blossom Spirit Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded as a player choice between dealing 2 or conditionally dealing 4, but the card should always select an enemy follower and deal 4 damage instead of 2 if you have at least 3 cards in your EX area; encode this as a single conditional damage effect, and implement a condition for total cards in EX area (not trait-based) if the engine lacks one."
+    ]
+  },
+  "Blossom Treant": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability only, while Ward remains in keywords."
+    ]
+  },
+  "Blossom Treant Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Blossoming Archer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is incorrect: the card checks for at least 3 cards with different base costs in your EX area, not at least 3 EX-area cards of any trait; encode the fanfare as conditional deal 3 damage to an enemy follower using a dedicated EX-area distinct-base-cost condition, and implement such a condition in the engine if missing."
+    ]
+  },
+  "Blossoms' Advance": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The optional first effect is encoded incorrectly as moving a follower to the EX area; it should optionally summon a Passion follower that costs 6 or less from your hand to the field. Encode a hand-to-field summon/play effect with trait Passion and max cost 6, and implement a hand summon operation/filter if the engine lacks one."
+    ]
+  },
+  "Bone Chimera": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing the Necrocharge (7) continuous clause: this follower has Rush and Bane while Necrocharge (7) is active. Encode it as a passive conditional keyword-granting effect (or passiveKeywords gated by necrocharge), and implement conditional passive keyword support if the engine lacks it."
+    ]
+  },
+  "Bone Drone": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability only."
+    ]
+  },
+  "Boomerang Sister": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The destination effect is encoded incorrectly as moveToExArea, but the card says to put the selected enemy follower into its owner's EX area; encode a targeted move of an enemy follower to its owner's EX area, and implement a target-to-owner-EX-area operation if missing.",
+      "The fanfare cost uses banishFromExArea with filter trait:any, which is not a valid specific filter for 'a card from your EX area'; encode it as banishing 1 card from your EX area without an invalid trait filter, and implement a generic EX-area card cost selector if needed.",
+      "The activated cost shape is incorrect; banishing a card from your EX area should be represented as a proper activated cost using the engine's banishFromExArea cost support with a generic card filter/count, not custom banishCount fields."
+    ]
+  },
+  "Boomfish": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated effect is encoded as dealDamageAllEnemies, but the card deals 3 damage to each follower on the field and your leader; encode a sequence that deals 3 to all followers and 3 to your leader, and implement an operation for damaging all followers (both sides) and/or self leader if the engine lacks the necessary primitives."
+    ]
+  }
+}

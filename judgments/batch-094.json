@@ -1,0 +1,58 @@
+{
+  "Glistering Angel Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded with searchDeckChoose to add an Angel or Fallen Angel from the top 4 to hand, but it is missing the required reveal/add wording support because searchDeckChoose in the reference does not implement reveal for this op. It should be encoded as a top-4 choose-to-hand effect that reveals the chosen card and puts the rest on the bottom; implement reveal support on searchDeckChoose or a dedicated top-of-deck reveal-and-add operation."
+    ]
+  },
+  "Glittering Gold": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the keyword 'fanfare'; the source card has no Fanfare keyword.",
+      "The activated cost is incorrect. It should cost 1 PP and banish this card plus 2 other cards named Glittering Gold from your EX area, not a generic banishCount 3. Encode the cost as pp 1 plus banishSelf and banishFromExArea count 2 filtered to identityName 'Glittering Gold'."
+    ]
+  },
+  "Glitz & Glam☆Parade": {
+    "verdict": "fail",
+    "issues": [
+      "The first summonFromCemetery is too broad. It should select up to one 2-cost Passion follower exactly, not any Passion follower costing 2 or less. Change the filter to minCost 2 and maxCost 2.",
+      "The second summonFromCemetery should be optional/up-to-one if the engine supports it; the source says 'up to one' 1-cost Passion follower.",
+      "The first summonFromCemetery should also be optional/up-to-one if the engine supports it; the source says 'up to one' 2-cost Passion follower."
+    ]
+  },
+  "Globe of the Starways": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability should be marked quick because the source has [q][act]. Add quick: true to the activated ability.",
+      "The fanfare search is functionally close, but searchDeckChoose does not implement reveal in the reference. It should search the deck for an amulet, reveal it, and add it to hand; implement reveal support on searchDeckChoose or use a tutor op that supports reveal after deck search."
+    ]
+  },
+  "Goblin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Goblin Assault": {
+    "verdict": "fail",
+    "issues": [
+      "The play-cost reduction clause is encoded as a spell-timing ability, but it should be a when-playing-this optional additional cost/replacement effect that reduces this card's play cost before resolution. Replace the spell ability with a passive or play-time cost-modification encoding that says 'When playing this, you may discard a Goblinoid card; if you do, this costs 2 less to play.'"
+    ]
+  },
+  "Goblin Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Goblin King": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Goblin Princess": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare tutor is too broad. The source says 'a neutral follower that costs 1 play point', not 1 or less. Change the filter to minCost 1 and maxCost 1."
+    ]
+  },
+  "Goblin Princess Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

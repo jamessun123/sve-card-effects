@@ -1,0 +1,56 @@
+{
+  "Airi Totoki [Cinderella Girl] Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Airship Whale": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Airship Whale Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Akane Hino": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability is missing the \"Lesson (1)\" additional cost; it should require both [cost02] and Lesson (1) before granting this follower Storm. Implement a cost/effect primitive for Lesson counters or lesson payment so this can be encoded.",
+      "Strike ability is encoded as dealDamageAllEnemies for 2 to all enemies, but the source says \"Deal 2 damage to each enemy leader\"; it should damage enemy leaders only, not followers. Implement an ability to deal damage to each enemy leader, or a target/effect form that supports all enemy leaders."
+    ]
+  },
+  "Akane Hino [Positive Passion]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incorrectly wrapped as optionalCost; the source text makes \"Lesson (3), discard 2 Passion cards\" mandatory, not optional. It should be encoded as a required additional cost on the fanfare ability before dealing 6 to each enemy follower and drawing 2. Implement support for mandatory additional costs on triggered abilities, including Lesson payment."
+    ]
+  },
+  "Akari & Akira": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare only encodes \"Bury the top 3 cards of your deck\" and is missing all three follow-up clauses: if you buried a Cute card, heal your leader 2; if you buried a Cool card, give this Assail; if you buried a Passion card, give this +2 attack.",
+      "The missing follow-up clauses depend on what traits were among the cards buried by this specific mill effect; implement post-mill conditions/effects that can check whether a buried set included a card with a given trait so the three conditional rewards can be encoded correctly."
+    ]
+  },
+  "Akari Tsujino": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare incorrectly uses dealDamageAllEnemies for 3, which would hit followers too; the source says \"deal 3 damage to each enemy leader\". It should damage enemy leaders only. Implement an ability to deal damage to each enemy leader, or a target/effect form that supports all enemy leaders.",
+      "onDamaged ability is missing the condition \"takes at least 5 damage\"; it should only increase your max play points by 1 when this follower takes 5 or more damage at once. Implement an onDamaged threshold condition or event payload comparison to encode damage amount >= 5."
+    ]
+  },
+  "Akari Tsujino [Brand New!]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Akari Tsujino [Twice as Lovely]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare conditions are encoded using ownCemeteryTraitMin checks after milling, but the source requires checking whether the 3 cards buried by this effect included Cute/Cool/Passion cards specifically. It should not trigger based on preexisting cemetery contents.",
+      "Implement post-mill conditions/effects that can check whether a card with a given trait was among the cards buried by this specific mill effect, then use those conditions for heal 2 / grant Assail / +2 attack."
+    ]
+  },
+  "Aki Yamato": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

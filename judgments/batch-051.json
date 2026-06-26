@@ -1,0 +1,51 @@
+{
+  "Dario, Demon Count": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dario, Demon Count Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive triggered ability is encoded with unsupported op `grantOnEnemyFollowerLeaveField`. It should represent \"During your turn, whenever an enemy follower is put from the field into the cemetery, give this follower +1/+1.\" Add engine support for an enemy-follower-leaves-field / enemy-follower-to-cemetery trigger with a controller-turn condition, then encode it to buff self +1/+1."
+    ]
+  },
+  "Dark Alice": {
+    "verdict": "fail",
+    "issues": [
+      "Do not put `strike` in `keywords`; Strike is a triggered ability timing and should only be represented as the `strike` ability that discards a card from each opponent."
+    ]
+  },
+  "Dark Angel Olivia": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dark Bishop": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dark Bishop Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect should be a single choice from the top 5 cards: summon a Fable follower that costs 5 or less OR a Fable amulet that costs 5 or less, then put the rest on the bottom. The parsed form incorrectly creates two separate `onEvolve` searches, which can allow taking one of each. Replace them with one effect that chooses a single card matching either cardType follower or amulet with trait Fable and maxCost 5 from the same top-5 search."
+    ]
+  },
+  "Dark Charisma": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be listed in `keywords`; it is already correctly represented as a `timing: \"fanfare\"` ability.",
+      "The activated ability is Quick (`[q][act]`) but the parsed ability is missing `quick: true`."
+    ]
+  },
+  "Dark Dragoon Forte": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dark Dragoon Forte Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dark General": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

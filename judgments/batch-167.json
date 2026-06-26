@@ -1,0 +1,56 @@
+{
+  "Okami": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger should exclude this card itself: encode the ability so it triggers when another ally follower enters your field, e.g. onAllyFollowerEnter with a filter/selector excluding self if required by engine."
+    ]
+  },
+  "Old Man and Old Woman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Oldblood King": {
+    "verdict": "fail",
+    "issues": [
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Rush to each Forest Bat on your field by matching the specific card identity/name, not a trait.",
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Assail to each Forest Bat on your field by matching the specific card identity/name, not a trait."
+    ]
+  },
+  "Oldblood King Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve buff incorrectly uses trait \"Forest Bat\"; it should give each Forest Bat on your field +1 attack by matching the specific card identity/name, not a trait.",
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Rush to each Forest Bat on your field by matching the specific card identity/name, not a trait.",
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Assail to each Forest Bat on your field by matching the specific card identity/name, not a trait."
+    ]
+  },
+  "Olivia, Heroic Dark Angel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Olivia, Heroic Dark Angel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "One-Tailed Fox": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "One-Winged Traitor": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "One-Winged Traitor Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The target filter for the On Evolve buff is not valid per the target-selector reference; it should target another ally follower that is Angel or Fallen Angel, but the engine lacks documented support for filter/traitsAny on selfFollower targets. Implement target filtering for selfFollower (including traitsAny) or add an effect like buffFieldTrait/choose-target-by-filter for allied followers, then encode this as buff +1/+1 to another Angel or Fallen Angel follower you control."
+    ]
+  },
+  "Onion Patch": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is incorrect: it requires at least 5 cards named Onion Patch in your cemetery, not just any 5 cards. Encode this with a named-card cemetery condition; add an implemented condition such as ownCemeteryNamedMin { identityName: \"Onion Patch\", count: 5 }.",
+      "The granted ability is misencoded as Last Words; it should grant Storm and a Strike ability that deals 1 damage to an enemy follower. Encode the second clause as a granted Strike trigger, but the engine lacks an operation to grant triggered abilities like Strike conditionally; implement an effect such as grantTriggeredAbility/grantStrike, then use it here."
+    ]
+  }
+}

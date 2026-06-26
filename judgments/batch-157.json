@@ -1,0 +1,52 @@
+{
+  "Mr. Full Moon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mr. Heinlein, Shadow Mage": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare PP recovery is encoded with unsupported dynamic amount {\"op\":\"spellCountInLastMill\"}; it should recover X PP where X equals the number of spells put into your cemetery by this ability. Implement a dynamic amount/trackable result for counting spells milled by the immediately preceding mill effect, then use it in recoverPp.",
+      "Activated ability cost is encoded incorrectly: discarding a spell is not a supported field inside cost. It should be modeled as an activated ability with engage cost plus an additional discard-a-spell payment, but the engine lacks support for discardFromHand as an activated cost. Implement discardFromHand as a valid activated cost component or an activated-cost sequence wrapper, then encode '[act][engage], discard a spell: ...' correctly."
+    ]
+  },
+  "Ms. Miranda, Adored Academic": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ms. Tart Man": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing the required deck shuffle after tutoring; encode the effect as a sequence of tutorFromDeckAny to hand, then shuffleDeck."
+    ]
+  },
+  "Mukan, Shadowcrypt Ward": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mukan, Shadowcrypt Ward Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Multipart Experiment": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Spell should let you choose up to 2 options, or up to 3 instead if Spellchain (10) is active. The parsed ability always uses max 2 and misses the Spellchain (10) modifier. Encode this with conditional choice-count logic; since the engine lacks a way to vary choose/chooseMultiple max based on a condition, implement support for conditional max-choice counts (or a choose effect whose max can be set by condition) and encode the Spellchain clause."
+    ]
+  },
+  "Mushussu": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "My Life, My Sounds": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mysteria, Magic Founder": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare cost is encoded incorrectly: the card says 'Reveal an Academic follower from your hand,' not discard one. Replace discardFromHand with a reveal-from-hand cost/effect for an Academic follower; if reveal is represented as an optional cost, it must not remove the card from hand.",
+      "Passive cost reduction is too broad: it currently reduces this card's own play cost generically. It should specifically make any Academic follower you play cost 1 less while this card is on your field; encode this as an aura/passive reduction applying to Academic followers you play, not a self playCostReduction."
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "Dimension Shift": {
+    "verdict": "fail",
+    "issues": [
+      "The play-altering text is encoded as an activated hand ability, but this card is a spell with a conditional play cost. Encode it as a spell ability that takes another turn, plus an optional/conditional play-cost modification for 'When playing this card, banish 10 spells in your cemetery: This card costs 7 play points to play.' rather than an activated ability.",
+      "The cemetery banish cost shape is incorrect. Use the implemented banish-from-cemetery cost structure with a spell filter and count 10, not custom fields like 'banishCount'."
+    ]
+  },
+  "Dionne, Dancing Blade": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dionne, Dancing Blade Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability is missing the trigger limit. Add a per-turn cap so 'Strike - Refresh this follower. Perform only twice per turn.' is encoded with maxPerTurn: 2 on the strike ability."
+    ]
+  },
+  "Dire Bond": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Disciple of Destruction": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Disciple of Disdain": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Disciple of Lust": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The effect 'Deal 1 damage to each leader' is encoded incorrectly as dealDamageAllEnemies, which damages only the enemy side and not both leaders. It should damage both leaders on fanfare and on strike. Implement a dedicated ability such as a 'dealDamageEachLeader' effect (or equivalent multi-target leader damage primitive), then use it for both abilities."
+    ]
+  },
+  "Disciple of Repose": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The timing is too broad. The source says 'At the start of each opponent's main phase', but the parsed ability uses startOfMain without restricting it to opponents' turns. It should be encoded as an opponent-only start-of-main trigger; implement an opponent-turn/start-of-opponent-main trigger restriction or condition and apply it here."
+    ]
+  },
+  "Disciple of Truth": {
+    "verdict": "fail",
+    "issues": [
+      "The card-play trigger filter is placed at the ability root, but the implemented wrapper expects card-play filtering inside effect/grant structures rather than as a top-level ability field. Re-encode the trigger so it correctly checks 'Whenever you play a Mage card' and then heals your leader by 1."
+    ]
+  },
+  "Disciple of Unkilling": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is over-encoded as a generic top-1 search. The source specifically says to look at the top card of your deck, and if it's a Hunter card, you may reveal it and add it to your hand. Re-encode this as a top-card check/peek with a conditional optional add-to-hand for that revealed Hunter card, not as searchDeckChoose."
+    ]
+  }
+}

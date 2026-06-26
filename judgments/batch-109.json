@@ -1,0 +1,68 @@
+{
+  "Holylight Convert": {
+    "verdict": "engine-missing",
+    "issues": [
+      "End phase buff is encoded with unsupported dynamic amount `fieldTraitCount` and wrong basis. It should give this follower +X attack where X equals the number of followers with Ward on your field; implement a dynamic amount for counting followers by keyword on your field (for example `keywordFieldCount` or equivalent) and use that in `buffDynamic` targeting self.",
+      "Ward is a printed keyword, but base-card encoding should not imply the evolve cost line via `keywords`; keep `ward`, and represent the evolve cost only with `evolveCost: 1`/`evolvesTo` as already done."
+    ]
+  },
+  "Holylight Convert Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve tutor is incomplete: the deck search must be restricted to a follower with Ward that costs 3 or less. Add a Ward restriction to the filter; since the engine has no deck filter for keywords, implement keyword-based deck filtering (for example `filter.keyword: \"ward\"`) and use it with `cardType: \"follower\", maxCost: 3`, then summon and shuffle.",
+      "End phase buff is encoded with unsupported dynamic amount `fieldTraitCount` and wrong basis. It should give this follower +X attack where X equals the number of followers with Ward on your field; implement a dynamic amount for counting followers by keyword on your field (for example `keywordFieldCount` or equivalent) and use that in `buffDynamic` targeting self."
+    ]
+  },
+  "Holylord Eachtar": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare summon is encoded with `maxTotalCost: 2`, but the text says 'Select up to 2 Havencraft followers that cost 2 or less in your cemetery and summon them.' Remove `maxTotalCost`; each selected follower only needs individual `maxCost: 2` with count 2.",
+      "Rush aura is encoded with `trait: \"Havencraft\"`, but Havencraft is a class, not a trait. It should grant Rush to each Havencraft follower on your field by using `cardClass: \"haven\"` instead.",
+      "Activated cost is encoded incorrectly. The banish-from-cemetery cost should use the implemented cost shape `banishFromCemetery` with a `filter` and `count`, e.g. `{ \"banishFromCemetery\": { \"filter\": { \"cardClass\": \"haven\", \"cardType\": \"follower\" }, \"count\": 3 } }`.",
+      "Activated buff targets are wrong. The text says 'Give each other follower on your field +1/+1,' not each other Havencraft follower. Encode the effect so it buffs all other followers on your field, not class-limited followers."
+    ]
+  },
+  "Homebound Infantryman": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Start-of-end-phase condition is encoded as a fake card name match. It should check whether there is a Commander card that costs 3 or more on your field. Implement a field condition that can filter by trait and minimum cost on your field (for example `fieldCardMin`/`fieldMatchExists`) and use `trait: \"Commander\", minCost: 3`.",
+      "The revival ability is missing its `[cost01]` payment. Encode it as a start-of-end triggered ability with `cost: { \"pp\": 1 }` and the cemetery summon effect, if triggered abilities can pay costs; otherwise implement support for triggered optional PP costs.",
+      "The text 'This follower can't attack enemy leaders' is missing. Implement a passive restriction ability for 'can't attack leaders' (or a more general attack-target restriction) and add it alongside Assail."
+    ]
+  },
+  "Homecoming": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Base spell effect is wrong: it returns an enemy follower to hand, but the card should put the selected enemy follower on the top or bottom of its owner's deck. This needs a choice between `putOnTopOfDeck` and `putOnBottomOfDeck` for the selected follower; implement controller-choice/top-or-bottom deck placement if not available as a single operation.",
+      "Combo (5) replacement effect is not fully accurate. The card should make each opponent put each follower from their field on the top or bottom of its owner's deck instead, with each controller determining placement. `putAllEnemyFollowersOnDeck` loses the top-or-bottom choice; implement an all-followers top-or-bottom deck placement effect or a controller-choice variant."
+    ]
+  },
+  "Homework Time!": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Honest Cohort": {
+    "verdict": "fail",
+    "issues": [
+      "Raio mode is encoded without selecting the enemy follower target. The card says to deal 6 damage to the selected follower and 3 damage to its leader instead. Encode the Raio branch so it includes the selected enemy follower target for the 6 damage plus 3 to that follower's leader."
+    ]
+  },
+  "Honoka Ayase": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Targeting is not faithfully encoded: the selected target must be another iM@S CG follower on your field, but `grantKeyword` targets use an unsupported embedded `filter` on `selfFollower`. Implement target filtering by trait on field targets (for example allowing `targets.filter`) and use `trait: \"iM@S CG\"` with `excludeSelf: true`."
+    ]
+  },
+  "Honorable Thief": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is split into two separate abilities, but the text is sequential: each opponent buries the top 2 cards of their deck, then if there are at least 10 cards in opponents' cemeteries, evolve this follower. Encode this as one `fanfare` ability using `sequence` with `millOpponent` followed by an `if` check.",
+      "The auto-evolve clause is redundantly gated twice. Replace the current second fanfare ability with an `if` effect inside the single fanfare sequence whose `then` evolves this follower.",
+      "Auto-evolve is encoded with `triggerOnEvolve: true`, which is not part of the source text. Remove that flag unless required for a distinct printed clause."
+    ]
+  },
+  "Honorable Thief Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

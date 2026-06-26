@@ -1,0 +1,53 @@
+{
+  "Flower Princess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Combo (3) clause is encoded as a passive ability, but it is part of the fanfare and should only resolve when this card is played from hand. It should be folded into the fanfare effect as 'Put a Fairy token into your EX area, then if Combo (3), put a Fable counter on this card.' Since the engine lacks a way to express combo as a sub-condition inside a sequence cleanly without splitting timing semantics, implement support for fanfare-scoped conditional subclauses if needed.",
+      "The activated cost incorrectly uses an unsupported nested cost field 'removeCounter'. It should remove a Fable counter as part of the ability resolution or use a supported activated-cost encoding for counter removal. Implement activated cost support for removing counters, or allow 'removeCounter' as a legal cost shape."
+    ]
+  },
+  "Flower of Fairies": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fluffy Angel": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Flying Messenger Squirrel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is encoded as namedFollowerOnFieldByName 'Commander', but the card checks for a Commander card by trait, not a card literally named Commander. It should be a field trait condition such as 'if there's a Commander card on your field, draw a card.' The current condition type is unavailable in the engine; implement a condition for checking whether your field contains a card with a given trait."
+    ]
+  },
+  "Focus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The restriction '[quick] This card can't be played during your turn.' is missing. The spell should retain Quick but also include a play restriction limiting it to the opponent's turn. Implement a spell/hand play restriction ability or condition for 'can't be played during your turn'."
+    ]
+  },
+  "Forbidden Art": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Force of the Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forest Bat": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Forest Defender": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability is encoded as grantOnAllyFollowerEnter, but the source text says 'Whenever another Hunter follower on your field attacks'. It should trigger on allied Hunter followers attacking, not entering the field. Implement a timing/effect hook for 'when another ally follower attacks' (or an attack/strike watcher for other followers), then encode the 3-damage effect with that trigger."
+    ]
+  },
+  "Forest Defender Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive triggered ability is encoded as grantOnAllyFollowerEnter, but the source text says 'Whenever another Hunter follower on your field attacks'. It should trigger on allied Hunter followers attacking, not entering the field. Implement a timing/effect hook for 'when another ally follower attacks' (or an attack/strike watcher for other followers), then encode the 3-damage effect with that trigger."
+    ]
+  }
+}

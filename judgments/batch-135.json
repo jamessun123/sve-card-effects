@@ -1,0 +1,65 @@
+{
+  "Lyrial, Archer Throne": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect \"fanfare\" keyword; the source text only gives this card a quick activated ability, not Fanfare.",
+      "Add \"quick\": true to the activated ability instead of putting \"quick\" in keywords, since [q][act] means the activated ability can be used during quick windows.",
+      "Change the activated damage effect from dealing 2 damage to each enemy follower and leader to dealing 2 damage to each enemy leader only, using a leader-only damage effect.",
+      "Change the passive protection effect from giving your leader immunity to all ability damage to preventing only this card's controller leader from taking ability damage as stated on the card."
+    ]
+  },
+  "Lævateinn Dragon": {
+    "verdict": "fail",
+    "issues": [
+      "Replace the evolve ability effect from \"summonFromEvolveDeck\" to an effect that evolves this follower into a matching evolved follower with \"Lævateinn Dragon\" in its name; the current encoding summons from the evolve deck instead of evolving this card."
+    ]
+  },
+  "Lævateinn Dragon Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lævateinn Dragon, Attack Form Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the missing continuous clause \"This follower's name is also Lævateinn Dragon.\" The current encoding only includes the Strike ability. Implement a passive ability operation to grant an additional identity/name alias to the source follower."
+    ]
+  },
+  "Lævateinn Dragon, Blast Form Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Add the missing continuous clause \"This follower's name is also Lævateinn Dragon.\" The current encoding correctly handles Intimidate and the On Evolve damage, but it omits the alternate-name effect. Implement a passive ability operation to grant an additional identity/name alias to the source follower."
+    ]
+  },
+  "Lævateinn Dragon, Defense Form Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Change the passive damage reduction effect from \"damageCap\" maxPerHit 1 to an effect that reduces all damage dealt to this follower by 1. The current encoding incorrectly turns any damage above 1 into exactly 1 damage. Implement a passive damage-reduction-by-N operation for followers.",
+      "Add the missing continuous clause \"This follower's name is also Lævateinn Dragon.\" Implement a passive ability operation to grant an additional identity/name alias to the source follower."
+    ]
+  },
+  "Lævateinn Dragon, Dual Form α ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Change the Last Words effect from \"summonFromCemetery\" with an unsupported engaged field to an effect that selects a card named Lævateinn Dragon in your cemetery and puts it onto your field engaged. Implement support for summoning/reviving a selected cemetery card with engaged state, or extend summonFromCemetery to support engaged."
+    ]
+  },
+  "Lævateinn Dragon, Dual Form β ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Change the activated ability so that burying a Draconic Weapon is part of the required activation cost, not an optional cost layered inside the effect.",
+      "After paying the cost, the effect should be a sequence of \"draw a card\" and \"you may summon an Armed follower that costs 3 or less from your hand,\" not a choose-one effect.",
+      "Replace the incorrect \"playDeckTopFollower\" encoding with an effect that optionally summons an Armed follower that costs 3 or less from your hand. Implement an operation for selecting a follower from hand and putting it onto your field."
+    ]
+  },
+  "Lævateinn Dragon, Dual Form γ ADVANCED": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Change the passive Storm ability from a conditional passive \"grantKeyword\" effect to a representation of \"while there are at least 5 Armed cards in your cemetery, this follower has Storm\" that functions as a continuous keyword-granting effect.",
+      "Change the activated ability so that burying a Draconic Weapon is part of the required activation cost, not an optional cost layered inside the effect."
+    ]
+  },
+  "Mach Knight": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

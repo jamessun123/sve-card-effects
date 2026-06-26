@@ -1,0 +1,52 @@
+{
+  "Sorcery Cache": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incomplete: after optionally adding a spell from the top 4 cards to hand, it must also allow you to optionally put a spell from among them into your cemetery before putting the rest on the bottom of the deck. Encode this as a top-4 multi-selection/search effect that can move one spell to hand and one spell to cemetery from the same revealed set; the current `searchDeckChoose` only handles the hand part. Suggested engine addition: implement an effect for revealing/look-at-N and choosing multiple cards with different destinations (for example, one to hand and one to cemetery) from the viewed cards."
+    ]
+  },
+  "Sorcery in Solidarity": {
+    "verdict": "fail",
+    "issues": [
+      "The condition is encoded incorrectly as `ownCemeteryMin: 5`, but the source requires at least 5 Machina cards in your cemetery. Change it to `ownCemeteryTraitMin` with `trait: \"Machina\"` and `count: 5`."
+    ]
+  },
+  "Soul Box": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first fanfare condition is encoded incorrectly: it checks only for at least 1 card in your cemetery, but the source requires specifically that there is a spell in your cemetery. It should be a cemetery condition filtered to spells. Suggested engine addition: implement a condition type for cemetery card-type minimum, such as checking for at least 1 spell in your cemetery.",
+      "The second fanfare condition is encoded incorrectly as `inExArea`, which does not match 'If there's an amulet on your field'. It should check for an amulet on your field. Suggested engine addition: implement a condition type for field card-type minimum, such as at least 1 amulet on your field.",
+      "The second fanfare effect is encoded incorrectly as `dealDamageAllEnemies`, which would hit enemy followers as well. The source says to deal 5 damage to each enemy leader only. It should be encoded as damage to enemy leaders only; since multiplayer leader-wide damage is not available in the reference, suggested engine addition: implement an effect to deal damage to each enemy leader."
+    ]
+  },
+  "Soul Collector": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Soul Collector Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Soul Commander": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The triggered ability is encoded with `filter: { \"cardClass\": \"abyss\" }`, which matches Abysscraft followers, but the source triggers whenever a non-Abysscraft follower is put onto your field. It should trigger on followers entering your field whose class is not Abysscraft. Suggested engine addition: support negated filters such as `excludeCardClass` or a generic NOT filter for trigger filters."
+    ]
+  },
+  "Soul Conversion": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Soul Dealer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Soul Dealer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Soul Predation": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

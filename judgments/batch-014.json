@@ -1,0 +1,57 @@
+{
+  "Angelic Prism Priestess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare search is mostly correct, but `searchDeckChoose` includes `reveal: true`, which is not an implemented argument in the ability reference; remove that field for current engine compatibility, or implement reveal support on `searchDeckChoose` to model \"reveal an amulet ... and add it to your hand\" exactly."
+    ]
+  },
+  "Angelic Prism Priestess Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Angelic Snipe": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Angelic Strike": {
+    "verdict": "fail",
+    "issues": [
+      "The first step is encoded as `banishUpTo` targeting up to 2 enemy followers, but the source says to destroy them; change this to a destroy-up-to-2 effect instead of banish.",
+      "The damage target selector for this spell should allow an enemy follower only, which is already correct, but the destroy operation for \"up to 2\" is missing from the current encoding; replace the incorrect banish effect with the correct destroy-up-to-2 encoding."
+    ]
+  },
+  "Angelic Sword Maiden": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Anisage, Lost Forsaken": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The hand-triggered ability is missing: \"When this is discarded or banished from your hand, you may put it into your EX area.\" It should be encoded as a hand-zone trigger that moves the source to EX area, but the engine lacks a timing for \"when banished from hand\" and a combined discard/banish-from-hand trigger. Implement a hand trigger for banish/discard from hand, then encode an optional `moveSourceToExArea` effect."
+    ]
+  },
+  "Anisage, Lost Forsaken Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Anne & Grea, Mysterian Duo": {
+    "verdict": "fail",
+    "issues": [
+      "Storm is conditional in the source (only while there are at least 10 Academic cards in your cemetery), so it should not be listed as an unconditional printed keyword in `keywords`; remove `storm` from `keywords` and keep it only as a conditional passive ability.",
+      "Fanfare is not a standalone keyword entry on this card; remove `fanfare` from `keywords` because the fanfare is already represented as an ability."
+    ]
+  },
+  "Anne's Sorcery": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Both choice options target \"an enemy leader or enemy follower,\" but the encoding uses `enemyFieldCard`, which cannot target the enemy leader and can incorrectly target non-followers; encode a selector that supports enemy leader or enemy follower specifically. Since that selector is not present in the current ability reference, implement a target type for \"enemyLeaderOrFollower\" (or equivalent) and use it in both options.",
+      "The second choice currently only resolves if there are at least 10 Academic cards in your cemetery, but the source text only guarantees the upgraded 8 damage and 2 draws under that condition; the parser should preserve the exact conditional upgrade text once a proper enemy leader-or-follower target selector is implemented."
+    ]
+  },
+  "Anne's Summoning": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be included in `keywords`; remove `fanfare` from `keywords` because it is already represented correctly as a `timing: \"fanfare\"` ability."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "Chakram Wizard Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chamber of Cleansing": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability condition is encoded incorrectly as namedFollowerOnFieldByName with identityName 'Zealot follower'; it should require a Zealot follower on your field with cost 2 or more. Encode as a proper field condition/filter for trait 'Zealot' and minCost 2 if available; otherwise implement a condition type that checks for an allied follower by trait and cost.",
+      "Activated ability cost uses burySelf on the ability cost object, but implemented activated costs use burySelf as a standalone supported cost flag only conceptually; if current engine does not support amulet self-bury cleanly here, ensure this exact '[engage], bury this' cost is supported for activated abilities.",
+      "Card is missing the restriction that the summoned Fox of Invitation must come from your EX area under that condition; while summonFromExArea is correct, the engine also needs the above trait+cost field condition support to fully represent the card."
+    ]
+  },
+  "Changewing Cherub": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is incomplete: source says 'Put a Repair Mode or Naterran Great Tree token into your EX area,' but parsed always creates Repair Mode. It should be encoded as a choice between summoning Repair Mode or summoning Naterran Great Tree to the EX area; implement a choose effect that supports token summon options if not already supported."
+    ]
+  },
+  "Changewing Cherub Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve condition is incorrect: source counts Machina cards and/or Natura cards on your field and/or in your EX area totaling 5 or more, but parsed uses conditionAny with separate field-only Machina 5 or Natura 5 checks. It should check a combined total across both zones and both traits. Implement a condition type for combined trait count across field and EX area (with traitsAny ['Machina','Natura']) and then deal 2 damage to the selected enemy follower."
+    ]
+  },
+  "Chaos Wielder": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chaos Wielder Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Charaton, Iceflame Priest": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare cost is encoded too loosely: 'Bury an amulet' should specifically require selecting an amulet you control, but parsed buryFromFieldSelect has no amulet filter. It should be encoded with a field-selection bury effect filtered to amulets; implement amulet filtering for bury-from-field selection if unavailable.",
+      "Triggered ability timing/effect is incorrect: source says 'Once on each of your turns, when an amulet you control leaves the field, deal 1 damage to each enemy leader,' but parsed uses onLeaveField on this card and dealDamageAllEnemies. It should trigger when one of your amulets leaves the field during your turn and deal 1 damage only to the enemy leader. Implement a trigger for allied amulet leaving the field, ideally with controller and turn restriction support, then encode effect as dealDamage 1 to enemyLeader with oncePerTurn true."
+    ]
+  },
+  "Charitable Al-mi'raj": {
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword: add 'ward' to keywords to match the source text 'Ward.'"
+    ]
+  },
+  "Charitable Al-mi'raj Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve ability includes unsupported field 'reveal' inside searchDeckChoose per current reference. Encode only the implemented searchDeckChoose fields, or add engine support for a reveal flag on searchDeckChoose if reveal is required."
+    ]
+  },
+  "Charming Gentlemouse": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

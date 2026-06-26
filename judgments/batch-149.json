@@ -1,0 +1,53 @@
+{
+  "Metaproduction": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Michelle, the Mind Reader": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Michelle, the Mind Reader Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Midnight Gossip": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is encoded as buffing any self follower and then dealing damage to a separately selected enemy follower equal to that enemy follower's attack via targetAttack. It should deal damage to the second selected follower equal to the first selected follower's attack after the +1/+1 buff. Encode with linked multi-target support so one chosen ally follower is buffed and one chosen enemy follower takes damage based on the chosen ally's updated attack; implement an ability/op to reference one selected target's attack when damaging another selected target."
+    ]
+  },
+  "Midnight Vampire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive aura uses trait \"Forest Bat\", but Forest Bat is a token name, not a trait. It should grant Drain to your Forest Bat tokens specifically, e.g. by matching token identity/cardNo. Implement aura support that grants a keyword to allied cards by identity name or token card number, not only by trait/cardClass."
+    ]
+  },
+  "Miho Kohinata": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Miho Kohinata Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Miho Kohinata [P.C.S.]": {
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush condition is encoded with fieldTraitMin on trait \"Cute\", which counts all Cute cards on your field. It should require at least 3 Cute followers on your field. Change the condition to count followers only, using a condition/filter that restricts to follower cards with trait Cute."
+    ]
+  },
+  "Miho Kohinata [Summer Firsts]": {
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush condition is encoded with fieldTraitMin on trait \"Cute\", which counts all Cute cards on your field. It should require at least 3 Cute followers on your field. Change the condition to count followers only, using a condition/filter that restricts to follower cards with trait Cute."
+    ]
+  },
+  "Miho Kohinata [Youthful Romance]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability misses the Lesson (1) cost entirely. It is encoded as pp 0 and engage only, but should include Lesson (1) in the cost. Implement a cost representation for Lesson and encode that cost alongside engage.",
+      "The activated ability should select up to 2 enemy followers and deal each 2 damage, or 3 damage instead if there are at least 5 Cute cards in your cemetery. The parsed version deals 3 damage to only 1 target in the boosted case. It should target up to 2 enemy followers in both branches; implement support for optional 'up to N' targeted multi-damage if the current target selector cannot express count 0 to 2."
+    ]
+  }
+}

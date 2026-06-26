@@ -1,0 +1,57 @@
+{
+  "Mystic Ring": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mythril Golem": {
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (15) branch is encoded incorrectly: it uses dealDamageAllEnemies with followersOnly false, which would also damage the enemy leader for 5 from the first clause. It should still deal 5 damage only to each enemy follower, then separately deal 5 damage to each enemy leader.",
+      "The SC (15) effect says 'Deal 5 damage to each enemy leader,' but the parsed ability uses dealDamage to a single enemyLeader target. It should be encoded as the effect that damages each enemy leader, while preserving the separate follower-damage clause."
+    ]
+  },
+  "Mánagarmr Scout": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability's usage limit is wrong: source says 'Activate only twice per turn,' but parsed uses oncePerTurn true. It should allow maxPerTurn 2 instead.",
+      "The activated ability cost is encoded incorrectly: source requires 'banish a Naterran Great Tree from your field,' but parsed uses a non-reference cost shape banishFromField/banishCount. It should use an implemented cost/effect pattern that correctly banishes 1 Naterran Great Tree you control from the field."
+    ]
+  },
+  "Nagi Hisakawa": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare cost is mandatory, not optional: '[fanfare] Banish two 1-cost cards from your cemetery: Choose up to 2...' should not be encoded as optionalCost. It should be a fanfare ability with a required cemetery-banish cost before resolving the choose-up-to-2 effect. Implement support for mandatory fanfare costs.",
+      "The fanfare choice count is wrong: 'Choose up to 2' should allow choosing 0, 1, or 2 options, but parsed uses chooseMultiple with min 1. It should use min 0, max 2.",
+      "The second fanfare option is encoded as dealDamage to enemyLeader, which targets a single leader. Source says 'Deal 2 damage to each enemy leader.' It should be encoded with an effect that damages each enemy leader. Implement an ability op for damaging each enemy leader if needed.",
+      "The activated ability is missing the Lesson (1) cost restriction. '[act] [cost01], Lesson (1): Give this follower Rush.' should include the Lesson cost, likely banishing 1 Magical Item from EX area. Implement explicit Lesson cost support or encode it as an added banishFromExArea cost."
+    ]
+  },
+  "Nagi Hisakawa [Everyday Fairy Tale]": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare play-cost reduction is applied incorrectly: source says the searched Sparkling☆Days in your EX area 'costs 1 less to play this turn,' but parsed uses playCostReduction on the source card. It should apply a 1-cost reduction to the tutored card in EX area, not to this follower."
+    ]
+  },
+  "Naht's Henchman": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Nahtnaught, Cursed Queen": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Nana Abe": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare tutor uses searchDeckChoose with an unsupported field 'reveal'. It should encode 'You may reveal an amulet from among them and add it to your hand' as a top-5 choose-to-hand effect that reveals the chosen card, but reveal support is not available on searchDeckChoose. Implement reveal support for searchDeckChoose or a dedicated top-N reveal-and-add operation."
+    ]
+  },
+  "Nana Abe Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Nana Abe [Cinderella Girl]": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

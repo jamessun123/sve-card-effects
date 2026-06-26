@@ -1,0 +1,67 @@
+{
+  "Healing Angel Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Heartless Battle": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is encoded incorrectly: it should select 2 cards named Puppet in your EX area and transform one into Lloyd and the other into Victoria, not move followers to the EX area first. Replace the current sequence with EX-area-targeted transforms on the selected Puppets. This requires engine support for targeting cards in your EX area and transforming EX-area cards individually."
+    ]
+  },
+  "Heavenly Aegis": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve abilities are encoded incorrectly. The card should have two `timing: \"evolve\"` abilities that evolve this follower: one with `cost: {\"pp\":2}` and one with a discard-3 cost, rather than a 0-PP evolve keyword ability and a discard effect without the evolve result.",
+      "The card is missing its Aura ability 'This card can't be destroyed by abilities.' Add a passive/aura ability using `grantIndestructible` or equivalent continuous self-protection effect.",
+      "The card should not list `evolve` as a keyword here; the printed text is an evolve cost line, which should be represented by evolve abilities/costs instead."
+    ]
+  },
+  "Heavenly Aegis Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has the `ward` keyword; remove it because the source text does not grant Ward.",
+      "The card is missing its Aura ability 'This card can't be destroyed by abilities.' Add a passive/aura self-protection ability with `grantIndestructible` or equivalent.",
+      "The On Evolve effect is incomplete: the source says 'for the rest of this turn and during each opponent's next turn, this follower doesn't take damage,' but the encoding only gives generic damage immunity with no next-opponent-turn duration handling."
+    ]
+  },
+  "Heavenly Knight": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword entry.",
+      "The fanfare condition is encoded incorrectly. 'If there are at least 2 amulets on your field' should not use `fieldTraitMin` with `trait: \"amulet\"`; it needs a condition that counts amulets on your field. Add engine support for a field card-type/count condition such as field amulet count.",
+      "The fanfare buff is slightly incorrect: 'give this follower [attack]+2' should be encoded as an attack-only buff, not `def: 0`."
+    ]
+  },
+  "Heliodragon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first ability is incomplete: 'you may put it into your EX area' is optional, but the encoding makes moving to EX area mandatory. This needs optional self-move handling for `onDiscard`.",
+      "The second ability is encoded with the wrong timing. It should trigger once on each of your turns when you discard a card while this card is in play, not when this card itself is discarded. Encode it as a card-discard trigger for your turn only; this requires engine support for a trigger like 'when you discard a card' distinct from `onDiscard` on the source card."
+    ]
+  },
+  "Hell's Unleasher": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; the source text has only an activated ability and no Fanfare."
+    ]
+  },
+  "Hellblaze Demon": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented by the ability timing only.",
+      "The fanfare effect is incomplete. After discarding a card, it should put the top card of your deck into your EX area and, if it's a follower, give that card [attack]+1/[defense]+1. Encode the conditional buff using `putDeckTopToExArea` with its follower check and buff/play-cost payload as appropriate."
+    ]
+  },
+  "Hellfire Hound": {
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented by the ability timing only.",
+      "The optional cost is encoded incorrectly. 'Banish 6 cards from your cemetery' needs a cemetery filter, typically your own cemetery cards, but the current `banishFromCemetery` cost omits the required `filter` field."
+    ]
+  },
+  "Hellflame Dragon": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

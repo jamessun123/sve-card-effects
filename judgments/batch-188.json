@@ -1,0 +1,60 @@
+{
+  "Riamu's Reverie": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Spell effect is encoded as dealDamageAllEnemies with followersOnly:true, but the source says \"Deal 7 damage to each follower on the field,\" which includes your own followers as well. It should be encoded as damage to all followers on both fields. Implement a new ability such as dealDamageAllFollowers(amount) and use that here."
+    ]
+  },
+  "Righteous Devil": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve clause is incomplete. The source says \"[evolve] Give your leader [defense]-3: Evolve this follower.\" Add an evolve ability/cost line that requires paying 3 PP and reducing your own leader's defense by 3 as part of evolving, rather than only setting evolveCost: 3."
+    ]
+  },
+  "Righteous Devil Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Ability timing onEnemyFollowerLeaveField is not a valid implemented timing in the reference. The source trigger is \"Whenever an enemy follower is destroyed\" and should be represented with an implemented destroyed/enemy-destroy trigger, but no such timing currently exists. Implement a trigger timing for when an enemy follower is destroyed, then use it for the sequence dealing 1 damage to the enemy leader and healing your leader by 1."
+    ]
+  },
+  "Righteous Dragoon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Riina Tada [Eight Beat Rocker]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Riina Tada [Wannabe Legend]": {
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is wrong. \"[act] Lesson (1)\" should not be encoded as cost.pp: 0; encode the proper Lesson (1) cost/condition required by the card text.",
+      "Activated ability filter is too broad. The source allows \"an iM@S CG follower that costs 1 or less or iM@S CG amulet that costs 1 or less from your hand,\" so the hand selection should restrict cardType to follower or amulet, not any iM@S CG card with maxCost 1."
+    ]
+  },
+  "Riina Tada [Wannabe Legend] Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve ability is split incorrectly. The source is a single costed ability: \"Return an iM@S CG card on your field to its owner's hand: Select an enemy follower on the field and put it on the bottom of its owner's deck.\" Encode this as one onEvolve ability where returning your iM@S CG field card is the cost/required preceding effect for putting the enemy follower on the bottom of the deck, not as two separate independent onEvolve abilities.",
+      "The return target selector is invalid/incomplete. The target uses allyFieldCard with an inline filter field, which is not supported by the reference target selectors. It should use an implemented way to select an iM@S CG card on your field as the required return target for the cost/effect.",
+      "Activated ability cost is wrong. \"[act] Lesson (1)\" should not be encoded as cost.pp: 0; encode the proper Lesson (1) cost/condition required by the card text.",
+      "Activated ability filter is too broad. The source allows \"an iM@S CG follower that costs 1 or less or iM@S CG amulet that costs 1 or less from your hand,\" so the hand selection should restrict cardType to follower or amulet, not any iM@S CG card with maxCost 1."
+    ]
+  },
+  "Rika Jougasaki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rika Jougasaki Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve search is encoded incorrectly as searchDeckChoose over the whole deck with remainderTo: deckBottom. The source says to search your deck for a spell that costs 3 or less, reveal it, add it to your hand, then shuffle your deck. Encode this as tutorFromDeck with filter { cardType: \"spell\", maxCost: 3 }, to: \"hand\", reveal: true, followed by shuffleDeck."
+    ]
+  },
+  "Riley, Astral Shaman": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve clause is incomplete. The source says \"[evolve] [cost02]: Evolve this. Activate only if you've used Earth Rite to remove at least 2 Stack counters from cards on your field with Stack this turn.\" The conditional restriction on evolving is missing. Implement a condition type to track Earth Rite stack counters removed this turn (for example, earthRiteRemovedStacksThisTurn >= 2) and attach it to the evolve ability."
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "Seabrand Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sealed Tome": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Secrets of Onmyodo": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell has an additional cost to play, \"reveal 2 Onmyoji cards from your hand,\" but parsed uses noop. It should be encoded as a real additional play cost; implement support for reveal-from-hand costs filtered by trait/count.",
+      "The main effect is encoded with timing \"activated\" and cost {\"pp\":0}, but this is spell text resolving when the spell is played. It should be a \"spell\" ability that uses withChosenNumber for X.",
+      "The cemetery condition is wrong: \"at least 7 spells and/or Onmyoji cards in your cemetery\" is a combined total, but parsed uses conditionAny between spellchain 7 and Onmyoji 7. It should count cards matching either spell card type or Onmyoji trait together; implement a condition for cemetery count by OR filter / mixed card-type-or-trait total.",
+      "The Paper Shikigami cost reduction is applied with playCostReduction to the source effect, not to the token put into the EX area. It should reduce the play cost of the summoned EX-area token specifically; implement support to grant play-cost reduction to the card just put into EX area."
+    ]
+  },
+  "Seira Mizuki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Seira Mizuki Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sekhmet": {
+    "verdict": "fail",
+    "issues": [
+      "The activated effect is missing the required enemy follower target selection. Encode damageFollowerAndLeader with the selected enemy follower target, or equivalent targeting so the 4 damage is dealt to the chosen follower and 1 to its leader."
+    ]
+  },
+  "Sekka, Fatebound Fox": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is incomplete: after revealing and adding a card from among the top 3, if you revealed a card, discard a card. Add a conditional discard 1 after the searchDeckChoose resolves successfully.",
+      "The fanfare filter is too narrow: source says a Forestcraft card that costs 2 or less, not specifically a follower. Remove \"cardType\": \"follower\" from the search filter.",
+      "The activated cost is incorrect: source says banish this card and 2 other cards from your cemetery, not specifically follower cards. Encode the cemetery banish cost without a follower-only filter.",
+      "The activated effect should be optional ('You may summon'). Mark summonFromEvolveDeck as optional.",
+      "The evolve-deck summon target is misnamed as \"Sekka, Ninefold Blaze ADVANCED\". It should target \"Sekka, Ninefold Blaze\" as named on the source card."
+    ]
+  },
+  "Sekka, Ninefold Blaze ADVANCED": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sektor": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Sektor Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

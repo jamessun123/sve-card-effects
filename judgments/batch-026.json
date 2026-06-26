@@ -1,0 +1,65 @@
+{
+  "BRIGHT:LIGHTS": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search is encoded incorrectly as two tutors with maxCost 3 and maxCost 1; it should summon exactly a 3-cost follower and exactly a 1-cost follower from the deck, then shuffle.",
+      "The triggered ability is missing the word 'another'; the onAllyFollowerEnter ability should exclude this card so it triggers only when another iM@S CG follower is put onto your field."
+    ]
+  },
+  "Baalt, King of the Elves": {
+    "verdict": "fail",
+    "issues": [
+      "The first choose option uses an invalid target shape by placing a filter inside targets; it should target a follower on your field with trait Pixie using a supported selector/filter encoding."
+    ]
+  },
+  "Baby Carbuncle": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is a costed effect, but it is encoded as two separate unconditional fanfare abilities; it should be a single fanfare ability that returns a Beast card on your field other than Baby Carbuncle to hand as a cost/required step, then draws a card.",
+      "The return target is missing 'not named Baby Carbuncle'; excluding self is not sufficient, since another copy named Baby Carbuncle should also be ineligible."
+    ]
+  },
+  "Baccherus, Peppy Ghostie": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous text 'This follower's name is also Ghost' is missing; it should be encoded as a passive name-changing/additional-name ability, which is not implemented in the ability reference and would need a new passive op for granting an additional identity/name."
+    ]
+  },
+  "Baccherus, Peppy Ghostie Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous text 'This follower's name is also Ghost' is missing; it should be encoded as a passive name-changing/additional-name ability, which is not implemented in the ability reference and would need a new passive op for granting an additional identity/name."
+    ]
+  },
+  "Badb Catha": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The third fanfare choice is only approximated with peekDeck; it should specifically let you look at the top 3 cards, put any number on top in any order, and the rest on the bottom in any order. This exact split-and-reorder operation is not implemented and would need a new deck-reorder/scry-style op."
+    ]
+  },
+  "Badb Catha Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The second On Evolve choice is encoded as dealing 2 damage to one enemy leader, but it should deal 2 damage to each enemy leader."
+    ]
+  },
+  "Bahamut": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect should destroy each other follower on the field, but destroyAllFollowers also destroys Bahamut itself; it should exclude the source follower.",
+      "The static restriction 'If there are at least 2 enemy followers on the field, this follower can't attack enemy leaders' is encoded incorrectly as grantActRestriction and uses unsupported condition type fieldFollowerMin; it needs a passive cannot-attack-leader restriction with an enemy-follower-count condition, which is not implemented in the ability reference."
+    ]
+  },
+  "Bahamut Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The static restriction 'If there are at least 2 enemy followers on the field, this follower can't attack enemy leaders' is encoded incorrectly as grantActRestriction and uses unsupported condition type fieldFollowerMin; it needs a passive cannot-attack-leader restriction with an enemy-follower-count condition, which is not implemented in the ability reference."
+    ]
+  },
+  "Balance and Obliteration": {
+    "verdict": "fail",
+    "issues": [
+      "The first tutor effect is missing the follower restriction; it should search for a follower with 'Marlone' in its name, not any card with 'Marlone' in its name."
+    ]
+  }
+}

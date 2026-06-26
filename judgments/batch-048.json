@@ -1,0 +1,46 @@
+{
+  "Cryptid Keeper": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cryptid Keeper Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystal Fencer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystal Fencer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystal Witch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystalia Eve": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystalia Lily": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare tutor filter is too broad; it should require a follower with trait Crystalian or Pixie, so add \"cardType\": \"follower\" to the searchDeckChoose filter."
+    ]
+  },
+  "Crystalia Lily Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystalia Tia": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Crystalia Tia Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete and incorrectly targeted; it should select a Crystalia Eve token on your field, give it +1/+1, and grant Rush. Encode this as a sequence with a correctly filterable allied follower target plus a grantKeyword effect for Rush, and implement target filtering for field selectors by card identity/token name or a buff/grantKeyword operation that can apply to a specifically selected allied token."
+    ]
+  }
+}

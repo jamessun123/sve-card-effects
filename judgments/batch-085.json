@@ -1,0 +1,62 @@
+{
+  "Fox of Invitation": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Fragrantwood Whispers": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The choice count is encoded incorrectly as always max 2. It should encode 'Choose 1. If a follower on your field evolved this turn, choose up to 2 instead' as a conditional choice limit; add engine support for a condition checking whether an ally follower evolved this turn, then use an if/conditional choose or chooseMultiple with max 2 only when that condition is true."
+    ]
+  },
+  "Frederica Miyamoto": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger is missing the filter 'when you play a card that originally costs 5 or more'. The onCardPlayed ability should restrict to cards with original cost 5 or more.",
+      "The target is encoded incorrectly as only the enemy leader. It should target an enemy leader or an enemy follower on the field.",
+      "The damage effect should select a single valid target, then deal 3 damage to that selected target before drawing a card."
+    ]
+  },
+  "Frenzied Corpsmaster": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost reduction 'This costs 6 less to play if there are at least 3 Officer token followers on your field with different names' is missing. It should be encoded as a passive conditional playCostReduction(amount 6), but the engine lacks a condition for counting followers with different names; implement a condition for distinct-name field counts with trait/printing filters.",
+      "The activated ability cost is encoded with unsupported 'discardSelf'. It should instead use an implemented self-discard/self-to-cemetery cost such as burySelf or a dedicated discard-self cost operation.",
+      "The card incorrectly includes 'ward' in keywords on the base side. Ward appears only after the evolve separator/evolve section and should not be on the unevolved card.",
+      "The card incorrectly includes 'evolve' as a keyword. Evolve is not a keyword and should be represented only by evolveCost/evolution linkage.",
+      "The evolve section's granted Ward on evolve is not represented on the evolved side linkage here; ensure Ward is only present on the evolved card."
+    ]
+  },
+  "Frenzied Corpsmaster Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve effect says 'Select up to 2 enemy followers on the field and destroy them,' but the encoding uses mandatory count 2. It should allow selecting 0 to 2 enemy followers; add engine support for optional/up-to targeting on destroy targets."
+    ]
+  },
+  "Freshman Lou": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Friendly Embrace": {
+    "verdict": "fail",
+    "issues": [
+      "The 'When playing this, [engage] 2 cards on your field named Naterran Great Tree: This costs 2 less to play' clause is encoded incorrectly as part of the spell's resolving effect. It should be encoded as an optional play-time additional cost that reduces this card's play cost by 2, not as an effect that resolves after the spell is played.",
+      "The play-cost reduction is encoded with playCostReduction inside the spell effect, which changes the card after it is already being played. It should instead be represented as a play-time optional cost/payment tied to this card's cost reduction."
+    ]
+  },
+  "Friends Forever": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Frigid Necromancer": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability uses tutorFromCemetery to put a card onto the field, but the source text says to select a follower in your cemetery and summon it. It should use summonFromCemetery with filter cardType follower and maxCost 8, count 1, then set the summoned follower's stats to 1/1.",
+      "The card incorrectly lists 'lastWords' as a keyword. Last Words should be represented as an ability with timing 'lastWords', not as a keyword."
+    ]
+  },
+  "Frog Cleric": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

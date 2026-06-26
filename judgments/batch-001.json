@@ -1,0 +1,77 @@
+{
+  "#UNICUS": {
+    "verdict": "fail",
+    "issues": [
+      "The play-cost reduction clause is incorrectly encoded as a fanfare optionalCost ability; it should be a passive/when-playing cost reduction effect requiring banishing 3 Cute, 3 Cool, and 3 Passion cards from your cemetery as an additional play cost, not a field fanfare ability.",
+      "Remove unsupported keyword entries \"fanfare\" from keywords; only printed keywords \"storm\", \"bane\", and \"ward\" should be in keywords."
+    ]
+  },
+  "* (Asterisk)": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability is missing the Lesson (1) cost; it should encode [act] [cost01], Lesson (1): give this follower Storm. Implement support for Lesson costs in activated ability cost objects.",
+      "Remove keyword entry \"strike\" from keywords; Strike should be represented by the strike-timed ability, not as a keyword."
+    ]
+  },
+  "0. Lhynkal, The Fool": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search effect allows revealing up to 2 Arcana spells, but parsed searchDeckChoose only allows choosing one; encode the ability so up to 2 matching Arcana spells can be added to hand from the top 5, with the rest put on the bottom.",
+      "Remove keyword entries \"evolve\" and \"fanfare\" from keywords; evolve is already represented by evolveCost/evolvesTo and fanfare by the fanfare ability timing."
+    ]
+  },
+  "0. Lhynkal, The Fool Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "A Hellish Banquet": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The additional cost to play the spell is encoded incorrectly as an activated ability from hand; it should be a play additional cost of burying 2 cards named One-Tailed Fox before the spell effect resolves. Implement support for additional play costs on spells.",
+      "The cemetery ability is encoded incorrectly; it should be an activated ability from cemetery with cost banishSelf, and its effect should give each One-Tailed Fox on your field Storm, not grant a trigger when playing One-Tailed Fox.",
+      "Remove incorrect keyword entries \"fanfare\" and \"activated\" from keywords; this spell has no printed keywords."
+    ]
+  },
+  "A Horrible Night": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is missing its play restriction clause: it can't be played if you've played another A Horrible Night this turn. Implement support for per-name play restrictions based on cards played this turn.",
+      "The spell effect is completely missing; it should create a rest-of-turn leader-loss trigger that whenever your leader loses defense, deals 1 damage to the enemy leader and heals your leader by 1. Implement support for temporary turn-long triggered effects on leader defense loss."
+    ]
+  },
+  "A Single Vessel": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is missing; add a fanfare ability that selects an enemy follower and deals it 3 damage.",
+      "The activated ability cost is encoded incorrectly with unsupported \"discard\": 1; it should require discarding a card as part of the activation cost before burying this card. Implement support for discard-a-card activated costs, or encode via an effect/cost form that the engine supports.",
+      "Remove keyword entries \"fanfare\", \"lastWords\", and \"activated\" from keywords; these are ability timings, not printed keywords."
+    ]
+  },
+  "A Sweet Romantic Summer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is encoded incorrectly as namedFollowerOnFieldByName \"iM@S CG follower\"; it should check whether you have an iM@S CG follower on your field. Implement a condition for ally follower presence by trait/filter.",
+      "The activated ability is missing the condition 'Activate only if there are at least 10 Passion cards in your cemetery'; add the proper cemetery trait count condition, which requires engine support for ownCemeteryTraitMin with trait \"Passion\" if not already usable here.",
+      "The activated tutor filter should specify a follower with \"Shin Sato\" in its name, not any card whose name contains Shin Sato; add cardType: \"follower\" to the deck filter.",
+      "The activated effect should include shuffling the deck after searching, unless tutorFromDeck inherently handles it; if not inherent, add a shuffle step.",
+      "Remove keyword entries \"fanfare\" and \"activated\" from keywords; these are timings, not printed keywords."
+    ]
+  },
+  "Abby the Axe Girl": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The conditional damage clause is encoded incorrectly as unconditional with condition always and wrong target scope; it should be 'Then, if this follower has at least 5 attack, deal 2 damage to the enemy leader.'",
+      "The current effect incorrectly uses dealDamageAllEnemies, which damages enemy followers as well; it should deal damage only to the enemy leader.",
+      "Implement support for checking this follower's current attack against a threshold (for example, selfAttackMin condition) so the strike condition can be encoded correctly.",
+      "Remove keyword entry \"strike\" from keywords; Strike should be represented by the strike ability timing only."
+    ]
+  },
+  "Absolute Tolerance": {
+    "verdict": "engine-missing",
+    "issues": [
+      "One of the three play-cost reduction clauses is missing: add 'This card costs 5 less to play if there are no cards on your field.'",
+      "Implement support for a condition checking that your field has no cards, since the engine reference does not provide a field-empty condition.",
+      "Remove keyword entry \"fanfare\" from keywords; fanfare should be represented only by the fanfare ability timing."
+    ]
+  }
+}

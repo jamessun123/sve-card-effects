@@ -1,0 +1,50 @@
+{
+  "Winged Gatekeeper": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Winged Gatekeeper Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing passive ability for \"Whenever your leader gains [defense], deal 1 damage to each enemy leader.\" The parsed card only includes the On Evolve damage. To be correct, add a triggered ability for leader-heal events that deals 1 damage to the enemy leader. This requires implementing a new timing/trigger for \"when your leader gains defense\" (or a grant/on-heal style effect) in the engine."
+    ]
+  },
+  "Winged Inversion": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Winged Staff Priestess": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be encoded as an ability timing, not a keyword."
+    ]
+  },
+  "Wings of Desire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell's main effect is left as noop. It should target a follower on your field and grant it a Strike ability that deals damage to each enemy follower equal to the number of times your leader has lost defense this turn, then deal 1 damage to your leader. This requires engine support for granting Strike abilities to a chosen follower and a dynamic damage amount based on \"times your leader lost defense this turn.\""
+    ]
+  },
+  "Wings of Lust": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wingy, Chirpy Gemstone": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Wingy, Chirpy Gemstone Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded too broadly as tutorFromDeckAny. It should search your deck for a follower with 2 attack or less, reveal it, and add it to your hand. To be correct, encode a deck tutor filtered by follower attack <= 2; this needs engine support for DeckFilter fields on printed attack/stat values."
+    ]
+  },
+  "Winter Night Prayer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Witch of Calamity, Millie Parfait": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

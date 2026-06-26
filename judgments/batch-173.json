@@ -1,0 +1,48 @@
+{
+  "Penguin Wizard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Penguin Wizard Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Perpetual Despair": {
+    "verdict": "fail",
+    "issues": [
+      "The triggered ability from the cemetery is missing the zone restriction; add `activateFrom: \"cemetery\"` to the `onAllyFollowerEnter` ability so it only works from your cemetery.",
+      "The `onAllyFollowerEnter` ability incorrectly uses `filter` at the ability root; encode the follower-name trigger using an implemented trigger/filter mechanism matching followers with `identityNameContains: \"Marwynn\"` for the enter event rather than leaving it as a non-reference field.",
+      "The cemetery trigger's move effect should represent 'you may put this from your cemetery into your EX area. If you do...' as an optional move from cemetery to EX area; the current `moveSourceToExArea` without `activateFrom: \"cemetery\"` is incorrect."
+    ]
+  },
+  "Perseus": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is encoded incorrectly as `fieldTraitMin` with `trait: \"Follower\"`; this should check whether there are at least 4 followers on your field, including this one. Add an implemented condition for allied follower count on field (for example `selfFieldFollowerMin`) and use that condition before the +1/+1 buff."
+    ]
+  },
+  "Petalspine Stegosaurus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Petalwink Paladin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Phantom Assassin": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Phantom Blade Wielder": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Phantom Blade Wielder Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Phantom Howl": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

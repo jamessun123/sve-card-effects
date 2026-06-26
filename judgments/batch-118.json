@@ -1,0 +1,60 @@
+{
+  "Jeno, Levin Vanguard Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve search filter excludes the wrong name; it should exclude the base card identity name \"Jeno, Levin Vanguard\", not \"Jeno, Levin Vanguard Evolved\"."
+    ]
+  },
+  "Jerva of Draconic Mail": {
+    "verdict": "fail",
+    "issues": [
+      "The startOfEnd ability is encoded as dealing 5 damage only to enemies, but the source says each other follower on the field; it should damage all other followers, not just enemy followers."
+    ]
+  },
+  "Jerva of Draconic Mail Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The startOfEnd ability is encoded as dealing 5 damage only to enemy followers, but the source says each other follower on the field; it should damage all other followers, then also deal 5 damage to each enemy leader, then draw a card."
+    ]
+  },
+  "Jerva, Wyrm Transcendent": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is missing the onDiscard ability \"you may put it into your EX area\"; it should be encoded as an onDiscard optional move of this card to the EX area. Implement support for an optional self-move-to-EX-area on discard, e.g. onDiscard with moveSourceToExArea plus optional handling."
+    ]
+  },
+  "Jetbroom Witch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Jeweled Priestess": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Jeweled Priestess Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is stubbed with noop; it should actually let you optionally put an amulet that costs 2 or less from your hand onto your field. Implement a supported effect for playing/summoning an amulet from hand to field instead of noop.",
+      "The triggered healing ability uses timing onAllyFollowerEnter with a filter, but the source is \"when an amulet is put onto your field\"; this needs a trigger that can detect ally amulets entering the field, not only followers. Implement a generic onAllyCardEnter/onAllyFieldCardEnter trigger or equivalent.",
+      "The triggered healing ability incorrectly places the amulet filter at the ability level; with current reference there is no such ability-level filter field, so it is not faithfully encoded and should be represented by a supported trigger/filter structure once implemented."
+    ]
+  },
+  "Jiemon, Thief Lord": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Jiemon, Thief Lord Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has \"storm\" in keywords; the source gives Storm only to each other Festive follower on your field, not to this card itself, so remove the printed storm keyword from this card."
+    ]
+  },
+  "Joy of Destruction": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell effects are encoded with timing passive, but they should resolve when the spell is played; use timing spell with conditional effects instead of passive.",
+      "The first condition is wrong: it checks for a named follower \"Idolatry\", but the source says \"if there's an Idolatry card on your field,\" meaning any card with the Idolatry trait. Implement a condition for a trait-bearing card on your field, e.g. fieldTraitMin/count 1 that works for non-followers as needed.",
+      "The second condition is too narrow if implemented as follower-only namedFollowerOnFieldByName; it should check whether a card named \"Lishenna, Omen of Destruction\" is on your field, not necessarily only a follower. Implement a named card-on-field condition that is not follower-restricted, or otherwise support this card name check on any field card."
+    ]
+  }
+}

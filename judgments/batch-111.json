@@ -1,0 +1,64 @@
+{
+  "Hozumi, Enchanting Hostess Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability condition is encoded with unsupported condition types (`conditionAny` wrapping `playedCardsThisTurnMin`). It should be a single condition meaning 'you've played at least 3 cards this turn'; add an implemented condition such as `playedCardsThisTurnMin` and encode the ability directly with that condition.",
+      "Activated ability cost uses unsupported cost fields `banishFromField` and `banishCount`. It should encode '[cost02], banish another Festive card from your field' as an activated cost that banishes exactly 1 other Festive card from your field; implement a field-banish activated cost or equivalent effect-cost support."
+    ]
+  },
+  "Hulking Giant": {
+    "verdict": "fail",
+    "issues": [
+      "Last Words is encoded as `dealDamageAllEnemies` for 3 damage, but the source says 'Deal 3 damage to each enemy leader.' Replace it with damage only to enemy leader(s), not enemy followers."
+    ]
+  },
+  "Humpty Dumpty": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Humpty Dumpty Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve first damage effect is wrong: source says 'Deal 5 damage to each follower on the field,' but parsed uses `dealDamageAllEnemies` which only hits enemies. It should damage all followers on both sides; add/implement an all-followers damage effect and use that here.",
+      "On Evolve second damage effect is wrong: source says 'Deal 3 damage to each enemy leader,' but parsed uses `dealDamageAllEnemies` which also affects followers. It should target only enemy leader(s)."
+    ]
+  },
+  "Hurricane Golem": {
+    "verdict": "fail",
+    "issues": [
+      "Earth Rite clause is encoded as a separate `passive` ability that would continuously apply damage. It should be part of the Fanfare resolution: after dealing 2 to each enemy follower, if Earth Rite(1) is satisfied, deal 2 damage to each enemy follower on the field again."
+    ]
+  },
+  "Hypersonic Dragonewt": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Passive condition for 'While there's another Draconic Duelist card on your field' is encoded as `namedFollowerOnFieldByName: 'Another Draconic Duelist card'`, which is incorrect. It should check for another ally field card with trait 'Draconic Duelist'; implement a condition for ally field trait/name count with `excludeSelf` support.",
+      "Fanfare ability includes a `cost` on timing `fanfare`, but costs are only supported for `activated` abilities. It should encode '[fanfare] [cost01]: If Overflow is active for you, ...' as a fanfare optional/required PP payment; implement cost support for triggered abilities or a fanfare paid-cost wrapper."
+    ]
+  },
+  "Ice Dancing Dragonewt": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare effect is incomplete: source says 'If Overflow is active for you, give this follower [attack]+1 and Storm.' Parsed only gives +1 attack. Add granting Storm to this follower in the same conditional effect."
+    ]
+  },
+  "Ice Dancing Dragonewt Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Iceschillendrig, Gilded Autocrat": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare condition uses unsupported/incorrect condition `namedCardNotOnFieldByName`. It should represent 'If there's no Magitrain on your field' as the negation of a named card on your field; implement a `namedFollowerNotOnFieldByName`/negated field-name condition.",
+      "Triggered ability timing `onBecomeEngaged` is not in the implemented timing list. 'Whenever this card becomes engaged, each opponent discards a card' should use a supported engaged trigger; implement an `onBecomeEngaged` timing."
+    ]
+  },
+  "Iceschillendrig, Gilded Autocrat Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve ability should add exactly 2 followers from your cemetery to your hand, but the parsed form uses two unrestricted `tutorFromCemetery` steps that can select the same card and do not encode a single 'select 2' action. It should encode choosing 2 follower cards in cemetery and moving them to hand; implement a multi-select cemetery retrieval effect.",
+      "Triggered ability timing `onBecomeEngaged` is not implemented. 'Whenever this card becomes engaged, each opponent discards a card' should use an engaged trigger; implement `onBecomeEngaged` timing.",
+      "Final ability is incomplete/wrongly timed: source says 'During your turn, whenever a player discards a card, select an enemy follower on the field and engage it.' Parsed uses `onDiscard` with no 'during your turn' restriction and appears to only watch this card being discarded. It should be a global discard trigger during your turn; implement a timing/condition for 'whenever a player discards a card' with turn restriction."
+    ]
+  }
+}

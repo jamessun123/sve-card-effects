@@ -1,0 +1,66 @@
+{
+  "Jatelant, God of Prosperity": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The [fanfare] cost is mandatory, not optional. Replace the optionalCost wrapper with a fanfare ability that requires banishing 2 amulets from your cemetery as an additional cost before resolving the effect; this needs engine support for mandatory non-activated additional costs on triggered abilities.",
+      "The [fanfare] first effect should banish 2 amulets from your cemetery, but the cost filter uses {\"cardType\":\"amulet\"} in banishFromCemetery, and cemetery banish filters use DeckFilter fields that do not list cardType behavior for cemetery cards clearly; if unsupported, add engine support for cemetery filtering by card type/amulet.",
+      "The [act] ability's cost is encoded incorrectly as mill 1. It should bury an amulet from your field/cost area as the activation cost; encode it with an activated cost that buries a matching amulet from your field, which requires engine support for activated cost filtering to bury a specific amulet card from the field.",
+      "The [act] ability incorrectly summons from the deck using searchDeckChoose. It should let you optionally summon a Havencraft follower or amulet that costs 3 or less from your hand onto your field.",
+      "The [act] ability filter is incomplete. It should restrict to Havencraft follower or amulet cards costing 3 or less from your hand, not any Havencraft card costing 3 or less from the deck.",
+      "The parsed card has keywords [\"activated\"] and [\"fanfare\"]. Activated is not a card keyword and should not appear in keywords; keep the [act] text as an ability only."
+    ]
+  },
+  "Jeanne d'Arc": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Jeanne d'Arc Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve buff is encoded incorrectly as buffFieldTrait with cardClass \"haven\". It should give each other follower on your field +0/+2 regardless of class; encode a field-wide ally-follower buff excluding self instead of restricting to Havencraft followers."
+    ]
+  },
+  "Jeanne, Beacon of Salvation": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The cemetery condition is encoded incorrectly as ownCemeteryMin 2. It should check for at least 2 followers with \"Jeanne\" in their name in your cemetery; add engine support for cemetery name-contains or identityNameContains counting conditions, then use that condition for both the buff and Storm grant."
+    ]
+  },
+  "Jeanne, Beacon of Salvation Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability incorrectly targets a selfFollower with excludeSelf true. The source says \"Select a Havencraft follower that costs 2 or less on your field,\" which may include this follower if it matches; remove excludeSelf.",
+      "The Strike target restriction is encoded with an unsupported nested targets.filter. Encode the target using supported target selector fields or an effect/filter structure that correctly restricts to a Havencraft follower on your field that costs 2 or less."
+    ]
+  },
+  "Jeanne, Despair's Maiden": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The [fanfare] life payment is mandatory, not optional. Replace optionalCost with a mandatory additional cost/effect sequence that reduces your leader's defense by 2 before destroying the target; this needs engine support for mandatory negative leader-defense payment on triggered abilities.",
+      "The cost is encoded as healLeader amount -2, which is not a defined or reliable way to represent \"Give your leader [defense]-2.\" Add an implemented operation for leader self-damage or leader defense loss, then use it here."
+    ]
+  },
+  "Jeanne, Despair's Maiden Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Jeno, Fanged Tyrant": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction ability is encoded as an activated ability with condition enteredFromHand, but the source text is a \"When playing this card\" additional cost/reduction effect. Encode it as a play-time cost reduction effect tied to playing this card, not as a separate activated ability; this needs engine support for conditional additional costs while playing a card.",
+      "The additional cost should bury exactly one Levin follower that costs 3 or less, but the encoding uses buryFieldFollowers with an unsupported count field and a mass-bury style operation. Add engine support for selecting and burying one matching follower from your field as a play-time additional cost.",
+      "The card is missing the actual play-cost reduction semantics while in hand/play process. playCostReduction inside an activated ability does not faithfully represent \"This card costs 3 less to play\" when the cost is paid during playing; add engine support for conditional self play-cost reduction linked to an optional play-time cost."
+    ]
+  },
+  "Jeno, Levin Axeraider": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The onDiscard ability is encoded as searchDeckChoose lookAt 1 to hand, but the source specifically says look at the top card of your deck, and if it's a Levin card, you may reveal it and add it to your hand. This needs a top-deck peek/reveal-if-matches/add-to-hand encoding; add engine support for peeking at the top card and conditionally moving it to hand with reveal.",
+      "The passive Storm ability is encoded as grantKeyword under timing passive. Since the source says \"this has Storm\" while a condition holds, encode Storm as a passive keyword/aura under the cemetery condition rather than a granted trigger effect."
+    ]
+  },
+  "Jeno, Levin Vanguard": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

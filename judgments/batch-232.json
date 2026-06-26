@@ -1,0 +1,69 @@
+{
+  "Tristan of the Round Table Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Missing printed keyword Ward; add \"ward\" to keywords."
+    ]
+  },
+  "Trombone Devil": {
+    "verdict": "fail",
+    "issues": [
+      "The end phase damage ability targets only enemyFieldCard, but the source says enemy leader or enemy follower; encode a target that includes both leader and follower, or use a choose effect with enemyLeader and enemyFollower options.",
+      "Using keyword \"evolve\" is incorrect for the printed evolve cost line; keep evolvesTo/evolveCost, but do not list \"evolve\" in keywords."
+    ]
+  },
+  "Trombone Devil Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is encoded as dealDamageAllEnemies, but the source says deal 1 damage to each leader; replace with damage to both leaders only, not all enemy cards.",
+      "The end phase damage ability targets only enemyFieldCard, but the source says enemy leader or enemy follower; encode a target that includes both leader and follower, or use a choose effect with enemyLeader and enemyFollower options."
+    ]
+  },
+  "Tropical Grouper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The condition is incorrect: fieldTraitMin with trait \"evolved\" does not represent \"if there's an evolved follower on your field\"; this should use a condition that checks for at least 1 evolved follower on your field, which is not available in the current condition set and should be implemented.",
+      "The search effect is incorrectly encoded as searchDeckChoose/lookAt 40/remainderTo deckBottom; this should be tutorFromDeck with filter identityName \"Tropical Grouper\", to \"hand\", reveal true, followed by shuffleDeck."
+    ]
+  },
+  "Tropical Mermaid": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incorrectly encoded as a free choose between two modes; the source is conditional, not a choice. Encode buff +1/+1 to another Marine follower normally, and if condition entered from EX area applies, do +2/+2 instead.",
+      "The EX area clause is missing its condition; it should be gated by a condition equivalent to \"if this was played from the EX area\", which is not available in the current condition set and should be implemented.",
+      "The EX area clause is missing Rush and Assail; grant those keywords to the selected follower in addition to the +2/+2 buff. Assail keyword support should be implemented if not already available."
+    ]
+  },
+  "Troya, Thunder of Hagelberg": {
+    "verdict": "fail",
+    "issues": [
+      "Bane is a printed keyword, but it is encoded as an ability with timing \"evolve\"; move \"bane\" to keywords and remove the extra ability.",
+      "Using keyword \"evolve\" is incorrect for the printed evolve cost line; keep evolvesTo/evolveCost, but do not list \"evolve\" in keywords."
+    ]
+  },
+  "Troya, Thunder of Hagelberg Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrectly encoded as a choose between deal 2 damage and destroy; the source says deal 2 damage to the selected enemy follower, and if there are at least 2 Assassin followers in your cemetery, destroy that same follower instead.",
+      "The cemetery condition \"if there are at least 2 Assassin followers in your cemetery\" is missing; this needs a condition/filter for cemetery trait plus follower card type, which is not available in the current condition set and should be implemented.",
+      "The effect needs to refer to the same targeted follower after damage to decide whether to destroy it; support for sequencing damage and conditional destroy on the same selected target should be implemented if current targeting cannot retain the chosen target."
+    ]
+  },
+  "Truth Summons": {
+    "verdict": "fail",
+    "issues": [
+      "Missing Earth Rite condition/cost; encode the spell ability with condition {\"type\":\"earthRite\",\"count\":1} so the summon only happens with Earth Rite."
+    ]
+  },
+  "Truth's Adjudication": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The card is encoded as choose with max 2 unconditionally, but the source says choose one, and choose up to 2 only if there are at least 2 Mage followers on your field; encode this with a field-based condition and chooseMultiple only when that condition is met.",
+      "The condition \"if there are at least 2 Mage followers on your field\" cannot be represented with current condition types because fieldTraitMin checks trait, not follower subtype text like Mage; implement a field filter/count condition that can count followers by trait/name/subtype as needed."
+    ]
+  },
+  "Tsubaki": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

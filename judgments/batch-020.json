@@ -1,0 +1,62 @@
+{
+  "Ardent Nun": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ardent Nun Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ardent Torch": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect incorrectly deals 1 damage to all enemies and then again to the enemy leader; it should deal 1 damage only to the selected follower on your field and to the enemy leader, then draw 1 card. Replace the middle damage steps with a single enemyLeader damage effect and remove the all-enemies damage step."
+    ]
+  },
+  "Aria's Whirlwind": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play cost reduction is unconditional in parsed, but source says it costs 1 less only if there's a follower with both the Pixie and Princess traits in your EX area. This should be encoded as a conditional passive playCostReduction gated by an EX-area condition for a card matching both traits; implement a condition type that can check EX area cards by multiple traits if needed.",
+      "The spell effect is missing the required selection of a Pixie token on your field and incorrectly uses selfAttack from the spell source. It should select a Pixie token follower on your field and deal damage equal to that selected follower's attack to each enemy follower. This needs engine support for targeting a specific allied follower/token and using that chosen target's attack as a dynamic amount for a mass-damage effect."
+    ]
+  },
+  "Aria, Fairy Princess": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare is incomplete: source says 'Put up to 9 Fairy tokens onto your field or into your EX area,' but parsed always summons 9 to the field. This should allow distributing up to 9 Fairy tokens between field and EX area; implement an ability for flexible split placement across multiple zones.",
+      "The continuous effect 'While this card is on your field, your other Pixie followers have Rush' is missing. Add an aura/passive granting Rush to other allied Pixie followers while this card remains on the field."
+    ]
+  },
+  "Aria, Lady of the Woods": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Aria, Lady of the Woods Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Super-Evolve effect is encoded too broadly and incorrectly excludes self. Source says 'Give each Pixie token follower on your field and in your EX area [attack]+1/[defense]+1.' It should affect Pixie token followers only, include EX area cards, and not use otherOnly unless the source says 'other'."
+    ]
+  },
+  "Aria, Miasma Fairy": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The restriction 'This card can't be played from the EX area' is missing. Add a passive play restriction preventing play from EX area; implement a dedicated operation/condition for zone-based play prohibition if needed.",
+      "The Rush aura is encoded too broadly and with the wrong scope. Source says 'While this card is on your field or in your EX area, each Pixie token follower on your field has Rush.' It should apply only to Pixie token followers on your field, and also function while this card is in EX area. Implement support for aura effects active from EX area and for filtering specifically to token followers.",
+      "The Last Words effect is mandatory in parsed, but source says 'You may put this card into its owner's EX area.' It should be optional; implement optional execution for this triggered movement effect if needed."
+    ]
+  },
+  "Aria, Miasma Fairy Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive Rush aura is encoded too broadly. Source says 'Each Pixie token follower on your field has Rush.' It should apply only to Pixie token followers, not all Pixie followers; implement/support filtering auraGrantKeyword by printingType token.",
+      "The On Evolve tutor is missing the required shuffle after searching the deck. Encode this as tutor/search plus shuffle, or implement a search effect variant that guarantees shuffle after deck search.",
+      "The Last Words effect is mandatory in parsed, but source says 'You may put this card into its owner's EX area.' It should be optional; implement optional execution for this triggered movement effect if needed."
+    ]
+  },
+  "Arion": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect uses tutorFromCemetery to field, but source says to select an Abysscraft follower in your cemetery and summon it. It should be encoded as a summon-from-cemetery effect selecting an Abysscraft follower that costs 5 or less, not as adding/moving with tutorFromCemetery."
+    ]
+  }
+}

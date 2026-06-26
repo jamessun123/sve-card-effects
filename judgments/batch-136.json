@@ -1,0 +1,61 @@
+{
+  "Mach Knight Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Madlance Centaur": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; Strike is a triggered ability timing and should only be represented by the abilities entry with timing \"strike\"."
+    ]
+  },
+  "Maeve, Guardian of Earth": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing \"fanfare\", not as a keyword.",
+      "The optional cost \"Bury an amulet\" is encoded too broadly; the cost should require selecting and burying an amulet on your field, not any field card."
+    ]
+  },
+  "Mage of Nightfall": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing \"fanfare\", not as a keyword.",
+      "Earth Rite is missing as a cost/effect component; the fanfare should consume Earth Rite with an Earth Rite cost/effect rather than only using a condition gate."
+    ]
+  },
+  "Magiblade Witch": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magiblade Witch Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The second On Evolve option is missing Earth Rite; encode option (2) so it requires/consumes Earth Rite before dealing 4 damage divided between up to 2 enemy followers."
+    ]
+  },
+  "Magic Illusionist": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; this card has no Fanfare ability.",
+      "Earth Rite is missing as a cost/effect component on Last Words; the lastWords ability should consume Earth Rite with an Earth Rite cost/effect rather than only using a condition gate."
+    ]
+  },
+  "Magic Illusionist Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability timing \"lastWords\", not as a keyword.",
+      "Earth Rite is missing as a cost/effect component on Last Words; the lastWords ability should consume Earth Rite with an Earth Rite cost/effect rather than only using a condition gate."
+    ]
+  },
+  "Magic Missile": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Magic Owl": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing \"fanfare\", not as a keyword.",
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability timing \"lastWords\", not as a keyword."
+    ]
+  }
+}

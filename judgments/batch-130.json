@@ -1,0 +1,54 @@
+{
+  "Limonia, Flawed Saint": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is encoded incorrectly: banishing a Repair Mode from your EX area should reduce this card's evolve cost this turn, not its play cost. Change the effect from {\"op\":\"playCostReduction\",\"amount\":1} to {\"op\":\"evolveCostReduction\",\"amount\":1}.",
+      "The activated ability should not be marked oncePerTurn; the source text does not include an activation limit. Remove oncePerTurn."
+    ]
+  },
+  "Limonia, Flawed Saint Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is encoded with the wrong operation: it should summon a Machina follower that costs 2 or less from your cemetery, not tutor a card to the field. Change the effect to use summonFromCemetery with filter {\"trait\":\"Machina\",\"cardType\":\"follower\",\"maxCost\":2} and count 1."
+    ]
+  },
+  "Lina & Lena, Twin Souls": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Strike condition is encoded incorrectly: 'If there are at least 3 followers on your field' is not a trait-count condition with trait 'follower'. It should check total followers on your field, but there is no implemented condition for generic follower count on field. Add an engine condition such as fieldFollowerMin/count, then encode the Strike ability using that condition and buff this follower with atk +1 only."
+    ]
+  },
+  "Lindworm": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The evolve linkage is incomplete: the source says this follower evolves into a Virtuous Lindworm or Iniquitous Lindworm, but parsed data does not represent either evolve destination. Add engine support for multiple evolve destinations (for example evolvesTo as an array or a choose-evolution linkage) and encode both possible evolved forms.",
+      "The fanfare recovery amount is encoded with cemeteryFilterCount using divisor 1, but cemeteryFilterCount is defined for halved counts. This card needs the exact number of Dragoncraft spells in your cemetery. Add an engine dynamic amount for exact cemetery card count by filter, then use that as the amount for recoverPp."
+    ]
+  },
+  "Linkstaff Necromancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Linkstaff Necromancer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lishenna, Melodious Destruction": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Lishenna, Melodious Destruction Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is incomplete: the source says you may put up to 2 Idolatry cards from among the top 4 cards into your EX area, but searchDeckChoose only represents choosing a single card. Add engine support for choosing multiple matching cards from looked-at cards up to a specified maximum (e.g. searchDeckChooseMultiple with max 2), then encode this ability with max 2 and remainderTo deckBottom."
+    ]
+  },
+  "Lishenna, Omen of Destruction": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Little Dragon Nanny": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

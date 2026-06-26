@@ -1,0 +1,57 @@
+{
+  "Bladed Hedgehog Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as grantOnAllyFollowerEnter; it should trigger during your turn whenever an enemy follower is destroyed and give this follower [attack]+1. Replace it with an on-enemy-follower-destroyed-style trigger limited to your turn that buffs self atk +1; this trigger timing/condition is not present in the current ability reference and should be implemented.",
+      "The passive buff should increase only [attack] by 1 when the destruction event happens, not when an ally follower enters the field."
+    ]
+  },
+  "Bladerights Lieutenant": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Blazing Breath": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Blessed Fairy Dancer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare buffFieldTrait effect is incomplete: it should also affect Pixie followers in your EX area. Encode it as a field-and-EX-area trait buff excluding this card, but includeExArea support for buffFieldTrait is not implemented in the current engine and should be added."
+    ]
+  },
+  "Blessings of Creation": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Blitz": {
+    "verdict": "fail",
+    "issues": [
+      "The damage amount is incorrect: X should equal the number of cards named Magical Pawn on your field plus 2. Change the amount from namedIdentityFieldCount alone to a dynamic amount that adds 2 to that count."
+    ]
+  },
+  "Blood Arts": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Aluzard buff targets are encoded incorrectly with trait: \"Aluzard, Timeworn Vampire\"; the card text refers to followers named Aluzard, Timeworn Vampire on your field. It should target by identity name, requiring a field buff operation/filter by card name rather than trait; such name-based field buff support should be implemented.",
+      "The conditional check is incorrect: it checks exAreaNamedMin, but the source requires 3 faceup evolved followers named Aluzard, Timeworn Vampire in your evolve deck. This needs an evolve-deck named-count condition with faceup/evolved-state support, which is not in the current engine and should be implemented.",
+      "The first damage clause should deal 1 damage to your leader and each enemy follower on the field only. dealDamageAllEnemies without followersOnly may also hit the enemy leader; it should be restricted to enemy followers."
+    ]
+  },
+  "Blood Moon": {
+    "verdict": "fail",
+    "issues": [
+      "The activated effect is encoded as dealDamageAllEnemies/includeLeaders, which damages enemy followers and leaders; the source says 'Deal 1 damage to each leader.' Replace it with damage to both leaders only, not enemy followers."
+    ]
+  },
+  "Bloodstained Berserker": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare buff amount is incorrect: X should equal the number of cards named Bloodstained Berserker in your cemetery, not on your field. Replace namedIdentityFieldCount with a cemetery name-count dynamic amount; a dynamic amount/count by identity name in cemetery is not available in the current engine and should be implemented."
+    ]
+  },
+  "Bloodstained Berserker Evolved": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

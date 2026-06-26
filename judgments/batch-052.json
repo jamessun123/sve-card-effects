@@ -1,0 +1,65 @@
+{
+  "Dark Jeanne": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare damage is encoded incorrectly as dealDamageAllEnemies to only enemy followers; it should deal 2 damage to each other follower on the field, using dealDamageOtherFollowers amount 2.",
+      "Fanfare buff is encoded too broadly; buffFieldTrait with trait null buffs all your followers including amulets/cards. It should give each other follower on your field +2 attack only, targeting other allied followers rather than all field cards."
+    ]
+  },
+  "Dark Jeanne Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve condition uses unsupported selfLeaderDefMin; it should check if your leader's defense is at least 5. Implement a leader-defense-min condition such as selfLeaderDefMin/count.",
+      "On Evolve effect is incomplete; after selecting an enemy follower, it should deal 4 damage to that follower and each leader. Encode as a sequence including dealDamage to the selected enemy follower and damage to both leaders; the engine is missing a primitive to deal damage to each leader/both leaders."
+    ]
+  },
+  "Dark Offering": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Targeting is too narrow; the card says select a card on your field, but parsed destroy targets only selfFollower. It should target an allyFieldCard/count 1 so amulets can be chosen.",
+      "Destroying your own allyFieldCard is not supported by the current destroy target selector set; implement support for destroy on allyFieldCard/self field cards."
+    ]
+  },
+  "Dark Summoner": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing the granted Rush clause; when Sanguine is active, the effect should buff this follower +1/+1 and also grant it Rush."
+    ]
+  },
+  "Darkest Desire": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Additional cost is encoded as an effect step with buryFieldFollowers count 2, but the card requires bury 2 followers as an additional play cost. It should be represented as a play cost, not a resolving spell effect; implement spell additional-cost support such as a spell cost wrapper using buryFromField.",
+      "Damage effect is incorrect; dealDamageAllEnemies amount 2 hits enemy followers and leader, but the source says deal 2 damage to each enemy leader only. Encode damage to each enemy leader only; implement a primitive for damaging each enemy leader/all opposing leaders."
+    ]
+  },
+  "Darkfeast Bat": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare uses the wrong operation name; replace dealDamageFollowerAndLeader with the implemented damageFollowerAndLeader.",
+      "Fanfare is missing the required enemy follower selection linkage; the damage effect should select an enemy follower on the field and deal 4 damage to it and its leader."
+    ]
+  },
+  "Darkhaven Grace": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability condition is wrong; it uses discardedThisTurn, but it should activate only if a follower on your field evolved this turn. Encode the correct condition and implement a condition type for 'ally follower evolved this turn'.",
+      "Activated damage effect is incorrect; dealDamageAllEnemies amount 2 hits enemy followers as well, but the source says deal 2 damage to each enemy leader only. Encode damage to each enemy leader only; implement a primitive for damaging each enemy leader/all opposing leaders if needed."
+    ]
+  },
+  "Dauntless Commander": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dauntless Commander Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Dazzling Healer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Evolve linkage is incomplete; base Dazzling Healer has evolveCost 1 and should link to its evolved card instead of evolvesTo null.",
+      "Fanfare condition is encoded as spellchain count 1, but the source only requires there be a spell in your cemetery. Encode a cemetery-has-spell condition; implement a condition type for checking at least one spell in your cemetery or a generic cemetery filter minimum."
+    ]
+  }
+}

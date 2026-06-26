@@ -1,0 +1,64 @@
+{
+  "Zirconia, Ironcrown Ward Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve targets are incorrect: it should select up to 2 Officer token followers on your field, but the parsed targets only filter trait Officer and omit the token restriction. Change both target selectors to target selfFollower up to 2 with filter including trait \"Officer\" and printingType \"token\".",
+      "On Super-Evolve should allow selecting up to 2 targets, but the parsed encoding uses count 2 without optionality. Encode it as an optional selection of up to 2 Officer token followers if supported."
+    ]
+  },
+  "Zirnitra": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zirnitra, Dragon's Flame": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Missing play-cost reduction clause: \"When playing this card, bury a follower with \\\"Zirnitra\\\" in its name: This card costs 3 less to play.\" This should be encoded as an optional play-time cost reduction using a bury-from-field/hand cost tied to identityNameContains \"Zirnitra\" and a play cost reduction of 3; implement an ability for conditional optional additional play cost that modifies the card's play cost.",
+      "Fanfare draw amount is incorrect: it should draw for every Wyrmkin token on your field, but the parsed amount counts all Wyrmkin followers. Change the dynamic amount to count only Wyrmkin token followers; implement a dynamic field-count amount that can filter by both trait and printingType \"token\" if not available.",
+      "Aura is too broad: it should give Storm to each Wyrmkin token on your field, but the parsed aura grants Storm to all Wyrmkin followers. Change the aura to apply only to Wyrmkin token followers; implement auraGrantKeyword support for printingType filtering if not available."
+    ]
+  },
+  "Zizdvend, Fate's Arbiter": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare draw amount is incorrect: it should equal the number of other Festive followers on your field, but the parsed amount counts all Festive followers and includes this card. Change the dynamic amount to count other Festive followers only; implement a field-count dynamic amount that can exclude self.",
+      "Start of end phase damage amount is incorrect: it should equal the number of other Festive followers on your field, but the parsed amount counts all Festive followers and includes this card. Change the dynamic amount to count other Festive followers only; implement a field-count dynamic amount that can exclude self."
+    ]
+  },
+  "Zizdvend, Fate's Arbiter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Start of end phase damage amount is incorrect: it should equal the number of other Festive followers on your field, but the parsed amount counts all Festive followers and includes this card. Change the dynamic amount to count other Festive followers only; implement a field-count dynamic amount that can exclude self."
+    ]
+  },
+  "Zodiac Demon": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Activated ability is incorrectly encoded as optional. Discarding a follower is a required activation cost, not an optional additional cost. Encode the discard as part of the activated ability's cost/effect rather than optionalCost.",
+      "Damage amounts are incorrect: the parsed effect deals 0 damage to the follower and leader. It should deal X to the selected enemy follower where X equals the discarded follower's cost, and Y to its leader where Y equals half the discarded follower's cost rounded up. Implement dynamic damage amounts based on discarded card cost, including rounded-half-up for leader damage.",
+      "Activated effect is missing the target selection for the enemy follower associated with the damage effect. Encode the selected enemy follower target in the damage effect."
+    ]
+  },
+  "Zoe, Princess of Goldenia": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zoe, Princess of Goldenia Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Zoe, Shore's Melody": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare is unimplemented as noop. It should select an enemy follower, and if your leader has gained at least 4 defense this turn, destroy that follower and draw a card.",
+      "Implement a condition type for 'your leader has gained at least N defense this turn' and encode the effect as an if-condition whose then branch is a sequence of destroy on the selected enemy follower and draw 1."
+    ]
+  },
+  "Zwei, Murderous Puppet": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare target is incorrect: it should select a Puppet in your EX area, but the parsed transform targets a follower on your field. Change the effect to transform a selected Puppet in your EX area into a Victoria token.",
+      "Fanfare target filter is missing: it should specifically target a card named Puppet in your EX area. Add a target/filter for identityName \"Puppet\" in the EX area."
+    ]
+  }
+}

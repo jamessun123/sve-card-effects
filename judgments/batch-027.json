@@ -1,0 +1,60 @@
+{
+  "Balefire Wrenchsmith": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous trigger is encoded incorrectly as `onCardPlayed` with `condition: enteredFromHand`; it should trigger whenever another Wasteland card is put onto your field, not only when a Wasteland card is played from hand. Encode it as a field-enter trigger for another allied Wasteland card and exclude this card itself. This requires an implemented ability/trigger for \"when a card is put onto your field\" with filtering by trait and self-exclusion."
+    ]
+  },
+  "Balto, Dusk Bounty Hunter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bandage Connoisseur": {
+    "verdict": "fail",
+    "issues": [
+      "Both abilities use an unimplemented/incorrect op id `dealDamageFollowerAndLeader`; change each to `damageFollowerAndLeader` with the same follower target and amounts 4 and 1."
+    ]
+  },
+  "Bandit Raid": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The spell is incomplete: after summoning, if the summoned follower is a Thief follower, that follower should get +1/+1 and Rush. Encode the summon from the top 4, then conditionally buff and grant Rush to the summoned follower if it has trait Thief. This requires engine support for checking the trait of the card actually summoned by the preceding effect and applying follow-up effects to that summoned card."
+    ]
+  },
+  "Barbarossa": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play-cost reduction uses condition `enemyFieldCardMin`, which is not available in the reference. It should represent \"If there are at least 3 enemy cards on the field, this card costs 2 less to play.\" Add support for an enemy-field card count condition and use it with `playCostReduction` amount 2."
+    ]
+  },
+  "Barbarossa Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Barrage Brawler": {
+    "verdict": "fail",
+    "issues": [
+      "The `[evolve] Discard a card: Evolve this follower.` ability is encoded incorrectly. It should be an evolve ability whose cost is discarding 1 card and which evolves this card itself, not an `optionalCost` that uses `evolveOtherFollower` targeting Barrage Brawler. Encode the discard as the evolve payment/self-evolve effect for this card."
+    ]
+  },
+  "Barrage Brawler Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bastion of Seasons": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is wrong: it should be conditional on this follower having 3 seasonal counters or less and it can't attack enemies, not a blanket `cannotAttack`. Encode the attack restriction only while seasonal counters are 3 or less. This requires engine support for conditions based on counters on the source and ideally an attack restriction that blocks attacking enemies rather than all attacks.",
+      "The end-phase ability is incomplete and partly incorrect: after choosing to buff or deal damage, it must also place a seasonal counter on this follower. Add `addCounter` for a seasonal counter to self after the chosen effect.",
+      "The value of X is encoded incorrectly as this follower's attack via `selfAttack`; the card says X equals the selected follower's attack. Encode X using the selected target's attack. This requires engine support for using the chosen target's attack as the dynamic amount across the choose branches."
+    ]
+  },
+  "Bastion of Seasons Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is missing entirely: while this follower has 3 seasonal counters or less, it can't attack enemies. Add a conditional passive attack restriction based on seasonal counters. This requires engine support for source-counter conditions and ideally an attack restriction that blocks attacking enemies rather than all attacks.",
+      "The end-phase ability is incomplete: after choosing to buff or deal damage, it must also place a seasonal counter on this follower. Add `addCounter` for a seasonal counter to self after the chosen effect.",
+      "The value of X is encoded incorrectly as this follower's attack via `selfAttack`; the card says X equals the selected follower's attack. Encode X using the selected follower's attack. This requires engine support for reusing the chosen target's attack as the dynamic amount in the selected branch."
+    ]
+  }
+}

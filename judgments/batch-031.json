@@ -1,0 +1,57 @@
+{
+  "Berserk Demon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Berserk Demon Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is encoded as destroying exactly 2 enemy followers; it should destroy up to 2 enemy followers, using an optional/up-to targeting form rather than mandatory count 2."
+    ]
+  },
+  "Berserker's Pelt": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first ability is incorrectly encoded as a passive ability conditioned on discardedThisTurn; it should be a once-per-turn trigger for when your leader loses defense that buffs a follower on your field +1/+1. Implement a trigger timing/operation for 'when your leader loses defense' with oncePerTurn support, then encode the buff target as a follower on your field.",
+      "The card incorrectly has the keyword 'fanfare'; remove that keyword because it is not in the source text.",
+      "The activated ability condition is incorrectly encoded as {type:'selfLeader',count:1}; it should require activating only if your leader's defense is 10 or less. Implement a condition for leader defense threshold (for example selfLeaderDefMax 10), then use that condition with the activated heal effect."
+    ]
+  },
+  "Beryl, Nightmare Incarnate": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Big Soul Hunter": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Big Soul Hunter Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is too generic: buryEachOpponentFollowers count 1 does not capture 'the follower with the highest attack' on each opponent's field. It should use an effect specifically for each opponent burying their highest-attack follower."
+    ]
+  },
+  "Biofabrication": {
+    "verdict": "fail",
+    "issues": [
+      "The evolve-deck selection is too broad; it should select a faceup evolved follower in your evolve deck and turn that card facedown. Restrict the turnEvolveDeck/filter to evolved follower cards instead of any follower."
+    ]
+  },
+  "Birdkeeping Disciple": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare cost is encoded as a generic engage cost with no target restriction; it should require engaging an amulet on your field as the cost before summoning a Holy Falcon token. Implement activated/fanfare cost support for engaging a selected allied field card with cardType:'amulet', then encode the summon after that cost.",
+      "The keyword 'fanfare' should not be listed in keywords; keep Fanfare only as the ability timing."
+    ]
+  },
+  "Blackened Scripture": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Bladed Hedgehog": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability uses unsupported op 'grantOnEnemyFollowerDestroyed' and does not encode the 'during your turn' restriction explicitly. It should be a trigger for whenever an enemy follower is destroyed during your turn, giving this follower +1 attack. Implement a trigger timing/grant operation for 'on enemy follower destroyed' with turn restriction, then encode the self +1/+0 buff."
+    ]
+  }
+}

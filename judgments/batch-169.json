@@ -1,0 +1,46 @@
+{
+  "Orchis, Resolute Puppet Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is encoded with unsupported op `grantOnLeaveField`. It should represent \"Once on each of your turns, when a Puppet you control leaves the field, put a Lloyd token into your EX area\" using an implemented trigger/effect combination; the engine is missing a leave-field listener grant op for allied cards filtered by trait/controller. Implement an ability like `grantOnLeaveField` (with `filter`, controller scope, and `oncePerTurn`) or a direct `onAllyLeaveField` timing, then encode summoning Lloyd to `exArea` once per turn."
+    ]
+  },
+  "Orthrus, Hellhound Blader": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Orthrus, Hellhound Blader Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Otoha Umeki": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Otohime's Bodyguard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Otohime's Vanguard": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ouroboros": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Outlaw Gunner": {
+    "verdict": "fail",
+    "issues": [
+      "The Last Words ability is encoded as `dealDamageAllEnemies` for all enemy followers and leaders, but the source says \"Deal 2 damage to each enemy leader.\" Change it to damage enemy leaders only, not followers."
+    ]
+  },
+  "Overwhelming Crush": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Owen, Knight of Mysteria": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

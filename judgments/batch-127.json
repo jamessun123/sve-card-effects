@@ -1,0 +1,60 @@
+{
+  "Leod, the Crescent Blade": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive Intimidate and Aura ability is missing the condition 'while this card is reserved on your field'; encode it as a conditional passive if the engine supports a reserved-state condition, otherwise implement a condition/effect mechanism for 'reserved on your field'.",
+      "The start-of-end damage ability is also missing the condition 'while this card is reserved on your field'; encode the trigger with the same reserved-state condition, or add engine support for checking whether the source is reserved."
+    ]
+  },
+  "Leod, the Crescent Blade Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive Intimidate and Aura ability is missing the condition 'while this card is reserved on your field'; encode it as a conditional passive if the engine supports a reserved-state condition, otherwise implement a condition/effect mechanism for 'reserved on your field'.",
+      "The start-of-end damage ability is also missing the condition 'while this card is reserved on your field'; encode the trigger with the same reserved-state condition, or add engine support for checking whether the source is reserved."
+    ]
+  },
+  "Leonidas": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Leonidas Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Leonidas's Resolve": {
+    "verdict": "fail",
+    "issues": [
+      "The trigger should use the ability's filter/condition for 'Whenever a Swordcraft follower is put onto your field'; move the Swordcraft restriction out of the root ability body and encode it using a supported trigger filter/condition on the onAllyFollowerEnter ability so only Swordcraft followers trigger it."
+    ]
+  },
+  "Lesser Mummy": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare condition is encoded as ownCemeteryMin 10, but the card specifically uses Necrocharge (10); change the condition to {\"type\":\"necrocharge\",\"count\":10}."
+    ]
+  },
+  "Lesser Mummy Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Leviathan, the Furious": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare effect is encoded incorrectly: it should only engage the selected enemy follower and make it not refresh during its controller's next start phase; remove the unrelated grantOnDamaged effect and encode the engage effect with skipRefreshNextStart:true.",
+      "The start-of-end ability should target an engaged enemy follower, but the parsed target selector does not restrict to engaged followers; encode an engaged-only enemy follower selector if supported, otherwise implement target-selector support for 'engaged enemy follower'."
+    ]
+  },
+  "Levin Justice": {
+    "verdict": "fail",
+    "issues": [
+      "The spell is not a choice between two separate effects; the base effect (deal 3 to an enemy follower, then summon Yurius from deck, then shuffle) should always happen, and the Albert summon should be an additional conditional effect if the spell was played for 2 more play points.",
+      "The extra 2 play point mode is encoded as a separate choose option that omits the base damage and Yurius summon; instead encode a single spell effect with an optional/additional 2 PP cost that, if paid, also tutors and summons Albert, Levin Saber, then shuffles."
+    ]
+  },
+  "Levin Scholar": {
+    "verdict": "fail",
+    "issues": [
+      "The deck search is encoded as searchDeckChoose with lookAt:1, but the card searches the entire deck; replace it with tutorFromDeck using filter {\"trait\":\"Levin\",\"cardType\":\"follower\"}, to:\"hand\", reveal:true, followed by shuffleDeck."
+    ]
+  }
+}

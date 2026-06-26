@@ -1,0 +1,67 @@
+{
+  "Roland the Incorruptible": {
+    "verdict": "fail",
+    "issues": [
+      "The second Fanfare choice is incorrectly encoded as tutorFromDeckAny to field; it should summon \"Durandal the Incorruptible\" from your hand, using a hand-based selection/summon effect restricted to identityName \"Durandal the Incorruptible\".",
+      "Remove \"fanfare\" from keywords; Fanfare should be represented as an ability timing, not a keyword."
+    ]
+  },
+  "Roland the Incorruptible Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is too broad: refresh currently targets allyFieldCard with no restriction, but the source says to refresh each amulet on your field. It should only refresh allied amulets; implement a refresh effect/filter that can target allied field cards by cardType \"amulet\".",
+      "The start-of-end effect is correctly sequenced for heal and conditional draw."
+    ]
+  },
+  "Roly-Poly Mk I": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Roly-Poly Mk II": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented only by the timing of the ability, not as a keyword."
+    ]
+  },
+  "Romantic Chanteuse": {
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented as an ability timing, not a keyword."
+    ]
+  },
+  "Romantic Chanteuse Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is incorrectly encoded as granting cannotAttack to one enemy follower; the source says give each enemy follower \"This follower doesn't deal damage\" for the rest of this turn. This should affect all enemy followers and needs a dedicated implemented effect for 'doesn't deal damage this turn' (or an equivalent combat-damage suppression aura/status), since grantKeyword cannotAttack is not the same effect and only targets one follower."
+    ]
+  },
+  "Romelia, Lightning Striker": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented as an ability timing, not a keyword.",
+      "The Last Words condition is incorrect: it checks namedCardNotOnFieldByName \"Aftershock\", but the source says 'If there's an Aftershock on your field'. It should check for an Aftershock on your field, otherwise summon one. Implement a named amulet/card on field condition such as namedCardOnFieldByName or similar, since the available conditions do not support this exactly.",
+      "The Last Words effect is incorrect: transferCounters moves existing counters from this card to another card, but the source says to place a lightning counter on each Aftershock on your field. It should use an effect that adds 1 lightning counter to each allied Aftershock; implement addCounter targeting multiple matching allied field cards by identityName/card type if needed."
+    ]
+  },
+  "Romelia, Lightning Striker Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented as an ability timing, not a keyword.",
+      "On Evolve condition is wrong: it checks for absence of Aftershock, but the source says 'if there's an amulet on your field'. It should target an enemy follower, then conditionally deal it 3 damage if you control any amulet. Implement a field condition for controlling an allied amulet if needed.",
+      "The On Evolve structure should still select the enemy follower first and then conditionally damage that selected follower; current encoding conditionally performs a generic target selection only when the condition is met.",
+      "The Last Words condition is incorrect: it checks namedCardNotOnFieldByName \"Aftershock\", but the source says 'If there's an Aftershock on your field'. It should check for an Aftershock on your field, otherwise summon one. Implement a named amulet/card on field condition such as namedCardOnFieldByName or similar, since the available conditions do not support this exactly.",
+      "The Last Words effect is incorrect: transferCounters moves existing counters from this card to another card, but the source says to place a lightning counter on each Aftershock on your field. It should use an effect that adds 1 lightning counter to each allied Aftershock; implement addCounter targeting multiple matching allied field cards by identityName/card type if needed."
+    ]
+  },
+  "Ronavero, Darkhaven Ward": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Ronavero, Darkhaven Ward Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should affect the same selected enemy follower for both stat change and engage; current sequence independently targets an enemy follower twice. It should use one shared target for both setStats and engage.",
+      "On Super-Evolve is incomplete/incorrect: the source allows selecting a Faith spell or Faith amulet in your cemetery that costs 4 or less, but parsed only allows Faith spells and does not restrict maxCost to 4. It should filter for trait \"Faith\", maxCost 4, and card type spell or amulet."
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "Demonic Drummer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonic Hedonist": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonic Hedonist Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Strike is encoded incorrectly as dealDamageAllEnemies, which damages all enemy followers and the enemy leader. It should deal 1 damage to each leader only. Encode it as a sequence dealing 1 to selfLeader and 1 to enemyLeader, or implement a dedicated ability for 'deal damage to each leader'."
+    ]
+  },
+  "Demonic Procession": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonic Simulacrum": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonic Strike": {
+    "verdict": "fail",
+    "issues": [
+      "The target selector is too broad. enemyFieldCard can target enemy amulets, but the source says 'enemy leader or enemy follower'. Change the effect to target only enemyLeader or enemyFollower, such as a choose between dealDamage to enemyLeader and dealDamage to enemyFollower."
+    ]
+  },
+  "Demonium, Clash Devil": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonium, Punk Devil": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Demonlord Eachtar": {
+    "verdict": "fail",
+    "issues": [
+      "The summoned followers clause is encoded incorrectly. 'Select up to 2 Abysscraft followers that cost 2 play points or less in your cemetery' should not use maxTotalCost: 2; remove maxTotalCost so it allows up to 2 followers each costing 2 or less.",
+      "The NC (20) buff is encoded as an additional separate fanfare buff, causing both +1/+1 and +3/+3 to apply. It should instead replace the NC (10) buff with +3/+3 when Necrocharge 20 is active, e.g. use an if inside the Necrocharge 10 fanfare sequence or otherwise ensure only one buff amount applies.",
+      "The fanfare buff targets are wrong. The source says 'Give each other follower on your field' +1/+1 or +3/+3, not only Abysscraft followers. Remove cardClass: 'abyss' from the buff effect.",
+      "The passive Rush aura is encoded incorrectly. It should give Rush to each Abysscraft follower on your field, but the aura uses trait: 'Abysscraft' instead of cardClass: 'abyss'. Change it to auraGrantKeyword with cardClass: 'abyss'.",
+      "The passive Rush aura incorrectly excludes this card. The source says 'each Abysscraft follower on your field,' which includes this card. Remove excludeSelf: true."
+    ]
+  },
+  "Desert Pathfinder": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Naterran Great Tree placement is encoded as mandatory choose one, but the source says 'You may put ... onto your field or into your EX area,' so the entire placement should be optional. Encode an optional choose if supported, or implement support for an optional choose/choose-zero-or-one pattern.",
+      "The Natura-count condition is encoded incorrectly. The source counts Natura cards on your field and/or in your EX area combined, but conditionAny with separate fieldTraitMin 5 or exAreaTraitMin 5 fails when the total across both zones is 5 split between them. It should use a combined field+EX-area count condition; implement a new condition type for combined zone trait count.",
+      "The deck search filter is too narrow. The source says 'a Natura card,' not specifically a follower. The parsed filter correctly omits cardType, but the effect also says 'reveal' before adding to hand and searchDeckChoose has no reveal flag. Implement reveal support on searchDeckChoose if reveal handling is required by engine semantics."
+    ]
+  }
+}

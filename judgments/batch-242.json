@@ -1,0 +1,53 @@
+{
+  "Viking": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vile Violet Dragon": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Vincent, the Peacekeeper": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The [evolve] ability is encoded as a no-op with condition type \"always\", but it should require \"Activate only if this follower has gained attack or defense this turn\" and represent the paid evolve ability. Add an implemented condition for \"this follower gained attack or defense this turn\" and encode the evolve ability with that condition instead of a passiveKeywords stub.",
+      "The [fanfare] effect incorrectly uses searchDeckChoose to send a card to \"cemetery\"; it should search your deck for a Wasteland card, bury it, then shuffle. Implement deck search support that can move a chosen searched card directly from deck to cemetery, or an equivalent tutor-to-cemetery operation, and replace the current incorrect encoding."
+    ]
+  },
+  "Vincent, the Peacekeeper Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability uses unconditional if clauses with condition type \"always\"; each clause should instead check whether there are at least 3, 6, 9, and 12 cards with different base costs in your cemetery, respectively. Implement a condition type for counting distinct base costs in your cemetery and use thresholds 3/6/9/12.",
+      "The final 12-threshold effect is encoded as dealDamageAllEnemies for 12, which hits all enemies; it should deal 12 damage to each enemy leader only. Add an implemented operation for dealing damage to all enemy leaders (or multiplayer opponents' leaders) and use that instead."
+    ]
+  },
+  "Violent Soldier": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Viper Lash": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Viridia Magna": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Last Words cost only banishes a Naterran Great Tree from your EX area, but the source says banish a Naterran Great Tree from your field or EX area. Encode a cost that can select the named card from either zone; implement a cost/effect that can banish a chosen matching card from field-or-EX if needed.",
+      "The Last Words effect should put this card onto its owner's field engaged and evolve it, then if you didn't evolve it, banish it. The current reviveToField + transform encoding does not model 'evolve it' or the fallback 'if you didn't evolve it, banish it'. Implement support for evolving a revived card during resolution and a follow-up conditional 'if not evolved, banish this' branch, then replace the transform shortcut."
+    ]
+  },
+  "Viridia Magna Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Virtuous Lindworm Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage: this evolved card should include an \"evolvesFrom\" field matching its base form, in addition to \"specialType\": \"evolved\"."
+    ]
+  },
+  "Vlad, Impaler": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

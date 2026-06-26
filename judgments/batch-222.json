@@ -1,0 +1,65 @@
+{
+  "Suttungr Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Suzuho Ueda": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Suzuho Ueda Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly: it should reveal the top card of your deck and deal damage equal to that card's cost to an enemy follower, not damage equal to this follower's attack. Encode as an onEvolve ability that targets 1 enemy follower and uses a new implemented effect/dynamic amount for 'reveal top card of deck and use its cost as damage'."
+    ]
+  },
+  "Sweet Sentiments": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The second step is encoded incorrectly: it should give [attack]+1 to each follower that costs 1 or less on your field, not use buffFieldTrait with cardClass:any and otherOnly:true. Encode this with a field-buff effect that filters allied followers by maxCost 1 and does not exclude the selected follower unless the text says so; implement a new allied-field buff operation or extend buffFieldTrait/targets to support cost-based filtering."
+    ]
+  },
+  "Sweet-Tooth Medusa": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare deck search is encoded with searchDeckChoose and remainderTo:deckBottom, but the text says search your deck for a card that costs 2 or less, reveal it, add it to your hand, then shuffle your deck. It should be encoded as tutorFromDeck with filter maxCost 2, to hand, reveal true, followed by shuffleDeck; if tutorFromDeck does not currently support a required shuffle after a full-deck search in your engine flow, implement that sequencing.",
+      "The continuous summon ability is missing/incorrectly encoded: timing onEnemyFollowerLeaveField is not in the reference, and the card only triggers during your turn when an enemy follower is put from the field into the cemetery. Encode this as a supported graveyard-leave trigger if available with a 'during your turn' condition, or implement a new trigger timing for 'when an enemy follower is put from the field into the cemetery during your turn'."
+    ]
+  },
+  "Sweet-Tooth Medusa Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The continuous summon ability is missing/incorrectly encoded: timing onEnemyFollowerLeaveField is not in the reference, and the card only triggers during your turn when an enemy follower is put from the field into the cemetery. Encode this as a supported graveyard-leave trigger if available with a 'during your turn' condition, or implement a new trigger timing for 'when an enemy follower is put from the field into the cemetery during your turn'.",
+      "The activated ability is encoded incorrectly: [q][act] Bury 2 cards named Serpent means selecting/burying 2 Serpent cards, not milling 2 cards from your deck. It should be an activated quick ability with a cost that buries/banishes 2 cards named Serpent from the appropriate zone, then grants the next card you play this turn costs 2 less.",
+      "The cost reduction effect is encoded incorrectly as playCostReduction on this card; it should be grantNextPlayCostReduction amount 2 so it applies to the next card you play this turn.",
+      "The activated ability is missing quick:true to represent [q][act].",
+      "The bury-2-cards-named-Serpent cost is not representable with current implemented costs/effects for burying named cards from cemetery/field as written. Implement a cost/effect to select and bury or otherwise pay with 2 named cards 'Serpent' from the correct zone."
+    ]
+  },
+  "Sweet-Tooth Sleuth": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is left as noop. It should encode 'Select an opponent. They reveal their hand.' Implement a new effect for revealing a chosen opponent's hand, then replace noop with that effect."
+    ]
+  },
+  "Swift Infiltrator": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger is encoded incorrectly: the card triggers whenever one of your followers evolves, not when an ally follower enters the field. It should be an onAllyEvolve ability that buffs this follower +1/+1.",
+      "Use timing onAllyEvolve with effect buff atk 1 def 1 targeting self. If additional filtering is needed to ensure it is one of your followers, that timing already implies it; if missing in engine behavior, implement support for onAllyEvolve trigger handling."
+    ]
+  },
+  "Swift Tigress": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is left as noop. It should be encoded as a fanfare with an optional/paid engage of a Naterran Great Tree on your field, then grant this follower Storm.",
+      "This requires support for a fanfare-internal paid cost targeting a specific allied card by name/trait and then applying grantKeyword storm to self. Implement targeted engage-as-cost inside abilities or an optionalCost-compatible engage-target payment for an allied Naterran Great Tree."
+    ]
+  },
+  "Swiftblade Dragonewt": {
+    "verdict": "fail",
+    "issues": [
+      "The damage effect is encoded incorrectly: the card deals 3 damage to each enemy leader, not to all enemies. Replace dealDamageAllEnemies with dealDamage targeting enemyLeader for 3 damage."
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "Takumi Mukai [No One Can Stop Me]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive ability is incorrectly encoded as grantOnCardPlayed dealing 1 damage to all enemies. It should trigger during your turn whenever an iM@S CG card on your field deals damage to one or more enemy followers, then deal 1 damage to each enemy leader. Replace this with a damage-triggered field-card watcher if available; otherwise implement a new ability/trigger for 'when a card on your field with filter deals damage to enemy followers during your turn' and an effect that deals 1 damage to each enemy leader."
+    ]
+  },
+  "Talisman Disciple": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tanzanite Convictor": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is incorrectly encoded as fieldFollowerMin count 1. It should be 'if there's a follower with at least 7 defense on your field'. Replace with a condition that checks for a follower on your field with minimum defense 7; implement a new condition such as fieldFollowerDefMin if not available.",
+      "The start-of-end ability uses selfAttackMin, which is not in the implemented condition reference. It should be 'At the start of your end phase, if this follower has at least 3 attack, refresh it.' Implement a new condition such as selfAttackMin and use it here."
+    ]
+  },
+  "Tart Man": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is missing the required shuffle after tutoring. Wrap tutorFromDeckAny in a sequence and add shuffleDeck as the second step."
+    ]
+  },
+  "Tartarus, the Tormentor": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The activated ability cost is incorrectly encoded as burySelf. The source says 'put this card from your hand into your EX area', so this should activate from hand and move the source to EX area as part of the effect/cost flow. Use activateFrom: 'hand' and encode moving this card to EX area; if hand-to-EX-area activated-cost support is missing, implement a dedicated cost/effect for moving the source from hand to EX area.",
+      "The activated ability is incorrectly encoded as searchDeckChoose. The source says 'Look at the top 2 cards of your deck. You may reveal a Departed card from among them and add it to your hand. Bury the rest.' This should preserve hidden look-at-top-2 behavior and send the non-chosen cards to cemetery. Use a top-of-deck selection/peek effect with reveal-and-add and bury remainder; if unavailable, implement an effect for choosing from top N cards to hand with remainder to cemetery."
+    ]
+  },
+  "Tartarus, the Tormentor Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as tutorFromCemetery to field. It should summon a Departed follower from your cemetery. Replace with summonFromCemetery using filter { trait: 'Departed', cardType: 'follower' } and count 1."
+    ]
+  },
+  "Teachings of Creation": {
+    "verdict": "fail",
+    "issues": [
+      "The Stack keyword/effect is missing. Add the implemented stack ability, e.g. a passive/addStack representation corresponding to 'Stack.'"
+    ]
+  },
+  "Technolord": {
+    "verdict": "fail",
+    "issues": [
+      "Option (2) is too broad: enemyFieldCard can target followers or amulets, but the source specifically says 'Select an enemy amulet on the field and destroy it.' Restrict this option to enemy amulets only.",
+      "Option (4) is incorrectly encoded as searchDeckChoose with remainderTo deckBottom. The source is a full-deck search, add to hand, then shuffle. Replace with tutorFromDeck using filter { trait: 'Machina', excludeIdentityName: 'Technolord' }, to: 'hand', reveal: true, followed by shuffleDeck in sequence."
+    ]
+  },
+  "Technomancer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Tempered Aether": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

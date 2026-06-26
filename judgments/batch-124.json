@@ -1,0 +1,58 @@
+{
+  "Kotoka Saionji [Pure Euphoria]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kotoka Saionji [Pure Euphoria] Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Koume Shirasaka [Haunted Gown]": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability should grant the cost reduction to the card put into the EX area, not use a standalone `playCostReduction` on this card. Encode the search as `tutorFromDeck` with `filter: { \"identityName\": \"Last Daylight\" }`, `to: \"exArea\"`, `playCostReduction: 2`, then shuffle.",
+      "The activated ability cost for Lesson (1) is encoded with unsupported/wrong cost fields. Change it to use the implemented activated cost form for banishing from EX area, e.g. `cost: { \"pp\": 1, \"banishFromExArea\": { \"filter\": { \"trait\": \"Magical Item\" }, \"count\": 1 }, \"engage\": true }`."
+    ]
+  },
+  "Krampus": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare's 'Bury another follower' is encoded as an ability `cost`, but fanfare abilities do not use `cost`. Encode it inside the effect with `optionalCost` or an equivalent sequence that buries another follower from your field before the rest of the fanfare resolves."
+    ]
+  },
+  "Kudlak": {
+    "verdict": "fail",
+    "issues": [
+      "The fanfare should select up to 2 Vampire cards in your cemetery with total cost 6 or less and put them into your EX area; `tutorFromCemetery` only gets one card and does not enforce up to 2 / total cost 6. Encode an effect that moves up to 2 matching cards with max total cost 6 to EX area.",
+      "The fanfare is missing 'They cost 0 play points to play this turn.' After moving the selected cards to EX area, those cards should receive play cost reduction so their cost becomes 0 this turn."
+    ]
+  },
+  "Kumiko Matsuyama": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kumiko Matsuyama Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Kuon, Founder of Onmyodo": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The play cost reduction is encoded incorrectly. It should count both spells and Onmyoji cards in your cemetery, but `cemeteryFilterCount` with `traitsAny: [\"Spell\", \"Onmyoji\"]` does not represent spells correctly. Implement a cemetery-count dynamic amount/filter that can count cards by card type OR trait/class text, then use it for 'for every spell and Onmyoji card in your cemetery.'",
+      "The fanfare condition uses unsupported `namedCardNotOnFieldByName`. Encode it as 'if there is no Celestial Shikigami on your field' with a negated named-on-field condition; implement a `namedFollowerNotOnFieldByName` or generic negation condition in the engine.",
+      "The activated ability should select up to 2 Shikigami followers on your field, but the targeting is incorrect because `selfFollower` means your own followers and should not include this card unless it is a Shikigami; use a selector for allied followers with trait Shikigami and allow up to 2 targets. If trait-filtered allied-follower target selection is not implemented, add support for filtered allied follower targets."
+    ]
+  },
+  "Kuon, Wuxing Master": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost reduction is incomplete. 'When playing this, reveal 2 Onmyoji cards from your hand: This costs 1 less to play.' requires an optional reveal-from-hand play cost reduction rider, not unconditional `playCostReduction: 1`. Implement a play-time optional reveal cost/reduction ability for revealing cards from hand.",
+      "The [adv] ability is missing the 'You may' optionality; it should be optional to summon a Noble Shikigami from your evolve deck.",
+      "The [adv] ability condition is incorrect. It should check for at least 7 spells and/or Onmyoji cards in your cemetery, not generic `ownCemeteryMin: 7`. Implement a cemetery condition that counts cards matching card type spell OR trait Onmyoji."
+    ]
+  },
+  "Kyoko Igarashi": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

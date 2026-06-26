@@ -1,0 +1,60 @@
+{
+  "Splendid Fencer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare target is encoded with targets.filter inside selfFollower, but target selectors do not support filter in the reference. It should target an Officer follower on your field; add target-selector support for trait/cardClass filtering on selfFollower targets, then encode the buff as selecting 1 Officer follower on your field and giving it +2 attack."
+    ]
+  },
+  "Spring-Green Protection": {
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword \"fanfare\"; the source card has no Fanfare keyword.",
+      "The activated ability is incorrectly encoded as optionalCost with a noop combo clause. It should be a sequence that buffs a Forestcraft follower on your field by +0/+1, then if Combo (3) also gives the same selected follower +1 attack.",
+      "The Combo (3) clause is missing its actual effect. It should give the chosen follower [attack]+1 more."
+    ]
+  },
+  "Springleaf Sprite": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Springwell Dragon Keeper": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Springwell Dragon Keeper Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The On Evolve ability is encoded as optionalCost, but 'Discard a card:' is a required cost/effect gate, not optional. It should require discarding 1 card, then deal 4 damage to an enemy follower, and if the discarded card was an Arcana card, draw 1 card.",
+      "The conditional draw is encoded with discardedCardType: spell, which is incorrect. It should check whether the discarded card had the Arcana trait. Add a condition such as discardedCardTrait/lastDiscardedTrait to the engine, then use that to draw 1 card if an Arcana card was discarded."
+    ]
+  },
+  "Staff of Whirlwinds": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The damage amount is encoded as traitFieldCount with trait 'Runecraft', but the source counts Runecraft followers on your field, which is a class-based count, not a trait named Runecraft. It should deal damage equal to the number of Runecraft followers on your field. Add a dynamic amount for field follower count by class (or by filter), then use that amount for dealDamageAllEnemies."
+    ]
+  },
+  "Staircase to Paradise": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Remove the incorrect keyword \"fanfare\"; the source card has no Fanfare keyword.",
+      "The soul-counter gain ability is incorrectly encoded as an unconditional passive addCounter. It should trigger whenever a follower is put from your field into a cemetery. Add an appropriate trigger timing/condition for an allied follower leaving your field to the cemetery, then encode adding 1 soul counter to this card on that event.",
+      "The activation condition is incorrect: it checks own cemetery size instead of this card having at least 6 soul counters. It should require this card to have at least 6 soul counters. Add a condition type for source counter minimum, then use soul >= 6.",
+      "The search effect is incomplete. The source says you may reveal up to 2 followers from among the top 5 and add them to your hand, but searchDeckChoose selects only one card. It should allow choosing up to 2 followers from the looked-at cards and add them to hand, then put the rest on the bottom. Add support for multi-pick search-from-top-N effects."
+    ]
+  },
+  "Stalwart Featherfolk": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Stalwart Slinger": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Stalwart Slinger Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded as dealDamageAllEnemies, which would damage enemy followers as well. It should deal 3 damage only to each enemy leader; encode damage to enemy leaders only instead of all enemies."
+    ]
+  }
+}

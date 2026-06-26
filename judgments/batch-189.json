@@ -1,0 +1,64 @@
+{
+  "Riley, Astral Shaman Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve is encoded incorrectly: the source says to search your deck for a follower with Earth Rite that costs X or less, where X equals your max play points, summon it, then shuffle. Replace the withChosenNumber construct with a deck tutor/summon effect using maxCost: {\"op\":\"maxPp\"} and include shuffle; also the filter should express 'follower with Earth Rite', but the engine lacks a way to filter cards by Earth Rite ability, so implement deck filter support for keyword/ability-text matching such as Earth Rite."
+    ]
+  },
+  "Riley, Hydroshaman": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare choice count is wrong. It should choose exactly 1 option normally, and only choose up to 3 if this card was put onto the field from the cemetery. Encode this with a conditional using notEnteredFromHand/entered-from-cemetery logic instead of a single choose with max 3.",
+      "The activated ability is missing activateFrom: \"cemetery\". The source says '[act] [cost06]: Summon this card from your cemetery', so the ability must activate from the cemetery, not from the field/hand.",
+      "Storm is incorrectly listed as a printed keyword. The source only grants Storm to this card when summoned from the cemetery with its activated ability, so remove 'storm' from keywords and keep it only in the activated effect."
+    ]
+  },
+  "Rimewind": {
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is encoded as a player choice under Spellchain (10), but the source says the top-of-deck effect happens instead of returning to hand when Spellchain (10) is active. Encode this as a conditional: if spellchain 10, put the selected unevolved enemy follower on top of its owner's deck; else return it to hand.",
+      "The base spell effect without Spellchain (10) is missing as an unconditional/default branch. Add the normal returnToHand effect when the Spellchain condition is not met.",
+      "The target restriction 'unevolved enemy follower' is missing. Restrict the target selector to unevolved enemy followers if supported; otherwise this needs engine support for selecting only unevolved followers."
+    ]
+  },
+  "Rin & Mio": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rin Shibuya": {
+    "verdict": "fail",
+    "issues": [
+      "The second Fanfare effect targets the enemy leader only, but it is encoded as dealDamageAllEnemies for 5 damage to all enemy followers and leaders. Replace it with a dealDamage effect targeting enemyLeader for 5 damage."
+    ]
+  },
+  "Rin Shibuya [Cinderella Girl]": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Rin Shibuya [Triad Primus]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The Fanfare target restriction is encoded incorrectly. The source says 'select another follower with 3 attack or less on your field', but the target selector uses an unsupported embedded filter/maxAtk shape. Encode the target as another ally follower with 3 attack or less; this requires engine support for target selectors that can constrain selected followers by attack value.",
+      "The activated ability cost is incomplete. The source says '[act] [cost01], Lesson (1): Give this follower [attack]+1', so in addition to paying 1 PP it should also include the optional Lesson (1) payment before buffing. Add an optionalCost/spendPp 1 component for Lesson if intended by card text structure, or otherwise represent both costs explicitly."
+    ]
+  },
+  "Rina Fujimoto": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive play-cost reduction condition is wrong. It is encoded with condition type 'discardedThisTurn', but the source says 'if a follower on your field evolved this turn'. Replace this with a condition tracking whether an ally follower evolved this turn; the engine currently lacks a condition type for 'an ally follower evolved this turn', so implement one."
+    ]
+  },
+  "Risa Matoba": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect should allow summoning at most one qualifying follower from the top 3 cards, but it is encoded as searchDeckSummonMultiple with maxTotalCost 2, which could permit multiple summons. Replace it with an effect that looks at the top 3 cards and may summon a single iM@S CG follower that costs 2 or less, then puts the rest on the bottom."
+    ]
+  },
+  "Rite of the Ignorant": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive restriction 'This card can't be played from the EX area' is missing. Add a passive ability preventing play from the EX area; the engine lacks an implemented operation/condition for 'cannot be played from EX area', so implement support for that restriction.",
+      "The spell effect's first clause is encoded as healLeader 2, but the source says 'Give your leader [defense]+2.' This is not necessarily recovery and should be encoded as a leader defense increase effect; the engine lacks an operation for increasing leader defense/stat buffs, so implement one distinct from healing."
+    ]
+  }
+}

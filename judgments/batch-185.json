@@ -1,0 +1,62 @@
+{
+  "Redcap Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Strike ability is encoded incorrectly as grantLeaderDamageShield; it should prevent this follower from taking damage for the rest of the turn, e.g. by granting damage immunity to self until end of turn."
+    ]
+  },
+  "Regal Wildcat": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded with an incorrect condition namedFollowerOnFieldByName 'Regal Wildcat'; the source condition is 'If your leader is [swordcraft]', so the fanfare should be gated by a leader-class condition rather than checking for this follower on the field.",
+      "The card should not have a second unconditional duplicate fanfare ability; there is only one fanfare effect.",
+      "The 'give to each other follower on your field instead' branch is not conditional on your leader being Swordcraft and is represented as a free choice; it should happen only if your leader is Swordcraft.",
+      "The all-followers branch uses buffFieldTrait without restricting to all other followers correctly; it should buff each other follower on your field and grant them Storm, excluding this card."
+    ]
+  },
+  "Regalore, Steel Chimera": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Play cost reduction is encoded incorrectly with cemeteryFilterCount over all cemetery cards; it should count the number of cards with different base costs in your cemetery. Implement a dynamic amount for distinct base costs in cemetery, then use that as playCostReduction amount.",
+      "Ward is encoded incorrectly as a fanfare passiveKeywords ability; Ward is a printed keyword and should be in keywords, not as a fanfare ability."
+    ]
+  },
+  "Regalore, Steel Chimera Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve buff amount is encoded from the selected follower's attack using targetAttack; it should give the summoned Assembly Droid +X/+X where X equals the selected follower's cost. Implement a dynamic amount based on selected target cost, then use that for buffDynamic on the last summoned token."
+    ]
+  },
+  "Reggie, Peerless Artisan": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Reggie, Peerless Artisan Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Reina, Evolution's Herald": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare damage amount is encoded incorrectly as namedIdentityFieldCount 'faceup evolved followers'; it should equal the number of faceup evolved followers in your evolve deck. Implement a dynamic amount for counting faceup evolved followers in evolve deck, then use it as the damage amount."
+    ]
+  },
+  "Reina, Evolution's Herald Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Turning a faceup evolved follower in your evolve deck facedown is encoded with turnEvolveDeck using unsupported/incorrect orientation and filter fields; it should specifically select a faceup evolved follower in your evolve deck and turn it facedown. Implement support for selecting a faceup evolved card in evolve deck and turning it facedown."
+    ]
+  },
+  "Reinhardt, the Deathless": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare condition is encoded incorrectly as ownCemeteryMin 3; it should check whether there are at least 3 faceup evolved followers in your evolve deck. Implement a condition for minimum faceup evolved followers in evolve deck, then use it to gate the auto-evolve effect."
+    ]
+  },
+  "Reinhardt, the Deathless Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "Start of end phase ability is encoded incorrectly as a single buff with atk+2/def+2 to self and malformed leader targeting; it should give this follower +0/+2 and separately give your leader +0/+2."
+    ]
+  }
+}

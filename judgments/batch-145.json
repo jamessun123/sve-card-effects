@@ -1,0 +1,50 @@
+{
+  "Master Trainer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Master of Draconic Arts": {
+    "verdict": "fail",
+    "issues": [
+      "Fanfare ability is incomplete: after checking Overflow, it should both give this follower +4 attack and grant Rush; encode the then effect as a sequence with buff to self and grantKeyword \"rush\" to self."
+    ]
+  },
+  "Masterful Musician": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Masterful Musician Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The trigger for \"Whenever a Glittering Gold token is put into your EX area\" is encoded with unsupported timing \"onExAreaEntry\" and the damage effect also lacks the required enemy follower target selection. It should be represented as a trigger for a card entering your EX area filtered to identityName \"Glittering Gold\", then deal 3 damage to a selected enemy follower and 1 damage to its leader; implement a supported timing/ability such as an onExAreaEntry trigger with filter support and allow damageFollowerAndLeader to include the required enemy follower target selection."
+    ]
+  },
+  "Mayu Sakuma": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mayu Sakuma [Love-Laden Gift]": {
+    "verdict": "engine-missing",
+    "issues": [
+      "Fanfare says each player draws a card, but parsed as two draws for the controller. It should draw 1 for you and 1 for the opponent; implement an effect operation for opponent draw or each-player draw, then encode the fanfare with that instead of two self draw steps."
+    ]
+  },
+  "Mayu Sakuma [Love-Laden Gift] Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "On Evolve damage amount is wrong: it should equal the number of cards in the targeted enemy follower's controller's hand, not your hand. Implement a dynamic amount for target controller hand count (or equivalent), then use that for the selected enemy follower."
+    ]
+  },
+  "Mechabook Sorcerer": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mechagun Wielder": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Mechanical Analyzer": {
+    "verdict": "pass",
+    "issues": []
+  }
+}

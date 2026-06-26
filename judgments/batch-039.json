@@ -1,0 +1,54 @@
+{
+  "Ceridwen, Eternity Hunter Evolved": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive cost-reduction ability is incorrectly encoded as grantOnCardPlayed with playCostReduction after a Forbidden card is played. It should be a continuous effect that makes the 1st Forbidden token you play each turn cost 2 less while this card is on your field. The current engine lacks an implemented passive 'first matching card each turn costs less' ability; add a passive cost-reduction operation with filters for trait: Forbidden, printingType: token, firstPerTurn: true, amount: 2."
+    ]
+  },
+  "Ceryneian Hind": {
+    "verdict": "engine-missing",
+    "issues": [
+      "evolvesTo is incomplete. The source evolve line allows evolving into either Ceryneian Lighthind or Ceryneian Darkhind, but parsed only links to Ceryneian Lighthind Evolved. It should encode a choice between both evolve destinations; the current engine lacks support for multi-destination evolve linkage, so add evolve metadata supporting multiple possible evolves."
+    ]
+  },
+  "Ceryneian Lighthind Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability incorrectly uses buryFieldFollowers with filter cardType: amulet and an unsupported count field. It should require burying 1 amulet as a cost/condition, then giving your leader 4 defense only if that amulet was buried.",
+      "The healLeader effect is incorrectly a separate unconditional On Evolve ability. It should be part of the same On Evolve ability after the 'Bury an amulet' requirement, e.g. an optionalCost or equivalent gated sequence where burying an amulet leads to healLeader 4."
+    ]
+  },
+  "Cetus": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Cetus Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chaht, Ringside Announcer": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The passive play-cost reduction is missing. This card should cost 3 less to play if there's a Colosseum on High on your field. The current engine lacks a condition for 'named amulet/card on your field' and a conditional playCostReduction wrapper for this case; add support for a named field-card condition and use passive playCostReduction amount 3 gated by that condition."
+    ]
+  },
+  "Chaht, Ringside Announcer Evolved": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chain Lightning": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chain of Calling": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Chakram Wizard": {
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as namedFollowerOnFieldByName 'Mage'. The source requires 'if there's another Mage follower on your field', so it should check for at least 1 other follower on your field with trait Mage, excluding this card.",
+      "The Fanfare ability should still select an enemy follower first and then deal 3 damage to the selected follower only if the 'another Mage follower' condition is met. Replace the incorrect condition with a field trait/count check for another Mage follower and keep the damage targeted at the selected enemy follower."
+    ]
+  }
+}

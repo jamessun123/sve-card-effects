@@ -1,0 +1,56 @@
+{
+  "Hamelin": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The first fanfare ability is incorrectly encoded as moving any follower to the EX area; it should select a token card in your EX area as a reference only, not move any card. Replace the two fanfare abilities with a single effect that puts a token of the selected EX-area token card's same name into your EX area. This requires an unimplemented ability to target a token card in EX area and summon/create a same-name token in EX area based on that selected card."
+    ]
+  },
+  "Hammer Dragonewt": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Hammer Dragonewt Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded as dealing 2 damage to all enemies, but the source says 'Deal 2 damage to each enemy leader.' Encode it as damage to enemy leaders only, not enemy followers."
+    ]
+  },
+  "Hamsa": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare ability is incorrectly encoded as buffing attack by an invalid dynamic amount using peekDeck. It should reveal the top card of your deck, then give this follower +X attack where X equals that revealed card's cost. This requires an unimplemented dynamic amount/effect to read the revealed top card's cost after revealing the top card of the deck."
+    ]
+  },
+  "Happy Pig": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Harbinger of the Night": {
+    "verdict": "pass",
+    "issues": []
+  },
+  "Harbinger of the Night Evolved": {
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded as dealing 1 damage to all enemies, but the source says 'Deal 1 damage to each enemy leader.' Encode it as damage to enemy leaders only, not enemy followers."
+    ]
+  },
+  "Hardplume Warrior": {
+    "verdict": "engine-missing",
+    "issues": [
+      "The fanfare condition is incorrectly encoded as checking fieldTraitMin with trait 'Ward'; Ward is a keyword, not a trait. The ability should select another Havencraft follower on your field with Ward, and only if there are at least 3 followers on your field with Ward, give that selected follower Storm. This requires unimplemented condition/filter support for counting followers by keyword (Ward) and targeting followers by keyword."
+    ]
+  },
+  "Hare of Illusions": {
+    "verdict": "fail",
+    "issues": [
+      "The second activated ability is incorrectly encoded as destroyAllFollowers, but the source says 'Banish each follower on the field.' Encode it as banishing all followers on the field, not destroying them."
+    ]
+  },
+  "Harnessed Flame": {
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost/effect incorrectly buries Harnessed Glass via an effect step with sourceOnly true. The source requires putting this card and a Harnessed Glass from your field into their owners' cemeteries as part of the activation cost. Encode the additional cost as burying a Harnessed Glass from your field, not as a post-cost effect restricted to the source."
+    ]
+  }
+}
