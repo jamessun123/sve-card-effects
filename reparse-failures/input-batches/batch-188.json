@@ -1,0 +1,248 @@
+{
+  "Righteous Devil": {
+    "source": {
+      "name": "Righteous Devil",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "4",
+        "attack": "2",
+        "defense": "4",
+        "effect": "[evolve] Give your leader [defense]-3: Evolve this follower. Bane."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-105EN.png",
+      "cardNos": [
+        "BP01-105EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Righteous Devil Evolved",
+      "evolveCost": 3,
+      "keywords": [
+        "evolve",
+        "bane"
+      ],
+      "abilities": []
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve clause is incomplete. The source says \"[evolve] Give your leader [defense]-3: Evolve this follower.\" Add an evolve ability/cost line that requires paying 3 PP and reducing your own leader's defense by 3 as part of evolving, rather than only setting evolveCost: 3."
+    ]
+  },
+  "Riina Tada [Wannabe Legend]": {
+    "source": {
+      "name": "Riina Tada [Wannabe Legend]",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Search your deck for a 1-cost iM@S CG amulet, summon it, then shuffle. [act] Lesson (1): You may summon an iM@S CG follower that costs 1 or less or iM@S CG amulet that costs 1 or less from your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-006EN.png",
+      "cardNos": [
+        "ECP02-006EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Riina Tada [Wannabe Legend] Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "cardClass": "forest",
+                  "cardType": "amulet",
+                  "maxCost": 1,
+                  "trait": "iM@S CG"
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon an iM@S CG follower or amulet from hand",
+                "effect": {
+                  "op": "selectFromHand",
+                  "filter": {
+                    "trait": "iM@S CG",
+                    "maxCost": 1
+                  },
+                  "to": "field",
+                  "optional": true
+                }
+              }
+            ]
+          },
+          "cost": {
+            "pp": 0
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is wrong. \"[act] Lesson (1)\" should not be encoded as cost.pp: 0; encode the proper Lesson (1) cost/condition required by the card text.",
+      "Activated ability filter is too broad. The source allows \"an iM@S CG follower that costs 1 or less or iM@S CG amulet that costs 1 or less from your hand,\" so the hand selection should restrict cardType to follower or amulet, not any iM@S CG card with maxCost 1."
+    ]
+  },
+  "Riina Tada [Wannabe Legend] Evolved": {
+    "source": {
+      "name": "Riina Tada [Wannabe Legend] Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "On Evolve - Return an iM@S CG card on your field to its owner's hand: Select an enemy follower on the field and put it on the bottom of its owner's deck. [act] Lesson (1): You may summon an iM@S CG follower that costs 1 or less or iM@S CG amulet that costs 1 or less from your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-007EN.png",
+      "cardNos": [
+        "ECP02-007EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Riina Tada [Wannabe Legend]",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "filter": {
+                "trait": "iM@S CG"
+              }
+            }
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "putOnBottomOfDeck",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "selectFromHand",
+            "filter": {
+              "trait": "iM@S CG",
+              "maxCost": 1
+            },
+            "to": "field",
+            "optional": true
+          },
+          "cost": {
+            "pp": 0
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve ability is split incorrectly. The source is a single costed ability: \"Return an iM@S CG card on your field to its owner's hand: Select an enemy follower on the field and put it on the bottom of its owner's deck.\" Encode this as one onEvolve ability where returning your iM@S CG field card is the cost/required preceding effect for putting the enemy follower on the bottom of the deck, not as two separate independent onEvolve abilities.",
+      "The return target selector is invalid/incomplete. The target uses allyFieldCard with an inline filter field, which is not supported by the reference target selectors. It should use an implemented way to select an iM@S CG card on your field as the required return target for the cost/effect.",
+      "Activated ability cost is wrong. \"[act] Lesson (1)\" should not be encoded as cost.pp: 0; encode the proper Lesson (1) cost/condition required by the card text.",
+      "Activated ability filter is too broad. The source allows \"an iM@S CG follower that costs 1 or less or iM@S CG amulet that costs 1 or less from your hand,\" so the hand selection should restrict cardType to follower or amulet, not any iM@S CG card with maxCost 1."
+    ]
+  },
+  "Rika Jougasaki Evolved": {
+    "source": {
+      "name": "Rika Jougasaki Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Search your deck for a spell that costs 3 or less, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-048EN.png",
+      "cardNos": [
+        "CP02-048EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Rika Jougasaki",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardType": "spell",
+              "maxCost": 3
+            },
+            "lookAt": 40,
+            "to": "hand",
+            "optional": false,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve search is encoded incorrectly as searchDeckChoose over the whole deck with remainderTo: deckBottom. The source says to search your deck for a spell that costs 3 or less, reveal it, add it to your hand, then shuffle your deck. Encode this as tutorFromDeck with filter { cardType: \"spell\", maxCost: 3 }, to: \"hand\", reveal: true, followed by shuffleDeck."
+    ]
+  }
+}

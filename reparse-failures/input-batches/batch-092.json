@@ -1,0 +1,139 @@
+{
+  "Gilnelise, Omen of Craving": {
+    "source": {
+      "name": "Gilnelise, Omen of Craving",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Omen",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "3",
+        "defense": "5",
+        "effect": "Drain. [fanfare] [cost03]: Search your deck for an Apostle of Craving and Craving's Splendor, put them into your EX area, then shuffle your deck. [fanfare] If each player has 10 maximum play points, draw 3 cards. Whenever you play a [neutral] card, deal 1 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-105EN.png",
+      "cardNos": [
+        "BP05-105EN",
+        "PR-126EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "drain",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "cost": {
+            "pp": 3
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Apostle of Craving"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Craving's Splendor"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "ppMin",
+            "count": 10
+          },
+          "effect": {
+            "op": "draw",
+            "count": 3
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "cardClass": "neutral"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card should not include \"fanfare\" in keywords; Fanfare should be represented by abilities with timing \"fanfare\", not as a keyword.",
+      "The second Fanfare condition is wrong: \"If each player has 10 maximum play points\" is not equivalent to condition.type \"ppMin\" count 10. It should check both players' maximum play points; encode with an appropriate both-players-max-PP condition instead.",
+      "The triggered ability says \"deal 1 damage to each enemy leader,\" but the encoding only deals 1 damage to a single enemy leader target. It should hit each enemy leader simultaneously; add/use an effect that damages all enemy leaders or supports multiplayer leader-wide damage.",
+      "The onCardPlayed ability puts the card restriction at the ability root as \"filter\", which is not a valid ability wrapper field in the reference. The neutral-card restriction should be encoded using a supported card-play trigger filter mechanism."
+    ]
+  },
+  "Gingerbread House": {
+    "source": {
+      "name": "Gingerbread House",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Earth Sigil / Fable",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Give your leader [defense]+3."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-046EN.png",
+      "cardNos": [
+        "BP03-046EN",
+        "SDD03-014EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "earthSigil",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "healLeader",
+            "amount": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card should not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability only.",
+      "The source has \"Stack.\", but the encoding only uses keyword \"earthSigil\" and omits the stack implementation. It should include the Earth Sigil/Stack representation used by the engine, such as an addStack/passive stack-related encoding if required by your card model."
+    ]
+  }
+}

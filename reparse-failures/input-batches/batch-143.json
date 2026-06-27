@@ -1,0 +1,112 @@
+{
+  "Mars, Belligerent Flame": {
+    "source": {
+      "name": "Mars, Belligerent Flame",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Celestial",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. Bane."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-020EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Mars, Belligerent Flame Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": []
+    },
+    "verdict": "fail",
+    "issues": [
+      "The printed keyword Bane is missing from keywords; add \"bane\" to keywords."
+    ]
+  },
+  "Mars, Silent Flame General Evolved": {
+    "source": {
+      "name": "Mars, Silent Flame General Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Commander / Celestial",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "3",
+        "effect": "On Evolve, [cost0X]: Search your deck for an Officer follower that costs X play points or less and put it onto your field. X equals a number of your choice. Whenever an Officer follower is put onto your field, give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-021EN.png",
+      "cardNos": [
+        "BP04-021EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Mars, Silent Flame General",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0
+          },
+          "effect": {
+            "op": "withChosenNumber",
+            "min": 0,
+            "max": 99,
+            "then": {
+              "op": "tutorFromDeck",
+              "filter": {
+                "cardClass": "sword",
+                "cardType": "follower",
+                "trait": "Officer",
+                "maxCost": {
+                  "op": "chosenNumber"
+                }
+              },
+              "to": "field"
+            }
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "cardClass": "sword",
+            "cardType": "follower",
+            "trait": "Officer"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "lastSummoned"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first ability is timed incorrectly as an activated ability. The source text is 'On Evolve, [cost0X]: ...', so it should be an onEvolve ability with a variable PP cost, not a separate activated ability.",
+      "The On Evolve ability's cost is encoded incorrectly as fixed pp: 0. It should cost X play points, where X is a number of your choice, and the search should be for an Officer follower that costs X or less. Encode the chosen number as both the paid cost and the tutor maxCost."
+    ]
+  }
+}

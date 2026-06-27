@@ -1,0 +1,123 @@
+{
+  "Elf Song": {
+    "source": {
+      "name": "Elf Song",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell",
+        "trait": "Pixie",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Summon a Fairy token. Combo (3): Give each [forestcraft] follower on your field [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-013EN.png",
+      "cardNos": [
+        "BP04-013EN",
+        "PR-095EN",
+        "SDD01-014EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Fairy",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "combo",
+                  "count": 3
+                },
+                "then": {
+                  "op": "buffFieldTrait",
+                  "trait": "Forestcraft",
+                  "atk": 1,
+                  "def": 1,
+                  "otherOnly": false
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Combo (3) buff is encoded with buffFieldTrait using trait: \"Forestcraft\", but the source says \"each [forestcraft] follower on your field\"; encode this as a class-based field buff (e.g. buffFieldTrait with cardClass: \"forest\") instead of a trait-based one."
+    ]
+  },
+  "Elf Sorcerer": {
+    "source": {
+      "name": "Elf Sorcerer",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[fanfare][lastwords] Select an enemy follower on the field and give it [attack]-5/[defense]-5."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-016EN.png",
+      "cardNos": [
+        "BP17-016EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": -5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamage",
+            "amount": -5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Both [fanfare] and [lastwords] abilities are encoded as dealDamage amount -5, but the source gives the target [attack]-5/[defense]-5; replace each with a buff effect on an enemy follower with atk: -5 and def: -5."
+    ]
+  }
+}

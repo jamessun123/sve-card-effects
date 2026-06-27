@@ -1,0 +1,80 @@
+{
+  "Kagero, Swordbound Soul": {
+    "source": {
+      "name": "Kagero, Swordbound Soul",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Departed",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Necrocharge (10) - This follower has Rush and Bane. [fanfare] Choose one. (1) Select a Soulstrike in your cemetery and put it into your EX area. NC (20) - It costs 2 less to play this turn. (2) Bury the top 2 cards of your deck."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-076EN",
+        "PR-363EN",
+        "SDD05-010EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "rush",
+              "bane"
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select a Soulstrike in your cemetery and put it into your EX area",
+                "effect": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "identityName": "Soulstrike"
+                  },
+                  "to": "exArea"
+                }
+              },
+              {
+                "label": "Bury the top 2 cards of your deck",
+                "effect": {
+                  "op": "mill",
+                  "count": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare option to move Soulstrike from your cemetery to your EX area is missing the NC (20) rider. It should grant the selected Soulstrike card a play cost reduction of 2 this turn when Necrocharge (20) is active, e.g. use tutorFromCemetery with playCostReduction: 2 under a necrocharge 20 condition or wrap the option in a sequence/if."
+    ]
+  }
+}

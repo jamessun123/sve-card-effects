@@ -1,0 +1,45 @@
+{
+  "Scorpius": {
+    "source": {
+      "name": "Scorpius",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon / Celestial",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Bane. Strike: Deal 1 damage to each leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-096EN.png",
+      "cardNos": [
+        "BP04-096EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "bane"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Strike ability is encoded incorrectly as dealDamageAllEnemies 1, which damages all enemy followers and the enemy leader; it should deal 1 damage to each leader, so replace it with an effect that damages both leaders rather than enemy followers."
+    ]
+  }
+}

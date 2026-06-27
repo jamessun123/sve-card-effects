@@ -1,0 +1,128 @@
+{
+  "Beastfaced Mage": {
+    "source": {
+      "name": "Beastfaced Mage",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[act] [engage], Earth Rite: Select an enemy follower on the field and deal it 2 damage. [lastwords] Summon a Magic Sediment token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-057EN.png",
+      "cardNos": [
+        "BP09-057EN",
+        "PR-222EN",
+        "SDD03-018EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "field",
+          "cost": {
+            "engage": true,
+            "earthRite": {
+              "count": 1
+            }
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Magic Sediment",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove incorrect keywords \"fanfare\" and \"lastWords\" from keywords; the card has no Fanfare, and Last Words should remain only as an ability."
+    ]
+  },
+  "Beating of the Dragonwings": {
+    "source": {
+      "name": "Beating of the Dragonwings",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Dragonewt",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "As an additional cost to play this card, bury a Dragonewt follower. ---------- Select an enemy follower on the field. Deal it 4 damage and draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-070EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buryFieldFollowers",
+                "filter": {
+                  "trait": "Dragonewt",
+                  "cardType": "follower"
+                },
+                "sourceOnly": true
+              },
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is encoded incorrectly as buryFieldFollowers with sourceOnly:true, which buries this card instead of a Dragonewt follower on your field. Encode the play cost as selecting and burying a Dragonewt follower you control, e.g. a cost/effect using buryFromFieldSelect filtered to trait Dragonewt and cardType follower."
+    ]
+  }
+}

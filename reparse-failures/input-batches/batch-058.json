@@ -1,0 +1,275 @@
+{
+  "Disciple of Usurpation": {
+    "source": {
+      "name": "Disciple of Usurpation",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Omen / Thief",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "2",
+        "effect": "Storm. Strike: Each opponent puts the top card of their deck into their cemetery. Then, if there are at least 10 cards in opponents' cemeteries, give this follower [attack]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-025EN.png",
+      "cardNos": [
+        "BP05-025EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "millOpponent",
+                "count": 1
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "opponentCemeteryMin",
+                  "count": 10
+                },
+                "then": {
+                  "op": "buff",
+                  "atk": 2,
+                  "def": 0,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; Strike should be represented only as a timinged ability, while the printed keyword here is just Storm."
+    ]
+  },
+  "Displacer Bot": {
+    "source": {
+      "name": "Displacer Bot",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Machina / Golem",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. Ward. [fanfare] Look at the top 4 cards of your deck. You may put a Machina card from among them into your EX area. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-042EN.png",
+      "cardNos": [
+        "BP07-042EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Displacer Bot Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Machina"
+            },
+            "lookAt": 4,
+            "to": "exArea",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line should be represented by evolveCost/evolvesTo and Fanfare by the ability timing, while only Ward is a printed keyword."
+    ]
+  },
+  "Disrestan, Ocean Harbinger": {
+    "source": {
+      "name": "Disrestan, Ocean Harbinger",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Marine",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "5",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Discard a Marine card: Do the following 3 times. \"Put the top card of your deck into your EX area.\""
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-057EN.png",
+      "cardNos": [
+        "BP17-057EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Disrestan, Ocean Harbinger Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a Marine card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Marine"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "summon",
+                  "tokenName": "Put the top card of your deck into your EX area.",
+                  "count": 3,
+                  "zone": "exArea"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line should be represented by evolveCost/evolvesTo and Fanfare by the ability timing, not as keywords.",
+      "The Fanfare result is encoded incorrectly as summoning a token named \"Put the top card of your deck into your EX area.\"; after discarding a Marine card, it should put the top card of your deck into your EX area three times. Encode this as a sequence of three putDeckTopToExArea effects."
+    ]
+  },
+  "Divine Thunder": {
+    "source": {
+      "name": "Divine Thunder",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Deity",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field. Deal 7 damage to it and 3 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-122EN.png",
+      "cardNos": [
+        "BP16-122EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 7,
+            "leaderAmount": 3
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The effect op is incorrect; use the implemented op \"damageFollowerAndLeader\" with followerAmount 7 and leaderAmount 3 instead of the nonexistent \"dealDamageFollowerAndLeader\"."
+    ]
+  },
+  "Divine Tiger": {
+    "source": {
+      "name": "Divine Tiger",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Dragonewt / Wyrmkin",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When this card is discarded, you may put it into your EX area. ---------- Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-072EN.png",
+      "cardNos": [
+        "BP04-072EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveSourceToExArea"
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The discard trigger is missing and the spell effect is conflated; encode \"When this card is discarded, you may put it into your EX area\" as a separate onDiscard ability with moveSourceToExArea, and keep the spell ability as only \"deal 3 damage to an enemy follower.\"",
+      "The spell ability should not automatically move this card to the EX area when played; moveSourceToExArea must be removed from the spell effect."
+    ]
+  }
+}

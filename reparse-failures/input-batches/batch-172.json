@@ -1,0 +1,155 @@
+{
+  "Patrick, Rhiceros Knight": {
+    "source": {
+      "name": "Patrick, Rhiceros Knight",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Commander / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward. [fanfare] You may put a Naterran Great Tree token onto your field or into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-018EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Patrick, Rhiceros Knight Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Naterran Great Tree token onto your field",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Put a Naterran Great Tree token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"You may put a Naterran Great Tree token onto your field or into your EX area\"; encode this as optional. Change the effect from mandatory \"choose\" to an optional choice, e.g. a choose/chooseMultiple form that allows declining, or otherwise mark the selection optional."
+    ]
+  },
+  "Paula, Icy Warmth": {
+    "source": {
+      "name": "Paula, Icy Warmth",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Pixie",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower into a Paula, Gentle Warmth or Paula, Passionate Warmth."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-004EN.png",
+      "cardNos": [
+        "BP09-004EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Paula, Gentle Warmth Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve line is incomplete: this follower can evolve into \"Paula, Gentle Warmth\" or \"Paula, Passionate Warmth\", but parsed only links to \"Paula, Gentle Warmth Evolved\". Encode the alternate evolve destination as well, using the engine's supported multi-destination evolve linkage if available."
+    ]
+  },
+  "Penguin Guardian": {
+    "source": {
+      "name": "Penguin Guardian",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "3",
+        "effect": "[evolve] [cost03]: Evolve this. Ward. [fanfare] [cost03]: Give this [attack]+2/[defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-032EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Penguin Guardian Evolved",
+      "evolveCost": 3,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is missing its cost. Source says \"[fanfare] [cost03]: Give this [attack]+2/[defense]+2.\" Encode the fanfare with a 3 PP cost requirement before the buff, rather than an unconditional buff."
+    ]
+  }
+}

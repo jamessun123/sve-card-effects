@@ -1,0 +1,374 @@
+{
+  "Edelweiss, Sagelight Ward Evolved": {
+    "source": {
+      "name": "Edelweiss, Sagelight Ward Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Mage / Golem",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Summon a Strikeform Golem token. Put a Guardform Golem token into your EX area. On Super-Evolve - Draw 2 cards. Whenever a Golem follower is put onto your field, add 1 to a Stack on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-044EN.png",
+      "cardNos": [
+        "BP16-044EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Strikeform Golem",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Guardform Golem",
+                "count": 1,
+                "zone": "exArea"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onSuperEvolve",
+          "effect": {
+            "op": "draw",
+            "count": 2
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "trait": "Golem"
+          },
+          "effect": {
+            "op": "addStack",
+            "amount": 1
+          }
+        }
+      ],
+      "specialType": "evolved"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The 'Whenever a Golem follower is put onto your field' ability is encoded incorrectly: the ally-enter trigger should target only Golem followers, but the DSL places `filter` at the ability root where it is unsupported. Encode this as an `onAllyFollowerEnter` ability with a supported follower filter/condition so it only triggers for Golem followers."
+    ]
+  },
+  "Edgy Elf": {
+    "source": {
+      "name": "Edgy Elf",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Storm. Strike - Banish the top 3 cards of your deck: Give this follower [attack]+1/[defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-015EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "millToBanish",
+                "count": 3
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `strike` from `keywords`; Strike is a triggered ability timing and should only be represented as the `timing: \"strike\"` ability, while only Storm belongs in `keywords`."
+    ]
+  },
+  "Edict of Truth": {
+    "source": {
+      "name": "Edict of Truth",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Omen / Mage",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When a Raio, Omen of Truth is put onto your field, banish this card from your cemetery: Gain 1 Evolution Point. ---------- Look at the top 5 cards of your deck. You may put up to 2 cards that cost 3 or less from among them into your EX area. They cost 3 less to play this turn. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-041EN.png",
+      "cardNos": [
+        "BP08-041EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "identityName": "Raio, Omen of Truth"
+          },
+          "effect": {
+            "op": "recoverPp",
+            "amount": 1
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "cost": {
+            "banishSelf": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "gainEvolutionPoint",
+                "amount": 1
+              },
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "maxCost": 3
+                },
+                "lookAt": 5,
+                "to": "exArea",
+                "optional": true,
+                "playCostReduction": 3,
+                "remainderTo": "deckBottom"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery trigger is encoded with the wrong effect and timing separation: 'When a Raio, Omen of Truth is put onto your field, banish this card from your cemetery: Gain 1 Evolution Point.' should be a triggered ability from the cemetery (`timing: \"onAllyFollowerEnter\"`, `activateFrom: \"cemetery\"`) whose effect/cost banishes this card and gains 1 evolution point, not an on-field trigger that recovers PP.",
+      "The spell effect is missing from `timing: \"spell\"`: the top-level spell ability should look at the top 5 cards of your deck and let you put up to 2 cards that cost 3 or less into your EX area with cost reduction 3, then put the rest on the bottom of your deck.",
+      "The current `searchDeckChoose` under the activated cemetery ability is incomplete because the source allows up to 2 qualifying cards, not just a single optional card; the spell effect should be encoded as a top-5 selection of up to 2 cards to EX area with `playCostReduction: 3` and the remainder to the bottom."
+    ]
+  },
+  "Eidolon of Madness Evolved": {
+    "source": {
+      "name": "Eidolon of Madness Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet / Evolved",
+        "trait": "Zealot / Eidolon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "-",
+        "attack": "-",
+        "defense": "-",
+        "effect": "On Evolve - Select an enemy follower on the field and banish it. [lastwords] Deal 3 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-090EN.png",
+      "cardNos": [
+        "BP08-090EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "banish",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 3,
+            "followersOnly": false
+          }
+        }
+      ],
+      "specialType": "evolved"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words ability is encoded incorrectly: it should deal 3 damage to each enemy leader, not to all enemies. Replace `dealDamageAllEnemies` with an effect that deals 3 damage to the enemy leader only."
+    ]
+  },
+  "Eleanor, Cosmic Flower": {
+    "source": {
+      "name": "Eleanor, Cosmic Flower",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Discard a spell: Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-039EN.png",
+      "cardNos": [
+        "BP07-039EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": []
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a spell",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "cardType": "spell"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is not encoded correctly: `[evolve] [cost01]: Evolve this follower.` should be represented by evolve linkage/cost (`evolveCost: 1`) instead of adding `evolve`/`fanfare` to `keywords` and using a placeholder passiveKeywords ability.",
+      "Remove `evolve` and `fanfare` from `keywords`; these are not printed keywords and should not appear there."
+    ]
+  },
+  "Eleanor, Cosmic Flower Evolved": {
+    "source": {
+      "name": "Eleanor, Cosmic Flower Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Mage",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Search your deck for a Splendid Conjury, put it into your EX area, then shuffle your deck. Spellchain (10) - It costs 2 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-040EN.png",
+      "cardNos": [
+        "BP07-040EN",
+        "PR-214EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Splendid Conjury"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "spellchain",
+            "count": 10
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 2
+          }
+        }
+      ],
+      "specialType": "evolved"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (10) clause is attached incorrectly as a passive self cost reduction. In the source, 'Spellchain (10) - It costs 2 less to play this turn.' refers to the searched 'Splendid Conjury' put into your EX area during On Evolve, so the cost reduction should be applied conditionally to that tutored card as part of the On Evolve effect, not as a passive ability on Eleanor herself."
+    ]
+  }
+}

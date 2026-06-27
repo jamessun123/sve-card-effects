@@ -1,0 +1,276 @@
+{
+  "Geno, Machine Artisan Evolved": {
+    "source": {
+      "name": "Geno, Machine Artisan Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Commander / Supreme",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve: Search your deck for an amulet, reveal it, add it to your hand, then shuffle your deck. Whenever you play an amulet, select a follower on your field and give it [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-028EN.png",
+      "cardNos": [
+        "BP05-028EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Geno, Machine Artisan",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "cardType": "amulet"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "cardType": "amulet"
+          },
+          "effect": {
+            "op": "buff",
+            "def": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "manual"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The 'Whenever you play an amulet' trigger is encoded with a top-level 'filter', but card-play triggers should gate amulets via a condition/effect structure supported by the DSL; encode it so it triggers only when you play an amulet and then buffs a follower on your field +0/+1."
+    ]
+  },
+  "Georgius": {
+    "source": {
+      "name": "Georgius",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin / Cutthroat / Draconic Duelist",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Select an enemy follower on the field and, if Overflow is active for you, deal 2 damage to it and its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-055EN.png",
+      "cardNos": [
+        "BP11-055EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Georgius Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "dealDamageFollowerAndLeader",
+              "followerAmount": 2,
+              "leaderAmount": 2
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is missing the required initial target selection of an enemy follower; it should select an enemy follower on the field and only then, if Overflow is active, deal 2 damage to that follower and its leader.",
+      "The effect op is incorrect: use the implemented op 'damageFollowerAndLeader' instead of unsupported 'dealDamageFollowerAndLeader'.",
+      "'fanfare' and 'evolve' should not be listed in keywords; keep evolve linkage via evolveCost/evolvesTo and represent fanfare as an ability timing only."
+    ]
+  },
+  "Georgius Evolved": {
+    "source": {
+      "name": "Georgius Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Wyrmkin / Cutthroat / Draconic Duelist",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "On Evolve - Destroy each enemy follower with 3 defense or less on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-056EN.png",
+      "cardNos": [
+        "BP11-056EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Georgius",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "destroyAllEnemyField"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is overencoded as 'destroyAllEnemyField'; it should destroy each enemy follower with 3 defense or less on the field, not all enemy followers and amulets."
+    ]
+  },
+  "Ghastly Banishment": {
+    "source": {
+      "name": "Ghastly Banishment",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Put 2 Ghost tokens into your EX area. They cost 1 less to play this turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-086EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Ghost",
+                "count": 2,
+                "zone": "exArea"
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cost reduction is encoded as a generic self 'playCostReduction', but the source says the 2 Ghost tokens put into your EX area cost 1 less to play this turn. It should grant a 1-cost reduction specifically to those Ghost cards in EX area for this turn, not reduce this spell's own cost."
+    ]
+  },
+  "Ghastly Treant": {
+    "source": {
+      "name": "Ghastly Treant",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Verdant",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Put a Naterran Great Tree token into your EX area. [act] Banish a Naterran Great Tree from your field: Give your leader [defense]+3. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-013EN.png",
+      "cardNos": [
+        "BP07-013EN",
+        "PR-178EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Naterran Great Tree",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "buryFromField": {
+              "identityName": "Naterran Great Tree"
+            },
+            "buryFieldCount": 1
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is wrong: the source says 'Banish a Naterran Great Tree from your field', but the parsed cost uses bury-from-field. It should banish 1 Naterran Great Tree on your field as the activation cost.",
+      "The activated cost JSON shape is invalid for the reference. Use an implemented activated cost form such as a banish/bury selector cost matching a Naterran Great Tree on your field."
+    ]
+  }
+}

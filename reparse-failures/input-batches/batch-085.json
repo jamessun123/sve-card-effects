@@ -1,0 +1,195 @@
+{
+  "Frederica Miyamoto": {
+    "source": {
+      "name": "Frederica Miyamoto",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Silver",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Once per turn, when you play a card that originally costs 5 or more, select an enemy leader or enemy follower on the field. Deal it 3 damage and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-044EN.png",
+      "cardNos": [
+        "CP02-044EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onCardPlayed",
+          "condition": {
+            "type": "always"
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger is missing the filter 'when you play a card that originally costs 5 or more'. The onCardPlayed ability should restrict to cards with original cost 5 or more.",
+      "The target is encoded incorrectly as only the enemy leader. It should target an enemy leader or an enemy follower on the field.",
+      "The damage effect should select a single valid target, then deal 3 damage to that selected target before drawing a card."
+    ]
+  },
+  "Friendly Embrace": {
+    "source": {
+      "name": "Friendly Embrace",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell",
+        "trait": "Machina / Natura / Beast",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When playing this, [engage] 2 cards on your field named Naterran Great Tree: This costs 2 less to play. ---------- Give your leader [defense]+1. Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-007EN.png",
+      "cardNos": [
+        "BP17-007EN",
+        "PR-476EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "engage",
+                "targets": {
+                  "type": "allyFieldCard",
+                  "count": 2,
+                  "filter": {
+                    "identityName": "Naterran Great Tree"
+                  }
+                }
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 2
+              },
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The 'When playing this, [engage] 2 cards on your field named Naterran Great Tree: This costs 2 less to play' clause is encoded incorrectly as part of the spell's resolving effect. It should be encoded as an optional play-time additional cost that reduces this card's play cost by 2, not as an effect that resolves after the spell is played.",
+      "The play-cost reduction is encoded with playCostReduction inside the spell effect, which changes the card after it is already being played. It should instead be represented as a play-time optional cost/payment tied to this card's cost reduction."
+    ]
+  },
+  "Frigid Necromancer": {
+    "source": {
+      "name": "Frigid Necromancer",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Necromancer",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[act] [engage]: Select a follower in your cemetery that costs 8 or less. Summon it and change its attack and defense to 1. [lastwords] Banish this."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-076EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardType": "follower",
+                  "maxCost": 8
+                },
+                "to": "field"
+              },
+              {
+                "op": "setStats",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "banishSelf"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability uses tutorFromCemetery to put a card onto the field, but the source text says to select a follower in your cemetery and summon it. It should use summonFromCemetery with filter cardType follower and maxCost 8, count 1, then set the summoned follower's stats to 1/1.",
+      "The card incorrectly lists 'lastWords' as a keyword. Last Words should be represented as an ability with timing 'lastWords', not as a keyword."
+    ]
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "Star Phoenix": {
+    "source": {
+      "name": "Star Phoenix",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Phoenix / Celestial",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve][cost01]: Evolve this follower. During your turn, when you play a [dragoncraft] spell, [cost01]: Put this card from your cemetery onto your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-064EN.png",
+      "cardNos": [
+        "BP04-064EN",
+        "PR-103EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Star Phoenix Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "reviveSelfFromCemetery"
+          },
+          "cost": {
+            "pp": 1
+          },
+          "oncePerTurn": false
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The revive ability is missing the condition \"During your turn\"; add an appropriate turn restriction/condition so it only triggers on your turn when you play a Dragoncraft spell.",
+      "The triggered ability is incorrectly encoded with a cost on timing \"onCardPlayed\"; it should be an on-card-play trigger for Dragoncraft spells that then pays [cost01] to put this card from your cemetery onto your field, not a generic trigger with an activated-style cost field."
+    ]
+  },
+  "Star of the Show": {
+    "source": {
+      "name": "Star of the Show",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "You may play this for 3 more play points. ---------- Select an enemy follower on the field. Destroy it and, if you played this for 3 more play points, search your deck for a follower with \"Tsukasa Kiryu\" in its name, summon it, then shuffle."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-046EN.png",
+      "cardNos": [
+        "ECP02-046EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "optionalCost",
+            "label": "You may play this for 3 more play points",
+            "cost": {
+              "op": "spendPp",
+              "amount": 3
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                },
+                {
+                  "op": "if",
+                  "condition": {
+                    "type": "always"
+                  },
+                  "then": {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityNameContains": "Tsukasa Kiryu"
+                    },
+                    "to": "field"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The extra 3 PP clause is encoded incorrectly: the card always destroys an enemy follower, and only if you played it for 3 more play points do you search and summon Tsukasa Kiryu; move the destroy effect outside the optional-cost \"then\" branch so it always happens.",
+      "The conditional follow-up is wrong: the parsed card uses condition type \"always\", causing the deck search to always occur. It should occur only if this spell was played for 3 more play points.",
+      "The deck search should summon a follower with \"Tsukasa Kiryu\" in its name and then shuffle; ensure the search is conditional on the extra-cost payment and includes the required shuffle after searching."
+    ]
+  }
+}

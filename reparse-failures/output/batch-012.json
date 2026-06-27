@@ -1,0 +1,61 @@
+{
+  "Ancient Alchemist": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Guardform Golem",
+            "count": 2,
+            "zone": "exArea"
+          }
+        }
+      }
+    ],
+    "evolvesTo": "Ancient Alchemist Evolved",
+    "evolveCost": 3,
+    "parseConfidence": "high"
+  },
+  "Ancient Amplifier": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Mystic Artifact",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "engage": true,
+          "burySelf": true
+        },
+        "effect": {
+          "op": "buff",
+          "atk": 2,
+          "def": 1,
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "filter": {
+              "printingType": "token"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

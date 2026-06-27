@@ -1,0 +1,59 @@
+{
+  "Temple Healer": {
+    "source": {
+      "name": "Temple Healer",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this: Ward. [fanfare] Discard a follower with Ward: Draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-106EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Temple Healer Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a follower with Ward",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "cardType": "follower"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare optional discard cost is missing the Ward requirement. Change discardFromHand filter from only {\"cardType\":\"follower\"} to a filter that specifically requires a follower with Ward.",
+      "The evolve linkage is incomplete for a card with an explicit [evolve] ability line. Add the corresponding evolve ability entry if your schema expects evolve timing abilities rather than only keywords/evolveCost."
+    ]
+  }
+}

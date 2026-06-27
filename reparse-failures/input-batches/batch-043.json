@@ -1,0 +1,107 @@
+{
+  "Clash of Heroes": {
+    "source": {
+      "name": "Clash of Heroes",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Arena",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower on your field and an enemy follower on the field. Deal the first follower damage equal to the second's attack. Deal the second follower damage equal to the first's attack."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-112EN.png",
+      "cardNos": [
+        "BP06-112EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "clash"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as clash. It should deal damage to one chosen follower on your field equal to the chosen enemy follower's attack, then deal damage to that enemy follower equal to the first follower's attack; replace the effect with a two-target damage exchange implementation rather than clash."
+    ]
+  },
+  "Classroom Lily": {
+    "source": {
+      "name": "Classroom Lily",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Gold",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Give your leader [defense]+2. Draw a card. [q][act] [cost02], [engage], bury this card: Select an iM@S CG follower in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-092EN.png",
+      "cardNos": [
+        "CP02-092EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 2
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "iM@S CG",
+              "cardType": "follower"
+            },
+            "to": "hand"
+          },
+          "cost": {
+            "pp": 2,
+            "engage": true,
+            "burySelf": true
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing quick timing metadata. Add \"quick\": true to the activated ability to match [q][act]."
+    ]
+  }
+}

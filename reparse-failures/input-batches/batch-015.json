@@ -1,0 +1,347 @@
+{
+  "Anne, Belle of Mysteria Evolved": {
+    "source": {
+      "name": "Anne, Belle of Mysteria Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Mage / Academic / Princess",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "5",
+        "effect": "On Evolve: Search your deck for an Academic follower with a different name from this card, reveal it, and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-039EN.png",
+      "cardNos": [
+        "BP02-039EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Anne, Belle of Mysteria",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "Academic",
+              "cardType": "follower",
+              "excludeIdentityName": "Anne, Belle of Mysteria Evolved"
+            },
+            "to": "hand",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor excludes the wrong name. 'with a different name from this card' on the evolved card means it should exclude identityName 'Anne, Belle of Mysteria', not 'Anne, Belle of Mysteria Evolved'."
+    ]
+  },
+  "Anne, Mysterian Imperatrix": {
+    "source": {
+      "name": "Anne, Mysterian Imperatrix",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Academic / Princess / Cutthroat",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Discard an Academic card: Draw a card. If there are at least 5 Academic cards in your cemetery, put an Anne's Summoning token into your EX area. [act] [engage]: You may play a Rending Blast from your evolve deck. Activate only if there are at least 15 Academic cards in your cemetery."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-036EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard an Academic card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Academic"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "draw",
+                  "count": 1
+                },
+                {
+                  "op": "if",
+                  "condition": {
+                    "type": "ownCemeteryTraitMin",
+                    "trait": "Academic",
+                    "count": 5
+                  },
+                  "then": {
+                    "op": "summon",
+                    "tokenName": "Anne's Summoning",
+                    "count": 1,
+                    "zone": "exArea"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "field",
+          "cost": {
+            "engage": true
+          },
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Academic",
+            "count": 15
+          },
+          "effect": {
+            "op": "tutorFromEvolveDeck",
+            "filter": {
+              "identityName": "Rending Blast"
+            },
+            "to": "field",
+            "optional": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is encoded as tutoring Rending Blast from the evolve deck to the field, but the source says 'You may play a Rending Blast from your evolve deck.' It should be encoded as playing/casting that specific card from the evolve deck rather than tutoring it to the field."
+    ]
+  },
+  "Annihilating Onslaught": {
+    "source": {
+      "name": "Annihilating Onslaught",
+      "type": "token",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell / Token",
+        "trait": "Omen / Hunter",
+        "rarity": "Premium",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "If there are at least 6 Hunter cards in your cemetery, deal 6 damage to each enemy leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-PR09EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Hunter",
+              "count": 6
+            },
+            "then": {
+              "op": "dealDamageAllEnemies",
+              "amount": 6,
+              "followersOnly": false
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell should deal 6 damage to each enemy leader only, but the parsed effect uses dealDamageAllEnemies with followersOnly false, which would also hit followers. Replace it with damage targeted only at enemy leaders."
+    ]
+  },
+  "Anvelt, Judgment's Cannon": {
+    "source": {
+      "name": "Anvelt, Judgment's Cannon",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Faith",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "6",
+        "attack": "4",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward. [fanfare] Select up to 2 enemy followers on the field and deal them 3 damage. If there's a Wasteland card in your EX area, deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-087EN.png",
+      "cardNos": [
+        "BP11-087EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Anvelt, Judgment's Cannon Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "choose",
+                "min": 1,
+                "max": 2,
+                "options": [
+                  {
+                    "label": "Deal 3 damage to an enemy follower",
+                    "effect": {
+                      "op": "dealDamage",
+                      "amount": 3,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Wasteland",
+                  "count": 1
+                },
+                "then": {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 2,
+                  "followersOnly": false
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says 'Select up to 2 enemy followers on the field and deal them 3 damage,' but the parsed choose effect has min 1, forcing at least one target. It should allow 0 to 2 targets.",
+      "The conditional damage should hit each enemy leader only, but the parsed effect uses dealDamageAllEnemies with followersOnly false, which also damages followers. Replace it with damage to enemy leaders only."
+    ]
+  },
+  "Anvelt, Judgment's Cannon Evolved": {
+    "source": {
+      "name": "Anvelt, Judgment's Cannon Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Wasteland / Faith",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "6",
+        "effect": "Ward. On Evolve - Select up to 2 enemy followers on the field and deal them 3 damage. If there's a Wasteland card in your EX area, deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-088EN.png",
+      "cardNos": [
+        "BP11-088EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Anvelt, Judgment's Cannon",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "choose",
+                "min": 1,
+                "max": 2,
+                "options": [
+                  {
+                    "label": "Deal 3 damage to an enemy follower",
+                    "effect": {
+                      "op": "dealDamage",
+                      "amount": 3,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Wasteland",
+                  "count": 1
+                },
+                "then": {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 2,
+                  "followersOnly": false
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect says 'Select up to 2 enemy followers on the field and deal them 3 damage,' but the parsed choose effect has min 1, forcing at least one target. It should allow 0 to 2 targets.",
+      "The conditional damage should hit each enemy leader only, but the parsed effect uses dealDamageAllEnemies with followersOnly false, which also damages followers. Replace it with damage to enemy leaders only."
+    ]
+  }
+}

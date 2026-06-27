@@ -1,0 +1,45 @@
+{
+  "Magical Squirrel Evolved": {
+    "source": {
+      "name": "Magical Squirrel Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Arcanaform / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Select an enemy follower on the field. Deal 1 damage to it and its leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-049EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Magical Squirrel",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 1,
+            "leaderAmount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is missing target selection for the enemy follower. Encode it as damageFollowerAndLeader with the required selected enemy follower target, or use a sequence that first selects an enemy follower and then deals 1 damage to it and its leader."
+    ]
+  }
+}

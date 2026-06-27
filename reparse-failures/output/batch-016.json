@@ -1,0 +1,120 @@
+{
+  "Apostle of Craving": {
+    "evolvesTo": "Apostle of Craving Evolved",
+    "evolveCost": 1,
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "inExArea"
+        },
+        "effect": {
+          "op": "exAreaPlayCostReduction",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "namedFollowerOnFieldByName",
+          "identityName": "Gilnelise, Omen of Craving"
+        },
+        "effect": {
+          "op": "exAreaPlayCostReduction",
+          "amount": 3
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "rush",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Apostle of Craving Evolved": {
+    "evolvesFrom": "Apostle of Craving",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "buff",
+              "atk": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Apostle of Lust": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "count": 1
+        }
+      },
+      {
+        "timing": "onAllyFollowerEnter",
+        "filter": {
+          "trait": "Demon"
+        },
+        "effect": {
+          "op": "healLeader",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Apostle of Repose": {
+    "evolvesTo": "Apostle of Repose Evolved",
+    "evolveCost": 2,
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "recoverPp",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

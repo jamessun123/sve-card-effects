@@ -1,0 +1,177 @@
+{
+  "Okami": {
+    "source": {
+      "name": "Okami",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "4",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Whenever another follower is put onto your field, give this follower [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-021EN.png",
+      "cardNos": [
+        "BP01-021EN",
+        "SD01-008EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger should exclude this card itself: encode the ability so it triggers when another ally follower enters your field, e.g. onAllyFollowerEnter with a filter/selector excluding self if required by engine."
+    ]
+  },
+  "Oldblood King": {
+    "source": {
+      "name": "Oldblood King",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Vampire",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "4",
+        "attack": "2",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Summon 2 Forest Bat tokens. While this card is on your field, each Forest Bat on your field has Rush and Assail."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-092EN.png",
+      "cardNos": [
+        "BP09-092EN",
+        "PR-284EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Oldblood King Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Forest Bat",
+            "count": 2,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "trait": "Forest Bat",
+            "excludeSelf": false
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "assail",
+            "trait": "Forest Bat",
+            "excludeSelf": false
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Rush to each Forest Bat on your field by matching the specific card identity/name, not a trait.",
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Assail to each Forest Bat on your field by matching the specific card identity/name, not a trait."
+    ]
+  },
+  "Oldblood King Evolved": {
+    "source": {
+      "name": "Oldblood King Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Vampire",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "5",
+        "effect": "On Evolve - Give each Forest Bat on your field [attack]+1. While this card is on your field, each Forest Bat on your field has Rush and Assail."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-093EN.png",
+      "cardNos": [
+        "BP09-093EN",
+        "PR-285EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Oldblood King",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": "Forest Bat",
+            "atk": 1,
+            "def": 0,
+            "otherOnly": false
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "trait": "Forest Bat",
+            "excludeSelf": false
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "assail",
+            "trait": "Forest Bat",
+            "excludeSelf": false
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve buff incorrectly uses trait \"Forest Bat\"; it should give each Forest Bat on your field +1 attack by matching the specific card identity/name, not a trait.",
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Rush to each Forest Bat on your field by matching the specific card identity/name, not a trait.",
+      "The passive aura incorrectly uses trait \"Forest Bat\"; it should grant Assail to each Forest Bat on your field by matching the specific card identity/name, not a trait."
+    ]
+  }
+}

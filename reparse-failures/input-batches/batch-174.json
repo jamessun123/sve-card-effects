@@ -1,0 +1,126 @@
+{
+  "Phoenix Empress": {
+    "source": {
+      "name": "Phoenix Empress",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Phoenix",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "5",
+        "attack": "5",
+        "defense": "3",
+        "effect": "Rush. [lastwords] Decrease your max play points by 1: Put this card onto its owner's field engaged."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-055EN.png",
+      "cardNos": [
+        "BP06-055EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Decrease your max play points by 1",
+            "cost": {
+              "op": "increaseMaxPp",
+              "amount": -1
+            },
+            "then": {
+              "op": "summon",
+              "tokenName": "Phoenix Empress",
+              "count": 1,
+              "zone": "field"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Last Words revival is encoded incorrectly: after paying the optional cost of decreasing your max play points by 1, this card should return itself to the field engaged, not summon a token copy. Replace the then effect with a self-revival effect such as reviveToField with engaged:true."
+    ]
+  },
+  "Piercye, Queen of Frost Evolved": {
+    "source": {
+      "name": "Piercye, Queen of Frost Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Elf",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Search your deck for a follower that costs 2 or less, reveal it, add it to your hand, then shuffle. Whenever a follower on your field evolves, deal 1 damage to each enemy leader and 2 damage to each enemy follower on the field, and give your leader [defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-005EN",
+        "PR-371EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Piercye, Queen of Frost",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "hand",
+            "reveal": true
+          }
+        },
+        {
+          "timing": "onAllyEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": true
+              },
+              {
+                "op": "healLeader",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is incomplete: after searching your deck for a follower that costs 2 or less, revealing it, and adding it to your hand, the effect must also shuffle your deck. Add a shuffleDeck step after tutorFromDeck."
+    ]
+  }
+}

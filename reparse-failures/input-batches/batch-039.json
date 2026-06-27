@@ -1,0 +1,113 @@
+{
+  "Ceryneian Lighthind Evolved": {
+    "source": {
+      "name": "Ceryneian Lighthind Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith / Beast / Lightborne",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Ward. On Evolve - Bury an amulet: Give your leader [defense]+4."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-110EN.png",
+      "cardNos": [
+        "BP09-110EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Ceryneian Hind",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "buryFieldFollowers",
+            "filter": {
+              "cardType": "amulet"
+            },
+            "count": 1
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "healLeader",
+            "amount": 4
+          }
+        }
+      ],
+      "specialType": "evolved"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability incorrectly uses buryFieldFollowers with filter cardType: amulet and an unsupported count field. It should require burying 1 amulet as a cost/condition, then giving your leader 4 defense only if that amulet was buried.",
+      "The healLeader effect is incorrectly a separate unconditional On Evolve ability. It should be part of the same On Evolve ability after the 'Bury an amulet' requirement, e.g. an optionalCost or equivalent gated sequence where burying an amulet leads to healLeader 4."
+    ]
+  },
+  "Chakram Wizard": {
+    "source": {
+      "name": "Chakram Wizard",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Select an enemy follower on the field and, if there's another Mage follower on your field, deal the selected follower 3 damage."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-047EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Mage"
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "evolvesTo": "Chakram Wizard Evolved",
+      "evolveCost": 1,
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare condition is encoded incorrectly as namedFollowerOnFieldByName 'Mage'. The source requires 'if there's another Mage follower on your field', so it should check for at least 1 other follower on your field with trait Mage, excluding this card.",
+      "The Fanfare ability should still select an enemy follower first and then deal 3 damage to the selected follower only if the 'another Mage follower' condition is met. Replace the incorrect condition with a field trait/count check for another Mage follower and keep the damage targeted at the selected enemy follower."
+    ]
+  }
+}

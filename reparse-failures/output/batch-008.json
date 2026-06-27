@@ -1,0 +1,39 @@
+{
+  "Alchemist's Workshop": {
+    "keywords": [
+      "stack"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Strikeform Golem",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aldis, Trendsetting Seraph Evolved": {
+    "evolvesFrom": "Aldis, Trendsetting Seraph",
+    "specialType": "evolved",
+    "keywords": [
+      "lastWords"
+    ],
+    "abilities": [
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

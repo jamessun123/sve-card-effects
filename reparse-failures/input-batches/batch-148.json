@@ -1,0 +1,311 @@
+{
+  "Merlin": {
+    "source": {
+      "name": "Merlin",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[evolve][cost02]: Evolve this follower. [fanfare] Search your deck for a spell, reveal it, and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-052EN.png",
+      "cardNos": [
+        "BP01-052EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Merlin Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardType": "spell"
+            },
+            "lookAt": 40,
+            "to": "hand",
+            "optional": false,
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search is incorrectly encoded with searchDeckChoose; it should use tutorFromDeck with filter {\"cardType\":\"spell\"}, to \"hand\", and reveal true to represent searching your deck for any spell and adding it to your hand."
+    ]
+  },
+  "Mermaid Archer": {
+    "source": {
+      "name": "Mermaid Archer",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Marine",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "0",
+        "defense": "4",
+        "effect": "[act] [engage], put a Marine card from your hand into your EX area: Select an enemy follower on the field and deal it damage equal to the number of Marine followers on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-071EN.png",
+      "cardNos": [
+        "BP17-071EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "hand",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "put a Marine card from your hand into your EX area",
+            "cost": {
+              "op": "selectFromHand",
+              "filter": {
+                "trait": "Marine"
+              },
+              "to": "exArea"
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": {
+                "op": "traitFieldCount",
+                "trait": "Marine",
+                "multiplier": 1
+              },
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has the keyword fanfare; remove that keyword because the source only has an activated ability.",
+      "The activated ability is incorrectly set to activateFrom \"hand\"; it should activate from the field.",
+      "The cost should require putting a Marine card from your hand into your EX area, not an optional additional cost; encode the hand-to-EX action as part of the activated ability's required cost/effect sequence rather than optionalCost."
+    ]
+  },
+  "Mermaid Song": {
+    "source": {
+      "name": "Mermaid Song",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Marine",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When playing this, [engage] a Marine follower on your field: This costs 2 less to play. ---------- Select an enemy follower on the field. Engage it and draw a card. It doesn't refresh during its controller's next start phase."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-068EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[engage] a Marine follower on your field",
+            "cost": {
+              "op": "engageSelf"
+            },
+            "then": {
+              "op": "playCostReduction",
+              "amount": 2
+            }
+          }
+        },
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                },
+                "skipRefreshNextStart": true
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has the keyword quick; remove it because the source does not have [quick].",
+      "The cost-reduction clause is encoded as a spell ability with optionalCost and engageSelf, but it should target and engage a Marine follower on your field when playing this card; engageSelf is incorrect and this is not a separate spell effect.",
+      "The main spell effect should not have quick: true.",
+      "The cost-reduction mechanic 'When playing this, engage a Marine follower on your field: This costs 2 less to play' is not faithfully represented as a play-time cost modifier tied to engaging a Marine follower."
+    ]
+  },
+  "Mermaid of Punishment": {
+    "source": {
+      "name": "Mermaid of Punishment",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Marine",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "5",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. Whenever another Marine follower is put onto your field, deal 1 damage to each enemy leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-062EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Mermaid of Punishment Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Marine"
+            },
+            "effect": {
+              "op": "dealDamageAllEnemies",
+              "amount": 1,
+              "followersOnly": false
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be 'another Marine follower' entering your field; add exclusion so this card does not trigger on itself.",
+      "The triggered effect is incorrect: dealDamageAllEnemies damages enemy followers and leader, but the source says to deal 1 damage to each enemy leader only; encode damage only to enemy leaders."
+    ]
+  },
+  "Mermaid of Punishment Evolved": {
+    "source": {
+      "name": "Mermaid of Punishment Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Marine",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Look at the top 5 cards of your deck. You may put up to 2 Marine cards from among them into your EX area. They cost 2 less to play this turn. Put the rest on the bottom of your deck in any order. Whenever another Marine follower is put onto your field, deal 1 damage to each enemy leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-063EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Mermaid of Punishment",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Marine"
+            },
+            "lookAt": 5,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 2,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Marine"
+            },
+            "effect": {
+              "op": "dealDamageAllEnemies",
+              "amount": 1,
+              "followersOnly": false
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve says you may put up to 2 Marine cards from the top 5 into your EX area, but searchDeckChoose only selects one; encode selection of up to 2 cards from among the top 5.",
+      "The trigger should be 'another Marine follower' entering your field; add exclusion so this card does not trigger on itself.",
+      "The triggered effect is incorrect: dealDamageAllEnemies damages enemy followers and leader, but the source says to deal 1 damage to each enemy leader only; encode damage only to enemy leaders."
+    ]
+  }
+}

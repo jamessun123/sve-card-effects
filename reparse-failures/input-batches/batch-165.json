@@ -1,0 +1,181 @@
+{
+  "Noble Shieldmaiden": {
+    "source": {
+      "name": "Noble Shieldmaiden",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Noble",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "7",
+        "attack": "6",
+        "defense": "5",
+        "effect": "Ward. [fanfare] Look at the top 5 cards of your deck. You may summon a follower that costs 6 or less from among them. Put the rest on the bottom of your deck in any order. [act] [cost01], discard this: Summon a Steelclad Knight token."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-029EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardType": "follower",
+              "maxCost": 6
+            },
+            "lookAt": 5,
+            "to": "field",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "discardSelf": true
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Steelclad Knight",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly with {\"discardSelf\":true}, which is not a valid implemented cost. Change it to use the implemented discard cost for this card from hand, e.g. an activated ability from hand with cost {\"pp\":1} and an effect/cost sequence that discards this card, then summons a Steelclad Knight token."
+    ]
+  },
+  "Noble Shikigami ADVANCED": {
+    "source": {
+      "name": "Noble Shikigami ADVANCED",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Advanced",
+        "trait": "Shikigami",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "10",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Ward. This doesn't take ability damage. [fanfare] Deal 5 damage to each enemy leader and enemy follower on the field."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-042EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "damageImmunity",
+            "amount": 99,
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 5
+          }
+        }
+      ],
+      "specialType": "advanced",
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card's type linkage is wrong: source type is evolved, but parsed uses \"specialType\":\"advanced\". It should be encoded as an evolved card with \"specialType\":\"evolved\" and appropriate evolve linkage if applicable."
+    ]
+  },
+  "Noriko Shiina": {
+    "source": {
+      "name": "Noriko Shiina",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] If there are at least 3 iM@S CG followers on your field, give this follower [attack]+1 and Rush. (Followers with Rush can attack enemy followers on the turn they're put onto your field.) Strike - Give your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-015EN.png",
+      "cardNos": [
+        "CP02-064EN",
+        "CSD02a-015EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "strike",
+        "rush"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "iM@S CG",
+              "count": 3
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Rush is encoded as a printed keyword, but the source only grants Rush during fanfare if there are at least 3 iM@S CG followers on your field. Remove \"rush\" from keywords and add it to the fanfare's conditional effect, e.g. grantKeyword \"rush\" to self inside the same if/then as the +1 attack buff."
+    ]
+  }
+}

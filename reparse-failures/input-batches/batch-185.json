@@ -1,0 +1,254 @@
+{
+  "Redcap Evolved": {
+    "source": {
+      "name": "Redcap Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "-",
+        "attack": "6",
+        "defense": "5",
+        "effect": "Follower Strike - For the rest of this turn, this follower doesn't take damage. At the start of your end phase, refresh this card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-081EN.png",
+      "cardNos": [
+        "BP11-081EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "grantLeaderDamageShield",
+            "charges": 99
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "refresh",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Strike ability is encoded incorrectly as grantLeaderDamageShield; it should prevent this follower from taking damage for the rest of the turn, e.g. by granting damage immunity to self until end of turn."
+    ]
+  },
+  "Regal Wildcat": {
+    "source": {
+      "name": "Regal Wildcat",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Beast",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Storm. [fanfare] Select another follower on your field and give it [attack]+2/[defense]+2 and Storm. If your leader is [swordcraft], give to each other follower on your field instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-440EN.png",
+      "cardNos": [
+        "PR-440EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Regal Wildcat"
+            },
+            "then": {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Select another follower on your field and give it [attack]+2/[defense]+2 and Storm",
+                  "effect": {
+                    "op": "sequence",
+                    "steps": [
+                      {
+                        "op": "buff",
+                        "atk": 2,
+                        "def": 2,
+                        "targets": {
+                          "type": "selfFollower",
+                          "count": 1,
+                          "excludeSelf": true
+                        }
+                      },
+                      {
+                        "op": "grantKeyword",
+                        "keyword": "storm",
+                        "targets": {
+                          "type": "selfFollower",
+                          "count": 1,
+                          "excludeSelf": true
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Give to each other follower on your field instead",
+                  "effect": {
+                    "op": "sequence",
+                    "steps": [
+                      {
+                        "op": "buffFieldTrait",
+                        "atk": 2,
+                        "def": 2,
+                        "keyword": "storm",
+                        "excludeSelf": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select another follower on your field and give it [attack]+2/[defense]+2 and Storm",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "buff",
+                      "atk": 2,
+                      "def": 2,
+                      "targets": {
+                        "type": "selfFollower",
+                        "count": 1,
+                        "excludeSelf": true
+                      }
+                    },
+                    {
+                      "op": "grantKeyword",
+                      "keyword": "storm",
+                      "targets": {
+                        "type": "selfFollower",
+                        "count": 1,
+                        "excludeSelf": true
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Give to each other follower on your field instead",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "buffFieldTrait",
+                      "atk": 2,
+                      "def": 2,
+                      "keyword": "storm",
+                      "excludeSelf": true
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded with an incorrect condition namedFollowerOnFieldByName 'Regal Wildcat'; the source condition is 'If your leader is [swordcraft]', so the fanfare should be gated by a leader-class condition rather than checking for this follower on the field.",
+      "The card should not have a second unconditional duplicate fanfare ability; there is only one fanfare effect.",
+      "The 'give to each other follower on your field instead' branch is not conditional on your leader being Swordcraft and is represented as a free choice; it should happen only if your leader is Swordcraft.",
+      "The all-followers branch uses buffFieldTrait without restricting to all other followers correctly; it should buff each other follower on your field and grant them Storm, excluding this card."
+    ]
+  },
+  "Reinhardt, the Deathless Evolved": {
+    "source": {
+      "name": "Reinhardt, the Deathless Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Commander",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "5",
+        "effect": "Assail. At the start of your end phase, give this follower and your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-022EN.png",
+      "cardNos": [
+        "BP11-022EN",
+        "PR-287EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "assail"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "buff",
+            "def": 2,
+            "targets": {
+              "type": "self"
+            },
+            "atk": 2,
+            "targets2": {
+              "type": "selfLeader"
+            }
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Start of end phase ability is encoded incorrectly as a single buff with atk+2/def+2 to self and malformed leader targeting; it should give this follower +0/+2 and separately give your leader +0/+2."
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "Goblin Queen": {
+    "source": {
+      "name": "Goblin Queen",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Goblinoid",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Look at the top 5 cards of your deck. You may reveal a Goblinoid card from among them and add it to your hand. Put the rest on the bottom of your deck in any order. [act] [engage], banish 3 Goblinoid cards from your cemetery: Select an enemy follower on the field. Destroy it and deal 3 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-107EN.png",
+      "cardNos": [
+        "BP11-107EN",
+        "PR-278EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "fanfare",
+        "fanfare",
+        "act"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Goblinoid"
+            },
+            "lookAt": 5,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "banishFromCemetery": {
+              "trait": "Goblinoid"
+            },
+            "banishCount": 3
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove keywords entries for \"fanfare\" and \"act\"; these are timings and should only be represented as abilities, not in keywords.",
+      "The activated ability should use a single selected enemy follower for both clauses; encode it as destroying the selected enemy follower and dealing 3 damage to that follower's leader with a linked effect such as damageFollowerAndLeader, not as separate destroy-any-follower plus 3 damage to enemy leader."
+    ]
+  },
+  "Goblinmount Demon": {
+    "source": {
+      "name": "Goblinmount Demon",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Goblinoid",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "5",
+        "attack": "6",
+        "defense": "6",
+        "effect": "[evolve][cost00]: Evolve this follower. Ward. [fanfare] Deal 2 damage to each other follower on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-164EN.png",
+      "cardNos": [
+        "BP01-164EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Goblinmount Demon Evolved",
+      "evolveCost": 0,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is targeted incorrectly: it should deal 2 damage to each other follower on your field, not to each enemy follower. Replace dealDamageAllEnemies with dealDamageOtherFollowers or an equivalent self-field-only effect excluding this follower.",
+      "Remove \"evolve\" and \"fanfare\" from keywords; they are timings/evolve metadata, not keywords."
+    ]
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "Magical Augmentation": {
+    "source": {
+      "name": "Magical Augmentation",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and deal it 2 damage. Earth Rite (2): Deal 4 damage instead and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-053EN.png",
+      "cardNos": [
+        "BP10-053EN",
+        "PR-270EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "earthRite"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 2 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 2,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Earth Rite (2) - Deal 4 damage instead and draw a card",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "dealDamage",
+                      "amount": 4,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    },
+                    {
+                      "op": "draw",
+                      "count": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as a free choose between normal mode and Earth Rite mode. Encode it as deal 2 damage by default, with an Earth Rite (2) conditional replacing that with deal 4 damage and draw 1 card."
+    ]
+  },
+  "Magical Knight": {
+    "source": {
+      "name": "Magical Knight",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Chess",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve][cost01]: Evolve this follower. Whenever another Chess follower is put onto your field, give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-044EN.png",
+      "cardNos": [
+        "BP03-044EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Magical Knight Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "trait": "Chess"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "targets": {
+              "type": "lastSummoned"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be 'whenever another Chess follower is put onto your field'; add excludeSelf so this does not trigger on itself entering.",
+      "The trigger should apply to any other Chess follower put onto your field, not just the last summoned follower; encode the entered follower as the target in a way that works for all field-entry cases."
+    ]
+  },
+  "Magical Knight Evolved": {
+    "source": {
+      "name": "Magical Knight Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Chess",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve: Summon a Magical Pawn token. Whenever another Chess follower is put onto your field, give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-045EN.png",
+      "cardNos": [
+        "BP03-045EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Magical Knight",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Magical Pawn",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "trait": "Chess"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "targets": {
+              "type": "lastSummoned"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be 'whenever another Chess follower is put onto your field'; add excludeSelf so this does not trigger on itself entering.",
+      "The trigger should apply to any other Chess follower put onto your field, not just the last summoned follower; encode the entered follower as the target in a way that works for all field-entry cases."
+    ]
+  }
+}

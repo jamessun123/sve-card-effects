@@ -1,0 +1,83 @@
+{
+  "Nao Kamiya": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "iM@S CG",
+            "count": 3
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Natalia": {
+    "keywords": [
+      "storm",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "traitFieldCount",
+            "trait": "Passion",
+            "multiplier": 1
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Naterra's Future": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Natura"
+              },
+              "lookAt": 1,
+              "to": "hand",
+              "optional": true,
+              "reveal": true
+            },
+            {
+              "op": "summon",
+              "tokenName": "Naterran Great Tree",
+              "count": 1,
+              "zone": "exArea"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "Draconic Armor": {
+    "source": {
+      "name": "Draconic Armor",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin / Armed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Summon a Draconic Weapon token. If Overflow is active for you, summon 2 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-068EN.png",
+      "cardNos": [
+        "BP02-068EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon a Draconic Weapon token",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Draconic Weapon",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "If Overflow is active for you, summon 2 instead",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "overflow"
+                  },
+                  "then": {
+                    "op": "summon",
+                    "tokenName": "Draconic Weapon",
+                    "count": 2,
+                    "zone": "field"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is not a player choice. Replace the choose effect with a sequence or if effect that always summons 1 Draconic Weapon, and if Overflow is active, summons 1 additional Draconic Weapon instead."
+    ]
+  }
+}

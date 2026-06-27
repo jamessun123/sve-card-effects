@@ -1,0 +1,176 @@
+{
+  "Razory Claw": {
+    "source": {
+      "name": "Razory Claw",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] Deal 2 damage to your leader. Select an enemy leader or enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-125EN.png",
+      "cardNos": [
+        "BP01-125EN",
+        "PR-116EN",
+        "SD05-014EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "selfLeader"
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFieldCard",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The 3-damage target is encoded as enemyFieldCard, which can include amulets. It should target an enemy leader or enemy follower only; change to a selector/effect that allows enemyLeader or enemyFollower, not enemyFieldCard."
+    ]
+  },
+  "Red Ragewyrm": {
+    "source": {
+      "name": "Red Ragewyrm",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin / Fable",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "3",
+        "attack": "0",
+        "defense": "5",
+        "effect": "[act][engage]: Give this follower [attack]+5. If Overflow is active for you, give [attack]+10 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-059EN.png",
+      "cardNos": [
+        "BP03-059EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "buff",
+              "atk": 10,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            },
+            "else": {
+              "op": "buff",
+              "atk": 5,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "evolvesTo": "Red Ragewyrm Evolved",
+      "evolveCost": 1,
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card has an incorrect keyword entry \"evolve\". Remove that keyword; the card only has an activated ability and evolve linkage fields."
+    ]
+  },
+  "Red-Hot Ritual": {
+    "source": {
+      "name": "Red-Hot Ritual",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Earth Sigil",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-051EN.png",
+      "cardNos": [
+        "BP02-051EN",
+        "PR-066EN",
+        "SDD03-020EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The printed keyword/effect \"Stack.\" is missing. Add the Stack keyword/effect to the encoding."
+    ]
+  }
+}

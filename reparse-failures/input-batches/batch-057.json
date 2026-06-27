@@ -1,0 +1,188 @@
+{
+  "Dimension Shift": {
+    "source": {
+      "name": "Dimension Shift",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "12",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When playing this card, banish 10 spells in your cemetery: This card costs 7 play points to play. Take another turn after this one."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-057EN.png",
+      "cardNos": [
+        "BP01-057EN",
+        "PR-169EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "hand",
+          "cost": {
+            "pp": 7,
+            "banishFromCemetery": {
+              "cardType": "spell"
+            },
+            "banishCount": 10
+          },
+          "effect": {
+            "op": "takeExtraTurn"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The play-altering text is encoded as an activated hand ability, but this card is a spell with a conditional play cost. Encode it as a spell ability that takes another turn, plus an optional/conditional play-cost modification for 'When playing this card, banish 10 spells in your cemetery: This card costs 7 play points to play.' rather than an activated ability.",
+      "The cemetery banish cost shape is incorrect. Use the implemented banish-from-cemetery cost structure with a spell filter and count 10, not custom fields like 'banishCount'."
+    ]
+  },
+  "Dionne, Dancing Blade Evolved": {
+    "source": {
+      "name": "Dionne, Dancing Blade Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Officer / Dancer",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Storm. Strike - Refresh this follower. Perform only twice per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-020EN.png",
+      "cardNos": [
+        "BP08-020EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Dionne, Dancing Blade",
+      "specialType": "evolved",
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "refresh",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability is missing the trigger limit. Add a per-turn cap so 'Strike - Refresh this follower. Perform only twice per turn.' is encoded with maxPerTurn: 2 on the strike ability."
+    ]
+  },
+  "Disciple of Truth": {
+    "source": {
+      "name": "Disciple of Truth",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Omen / Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Whenever you play a Mage card, give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-046EN.png",
+      "cardNos": [
+        "BP05-046EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "trait": "Mage"
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card-play trigger filter is placed at the ability root, but the implemented wrapper expects card-play filtering inside effect/grant structures rather than as a top-level ability field. Re-encode the trigger so it correctly checks 'Whenever you play a Mage card' and then heals your leader by 1."
+    ]
+  },
+  "Disciple of Unkilling": {
+    "source": {
+      "name": "Disciple of Unkilling",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Omen / Hunter",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "1",
+        "defense": "3",
+        "effect": "[fanfare] Look at the top card of your deck. If it's a Hunter card, you may reveal it and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-008EN.png",
+      "cardNos": [
+        "BP05-008EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Hunter"
+            },
+            "lookAt": 1,
+            "to": "hand",
+            "optional": true,
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is over-encoded as a generic top-1 search. The source specifically says to look at the top card of your deck, and if it's a Hunter card, you may reveal it and add it to your hand. Re-encode this as a top-card check/peek with a conditional optional add-to-hand for that revealed Hunter card, not as searchDeckChoose."
+    ]
+  }
+}

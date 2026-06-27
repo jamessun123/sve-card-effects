@@ -1,0 +1,164 @@
+{
+  "Natsuki Kimura [Scarlet Love Song] Evolved": {
+    "source": {
+      "name": "Natsuki Kimura [Scarlet Love Song] Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "While there are at least 10 Passion cards in your cemetery, this has Storm. On Evolve - Select an enemy follower on the field and deal it damage equal to 2 times the number of Passion followers on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-056EN.png",
+      "cardNos": [
+        "ECP02-056EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Passion",
+            "count": 10
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "storm"
+            ]
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Passion",
+              "multiplier": 2
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the top-level keywords entry for \"storm\"; the source gives Storm only conditionally while there are at least 10 Passion cards in your cemetery, so it should appear only as the conditional passive ability."
+    ]
+  },
+  "Necrocarnival": {
+    "source": {
+      "name": "Necrocarnival",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose one of the following. Necrocharge (10): Choose up to 2 instead. (1) Select a follower that costs 2 play points or less in your cemetery and put it onto your field. (2) Summon 2 Ghost tokens."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-085EN.png",
+      "cardNos": [
+        "BP02-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a follower from cemetery onto your field",
+                "effect": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "cardType": "follower",
+                    "maxCost": 2
+                  },
+                  "to": "field"
+                }
+              },
+              {
+                "label": "Summon 2 Ghost tokens",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Ghost",
+                  "count": 2,
+                  "zone": "field"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "chooseMultiple",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Put a follower from cemetery onto your field",
+                "effect": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "cardType": "follower",
+                    "maxCost": 2
+                  },
+                  "to": "field"
+                }
+              },
+              {
+                "label": "Summon 2 Ghost tokens",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Ghost",
+                  "count": 2,
+                  "zone": "field"
+                }
+              }
+            ]
+          },
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded as two separate spell abilities, causing the base choose-one effect to remain available even when Necrocharge (10) is active. It should be a single spell ability that uses an if condition on necrocharge(10): choose up to 2 if true, otherwise choose 1."
+    ]
+  }
+}

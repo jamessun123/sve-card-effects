@@ -1,0 +1,273 @@
+{
+  "Priest of the Cudgel": {
+    "source": {
+      "name": "Priest of the Cudgel",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Silver",
+        "cardSet": "Starter Deck #6 “Maculate Ablution”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve][cost01]: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD06/SD06-003EN.png",
+      "cardNos": [
+        "SD06-003EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Priest of the Cudgel Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing the printed evolve ability. Add an ability with timing \"evolve\" and cost {\"pp\":1} that represents \"Evolve this follower\"; do not encode \"evolve\" as a keyword only."
+    ]
+  },
+  "Priestess of Foresight": {
+    "source": {
+      "name": "Priestess of Foresight",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "7",
+        "attack": "3",
+        "defense": "6",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward. [fanfare] Search your deck for an Arcana follower that costs 4 or less, summon it, then shuffle."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-103EN.png",
+      "cardNos": [
+        "BP10-103EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Priestess of Foresight Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "Arcana",
+                  "cardType": "follower",
+                  "maxCost": 4
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing the printed evolve ability. Add an ability with timing \"evolve\" and cost {\"pp\":1} that represents \"Evolve this follower\"; do not encode \"evolve\" as a keyword only.",
+      "Do not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability timing only."
+    ]
+  },
+  "Priestess of Foresight Evolved": {
+    "source": {
+      "name": "Priestess of Foresight Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Arcana / Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "7",
+        "effect": "Ward. On Evolve - Select up to 2 enemy followers on the field and destroy them."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-104EN.png",
+      "cardNos": [
+        "BP10-104EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Priestess of Foresight",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 2
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should select up to 2 enemy followers, but the encoding requires exactly 2. Change the effect to an operation that supports \"up to 2\" enemy followers."
+    ]
+  },
+  "Prim, Innocent Princess": {
+    "source": {
+      "name": "Prim, Innocent Princess",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Princess",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Summon a Knight token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-021EN.png",
+      "cardNos": [
+        "BP09-021EN",
+        "PR-257EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Prim, Innocent Princess Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Knight",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing the printed evolve ability. Add an ability with timing \"evolve\" and cost {\"pp\":1} that represents \"Evolve this follower\"; do not encode \"evolve\" as a keyword only.",
+      "Do not include \"fanfare\" in keywords; Fanfare should be represented by the fanfare ability timing only."
+    ]
+  },
+  "Prime Dragon Keeper": {
+    "source": {
+      "name": "Prime Dragon Keeper",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "3",
+        "attack": "1",
+        "defense": "5",
+        "effect": "[fanfare] If Overflow is active for you, give this follower [attack]+1/[defense]+1 and Intimidate. Whenever another [dragoncraft] follower that costs 3 play points or less is put onto your field, select an enemy follower on the field. Deal 2 damage to it and 1 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-063EN.png",
+      "cardNos": [
+        "BP04-063EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 1,
+                  "targets": {
+                    "type": "self"
+                  }
+                },
+                {
+                  "op": "grantKeyword",
+                  "keyword": "intimidate",
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "cardClass": "dragon",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "effect": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 2,
+            "leaderAmount": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second ability should trigger only when another Dragoncraft follower that costs 3 or less is put onto your field. The encoding is missing the \"another\" restriction; add excludeSelf handling to the trigger filter or equivalent so this card entering does not trigger itself.",
+      "The second ability is encoded with an invalid operation id. Change \"dealDamageFollowerAndLeader\" to the implemented op \"damageFollowerAndLeader\".",
+      "The second ability must select an enemy follower, then deal 2 damage to it and 1 damage to its leader. Ensure the damage effect includes the required enemy follower target selection."
+    ]
+  }
+}

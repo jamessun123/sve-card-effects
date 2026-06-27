@@ -1,0 +1,61 @@
+{
+  "Apostle of Unkilling Evolved": {
+    "evolvesFrom": "Apostle of Unkilling",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Hunter",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Apostle of Usurpation": {
+    "evolvesTo": "Apostle of Usurpation Evolved",
+    "evolveCost": 1,
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "millOpponent",
+              "count": 2
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "opponentCemeteryMin",
+                "count": 10
+              },
+              "then": {
+                "op": "draw",
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

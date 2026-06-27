@@ -1,0 +1,114 @@
+{
+  "Wildfire Tyrannosaur": {
+    "source": {
+      "name": "Wildfire Tyrannosaur",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Natura / Wyrmkin",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "8",
+        "attack": "6",
+        "defense": "6",
+        "effect": "When this card is discarded, [cost01]: Select an enemy follower on the field and deal it 3 damage. ---------- [act] Banish a Naterran Great Tree from your field: Deal 3 damage to each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-055EN.png",
+      "cardNos": [
+        "BP07-055EN",
+        "PR-289EN",
+        "SDD04-005EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onDiscard",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "buryFromField": {
+              "identityName": "Naterran Great Tree"
+            },
+            "buryFieldCount": 1
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 3,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly: source says banish a Naterran Great Tree from your field, but parsed uses buryFromField. It should use a banish-from-field cost/filter for a Naterran Great Tree on your field."
+    ]
+  },
+  "Wildwood Matriarch Evolved": {
+    "source": {
+      "name": "Wildwood Matriarch Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Hunter",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Select up to 2 Hunter followers that cost 2 or less in your cemetery and summon them."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-006EN.png",
+      "cardNos": [
+        "BP06-006EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Wildwood Matriarch",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "trait": "Hunter",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "count": 2,
+            "maxTotalCost": 4
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability should summon up to 2 Hunter followers that cost 2 or less from your cemetery, but parsed incorrectly adds maxTotalCost: 4. Remove maxTotalCost so any 2 matching followers may be summoned."
+    ]
+  }
+}

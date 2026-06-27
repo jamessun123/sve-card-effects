@@ -1,0 +1,51 @@
+{
+  "Kiss of Lust": {
+    "source": {
+      "name": "Kiss of Lust",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Omen / Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Give your leader [defense]+2. Draw a card. If Sanguine is active for you, draw 2 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-079EN.png",
+      "cardNos": [
+        "BP08-079EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 2
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing the Sanguine clause. After healing 2, the draw should be conditional: draw 2 if Sanguine is active for you, otherwise draw 1. Encode this with an if condition of {\"type\":\"sanguine\"} and then/else draw counts 2 and 1."
+    ]
+  }
+}

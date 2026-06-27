@@ -1,0 +1,46 @@
+{
+  "Wyrmfire Engineer": {
+    "source": {
+      "name": "Wyrmfire Engineer",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[lastwords] Summon a Bullet Bike token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-065EN.png",
+      "cardNos": [
+        "BP11-065EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Bullet Bike",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card should not list \"lastWords\" in keywords; Last Words should be represented by the lastWords-timing ability only."
+    ]
+  }
+}

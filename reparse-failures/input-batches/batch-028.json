@@ -1,0 +1,264 @@
+{
+  "Bat Usher": {
+    "source": {
+      "name": "Bat Usher",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Festive / Demon / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] If there are 2 cards or less in your hand, give this [attack]+1. If there are 0, give it Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "handMax",
+              "count": 2
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "handMax",
+              "count": 0
+            },
+            "then": {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove printed keyword \"storm\" from keywords; Storm is conditional and should only be granted by the fanfare ability when hand count is 0."
+    ]
+  },
+  "Battlefield Inquisitor": {
+    "source": {
+      "name": "Battlefield Inquisitor",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Zealot / Cutthroat",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "8",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[fanfare] Select up to 2 enemy cards on the field. Destroy them and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-095EN.png",
+      "cardNos": [
+        "BP08-095EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Destroy an enemy card on the field",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFieldCard",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Destroy an enemy card on the field",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFieldCard",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target/effect should allow selecting up to 2 enemy cards and destroying them, not use choose with min 1/max 2 duplicated single-destroy options; encode as a single destroy effect targeting enemyFieldCard with count up to 2 if supported."
+    ]
+  },
+  "Bayleon, Sovereign Light": {
+    "source": {
+      "name": "Bayleon, Sovereign Light",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Commander / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward. [fanfare] You may put a Naterran Great Tree token onto your field or into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-018EN.png",
+      "cardNos": [
+        "BP07-018EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Bayleon, Sovereign Light Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Naterran Great Tree token onto your field",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Put a Naterran Great Tree token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"You may put a Naterran Great Tree token onto your field or into your EX area\"; current choose requires exactly one option. Make the choice optional so you may choose neither destination."
+    ]
+  },
+  "Bear Pelt Warrior": {
+    "source": {
+      "name": "Bear Pelt Warrior",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Beast",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "4",
+        "attack": "5",
+        "defense": "4",
+        "effect": "Rush. Strike - Deal 1 damage to each leader. [lastwords] Give your leader [defense]+4."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-074EN.png",
+      "cardNos": [
+        "BP06-074EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "strike",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "healLeader",
+            "amount": 4
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" and \"lastWords\" from keywords; these are timings and should be represented by abilities, not printed keywords.",
+      "Strike is misencoded as dealDamageAllEnemies. It should deal 1 damage to each leader, i.e. both leaders, not all enemy followers and leader."
+    ]
+  }
+}

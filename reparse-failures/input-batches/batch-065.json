@@ -1,0 +1,52 @@
+{
+  "Dragonsoul Princess": {
+    "source": {
+      "name": "Dragonsoul Princess",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonewt / Princess",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Look at the top 5 cards of your deck. You may put a Wyrmkin follower from among them into your EX area. If Overflow is active for you, it costs 3 less to play this turn. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-061EN.png",
+      "cardNos": [
+        "BP08-061EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Wyrmkin",
+              "cardType": "follower"
+            },
+            "lookAt": 5,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 3,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The EX area cost reduction is incorrectly unconditional. Encode the Overflow requirement so the chosen Wyrmkin follower costs 3 less only if Overflow is active for you."
+    ]
+  }
+}

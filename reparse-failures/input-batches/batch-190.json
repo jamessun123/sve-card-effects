@@ -1,0 +1,201 @@
+{
+  "Rivaylian Deputy": {
+    "source": {
+      "name": "Rivaylian Deputy",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "2",
+        "effect": "[fanfare] Summon a Dutiful Steed token. Once on each of your turns, when a Mount card is put onto your field, draw a card, then discard a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-048EN.png",
+      "cardNos": [
+        "BP11-048EN",
+        "PR-273EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Dutiful Steed",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "trait": "Mount"
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second ability uses an unsupported top-level 'filter' field and should instead encode the trigger condition in a supported way; it should trigger once per turn when a Mount card is put onto your field, then draw 1 and discard 1."
+    ]
+  },
+  "Robofalcon": {
+    "source": {
+      "name": "Robofalcon",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Machina / Avian",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. Storm. Strike - Put a Repair Mode token into your EX area. Then, if there are at least 3 cards named Repair Mode in your EX area, give this follower [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-094EN.png",
+      "cardNos": [
+        "BP07-094EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "storm",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": []
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Repair Mode",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaNamedMin",
+                  "identityName": "Repair Mode",
+                  "count": 3
+                },
+                "then": {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 0,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The keyword list incorrectly includes 'strike'; Strike is a triggered ability timing, not a keyword, so remove 'strike' from keywords and keep only the strike ability in abilities.",
+      "The evolve ability is represented as a no-op passiveKeywords wrapper; the actual evolve line is already captured by evolveCost/evolvesTo/evolveCost 1, so the extra evolve ability should be removed.",
+      "The base card is missing evolve linkage fields; add evolvesTo: 'Robofalcon Evolved' and evolveCost: 1 to match '[evolve] [cost01]: Evolve this follower.'"
+    ]
+  },
+  "Robowhip Reverend": {
+    "source": {
+      "name": "Robowhip Reverend",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Machina / Faith / Zealot",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Put a Repair Mode token into your EX area. If this card was put onto the field by an ability, give each Machina follower on your field [attack]+1/[defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-091EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Repair Mode",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": "Machina",
+            "atk": 1,
+            "def": 1,
+            "excludeSelf": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The +1/+1 to each Machina follower should be part of the same fanfare ability after putting a Repair Mode token into your EX area; combine these into a single fanfare sequence with the summon first, then an if-condition checking notEnteredFromHand for the buff.",
+      "The condition for the buff is incorrect: 'If this card was put onto the field by an ability' does not mean notEnteredFromHand. It should only apply when this follower entered the field by an ability, so replace the condition with a dedicated 'enteredByAbility' style condition rather than notEnteredFromHand."
+    ]
+  }
+}

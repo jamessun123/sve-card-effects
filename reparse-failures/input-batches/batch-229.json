@@ -1,0 +1,175 @@
+{
+  "Titanic Showdown": {
+    "source": {
+      "name": "Titanic Showdown",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Amulet",
+        "trait": "Gigant",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "7",
+        "attack": "-",
+        "defense": "-",
+        "effect": "This card is put onto the field engaged. [fanfare] Look at the top 5 cards of your deck. From among them, you may reveal up to 5 followers that cost 7 or more and add them to your hand. Put the rest on the bottom of your deck in any order. [act] [engage], bury this card: Reveal 2 random cards from your hand. Summon each follower from among them."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-112EN.png",
+      "cardNos": [
+        "BP11-112EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardType": "follower",
+              "minCost": 7
+            },
+            "lookAt": 5,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "revealRandomHandSummonFollowers",
+            "count": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing the static clause \"This card is put onto the field engaged.\" Add a passive/entry encoding so the amulet enters engaged.",
+      "The fanfare is encoded as searchDeckChoose, which only chooses a single card. It should allow revealing and adding up to 5 followers that cost 7 or more from the top 5 cards of your deck, with the rest put on the bottom in any order."
+    ]
+  },
+  "Tokiko Zaizen": {
+    "source": {
+      "name": "Tokiko Zaizen",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Passion”",
+        "cost": "3",
+        "attack": "4",
+        "defense": "3",
+        "effect": "[fanfare] Deal each enemy leader damage equal to the number of other iM@S CG followers on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02c/CSD02c-013EN.png",
+      "cardNos": [
+        "CP02-063EN",
+        "CSD02c-013EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "iM@S CG",
+              "multiplier": 1
+            },
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare should deal damage only to the enemy leader, not to all enemies. Replace dealDamageAllEnemies with dealDamage targeting enemyLeader.",
+      "The damage amount should equal the number of other iM@S CG followers on your field, but the current traitFieldCount includes this follower itself. Encode the count as excluding self."
+    ]
+  },
+  "Tomoe Murakami [Crimson Fighter]": {
+    "source": {
+      "name": "Tomoe Murakami [Crimson Fighter]",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[fanfare] The next Passion spell that costs 3 or less you play this turn costs 3 less. Once per turn, when you play a Passion spell, deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-036EN.png",
+      "cardNos": [
+        "ECP02-036EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantNextPlayCostReduction",
+            "filter": {
+              "trait": "Passion",
+              "cardType": "spell",
+              "maxCost": 3
+            },
+            "amount": 3
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "trait": "Passion",
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The triggered ability is malformed: the card-play filter is placed at the ability level, but implemented triggered abilities require the condition/filter to be encoded correctly for onCardPlayed. Encode it as an onCardPlayed ability that triggers when you play a Passion spell.",
+      "The triggered effect should deal 2 damage to each enemy leader, not to all enemies. Replace dealDamageAllEnemies with damage to enemyLeader only."
+    ]
+  }
+}

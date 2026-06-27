@@ -1,0 +1,332 @@
+{
+  "New Generations": {
+    "source": {
+      "name": "New Generations",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute / Cool / Passion",
+        "rarity": "Legendary",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "10",
+        "attack": "5",
+        "defense": "5",
+        "effect": "When playing this card, banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery: This card costs 9 less to play. ---------- Storm. Bane. Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-103EN.png",
+      "cardNos": [
+        "CP02-103EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "bane",
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "banishFromCemetery",
+                  "filter": {
+                    "trait": "Cute"
+                  },
+                  "count": 3
+                },
+                {
+                  "op": "banishFromCemetery",
+                  "filter": {
+                    "trait": "Cool"
+                  },
+                  "count": 3
+                },
+                {
+                  "op": "banishFromCemetery",
+                  "filter": {
+                    "trait": "Passion"
+                  },
+                  "count": 3
+                }
+              ]
+            },
+            "then": {
+              "op": "playCostReduction",
+              "amount": 9
+            }
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "storm",
+              "bane",
+              "ward"
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The play-cost reduction ability is encoded with timing \"fanfare\", but \"When playing this card ... this card costs 9 less to play\" must be a play-time cost-modification ability, not a Fanfare trigger. Encode it as a passive/while-in-hand-or-playing cost reduction gated by paying the banish cost.",
+      "The printed keywords Storm, Bane, and Ward are duplicated in both `keywords` and a passive `passiveKeywords` ability; keep them only in `keywords`."
+    ]
+  },
+  "Newfound Allies": {
+    "source": {
+      "name": "Newfound Allies",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Machina / Natura / Dragonewt",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "8",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Shuffle your deck, then look at the top 2 cards. You may summon up to 2 followers from among them. Bury the rest."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-066EN.png",
+      "cardNos": [
+        "BP17-066EN",
+        "PR-471EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "searchDeckSummonMultiple",
+                "filter": {
+                  "cardType": "follower"
+                },
+                "lookAt": 2,
+                "maxTotalCost": 99,
+                "remainderTo": "deckBottom"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The final zone for the non-summoned cards is wrong. \"Bury the rest\" should put the remaining looked-at cards into the cemetery, not the bottom of the deck; replace `remainderTo: \"deckBottom\"` with cemetery handling."
+    ]
+  },
+  "Nicola, Enduring Steward": {
+    "source": {
+      "name": "Nicola, Enduring Steward",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Departed",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "2",
+        "effect": "While there's another Machina follower on your field, this has Rush and Bane. [fanfare] If this wasn't put onto the field from hand, give it Assail. [lastwords] Discard 2 Machina cards: Put this into its owner's EX area and give it \"This costs 1 less to play.\""
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-079EN.png",
+      "cardNos": [
+        "BP17-079EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "rush"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Machina",
+            "count": 2
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "rush",
+              "bane"
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "notEnteredFromHand"
+            },
+            "then": {
+              "op": "grantKeyword",
+              "keyword": "assail",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard 2 Machina cards",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Machina"
+              },
+              "count": 2
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "moveSourceToExArea"
+                },
+                {
+                  "op": "grantPlayCostReduction",
+                  "amount": 1,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card has `keywords: [\"fanfare\", \"rush\"]`, but Fanfare is not a keyword and Rush is conditional rather than always printed. Remove these from `keywords` and keep the conditional Rush/Bane only in the passive ability.",
+      "The Last Words cost reduction is applied to `targets: {\"type\":\"self\"}` after moving the card to EX area, but the source text gives the moved card in EX area \"This costs 1 less to play.\" Encode the reduction so it applies to this card in EX area / future plays of this card, not a field self-target buff."
+    ]
+  },
+  "Nicola, Forbidden Strength": {
+    "source": {
+      "name": "Nicola, Forbidden Strength",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Departed",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Bury the top 2 cards of your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-076EN.png",
+      "cardNos": [
+        "BP07-076EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Nicola, Forbidden Strength Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "mill",
+            "count": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card has `keywords: [\"evolve\", \"fanfare\"]`, but neither Evolve nor Fanfare should be listed as keywords. Keep `evolveCost: 1` and the Fanfare ability only."
+    ]
+  },
+  "Nicola, Forbidden Strength Evolved": {
+    "source": {
+      "name": "Nicola, Forbidden Strength Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Machina / Departed",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Select a Machina card that costs 2 or less in your cemetery and put it into your EX area. It costs 2 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-077EN.png",
+      "cardNos": [
+        "BP07-077EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "evolvesFrom": "Nicola, Forbidden Strength",
+      "specialType": "evolved",
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Machina",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "exArea",
+            "playCostReduction": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve target filter is too narrow. The source says \"Select a Machina card that costs 2 or less in your cemetery,\" not a follower specifically; remove `cardType: \"follower\"` from the cemetery filter."
+    ]
+  }
+}

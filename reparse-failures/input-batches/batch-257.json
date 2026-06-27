@@ -1,0 +1,139 @@
+{
+  "Zirconia, Ironcrown Ward Evolved": {
+    "source": {
+      "name": "Zirconia, Ironcrown Ward Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Commander / Noble",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Summon a Steelclad Knight and Shield Guardian token. On Super-Evolve - Select up to 2 Officer token followers on your field and give them [attack]+1/[defense]+1 and Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-024EN.png",
+      "cardNos": [
+        "BP16-024EN"
+      ]
+    },
+    "previousParsed": {
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Steelclad Knight",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Shield Guardian",
+                "count": 1,
+                "zone": "field"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onSuperEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 2,
+                  "filter": {
+                    "trait": "Officer"
+                  }
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 2,
+                  "filter": {
+                    "trait": "Officer"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve targets are incorrect: it should select up to 2 Officer token followers on your field, but the parsed targets only filter trait Officer and omit the token restriction. Change both target selectors to target selfFollower up to 2 with filter including trait \"Officer\" and printingType \"token\".",
+      "On Super-Evolve should allow selecting up to 2 targets, but the parsed encoding uses count 2 without optionality. Encode it as an optional selection of up to 2 Officer token followers if supported."
+    ]
+  },
+  "Zwei, Murderous Puppet": {
+    "source": {
+      "name": "Zwei, Murderous Puppet",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry / Cutthroat",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Select a Puppet in your EX area and transform it into a Victoria token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-004EN.png",
+      "cardNos": [
+        "BP08-004EN",
+        "SP01-004EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Zwei, Murderous Puppet Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "transform",
+            "tokenName": "Victoria",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare target is incorrect: it should select a Puppet in your EX area, but the parsed transform targets a follower on your field. Change the effect to transform a selected Puppet in your EX area into a Victoria token.",
+      "Fanfare target filter is missing: it should specifically target a card named Puppet in your EX area. Add a target/filter for identityName \"Puppet\" in the EX area."
+    ]
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "Dark Jeanne": {
+    "source": {
+      "name": "Dark Jeanne",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Zealot",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve][cost01]: Evolve this follower. [fanfare] Deal 2 damage to each other follower on the field. Give each other follower on your field [attack]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-099EN.png",
+      "cardNos": [
+        "BP04-099EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Dark Jeanne Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": true
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": null,
+            "atk": 2,
+            "def": 0,
+            "otherOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare damage is encoded incorrectly as dealDamageAllEnemies to only enemy followers; it should deal 2 damage to each other follower on the field, using dealDamageOtherFollowers amount 2.",
+      "Fanfare buff is encoded too broadly; buffFieldTrait with trait null buffs all your followers including amulets/cards. It should give each other follower on your field +2 attack only, targeting other allied followers rather than all field cards."
+    ]
+  },
+  "Dark Summoner": {
+    "source": {
+      "name": "Dark Summoner",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[fanfare] If Sanguine is active for you, give this follower [attack]+1/[defense]+1 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-112EN.png",
+      "cardNos": [
+        "BP01-112EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "sanguine"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing the granted Rush clause; when Sanguine is active, the effect should buff this follower +1/+1 and also grant it Rush."
+    ]
+  },
+  "Darkfeast Bat": {
+    "source": {
+      "name": "Darkfeast Bat",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Vampire / Beast",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "6",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Select an enemy follower on the field. Deal 4 damage to it and its leader and, if Sanguine is active for you, recover 3 play points."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-094EN.png",
+      "cardNos": [
+        "BP09-094EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageFollowerAndLeader",
+                "followerAmount": 4,
+                "leaderAmount": 4
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "sanguine"
+                },
+                "then": {
+                  "op": "recoverPp",
+                  "amount": 3
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare uses the wrong operation name; replace dealDamageFollowerAndLeader with the implemented damageFollowerAndLeader.",
+      "Fanfare is missing the required enemy follower selection linkage; the damage effect should select an enemy follower on the field and deal 4 damage to it and its leader."
+    ]
+  }
+}

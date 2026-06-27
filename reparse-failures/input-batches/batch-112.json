@@ -1,0 +1,323 @@
+{
+  "Icyclone": {
+    "source": {
+      "name": "Icyclone",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Heroic",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "4",
+        "effect": "[fanfare] Select an enemy follower on the field and deal it 1 damage. If there's another Heroic follower on your field, deal 4 damage instead. [lastwords] Look at the top card of your deck. If it's a Heroic card, you may put it into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-034EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal it 1 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 1,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "If there's another Heroic follower on your field, deal 4 damage instead",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "fieldTraitMin",
+                    "trait": "Heroic",
+                    "count": 2
+                  },
+                  "then": {
+                    "op": "dealDamage",
+                    "amount": 4,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  "else": {
+                    "op": "dealDamage",
+                    "amount": 1,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Heroic"
+            },
+            "lookAt": 1,
+            "to": "exArea",
+            "optional": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded as a player choice between two damage modes, but the card has no choice; replace the choose effect with a single conditional effect that deals 4 damage if there is another Heroic follower on your field, otherwise 1 damage, to the selected enemy follower.",
+      "Last Words is encoded as searchDeckChoose over the top 1 card, which does not preserve 'look at the top card' semantics; encode it as peeking at the top card and, if that card has the Heroic trait, optionally put it into your EX area."
+    ]
+  },
+  "Illganeau, Horror Astray": {
+    "source": {
+      "name": "Illganeau, Horror Astray",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Departed / Demon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] Select a Wasteland follower that costs 3 or less in your cemetery. Necrocharge (10) - You may summon it. If you do, banish this card. [lastwords] Put this card into its owner's EX area. Bury the top card of your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-071EN.png",
+      "cardNos": [
+        "BP11-071EN",
+        "SDD05-005EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Necrocharge (10) - You may summon it. If you do, banish this card.",
+            "cost": {
+              "op": "if",
+              "condition": {
+                "type": "necrocharge",
+                "count": 10
+              },
+              "then": {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "trait": "Wasteland",
+                  "cardType": "follower",
+                  "maxCost": 3
+                },
+                "count": 1,
+                "maxTotalCost": 3
+              }
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "banishSelf"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveSourceToExArea"
+              },
+              {
+                "op": "mill",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should first select a Wasteland follower that costs 3 or less in your cemetery, then under Necrocharge (10) you may summon that selected card; the current summonFromCemetery encoding does not model selecting the specific target before the Necrocharge clause.",
+      "Fanfare uses optionalCost incorrectly; Necrocharge (10) is a condition, not a paid cost. Encode the ability as a targeted cemetery selection with a conditional optional summon, and if you do, banish this card."
+    ]
+  },
+  "Ilmisuna, Discord Hawker": {
+    "source": {
+      "name": "Ilmisuna, Discord Hawker",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Merchant",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[act] [engage]: Select an enemy follower on the field and deal it 3 damage. If there's a Merchant follower not named Ilmisuna, Discord Hawker on your field, deal 5 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-025EN.png",
+      "cardNos": [
+        "BP10-025EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "act"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "Merchant",
+              "count": 2
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keywords incorrectly include fanfare; remove the extra 'fanfare' keyword because the card only has an activated [act] ability."
+    ]
+  },
+  "Impious Bishop": {
+    "source": {
+      "name": "Impious Bishop",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Zealot",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "2",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Look at the top 5 cards of your deck. You may put a Zealot card that costs 2 or less from among them into your EX area. It costs 2 less to play this turn. Put the rest on the bottom of your deck in any order. Once per turn, when your leader gains [defense], select an enemy follower on the field and deal it 4 damage."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-093EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Zealot",
+              "maxCost": 2
+            },
+            "lookAt": 5,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 2,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "condition": {
+            "type": "always"
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "enteredFromHand"
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The triggered ability timing is wrong; it should trigger when your leader gains defense, not onCardPlayed. Replace it with an ability that triggers on leader healing/defense gain and deals 4 damage to an enemy follower once per turn.",
+      "The current conditional enteredFromHand clause is unrelated to the source text and should be removed from the once-per-turn damage ability."
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "Outlaw Gunner": {
+    "source": {
+      "name": "Outlaw Gunner",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Officer / Thief",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Summon a Bullet Bike token. [lastwords] Deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-027EN.png",
+      "cardNos": [
+        "BP11-027EN",
+        "PR-272EN",
+        "SDD02-012EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Bullet Bike",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words ability is encoded as `dealDamageAllEnemies` for all enemy followers and leaders, but the source says \"Deal 2 damage to each enemy leader.\" Change it to damage enemy leaders only, not followers."
+    ]
+  }
+}

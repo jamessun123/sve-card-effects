@@ -1,0 +1,162 @@
+{
+  "Bullet Bike": {
+    "source": {
+      "name": "Bullet Bike",
+      "type": "token",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Amulet / Token",
+        "trait": "Wasteland / Mount",
+        "rarity": "-",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] Bury this card: Select a follower on your field. Give it Rush and, if it's a Wasteland follower, [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-T04EN.png",
+      "cardNos": [
+        "BP11-T04EN",
+        "BP16-T21EN",
+        "SDD02-T04EN",
+        "SDD05-T02EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "burySelf"
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 0,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "rush",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "fieldTraitMin",
+                  "trait": "Wasteland",
+                  "count": 1
+                },
+                "then": {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 0,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability incorrectly gives [attack]+1 to a follower unconditionally before granting Rush; it should first select a follower on your field and give it Rush, with no unconditional buff.",
+      "Activated ability targets are inconsistent across steps; the selected follower should be the same follower for both granting Rush and any conditional buff.",
+      "Conditional buff is encoded as checking whether there is any Wasteland follower on your field; it should check whether the selected follower is a Wasteland follower, then give that selected follower [attack]+1."
+    ]
+  },
+  "Bumpkin Recruit": {
+    "source": {
+      "name": "Bumpkin Recruit",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] If there are at least 5 [swordcraft] followers in your cemetery, give this [attack]+1 and Rush. [lastwords] Draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-024EN",
+        "PR-406EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryClassMin",
+              "cardClass": "sword",
+              "count": 5
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 0,
+                  "targets": {
+                    "type": "self"
+                  }
+                },
+                {
+                  "op": "grantKeyword",
+                  "keyword": "rush",
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare condition is encoded as having at least 5 Swordcraft cards in your cemetery; it should require at least 5 Swordcraft followers in your cemetery."
+    ]
+  }
+}

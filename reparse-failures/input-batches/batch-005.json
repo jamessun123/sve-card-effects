@@ -1,0 +1,107 @@
+{
+  "Aether of the White Wing": {
+    "source": {
+      "name": "Aether of the White Wing",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Luminary / Lightborne",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "7",
+        "attack": "3",
+        "defense": "5",
+        "effect": "Ward. [fanfare] Search your deck for a [havencraft] follower with a different name from this card that costs less than your maximum play points and put it onto your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-098EN.png",
+      "cardNos": [
+        "BP04-098EN",
+        "SP01-043EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardClass": "haven",
+              "cardType": "follower",
+              "maxCost": {
+                "op": "maxPp"
+              },
+              "excludeIdentityName": "Aether of the White Wing"
+            },
+            "to": "field"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare tutor incorrectly uses maxCost equal to your maximum play points; it should search for a Havencraft follower with cost less than your maximum play points, so encode the cost bound as strictly less than max PP rather than equal-or-less."
+    ]
+  },
+  "Aiko Takamori Evolved": {
+    "source": {
+      "name": "Aiko Takamori Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Legendary",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - You may summon a Passion follower that costs 3 or less from your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-002EN.png",
+      "cardNos": [
+        "CP02-002EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Aiko Takamori",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "always"
+            },
+            "then": {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Passion",
+                "cardType": "follower",
+                "maxCost": 3
+              },
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded incorrectly as summoning a Passion follower that costs 3 or less from your cemetery; it should instead optionally put a Passion follower that costs 3 or less from your hand onto your field."
+    ]
+  }
+}

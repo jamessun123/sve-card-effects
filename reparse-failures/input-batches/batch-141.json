@@ -1,0 +1,71 @@
+{
+  "March Hare's Teatime": {
+    "source": {
+      "name": "March Hare's Teatime",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith / Fable",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "4",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Look at the top 5 cards of your deck. You may put a Fable follower that costs 5 play points or less from among them onto your field. Put the remaining cards on the bottom of your deck in any order. [act][cost02], [engage], put this card into its owner's cemetery: Select a Fable follower that costs 3 play points or less in your cemetery and put it onto your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-100EN.png",
+      "cardNos": [
+        "BP03-100EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "Fable",
+              "cardType": "follower",
+              "maxCost": 5
+            },
+            "lookAt": 5,
+            "maxTotalCost": 5,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "cost": {
+            "pp": 2,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "trait": "Fable",
+              "cardType": "follower",
+              "maxCost": 3
+            },
+            "count": 1,
+            "maxTotalCost": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability incorrectly has `activateFrom: \"cemetery\"`; the source [act] ability is activated while this amulet is on the field. Change `activateFrom` to `field` or omit it.",
+      "The fanfare effect is overconstrained as `searchDeckSummonMultiple` with `maxTotalCost: 5`; the source says 'you may put a Fable follower that costs 5 play points or less'—a single optional summon, not a total-cost-based multi-summon. Encode it with a single-card top-5 search/summon effect that optionally puts 1 matching follower onto your field and puts the rest on the bottom."
+    ]
+  }
+}

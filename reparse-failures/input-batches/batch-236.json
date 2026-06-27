@@ -1,0 +1,368 @@
+{
+  "Unlikely Fellowship": {
+    "source": {
+      "name": "Unlikely Fellowship",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Spell",
+        "trait": "Natura / Lightborne / Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose 1. (1) Select an enemy follower on the field and deal it 2 damage. (2) Select a follower in your cemetery with \"Meowskers\" in its name and summon it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-103EN.png",
+      "cardNos": [
+        "BP17-103EN",
+        "PR-473EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 2 damage to an enemy follower",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 2,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Summon a Meowskers card from your cemetery",
+                "effect": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "identityNameContains": "Meowskers"
+                  },
+                  "to": "field"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second choose option is incorrectly encoded as tutorFromCemetery to field; it should summon a follower from your cemetery with 'Meowskers' in its name. Replace with summonFromCemetery using a filter including cardType 'follower' and identityNameContains 'Meowskers', count 1."
+    ]
+  },
+  "Unnamed Determination": {
+    "source": {
+      "name": "Unnamed Determination",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Supreme",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Search your deck for a follower with \"Maisha\" in its name, put it into your EX area, then shuffle. If there are at least 5 followers in your cemetery, it costs 1 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-118EN.png",
+      "cardNos": [
+        "BP17-118EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityNameContains": "Maisha"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 5
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell ability is missing the restriction that the searched card must be a follower. Add cardType 'follower' to the tutorFromDeck filter for the card with 'Maisha' in its name.",
+      "The cost reduction is incorrectly encoded as a passive ability on the spell card itself; the source says the card put into your EX area costs 1 less to play this turn if there are at least 5 followers in your cemetery. Encode the reduction on the tutored EX-area card, conditional on having at least 5 followers in your cemetery."
+    ]
+  },
+  "Unselfish Grace": {
+    "source": {
+      "name": "Unselfish Grace",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Amulet",
+        "trait": "Arcana / Demon / Lightborne",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Place X grace counters on this card. X equals the number of cards in your hand. [act] [engage], remove 2 grace counters from this card: Give your leader [defense]+1. [act] [cost01], [engage], bury this card: Search your deck for a 7-cost Arcana card, reveal it, add it to your hand, then shuffle."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-085EN.png",
+      "cardNos": [
+        "BP10-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "addCounter",
+            "counter": "grace",
+            "amount": {
+              "op": "handCount"
+            },
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "removeCounter",
+            "counter": "grace",
+            "amount": 2,
+            "targets": {
+              "type": "self"
+            },
+            "then": {
+              "op": "healLeader",
+              "amount": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardType": "follower",
+              "cardClass": "neutral",
+              "maxCost": 7,
+              "identityNameContains": "Arcana"
+            },
+            "to": "hand",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second activated ability's tutor filter is incorrect: it searches for a 7-cost Arcana card, but the parsed filter uses cardType 'follower', cardClass 'neutral', maxCost 7, and identityNameContains 'Arcana'. It should search for a card with trait 'Arcana' and exact cost 7, then reveal it and add it to hand."
+    ]
+  },
+  "Urd Evolved": {
+    "source": {
+      "name": "Urd Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Deity",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve: Select a card in an opponent's EX area and banish it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-156EN.png",
+      "cardNos": [
+        "BP01-156EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Urd",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "banish",
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as banish targeting an enemy field card; it should banish a card in an opponent's EX area. Replace with banishFromOpponentExArea count 1."
+    ]
+  },
+  "Urias, Final Vampire Evolved": {
+    "source": {
+      "name": "Urias, Final Vampire Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Vampire",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Choose up to 3. (1) Select an enemy follower on the field. Deal 3 damage to it and 1 damage to your leader. (2) Deal 1 damage to your leader and each enemy follower on the field. (3) Deal 1 damage to your leader. Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-075EN.png",
+      "cardNos": [
+        "BP17-075EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Urias, Final Vampire",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 3,
+            "options": [
+              {
+                "label": "Deal 3 damage to an enemy follower and 1 damage to your leader",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "dealDamage",
+                      "amount": 3,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    },
+                    {
+                      "op": "dealDamage",
+                      "amount": 1,
+                      "targets": {
+                        "type": "selfLeader"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Deal 1 damage to your leader and each enemy follower on the field",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "dealDamage",
+                      "amount": 1,
+                      "targets": {
+                        "type": "selfLeader"
+                      }
+                    },
+                    {
+                      "op": "dealDamageAllEnemies",
+                      "amount": 1,
+                      "followersOnly": true
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Deal 1 damage to your leader. Draw a card",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "dealDamage",
+                      "amount": 1,
+                      "targets": {
+                        "type": "selfLeader"
+                      }
+                    },
+                    {
+                      "op": "draw",
+                      "count": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve mode selection is incorrectly encoded as choose; the source says 'Choose up to 3', so the player may choose multiple modes. Replace choose with chooseMultiple, min 1, max 3."
+    ]
+  }
+}

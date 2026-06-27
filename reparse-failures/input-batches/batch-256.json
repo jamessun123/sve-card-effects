@@ -1,0 +1,59 @@
+{
+  "Zell, Windreader": {
+    "source": {
+      "name": "Zell, Windreader",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Select a [dragoncraft] follower on your field and, if you have 10 max play points, give it Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-073EN.png",
+      "cardNos": [
+        "BP16-073EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ppMin",
+              "count": 10
+            },
+            "then": {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "cardClass": "dragon",
+                  "cardType": "follower"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target selection is encoded incorrectly. The source says \"Select a Dragoncraft follower on your field and, if you have 10 max play points, give it Storm,\" so the target must always be selected, then the Storm grant happens only if ppMin 10 is true. Move the target selector outside the condition and apply the condition only to the grantKeyword effect."
+    ]
+  }
+}

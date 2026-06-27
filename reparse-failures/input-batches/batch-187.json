@@ -1,0 +1,191 @@
+{
+  "Resplendent Phoenix": {
+    "source": {
+      "name": "Resplendent Phoenix",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Phoenix",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Ward. [fanfare] [cost02]: If Overflow is active for you, shuffle your deck, then put the top card into your EX area. It costs 0 to play this turn. [lastwords] Give your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-054EN.png",
+      "cardNos": [
+        "BP11-054EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "cost": {
+              "op": "spendPp",
+              "amount": 2
+            },
+            "then": {
+              "op": "if",
+              "condition": {
+                "type": "overflow"
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "shuffleDeck"
+                  },
+                  {
+                    "op": "putDeckTopToExArea"
+                  },
+                  {
+                    "op": "playCostReduction",
+                    "amount": 0
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"lastWords\" from keywords; they are timings and should be represented only in abilities.",
+      "The fanfare effect's cost reduction is encoded incorrectly. After putting the top card into your EX area, that card should cost 0 to play this turn, not apply a generic playCostReduction effect on this follower/source. Encode this with putDeckTopToExArea and playCostReduction: 99 (or equivalent reduction to 0 for the moved card) on the card put into EX area.",
+      "The Last Words effect should give your leader +2 defense as written; if the engine distinguishes this from healing, use the correct leader-defense gain encoding rather than healLeader."
+    ]
+  },
+  "Retracing the Past": {
+    "source": {
+      "name": "Retracing the Past",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Mercenary",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower on your field and give it \"[lastwords] Give your leader [defense]+2. Draw a card\" for the rest of this turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-119EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "grantLastWords",
+            "effect": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "healLeader",
+                  "amount": 2
+                },
+                {
+                  "op": "draw",
+                  "count": 1
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell must select a follower on your field and give that selected follower the Last Words ability. The current grantLastWords effect has no target. It should target a selfFollower count 1."
+    ]
+  },
+  "Revolver Eagle": {
+    "source": {
+      "name": "Revolver Eagle",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Faith / Avian",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "1",
+        "effect": "Storm. [fanfare] Put a Bullet Bike token into your EX area. [act] [cost06]: Give this follower [attack]+4/[defense]+4."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-099EN.png",
+      "cardNos": [
+        "BP11-099EN",
+        "PR-277EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Bullet Bike",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 6
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 4,
+            "def": 4,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; it is a timing and should be represented only by the fanfare ability."
+    ]
+  }
+}

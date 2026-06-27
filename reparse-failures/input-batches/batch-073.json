@@ -1,0 +1,50 @@
+{
+  "Ersatz Elimination": {
+    "source": {
+      "name": "Ersatz Elimination",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell / Token",
+        "trait": "Omen / Mage",
+        "rarity": "Premium",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower in your cemetery with both the Omen and Mage traits that costs 3 or less and summon it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-PR11EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "traitsAny": [
+                "Omen",
+                "Mage"
+              ],
+              "cardType": "follower",
+              "maxCost": 3
+            },
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Cemetery summon filter is too broad: `traitsAny` matches a follower with either Omen or Mage, but the source requires both traits. Change the filter to require both Omen and Mage traits, which needs an AND-style trait filter rather than `traitsAny`."
+    ]
+  }
+}

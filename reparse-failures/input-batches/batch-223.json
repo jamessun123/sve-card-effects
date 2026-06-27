@@ -1,0 +1,182 @@
+{
+  "Swordflash Panther": {
+    "source": {
+      "name": "Swordflash Panther",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Beast",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "3",
+        "effect": "Rush. [fanfare] Select a [swordcraft] follower that costs 2 or less in your cemetery. Summon it and give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-023EN.png",
+      "cardNos": [
+        "BP08-023EN",
+        "PR-206EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardClass": "sword",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "to": "field"
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing only, while Rush stays in keywords.",
+      "The fanfare incorrectly uses tutorFromCemetery to field; the card text says to summon a follower from your cemetery. Encode this as summonFromCemetery with filter {\"cardClass\":\"sword\",\"cardType\":\"follower\",\"maxCost\":2}, count 1, then buff the lastSummoned follower with atk +1."
+    ]
+  },
+  "Swordwhip Dragoon": {
+    "source": {
+      "name": "Swordwhip Dragoon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "2",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] Select up to 2 enemy followers on the field and deal 2 damage divided between them. If Overflow is active for you, deal 4 damage divided between them instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-063EN.png",
+      "cardNos": [
+        "BP06-063EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 2 damage divided between up to 2 enemy followers",
+                "effect": {
+                  "op": "dealDamageSplit",
+                  "primaryAmount": 2,
+                  "maxTargets": 2,
+                  "targets": {
+                    "type": "enemyFollower"
+                  }
+                }
+              },
+              {
+                "label": "Deal 4 damage divided between up to 2 enemy followers if Overflow is active",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "overflow"
+                  },
+                  "then": {
+                    "op": "dealDamageSplit",
+                    "primaryAmount": 4,
+                    "maxTargets": 2,
+                    "targets": {
+                      "type": "enemyFollower"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing only.",
+      "The fanfare is encoded as a player choice between 2 damage and conditional 4 damage, but the card has no choice. Encode it as an if effect: if Overflow is active, dealDamageSplit with primaryAmount 4 to up to 2 enemy followers; otherwise dealDamageSplit with primaryAmount 2 to up to 2 enemy followers."
+    ]
+  },
+  "Sylvia, Grand Arbiter": {
+    "source": {
+      "name": "Sylvia, Grand Arbiter",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Supreme",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-103EN.png",
+      "cardNos": [
+        "BP11-103EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "triggerAbilities",
+            "timing": "onEvolve"
+          }
+        }
+      ],
+      "evolvesTo": "Sylvia, Grand Arbiter Evolved",
+      "evolveCost": 0,
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Evolve this follower,\" but the encoding only triggers On Evolve abilities. Encode the fanfare as actually evolving this follower (for example using an evolve/self-evolve effect rather than triggerAbilities onEvolve), so it properly changes to the evolved state and links to Sylvia, Grand Arbiter Evolved."
+    ]
+  }
+}

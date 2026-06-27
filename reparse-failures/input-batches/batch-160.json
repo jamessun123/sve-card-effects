@@ -1,0 +1,167 @@
+{
+  "Nao Kamiya": {
+    "source": {
+      "name": "Nao Kamiya",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] If there are at least 3 iM@S CG followers on your field, select an enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-029EN.png",
+      "cardNos": [
+        "CP02-029EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "iM@S CG",
+              "count": 3
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the extra keyword \"storm\". The source card only has a fanfare ability and does not have Storm."
+    ]
+  },
+  "Natalia": {
+    "source": {
+      "name": "Natalia",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "2",
+        "attack": "1",
+        "defense": "3",
+        "effect": "Storm. [fanfare] Select an enemy follower on the field and deal it damage equal to the number of other Passion followers on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-149EN.png",
+      "cardNos": [
+        "CP02-097EN",
+        "CSD02c-016EN",
+        "PR-149EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Passion",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare damage amount is incorrect: it should be equal to the number of other Passion followers on your field, but parsed uses all Passion followers on your field. Encode a count excluding this follower."
+    ]
+  },
+  "Naterra's Future": {
+    "source": {
+      "name": "Naterra's Future",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Natura",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Look at the top card of your deck. If it's a Natura card, you may reveal it and add it to your hand. Put a Naterran Great Tree token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-117EN.png",
+      "cardNos": [
+        "BP17-117EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Natura"
+                },
+                "lookAt": 1,
+                "to": "hand",
+                "optional": true,
+                "reveal": true
+              },
+              {
+                "op": "summon",
+                "tokenName": "Naterran Great Tree",
+                "count": 1,
+                "zone": "exArea"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first effect is overencoded: \"Look at the top card of your deck. If it's a Natura card, you may reveal it and add it to your hand\" should only operate on the top card, but searchDeckChoose with lookAt 1 can choose that card regardless of whether it is the top card after viewing/filtering semantics. It should be encoded as a top-card peek/check for trait Natura, then optional reveal and add to hand."
+    ]
+  }
+}

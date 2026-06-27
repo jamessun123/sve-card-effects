@@ -1,0 +1,67 @@
+{
+  "Swiftblade Dragonewt": {
+    "source": {
+      "name": "Swiftblade Dragonewt",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonewt / Wyrmkin / Armed",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] If there are at least 3 Armed cards in your cemetery, summon a Draconic Weapon token and deal 3 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-064EN.png",
+      "cardNos": [
+        "BP10-064EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Swiftblade Dragonewt Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Armed",
+              "count": 3
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "summon",
+                  "tokenName": "Draconic Weapon",
+                  "count": 1,
+                  "zone": "field"
+                },
+                {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 3,
+                  "followersOnly": false
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The damage effect is encoded incorrectly: the card deals 3 damage to each enemy leader, not to all enemies. Replace dealDamageAllEnemies with dealDamage targeting enemyLeader for 3 damage."
+    ]
+  }
+}

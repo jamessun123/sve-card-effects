@@ -1,0 +1,414 @@
+{
+  "Ironknuckle Nun": {
+    "source": {
+      "name": "Ironknuckle Nun",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Machina / Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "Ward. [fanfare][lastwords] Put a Repair Mode token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-097EN.png",
+      "cardNos": [
+        "BP07-097EN",
+        "PR-183EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Repair Mode",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Repair Mode",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"lastWords\" from keywords; they are timings and are already correctly represented as abilities."
+    ]
+  },
+  "Ironwrought Defender": {
+    "source": {
+      "name": "Ironwrought Defender",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Heroic",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] If there are at least 2 Heroic cards in your cemetery, give this follower [defense]+1 and Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-033EN.png",
+      "cardNos": [
+        "BP03-033EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Heroic",
+              "count": 2
+            },
+            "then": {
+              "op": "buff",
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "ward"
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Ward is conditional on the fanfare cemetery check, but parsed as an unconditional passive keyword; encode Ward inside the fanfare conditional together with the +1 defense effect, not as a standalone passive ability.",
+      "Remove \"fanfare\" from keywords; it is a timing, not a keyword."
+    ]
+  },
+  "Isabelle, Intrepid Mage": {
+    "source": {
+      "name": "Isabelle, Intrepid Mage",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Discard a card: Choose 1. (1) Select an enemy follower on the field and deal it 3 damage. (2) Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-037EN.png",
+      "cardNos": [
+        "BP17-037EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Isabelle, Intrepid Mage Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Select an enemy follower on the field and deal it 3 damage",
+                  "effect": {
+                    "op": "dealDamage",
+                    "amount": 3,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                },
+                {
+                  "label": "Draw a card",
+                  "effect": {
+                    "op": "draw",
+                    "count": 1
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect makes discarding a card mandatory to perform the choose-one effect, but parsed as optionalCost; encode it as a required discard followed by choose 1.",
+      "Remove \"evolve\" and \"fanfare\" from keywords; they are not keywords and are represented by evolveCost/evolvesTo and ability timing."
+    ]
+  },
+  "Israfil": {
+    "source": {
+      "name": "Israfil",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Angel / Deity",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "8",
+        "attack": "8",
+        "defense": "8",
+        "effect": "[evolve][cost01]: Evolve this follower. [fanfare] Give your leader [defense]+4. Strike: Deal 3 damage to each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-117EN.png",
+      "cardNos": [
+        "BP04-117EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare",
+        "strike"
+      ],
+      "evolvesTo": "Israfil Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "healLeader",
+            "amount": 4
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 3,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\", \"fanfare\", and \"strike\" from keywords; they are not card keywords and are already represented by evolve data and ability timings."
+    ]
+  },
+  "Israfil Evolved": {
+    "source": {
+      "name": "Israfil Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Angel / Deity",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "10",
+        "defense": "10",
+        "effect": "Strike: Deal 5 damage to each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-118EN.png",
+      "cardNos": [
+        "BP04-118EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Israfil",
+      "specialType": "evolved",
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 5,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; it is a timing, not a keyword, and is already represented by the strike ability."
+    ]
+  },
+  "Itsurugi, Eager Admirer": {
+    "source": {
+      "name": "Itsurugi, Eager Admirer",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Festive / Demon / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[adv] [cost04], banish this: You may summon an Itsurugi, Paradise's End from your evolve deck. Activate only if there are at least 5 Festive cards or at least 10 [abysscraft] cards in your cemetery. [fanfare] Put a Wolfling's Struggle token into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-070EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "advanced"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Wolfling's Struggle",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 4
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "conditionAny",
+              "conditions": [
+                {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Festive",
+                  "count": 5
+                },
+                {
+                  "type": "ownCemeteryClassMin",
+                  "cardClass": "abyss",
+                  "count": 10
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "banishSelf"
+                },
+                {
+                  "op": "summonFromEvolveDeck",
+                  "filter": {
+                    "identityName": "Itsurugi, Paradise's End"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated [adv] ability is missing the self-banish cost in cost; encode banishing this card as part of the activated cost (e.g. cost includes banishSelf) rather than as an effect step after the condition check."
+    ]
+  },
+  "Ivory Dragon": {
+    "source": {
+      "name": "Ivory Dragon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve][cost00]: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-092EN.png",
+      "cardNos": [
+        "BP01-092EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolveCost": 0,
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing evolvesTo linkage for this base follower with an evolve cost line; set evolvesTo to the evolved card name.",
+      "Remove \"evolve\" from keywords; it is not a keyword and should be represented by evolveCost/evolvesTo."
+    ]
+  }
+}

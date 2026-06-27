@@ -1,0 +1,108 @@
+{
+  "Karakuri Servant Evolved": {
+    "source": {
+      "name": "Karakuri Servant Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Festive / Puppetry / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Select an enemy follower on the field and deal it 2 damage. If there are at least 3 cards in your EX area, deal 3 damage instead."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-013EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Karakuri Servant",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "exAreaTraitMin",
+              "trait": "Puppet",
+              "count": 3
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The condition is encoded incorrectly as exAreaTraitMin with trait 'Puppet', but the source says 'If there are at least 3 cards in your EX area'. Change it to a condition that checks total cards in your EX area being 3 or more, not Puppet trait cards."
+    ]
+  },
+  "Karen Hojo Evolved": {
+    "source": {
+      "name": "Karen Hojo Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Silver",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Select an enemy follower on the field. Deal it and this follower 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-027EN.png",
+      "cardNos": [
+        "CP02-027EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Karen Hojo",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamageCompare",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            },
+            "damageTargetFirst": true
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded as dealDamageCompare, which deals damage based on another follower's attack, but the source says 'Deal it and this follower 3 damage.' Replace this with a sequence that deals 3 damage to the selected enemy follower and 3 damage to this follower."
+    ]
+  }
+}

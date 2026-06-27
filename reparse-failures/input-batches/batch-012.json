@@ -1,0 +1,119 @@
+{
+  "Ancient Alchemist": {
+    "source": {
+      "name": "Ancient Alchemist",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Alchemist",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "5",
+        "effect": "[evolve][cost03]: Evolve this follower. [fanfare] Earth Rite: Put 2 Guardform Golem tokens into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-054EN.png",
+      "cardNos": [
+        "BP01-054EN",
+        "SDD03-006EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "earthRite",
+              "count": 1
+            },
+            "then": {
+              "op": "summon",
+              "tokenName": "Guardform Golem",
+              "count": 2,
+              "zone": "exArea"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage: add `evolvesTo: \"Ancient Alchemist Evolved\"` and `evolveCost: 3` to match `[evolve][cost03]: Evolve this follower.`"
+    ]
+  },
+  "Ancient Amplifier": {
+    "source": {
+      "name": "Ancient Amplifier",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Eidolon / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Summon a Mystic Artifact token. [act] [cost01], [engage], put this card into its owner's cemetery: Select a token follower on your field and give it [attack]+2/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-102EN.png",
+      "cardNos": [
+        "BP05-102EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Mystic Artifact",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 1,
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "filter": {
+                "trait": "Supreme"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded incorrectly. It should target a token follower on your field, not an allied field card with trait `Supreme`. Change the target to a self follower selector filtered to token printings, e.g. `targets: {\"type\":\"selfFollower\",\"count\":1,\"filter\":{\"printingType\":\"token\"}}`."
+    ]
+  }
+}

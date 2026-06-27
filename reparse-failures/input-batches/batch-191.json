@@ -1,0 +1,141 @@
+{
+  "Robowing Precant": {
+    "source": {
+      "name": "Robowing Precant",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Machina / Faith",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Put a Repair Mode token into your EX area. Then, if there are at least 3 cards named Repair Mode in your EX area, draw a card. Whenever you play a Repair Mode, select a follower on your field and give it Bane."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-099EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Repair Mode",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaNamedMin",
+                  "identityName": "Repair Mode",
+                  "count": 3
+                },
+                "then": {
+                  "op": "draw",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "identityName": "Repair Mode"
+          },
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "identityName": "Repair Mode"
+            },
+            "effect": {
+              "op": "grantKeyword",
+              "keyword": "bane",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The 'Whenever you play a Repair Mode' ability is encoded incorrectly. Replace the current onCardPlayed/grantOnCardPlayed structure with a direct triggered ability that triggers when you play a card named Repair Mode and grants Bane to a selected follower on your field.",
+      "The triggered ability to grant Bane is missing the actual target-selection form from the source. It should target a follower on your field (for example with targets.type 'selfFollower' or 'anyFollower' as appropriate to your controller-only field targeting), not wrap the effect as a granted future trigger."
+    ]
+  },
+  "Rola, Inferno Dragoon": {
+    "source": {
+      "name": "Rola, Inferno Dragoon",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Machina / Faith / Eidolon",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Put a Repair Mode token into your EX area. If this card was put onto the field by an ability, evolve it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-086EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Rola, Inferno Dragoon Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Repair Mode",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "effect": {
+            "op": "evolveOtherFollower",
+            "excludeSelf": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second fanfare ability is encoded with the wrong effect. If this card was put onto the field by an ability, it should evolve itself; replace evolveOtherFollower excludeSelf:true with an effect that evolves this follower."
+    ]
+  }
+}

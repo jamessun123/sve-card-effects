@@ -1,0 +1,258 @@
+{
+  "Mechanical Bowman": {
+    "source": {
+      "name": "Mechanical Bowman",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Hunter / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Banish a card in your EX area: Select an enemy follower on the field and deal it 5 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-013EN.png",
+      "cardNos": [
+        "BP05-013EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "cost": {
+              "op": "banishFromExArea",
+              "count": 1
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "label": "Banish a card in your EX area"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not encode Fanfare as a keyword here; remove \"fanfare\" from keywords and keep the effect only as an ability with timing \"fanfare\".",
+      "The optional cost is missing the EX area filter object required by banishFromExArea; encode the cost as banishFromExArea with count 1 and a valid filter matching any card."
+    ]
+  },
+  "Mechanized Lifeform": {
+    "source": {
+      "name": "Mechanized Lifeform",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Machina / Forbidden",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "1",
+        "effect": "[fanfare] Put a Repair Mode token into your EX area. Once per turn, when you play a Machina card, draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-044EN.png",
+      "cardNos": [
+        "BP07-044EN",
+        "PR-180EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Repair Mode",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "trait": "Machina"
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not encode Fanfare as a keyword here; remove \"fanfare\" from keywords and keep the effect only as an ability with timing \"fanfare\".",
+      "The continuous trigger for playing a Machina card is incorrectly encoded with a top-level filter field; encode it as timing \"onCardPlayed\" with condition/effect support matching 'when you play a Machina card, draw a card' rather than an unsupported top-level filter."
+    ]
+  },
+  "Mechasaw Deathbringer": {
+    "source": {
+      "name": "Mechasaw Deathbringer",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Departed",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[act] [cost01], bury this card: Bury the top 2 cards of your deck. [lastwords] Select an enemy follower on the field and destroy it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-083EN",
+        "PR-355EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "mill",
+            "count": 2
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not encode activated/Last Words as keywords here; remove \"activated\" and \"lastWords\" from keywords and keep them only as abilities with timings \"activated\" and \"lastWords\"."
+    ]
+  },
+  "Meet the Levin Sisters!": {
+    "source": {
+      "name": "Meet the Levin Sisters!",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Commander / Officer / Levin",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "You may play this card for 4 more play points. ---------- Search your deck for a Mina, Levin Vice Leader; Mona, Levin Mage; or Mena, Levin Duelist, reveal it, add it to your hand, then shuffle. If you played this card for 4 more play points, search for 1 of each instead, summon them, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-035EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "optionalCost",
+            "label": "You may play this card for 4 more play points",
+            "cost": {
+              "op": "spendPp",
+              "amount": 4
+            },
+            "then": {
+              "op": "choose",
+              "min": 1,
+              "max": 1,
+              "options": [
+                {
+                  "label": "Search your deck for a Mina, Levin Vice Leader; Mona, Levin Mage; or Mena, Levin Duelist, reveal it, add it to your hand, then shuffle",
+                  "effect": {
+                    "op": "searchDeckChoose",
+                    "filter": {
+                      "identityNameContains": "Levin"
+                    },
+                    "lookAt": 40,
+                    "to": "hand",
+                    "optional": true,
+                    "reveal": true,
+                    "remainderTo": "deckBottom"
+                  }
+                },
+                {
+                  "label": "If you played this card for 4 more play points, search for 1 of each instead, summon them, then shuffle",
+                  "effect": {
+                    "op": "sequence",
+                    "steps": [
+                      {
+                        "op": "searchDeckSummonMultiple",
+                        "filter": {
+                          "identityNameContains": "Levin"
+                        },
+                        "lookAt": 40,
+                        "maxTotalCost": 12,
+                        "remainderTo": "deckBottom"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is misencoded as an optional cost followed by a player choice between the normal and enhanced effects. The base effect should always search for exactly one of Mina, Mona, or Mena and add it to hand, while the 4-extra-PP payment should instead replace that with the enhanced effect.",
+      "The normal search filter is too broad: identityNameContains \"Levin\" can find many wrong cards. It should be restricted to exactly Mina, Levin Vice Leader; Mona, Levin Mage; or Mena, Levin Duelist.",
+      "The normal mode should add the chosen card to hand and shuffle, not use searchDeckChoose with remainderTo deckBottom.",
+      "The enhanced mode is incorrect: it must search for 1 of each of the three specific cards and summon them, not searchDeckSummonMultiple for generic Levin cards with max total cost 12.",
+      "The enhanced mode should only occur if the 4-more-PP optional payment was made, not as one option of a generic choose effect."
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "Craving's Splendor": {
+    "source": {
+      "name": "Craving's Splendor",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Omen",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] If there is a Gilnelise, Omen of Craving on your field, this card costs 3 less to play from the EX area. Select an enemy follower on the field. Deal it 4 damage and give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-113EN.png",
+      "cardNos": [
+        "BP05-113EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "inExArea"
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 3
+          }
+        },
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "healLeader",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The EX-area cost reduction is missing the condition \"If there is a Gilnelise, Omen of Craving on your field\". Add a named-follower-on-field condition along with the existing in-EX-area condition so the reduction applies only while this card is in your EX area and Gilnelise, Omen of Craving is on your field."
+    ]
+  }
+}

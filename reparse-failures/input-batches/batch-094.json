@@ -1,0 +1,242 @@
+{
+  "Glittering Gold": {
+    "source": {
+      "name": "Glittering Gold",
+      "type": "token",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell / Token",
+        "trait": "Festive / Thief / Loot",
+        "rarity": "-",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "0",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] [cost01], banish this and 2 other cards named Glittering Gold from your EX area: Give your leader [defense]+1. Draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-T02EN",
+        "BP16-T15EN",
+        "PR-380EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "banishFromExArea": {
+              "identityName": "Glittering Gold"
+            },
+            "banishCount": 3
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the keyword 'fanfare'; the source card has no Fanfare keyword.",
+      "The activated cost is incorrect. It should cost 1 PP and banish this card plus 2 other cards named Glittering Gold from your EX area, not a generic banishCount 3. Encode the cost as pp 1 plus banishSelf and banishFromExArea count 2 filtered to identityName 'Glittering Gold'."
+    ]
+  },
+  "Glitz & Glam☆Parade": {
+    "source": {
+      "name": "Glitz & Glam☆Parade",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Legendary",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select up to one 2-cost Passion follower and up to one 1-cost Passion follower in your cemetery and summon them. Give your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-029EN.png",
+      "cardNos": [
+        "ECP02-029EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "trait": "Passion",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "count": 1,
+                "maxTotalCost": 2
+              },
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "trait": "Passion",
+                  "cardType": "follower",
+                  "maxCost": 1
+                },
+                "count": 1,
+                "maxTotalCost": 1
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first summonFromCemetery is too broad. It should select up to one 2-cost Passion follower exactly, not any Passion follower costing 2 or less. Change the filter to minCost 2 and maxCost 2.",
+      "The second summonFromCemetery should be optional/up-to-one if the engine supports it; the source says 'up to one' 1-cost Passion follower.",
+      "The first summonFromCemetery should also be optional/up-to-one if the engine supports it; the source says 'up to one' 2-cost Passion follower."
+    ]
+  },
+  "Goblin Assault": {
+    "source": {
+      "name": "Goblin Assault",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Goblinoid",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When playing this, discard a Goblinoid card: This costs 2 less to play. ---------- Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-119EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a Goblinoid card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Goblinoid"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "playCostReduction",
+              "amount": 2
+            }
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The play-cost reduction clause is encoded as a spell-timing ability, but it should be a when-playing-this optional additional cost/replacement effect that reduces this card's play cost before resolution. Replace the spell ability with a passive or play-time cost-modification encoding that says 'When playing this, you may discard a Goblinoid card; if you do, this costs 2 less to play.'"
+    ]
+  },
+  "Goblin Princess": {
+    "source": {
+      "name": "Goblin Princess",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Goblinoid / Princess",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "1",
+        "effect": "[evolve][cost01]: Evolve this follower. [fanfare] Search your deck for a [neutral] follower that costs 1 play point and put it onto your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-124EN.png",
+      "cardNos": [
+        "BP04-124EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Goblin Princess Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardClass": "neutral",
+              "cardType": "follower",
+              "maxCost": 1
+            },
+            "to": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare tutor is too broad. The source says 'a neutral follower that costs 1 play point', not 1 or less. Change the filter to minCost 1 and maxCost 1."
+    ]
+  }
+}

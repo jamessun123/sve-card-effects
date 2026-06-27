@@ -1,0 +1,56 @@
+{
+  "Al-mi'raj Defender": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "lookAt": 5,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "always"
+            },
+            "then": {
+              "op": "playCostReduction",
+              "amount": 4
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Albert, Thunderous Doom": {
+    "evolvesTo": "Albert, Thunderous Doom Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "cost": {
+          "buryFromField": {
+            "trait": "Levin"
+          },
+          "excludeSelf": true
+        },
+        "effect": {
+          "op": "destroy",
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "Godsent Stride": {
+    "source": {
+      "name": "Godsent Stride",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower on your field. Give it [attack]+3/[defense]+2 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-034EN.png",
+      "cardNos": [
+        "BP08-034EN",
+        "SDD02-015EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "buff",
+            "atk": 3,
+            "def": 2,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing Rush grant. The spell should be encoded as a sequence that buffs the selected follower +3/+2 and grants it Rush, e.g. add a grantKeyword effect with keyword \"rush\" targeting the same selfFollower target."
+    ]
+  },
+  "Golem's Rampage": {
+    "source": {
+      "name": "Golem's Rampage",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Golem / Forbidden",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Bury a Golem follower: Deal 3 damage to each enemy leader and enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-050EN.png",
+      "cardNos": [
+        "BP06-050EN",
+        "PR-157EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buryFieldFollowers",
+                "filter": {
+                  "trait": "Golem"
+                },
+                "sourceOnly": false
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": false
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cost/effect is encoded incorrectly. The card says 'Bury a Golem follower' as a required single sacrifice, but the current effect buries Golem followers broadly with buryFieldFollowers. Encode the spell so it buries exactly one Golem follower on your field as the cost/effect, using a single-target bury operation such as an activated/spell-compatible select-and-bury of one matching follower before dealing 3 damage to all enemies."
+    ]
+  }
+}

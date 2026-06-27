@@ -1,0 +1,36 @@
+{
+  "Ancient Elf Evolved": {
+    "evolvesFrom": "Ancient Elf",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "returnToHand",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 1,
+                "excludeSelf": true
+              }
+            },
+            {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

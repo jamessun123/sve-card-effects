@@ -1,0 +1,172 @@
+{
+  "Dragon Breeder Evolved": {
+    "source": {
+      "name": "Dragon Breeder Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Dragonheart",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Look at the top 4 cards of your deck. You may put a [dragoncraft] follower that costs 3 or less from among them into your EX area and give it [attack]+1/[defense]+1. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-065EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Dragon Breeder",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "follower",
+              "maxCost": 3
+            },
+            "lookAt": 4,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 0,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incomplete: after putting a 3-cost or less Dragoncraft follower into your EX area, it should also give that card +1/+1. Replace the current `searchDeckChoose` encoding with an effect that applies the +1/+1 buff to the chosen card in EX area, or extend the search effect to support granting stats to the selected card."
+    ]
+  },
+  "Dragon Empress Otohime": {
+    "source": {
+      "name": "Dragon Empress Otohime",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonewt / Marine",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "4",
+        "attack": "2",
+        "defense": "4",
+        "effect": "[fanfare] Summon an Otohime's Vanguard token. If Overflow is active for you, summon 3 instead. During your turn, whenever another [dragoncraft] follower is put from your field into the cemetery, select an enemy leader or enemy follower on the field and deal it 1 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-052EN.png",
+      "cardNos": [
+        "BP08-052EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "summon",
+              "tokenName": "Otohime's Vanguard",
+              "count": 3,
+              "zone": "field"
+            },
+            "else": {
+              "op": "summon",
+              "tokenName": "Otohime's Vanguard",
+              "count": 1,
+              "zone": "field"
+            }
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "cardClass": "dragon"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          },
+          "oncePerTurn": false
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second ability is encoded with the wrong timing and trigger. It should trigger when another Dragoncraft follower is put from your field into the cemetery during your turn, not whenever you play a Dragoncraft card. Replace `timing: \"onCardPlayed\"` with an appropriate leave-field/to-cemetery trigger for allied Dragoncraft followers.",
+      "The second ability targets are incorrect. It should deal 1 damage to a selected enemy leader or enemy follower, not only the enemy leader. Encode the target as a choice between enemy leader and enemy follower, or an equivalent selector covering both."
+    ]
+  },
+  "Dragon Spawning": {
+    "source": {
+      "name": "Dragon Spawning",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Look at the top 3 cards of your deck. You may put a [dragoncraft] follower from among them into your EX area. If Overflow is active for you, it costs 2 less to play this turn. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-073EN.png",
+      "cardNos": [
+        "BP10-073EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "follower"
+            },
+            "lookAt": 3,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 2,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The EX area play-cost reduction is unconditional in the parsed ability, but the source says it only applies if Overflow is active for you. Encode the `searchDeckChoose` without `playCostReduction`, then apply the 2-cost reduction only under an `overflow` condition."
+    ]
+  }
+}

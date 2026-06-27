@@ -1,0 +1,248 @@
+{
+  "Celia, Sky Commander": {
+    "source": {
+      "name": "Celia, Sky Commander",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower into a Celia, Hope's Strategist. [evolve] [cost04]: Evolve this follower into a Celia, Despair's Messenger."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-018EN.png",
+      "cardNos": [
+        "BP09-018EN",
+        "PR-268EN",
+        "SP01-011EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Celia, Hope's Strategist Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Celia, Hope's Strategist"
+            }
+          }
+        },
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Celia, Despair's Messenger"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve linkage is incomplete/incorrect: this card has two distinct evolve options, so `evolvesTo` and a single `evolveCost` do not faithfully represent the source. Remove the single `evolvesTo`/`evolveCost` shortcut and encode both evolve abilities with their respective costs: [cost01] for \"Celia, Hope's Strategist\" and [cost04] for \"Celia, Despair's Messenger\".",
+      "The first `timing: \"evolve\"` ability is missing the required activated cost for [cost01]. Add the evolve cost/payment to this ability so it represents \"[evolve] [cost01]\".",
+      "The second `timing: \"evolve\"` ability is missing the required activated cost for [cost04]. Add the evolve cost/payment to this ability so it represents \"[evolve] [cost04]\"."
+    ]
+  },
+  "Cerberus": {
+    "source": {
+      "name": "Cerberus",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Put a Mimi, Infernal Right Paw or Coco, Infernal Left Paw token into your EX area. Necrocharge (10) - Put both instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-101EN.png",
+      "cardNos": [
+        "BP01-101EN",
+        "PR-140EN",
+        "SP01-035EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Cerberus Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Mimi, Infernal Right Paw or Coco, Infernal Left Paw token into your EX area",
+                "effect": {
+                  "op": "choose",
+                  "min": 1,
+                  "max": 1,
+                  "options": [
+                    {
+                      "label": "Mimi, Infernal Right Paw",
+                      "effect": {
+                        "op": "summon",
+                        "tokenName": "Mimi, Infernal Right Paw",
+                        "count": 1,
+                        "zone": "exArea"
+                      }
+                    },
+                    {
+                      "label": "Coco, Infernal Left Paw",
+                      "effect": {
+                        "op": "summon",
+                        "tokenName": "Coco, Infernal Left Paw",
+                        "count": 1,
+                        "zone": "exArea"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is incomplete: it must also encode \"Necrocharge (10) - Put both instead.\" Add a Necrocharge (10) branch/conditional so the fanfare summons both Mimi and Coco into the EX area instead of choosing one when the condition is met."
+    ]
+  },
+  "Cerberus, Hellfire Unleashed": {
+    "source": {
+      "name": "Cerberus, Hellfire Unleashed",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Summon a Mimi, Right Paw Hellhound and Coco, Left Paw Hellhound token. Necrocharge (10) - Give them Storm. [act] [engage], bury another follower: Select an enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-077EN.png",
+      "cardNos": [
+        "BP16-077EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Mimi, Right Paw Hellhound",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Coco, Left Paw Hellhound",
+                "count": 1,
+                "zone": "field"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "filter": {
+                    "identityName": "Mimi, Right Paw Hellhound"
+                  },
+                  "count": 1
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "filter": {
+                    "identityName": "Coco, Left Paw Hellhound"
+                  },
+                  "count": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true,
+            "buryFromField": {
+              "cardType": "follower"
+            },
+            "buryFieldCount": 1,
+            "excludeSelfFromBury": true
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Necrocharge (10) fanfare branch targets are encoded incorrectly. \"Give them Storm\" refers to the two tokens just summoned, but the parsed `grantKeyword` targets use unsupported/incorrect target filtering on `selfFollower`. Encode this as granting Storm to the summoned Mimi and Coco correctly, matching the two tokens created by the fanfare.",
+      "The activated ability cost is encoded incorrectly. The source says \"[act] [engage], bury another follower\"; use the implemented activated cost shape with `engage: true` and `buryFromField` matching one follower with `excludeSelf`, rather than custom fields like `buryFieldCount` and `excludeSelfFromBury`."
+    ]
+  }
+}

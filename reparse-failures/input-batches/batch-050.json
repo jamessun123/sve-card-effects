@@ -1,0 +1,228 @@
+{
+  "Cynthia, the Queen's Blade": {
+    "source": {
+      "name": "Cynthia, the Queen's Blade",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "6",
+        "attack": "4",
+        "defense": "6",
+        "effect": "[fanfare] Put a Fairy Wisp token into your EX area. Give each Pixie token on your field [attack]+2. While this card is on your field, each Pixie token on your field has Storm and Assail. Whenever a Pixie token is put onto your field, give it [attack]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-003EN.png",
+      "cardNos": [
+        "BP07-003EN",
+        "SDD01-002EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Fairy Wisp",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "buffFieldTrait",
+                "trait": "Pixie",
+                "atk": 2,
+                "otherOnly": true
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "filter": {
+                    "trait": "Pixie"
+                  },
+                  "excludeSelf": true
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "assail",
+                "targets": {
+                  "type": "selfFollower",
+                  "filter": {
+                    "trait": "Pixie"
+                  },
+                  "excludeSelf": true
+                }
+              },
+              {
+                "op": "grantOnAllyFollowerEnter",
+                "filter": {
+                  "trait": "Pixie"
+                },
+                "effect": {
+                  "op": "buff",
+                  "atk": 2,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare buff is encoded incorrectly: \"Give each Pixie token on your field [attack]+2\" should affect all Pixie tokens, not `otherOnly: true`. Remove the exclusion and restrict to Pixie tokens rather than all Pixie-trait followers if token filtering is available.",
+      "The continuous Storm and Assail clause is encoded at the wrong timing and with the wrong semantics. \"While this card is on your field, each Pixie token on your field has Storm and Assail\" should be a passive/aura ability, not part of fanfare, and should continuously affect Pixie tokens on your field.",
+      "The continuous Storm and Assail clause targets are incorrect: it should apply to Pixie tokens on your field, not `selfFollower` with `excludeSelf: true` and a trait filter. Use an aura/passive field-wide grant to matching Pixie token followers.",
+      "The last clause is encoded incorrectly: \"Whenever a Pixie token is put onto your field, give it [attack]+2\" should be this card's own triggered ability on ally follower entry, not a fanfare effect granting a trigger. Encode it as a separate `onAllyFollowerEnter` ability filtered to Pixie tokens that buffs the entering follower."
+    ]
+  },
+  "Dance of Death": {
+    "source": {
+      "name": "Dance of Death",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Dancer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "4",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field. Deal 5 damage to it and 2 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-117EN.png",
+      "cardNos": [
+        "BP02-117EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 5,
+            "leaderAmount": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The effect op is invalidly encoded as `dealDamageFollowerAndLeader`; per the engine reference it should be `damageFollowerAndLeader` with the same `followerAmount` 5 and `leaderAmount` 2."
+    ]
+  },
+  "Dance of Usurpation": {
+    "source": {
+      "name": "Dance of Usurpation",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Omen / Thief",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "4",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select any number of enemy followers on the field and deal 4 damage divided between them. If there are at least 10 cards in opponents' cemeteries, deal 8 damage divided between them instead. If there are at least 20, deal 8 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-028EN.png",
+      "cardNos": [
+        "BP08-028EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 4 damage divided between enemy followers",
+                "effect": {
+                  "op": "dealDamageSplit",
+                  "primaryAmount": 4,
+                  "maxTargets": 99,
+                  "targets": {
+                    "type": "enemyFollower"
+                  },
+                  "secondaryAmount": 0
+                }
+              },
+              {
+                "label": "Deal 8 damage divided between enemy followers",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "opponentCemeteryMin",
+                    "count": 10
+                  },
+                  "then": {
+                    "op": "dealDamageSplit",
+                    "primaryAmount": 8,
+                    "maxTargets": 99,
+                    "targets": {
+                      "type": "enemyFollower"
+                    },
+                    "secondaryAmount": 0
+                  }
+                }
+              },
+              {
+                "label": "Deal 8 damage to each enemy leader",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "opponentCemeteryMin",
+                    "count": 20
+                  },
+                  "then": {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 8,
+                    "followersOnly": false
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded as a player choice, but the card does not choose modes. It should always deal divided damage to enemy followers, using 8 instead of 4 if opponents' cemeteries have at least 10 cards, rather than `choose` between separate options.",
+      "The 20-cards clause is encoded incorrectly: \"If there are at least 20, deal 8 damage to each enemy leader\" should damage enemy leaders only, not all enemies via `dealDamageAllEnemies`.",
+      "The 20-cards clause should be additional to the divided-damage effect, not a separate mutually exclusive option. Encode the spell as a sequence: divided damage with conditional amount, then an additional conditional leader-damage effect if cemetery count is at least 20."
+    ]
+  }
+}

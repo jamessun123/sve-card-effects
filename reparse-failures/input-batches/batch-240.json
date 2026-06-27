@@ -1,0 +1,80 @@
+{
+  "Vania, Vampire Princess": {
+    "source": {
+      "name": "Vania, Vampire Princess",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Vampire / Princess",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Give this follower [attack]+X/[defense]+X. X equals the number of Forest Bat tokens on your field. [act][cost01], put a Forest Bat token from your field into its owner's cemetery: Select an enemy follower on the field. Deal 3 damage to it and 1 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-069EN.png",
+      "cardNos": [
+        "BP02-069EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffDynamic",
+            "atk": {
+              "op": "namedIdentityFieldCount",
+              "identityName": "Forest Bat",
+              "multiplier": 1
+            },
+            "def": {
+              "op": "namedIdentityFieldCount",
+              "identityName": "Forest Bat",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "identityName": "Forest Bat"
+                },
+                "count": 1
+              },
+              {
+                "op": "dealDamageFollowerAndLeader",
+                "followerAmount": 3,
+                "leaderAmount": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is wrong: it should require both paying 1 PP and putting a Forest Bat token from your field into its owner's cemetery, not banishing a Forest Bat from your EX area. Encode the extra cost using a field-bury cost/effect that selects your Forest Bat on the field.",
+      "The damage effect is encoded with the wrong operation and is missing the required selected enemy follower target. It should select an enemy follower, deal 3 damage to that follower, and 1 damage to its leader using op \"damageFollowerAndLeader\"."
+    ]
+  }
+}

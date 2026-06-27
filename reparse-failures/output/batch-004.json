@@ -1,0 +1,134 @@
+{
+  "Aerial Craft Evolved": {
+    "evolvesFrom": "Aerial Craft",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "trait": "Machina",
+            "cardType": "follower",
+            "maxCost": 2
+          },
+          "to": "field",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aerial Slash": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 1,
+          "banishSelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Heroic",
+          "count": 5
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyLeader"
+          }
+        }
+      },
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aerin, Crystalian Frostward Evolved": {
+    "evolvesFrom": "Aerin, Crystalian Frostward",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "trait": "Crystalian",
+                "cardType": "follower",
+                "maxCost": 2
+              },
+              "to": "exArea"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aether of the Warrior Wing": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "traitsAny": [
+                  "Commander",
+                  "Officer"
+                ],
+                "cardType": "card"
+              },
+              "to": "hand",
+              "reveal": true
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "ownCemeteryClassMin",
+          "cardClass": "sword",
+          "count": 7
+        },
+        "effect": {
+          "op": "buffFieldTrait",
+          "cardClass": "sword",
+          "atk": 1,
+          "def": 1,
+          "otherOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

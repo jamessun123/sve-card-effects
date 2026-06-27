@@ -1,0 +1,225 @@
+{
+  "Apostle of Craving": {
+    "source": {
+      "name": "Apostle of Craving",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Omen",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "If there is a Gilnelise, Omen of Craving on your field, this card costs 3 less to play from the EX area. [evolve] [cost01]: Evolve this follower. [fanfare] Select another follower on your field and give it Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-106EN.png",
+      "cardNos": [
+        "BP05-106EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Apostle of Craving Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "sourceInExArea"
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 3
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "excludeSelf": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Passive cost reduction is missing the named-follower condition. It should only apply if there is a Gilnelise, Omen of Craving on your field, so add condition type namedFollowerOnFieldByName with identityName \"Gilnelise, Omen of Craving\" alongside the EX area condition.",
+      "Passive cost reduction should use exAreaPlayCostReduction rather than generic playCostReduction, because the source says this card costs 3 less to play from the EX area."
+    ]
+  },
+  "Apostle of Craving Evolved": {
+    "source": {
+      "name": "Apostle of Craving Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve: Select another follower on the field. Deal it 3 damage and give it [attack]+3."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-107EN.png",
+      "cardNos": [
+        "BP05-107EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Apostle of Craving",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "buff",
+                "atk": 3,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve target is encoded incorrectly. Source says \"Select another follower on the field,\" so the target should be anyFollower with exclude-self behavior, not enemyFollower.",
+      "On Evolve buff target is encoded incorrectly. After dealing 3 damage to the selected follower, that same selected follower should get [attack]+3; parsed incorrectly buffs self instead."
+    ]
+  },
+  "Apostle of Lust": {
+    "source": {
+      "name": "Apostle of Lust",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Omen / Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[act] [engage], give your leader [defense]-1: Select a follower that costs 2 play points or less in your cemetery and put it onto your field. Whenever another Demon follower is put onto your field, give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-072EN.png",
+      "cardNos": [
+        "BP05-072EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "field"
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is incomplete. Source says \"[engage], give your leader [defense]-1\" but parsed only includes engage. Add the leader self-damage/heal-negative-1 cost before the cemetery summon effect.",
+      "Activated ability uses the wrong operation. It should put a selected follower that costs 2 play points or less from your cemetery onto your field, so use summonFromCemetery with filter cardType follower and maxCost 2, not tutorFromCemetery to field.",
+      "Triggered heal ability is missing its condition. Source says \"Whenever another Demon follower is put onto your field,\" so the trigger should filter for Demon followers entering and exclude this card itself; parsed currently heals on any ally follower entering."
+    ]
+  },
+  "Apostle of Repose": {
+    "source": {
+      "name": "Apostle of Repose",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Omen / Zealot",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "4",
+        "effect": "[evolve] [cost02]: Evolve this follower. At the start of each opponent's main phase, recover 1 play point."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-089EN.png",
+      "cardNos": [
+        "BP05-089EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Apostle of Repose Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfMain",
+          "effect": {
+            "op": "recoverPp",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keywords are incorrect. The source has no Fanfare keyword, so remove \"fanfare\" from keywords.",
+      "Start-of-main recovery is incomplete. Source says \"At the start of each opponent's main phase,\" but parsed triggers at startOfMain with no opponent-phase restriction. It should be limited to each opponent's main phase."
+    ]
+  }
+}

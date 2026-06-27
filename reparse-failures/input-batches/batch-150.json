@@ -1,0 +1,368 @@
+{
+  "Mika & Rika": {
+    "source": {
+      "name": "Mika & Rika",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Special",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Search your deck for an iM@S CG spell, put it into your EX area, then shuffle. It costs 3 less to play this turn. [act] Lesson (1): Select an iM@S CG spell in your cemetery and put it into your EX area. It costs 3 less to play this turn. Activate only if there are at least 10 Passion cards in your cemetery, and only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-SP05aEN.png",
+      "cardNos": [
+        "ECP02-SP05aEN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "iM@S CG",
+                  "cardType": "spell"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 3
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Passion",
+            "count": 10
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "Lesson (1)",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "spendPp",
+                  "amount": 1
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "trait": "iM@S CG",
+                    "cardType": "spell"
+                  },
+                  "to": "exArea",
+                  "playCostReduction": 3
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare cost reduction is encoded as a standalone playCostReduction on this follower; it should reduce the cost of the spell put into your EX area this turn, e.g. encode the deck tutor with playCostReduction: 3 or otherwise apply the reduction to the tutored EX-area card.",
+      "The activated ability is missing the Lesson keyword/cost representation; encode the activation cost as cost.pp: 1 rather than wrapping it in optionalCost, since Lesson (1) is the act cost here."
+    ]
+  },
+  "Mika Jougasaki [My★Style]": {
+    "source": {
+      "name": "Mika Jougasaki [My★Style]",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Legendary",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Search your deck for an iM@S CG spell, put it into your EX area, then shuffle. It costs 3 less to play this turn. [act] Lesson (1): Select an iM@S CG spell in your cemetery and put it into your EX area. It costs 3 less to play this turn. Activate only if there are at least 10 Passion cards in your cemetery, and only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-027EN.png",
+      "cardNos": [
+        "ECP02-027EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "iM@S CG",
+                  "cardType": "spell"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 3
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Passion",
+            "count": 10
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "Lesson (1)",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "spendPp",
+                  "amount": 1
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "trait": "iM@S CG",
+                    "cardType": "spell"
+                  },
+                  "to": "exArea",
+                  "playCostReduction": 3
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare cost reduction is encoded as a standalone playCostReduction on this follower; it should reduce the cost of the spell put into your EX area this turn, e.g. encode the deck tutor with playCostReduction: 3 or otherwise apply the reduction to the tutored EX-area card.",
+      "The activated ability is missing the Lesson keyword/cost representation; encode the activation cost as cost.pp: 1 rather than wrapping it in optionalCost, since Lesson (1) is the act cost here."
+    ]
+  },
+  "Miku Maekawa": {
+    "source": {
+      "name": "Miku Maekawa",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "2",
+        "attack": "3",
+        "defense": "1",
+        "effect": "Strike - Select an enemy follower on the field and deal it 2 damage. [act] [cost01], Lesson (1): Give this follower Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-150EN.png",
+      "cardNos": [
+        "CP02-003EN",
+        "PR-150EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability omits the Lesson (1) cost requirement; encode the full act cost to include Lesson (1) in addition to cost.pp: 1."
+    ]
+  },
+  "Miku Maekawa [Meownderful World]": {
+    "source": {
+      "name": "Miku Maekawa [Meownderful World]",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "Storm. [lastwords] Lesson (1): Search your deck for a follower with \"Miku Maekawa\" in its name, reveal it, add it to your hand, then shuffle."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-010EN.png",
+      "cardNos": [
+        "ECP02-010EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityNameContains": "Miku Maekawa"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "keywords incorrectly includes 'lastWords'; Last Words should be represented as an ability with timing 'lastWords', not as a keyword.",
+      "Last Words tutor is missing the follower restriction; the deck filter should include cardType: 'follower' in addition to identityNameContains: 'Miku Maekawa'.",
+      "The Last Words ability omits the Lesson (1) cost/requirement; encode the full Last Words text to include Lesson (1) before the tutor effect."
+    ]
+  },
+  "Miku Maekawa [Summer Cat Rendezvous]": {
+    "source": {
+      "name": "Miku Maekawa [Summer Cat Rendezvous]",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "2",
+        "attack": "3",
+        "defense": "1",
+        "effect": "Strike - Select an enemy follower on the field and deal it 2 damage. [act] [cost01], Lesson (1): Give this Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-462EN.png",
+      "cardNos": [
+        "PR-462EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability omits the Lesson (1) cost requirement; encode the full act cost to include Lesson (1) in addition to cost.pp: 1."
+    ]
+  }
+}

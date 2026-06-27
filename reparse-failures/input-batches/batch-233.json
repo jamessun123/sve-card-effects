@@ -1,0 +1,180 @@
+{
+  "Tsubaki of the Demon Blade": {
+    "source": {
+      "name": "Tsubaki of the Demon Blade",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Assassin / Ninja",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "3",
+        "attack": "4",
+        "defense": "3",
+        "effect": "[fanfare] If there are at least 5 [swordcraft] followers in your cemetery, select an enemy follower on the field and destroy it. While there are at least 10 [swordcraft] followers in your cemetery, this follower has Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-021EN.png",
+      "cardNos": [
+        "BP07-021EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryClassMin",
+              "cardClass": "sword",
+              "count": 5
+            },
+            "then": {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"storm\" from keywords; Storm is conditional, not always active.",
+      "Add a passive ability with condition {\"type\":\"ownCemeteryClassMin\",\"cardClass\":\"sword\",\"count\":10} that grants this follower Storm, e.g. grantKeyword/passiveKeywords gated by that condition."
+    ]
+  },
+  "Turquoise Sister": {
+    "source": {
+      "name": "Turquoise Sister",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "7",
+        "attack": "4",
+        "defense": "7",
+        "effect": "Ward. [fanfare] Search your deck for a Faith follower with 2 attack or less, summon it, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-102EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "Faith",
+              "cardType": "follower",
+              "maxDef": 2
+            },
+            "to": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The tutor filter uses maxDef:2, but source says a Faith follower with 2 attack or less. Change the filter to match attack <= 2 instead of defense <= 2."
+    ]
+  },
+  "Tutankhamun": {
+    "source": {
+      "name": "Tutankhamun",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Luminary",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "4",
+        "attack": "5",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Draw a card. Put a card from your hand on the bottom of your deck. [lastwords] [cost01]: Search your deck for a Tutankhamun, summon it engaged, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-108EN.png",
+      "cardNos": [
+        "BP09-108EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "putHandCardOnDeck",
+                "position": "bottom"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "optionalCost",
+            "cost": {
+              "op": "spendPp",
+              "amount": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityName": "Tutankhamun"
+                  },
+                  "to": "field"
+                },
+                {
+                  "op": "shuffleDeck"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Last Words should summon the searched Tutankhamun engaged; parsed tutors to field without the engaged state. Change the effect to summon/search in a way that preserves \"engaged\" on entry."
+    ]
+  }
+}

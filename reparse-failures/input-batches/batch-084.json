@@ -1,0 +1,99 @@
+{
+  "Fortune Fowl": {
+    "source": {
+      "name": "Fortune Fowl",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Avian",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "4",
+        "defense": "1",
+        "effect": "Rush. [lastwords] [cost01]: Summon a Holy Falcon token."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-100EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Holy Falcon",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The summon ability is timed incorrectly. It should be a lastWords ability with cost {\"pp\":1}, not a generic activated ability. Change the timing to \"lastWords\" and keep the PP cost on that ability."
+    ]
+  },
+  "Fox Lancer": {
+    "source": {
+      "name": "Fox Lancer",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] You may put a Naterran Great Tree token onto your field or into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-031EN.png",
+      "cardNos": [
+        "BP17-031EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "selectFromHand",
+            "filter": {
+              "identityName": "Naterran Great Tree"
+            },
+            "to": "field",
+            "optional": true
+          }
+        }
+      ],
+      "evolvesTo": "Fox Lancer Evolved",
+      "evolveCost": 1,
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is encoded incorrectly. It should put a Naterran Great Tree token onto your field or into your EX area, but the parsed ability uses selectFromHand and does not create the token. Replace it with an effect that lets the player choose one of two summon options: summon the Naterran Great Tree token to the field or to the EX area."
+    ]
+  }
+}

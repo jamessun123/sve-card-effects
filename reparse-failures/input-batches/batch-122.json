@@ -1,0 +1,248 @@
+{
+  "Karula, Arts Master": {
+    "source": {
+      "name": "Karula, Arts Master",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Arena / Faith",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. At the start of your end phase, if you have at least 2 play points, deal 2 damage to each enemy leader. If you have at least 4, draw a card. If you have at least 6, select up to 1 enemy follower on the field and destroy it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-087EN.png",
+      "cardNos": [
+        "BP06-087EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Karula, Arts Master Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "chooseMultiple",
+            "min": 0,
+            "max": 3,
+            "options": [
+              {
+                "label": "If you have at least 2 play points, deal 2 damage to each enemy leader",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "ppMin",
+                    "count": 2
+                  },
+                  "then": {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyLeader"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "If you have at least 4 play points, draw a card",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "ppMin",
+                    "count": 4
+                  },
+                  "then": {
+                    "op": "draw",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "If you have at least 6 play points, destroy an enemy follower",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "ppMin",
+                    "count": 6
+                  },
+                  "then": {
+                    "op": "destroy",
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end effect should resolve all applicable clauses in sequence, not let the player choose any subset. Replace the chooseMultiple wrapper with a sequence of conditional effects: if PP >= 2 deal 2 damage to the enemy leader, then if PP >= 4 draw 1, then if PP >= 6 destroy up to 1 enemy follower."
+    ]
+  },
+  "Karula, Arts Master Evolved": {
+    "source": {
+      "name": "Karula, Arts Master Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Arena / Faith",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "At the start of your end phase, recover 2 play points. Then, if you have at least 2 play points, deal 2 damage to each enemy leader. If you have at least 4, draw a card. If you have at least 6, select up to 1 enemy follower on the field and destroy it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-088EN.png",
+      "cardNos": [
+        "BP06-088EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Karula, Arts Master",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "recoverPp",
+                "amount": 2
+              },
+              {
+                "op": "chooseMultiple",
+                "min": 0,
+                "max": 3,
+                "options": [
+                  {
+                    "label": "If you have at least 2 play points, deal 2 damage to each enemy leader",
+                    "effect": {
+                      "op": "if",
+                      "condition": {
+                        "type": "ppMin",
+                        "count": 2
+                      },
+                      "then": {
+                        "op": "dealDamage",
+                        "amount": 2,
+                        "targets": {
+                          "type": "enemyLeader"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "label": "If you have at least 4 play points, draw a card",
+                    "effect": {
+                      "op": "if",
+                      "condition": {
+                        "type": "ppMin",
+                        "count": 4
+                      },
+                      "then": {
+                        "op": "draw",
+                        "count": 1
+                      }
+                    }
+                  },
+                  {
+                    "label": "If you have at least 6 play points, destroy an enemy follower",
+                    "effect": {
+                      "op": "if",
+                      "condition": {
+                        "type": "ppMin",
+                        "count": 6
+                      },
+                      "then": {
+                        "op": "destroy",
+                        "targets": {
+                          "type": "enemyFollower",
+                          "count": 1
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "After recovering 2 play points, the remaining start-of-end effect should resolve all applicable clauses in sequence, not let the player choose any subset. Replace the chooseMultiple wrapper with sequential conditional checks for PP >= 2, PP >= 4, and PP >= 6."
+    ]
+  },
+  "Katakura Kojuro Evolved": {
+    "source": {
+      "name": "Katakura Kojuro Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Draconic Duelist",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Look at the top 4 cards of your deck. You may reveal a Draconic Duelist follower from among them and add it to your hand. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-078EN.png",
+      "cardNos": [
+        "BP09-078EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Katakura Kojuro",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Draconic Duelist"
+            },
+            "lookAt": 4,
+            "to": "hand",
+            "optional": true,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve search filter is incomplete. It should only allow a Draconic Duelist follower from among the top 4 cards, so add \"cardType\": \"follower\" to the searchDeckChoose filter."
+    ]
+  }
+}

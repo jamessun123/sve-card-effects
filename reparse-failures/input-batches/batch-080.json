@@ -1,0 +1,92 @@
+{
+  "Flail Knight": {
+    "source": {
+      "name": "Flail Knight",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "Strike: Select an enemy follower on the field. Deal 1 damage to it and its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-033EN.png",
+      "cardNos": [
+        "BP04-033EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 1,
+            "leaderAmount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability is missing the required target selection for the enemy follower. Encode `damageFollowerAndLeader` with a selected enemy follower target, or otherwise represent \"Select an enemy follower on the field. Deal 1 damage to it and its leader.\""
+    ]
+  },
+  "Flame Pillar Dragonewt Evolved": {
+    "source": {
+      "name": "Flame Pillar Dragonewt Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Dragonewt / Draconic Duelist",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Search your deck for a Draconic Duelist follower that costs 3 or less, summon it, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-062EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Flame Pillar Dragonewt",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "Draconic Duelist",
+              "cardType": "follower",
+              "maxCost": 3
+            },
+            "to": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect searches and summons from the deck but omits the mandatory shuffle afterward. Encode the effect as a sequence with `tutorFromDeck` to `field` followed by `shuffleDeck`, or otherwise include the shuffle clause."
+    ]
+  }
+}

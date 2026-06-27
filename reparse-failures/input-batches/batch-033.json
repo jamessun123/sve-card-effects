@@ -1,0 +1,92 @@
+{
+  "Blossom Treant": {
+    "source": {
+      "name": "Blossom Treant",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Fae-Touched",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "6",
+        "effect": "[evolve] [cost03]: Evolve this. Ward. [lastwords] Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-013EN.png",
+      "cardNos": [
+        "BP17-013EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Blossom Treant Evolved",
+      "evolveCost": 3,
+      "keywords": [
+        "ward",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability only, while Ward remains in keywords."
+    ]
+  },
+  "Bone Drone": {
+    "source": {
+      "name": "Bone Drone",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Departed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[lastwords] Summon an Assembly Droid token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-081EN.png",
+      "cardNos": [
+        "BP07-081EN",
+        "PR-182EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Assembly Droid",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability only."
+    ]
+  }
+}

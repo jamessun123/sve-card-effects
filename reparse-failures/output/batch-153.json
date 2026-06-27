@@ -1,0 +1,41 @@
+{
+  "Mischievous Zombie Evolved": {
+    "evolvesFrom": "Mischievous Zombie",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "bane",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mist Shaman Evolved": {
+    "evolvesFrom": "Mist Shaman",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "aura",
+          "targets": {
+            "type": "selfFollower",
+            "count": 1,
+            "excludeSelf": true
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

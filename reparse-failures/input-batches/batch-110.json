@@ -1,0 +1,253 @@
+{
+  "Hornet Strike": {
+    "source": {
+      "name": "Hornet Strike",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell",
+        "trait": "Insect",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and deal it 3 damage. Combo (3) - Deal 5 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-016EN.png",
+      "cardNos": [
+        "BP11-016EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 3 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Combo (3) - Deal 5 damage instead",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "combo",
+                    "count": 3
+                  },
+                  "then": {
+                    "op": "dealDamage",
+                    "amount": 5,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is incorrectly encoded as a player choice between 3 damage and a conditional 5-damage option; encode it as a single conditional effect that deals 5 damage if Combo (3) is active, otherwise 3 damage, to the same selected enemy follower."
+    ]
+  },
+  "Hotaru Shiragiku [Unbreakable] Evolved": {
+    "source": {
+      "name": "Hotaru Shiragiku [Unbreakable] Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Search your deck for an iM@S CG follower with 1 attack, reveal it, add it to your hand, then shuffle. At the start of your end phase, select a follower on your field and, if there are at least 5 Cute cards in your cemetery, give it [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-045EN.png",
+      "cardNos": [
+        "ECP02-045EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Hotaru Shiragiku [Unbreakable]",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "iM@S CG",
+              "cardType": "follower",
+              "maxCost": 1
+            },
+            "to": "hand",
+            "reveal": true
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Cute",
+              "count": 5
+            },
+            "then": {
+              "op": "buff",
+              "def": 2,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor filter is wrong: the source says 'an iM@S CG follower with 1 attack', but parsed uses maxCost 1; change the search to match 1 attack instead of cost 1.",
+      "The start-of-end ability targets are too narrow: the source says 'select a follower on your field', but parsed uses selfFollower; change the target selector to any allied follower on your field, including this card."
+    ]
+  },
+  "Howling Demon": {
+    "source": {
+      "name": "Howling Demon",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon / Musical",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "5",
+        "attack": "5",
+        "defense": "4",
+        "effect": "[evolve][cost03]: Evolve this follower. [fanfare] Select an enemy follower on the field and deal it 4 damage. If Sanguine is active for you, deal 8 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-080EN.png",
+      "cardNos": [
+        "BP04-080EN"
+      ]
+    },
+    "previousParsed": {
+      "evolveCost": 3,
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "sanguine"
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 8,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage for a base follower with an evolve cost line; add evolvesTo: 'Howling Demon Evolved'.",
+      "The printed evolve ability should not be represented only as a keyword; include proper evolve linkage rather than keywords.fanfare only."
+    ]
+  },
+  "Howling Demon Evolved": {
+    "source": {
+      "name": "Howling Demon Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon / Musical",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "7",
+        "defense": "6",
+        "effect": "Storm. On Evolve: If Sanguine is active for you, give your leader [defense]+5."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-081EN.png",
+      "cardNos": [
+        "BP04-081EN"
+      ]
+    },
+    "previousParsed": {
+      "specialType": "evolved",
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "sanguine"
+            },
+            "then": {
+              "op": "healLeader",
+              "amount": 5
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage for the evolved form; add evolvesFrom: 'Howling Demon'."
+    ]
+  }
+}

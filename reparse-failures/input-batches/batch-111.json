@@ -1,0 +1,249 @@
+{
+  "Hulking Giant": {
+    "source": {
+      "name": "Hulking Giant",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Golem / Forbidden",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "5",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[fanfare] Earth Rite: Select an enemy follower on the field and deal it 5 damage. [lastwords] Earth Rite: Deal 3 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-040EN.png",
+      "cardNos": [
+        "BP06-040EN",
+        "PR-164EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "earthRite",
+              "count": 1
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "earthRite",
+              "count": 1
+            },
+            "then": {
+              "op": "dealDamageAllEnemies",
+              "amount": 3,
+              "followersOnly": false
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Last Words is encoded as `dealDamageAllEnemies` for 3 damage, but the source says 'Deal 3 damage to each enemy leader.' Replace it with damage only to enemy leader(s), not enemy followers."
+    ]
+  },
+  "Humpty Dumpty Evolved": {
+    "source": {
+      "name": "Humpty Dumpty Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Fable",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve: Deal 5 damage to each follower on the field. Deal 3 damage to each enemy leader. Discard your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-116EN.png",
+      "cardNos": [
+        "BP03-116EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Humpty Dumpty",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": false
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": false
+              },
+              {
+                "op": "discardHand"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve first damage effect is wrong: source says 'Deal 5 damage to each follower on the field,' but parsed uses `dealDamageAllEnemies` which only hits enemies. It should damage all followers on both sides; add/implement an all-followers damage effect and use that here.",
+      "On Evolve second damage effect is wrong: source says 'Deal 3 damage to each enemy leader,' but parsed uses `dealDamageAllEnemies` which also affects followers. It should target only enemy leader(s)."
+    ]
+  },
+  "Hurricane Golem": {
+    "source": {
+      "name": "Hurricane Golem",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Golem",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[fanfare] Deal 2 damage to each enemy follower on the field. Earth Rite: Deal 2 damage to each enemy follower on the field. [lastwords] Summon a Magic Sediment token."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-046EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": true
+          }
+        },
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": true
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Magic Sediment",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Earth Rite clause is encoded as a separate `passive` ability that would continuously apply damage. It should be part of the Fanfare resolution: after dealing 2 to each enemy follower, if Earth Rite(1) is satisfied, deal 2 damage to each enemy follower on the field again."
+    ]
+  },
+  "Ice Dancing Dragonewt": {
+    "source": {
+      "name": "Ice Dancing Dragonewt",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonewt / Wyrmkin",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] If Overflow is active for you, give this follower [attack]+1 and Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-059EN.png",
+      "cardNos": [
+        "BP06-059EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Ice Dancing Dragonewt Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare effect is incomplete: source says 'If Overflow is active for you, give this follower [attack]+1 and Storm.' Parsed only gives +1 attack. Add granting Storm to this follower in the same conditional effect."
+    ]
+  }
+}

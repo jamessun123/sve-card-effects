@@ -1,0 +1,327 @@
+{
+  "Thunder God of the Tempest": {
+    "source": {
+      "name": "Thunder God of the Tempest",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Deity",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "7",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[fanfare] Choose up to 2. (1) Select an enemy amulet on the field and destroy it. (2) Deal 3 damage to each enemy follower on the field. (3) Give this Storm. (4) Draw 2 cards."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-117EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Destroy an enemy amulet",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFieldCard",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Deal 3 damage to each enemy follower",
+                "effect": {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 3,
+                  "followersOnly": true
+                }
+              },
+              {
+                "label": "Give this Storm",
+                "effect": {
+                  "op": "grantKeyword",
+                  "keyword": "storm",
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              },
+              {
+                "label": "Draw 2 cards",
+                "effect": {
+                  "op": "draw",
+                  "count": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Choose up to 2,\" so the root effect should use chooseMultiple with min 0 and max 2, not choose with min 1 and max 2.",
+      "Option 1 should target an enemy amulet on the field, but the parsed destroy effect uses enemyFieldCard and can hit followers; restrict the target to enemy amulets specifically."
+    ]
+  },
+  "Thundering Roar": {
+    "source": {
+      "name": "Thundering Roar",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Omen / Necromancer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose one of the following. Necrocharge (10): Choose up to 2 instead. (1) Each opponent discards a random card. (2) Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-085EN.png",
+      "cardNos": [
+        "BP05-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Each opponent discards a random card",
+                "effect": {
+                  "op": "opponentDiscardEach",
+                  "count": 1
+                }
+              },
+              {
+                "label": "Select an enemy follower on the field and deal it 3 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell says \"Choose one\" and only becomes \"Choose up to 2\" with Necrocharge (10); encode a base choice of exactly 1 plus a Necrocharge (10) conditional that changes the choice count to up to 2, instead of always allowing up to 2."
+    ]
+  },
+  "Thunderous Roar": {
+    "source": {
+      "name": "Thunderous Roar",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] As an additional cost to play this card, you may discard a [dragoncraft] card that costs 7 or more. ---------- Select an enemy follower on the field and deal it 3 damage. If you paid this card's additional cost, deal 4 damage instead and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-068EN.png",
+      "cardNos": [
+        "BP11-068EN",
+        "SDD04-018EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 3 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "If you paid the additional cost, deal 4 damage instead and draw a card",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "dealDamage",
+                      "amount": 4,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    },
+                    {
+                      "op": "draw",
+                      "count": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell has an optional additional cost of discarding a Dragoncraft card that costs 7 or more; this is missing and should be encoded with an optionalCost/discardFromHand branch tied to the upgraded effect.",
+      "The parsed choose between 3 damage and 4 damage + draw is incorrect because the player does not choose the mode independently; the effect should deal 3 damage by default, or 4 damage and draw a card only if the additional cost was paid."
+    ]
+  },
+  "Tiniest Dragon Evolved": {
+    "source": {
+      "name": "Tiniest Dragon Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Deal 5 damage to each follower on the field."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-071EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "evolvesFrom": "Tiniest Dragon",
+      "specialType": "evolved",
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 5,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve says \"Deal 5 damage to each follower on the field,\" but the parsed effect uses dealDamageAllEnemies and only damages enemy followers. It should damage all followers on both sides; encode an all-followers damage effect instead."
+    ]
+  },
+  "Tinkering Shopkeeper": {
+    "source": {
+      "name": "Tinkering Shopkeeper",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Festive / Puppetry / Supreme",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "1",
+        "effect": "[fanfare] Put a Puppet token into your EX area. Then, if there are at least 3 cards in your EX area, give your leader [defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-010EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Puppet",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "exAreaTraitMin",
+                  "trait": "Puppet",
+                  "count": 3
+                },
+                "then": {
+                  "op": "healLeader",
+                  "amount": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The condition is \"if there are at least 3 cards in your EX area,\" but the parsed condition checks for at least 3 Puppet-trait cards in EX area. It should check total EX area card count, not trait-specific count."
+    ]
+  }
+}

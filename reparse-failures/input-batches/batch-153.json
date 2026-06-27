@@ -1,0 +1,98 @@
+{
+  "Mischievous Zombie Evolved": {
+    "source": {
+      "name": "Mischievous Zombie Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve: Select a Ghost on your field and give it Bane."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-087EN.png",
+      "cardNos": [
+        "BP03-087EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Mischievous Zombie",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "bane",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "identityName": "Ghost"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve target selector adds a filter for identityName Ghost inside targets, but target selectors only support fields like maxCost/maxDef; encode the target as selecting a Ghost on your field with a supported targeting/filter mechanism instead of an invalid target shape."
+    ]
+  },
+  "Mist Shaman Evolved": {
+    "source": {
+      "name": "Mist Shaman Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve: Select another follower on your field and give it Aura."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-113EN.png",
+      "cardNos": [
+        "BP04-113EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Mist Shaman",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "ward",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "excludeSelf": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve grants keyword ward, but the source says to give another follower on your field Aura. Change the granted keyword from ward to aura."
+    ]
+  }
+}

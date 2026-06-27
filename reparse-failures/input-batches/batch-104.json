@@ -1,0 +1,271 @@
+{
+  "Heavenly Aegis": {
+    "source": {
+      "name": "Heavenly Aegis",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Eidolon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "8",
+        "attack": "8",
+        "defense": "8",
+        "effect": "[evolve][cost02]: Evolve this follower. [evolve] Discard 3 cards: Evolve this follower. Aura. This card can't be destroyed by abilities. (It can still be destroyed by ability damage.)"
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-086EN.png",
+      "cardNos": [
+        "BP02-086EN",
+        "PR-139EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "cost": {
+            "pp": 0
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "evolve"
+            ]
+          }
+        },
+        {
+          "timing": "evolve",
+          "cost": {
+            "pp": 0
+          },
+          "effect": {
+            "op": "discard",
+            "count": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve abilities are encoded incorrectly. The card should have two `timing: \"evolve\"` abilities that evolve this follower: one with `cost: {\"pp\":2}` and one with a discard-3 cost, rather than a 0-PP evolve keyword ability and a discard effect without the evolve result.",
+      "The card is missing its Aura ability 'This card can't be destroyed by abilities.' Add a passive/aura ability using `grantIndestructible` or equivalent continuous self-protection effect.",
+      "The card should not list `evolve` as a keyword here; the printed text is an evolve cost line, which should be represented by evolve abilities/costs instead."
+    ]
+  },
+  "Heavenly Aegis Evolved": {
+    "source": {
+      "name": "Heavenly Aegis Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith / Eidolon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "-",
+        "attack": "10",
+        "defense": "10",
+        "effect": "Aura. On Evolve: For the rest of this turn and during each opponent's next turn, this follower doesn't take damage. This card can't be destroyed by abilities."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-087EN.png",
+      "cardNos": [
+        "BP02-087EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "damageImmunity",
+            "amount": 99,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has the `ward` keyword; remove it because the source text does not grant Ward.",
+      "The card is missing its Aura ability 'This card can't be destroyed by abilities.' Add a passive/aura self-protection ability with `grantIndestructible` or equivalent.",
+      "The On Evolve effect is incomplete: the source says 'for the rest of this turn and during each opponent's next turn, this follower doesn't take damage,' but the encoding only gives generic damage immunity with no next-opponent-turn duration handling."
+    ]
+  },
+  "Hell's Unleasher": {
+    "source": {
+      "name": "Hell's Unleasher",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[act][engage], put this card into its owner's cemetery: Select a follower that costs at least 3 play points in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-109EN.png",
+      "cardNos": [
+        "BP01-109EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "field",
+          "cost": {
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "cardType": "follower",
+              "minCost": 3
+            },
+            "to": "hand"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; the source text has only an activated ability and no Fanfare."
+    ]
+  },
+  "Hellblaze Demon": {
+    "source": {
+      "name": "Hellblaze Demon",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Discard a card: Put the top card of your deck into your EX area. If it's a follower, give it [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-078EN.png",
+      "cardNos": [
+        "BP07-078EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "putDeckTopToExArea"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented by the ability timing only.",
+      "The fanfare effect is incomplete. After discarding a card, it should put the top card of your deck into your EX area and, if it's a follower, give that card [attack]+1/[defense]+1. Encode the conditional buff using `putDeckTopToExArea` with its follower check and buff/play-cost payload as appropriate."
+    ]
+  },
+  "Hellfire Hound": {
+    "source": {
+      "name": "Hellfire Hound",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon / Beast",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Banish 6 cards from your cemetery: Select any number of enemy followers on the field and deal 6 damage divided between them."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-078EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish 6 cards from your cemetery",
+            "cost": {
+              "op": "banishFromCemetery",
+              "count": 6
+            },
+            "then": {
+              "op": "dealDamageSplit",
+              "primaryAmount": 6,
+              "maxTargets": 99,
+              "targets": {
+                "type": "enemyFollower"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented by the ability timing only.",
+      "The optional cost is encoded incorrectly. 'Banish 6 cards from your cemetery' needs a cemetery filter, typically your own cemetery cards, but the current `banishFromCemetery` cost omits the required `filter` field."
+    ]
+  }
+}

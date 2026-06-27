@@ -1,0 +1,52 @@
+{
+  "Maisha, Hero of Purgation": {
+    "source": {
+      "name": "Maisha, Hero of Purgation",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Supreme",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[evolve] [cost02]: Evolve this follower. Strike - Select a [neutral] spell that costs 3 or less in your cemetery and play it for 0 play points."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-108EN.png",
+      "cardNos": [
+        "BP07-108EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Maisha, Hero of Purgation Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "playFromOpponentCemetery",
+            "filter": {
+              "cardClass": "neutral",
+              "cardType": "spell",
+              "maxCost": 3
+            },
+            "maxCost": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Strike is encoded with playFromOpponentCemetery, but the card plays a neutral spell from your cemetery. Replace this with an effect that selects a neutral spell that costs 3 or less in your cemetery and plays it for 0 play points."
+    ]
+  }
+}

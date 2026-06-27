@@ -1,0 +1,280 @@
+{
+  "Selena, Sugarkiss Assassin": {
+    "source": {
+      "name": "Selena, Sugarkiss Assassin",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Faith / Zealot",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "4",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Storm. [fanfare] Look at the top 4 cards of your deck. From among them, you may put up to 1 Wasteland card and up to 1 follower that costs 2 or less into your EX area. Put the rest on the bottom of your deck in any order. Strike - Recover 2 play points."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-086EN.png",
+      "cardNos": [
+        "BP11-086EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardClass": "haven",
+              "identityNameContains": "Wasteland",
+              "maxCost": 2
+            },
+            "lookAt": 4,
+            "to": "exArea",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "recoverPp",
+            "amount": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded incorrectly: it should allow putting up to 1 Wasteland card and up to 1 follower that costs 2 or less from the top 4 cards into your EX area, but the current filter requires a single card to be both Wasteland and cost 2 or less. Encode this as a two-pick effect from the top 4 with separate filters for a Wasteland card and for a follower with maxCost 2, then put the rest on the bottom."
+    ]
+  },
+  "Self-Proclaimed Fan Favorite": {
+    "source": {
+      "name": "Self-Proclaimed Fan Favorite",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose 1. If there are at least 5 Cute cards in your cemetery, choose up to 2 instead. (1) Select an enemy follower on the field and deal it 4 damage. (2) Search your deck for a follower with \"Sachiko Koshimizu\" in its name, summon it, then shuffle. Give it Drain. (3) Put a Magical Item token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-059EN.png",
+      "cardNos": [
+        "ECP02-059EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 4 damage to an enemy follower",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Search for Sachiko Koshimizu follower",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
+                      "filter": {
+                        "identityNameContains": "Sachiko Koshimizu",
+                        "cardType": "follower"
+                      },
+                      "to": "field"
+                    },
+                    {
+                      "op": "grantKeyword",
+                      "keyword": "drain",
+                      "targets": {
+                        "type": "lastSummoned"
+                      }
+                    },
+                    {
+                      "op": "shuffleDeck"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Put a Magical Item token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Magical Item",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell's modal structure is encoded incorrectly: the source says 'Choose 1. If there are at least 5 Cute cards in your cemetery, choose up to 2 instead.' but parsed always uses choose exactly 1. Encode this with an if-condition on ownCemeteryTraitMin trait Cute count 5, using chooseMultiple min 1 max 2 when true and choose min 1 max 1 otherwise."
+    ]
+  },
+  "Seraph of Sin": {
+    "source": {
+      "name": "Seraph of Sin",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Fallen Angel",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Select an enemy leader or enemy follower on the field and deal it 2 damage. [lastwords] Select a Fallen Angel card that costs 3 play points or less in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-111EN.png",
+      "cardNos": [
+        "BP03-111EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Fallen Angel",
+              "cardType": "follower",
+              "maxCost": 3
+            },
+            "to": "hand"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare target is encoded incorrectly: the source can target an enemy leader or an enemy follower, but parsed targets only enemy field cards. Encode the damage target as enemy leader or enemy follower, for example with a choose between enemyLeader and enemyFollower if no combined target selector exists."
+    ]
+  },
+  "Serene Sanctuary": {
+    "source": {
+      "name": "Serene Sanctuary",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Search your deck for a Luminary amulet, reveal it, add it to your hand, then shuffle. [act] [engage]: Bury this. Activate only if this has a prayer counter. [lastwords] Give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-106EN.png",
+      "cardNos": [
+        "BP16-106EN",
+        "PR-403EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Luminary",
+              "cardType": "amulet"
+            },
+            "lookAt": 1,
+            "to": "hand",
+            "optional": false,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "condition": {
+            "type": "always"
+          },
+          "effect": {
+            "op": "burySelf"
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare tutor is encoded incorrectly: 'Search your deck for a Luminary amulet, reveal it, add it to your hand, then shuffle' should search the whole deck, not look at only 1 card and put the remainder on the bottom. Encode it with tutorFromDeck filter trait Luminary and cardType amulet to hand with reveal true.",
+      "The activated ability condition is missing: it should activate only if this amulet has a prayer counter, not unconditionally. Add the proper counter-based condition to the activated burySelf ability."
+    ]
+  }
+}

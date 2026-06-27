@@ -1,0 +1,101 @@
+{
+  "Alchemist's Workshop": {
+    "source": {
+      "name": "Alchemist's Workshop",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Earth Sigil",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Summon a Strikeform Golem token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-074EN.png",
+      "cardNos": [
+        "BP01-074EN",
+        "PR-009EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "addStack",
+                "amount": 1
+              },
+              {
+                "op": "summon",
+                "tokenName": "Strikeform Golem",
+                "count": 1,
+                "zone": "field"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Stack is encoded incorrectly as part of the fanfare sequence. 'Stack' should be represented as a keyword/passive card property, while the fanfare should only summon a Strikeform Golem token."
+    ]
+  },
+  "Aldis, Trendsetting Seraph Evolved": {
+    "source": {
+      "name": "Aldis, Trendsetting Seraph Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Angel",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[lastwords] Deal 3 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-115EN.png",
+      "cardNos": [
+        "BP07-115EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Aldis, Trendsetting Seraph",
+      "specialType": "evolved",
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 3,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Last Words effect is encoded as dealDamageAllEnemies, but the card says 'Deal 3 damage to each enemy leader.' It should deal 3 damage only to enemy leaders, not to followers or other enemies."
+    ]
+  }
+}

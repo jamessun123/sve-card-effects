@@ -1,0 +1,139 @@
+{
+  "Silvernail Markswoman Evolved": {
+    "source": {
+      "name": "Silvernail Markswoman Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Vampire / Cutthroat",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "4",
+        "effect": "On Evolve - Select an enemy follower on the field. Deal 4 damage to it and its leader, and discard a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-083EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Silvernail Markswoman",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "damageFollowerAndLeader",
+                "followerAmount": 4,
+                "leaderAmount": 4
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve damage effect is missing the required target selection. Encode it so it selects an enemy follower on the field, then deals 4 damage to that selected follower and 4 damage to its leader."
+    ]
+  },
+  "Sincere Masquerade Ghost ADVANCED": {
+    "source": {
+      "name": "Sincere Masquerade Ghost ADVANCED",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Advanced",
+        "trait": "Departed",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Storm. [fanfare] Summon 2 Gargantuan Ghost tokens. Whenever another follower with \"Ghost\" in its name is put onto your field, give it [attack]+1 and Rush. [lastwords] Select a Masquerade Ghost in your EX area and put it onto your field engaged."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-077EN.png",
+      "cardNos": [
+        "BP10-077EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "lastWords"
+      ],
+      "specialType": "advanced",
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Gargantuan Ghost",
+            "count": 2,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "identityNameContains": "Ghost"
+            },
+            "effect": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 0,
+                  "targets": {
+                    "type": "self"
+                  }
+                },
+                {
+                  "op": "grantKeyword",
+                  "keyword": "rush",
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summonFromExArea",
+            "filter": {
+              "identityNameContains": "Masquerade Ghost"
+            },
+            "engaged": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive trigger should apply only when another follower with \"Ghost\" in its name enters your field. Add exclusion of this card itself to the grantOnAllyFollowerEnter filter/trigger so it matches \"another follower\"."
+    ]
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "Noble Shieldmaiden": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "cardType": "follower",
+            "maxCost": 6
+          },
+          "lookAt": 5,
+          "to": "field",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 1,
+          "discardSelf": true
+        },
+        "effect": {
+          "op": "summon",
+          "tokenName": "Steelclad Knight",
+          "count": 1,
+          "zone": "field"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Noble Shikigami ADVANCED": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "damageImmunity",
+          "amount": 99,
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 5
+        }
+      }
+    ],
+    "specialType": "evolved",
+    "parseConfidence": "high"
+  },
+  "Noriko Shiina": {
+    "evolvesTo": "Noriko Shiina Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare",
+      "strike",
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "iM@S CG",
+            "count": 3
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

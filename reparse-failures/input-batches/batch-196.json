@@ -1,0 +1,62 @@
+{
+  "Sacred Plea": {
+    "source": {
+      "name": "Sacred Plea",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act][engage], put this card into its owner's cemetery: Draw a card. [act][cost02], [engage], put this card into its owner's cemetery: Draw 2 cards."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-133EN.png",
+      "cardNos": [
+        "BP01-133EN",
+        "PR-075EN",
+        "SDD06-007EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the keyword \"fanfare\" from keywords; the source card has no Fanfare ability."
+    ]
+  }
+}

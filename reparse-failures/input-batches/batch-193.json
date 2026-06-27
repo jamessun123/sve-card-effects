@@ -1,0 +1,58 @@
+{
+  "Rookie Trainer": {
+    "source": {
+      "name": "Rookie Trainer",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "iM@S CG",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Cool”",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[act] [engage]: Select another iM@S CG follower on your field and give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02b/CSD02b-018EN.png",
+      "cardNos": [
+        "CP02-108EN",
+        "CSD02b-018EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 0,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "excludeSelf": true,
+              "filter": {
+                "trait": "iM@S CG"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded incorrectly: it should select another iM@S CG follower on your field, but the target uses an unsupported embedded filter on selfFollower. Encode it with a target selector that correctly restricts to another allied iM@S CG follower, keeping only [attack]+1 and no defense change."
+    ]
+  }
+}

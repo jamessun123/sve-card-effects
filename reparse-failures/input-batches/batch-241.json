@@ -1,0 +1,45 @@
+{
+  "Victorious Grappler": {
+    "source": {
+      "name": "Victorious Grappler",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "6",
+        "effect": "Strike - Select an enemy follower on the field. Deal 3 damage to it and its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-034EN.png",
+      "cardNos": [
+        "BP17-034EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 3,
+            "leaderAmount": 3
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability is missing the target selection for the enemy follower. Encode it as damageFollowerAndLeader with the required target selector for 1 enemy follower, so the effect matches \"Select an enemy follower on the field. Deal 3 damage to it and its leader.\""
+    ]
+  }
+}

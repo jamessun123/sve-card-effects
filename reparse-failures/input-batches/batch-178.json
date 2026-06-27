@@ -1,0 +1,126 @@
+{
+  "Prudent General": {
+    "source": {
+      "name": "Prudent General",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Commander",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. Each [swordcraft] token on your field has Rush. [fanfare] Summon a Steelclad Knight token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-023EN.png",
+      "cardNos": [
+        "BP10-023EN",
+        "SDD02-008EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Prudent General Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "trait": "swordcraft",
+            "excludeSelf": true
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Steelclad Knight",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush aura is encoded incorrectly with trait \"swordcraft\", but the source says 'Each [swordcraft] token on your field has Rush.' It should target Swordcraft token followers, e.g. auraGrantKeyword with an implementation that filters by cardClass \"sword\" and printingType \"token\" (not trait \"swordcraft\")."
+    ]
+  },
+  "Prudent General Evolved": {
+    "source": {
+      "name": "Prudent General Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Arcana / Commander",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Each [swordcraft] token on your field has Rush. On Evolve - Summon a Steelclad Knight token. Give each Steelclad Knight on your field [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-024EN.png",
+      "cardNos": [
+        "BP10-024EN",
+        "PR-303EN",
+        "SDD02-009EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Prudent General",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "trait": "swordcraft",
+            "excludeSelf": true
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Steelclad Knight",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "buffFieldTrait",
+                "trait": "Steelclad Knight",
+                "atk": 1,
+                "def": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush aura is encoded incorrectly with trait \"swordcraft\", but the source says 'Each [swordcraft] token on your field has Rush.' It should target Swordcraft token followers, e.g. auraGrantKeyword with an implementation that filters by cardClass \"sword\" and printingType \"token\" (not trait \"swordcraft\").",
+      "The On Evolve buff is encoded incorrectly with buffFieldTrait using trait \"Steelclad Knight\". 'Give each Steelclad Knight on your field [attack]+1/[defense]+1' should target cards by name/identity, not by trait. It should be encoded as a field buff filtered to Steelclad Knight tokens/name; engine should support buffing field cards by identityName or cardNo."
+    ]
+  }
+}

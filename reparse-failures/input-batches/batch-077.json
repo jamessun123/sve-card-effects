@@ -1,0 +1,72 @@
+{
+  "Fan of Otohime": {
+    "source": {
+      "name": "Fan of Otohime",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Amulet",
+        "trait": "Marine",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] [engage], bury this: Summon a Megalorca token. [act] [cost01], [engage], bury this: Select an enemy follower on the field and deal it 4 damage. Activate only if there's a Marine follower on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-065EN.png",
+      "cardNos": [
+        "BP16-065EN",
+        "PR-429EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Megalorca",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Marine"
+          },
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'fanfare'; this card has no Fanfare keyword.",
+      "The activation condition is encoded incorrectly as namedFollowerOnFieldByName: 'Marine'. It should require that there is a Marine follower on your field, which should be encoded with a field-trait follower condition; add engine support for a condition like fieldTraitMin with trait 'Marine' scoped to followers if needed."
+    ]
+  }
+}

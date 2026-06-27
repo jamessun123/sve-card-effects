@@ -1,0 +1,214 @@
+{
+  "Angelic Strike": {
+    "source": {
+      "name": "Angelic Strike",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Angel",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "6",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select up to 2 enemy followers on the field. Destroy them and, if there's a Fallen Angel card in your cemetery, give your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-118EN.png",
+      "cardNos": [
+        "BP10-118EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishUpTo",
+                "targets": {
+                  "type": "enemyFollower"
+                },
+                "maxCount": 2
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Fallen Angel",
+                  "count": 1
+                },
+                "then": {
+                  "op": "healLeader",
+                  "amount": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first step is encoded as `banishUpTo` targeting up to 2 enemy followers, but the source says to destroy them; change this to a destroy-up-to-2 effect instead of banish.",
+      "The damage target selector for this spell should allow an enemy follower only, which is already correct, but the destroy operation for \"up to 2\" is missing from the current encoding; replace the incorrect banish effect with the correct destroy-up-to-2 encoding."
+    ]
+  },
+  "Anne & Grea, Mysterian Duo": {
+    "source": {
+      "name": "Anne & Grea, Mysterian Duo",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Academic / Princess",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "While there are at least 10 Academic cards in your cemetery, this has Storm. [fanfare] Discard 2 Academic cards: Select an enemy follower on the field. Deal it 5 damage and draw 2 cards. At the start of your end phase, if there are at least 5 Academic cards in your cemetery, summon an Anne's Summoning token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-038EN.png",
+      "cardNos": [
+        "BP16-038EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Academic",
+            "count": 10
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard 2 Academic cards",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Academic"
+              },
+              "count": 2
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                },
+                {
+                  "op": "draw",
+                  "count": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Academic",
+              "count": 5
+            },
+            "then": {
+              "op": "summon",
+              "tokenName": "Anne's Summoning",
+              "count": 1,
+              "zone": "field"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Storm is conditional in the source (only while there are at least 10 Academic cards in your cemetery), so it should not be listed as an unconditional printed keyword in `keywords`; remove `storm` from `keywords` and keep it only as a conditional passive ability.",
+      "Fanfare is not a standalone keyword entry on this card; remove `fanfare` from `keywords` because the fanfare is already represented as an ability."
+    ]
+  },
+  "Anne's Summoning": {
+    "source": {
+      "name": "Anne's Summoning",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Token",
+        "trait": "Golem / Arcanaform / Academic",
+        "rarity": "-",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Rush. Ward. [fanfare] Give your leader [defense]+2. At the start of your main phase, banish this card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-T01EN",
+        "BP16-T16EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        },
+        {
+          "timing": "startOfMain",
+          "effect": {
+            "op": "banishSelf"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be included in `keywords`; remove `fanfare` from `keywords` because it is already represented correctly as a `timing: \"fanfare\"` ability."
+    ]
+  }
+}

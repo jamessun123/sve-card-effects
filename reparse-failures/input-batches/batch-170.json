@@ -1,0 +1,169 @@
+{
+  "Owl Receptionist": {
+    "source": {
+      "name": "Owl Receptionist",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Festive / Arcanaform / Forbidden",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] The next Festive card that costs 3 or less or Mage card that costs 3 or less you play this turn costs 3 less. If there's a Yukishima, Master Biographer on your field, give your leader [defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-049EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantNextPlayCostReduction",
+            "filter": {
+              "traitsAny": [
+                "Festive",
+                "Mage"
+              ],
+              "maxCost": 3
+            },
+            "amount": 3
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Yukishima, Master Biographer"
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cost-reduction filter is incorrect. \"Festive card that costs 3 or less or Mage card that costs 3 or less\" should not be encoded as `traitsAny: [\"Festive\", \"Mage\"]`, because Mage is a card type/trait family and the OR structure matters. Encode the next-play reduction as an OR between (trait Festive, maxCost 3) and (trait Mage, maxCost 3), or otherwise narrow it so it does not match any card with either trait incorrectly."
+    ]
+  },
+  "Owlcat Evolved": {
+    "source": {
+      "name": "Owlcat Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve: Select an enemy follower with 1 attack or less or 1 defense on the field and banish it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-128EN.png",
+      "cardNos": [
+        "BP04-128EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Owlcat",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "banishUpTo",
+            "targets": {
+              "type": "enemyFollower",
+              "maxDef": 1
+            },
+            "maxCount": 1
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve banish target restriction is incomplete and slightly misencoded. It should select exactly 1 enemy follower with 1 attack or less OR 1 defense or less, not `banishUpTo` with only `maxDef: 1`. Change to a single-target banish with both allowed stat conditions represented if supported."
+    ]
+  },
+  "Panther Scout": {
+    "source": {
+      "name": "Panther Scout",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Thief / Beast",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Storm. [fanfare] You may put a Naterran Great Tree token onto your field or into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-027EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Naterran Great Tree token onto your field",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Put a Naterran Great Tree token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare is optional ('You may put...'), but the parsed `choose` effect forces one of the two options. Encode it as optional by allowing no selection, such as `choose` with `min: 0, max: 1`, or another optional construct that permits declining both field and EX area placement."
+    ]
+  }
+}

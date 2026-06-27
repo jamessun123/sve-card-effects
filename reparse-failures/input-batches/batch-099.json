@@ -1,0 +1,185 @@
+{
+  "Greenbrier Elf": {
+    "source": {
+      "name": "Greenbrier Elf",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Banish a Pixie token from your EX area: Look at the top 4 cards of your deck. You may reveal a [forestcraft] card from among them and add it to your hand. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-004EN.png",
+      "cardNos": [
+        "BP06-004EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish a Pixie token from your EX area",
+            "cost": {
+              "op": "banishFromExArea",
+              "filter": {
+                "identityName": "Pixie"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "searchDeckChoose",
+              "filter": {
+                "cardClass": "forest"
+              },
+              "lookAt": 4,
+              "to": "hand",
+              "optional": true,
+              "reveal": true,
+              "remainderTo": "deckBottom"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost should banish a Pixie token from your EX area; the filter should include printingType token in addition to identityName Pixie.",
+      "The search effect should reveal and add a Forestcraft card from among the top 4 cards, but searchDeckChoose in the reference does not support reveal. Remove the unsupported reveal field from this encoding."
+    ]
+  },
+  "Gremory, Death Teller": {
+    "source": {
+      "name": "Gremory, Death Teller",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Ultimate",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "Ward. [fanfare] Bury the top 2 cards of your deck. [act] [cost01]: Summon this card from your cemetery. Give it \"[lastwords] Banish this card.\" Activate only if there are at least 10 cards in your cemetery and no cards named Gremory, Death Teller on your field."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-U05EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Gremory, Death Teller",
+      "evolveCost": 1,
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "mill",
+            "count": 2
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "cost": {
+            "pp": 1
+          },
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 10
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Gremory, Death Teller"
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "reviveSelfFromCemetery"
+                },
+                {
+                  "op": "grantLastWords",
+                  "effect": {
+                    "op": "banishSelf"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "manual"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated cemetery ability should activate only if there are at least 10 cards in your cemetery and no cards named Gremory, Death Teller on your field. The current encoding does the opposite by placing the namedFollowerOnFieldByName check in an if-then that revives only when a Gremory is on your field. Invert this so revival happens only when no such card is on your field.",
+      "The cemetery ability should summon this card from your cemetery and then give it \"Last Words: Banish this card.\" The revive effect should be encoded consistently as the summon/revive action from cemetery, but the main correctness issue is the missing \"no cards named Gremory, Death Teller on your field\" restriction."
+    ]
+  },
+  "Grimnir, War Cyclone Evolved": {
+    "source": {
+      "name": "Grimnir, War Cyclone Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Lightborne",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "5",
+        "defense": "6",
+        "effect": "Ward. On Evolve, [cost04]: Deal 4 damage to each enemy leader and enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-120EN.png",
+      "cardNos": [
+        "BP04-120EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Grimnir, War Cyclone",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 4
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is missing its cost. It should be encoded as timing onEvolve with a cost of 4 PP before dealing 4 damage to each enemy leader and enemy follower on the field."
+    ]
+  }
+}

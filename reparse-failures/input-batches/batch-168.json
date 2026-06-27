@@ -1,0 +1,285 @@
+{
+  "Opposing Statues": {
+    "source": {
+      "name": "Opposing Statues",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Eidolon / Avian",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "4",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Search your deck for a Holy Fowl of Ivory, summon it, then shuffle your deck. [fanfare] Bury another amulet: Search your deck for a Hexed Fowl of Ebon, summon it, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-116EN.png",
+      "cardNos": [
+        "BP09-116EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Holy Fowl of Ivory"
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Bury another amulet",
+            "cost": {
+              "op": "buryFromFieldSelect",
+              "excludeSelf": true,
+              "optional": false
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityName": "Hexed Fowl of Ebon"
+                  },
+                  "to": "field"
+                },
+                {
+                  "op": "shuffleDeck"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second fanfare cost is encoded as buryFromFieldSelect with only excludeSelf:true, but the source says \"Bury another amulet\"; restrict the cost to another amulet on your field rather than any other field card."
+    ]
+  },
+  "Orbed Cancer": {
+    "source": {
+      "name": "Orbed Cancer",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Marine",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "7",
+        "attack": "6",
+        "defense": "7",
+        "effect": "[fanfare] Draw 3 cards. [act] [cost01], discard this and a [dragoncraft] card that costs 7 or more: Draw 2 cards."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-074EN",
+        "SDD04-017EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "draw",
+            "count": 3
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "discard": 1,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "discard this and a Dragoncraft card that costs 7 or more",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "cardClass": "dragon",
+                "minCost": 7
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 2
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is incorrect: it uses an unsupported/incorrect cost field \"discard\":1 and burySelf:true, but the source requires discarding this card and a Dragoncraft card that costs 7 or more. Encode the activation from hand with cost {\"pp\":1} and make the effect a sequence or optionalCost that discards this card from hand plus discardFromHand of a Dragoncraft card with minCost 7, then draw 2 cards."
+    ]
+  },
+  "Orchis, Newfound Heart": {
+    "source": {
+      "name": "Orchis, Newfound Heart",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "2",
+        "effect": "[fanfare] Banish 2 cards named Puppet from your EX area: Put a Lloyd token into your EX area. [act] [engage]: Select a Puppet on your field and give it [attack]+1/[defense]+1, Storm, and Bane. Activate only if there are at least 3 Puppetry cards in your cemetery."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-003EN.png",
+      "cardNos": [
+        "BP16-003EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "identityName": "Puppet"
+                },
+                "count": 2
+              },
+              {
+                "op": "summon",
+                "tokenName": "Lloyd",
+                "count": 1,
+                "zone": "exArea"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Puppetry",
+            "count": 3
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "identityName": "Puppet"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is incomplete: it only gives the selected Puppet +1/+1, but the source also gives it Storm and Bane. Encode this as a sequence adding buff +1/+1 and grantKeyword storm and grantKeyword bane to the selected Puppet."
+    ]
+  },
+  "Orchis, Puppet Girl": {
+    "source": {
+      "name": "Orchis, Puppet Girl",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower into an Orchis, Resolute Puppet. [evolve] [cost04]: Evolve this follower into an Orchis, Vengeful Puppet. Activate only if there are at least 3 Puppetry cards in your cemetery."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-002EN.png",
+      "cardNos": [
+        "BP08-002EN",
+        "SP01-002EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Orchis, Resolute Puppet",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Orchis, Resolute Puppet"
+            }
+          }
+        },
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Orchis, Vengeful Puppet"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card has two distinct evolve options, but evolvesTo/evolveCost only represent the first one. Add the second evolve option correctly, including its [cost04] cost and the cemetery condition for evolving into Orchis, Vengeful Puppet.",
+      "The second evolve ability is missing its activation restriction: it should activate only if there are at least 3 Puppetry cards in your cemetery.",
+      "Both evolve abilities are incorrectly encoded as summonFromEvolveDeck effects with no costs. They should be evolve timing abilities/cost lines that evolve this follower into the specified form, with costs 1 and 4 respectively, rather than generic summonFromEvolveDeck with no evolve cost handling."
+    ]
+  }
+}

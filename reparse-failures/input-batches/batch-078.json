@@ -1,0 +1,324 @@
+{
+  "Feather Sanctuary": {
+    "source": {
+      "name": "Feather Sanctuary",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith / Avian",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Summon a Holy Falcon token. [act] [engage], bury an amulet: Summon a Holy Falcon token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-096EN.png",
+      "cardNos": [
+        "BP06-096EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Holy Falcon",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "buryFromField": {
+              "cardType": "amulet"
+            },
+            "buryFieldCount": 1
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Holy Falcon",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare summon is encoded to zone \"exArea\", but \"Summon a Holy Falcon token\" should summon it to the field; change the summon zone to \"field\".",
+      "Activated ability summon is encoded to zone \"exArea\", but \"Summon a Holy Falcon token\" should summon it to the field; change the summon zone to \"field\"."
+    ]
+  },
+  "Feral Aether": {
+    "source": {
+      "name": "Feral Aether",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Natura",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Summon a Naterran Great Tree token. If Overflow is active for you, summon up to 3 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-068EN.png",
+      "cardNos": [
+        "BP07-068EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon a Naterran Great Tree token.",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "If Overflow is active for you, summon up to 3 instead.",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "overflow"
+                  },
+                  "then": {
+                    "op": "summon",
+                    "tokenName": "Naterran Great Tree",
+                    "count": 3,
+                    "zone": "field"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as a choose-one effect. It should resolve automatically: summon 1 Naterran Great Tree token normally, and if Overflow is active, summon 3 instead. Encode this as an if/else or equivalent automatic conditional, not player choice."
+    ]
+  },
+  "Fertile Aether": {
+    "source": {
+      "name": "Fertile Aether",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell",
+        "trait": "Natura",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Put a Naterran Great Tree token into your EX area. Combo (3) - Put 2 instead and give your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-017EN.png",
+      "cardNos": [
+        "BP07-017EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Naterran Great Tree token into your EX area.",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              },
+              {
+                "label": "Combo (3) - Put 2 instead and give your leader [defense]+2.",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "combo",
+                    "count": 3
+                  },
+                  "then": {
+                    "op": "sequence",
+                    "steps": [
+                      {
+                        "op": "summon",
+                        "tokenName": "Naterran Great Tree",
+                        "count": 2,
+                        "zone": "exArea"
+                      },
+                      {
+                        "op": "healLeader",
+                        "amount": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as a choose-one effect. It should resolve automatically: put 1 Naterran Great Tree token into your EX area normally, and if Combo (3) is active, put 2 instead and heal your leader 2. Encode this as an if/else or equivalent automatic conditional, not player choice."
+    ]
+  },
+  "Fervent Machine Soldier": {
+    "source": {
+      "name": "Fervent Machine Soldier",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Supreme",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[fanfare] Discard a Commander card: Search your deck for a Commander card, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-026EN.png",
+      "cardNos": [
+        "BP05-026EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a Commander card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Commander"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "trait": "Commander",
+                    "cardType": "follower"
+                  },
+                  "to": "hand",
+                  "reveal": true
+                },
+                {
+                  "op": "shuffleDeck"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The searched card is incorrectly restricted to followers. The source says \"Search your deck for a Commander card,\" so remove the \"cardType\": \"follower\" restriction from the tutor filter."
+    ]
+  },
+  "Fervid Soldier": {
+    "source": {
+      "name": "Fervid Soldier",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve][cost02]: Evolve this follower. Whenever another follower is put onto your field, give this follower [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-043EN.png",
+      "cardNos": [
+        "BP01-043EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Fervid Soldier Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "effect": {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger should be \"Whenever another follower is put onto your field,\" but the current grantOnAllyFollowerEnter effect does not exclude this card itself. Add the equivalent of \"another\" so the trigger only applies when a different follower enters your field."
+    ]
+  }
+}

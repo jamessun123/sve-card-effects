@@ -1,0 +1,125 @@
+{
+  "Yukishima, Master Biographer": {
+    "source": {
+      "name": "Yukishima, Master Biographer",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Festive / Mage / Forbidden",
+        "rarity": "Ultimate",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "5",
+        "effect": "[fanfare] The next Festive card that costs 3 or less or Mage card that costs 3 or less you play this turn costs 3 less. Whenever you play a Festive card that costs 3 or less or a Mage card that costs 3 or less, select an enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-U03EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "maxCost": 3
+            },
+            "effect": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantNextPlayCostReduction",
+            "amount": 3,
+            "filter": {
+              "maxCost": 3
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost-reduction ability is too broad; `grantNextPlayCostReduction.filter` should restrict to cards that are either Festive and cost 3 or less or Mage and cost 3 or less, not all cards costing 3 or less.",
+      "The triggered damage ability is too broad and has the wrong duration/timing placement; it should only trigger when you play a Festive card that costs 3 or less or a Mage card that costs 3 or less, and it should be represented as a continuous/field trigger rather than granted only by fanfare for this turn."
+    ]
+  },
+  "Yuwan, Dimensional Avenger": {
+    "source": {
+      "name": "Yuwan, Dimensional Avenger",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Supreme",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Look at the top 2 cards of your deck. You may put a follower from among them into your EX area. Put the rest on the bottom of your deck in any order. If you put a follower into your EX area this way, discard a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-093EN.png",
+      "cardNos": [
+        "BP17-093EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Yuwan, Dimensional Avenger Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "cardType": "follower"
+                },
+                "lookAt": 2,
+                "to": "exArea",
+                "optional": true,
+                "remainderTo": "deckBottom"
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare incorrectly makes the discard unconditional; the discard should happen only if you put a follower into your EX area this way."
+    ]
+  }
+}

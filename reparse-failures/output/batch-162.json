@@ -1,0 +1,165 @@
+{
+  "Nelcha, Fashion Hazard": {
+    "evolvesTo": "Nelcha, Fashion Hazard Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "evolve",
+      "strike"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "if",
+              "condition": {
+                "type": "spellchain",
+                "count": 5
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "buff",
+                    "atk": -2,
+                    "def": -2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  },
+                  {
+                    "op": "buff",
+                    "atk": 2,
+                    "def": 2,
+                    "targets": {
+                      "type": "self"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nene Kurihara": {
+    "evolvesTo": "Nene Kurihara Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 3,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nene Kurihara Evolved": {
+    "evolvesFrom": "Nene Kurihara",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summonFromCemetery",
+          "filter": {
+            "trait": "Cute",
+            "cardType": "follower"
+          },
+          "count": 1
+        },
+        "cost": {
+          "pp": 3
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Neptune": {
+    "evolvesTo": "Neptune Evolved",
+    "evolveCost": 2,
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Megalorca",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Megalorca"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Neptune Evolved": {
+    "evolvesFrom": "Neptune",
+    "specialType": "evolved",
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Megalorca",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnCardPlayed",
+          "filter": {
+            "identityName": "Megalorca"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

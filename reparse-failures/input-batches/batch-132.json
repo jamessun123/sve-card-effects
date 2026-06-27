@@ -1,0 +1,259 @@
+{
+  "Lookout Elf": {
+    "source": {
+      "name": "Lookout Elf",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Look at the top card of your deck. You may put it on the bottom of your deck. Put 2 Fairy tokens into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-012EN.png",
+      "cardNos": [
+        "BP11-012EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Lookout Elf Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "peekDeck",
+                "count": 1,
+                "optionalBury": true
+              },
+              {
+                "op": "summon",
+                "tokenName": "Fairy",
+                "count": 2,
+                "zone": "exArea"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "manual"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare's first step is encoded incorrectly: \"Look at the top card of your deck. You may put it on the bottom of your deck.\" should not use peekDeck with optionalBury. Encode it as an effect that lets you look at the top card and optionally put that card on the bottom of your deck."
+    ]
+  },
+  "Lounes, Levin Apprentice": {
+    "source": {
+      "name": "Lounes, Levin Apprentice",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Levin",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost03]: Evolve this follower. [fanfare] Discard a Levin card: Search your deck for a [swordcraft] follower with \"Albert\" in its name, reveal it, add it to your hand, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-026EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Lounes, Levin Apprentice Evolved",
+      "evolveCost": 3,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a Levin card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Levin"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "cardClass": "sword",
+                    "identityNameContains": "Albert"
+                  },
+                  "to": "hand",
+                  "reveal": true
+                },
+                {
+                  "op": "shuffleDeck"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare tutor filter is incomplete: it should search for a Swordcraft follower with \"Albert\" in its name, so add \"cardType\": \"follower\" to the tutorFromDeck filter."
+    ]
+  },
+  "Loxis, Homestead Pioneer": {
+    "source": {
+      "name": "Loxis, Homestead Pioneer",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Elf / Hunter",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. 3 times on each of your turns, when you play an amulet, recover 1 play point. [act] [engage] 3 amulets on your field: Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-001EN.png",
+      "cardNos": [
+        "BP11-001EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Loxis, Homestead Pioneer Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "cardType": "amulet"
+            },
+            "effect": {
+              "op": "recoverPp",
+              "amount": 1
+            },
+            "maxPerTurn": 3
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "buryFromField": {
+              "cardType": "amulet"
+            },
+            "buryFieldCount": 3
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly includes the keyword \"fanfare\" even though the source text has no fanfare ability; remove \"fanfare\" from keywords.",
+      "The activated ability cost is encoded incorrectly: the source says \"[act] [engage] 3 amulets on your field,\" which means engaging 3 amulets, not putting them into the cemetery. Replace the buryFromField cost with a cost that engages 3 amulets on your field."
+    ]
+  },
+  "Loyal Sea Serpent": {
+    "source": {
+      "name": "Loyal Sea Serpent",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart / Marine",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "Ward. [fanfare] [cost04]: Summon a Dragon token. Whenever a [dragoncraft] token follower is put onto your field, give your leader [defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-067EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[cost04]",
+            "cost": {
+              "op": "spendPp",
+              "amount": 4
+            },
+            "then": {
+              "op": "summon",
+              "tokenName": "Dragon",
+              "count": 1,
+              "zone": "field"
+            }
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "cardClass": "dragon"
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is incorrectly encoded as an optionalCost. \"[fanfare] [cost04]: Summon a Dragon token.\" is a fanfare with a required additional 4 PP cost to activate, so encode the ability with a fanfare cost of 4 PP rather than an optional payment.",
+      "The trigger filter is too broad: it should trigger whenever a Dragoncraft token follower is put onto your field, so add the token restriction (for example printingType: \"token\") to the onAllyFollowerEnter filter."
+    ]
+  }
+}

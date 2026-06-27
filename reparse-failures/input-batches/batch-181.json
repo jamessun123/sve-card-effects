@@ -1,0 +1,45 @@
+{
+  "Rabbit Necromancer": {
+    "source": {
+      "name": "Rabbit Necromancer",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Necromancer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[lastwords] Deal 2 damage to each leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-121EN.png",
+      "cardNos": [
+        "BP01-121EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Last Words is encoded as dealDamageAllEnemies, which damages the opponent's side, but the source says deal 2 damage to each leader. Replace it with an effect that damages both leaders only; implement as a dedicated both-leaders damage effect or equivalent composition instead of dealDamageAllEnemies."
+    ]
+  }
+}

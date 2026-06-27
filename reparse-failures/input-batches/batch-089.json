@@ -1,0 +1,56 @@
+{
+  "Garyu, Supreme Dragonkin": {
+    "source": {
+      "name": "Garyu, Supreme Dragonkin",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Arena / Dragonewt",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "5",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Draw a card. While this card is on your field, each other [dragoncraft] follower on your field has Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-052EN.png",
+      "cardNos": [
+        "BP06-052EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Garyu, Supreme Dragonkin Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "ward",
+            "trait": "Dragoncraft",
+            "excludeSelf": true
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive Ward aura is encoded with \"trait\": \"Dragoncraft\", but the source says each other Dragoncraft follower on your field has Ward. Encode the aura to target other followers by class, e.g. use \"cardClass\": \"dragon\" (or an equivalent follower/class filter), not a trait string.",
+      "The card should not list \"rush\" as a keyword; the source text only has [fanfare] Draw a card and no printed Rush keyword."
+    ]
+  }
+}

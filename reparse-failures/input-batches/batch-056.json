@@ -1,0 +1,274 @@
+{
+  "Desperados' Shot": {
+    "source": {
+      "name": "Desperados' Shot",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Wasteland / Thief",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and deal it 4 damage. If there's a Bunny & Baron, Specter Duo and Val, Trusty Getaway Car on your field, deal 6 damage instead and deal 2 damage to the selected follower's leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-028EN.png",
+      "cardNos": [
+        "BP11-028EN",
+        "SDD02-013EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 4 damage to an enemy follower",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 4,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "If you control Bunny & Baron, Specter Duo and Val, Trusty Getaway Car, deal 6 damage instead and deal 2 damage to that follower's leader",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "if",
+                      "condition": {
+                        "type": "conditionAny",
+                        "conditions": [
+                          {
+                            "type": "namedFollowerOnFieldByName",
+                            "identityName": "Bunny & Baron, Specter Duo"
+                          },
+                          {
+                            "type": "namedFollowerOnFieldByName",
+                            "identityName": "Val, Trusty Getaway Car"
+                          }
+                        ]
+                      },
+                      "then": {
+                        "op": "sequence",
+                        "steps": [
+                          {
+                            "op": "dealDamage",
+                            "amount": 6,
+                            "targets": {
+                              "type": "enemyFollower",
+                              "count": 1
+                            }
+                          },
+                          {
+                            "op": "dealDamage",
+                            "amount": 2,
+                            "targets": {
+                              "type": "enemyLeader"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell should not be encoded as a player choice between two modes. Replace the root `choose` with a single targeted damage effect that selects one enemy follower, then uses an `if` checking that both Bunny & Baron, Specter Duo and Val, Trusty Getaway Car are on your field to deal 6 damage and 2 damage to that follower's leader; otherwise deal 4 damage to the selected follower.",
+      "The condition for the upgraded effect is wrong: `conditionAny` means either named follower, but the source requires both named followers on your field. Encode this as a condition requiring both cards, not either.",
+      "The upgraded effect loses linkage to the originally selected follower and instead retargets any enemy follower plus the enemy leader. It should damage the same selected follower for 6 and that selected follower's leader for 2."
+    ]
+  },
+  "Destruction in Black": {
+    "source": {
+      "name": "Destruction in Black",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet / Token",
+        "trait": "Omen / Idolatry",
+        "rarity": "-",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "At the start of your main phase, deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-T02EN.png",
+      "cardNos": [
+        "BP05-T02EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfMain",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The effect is 'deal 2 damage to each enemy leader', but `dealDamageAllEnemies` also affects followers. Encode this as damage only to enemy leader(s), not all enemy cards."
+    ]
+  },
+  "Device Diviner": {
+    "source": {
+      "name": "Device Diviner",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Machina / Alchemist",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Put an Assembly Droid or Repair Mode token into your EX area. Once per turn, when you play a Machina card, give your leader [defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-048EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put an Assembly Droid token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Assembly Droid",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              },
+              {
+                "label": "Put a Repair Mode token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Repair Mode",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "trait": "Machina"
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "manual"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The triggered heal ability incorrectly puts `filter` at the ability root for `timing: onCardPlayed`. Encode the Machina restriction as an implemented wrapper shape, such as a granted on-card-play trigger with `filter`, or another supported representation where the trigger itself is filtered to Machina cards."
+    ]
+  },
+  "Devilish Flautist": {
+    "source": {
+      "name": "Devilish Flautist",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Rush. [fanfare] Discard a random card: Give this follower [attack]+1 and Drain."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-088EN.png",
+      "cardNos": [
+        "BP03-088EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a random card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost is mandatory, not optional. Replace `optionalCost` with an effect that discards 1 random card, then gives this follower +1 attack and Drain.",
+      "The fanfare is missing 'Give this follower Drain.' Add a `grantKeyword` effect for `drain` to this follower after the discard."
+    ]
+  }
+}

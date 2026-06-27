@@ -1,0 +1,128 @@
+{
+  "Miho Kohinata [P.C.S.]": {
+    "source": {
+      "name": "Miho Kohinata [P.C.S.]",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Legendary",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Look at the top card of your deck. If it's a Cute card, you may reveal it and add it to your hand. While there are at least 3 Cute followers on your field, this follower has Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-003EN.png",
+      "cardNos": [
+        "CSD02a-003EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Cute"
+            },
+            "lookAt": 1,
+            "to": "hand",
+            "optional": true,
+            "reveal": true
+          }
+        },
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cute",
+            "count": 3
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush condition is encoded with fieldTraitMin on trait \"Cute\", which counts all Cute cards on your field. It should require at least 3 Cute followers on your field. Change the condition to count followers only, using a condition/filter that restricts to follower cards with trait Cute."
+    ]
+  },
+  "Miho Kohinata [Summer Firsts]": {
+    "source": {
+      "name": "Miho Kohinata [Summer Firsts]",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "While there are at least 3 Cute followers on your field, this has Rush. [fanfare] Look at the top card of your deck. If it's a Cute card, you may reveal it and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-464EN.png",
+      "cardNos": [
+        "PR-464EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cute",
+            "count": 3
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "rush",
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Cute"
+            },
+            "lookAt": 1,
+            "to": "hand",
+            "optional": true,
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive Rush condition is encoded with fieldTraitMin on trait \"Cute\", which counts all Cute cards on your field. It should require at least 3 Cute followers on your field. Change the condition to count followers only, using a condition/filter that restricts to follower cards with trait Cute."
+    ]
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "Mythril Golem": {
+    "source": {
+      "name": "Mythril Golem",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Golem",
+        "rarity": "Legendary",
+        "cardSet": "Starter Deck #3 “Mysteries of Conjuration”",
+        "cost": "6",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[fanfare] Deal 3 damage to each enemy follower on the field. Spellchain (7): Deal 5 damage instead. SC (15): Deal 5 damage to each enemy leader. (If you have at least 7 spells in your cemetery, perform Spellchain (7). Then, if you have at least 15 spells, perform SC (15).)"
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD03/SD03-001EN.png",
+      "cardNos": [
+        "SD03-001EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "spellchain",
+              "count": 15
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 5,
+                  "followersOnly": false
+                },
+                {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyLeader"
+                  }
+                }
+              ]
+            },
+            "else": {
+              "op": "if",
+              "condition": {
+                "type": "spellchain",
+                "count": 7
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": true
+              },
+              "else": {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": true
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (15) branch is encoded incorrectly: it uses dealDamageAllEnemies with followersOnly false, which would also damage the enemy leader for 5 from the first clause. It should still deal 5 damage only to each enemy follower, then separately deal 5 damage to each enemy leader.",
+      "The SC (15) effect says 'Deal 5 damage to each enemy leader,' but the parsed ability uses dealDamage to a single enemyLeader target. It should be encoded as the effect that damages each enemy leader, while preserving the separate follower-damage clause."
+    ]
+  },
+  "Mánagarmr Scout": {
+    "source": {
+      "name": "Mánagarmr Scout",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Natura / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[fanfare] Summon a Naterran Great Tree token. [act] [cost01], banish a Naterran Great Tree from your field: Select an enemy follower on the field and deal it 2 damage. Activate only twice per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-070EN.png",
+      "cardNos": [
+        "BP17-070EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "advanced"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Naterran Great Tree",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 1,
+            "banishFromField": {
+              "tokenName": "Naterran Great Tree"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability's usage limit is wrong: source says 'Activate only twice per turn,' but parsed uses oncePerTurn true. It should allow maxPerTurn 2 instead.",
+      "The activated ability cost is encoded incorrectly: source requires 'banish a Naterran Great Tree from your field,' but parsed uses a non-reference cost shape banishFromField/banishCount. It should use an implemented cost/effect pattern that correctly banishes 1 Naterran Great Tree you control from the field."
+    ]
+  },
+  "Nagi Hisakawa [Everyday Fairy Tale]": {
+    "source": {
+      "name": "Nagi Hisakawa [Everyday Fairy Tale]",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] If there are at least 5 iM@S CG cards in your cemetery, search your deck for a Sparkling☆Days, put it into your EX area, then shuffle. It costs 1 less to play this turn. [act] [cost02], [engage], bury this: Search your deck for a follower with \"Nagi Hisakawa\" in its name, summon it, then shuffle. Activate only if there are at least 10 iM@S CG cards in your cemetery."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-023EN.png",
+      "cardNos": [
+        "ECP02-023EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "advanced"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "iM@S CG",
+              "count": 5
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityName": "Sparkling☆Days"
+                  },
+                  "to": "exArea"
+                },
+                {
+                  "op": "shuffleDeck"
+                },
+                {
+                  "op": "playCostReduction",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "field",
+          "cost": {
+            "pp": 2,
+            "engage": true,
+            "burySelf": true
+          },
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "iM@S CG",
+            "count": 10
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityNameContains": "Nagi Hisakawa"
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare play-cost reduction is applied incorrectly: source says the searched Sparkling☆Days in your EX area 'costs 1 less to play this turn,' but parsed uses playCostReduction on the source card. It should apply a 1-cost reduction to the tutored card in EX area, not to this follower."
+    ]
+  }
+}

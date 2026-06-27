@@ -1,0 +1,160 @@
+{
+  "Forest Hermit Evolved": {
+    "source": {
+      "name": "Forest Hermit Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Hunter",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Select a Natura card in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-015EN.png",
+      "cardNos": [
+        "BP07-015EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Forest Hermit",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Natura",
+              "cardType": "follower"
+            },
+            "to": "hand"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor filter is incorrect: source says 'Select a Natura card in your cemetery', not only a Natura follower. Change tutorFromCemetery filter to match any card with trait \"Natura\" and remove \"cardType\": \"follower\"."
+    ]
+  },
+  "Forest Oracle Pascale": {
+    "source": {
+      "name": "Forest Oracle Pascale",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Fae-Touched / Dancer",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "7",
+        "attack": "4",
+        "defense": "7",
+        "effect": "Ward. [fanfare] Select an enemy follower on the field and put it on top of its owner's deck. At the start of your end phase, give each other follower on your field [attack]+2/[defense]+2 and your leader [defense]+4."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-001EN.png",
+      "cardNos": [
+        "BP08-001EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buffFieldTrait",
+                "atk": 2,
+                "def": 2,
+                "excludeSelf": true
+              },
+              {
+                "op": "healLeader",
+                "amount": 4
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is incorrect: it should put the selected enemy follower on top of its owner's deck, not return it to hand. Replace returnToHand with putOnTopOfDeck targeting an enemy follower.",
+      "The start-of-end buff is too broad: source says 'each other follower on your field', but buffFieldTrait without a trait/class filter can affect non-followers. Encode the buff so it applies only to your other followers on the field."
+    ]
+  },
+  "Forestclaw Sentinel": {
+    "source": {
+      "name": "Forestclaw Sentinel",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Natura / Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Summon a Naterran Great Tree token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-063EN.png",
+      "cardNos": [
+        "BP17-063EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Forestclaw Sentinel Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Naterran Great Tree",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare zone is incorrect: 'Summon a Naterran Great Tree token' means summon it onto the field, not into the EX area. Change summon zone from \"exArea\" to \"field\"."
+    ]
+  }
+}

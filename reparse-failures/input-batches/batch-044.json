@@ -1,0 +1,107 @@
+{
+  "Concentration": {
+    "source": {
+      "name": "Concentration",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Give your leader [defense]+3. Draw a card. Earth Rite: Draw 2 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-049EN.png",
+      "cardNos": [
+        "BP04-049EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "earthRite"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 3
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "timing": "spell",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "draw",
+            "count": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Earth Rite is encoded incorrectly: the current parse draws 1 card unconditionally and then draws 2 more on Earth Rite, but the source means draw 1 normally or draw 2 instead if Earth Rite is active. Encode the spell as healLeader 3, then an if with condition earthRite(1) that draws 2 in the then branch and draws 1 in the else branch."
+    ]
+  },
+  "Conflagration": {
+    "source": {
+      "name": "Conflagration",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Deal 5 damage to each follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-089EN.png",
+      "cardNos": [
+        "BP01-089EN",
+        "PR-004EN",
+        "SS02-002EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 5,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is incorrect: it should deal 5 damage to each follower on the field, not just enemy followers. Encode it as dealDamageOtherFollowers with includeLeaders false plus damage to self if needed, or preferably implement/use an effect that deals damage to all followers on both fields."
+    ]
+  }
+}

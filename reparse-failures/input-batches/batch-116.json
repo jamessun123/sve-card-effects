@@ -1,0 +1,179 @@
+{
+  "Jackshovel Gravedigger": {
+    "source": {
+      "name": "Jackshovel Gravedigger",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Necromancer",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "0",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this follower. Bane. [fanfare] If this card was put onto the field by an ability, evolve it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-072EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Jackshovel Gravedigger Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "notEnteredFromHand"
+            },
+            "then": {
+              "op": "refresh",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keyword is incorrect: the card has Bane, not Ward. Replace \"ward\" in keywords with \"bane\".",
+      "The fanfare effect is encoded incorrectly as refresh self. It should evolve this follower if it wasn't put onto the field from hand. Replace the then effect with {\"op\":\"autoEvolveIf\",\"condition\":{\"type\":\"notEnteredFromHand\"}} or equivalently encode the fanfare to evolve this follower under that condition."
+    ]
+  },
+  "Jackshovel Gravedigger Evolved": {
+    "source": {
+      "name": "Jackshovel Gravedigger Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Machina / Necromancer",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "1",
+        "defense": "2",
+        "effect": "Bane. On Evolve - Summon an Assembly Droid token. Bury the top card of your deck."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-073EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Jackshovel Gravedigger",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Assembly Droid",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "mill",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keyword is incorrect: the card has Bane, not Ward. Replace \"ward\" in keywords with \"bane\"."
+    ]
+  },
+  "Jadelong Tactician": {
+    "source": {
+      "name": "Jadelong Tactician",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "5",
+        "attack": "3",
+        "defense": "5",
+        "effect": "Storm. Strike - Select another follower on your field and give it [attack]+1/[defense]+1. If it's a Garyu, Supreme Dragonkin, give [attack]+2/[defense]+2 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-061EN.png",
+      "cardNos": [
+        "BP06-061EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Garyu, Supreme Dragonkin"
+            },
+            "then": {
+              "op": "buff",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "excludeSelf": true
+              }
+            },
+            "else": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "excludeSelf": true
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keyword handling is incorrect: Strike should not be listed in keywords because it is already represented as a strike-timing ability. Remove \"strike\" from keywords.",
+      "The strike effect is encoded with the wrong condition. The card checks whether the selected follower is Garyu, Supreme Dragonkin, not whether any Garyu is on your field. Encode selection of another follower on your field, then give it +1/+1, or +2/+2 instead if the selected target's identity is Garyu, Supreme Dragonkin."
+    ]
+  }
+}

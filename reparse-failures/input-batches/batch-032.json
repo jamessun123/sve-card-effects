@@ -1,0 +1,113 @@
+{
+  "Blitz": {
+    "source": {
+      "name": "Blitz",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Chess",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and deal it X damage. X equals the number of cards named Magical Pawn on your field plus 2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-052EN.png",
+      "cardNos": [
+        "BP03-052EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "namedIdentityFieldCount",
+              "identityName": "Magical Pawn",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The damage amount is incorrect: X should equal the number of cards named Magical Pawn on your field plus 2. Change the amount from namedIdentityFieldCount alone to a dynamic amount that adds 2 to that count."
+    ]
+  },
+  "Blood Moon": {
+    "source": {
+      "name": "Blood Moon",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Amulet",
+        "trait": "Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Search your deck for a Beast follower, reveal it, add it to your hand, then shuffle your deck. [act] [engage], bury this card: Deal 1 damage to each leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-099EN.png",
+      "cardNos": [
+        "BP09-099EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Beast",
+              "cardType": "follower"
+            },
+            "lookAt": 40,
+            "to": "hand",
+            "optional": true,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "includeLeaders": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated effect is encoded as dealDamageAllEnemies/includeLeaders, which damages enemy followers and leaders; the source says 'Deal 1 damage to each leader.' Replace it with damage to both leaders only, not enemy followers."
+    ]
+  }
+}

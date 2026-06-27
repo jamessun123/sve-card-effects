@@ -1,0 +1,107 @@
+{
+  "Caladrius": {
+    "source": {
+      "name": "Caladrius",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Avian",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "6",
+        "attack": "6",
+        "defense": "6",
+        "effect": "Rush. [fanfare] Bury an amulet: Give this Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-110EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Caladrius Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buryFieldFollowers",
+            "filter": {
+              "cardType": "amulet"
+            },
+            "minCost": 0
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded incorrectly as an unconditional buryFieldFollowers effect. It should be an optional-cost style fanfare that buries an amulet on your field and then gives this follower Storm.",
+      "The Storm granted by the fanfare is missing. Add a fanfare effect that, after burying an amulet, uses grantKeyword with keyword \"storm\" targeting self.",
+      "The bury target is wrong. Do not use buryFieldFollowers for an amulet; encode the cost as burying an ally field card filtered to cardType \"amulet\"."
+    ]
+  },
+  "Carbuncle, Immortal Jewel Evolved": {
+    "source": {
+      "name": "Carbuncle, Immortal Jewel Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Fae-Touched / Beast",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Put a Carbuncle's Sparkle token into your EX area. Give each Carbuncle's Sparkle in your EX area \"This card costs 2 less to play.\""
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-005EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Carbuncle, Immortal Jewel",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Carbuncle's Sparkle",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantPlayCostReduction",
+            "amount": 2,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second On Evolve clause is missing from the onEvolve ability. The On Evolve effect should be a sequence that both puts a Carbuncle's Sparkle token into your EX area and gives each Carbuncle's Sparkle in your EX area \"This card costs 2 less to play.\"",
+      "The passive grantPlayCostReduction targeting self is incorrect. The cost reduction should apply to each card named Carbuncle's Sparkle in your EX area, not to this evolved follower."
+    ]
+  }
+}

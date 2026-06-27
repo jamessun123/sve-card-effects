@@ -1,0 +1,71 @@
+{
+  "Sorcery in Solidarity": {
+    "source": {
+      "name": "Sorcery in Solidarity",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Machina / Mage / Golem",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "If there are at least 5 Machina cards in your cemetery, search your deck for a Machina follower that costs 3 or less and a 1-cost [runecraft] spell, summon the follower, put the spell into your EX area, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-041EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryMin",
+              "count": 5
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "trait": "Machina",
+                    "cardType": "follower",
+                    "maxCost": 3
+                  },
+                  "to": "field"
+                },
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "cardClass": "rune",
+                    "cardType": "spell",
+                    "maxCost": 1
+                  },
+                  "to": "exArea"
+                },
+                {
+                  "op": "shuffleDeck"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The condition is encoded incorrectly as `ownCemeteryMin: 5`, but the source requires at least 5 Machina cards in your cemetery. Change it to `ownCemeteryTraitMin` with `trait: \"Machina\"` and `count: 5`."
+    ]
+  }
+}

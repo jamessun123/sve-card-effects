@@ -1,0 +1,140 @@
+{
+  "Spawn of the Abyss Evolved": {
+    "source": {
+      "name": "Spawn of the Abyss Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Gloryfinder",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "-",
+        "attack": "7",
+        "defense": "8",
+        "effect": "At the start of your end phase, if your leader is [abysscraft], give your leader [defense]+4, draw 2 cards, then each opponent discards 2 cards and buries 2 followers."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-220EN.png",
+      "cardNos": [
+        "PR-220EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "conditionAny",
+              "conditions": [
+                {
+                  "type": "sourceInExArea"
+                },
+                {
+                  "type": "namedFollowerOnFieldByName",
+                  "identityName": "Spawn of the Abyss"
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "healLeader",
+                  "amount": 4
+                },
+                {
+                  "op": "draw",
+                  "count": 2
+                },
+                {
+                  "op": "opponentDiscardEach",
+                  "count": 2
+                },
+                {
+                  "op": "buryEachOpponentFollowers",
+                  "count": 2
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end ability incorrectly adds a condition requiring this card to be in the EX area or a named follower to be on the field; the source text is unconditional apart from your leader being Abysscraft, so remove that `if` wrapper and encode the effect directly.",
+      "The effect text says \"if your leader is [abysscraft]\" but the parsed condition does not check leader class; replace the current condition with a class check for your leader being Abysscraft.",
+      "The current sequence is nested under an incorrect conditional; the actual effect should simply be: heal your leader 4, draw 2 cards, each opponent discards 2 cards, then each opponent buries 2 followers, gated only by your leader being Abysscraft."
+    ]
+  },
+  "Spiderweb Array": {
+    "source": {
+      "name": "Spiderweb Array",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field. Engage it and draw a card. It doesn't refresh during its controller's next start phase."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-085EN.png",
+      "cardNos": [
+        "BP11-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "grantOnCardPlayed",
+                "filter": {
+                  "cardType": "follower"
+                },
+                "effect": {
+                  "op": "noop",
+                  "label": "It doesn't refresh during its controller's next start phase"
+                },
+                "untilEndOfTurn": true
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The final clause is encoded incorrectly as `grantOnCardPlayed` with a `noop`; it should be part of the same target engagement effect using `engage` with `skipRefreshNextStart: true` on the selected enemy follower.",
+      "Remove the unimplemented `noop` placeholder and the unrelated `grantOnCardPlayed` wrapper; the spell should resolve as: engage target enemy follower with skip-refresh-next-start, then draw 1 card."
+    ]
+  }
+}

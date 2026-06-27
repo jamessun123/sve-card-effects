@@ -1,0 +1,119 @@
+{
+  "Slash of the One": {
+    "source": {
+      "name": "Slash of the One",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Omen",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy card that costs 4 or less on the field and destroy it. If there are 2 cards or less in your hand, deal 2 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-109EN.png",
+      "cardNos": [
+        "BP08-109EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Destroy enemy card (cost 4 or less)",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFieldCard",
+                    "maxCost": 4
+                  }
+                }
+              },
+              {
+                "label": "Deal 2 damage to its leader if you have 2 or fewer cards in hand",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "handMax",
+                    "count": 2
+                  },
+                  "then": {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyLeader"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Spell effect is incorrectly encoded as a `choose` between destroying the card and dealing leader damage; both effects should happen in sequence. Replace with a `sequence` that first destroys an enemy field card with cost 4 or less, then an `if` with condition `handMax: 2` that deals 2 damage to the enemy leader."
+    ]
+  },
+  "Sledgehammer Exorcist": {
+    "source": {
+      "name": "Sledgehammer Exorcist",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "3",
+        "attack": "4",
+        "defense": "3",
+        "effect": "[fanfare][cost02]: Select an enemy follower on the field and deal it 4 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-101EN.png",
+      "cardNos": [
+        "BP02-101EN",
+        "PR-082EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing its `[cost02]` requirement. Encode the ability as a fanfare with a 2 PP cost before dealing 4 damage to an enemy follower."
+    ]
+  }
+}

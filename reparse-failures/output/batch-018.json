@@ -1,0 +1,100 @@
+{
+  "Aquatic Authority": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Marine"
+          },
+          "lookAt": 3,
+          "to": "exArea",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Aragavy the Berserker": {
+    "keywords": [
+      "fanfare",
+      "storm"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost05]",
+          "cost": {
+            "op": "spendPp",
+            "amount": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageOtherFollowers",
+                "amount": 5,
+                "includeLeaders": false
+              },
+              {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "condition": {
+          "type": "sanguine"
+        },
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Damage enemy leader",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            },
+            {
+              "label": "Damage enemy follower",
+              "effect": {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

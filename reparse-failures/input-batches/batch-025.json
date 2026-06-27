@@ -1,0 +1,209 @@
+{
+  "Azazel": {
+    "source": {
+      "name": "Azazel",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "7",
+        "attack": "6",
+        "defense": "6",
+        "effect": "Necrocharge (10): This card costs 3 less to play. [evolve][cost01]: Evolve this follower. Bane. [fanfare] Each opponent discards a random card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-073EN.png",
+      "cardNos": [
+        "BP02-073EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Azazel Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 3
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "opponentDiscardEach",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword \"bane\"; add it to `keywords` for the printed Bane ability."
+    ]
+  },
+  "Azi Dahaka": {
+    "source": {
+      "name": "Azi Dahaka",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Turn 3 facedown evolved followers in your evolve deck faceup: Select an enemy follower on the field and destroy it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-053EN.png",
+      "cardNos": [
+        "BP08-053EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Azi Dahaka Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "turnEvolveDeck",
+            "orientation": "faceup",
+            "count": 3
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is conditional on turning 3 facedown evolved followers in your evolve deck face up; encode it as a single gated/paid effect (not two separate unconditional fanfare abilities), so the destroy only happens if that evolve-deck action is performed."
+    ]
+  },
+  "Azuki Momoi": {
+    "source": {
+      "name": "Azuki Momoi",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "4",
+        "attack": "3",
+        "defense": "5",
+        "effect": "This card costs 3 less to play if there are at least 3 iM@S CG followers on your field. ---------- Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-013EN.png",
+      "cardNos": [
+        "CP02-013EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "iM@S CG",
+            "count": 3
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 3
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword \"ward\"; add it to `keywords` for the printed Ward ability."
+    ]
+  },
+  "Azurite Maiden": {
+    "source": {
+      "name": "Azurite Maiden",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "Ward. [fanfare] [cost01]: Select a Faith follower in your cemetery. Put it into your EX area and give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-105EN.png",
+      "cardNos": [
+        "BP10-105EN",
+        "PR-254EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Faith",
+              "cardType": "follower"
+            },
+            "to": "exArea",
+            "playCostReduction": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing its cost; add `cost: { \"pp\": 1 }` to the fanfare ability to represent `[fanfare] [cost01]`.",
+      "The cemetery effect is encoded incorrectly as `tutorFromCemetery` with `playCostReduction: 1`; it should put a Faith follower from your cemetery into your EX area, then give that moved card [attack]+1, not reduce its play cost."
+    ]
+  }
+}

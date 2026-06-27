@@ -1,0 +1,173 @@
+{
+  "Dragonbond Mage": {
+    "source": {
+      "name": "Dragonbond Mage",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "Whenever you play a spell, place 1 spell counter on this card. [act] Remove 3 spell counters from this card: Select an enemy follower on the field and deal it 5 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-062EN.png",
+      "cardNos": [
+        "BP01-062EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "act"
+      ],
+      "abilities": [
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "addCounter",
+            "counter": "spell",
+            "amount": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "removeCounter",
+                "counter": "spell",
+                "amount": 3,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The whenever-you-play-a-spell ability is incorrectly encoded with filter at the ability root; the spell restriction should be encoded on the trigger so it only triggers when you play a spell.",
+      "The activated ability cost is incorrect: it should not be pp: 0. The ability's cost is removing 3 spell counters from this card.",
+      "The activated ability should encode removing 3 spell counters as the activation cost (or as a removeCounter effect that must succeed before damage), not as a generic 0-PP activated ability."
+    ]
+  },
+  "Dragonclad Lancer": {
+    "source": {
+      "name": "Dragonclad Lancer",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart / Cutthroat",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Select another follower on your field. Deal it 2 damage and give this follower [attack]+1/[defense]+1 and Rush. [act] [cost03]: Give this follower [attack]+1/[defense]+1 and Assail."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-071EN.png",
+      "cardNos": [
+        "BP10-071EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "act"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "rush",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "assail",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target should be another follower on your field; encode the damage target as selfFollower with excludeSelf: true, not any self follower including this card."
+    ]
+  }
+}

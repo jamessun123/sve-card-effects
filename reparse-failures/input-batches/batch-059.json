@@ -1,0 +1,158 @@
+{
+  "Djeana, the Stouthearted Evolved": {
+    "source": {
+      "name": "Djeana, the Stouthearted Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Natura / Beast",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Discard 2 Natura cards: Increase your max play points by 1. On Super-Evolve - Look at the top 4 cards of your deck. From among them, you may reveal up to 2 Natura cards and add them to your hand. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-060EN.png",
+      "cardNos": [
+        "BP17-060EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Djeana, the Stouthearted",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard 2 Natura cards",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Natura"
+              },
+              "count": 2
+            },
+            "then": {
+              "op": "increaseMaxPp",
+              "amount": 1
+            }
+          }
+        },
+        {
+          "timing": "onSuperEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Natura"
+            },
+            "lookAt": 4,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve is incorrectly encoded as searchDeckChoose with no way to take up to 2 cards; it should allow revealing and adding up to 2 Natura cards from the top 4 to hand, then put the rest on the bottom."
+    ]
+  },
+  "Doomwright Resurgence": {
+    "source": {
+      "name": "Doomwright Resurgence",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Supreme / Lightborne",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a Supreme token follower on your field that costs 5 or less and summon a token of the same name."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-123EN.png",
+      "cardNos": [
+        "BP16-123EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "summonSameNameToken"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Spell effect is incomplete and untargeted: summonSameNameToken should target a Supreme token follower on your field that costs 5 or less, not summon from source without selection."
+    ]
+  },
+  "Drache, Fiery Dragonlord": {
+    "source": {
+      "name": "Drache, Fiery Dragonlord",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Dragonewt / Draconic Duelist",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "3",
+        "effect": "[evolve] [cost04]: Evolve this follower. Rush. [fanfare] The next Draconic Duelist card you play this turn costs 3 less."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-054EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Drache, Fiery Dragonlord",
+      "evolveCost": 4,
+      "keywords": [
+        "rush",
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantNextPlayCostReduction",
+            "filter": {
+              "cardClass": "dragon"
+            },
+            "amount": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "evolvesTo is incorrect; it should link to the evolved form card name, not to the base card name.",
+      "Fanfare filter is too broad: grantNextPlayCostReduction is set to any Dragoncraft card, but it should apply only to the next Draconic Duelist card you play this turn, so filter by trait 'Draconic Duelist' instead."
+    ]
+  }
+}

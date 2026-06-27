@@ -1,0 +1,89 @@
+{
+  "Charitable Al-mi'raj": {
+    "source": {
+      "name": "Charitable Al-mi'raj",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-099EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Charitable Al-mi'raj Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword: add 'ward' to keywords to match the source text 'Ward.'"
+    ]
+  },
+  "Charitable Al-mi'raj Evolved": {
+    "source": {
+      "name": "Charitable Al-mi'raj Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Ward. On Evolve - Look at the top 4 cards of your deck. You may reveal a Beast card from among them and add it to your hand. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-100EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Charitable Al-mi'raj",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Beast"
+            },
+            "lookAt": 4,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve ability includes unsupported field 'reveal' inside searchDeckChoose per current reference. Encode only the implemented searchDeckChoose fields, or add engine support for a reveal flag on searchDeckChoose if reveal is required."
+    ]
+  }
+}

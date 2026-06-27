@@ -1,0 +1,167 @@
+{
+  "Mjerrabaine, Great One": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "discard",
+          "count": 3
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Great Testimony",
+          "count": 1,
+          "zone": "exArea"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "activateFrom": "cemetery",
+        "cost": {
+          "banishFromCemetery": {
+            "identityName": "Mjerrabaine, Omen of One"
+          },
+          "count": 1
+        },
+        "effect": {
+          "op": "dealDamageAllEnemies",
+          "amount": 2,
+          "followersOnly": false
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Mjerrabaine, Omen of One": {
+    "evolvesTo": "Mjerrabaine, Omen of One Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 2
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": false
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 0
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mjerrabaine, Omen of One Evolved": {
+    "evolvesFrom": "Mjerrabaine, Omen of One",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "refresh",
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 2
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": false
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 0
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": true
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Momoka Sakurai": {
+    "evolvesTo": "Momoka Sakurai Evolved",
+    "evolveCost": 1,
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "[cost02], Lesson (1)",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "spendPp",
+                "amount": 2
+              },
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "trait": "Magical Item"
+                },
+                "count": 1
+              }
+            ]
+          },
+          "then": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

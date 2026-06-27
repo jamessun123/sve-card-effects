@@ -1,0 +1,65 @@
+{
+  "Perpetual Despair": {
+    "source": {
+      "name": "Perpetual Despair",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Omen / Zealot",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Whenever a follower with \"Marwynn\" in its name is put onto your field, you may put this from your cemetery into your EX area. If you do, give your leader [defense]+1. ---------- [act] [engage], bury this: Draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-101EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "identityNameContains": "Marwynn"
+          },
+          "effect": {
+            "op": "optionalCost",
+            "cost": {
+              "op": "moveSourceToExArea"
+            },
+            "then": {
+              "op": "healLeader",
+              "amount": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The triggered ability from the cemetery is missing the zone restriction; add `activateFrom: \"cemetery\"` to the `onAllyFollowerEnter` ability so it only works from your cemetery.",
+      "The `onAllyFollowerEnter` ability incorrectly uses `filter` at the ability root; encode the follower-name trigger using an implemented trigger/filter mechanism matching followers with `identityNameContains: \"Marwynn\"` for the enter event rather than leaving it as a non-reference field.",
+      "The cemetery trigger's move effect should represent 'you may put this from your cemetery into your EX area. If you do...' as an optional move from cemetery to EX area; the current `moveSourceToExArea` without `activateFrom: \"cemetery\"` is incorrect."
+    ]
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "Jeno, Levin Vanguard Evolved": {
+    "source": {
+      "name": "Jeno, Levin Vanguard Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Officer / Levin",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Assail. On Evolve: Look at the top 4 cards of your deck. From among them, you may reveal a Levin follower with a different name from this card and add it to your hand. Put the remaining cards on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-026EN.png",
+      "cardNos": [
+        "BP02-026EN",
+        "SP01-017EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Jeno, Levin Vanguard",
+      "specialType": "evolved",
+      "keywords": [
+        "assail"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Levin",
+              "cardType": "follower",
+              "excludeIdentityName": "Jeno, Levin Vanguard Evolved"
+            },
+            "lookAt": 4,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve search filter excludes the wrong name; it should exclude the base card identity name \"Jeno, Levin Vanguard\", not \"Jeno, Levin Vanguard Evolved\"."
+    ]
+  },
+  "Jerva of Draconic Mail": {
+    "source": {
+      "name": "Jerva of Draconic Mail",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "5",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Discard your hand. At the start of your end phase, deal 5 damage to each other follower on the field and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-062EN.png",
+      "cardNos": [
+        "BP09-062EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Jerva of Draconic Mail Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "discardHand"
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": true
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The startOfEnd ability is encoded as dealing 5 damage only to enemies, but the source says each other follower on the field; it should damage all other followers, not just enemy followers."
+    ]
+  },
+  "Jerva of Draconic Mail Evolved": {
+    "source": {
+      "name": "Jerva of Draconic Mail Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Dragonheart",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "At the start of your end phase, deal 5 damage to each other follower on the field and each enemy leader and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-063EN.png",
+      "cardNos": [
+        "BP09-063EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Jerva of Draconic Mail",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": true
+              },
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The startOfEnd ability is encoded as dealing 5 damage only to enemy followers, but the source says each other follower on the field; it should damage all other followers, then also deal 5 damage to each enemy leader, then draw a card."
+    ]
+  },
+  "Jiemon, Thief Lord Evolved": {
+    "source": {
+      "name": "Jiemon, Thief Lord Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Festive / Commander / Thief",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "5",
+        "effect": "Each other Festive follower on your field has Storm. On Evolve - Banish 2 cards named Glittering Gold from your EX area: Look at the top 5 cards of your deck. You may put a Festive card that costs 3 or less from among them into your EX area. It costs 3 less to play this turn. Put the rest on the bottom of your deck in any order. [act] [cost01]: Play this follower's On Evolve ability."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-023EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Jiemon, Thief Lord",
+      "specialType": "evolved",
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "aura",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "storm",
+            "trait": "Festive",
+            "excludeSelf": true
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishFromExArea",
+                "filter": {
+                  "identityName": "Glittering Gold"
+                },
+                "count": 2
+              },
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Festive",
+                  "maxCost": 3
+                },
+                "lookAt": 5,
+                "to": "exArea",
+                "optional": true,
+                "playCostReduction": 3,
+                "remainderTo": "deckBottom"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "triggerAbilities",
+            "timing": "onEvolve"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card incorrectly has \"storm\" in keywords; the source gives Storm only to each other Festive follower on your field, not to this card itself, so remove the printed storm keyword from this card."
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "Ace Dragoon": {
+    "source": {
+      "name": "Ace Dragoon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "0",
+        "defense": "2",
+        "effect": "Rush. [fanfare] Select another follower on the field and give this follower [attack]+X. X equals the selected follower's attack."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-095EN.png",
+      "cardNos": [
+        "BP01-095EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffDynamic",
+            "atk": {
+              "op": "targetAttack"
+            },
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented only as the ability timing, while Rush remains in keywords.",
+      "The fanfare should select another follower on the field and give this follower attack equal to that selected follower's attack; encode the chosen target explicitly instead of using buffDynamic with targetAttack and no target selector."
+    ]
+  },
+  "Acid Golem": {
+    "source": {
+      "name": "Acid Golem",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Golem / Arcanaform / Forbidden",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Earth Rite: Select an enemy leader or enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-043EN",
+        "PR-439EN",
+        "SDD03-009EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Acid Golem Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line belongs in evolveCost and Fanfare belongs as ability timing, not keywords.",
+      "The fanfare target is \"an enemy leader or enemy follower\"; change targets from enemyFieldCard to a selector/effect structure that can hit either the enemy leader or an enemy follower."
+    ]
+  },
+  "Actress Feria": {
+    "source": {
+      "name": "Actress Feria",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Musical / Fable / Princess",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[act][engage]: Select another Fable follower on your field and put a Fable counter on it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-114EN.png",
+      "cardNos": [
+        "BP03-114EN",
+        "SP01-053EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "addCounter",
+            "counter": "fable",
+            "amount": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "excludeSelf": true,
+              "filter": {
+                "trait": "Fable"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; this card has only an activated [act][engage] ability and no Fanfare."
+    ]
+  }
+}

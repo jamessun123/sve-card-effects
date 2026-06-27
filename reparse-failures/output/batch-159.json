@@ -1,0 +1,159 @@
+{
+  "Mythril Golem": {
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "spellchain",
+            "count": 15
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 5,
+                "followersOnly": true
+              },
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          },
+          "else": {
+            "op": "if",
+            "condition": {
+              "type": "spellchain",
+              "count": 7
+            },
+            "then": {
+              "op": "dealDamageAllEnemies",
+              "amount": 5,
+              "followersOnly": true
+            },
+            "else": {
+              "op": "dealDamageAllEnemies",
+              "amount": 3,
+              "followersOnly": true
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mánagarmr Scout": {
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Naterran Great Tree",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "oncePerTurn": true,
+        "cost": {
+          "pp": 1,
+          "banishFromField": {
+            "tokenName": "Naterran Great Tree"
+          },
+          "banishCount": 1
+        },
+        "effect": {
+          "op": "dealDamage",
+          "amount": 2,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nagi Hisakawa [Everyday Fairy Tale]": {
+    "keywords": [
+      "fanfare",
+      "advanced"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "iM@S CG",
+            "count": 5
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Sparkling☆Days"
+                },
+                "to": "exArea"
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 1
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "field",
+        "cost": {
+          "pp": 2,
+          "engage": true,
+          "burySelf": true
+        },
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "iM@S CG",
+          "count": 10
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeck",
+              "filter": {
+                "identityNameContains": "Nagi Hisakawa"
+              },
+              "to": "field"
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

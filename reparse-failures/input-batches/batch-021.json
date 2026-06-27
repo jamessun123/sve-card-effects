@@ -1,0 +1,130 @@
+{
+  "Arisu Tachibana": {
+    "source": {
+      "name": "Arisu Tachibana",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Silver",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] If there are at least 3 iM@S CG followers on your field, search your deck for a 1-cost spell or 1-cost amulet, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-059EN.png",
+      "cardNos": [
+        "CP02-059EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "iM@S CG",
+              "count": 3
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "searchDeckChoose",
+                  "filter": {
+                    "maxCost": 1,
+                    "cardType": "spell"
+                  },
+                  "lookAt": 40,
+                  "to": "hand",
+                  "optional": true,
+                  "remainderTo": "deckBottom",
+                  "reveal": true
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search effect is incomplete: it only searches for a 1-cost spell, but the source says 'a 1-cost spell or 1-cost amulet.' Encode the search with a choice covering both card types, or another valid representation that allows either a spell or an amulet.",
+      "The fanfare search effect is encoded with `searchDeckChoose`/`lookAt: 40`/`remainderTo: deckBottom`, which does not match 'search your deck ... then shuffle your deck.' It should use a deck-search effect like `tutorFromDeck` to hand with reveal, followed by `shuffleDeck`."
+    ]
+  },
+  "Armor Burst": {
+    "source": {
+      "name": "Armor Burst",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin / Armed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an Armed follower on your field and an enemy follower on the field. Put the first follower into its owner's EX area, deal 3 damage to the second, and summon a Draconic Weapon token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-072EN.png",
+      "cardNos": [
+        "BP03-072EN",
+        "PR-252EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveToExArea",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "summon",
+                "tokenName": "Draconic Weapon",
+                "count": 1,
+                "zone": "field"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first target is encoded too broadly as any self follower. It should specifically target an Armed follower on your field, so add a target/filter restriction for trait `Armed`.",
+      "The summoned Draconic Weapon token is encoded to the field, but the source only says 'summon a Draconic Weapon token' and Draconic Weapon is an amulet token that should enter as a field card/amulet via the correct token summon handling. Use the exact token summon representation for that token rather than a generic field follower summon if needed."
+    ]
+  }
+}

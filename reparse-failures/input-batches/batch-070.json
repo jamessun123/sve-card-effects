@@ -1,0 +1,129 @@
+{
+  "Elven Archery": {
+    "source": {
+      "name": "Elven Archery",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell",
+        "trait": "Elf",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select up to 2 enemy followers on the field and deal them 1 damage. Combo (3): Deal 2 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-011EN.png",
+      "cardNos": [
+        "BP02-011EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Select up to 2 enemy followers on the field and deal them 1 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 1,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 2
+                  }
+                }
+              },
+              {
+                "label": "Combo (3): Deal 2 damage instead",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "combo",
+                    "count": 3
+                  },
+                  "then": {
+                    "op": "dealDamage",
+                    "amount": 2,
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 2
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is incorrectly encoded as a choose effect; it should be a single spell ability that deals damage to up to 2 enemy followers, with the amount determined by Combo (3). Encode it as an if/condition on combo that changes the damage amount instead of presenting separate player choices.",
+      "The targeting is incorrect for 'up to 2 enemy followers'; using dealDamage with targets.count 2 implies exactly 2 targets. It should be encoded with an operation that supports selecting up to 2 targets or equivalent split/multi-target handling, not as exactly 2 targets.",
+      "The Combo (3): 'Deal 2 damage instead' clause is misrepresented as a separate optional choice. It should replace the base 1 damage when the combo condition is met, not be an independently chosen mode."
+    ]
+  },
+  "Elven Waitress": {
+    "source": {
+      "name": "Elven Waitress",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Festive / Elf",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Put a card from your hand on the bottom of your deck: Give your leader [defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-008EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Elven Waitress Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Put a card from your hand on the bottom of your deck",
+            "cost": {
+              "op": "putHandCardOnDeck",
+              "position": "bottom"
+            },
+            "then": {
+              "op": "healLeader",
+              "amount": 2
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect incorrectly uses healLeader 2. 'Give your leader [defense]+2' should be encoded as increasing the leader's defense by 2, not recovery. Use the appropriate leader defense increase effect rather than healing."
+    ]
+  }
+}

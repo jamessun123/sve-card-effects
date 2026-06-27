@@ -1,0 +1,60 @@
+{
+  "Ancient Elf Evolved": {
+    "source": {
+      "name": "Ancient Elf Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Elf",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Ward. On Evolve, return another card on your field to its owner's hand: Give this follower [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-003EN.png",
+      "cardNos": [
+        "BP01-003EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "excludeSelf": true
+            }
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect is encoded as two separate mandatory abilities; it should be a single On Evolve ability where returning another card on your field to its owner's hand is the cost or prerequisite for then giving this follower +1/+1."
+    ]
+  }
+}

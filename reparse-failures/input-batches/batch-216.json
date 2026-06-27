@@ -1,0 +1,127 @@
+{
+  "Spring-Green Protection": {
+    "source": {
+      "name": "Spring-Green Protection",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Amulet",
+        "trait": "Elf",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act][cost01], [engage], put this card into its owner's cemetery: Select a [forestcraft] follower on your field and give it [defense]+1. Combo (3): Give it [attack]+1 more. When this card leaves the field, put a Fairy Wisp token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-008EN.png",
+      "cardNos": [
+        "BP04-008EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "Select a Forestcraft follower on your field and give it [defense]+1",
+            "cost": {
+              "op": "if",
+              "condition": {
+                "type": "combo",
+                "count": 3
+              },
+              "then": {
+                "op": "noop",
+                "label": "combo bonus"
+              }
+            },
+            "then": {
+              "op": "buff",
+              "def": 1,
+              "targets": {
+                "type": "selfFollower",
+                "count": 1,
+                "filter": {
+                  "cardClass": "forest"
+                }
+              }
+            }
+          }
+        },
+        {
+          "timing": "onLeaveField",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fairy Wisp",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword \"fanfare\"; the source card has no Fanfare keyword.",
+      "The activated ability is incorrectly encoded as optionalCost with a noop combo clause. It should be a sequence that buffs a Forestcraft follower on your field by +0/+1, then if Combo (3) also gives the same selected follower +1 attack.",
+      "The Combo (3) clause is missing its actual effect. It should give the chosen follower [attack]+1 more."
+    ]
+  },
+  "Stalwart Slinger Evolved": {
+    "source": {
+      "name": "Stalwart Slinger Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Officer",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Assail. On Evolve - Deal 3 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-026EN.png",
+      "cardNos": [
+        "BP11-026EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Stalwart Slinger",
+      "specialType": "evolved",
+      "keywords": [
+        "assail"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 3,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is encoded as dealDamageAllEnemies, which would damage enemy followers as well. It should deal 3 damage only to each enemy leader; encode damage to enemy leaders only instead of all enemies."
+    ]
+  }
+}

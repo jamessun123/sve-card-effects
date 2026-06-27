@@ -1,0 +1,277 @@
+{
+  "Belphomet, Worldreaver": {
+    "source": {
+      "name": "Belphomet, Worldreaver",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Machina / Supreme",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Summon an Armored Tentacle token. [act] [cost03], banish 2 Machina tokens from your EX area, put this card from your hand into your EX area: Summon an Armored Tentacle or Assault Tentacle token."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-035EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Belphomet, Worldreaver Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Armored Tentacle",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3,
+            "banishFromExArea": {
+              "trait": "Machina"
+            },
+            "banishCount": 2
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveSourceToExArea"
+              },
+              {
+                "op": "choose",
+                "min": 1,
+                "max": 1,
+                "options": [
+                  {
+                    "label": "Armored Tentacle",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Armored Tentacle",
+                      "count": 1,
+                      "zone": "field"
+                    }
+                  },
+                  {
+                    "label": "Assault Tentacle",
+                    "effect": {
+                      "op": "summon",
+                      "tokenName": "Assault Tentacle",
+                      "count": 1,
+                      "zone": "field"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly; `banishFromExArea` must be a cost object with both filter and count, e.g. `\"banishFromExArea\": { \"filter\": { \"trait\": \"Machina\", \"printingType\": \"token\" }, \"count\": 2 }`, because the card requires banishing 2 Machina tokens from your EX area.",
+      "The activated ability is missing `activateFrom: \"hand\"`; the source says 'put this card from your hand into your EX area', so the [act] ability must activate from hand.",
+      "The activated ability's banish filter is too broad; it should require Machina tokens from your EX area, not any Machina cards."
+    ]
+  },
+  "Belphomet, Worldreaver Evolved": {
+    "source": {
+      "name": "Belphomet, Worldreaver Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Machina / Supreme",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "6",
+        "defense": "6",
+        "effect": "On Evolve - Discard a Machina card: Summon an Assault Tentacle token. [act] [cost02], banish a Machina token from your EX area: Summon an Assault Tentacle token."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-036EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Belphomet, Worldreaver",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "optionalCost",
+                "label": "Discard a Machina card",
+                "cost": {
+                  "op": "discardFromHand",
+                  "filter": {
+                    "trait": "Machina"
+                  },
+                  "count": 1
+                },
+                "then": {
+                  "op": "summon",
+                  "tokenName": "Assault Tentacle",
+                  "count": 1,
+                  "zone": "field"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "banishFromExArea": {
+              "trait": "Machina"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Assault Tentacle",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly; `banishFromExArea` must include both filter and count, e.g. `\"banishFromExArea\": { \"filter\": { \"trait\": \"Machina\", \"printingType\": \"token\" }, \"count\": 1 }`, because the card requires banishing a Machina token from your EX area.",
+      "The activated ability's banish filter is too broad; it should require a Machina token from your EX area, not any Machina card."
+    ]
+  },
+  "Bergent, Layered Sorceress Evolved": {
+    "source": {
+      "name": "Bergent, Layered Sorceress Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Mage / Arcanaform",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Discard an Onion Patch: Draw 2 cards. [lastwords] You may put this into its owner's EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-040EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Bergent, Layered Sorceress",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard an Onion Patch",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "identityName": "Onion Patch"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 2
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "moveSourceToExArea"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words ability is missing the optionality; it should be optional, i.e. 'You may put this into its owner's EX area,' not mandatory `moveSourceToExArea`."
+    ]
+  },
+  "Bergent, Onion Patchmaster": {
+    "source": {
+      "name": "Bergent, Onion Patchmaster",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Arcanaform",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Look at the top 5 cards of your deck. You may summon up to 2 cards named Onion Patch from among them. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-048EN.png",
+      "cardNos": [
+        "BP09-048EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Bergent, Onion Patchmaster Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "identityName": "Onion Patch"
+            },
+            "lookAt": 5,
+            "maxTotalCost": 999,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded too loosely; it should summon up to 2 cards named Onion Patch from among the top 5 cards, not any number via `maxTotalCost: 999`. Change it to an effect that limits the number of Onion Patch cards summoned from the looked-at cards to 2."
+    ]
+  }
+}

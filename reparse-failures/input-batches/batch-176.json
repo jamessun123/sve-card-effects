@@ -1,0 +1,234 @@
+{
+  "Polyphonic Roar": {
+    "source": {
+      "name": "Polyphonic Roar",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Amulet",
+        "trait": "Wyrmkin",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Once on each of your turns, when a Dragon token is put onto your field, select an enemy leader or enemy follower on the field and deal it 5 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-058EN.png",
+      "cardNos": [
+        "BP02-058EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "identityName": "Dragon token"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "choose",
+              "count": 1
+            }
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger filter is not encoded in a supported location; encode the once-per-turn trigger as timing \"onAllyFollowerEnter\" with a condition/filter for the entering follower being a Dragon token, rather than a top-level unsupported \"filter\" field.",
+      "The damage target is incorrect; replace targets {\"type\":\"choose\"} with a valid selector that lets you choose an enemy leader or enemy follower."
+    ]
+  },
+  "Pompous Summons": {
+    "source": {
+      "name": "Pompous Summons",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Commander / Princess",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose one. (1) Draw a card. (2) If there's a Princess follower on your field, search your deck for a [swordcraft] follower, reveal it, add it to your hand, then shuffle."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-036EN.png",
+      "cardNos": [
+        "BP10-036EN",
+        "PR-248EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Draw a card",
+                "effect": {
+                  "op": "draw",
+                  "count": 1
+                }
+              },
+              {
+                "label": "If there's a Princess follower on your field, search your deck for a Swordcraft follower, reveal it, add it to your hand, then shuffle",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "namedFollowerOnFieldByName",
+                    "identityName": "Princess follower"
+                  },
+                  "then": {
+                    "op": "sequence",
+                    "steps": [
+                      {
+                        "op": "tutorFromDeck",
+                        "filter": {
+                          "cardClass": "sword",
+                          "cardType": "follower"
+                        },
+                        "to": "hand",
+                        "reveal": true
+                      },
+                      {
+                        "op": "shuffleDeck"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The field condition is encoded incorrectly; \"if there's a Princess follower on your field\" should check for a follower with the Princess trait, not named \"Princess follower\". Use a trait-based field condition for Princess followers on your field."
+    ]
+  },
+  "Poseidon": {
+    "source": {
+      "name": "Poseidon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Marine / Draconic Duelist",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "8",
+        "attack": "4",
+        "defense": "7",
+        "effect": "Ward. [fanfare] Search your deck for up to 2 Draconic Duelist followers with different names that cost 2 or less, summon them, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-071EN.png",
+      "cardNos": [
+        "BP09-071EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "Draconic Duelist",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "lookAt": 5,
+            "maxTotalCost": 4,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search/summon effect is encoded incorrectly; it should search the deck for up to 2 Draconic Duelist followers with different names and summon them, then shuffle, not look at the top 5 cards with total cost 4 and put the rest on the bottom.",
+      "The encoded effect is missing the \"different names\" restriction on the 2 summoned followers."
+    ]
+  },
+  "Price of Magic": {
+    "source": {
+      "name": "Price of Magic",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Earth Sigil",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Select an enemy follower with 4 defense or less on the field and banish it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-066EN.png",
+      "cardNos": [
+        "BP01-066EN",
+        "SDD03-013EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "always"
+            },
+            "then": {
+              "op": "banish",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1,
+                "maxDef": 4
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card is missing the Stack keyword/effect; encode the amulet's printed Stack ability in addition to the fanfare banish effect.",
+      "The fanfare ability is wrapped in an unnecessary always-if; encode it directly as a banish effect targeting an enemy follower with maxDef 4."
+    ]
+  }
+}

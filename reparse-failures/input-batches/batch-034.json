@@ -1,0 +1,239 @@
+{
+  "Bouquet Fairy": {
+    "source": {
+      "name": "Bouquet Fairy",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Pixie",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Put a Fairy Wisp token into your EX area. [act] [engage], banish a card from your EX area: Select an enemy follower on the field and return it to its owner's hand."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-017EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fairy Wisp",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "banishFromExArea": {
+              "cardType": "follower"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated cost incorrectly restricts the banished EX-area card to cardType:follower. The source says 'banish a card from your EX area', so the cost should banish any card from your EX area, not only followers."
+    ]
+  },
+  "Brave Buccaneer": {
+    "source": {
+      "name": "Brave Buccaneer",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Thief",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Rush. [fanfare] Select up to 2 enemy followers on the field and engage them."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-037EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "engage",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 2
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target count is encoded as exactly 2 enemy followers, but the source says 'Select up to 2 enemy followers'. It should allow choosing 0 to 2 targets, so the engage effect should be optional/up-to-2 rather than exactly 2."
+    ]
+  },
+  "Briared Vampire Evolved": {
+    "source": {
+      "name": "Briared Vampire Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Vampire",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Put the top card of your deck into your EX area. Discard a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-079EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Briared Vampire",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "mill",
+                "count": 1
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first On Evolve step is incorrect: it uses mill 1, which puts the top card of your deck into your cemetery, but the source says to put the top card of your deck into your EX area. Replace the mill step with putDeckTopToExArea."
+    ]
+  },
+  "Brothers United": {
+    "source": {
+      "name": "Brothers United",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Natura / Commander / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower on your field with \"Bayleon\" in its name. Give it [attack]+1/[defense]+1, then you may put a Naterran Great Tree token onto your field or into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-036EN.png",
+      "cardNos": [
+        "BP17-036EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "identityNameContains": "Bayleon"
+              }
+            }
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put Naterran Great Tree onto your field",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Put Naterran Great Tree into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Naterran Great Tree",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is split into two separate spell abilities, but the source is one sequential effect. It should be a single spell ability that first buffs the chosen Bayleon follower, then offers the Naterran Great Tree placement option.",
+      "The target selector for the buff is invalid/inaccurate: selfFollower does not support a filter here and should target a follower on your field with 'Bayleon' in its name. Use a selector/effect form that correctly filters your own follower by identityNameContains 'Bayleon'.",
+      "The second effect is encoded as mandatory choose one, but the source says 'you may put ... onto your field or into your EX area', making the whole token placement optional. It should allow declining entirely, e.g. an optional choose between field/exArea or equivalent optional wrapper."
+    ]
+  }
+}

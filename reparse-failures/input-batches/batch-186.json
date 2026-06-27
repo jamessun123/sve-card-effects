@@ -1,0 +1,115 @@
+{
+  "Rending Blast ADVANCED": {
+    "source": {
+      "name": "Rending Blast ADVANCED",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell / Advanced",
+        "trait": "Mage / Academic / Princess / Cutthroat",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Deal 8 damage to each enemy leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-039EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "advanced"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 8,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The effect should deal 8 damage to each enemy leader only, not to all enemies. Replace dealDamageAllEnemies with a leader-only damage effect targeting enemy leaders."
+    ]
+  },
+  "Reno, Luxwing Featherfolk": {
+    "source": {
+      "name": "Reno, Luxwing Featherfolk",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Luminary / Avian",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "Rush. Strike - Deal 1 damage to each enemy leader. [fanfare] If this was put onto the field by an ability, give it Assail and, for the rest of this turn, \"This doesn't take damage.\""
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-105EN.png",
+      "cardNos": [
+        "BP16-105EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "strike",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "grantKeyword",
+                "keyword": "assail",
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "damageImmunity",
+                "amount": 99,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card should not list \"strike\" and \"fanfare\" in keywords. Keep Rush as a keyword, but represent Strike and Fanfare only as abilities with timing \"strike\" and \"fanfare\"."
+    ]
+  }
+}

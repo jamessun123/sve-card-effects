@@ -1,0 +1,138 @@
+{
+  "Dragon Wings": {
+    "source": {
+      "name": "Dragon Wings",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Deal 2 damage to each follower on the field. If Overflow is active for you, deal 3 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-099EN.png",
+      "cardNos": [
+        "BP01-099EN",
+        "SD04-016EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "dealDamageAllEnemies",
+              "amount": 3,
+              "followersOnly": true
+            },
+            "else": {
+              "op": "dealDamageAllEnemies",
+              "amount": 2,
+              "followersOnly": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is encoded as dealing damage only to enemy followers with dealDamageAllEnemies, but the source says \"each follower on the field\". It should damage all followers on both fields; replace this with an effect that hits all followers, such as dealDamageOtherFollowers plus self damage or an implemented all-followers equivalent."
+    ]
+  },
+  "Dragon-Devouring Dread": {
+    "source": {
+      "name": "Dragon-Devouring Dread",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin / Cutthroat",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "9",
+        "attack": "8",
+        "defense": "8",
+        "effect": "[fanfare] For each [dragoncraft] card that costs 7 or more in your cemetery, select up to 1 enemy follower on the field and banish it. [act] [cost03], discard this card and a [dragoncraft] card that costs 7 or more: Increase your max play points by 1. Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-058EN.png",
+      "cardNos": [
+        "BP11-058EN",
+        "SDD04-006EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryClassMin",
+              "cardClass": "dragon",
+              "count": 1
+            },
+            "then": {
+              "op": "banishUpTo",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              },
+              "maxCount": {
+                "op": "cemeteryFilterCount",
+                "filter": {
+                  "cardClass": "dragon",
+                  "minCost": 7
+                },
+                "divisor": 1
+              }
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3,
+            "discard": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "increaseMaxPp",
+                "amount": 1
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare should banish up to 1 enemy follower for each Dragoncraft card that costs 7 or more in your cemetery, but the parsed banishUpTo uses targets.count: 1, which limits selection to only one follower. It should allow up to X enemy followers, where X is the dynamic cemetery count.",
+      "The activated ability cost is incorrect. The source requires [cost03] and discarding this card and a Dragoncraft card that costs 7 or more; replace cost.discard with a cost/effect encoding that specifically discards this card plus 1 Dragoncraft card with minCost 7 from hand."
+    ]
+  }
+}

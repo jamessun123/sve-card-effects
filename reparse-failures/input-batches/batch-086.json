@@ -1,0 +1,221 @@
+{
+  "Frogbat": {
+    "source": {
+      "name": "Frogbat",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] Banish 2 cards in your cemetery: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-094EN.png",
+      "cardNos": [
+        "BP04-094EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Frogbat Evolved",
+      "evolveCost": 0,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "buryFieldFollowers",
+            "filter": {
+              "cardClass": "abyss"
+            },
+            "count": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is encoded incorrectly as burying field followers; it should banish 2 cards from your cemetery as the evolve cost, e.g. an `evolve` ability with cost `{ \"banishFromCemetery\": { \"filter\": { \"cardClass\": \"abyss\" }, \"count\": 2 } }` or equivalent cemetery-banish encoding, not `buryFieldFollowers`."
+    ]
+  },
+  "Frontline Instructor": {
+    "source": {
+      "name": "Frontline Instructor",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] [costX]: Summon X Steelclad Knight tokens. X equals a number of your choice. [act] [engage]: For the rest of this turn, each [swordcraft] follower currently on your field has Rush and Assail."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-032EN.png",
+      "cardNos": [
+        "BP11-032EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "withChosenNumber",
+            "min": 0,
+            "max": 99,
+            "then": {
+              "op": "summon",
+              "tokenName": "Steelclad Knight",
+              "count": {
+                "op": "chosenNumber",
+                "min": 0,
+                "max": 99
+              },
+              "zone": "field"
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "cardClass": "sword"
+            },
+            "effect": {
+              "op": "passiveKeywords",
+              "keywords": [
+                "rush",
+                "assail"
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is missing the [costX] payment linkage; choosing X and summoning X tokens should be tied to paying X PP, not just a free chosen-number effect. Encode the fanfare with an X-cost payment and then summon X Steelclad Knight tokens.",
+      "The activated ability is encoded incorrectly; it should give each Swordcraft follower currently on your field Rush and Assail for the rest of this turn, not grant a trigger for future card plays. Replace `grantOnCardPlayed` with an immediate field-wide grant/buff effect applying Rush and Assail to your current Swordcraft followers until end of turn."
+    ]
+  },
+  "Frontline Ramparts": {
+    "source": {
+      "name": "Frontline Ramparts",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Amulet",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[q][act] [engage], bury this card: Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-034EN.png",
+      "cardNos": [
+        "BP09-034EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing `quick: true` on the ability itself. The source is `[q][act]`, so the activated ability should be marked as quick, not only by putting `quick` in `keywords`."
+    ]
+  },
+  "Frostbite Dragon": {
+    "source": {
+      "name": "Frostbite Dragon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "7",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Select up to 2 enemy followers on the field and engage them."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-056EN",
+        "SDD04-007EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Frostbite Dragon Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "banishUpTo",
+            "targets": {
+              "type": "enemyFollower"
+            },
+            "maxCount": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is encoded incorrectly as banishing up to 2 enemy followers; it should engage up to 2 enemy followers. Replace `banishUpTo` with an `engage` effect targeting up to 2 enemy followers."
+    ]
+  }
+}

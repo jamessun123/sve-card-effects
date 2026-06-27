@@ -1,0 +1,56 @@
+{
+  "Master of Draconic Arts": {
+    "source": {
+      "name": "Master of Draconic Arts",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "4",
+        "effect": "Assail. Ward. [fanfare] If Overflow is active for you, give this follower [attack]+4 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-063EN.png",
+      "cardNos": [
+        "BP03-063EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "assail",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "overflow"
+            },
+            "then": {
+              "op": "buff",
+              "atk": 4,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare ability is incomplete: after checking Overflow, it should both give this follower +4 attack and grant Rush; encode the then effect as a sequence with buff to self and grantKeyword \"rush\" to self."
+    ]
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "Liam, Crazed Creator": {
+    "source": {
+      "name": "Liam, Crazed Creator",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry / Cutthroat",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Summon 2 Puppet tokens. [act] [engage]: Look at the top 5 cards of your deck. You may put a Puppetry card that costs 3 or less from among them into your EX area. It costs 3 less to play this turn. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-008EN.png",
+      "cardNos": [
+        "BP16-008EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "act"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Puppet",
+            "count": 2,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Puppetry",
+              "maxCost": 3
+            },
+            "lookAt": 5,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 3,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is encoded as summon 2 Puppet tokens to exArea, but the source says 'Summon 2 Puppet tokens,' which should put them onto the field. Change zone from exArea to field."
+    ]
+  },
+  "Liberté, Unchained Wolf": {
+    "source": {
+      "name": "Liberté, Unchained Wolf",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Beast / Cutthroat",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Bury another follower: This card's [evolve] costs 1 less this turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-078EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Liberté, Unchained Wolf Evolved",
+      "evolveCost": 2,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buryFromFieldSelect",
+            "excludeSelf": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability only buries another follower, but the source is 'Bury another follower: This card's [evolve] costs 1 less this turn.' Encode this as a costed/conditional sequence or optionalCost where burying another follower is followed by evolveCostReduction amount 1 for this turn."
+    ]
+  },
+  "Lightning Blast": {
+    "source": {
+      "name": "Lightning Blast",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] You may play this card for 5 more play points. Select an enemy follower on the field and banish it. If you played this card for 5 more play points, instead of banishing that follower, banish each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-066EN.png",
+      "cardNos": [
+        "BP04-066EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select an enemy follower on the field and banish it",
+                "effect": {
+                  "op": "banish",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Banish each enemy follower on the field",
+                "additionalPpCost": 5,
+                "effect": {
+                  "op": "destroyAllEnemyField"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The 5-more-PP option is encoded as destroyAllEnemyField, but the source says to banish each enemy follower on the field. Replace that option's effect with banishUpTo or another all-enemy-follower banish encoding that affects all enemy followers rather than destroying enemy field cards and amulets."
+    ]
+  }
+}

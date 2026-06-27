@@ -1,0 +1,77 @@
+{
+  "Shiki Ichinose": {
+    "source": {
+      "name": "Shiki Ichinose",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Legendary",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "5",
+        "attack": "2",
+        "defense": "5",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Look at the top 3 cards of your deck. You may put one of them into your EX area. Bury the rest. [act] [engage], discard a card: Select an enemy follower on the field and deal it 5 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-036EN.png",
+      "cardNos": [
+        "CP02-036EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Shiki Ichinose Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "iM@S CG"
+            },
+            "lookAt": 3,
+            "to": "exArea",
+            "optional": true,
+            "remainderTo": "cemetery"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "discard a card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 5,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded with filter {trait: \"iM@S CG\"}, but the source says you may put one of the top 3 cards into your EX area with no trait restriction. Change the effect to look at the top 3 cards, choose any 1 to put into your EX area, and bury the rest.",
+      "Activated ability cost is incomplete. The source requires '[engage], discard a card'; encode the discard as part of the activated cost instead of as an optionalCost effect so the damage effect is mandatory after paying the cost."
+    ]
+  }
+}

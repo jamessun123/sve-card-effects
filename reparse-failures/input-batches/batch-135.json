@@ -1,0 +1,110 @@
+{
+  "Lyrial, Archer Throne": {
+    "source": {
+      "name": "Lyrial, Archer Throne",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Angel",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "5",
+        "effect": "[q][act] [engage]: Deal 2 damage to each enemy leader. While this card is on your field, your leader doesn't take ability damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-108EN.png",
+      "cardNos": [
+        "BP05-108EN",
+        "PR-359EN",
+        "SP01-050EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "damageImmunity",
+            "amount": 99,
+            "targets": {
+              "type": "selfLeader"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect \"fanfare\" keyword; the source text only gives this card a quick activated ability, not Fanfare.",
+      "Add \"quick\": true to the activated ability instead of putting \"quick\" in keywords, since [q][act] means the activated ability can be used during quick windows.",
+      "Change the activated damage effect from dealing 2 damage to each enemy follower and leader to dealing 2 damage to each enemy leader only, using a leader-only damage effect.",
+      "Change the passive protection effect from giving your leader immunity to all ability damage to preventing only this card's controller leader from taking ability damage as stated on the card."
+    ]
+  },
+  "Lævateinn Dragon": {
+    "source": {
+      "name": "Lævateinn Dragon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin / Armed",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve][cost01]: Evolve this follower into an evolved follower with \"Lævateinn Dragon\" in its name."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-056EN.png",
+      "cardNos": [
+        "BP03-056EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolvesTo": "Lævateinn Dragon Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityNameContains": "Lævateinn Dragon"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Replace the evolve ability effect from \"summonFromEvolveDeck\" to an effect that evolves this follower into a matching evolved follower with \"Lævateinn Dragon\" in its name; the current encoding summons from the evolve deck instead of evolving this card."
+    ]
+  }
+}

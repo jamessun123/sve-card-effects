@@ -1,0 +1,188 @@
+{
+  "Creative Conjurer": {
+    "source": {
+      "name": "Creative Conjurer",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Choose one. (1) Add 1 to a Stack on your field. (2) Earth Rite: Deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-050EN.png",
+      "cardNos": [
+        "BP10-050EN",
+        "PR-249EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Add 1 to a Stack on your field",
+                "effect": {
+                  "op": "addStack",
+                  "amount": 1
+                }
+              },
+              {
+                "label": "Earth Rite: Deal 2 damage to each enemy leader",
+                "effect": {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 2,
+                  "followersOnly": false
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second choose option is missing the Earth Rite condition/cost; encode it so that option (2) requires Earth Rite (1), e.g. with a conditional/costed effect that consumes 1 stack before dealing damage.",
+      "The second choose option targets the wrong side; 'Deal 2 damage to each enemy leader' should damage only enemy leaders, not all enemies."
+    ]
+  },
+  "Crimson Meteor Storm": {
+    "source": {
+      "name": "Crimson Meteor Storm",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "7",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Spellchain (10) - This card costs 2 less to play. ---------- Deal 6 damage to each enemy follower on the field. Deal 3 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-045EN.png",
+      "cardNos": [
+        "BP06-045EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "spellchain",
+            "count": 10
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 2
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 6,
+                "followersOnly": true
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": false
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect's second damage clause is encoded as damage to all enemies; 'Deal 3 damage to each enemy leader' should damage only enemy leaders."
+    ]
+  },
+  "Crocus Rat": {
+    "source": {
+      "name": "Crocus Rat",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Verdant / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] [cost05]: Select an enemy follower on the field. Put it on the bottom of its owner's deck and draw a card. When this card is returned to hand from your field, give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-015EN.png",
+      "cardNos": [
+        "BP10-015EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[cost05]",
+            "cost": {
+              "op": "spendPp",
+              "amount": 5
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "putOnBottomOfDeck",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                },
+                {
+                  "op": "draw",
+                  "count": 1
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The return-to-hand trigger is missing; add an onReturnToHand ability that heals your leader for 1 when this card is returned to hand from your field."
+    ]
+  }
+}

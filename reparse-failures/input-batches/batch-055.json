@@ -1,0 +1,139 @@
+{
+  "Demonic Strike": {
+    "source": {
+      "name": "Demonic Strike",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Fiend",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy leader or enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-168EN.png",
+      "cardNos": [
+        "BP01-168EN",
+        "PR-019EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The target selector is too broad. enemyFieldCard can target enemy amulets, but the source says 'enemy leader or enemy follower'. Change the effect to target only enemyLeader or enemyFollower, such as a choose between dealDamage to enemyLeader and dealDamage to enemyFollower."
+    ]
+  },
+  "Demonlord Eachtar": {
+    "source": {
+      "name": "Demonlord Eachtar",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "7",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[fanfare] Necrocharge (10): Select up to 2 [abysscraft] followers that cost 2 play points or less in your cemetery and put them onto your field. Give each other follower on your field [attack]+1/[defense]+1. NC (20): Give [attack]+3/[defense]+3 instead. While this card is on your field, each [abysscraft] follower on your field has Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-082EN.png",
+      "cardNos": [
+        "BP04-082EN",
+        "SDD05-006EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "count": 2,
+                "maxTotalCost": 2
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "abyss",
+                "atk": 1,
+                "def": 1,
+                "excludeSelf": true
+              }
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 20
+          },
+          "effect": {
+            "op": "buffFieldTrait",
+            "cardClass": "abyss",
+            "atk": 3,
+            "def": 3,
+            "excludeSelf": true
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "trait": "Abysscraft",
+            "excludeSelf": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The summoned followers clause is encoded incorrectly. 'Select up to 2 Abysscraft followers that cost 2 play points or less in your cemetery' should not use maxTotalCost: 2; remove maxTotalCost so it allows up to 2 followers each costing 2 or less.",
+      "The NC (20) buff is encoded as an additional separate fanfare buff, causing both +1/+1 and +3/+3 to apply. It should instead replace the NC (10) buff with +3/+3 when Necrocharge 20 is active, e.g. use an if inside the Necrocharge 10 fanfare sequence or otherwise ensure only one buff amount applies.",
+      "The fanfare buff targets are wrong. The source says 'Give each other follower on your field' +1/+1 or +3/+3, not only Abysscraft followers. Remove cardClass: 'abyss' from the buff effect.",
+      "The passive Rush aura is encoded incorrectly. It should give Rush to each Abysscraft follower on your field, but the aura uses trait: 'Abysscraft' instead of cardClass: 'abyss'. Change it to auraGrantKeyword with cardClass: 'abyss'.",
+      "The passive Rush aura incorrectly excludes this card. The source says 'each Abysscraft follower on your field,' which includes this card. Remove excludeSelf: true."
+    ]
+  }
+}

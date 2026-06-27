@@ -1,0 +1,226 @@
+{
+  "Haru Yuuki": {
+    "source": {
+      "name": "Haru Yuuki",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Silver",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] If there's a Risa Matoba on your field, give this follower [attack]+1/[defense]+1 and Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-094EN.png",
+      "cardNos": [
+        "CP02-094EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Haru Yuuki Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Risa Matoba"
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect is incomplete: if there's a Risa Matoba on your field, it should both give this follower +1/+1 and grant Storm. Encode the then-effect as a sequence of buff self by 1/1 and grantKeyword storm to self."
+    ]
+  },
+  "Harvest Festival": {
+    "source": {
+      "name": "Harvest Festival",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Amulet",
+        "trait": "Elf",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act][cost01], [engage], put this card into its owner's cemetery: Give your leader [defense]+1. When this card leaves the field, draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-016EN.png",
+      "cardNos": [
+        "BP01-016EN",
+        "PR-001EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        },
+        {
+          "timing": "onLeaveField",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "keywords incorrectly includes fanfare, but the card has no Fanfare ability. Remove the fanfare keyword."
+    ]
+  },
+  "Hazhan, Demonblade Knight": {
+    "source": {
+      "name": "Hazhan, Demonblade Knight",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "3",
+        "attack": "1",
+        "defense": "2",
+        "effect": "[evolve] [cost03]: Evolve this follower. [evolve] [cost01]: Evolve this follower. Activate only if Sanguine is active for you. Assail. Bane. Drain."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-072EN.png",
+      "cardNos": [
+        "BP11-072EN",
+        "PR-275EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "assail",
+        "bane",
+        "drain",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "condition": {
+            "type": "sanguine"
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "assail",
+              "bane",
+              "drain"
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve abilities are encoded incorrectly. The card has two evolve cost lines: a normal [evolve] [cost03]: Evolve this follower, and an alternate [evolve] [cost01]: Evolve this follower that is usable only if Sanguine is active. Encode evolveCost as 3 and add a conditional evolve ability/cost reduction for Sanguine rather than a passiveKeywords effect on timing evolve.",
+      "Assail, Bane, and Drain are unconditional printed keywords and should remain as keywords, not be represented by an evolve-timing passiveKeywords ability tied to Sanguine. Remove that incorrect ability."
+    ]
+  },
+  "Hazhan, Demonblade Knight Evolved": {
+    "source": {
+      "name": "Hazhan, Demonblade Knight Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "-",
+        "attack": "1",
+        "defense": "6",
+        "effect": "Assail. Bane. Drain. Strike - Deal 2 damage to each enemy leader. Refresh this follower. Perform only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-073EN.png",
+      "cardNos": [
+        "BP11-073EN",
+        "PR-276EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "assail",
+        "bane",
+        "drain"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              },
+              {
+                "op": "refresh",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          },
+          "maxPerTurn": 1
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Strike effect targets are wrong: the source says \"Deal 2 damage to each enemy leader,\" meaning only enemy leaders are damaged, not all enemies. Replace dealDamageAllEnemies with an effect that deals 2 damage to each enemy leader."
+    ]
+  }
+}

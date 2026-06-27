@@ -1,0 +1,161 @@
+{
+  "Avant Blader Evolved": {
+    "source": {
+      "name": "Avant Blader Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Commander",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "On Evolve: Search your deck for up to 2 Officer followers, reveal them, and add them to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-032EN.png",
+      "cardNos": [
+        "BP02-032EN",
+        "PR-112EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Avant Blader",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Officer",
+              "cardType": "follower"
+            },
+            "lookAt": 5,
+            "to": "hand",
+            "optional": true,
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is encoded incorrectly as searchDeckChoose with \"lookAt\": 5 and a single optional pick; it should search the full deck for up to 2 Officer followers, reveal them, and add them to your hand, e.g. encode a deck tutor/search that can select up to 2 matching cards rather than looking at only the top 5."
+    ]
+  },
+  "Avatar of Fruition": {
+    "source": {
+      "name": "Avatar of Fruition",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Fae-Touched",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[fanfare] Put a Naterran Great Tree token into your EX area. While this card is on your field, any Naterran Great Tree you play costs 1 less."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-010EN.png",
+      "cardNos": [
+        "BP07-010EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Naterran Great Tree",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive cost reduction is too broad: playCostReduction on this card makes the source cheaper, but the text says any \"Naterran Great Tree\" you play costs 1 less while this is on your field. It should be encoded as a passive aura/effect that reduces the play cost of Naterran Great Tree cards you play, not this card itself."
+    ]
+  },
+  "Awakened Gaia": {
+    "source": {
+      "name": "Awakened Gaia",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Verdant",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "11",
+        "attack": "5",
+        "defense": "5",
+        "effect": "This card costs 5 less to play for every 5 Natura cards in your cemetery. ---------- [fanfare] Select an enemy follower on the field and destroy it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-001EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "playCostReduction",
+            "amount": {
+              "op": "cemeteryFilterCount",
+              "filter": {
+                "trait": "Natura"
+              },
+              "divisor": 5
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive playCostReduction amount is incorrect: the text says this card costs 5 less to play for every 5 Natura cards in your cemetery, but the current cemeteryFilterCount/divisor 5 only yields 1 reduction per 5 cards. It should multiply that count by 5, e.g. a dynamic amount equal to 5 × floor(Natura cards in your cemetery / 5)."
+    ]
+  }
+}

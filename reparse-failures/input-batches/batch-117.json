@@ -1,0 +1,123 @@
+{
+  "Jeanne d'Arc Evolved": {
+    "source": {
+      "name": "Jeanne d'Arc Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Luminary",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "5",
+        "effect": "On Evolve: Deal 2 damage to each enemy follower on the field. Give each other follower on your field [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-128EN.png",
+      "cardNos": [
+        "BP01-128EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Jeanne d'Arc",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": true
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "haven",
+                "atk": 0,
+                "def": 2,
+                "excludeSelf": true
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve buff is encoded incorrectly as buffFieldTrait with cardClass \"haven\". It should give each other follower on your field +0/+2 regardless of class; encode a field-wide ally-follower buff excluding self instead of restricting to Havencraft followers."
+    ]
+  },
+  "Jeanne, Beacon of Salvation Evolved": {
+    "source": {
+      "name": "Jeanne, Beacon of Salvation Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith / Luminary",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "4",
+        "effect": "On Evolve - You may summon a [havencraft] follower that costs 2 or less from your hand. Strike - Select a [havencraft] follower that costs 2 or less on your field and give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-107EN.png",
+      "cardNos": [
+        "BP09-107EN",
+        "SP01-041EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Jeanne, Beacon of Salvation",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "selectFromHand",
+            "filter": {
+              "cardClass": "haven",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "field",
+            "optional": true
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "cardClass": "haven",
+                "maxCost": 2
+              },
+              "excludeSelf": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability incorrectly targets a selfFollower with excludeSelf true. The source says \"Select a Havencraft follower that costs 2 or less on your field,\" which may include this follower if it matches; remove excludeSelf.",
+      "The Strike target restriction is encoded with an unsupported nested targets.filter. Encode the target using supported target selector fields or an effect/filter structure that correctly restricts to a Havencraft follower on your field that costs 2 or less."
+    ]
+  }
+}

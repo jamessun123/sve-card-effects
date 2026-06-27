@@ -1,0 +1,207 @@
+{
+  "Dark Alice": {
+    "source": {
+      "name": "Dark Alice",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon / Fable",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "6",
+        "attack": "6",
+        "defense": "6",
+        "effect": "Rush. Strike: Each opponent discards a card. [lastwords] Banish the top 10 cards of your deck: Put this follower onto its owner's field. Discard a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-073EN.png",
+      "cardNos": [
+        "BP03-073EN",
+        "PR-109EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "opponentDiscardEach",
+            "count": 1
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish the top 10 cards of your deck",
+            "cost": {
+              "op": "millToBanish",
+              "count": 10
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "reviveToField",
+                  "engaged": false
+                },
+                {
+                  "op": "discard",
+                  "count": 1
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not put `strike` in `keywords`; Strike is a triggered ability timing and should only be represented as the `strike` ability that discards a card from each opponent."
+    ]
+  },
+  "Dark Bishop Evolved": {
+    "source": {
+      "name": "Dark Bishop Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith / Fable",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Look at the top 5 cards of your deck. From among them, you may summon a Fable follower that costs 5 or less or Fable amulet that costs 5 or less. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-099EN.png",
+      "cardNos": [
+        "BP07-099EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Dark Bishop",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "traitsAny": [
+                "Fable"
+              ],
+              "maxCost": 5,
+              "cardType": "follower"
+            },
+            "lookAt": 5,
+            "to": "field",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "traitsAny": [
+                "Fable"
+              ],
+              "cardType": "amulet",
+              "maxCost": 5
+            },
+            "lookAt": 5,
+            "to": "field",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect should be a single choice from the top 5 cards: summon a Fable follower that costs 5 or less OR a Fable amulet that costs 5 or less, then put the rest on the bottom. The parsed form incorrectly creates two separate `onEvolve` searches, which can allow taking one of each. Replace them with one effect that chooses a single card matching either cardType follower or amulet with trait Fable and maxCost 5 from the same top-5 search."
+    ]
+  },
+  "Dark Charisma": {
+    "source": {
+      "name": "Dark Charisma",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith / Celestial",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Search your deck for an amulet, reveal it, and add it to your hand. [q][act] [cost02], [engage], put this card into its owner's cemetery: Give your leader [defense]+1. Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-105EN.png",
+      "cardNos": [
+        "BP04-105EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardType": "amulet"
+            },
+            "to": "hand",
+            "reveal": true
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be listed in `keywords`; it is already correctly represented as a `timing: \"fanfare\"` ability.",
+      "The activated ability is Quick (`[q][act]`) but the parsed ability is missing `quick: true`."
+    ]
+  }
+}

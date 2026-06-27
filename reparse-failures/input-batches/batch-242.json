@@ -1,0 +1,54 @@
+{
+  "Virtuous Lindworm Evolved": {
+    "source": {
+      "name": "Virtuous Lindworm Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Wyrmkin / Lightborne",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "10",
+        "defense": "10",
+        "effect": "Ward. At the start of your end phase, give your leader [defense]+6 and draw 3 cards."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-069EN.png",
+      "cardNos": [
+        "BP09-069EN"
+      ]
+    },
+    "previousParsed": {
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 6
+              },
+              {
+                "op": "draw",
+                "count": 3
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing evolve linkage: this evolved card should include an \"evolvesFrom\" field matching its base form, in addition to \"specialType\": \"evolved\"."
+    ]
+  }
+}

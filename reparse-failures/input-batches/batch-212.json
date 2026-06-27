@@ -1,0 +1,301 @@
+{
+  "Sneer of Disdain": {
+    "source": {
+      "name": "Sneer of Disdain",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Omen / Wyrmkin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When a Galmieux, Omen of Disdain is put onto your field, banish this card from your cemetery: Select a follower on your field and deal it 1 damage. ---------- Select a follower on the field and deal it 1 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-068EN.png",
+      "cardNos": [
+        "BP08-068EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "cost": {
+            "banishSelf": true,
+            "banishFromCemetery": {
+              "identityName": "Galmieux, Omen of Disdain"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "anyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery ability is incorrectly encoded as an activated ability with an invalid cost; it should be a triggered ability for when a \"Galmieux, Omen of Disdain\" is put onto your field, activating from cemetery with banishSelf as the cost.",
+      "The cemetery ability incorrectly requires banishing \"Galmieux, Omen of Disdain\" from the cemetery; the source text only says to banish this card from your cemetery.",
+      "The trigger condition \"When a Galmieux, Omen of Disdain is put onto your field\" is missing; encode it as a triggered ability gated by that named follower entering your field."
+    ]
+  },
+  "Snowman Army": {
+    "source": {
+      "name": "Snowman Army",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage / Arcanaform",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and change its attack and defense to 1. Spellchain (10) - It loses all abilities."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-050EN.png",
+      "cardNos": [
+        "BP16-050EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "setStats",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "spellchain",
+                  "count": 10
+                },
+                "then": {
+                  "op": "silence",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (10) silence should apply to the same selected enemy follower whose stats were changed to 1/1, but the parsed JSON creates a new target selection; encode this as a single target reused for both effects."
+    ]
+  },
+  "Sol Sister": {
+    "source": {
+      "name": "Sol Sister",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-097EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Sol Sister Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The keyword \"evolve\" should not be in keywords; represent the evolve line with evolveCost/evolvesTo only, while keeping \"ward\" as the printed keyword."
+    ]
+  },
+  "Somnolent Strength": {
+    "source": {
+      "name": "Somnolent Strength",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Arcana / Luminary",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Select up to 2 followers on your field and give them [attack]+1/[defense]+1. [act] [cost01], [engage], bury this card: Select an enemy follower on the field and give it [attack]-2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-098EN.png",
+      "cardNos": [
+        "BP10-098EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "chooseMultiple",
+            "min": 1,
+            "max": 2,
+            "options": [
+              {
+                "label": "Give a follower on your field [attack]+1/[defense]+1",
+                "effect": {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 1,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "buff",
+            "atk": -2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Select up to 2 followers on your field,\" but the parsed chooseMultiple has min 1; it should allow selecting 0, 1, or 2 followers.",
+      "The fanfare should target followers on your field generally, but selfFollower may exclude amulet/follower ambiguity depending on engine semantics; ensure it can select your followers on field up to 2 times as stated."
+    ]
+  },
+  "Sonata of Silence": {
+    "source": {
+      "name": "Sonata of Silence",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Omen / Necromancer",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a Rulenye, Omen of Silence in your cemetery. Summon it. Necrocharge (10) - Each opponent discards a random card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-075EN.png",
+      "cardNos": [
+        "BP08-075EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityName": "Rulenye, Omen of Silence"
+                },
+                "to": "field"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "necrocharge",
+                  "count": 10
+                },
+                "then": {
+                  "op": "opponentDiscardEach",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first effect is incorrectly encoded as tutorFromCemetery to field; it should summon the selected \"Rulenye, Omen of Silence\" from your cemetery, e.g. with summonFromCemetery filtered to that identity."
+    ]
+  }
+}

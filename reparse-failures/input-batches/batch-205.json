@@ -1,0 +1,73 @@
+{
+  "Shamu & Shama, Posh Felines": {
+    "source": {
+      "name": "Shamu & Shama, Posh Felines",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Hunter / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "Storm. [fanfare] Select an enemy follower on the field. Combo (5) - Deal it 3 damage. Strike, Combo (3) - Give this follower [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-003EN.png",
+      "cardNos": [
+        "BP11-003EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "combo",
+              "count": 5
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "combo",
+              "count": 3
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is incomplete: source first says 'Select an enemy follower on the field,' then Combo (5) - deal it 3 damage. Parsed only deals damage conditionally and omits the required target-selection clause outside the condition. Encode the fanfare so it always selects an enemy follower, then conditionally deals 3 damage to that selected target if Combo (5) is active."
+    ]
+  }
+}

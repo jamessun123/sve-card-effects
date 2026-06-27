@@ -1,0 +1,392 @@
+{
+  "Inverted Manipulation": {
+    "source": {
+      "name": "Inverted Manipulation",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Spell",
+        "trait": "Puppetry",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose 1. (1) Select a Puppetry token follower on your field and give it [attack]+2/[defense]+2. (2) Put 2 Puppet tokens into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-012EN.png",
+      "cardNos": [
+        "BP17-012EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select a Puppetry token follower on your field and give it [attack]+2/[defense]+2",
+                "effect": {
+                  "op": "buff",
+                  "atk": 2,
+                  "def": 2,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1,
+                    "filter": {
+                      "trait": "Puppetry"
+                    }
+                  }
+                }
+              },
+              {
+                "label": "Put 2 Puppet tokens into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Puppet",
+                  "count": 2,
+                  "zone": "exArea"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Choice (1) target is encoded incorrectly: it should target a Puppetry token follower on your field, so use a field target restricted to token followers with the Puppetry trait instead of a generic selfFollower filter lacking token restriction."
+    ]
+  },
+  "Inviolable Verdancy": {
+    "source": {
+      "name": "Inviolable Verdancy",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Amulet",
+        "trait": "Elf",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act][cost01], [engage], put this card into its owner's cemetery: Select a [forestcraft] follower on your field and give it [defense]+1. Combo (3): Give it [attack]+1 more. When this card leaves the field, put a Fairy Wisp token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-009EN.png",
+      "cardNos": [
+        "BP04-009EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "forest"
+                  }
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "combo",
+                  "count": 3
+                },
+                "then": {
+                  "op": "buff",
+                  "atk": 1,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1,
+                    "filter": {
+                      "cardClass": "forest"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onLeaveField",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fairy Wisp",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the spurious keyword \"fanfare\"; the source card has no Fanfare ability.",
+      "The activated ability buffs are encoded as two separate target selections; Combo (3) should give the same selected Forestcraft follower +1 attack more, so encode the combo bonus as additional buff to the originally selected target rather than selecting again."
+    ]
+  },
+  "Iron Staff Mechanic": {
+    "source": {
+      "name": "Iron Staff Mechanic",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Supreme",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Search your deck for a card that costs 1 play point, put it into your EX area, then shuffle your deck. It costs 1 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-042EN.png",
+      "cardNos": [
+        "BP05-042EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Iron Staff Mechanic Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "maxCost": 1
+            },
+            "to": "exArea",
+            "playCostReduction": 1
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the keywords \"evolve\" and \"fanfare\"; these are ability timings/cost lines, not printed keywords on this card."
+    ]
+  },
+  "Ironfist Beast Warrior": {
+    "source": {
+      "name": "Ironfist Beast Warrior",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Beast",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "6",
+        "effect": "When this card is discarded, you may put it into your EX area. ---------- [evolve] [cost03]: Evolve this follower. Ward. [fanfare] Put the top card of your deck into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-021EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Ironfist Beast Warrior Evolved",
+      "evolveCost": 3,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "onDiscard",
+          "effect": {
+            "op": "moveSourceToExArea"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "top card of your deck",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the keywords \"evolve\" and \"fanfare\"; these are ability timings/cost lines, not printed keywords on this card.",
+      "The onDiscard ability is missing the optionality; the source says \"you may put it into your EX area,\" so it should be encoded as an optional move to EX area rather than mandatory.",
+      "The fanfare effect is encoded incorrectly as summoning a token named \"top card of your deck\"; it should use putDeckTopToExArea to put the top card of your deck into your EX area."
+    ]
+  },
+  "Ironfist Beast Warrior Evolved": {
+    "source": {
+      "name": "Ironfist Beast Warrior Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Commander / Beast",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "6",
+        "defense": "8",
+        "effect": "Ward. On Evolve - Put the top card of your deck into your EX area. The next card you play from the EX area this turn costs 10 less."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-022EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Ironfist Beast Warrior",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "top card of your deck",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "grantNextPlayCostReduction",
+                "amount": 10
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first On Evolve step is encoded incorrectly as summoning a token named \"top card of your deck\"; it should use putDeckTopToExArea to put the top card of your deck into your EX area.",
+      "The cost reduction is too broad: the source says \"The next card you play from the EX area this turn costs 10 less,\" so the reduction should be restricted to the next play from the EX area rather than any next card played this turn."
+    ]
+  },
+  "Ironfist Priest": {
+    "source": {
+      "name": "Ironfist Priest",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this. Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-107EN.png",
+      "cardNos": [
+        "BP16-107EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Ironfist Priest Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward"
+      ],
+      "abilities": []
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the keyword \"evolve\"; this is an evolve cost line, not a printed keyword on the card."
+    ]
+  },
+  "Ironfist Priest Evolved": {
+    "source": {
+      "name": "Ironfist Priest Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Ward. On Evolve - Deal 4 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-108EN.png",
+      "cardNos": [
+        "BP16-108EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Ironfist Priest",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 4,
+            "followersOnly": false
+          }
+        }
+      ],
+      "specialType": "evolved"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect is encoded incorrectly: \"Deal 4 damage to each enemy leader\" should target enemy leaders only, not all enemies. Replace dealDamageAllEnemies with leader-only damage to enemy leaders."
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "Lucifer Evolved": {
+    "source": {
+      "name": "Lucifer Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Angel / Fallen Angel",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "-",
+        "attack": "8",
+        "defense": "7",
+        "effect": "Bane. At the start of your end phase, deal 4 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-153EN.png",
+      "cardNos": [
+        "BP01-153EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Lucifer",
+      "keywords": [
+        "bane"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 4,
+            "followersOnly": false
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end ability is encoded as dealDamageAllEnemies, which deals 4 damage to enemy followers and the enemy leader. It should deal 4 damage only to each enemy leader; encode it as dealDamage with amount 4 and targets {\"type\":\"enemyLeader\"}."
+    ]
+  }
+}

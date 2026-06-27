@@ -1,0 +1,128 @@
+{
+  "Sekhmet": {
+    "source": {
+      "name": "Sekhmet",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Beast",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[act] [engage], bury an amulet: Select an enemy follower on the field. Deal 4 damage to it and 1 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-091EN.png",
+      "cardNos": [
+        "BP08-091EN",
+        "PR-188EN",
+        "SDD06-004EN",
+        "SP01-044EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true,
+            "buryFromField": {
+              "cardType": "amulet"
+            },
+            "buryFieldCount": 1
+          },
+          "effect": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 4,
+            "leaderAmount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated effect is missing the required enemy follower target selection. Encode damageFollowerAndLeader with the selected enemy follower target, or equivalent targeting so the 4 damage is dealt to the chosen follower and 1 to its leader."
+    ]
+  },
+  "Sekka, Fatebound Fox": {
+    "source": {
+      "name": "Sekka, Fatebound Fox",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Hunter / Beast",
+        "rarity": "Ultimate",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] Look at the top 3 cards of your deck. You may reveal a [forestcraft] card that costs 2 or less from among them and add it to your hand. Put the rest on the bottom of your deck in any order. If you revealed a card, discard a card. [act] [cost03], banish this card and 2 other cards from your cemetery: You may summon a Sekka, Ninefold Blaze from your evolve deck."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-U01EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardClass": "forest",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "lookAt": 3,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3,
+            "banishSelf": true,
+            "banishFromCemetery": {
+              "cardType": "follower"
+            },
+            "banishCount": 2
+          },
+          "effect": {
+            "op": "summonFromEvolveDeck",
+            "filter": {
+              "identityName": "Sekka, Ninefold Blaze ADVANCED"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is incomplete: after revealing and adding a card from among the top 3, if you revealed a card, discard a card. Add a conditional discard 1 after the searchDeckChoose resolves successfully.",
+      "The fanfare filter is too narrow: source says a Forestcraft card that costs 2 or less, not specifically a follower. Remove \"cardType\": \"follower\" from the search filter.",
+      "The activated cost is incorrect: source says banish this card and 2 other cards from your cemetery, not specifically follower cards. Encode the cemetery banish cost without a follower-only filter.",
+      "The activated effect should be optional ('You may summon'). Mark summonFromEvolveDeck as optional.",
+      "The evolve-deck summon target is misnamed as \"Sekka, Ninefold Blaze ADVANCED\". It should target \"Sekka, Ninefold Blaze\" as named on the source card."
+    ]
+  }
+}

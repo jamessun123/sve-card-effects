@@ -1,0 +1,1164 @@
+{
+  "batch_count": 231,
+  "card_count": 642,
+  "verdict_counts": {
+    "fail": 642
+  },
+  "batches": [
+    {
+      "batch_stem": "batch-001",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-001.json"
+    },
+    {
+      "batch_stem": "batch-002",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-002.json"
+    },
+    {
+      "batch_stem": "batch-004",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-004.json"
+    },
+    {
+      "batch_stem": "batch-005",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-005.json"
+    },
+    {
+      "batch_stem": "batch-007",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-007.json"
+    },
+    {
+      "batch_stem": "batch-008",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-008.json"
+    },
+    {
+      "batch_stem": "batch-009",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-009.json"
+    },
+    {
+      "batch_stem": "batch-010",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-010.json"
+    },
+    {
+      "batch_stem": "batch-011",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-011.json"
+    },
+    {
+      "batch_stem": "batch-012",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-012.json"
+    },
+    {
+      "batch_stem": "batch-013",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-013.json"
+    },
+    {
+      "batch_stem": "batch-014",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-014.json"
+    },
+    {
+      "batch_stem": "batch-015",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-015.json"
+    },
+    {
+      "batch_stem": "batch-016",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-016.json"
+    },
+    {
+      "batch_stem": "batch-017",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-017.json"
+    },
+    {
+      "batch_stem": "batch-018",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-018.json"
+    },
+    {
+      "batch_stem": "batch-019",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-019.json"
+    },
+    {
+      "batch_stem": "batch-020",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-020.json"
+    },
+    {
+      "batch_stem": "batch-021",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-021.json"
+    },
+    {
+      "batch_stem": "batch-022",
+      "card_count": 6,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-022.json"
+    },
+    {
+      "batch_stem": "batch-023",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-023.json"
+    },
+    {
+      "batch_stem": "batch-024",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-024.json"
+    },
+    {
+      "batch_stem": "batch-025",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-025.json"
+    },
+    {
+      "batch_stem": "batch-026",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-026.json"
+    },
+    {
+      "batch_stem": "batch-027",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-027.json"
+    },
+    {
+      "batch_stem": "batch-028",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-028.json"
+    },
+    {
+      "batch_stem": "batch-029",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-029.json"
+    },
+    {
+      "batch_stem": "batch-030",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-030.json"
+    },
+    {
+      "batch_stem": "batch-031",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-031.json"
+    },
+    {
+      "batch_stem": "batch-032",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-032.json"
+    },
+    {
+      "batch_stem": "batch-033",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-033.json"
+    },
+    {
+      "batch_stem": "batch-034",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-034.json"
+    },
+    {
+      "batch_stem": "batch-035",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-035.json"
+    },
+    {
+      "batch_stem": "batch-036",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-036.json"
+    },
+    {
+      "batch_stem": "batch-037",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-037.json"
+    },
+    {
+      "batch_stem": "batch-038",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-038.json"
+    },
+    {
+      "batch_stem": "batch-039",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-039.json"
+    },
+    {
+      "batch_stem": "batch-040",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-040.json"
+    },
+    {
+      "batch_stem": "batch-041",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-041.json"
+    },
+    {
+      "batch_stem": "batch-043",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-043.json"
+    },
+    {
+      "batch_stem": "batch-044",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-044.json"
+    },
+    {
+      "batch_stem": "batch-045",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-045.json"
+    },
+    {
+      "batch_stem": "batch-046",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-046.json"
+    },
+    {
+      "batch_stem": "batch-047",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-047.json"
+    },
+    {
+      "batch_stem": "batch-048",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-048.json"
+    },
+    {
+      "batch_stem": "batch-049",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-049.json"
+    },
+    {
+      "batch_stem": "batch-050",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-050.json"
+    },
+    {
+      "batch_stem": "batch-051",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-051.json"
+    },
+    {
+      "batch_stem": "batch-052",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-052.json"
+    },
+    {
+      "batch_stem": "batch-053",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-053.json"
+    },
+    {
+      "batch_stem": "batch-054",
+      "card_count": 8,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-054.json"
+    },
+    {
+      "batch_stem": "batch-055",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-055.json"
+    },
+    {
+      "batch_stem": "batch-056",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-056.json"
+    },
+    {
+      "batch_stem": "batch-057",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-057.json"
+    },
+    {
+      "batch_stem": "batch-058",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-058.json"
+    },
+    {
+      "batch_stem": "batch-059",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-059.json"
+    },
+    {
+      "batch_stem": "batch-060",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-060.json"
+    },
+    {
+      "batch_stem": "batch-061",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-061.json"
+    },
+    {
+      "batch_stem": "batch-062",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-062.json"
+    },
+    {
+      "batch_stem": "batch-063",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-063.json"
+    },
+    {
+      "batch_stem": "batch-064",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-064.json"
+    },
+    {
+      "batch_stem": "batch-065",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-065.json"
+    },
+    {
+      "batch_stem": "batch-066",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-066.json"
+    },
+    {
+      "batch_stem": "batch-067",
+      "card_count": 6,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-067.json"
+    },
+    {
+      "batch_stem": "batch-068",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-068.json"
+    },
+    {
+      "batch_stem": "batch-069",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-069.json"
+    },
+    {
+      "batch_stem": "batch-070",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-070.json"
+    },
+    {
+      "batch_stem": "batch-071",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-071.json"
+    },
+    {
+      "batch_stem": "batch-072",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-072.json"
+    },
+    {
+      "batch_stem": "batch-073",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-073.json"
+    },
+    {
+      "batch_stem": "batch-074",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-074.json"
+    },
+    {
+      "batch_stem": "batch-075",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-075.json"
+    },
+    {
+      "batch_stem": "batch-077",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-077.json"
+    },
+    {
+      "batch_stem": "batch-078",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-078.json"
+    },
+    {
+      "batch_stem": "batch-079",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-079.json"
+    },
+    {
+      "batch_stem": "batch-080",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-080.json"
+    },
+    {
+      "batch_stem": "batch-081",
+      "card_count": 6,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-081.json"
+    },
+    {
+      "batch_stem": "batch-083",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-083.json"
+    },
+    {
+      "batch_stem": "batch-084",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-084.json"
+    },
+    {
+      "batch_stem": "batch-085",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-085.json"
+    },
+    {
+      "batch_stem": "batch-086",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-086.json"
+    },
+    {
+      "batch_stem": "batch-087",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-087.json"
+    },
+    {
+      "batch_stem": "batch-089",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-089.json"
+    },
+    {
+      "batch_stem": "batch-090",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-090.json"
+    },
+    {
+      "batch_stem": "batch-091",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-091.json"
+    },
+    {
+      "batch_stem": "batch-092",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-092.json"
+    },
+    {
+      "batch_stem": "batch-093",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-093.json"
+    },
+    {
+      "batch_stem": "batch-094",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-094.json"
+    },
+    {
+      "batch_stem": "batch-095",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-095.json"
+    },
+    {
+      "batch_stem": "batch-096",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-096.json"
+    },
+    {
+      "batch_stem": "batch-097",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-097.json"
+    },
+    {
+      "batch_stem": "batch-098",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-098.json"
+    },
+    {
+      "batch_stem": "batch-099",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-099.json"
+    },
+    {
+      "batch_stem": "batch-100",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-100.json"
+    },
+    {
+      "batch_stem": "batch-101",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-101.json"
+    },
+    {
+      "batch_stem": "batch-102",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-102.json"
+    },
+    {
+      "batch_stem": "batch-103",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-103.json"
+    },
+    {
+      "batch_stem": "batch-104",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-104.json"
+    },
+    {
+      "batch_stem": "batch-105",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-105.json"
+    },
+    {
+      "batch_stem": "batch-107",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-107.json"
+    },
+    {
+      "batch_stem": "batch-109",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-109.json"
+    },
+    {
+      "batch_stem": "batch-110",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-110.json"
+    },
+    {
+      "batch_stem": "batch-111",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-111.json"
+    },
+    {
+      "batch_stem": "batch-112",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-112.json"
+    },
+    {
+      "batch_stem": "batch-114",
+      "card_count": 7,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-114.json"
+    },
+    {
+      "batch_stem": "batch-115",
+      "card_count": 7,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-115.json"
+    },
+    {
+      "batch_stem": "batch-116",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-116.json"
+    },
+    {
+      "batch_stem": "batch-117",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-117.json"
+    },
+    {
+      "batch_stem": "batch-118",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-118.json"
+    },
+    {
+      "batch_stem": "batch-119",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-119.json"
+    },
+    {
+      "batch_stem": "batch-120",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-120.json"
+    },
+    {
+      "batch_stem": "batch-121",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-121.json"
+    },
+    {
+      "batch_stem": "batch-122",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-122.json"
+    },
+    {
+      "batch_stem": "batch-123",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-123.json"
+    },
+    {
+      "batch_stem": "batch-124",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-124.json"
+    },
+    {
+      "batch_stem": "batch-125",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-125.json"
+    },
+    {
+      "batch_stem": "batch-126",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-126.json"
+    },
+    {
+      "batch_stem": "batch-127",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-127.json"
+    },
+    {
+      "batch_stem": "batch-128",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-128.json"
+    },
+    {
+      "batch_stem": "batch-129",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-129.json"
+    },
+    {
+      "batch_stem": "batch-130",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-130.json"
+    },
+    {
+      "batch_stem": "batch-132",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-132.json"
+    },
+    {
+      "batch_stem": "batch-133",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-133.json"
+    },
+    {
+      "batch_stem": "batch-135",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-135.json"
+    },
+    {
+      "batch_stem": "batch-136",
+      "card_count": 7,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-136.json"
+    },
+    {
+      "batch_stem": "batch-137",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-137.json"
+    },
+    {
+      "batch_stem": "batch-138",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-138.json"
+    },
+    {
+      "batch_stem": "batch-139",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-139.json"
+    },
+    {
+      "batch_stem": "batch-140",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-140.json"
+    },
+    {
+      "batch_stem": "batch-141",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-141.json"
+    },
+    {
+      "batch_stem": "batch-143",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-143.json"
+    },
+    {
+      "batch_stem": "batch-144",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-144.json"
+    },
+    {
+      "batch_stem": "batch-145",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-145.json"
+    },
+    {
+      "batch_stem": "batch-146",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-146.json"
+    },
+    {
+      "batch_stem": "batch-147",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-147.json"
+    },
+    {
+      "batch_stem": "batch-148",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-148.json"
+    },
+    {
+      "batch_stem": "batch-149",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-149.json"
+    },
+    {
+      "batch_stem": "batch-150",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-150.json"
+    },
+    {
+      "batch_stem": "batch-152",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-152.json"
+    },
+    {
+      "batch_stem": "batch-153",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-153.json"
+    },
+    {
+      "batch_stem": "batch-154",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-154.json"
+    },
+    {
+      "batch_stem": "batch-155",
+      "card_count": 6,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-155.json"
+    },
+    {
+      "batch_stem": "batch-156",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-156.json"
+    },
+    {
+      "batch_stem": "batch-157",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-157.json"
+    },
+    {
+      "batch_stem": "batch-158",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-158.json"
+    },
+    {
+      "batch_stem": "batch-159",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-159.json"
+    },
+    {
+      "batch_stem": "batch-160",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-160.json"
+    },
+    {
+      "batch_stem": "batch-161",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-161.json"
+    },
+    {
+      "batch_stem": "batch-162",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-162.json"
+    },
+    {
+      "batch_stem": "batch-163",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-163.json"
+    },
+    {
+      "batch_stem": "batch-164",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-164.json"
+    },
+    {
+      "batch_stem": "batch-165",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-165.json"
+    },
+    {
+      "batch_stem": "batch-166",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-166.json"
+    },
+    {
+      "batch_stem": "batch-167",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-167.json"
+    },
+    {
+      "batch_stem": "batch-168",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-168.json"
+    },
+    {
+      "batch_stem": "batch-169",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-169.json"
+    },
+    {
+      "batch_stem": "batch-170",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-170.json"
+    },
+    {
+      "batch_stem": "batch-171",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-171.json"
+    },
+    {
+      "batch_stem": "batch-172",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-172.json"
+    },
+    {
+      "batch_stem": "batch-173",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-173.json"
+    },
+    {
+      "batch_stem": "batch-174",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-174.json"
+    },
+    {
+      "batch_stem": "batch-176",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-176.json"
+    },
+    {
+      "batch_stem": "batch-177",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-177.json"
+    },
+    {
+      "batch_stem": "batch-178",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-178.json"
+    },
+    {
+      "batch_stem": "batch-180",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-180.json"
+    },
+    {
+      "batch_stem": "batch-181",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-181.json"
+    },
+    {
+      "batch_stem": "batch-182",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-182.json"
+    },
+    {
+      "batch_stem": "batch-184",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-184.json"
+    },
+    {
+      "batch_stem": "batch-185",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-185.json"
+    },
+    {
+      "batch_stem": "batch-186",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-186.json"
+    },
+    {
+      "batch_stem": "batch-187",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-187.json"
+    },
+    {
+      "batch_stem": "batch-188",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-188.json"
+    },
+    {
+      "batch_stem": "batch-189",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-189.json"
+    },
+    {
+      "batch_stem": "batch-190",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-190.json"
+    },
+    {
+      "batch_stem": "batch-191",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-191.json"
+    },
+    {
+      "batch_stem": "batch-192",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-192.json"
+    },
+    {
+      "batch_stem": "batch-193",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-193.json"
+    },
+    {
+      "batch_stem": "batch-194",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-194.json"
+    },
+    {
+      "batch_stem": "batch-195",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-195.json"
+    },
+    {
+      "batch_stem": "batch-196",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-196.json"
+    },
+    {
+      "batch_stem": "batch-197",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-197.json"
+    },
+    {
+      "batch_stem": "batch-198",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-198.json"
+    },
+    {
+      "batch_stem": "batch-199",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-199.json"
+    },
+    {
+      "batch_stem": "batch-200",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-200.json"
+    },
+    {
+      "batch_stem": "batch-201",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-201.json"
+    },
+    {
+      "batch_stem": "batch-202",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-202.json"
+    },
+    {
+      "batch_stem": "batch-203",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-203.json"
+    },
+    {
+      "batch_stem": "batch-205",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-205.json"
+    },
+    {
+      "batch_stem": "batch-206",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-206.json"
+    },
+    {
+      "batch_stem": "batch-208",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-208.json"
+    },
+    {
+      "batch_stem": "batch-209",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-209.json"
+    },
+    {
+      "batch_stem": "batch-210",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-210.json"
+    },
+    {
+      "batch_stem": "batch-211",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-211.json"
+    },
+    {
+      "batch_stem": "batch-212",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-212.json"
+    },
+    {
+      "batch_stem": "batch-213",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-213.json"
+    },
+    {
+      "batch_stem": "batch-214",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-214.json"
+    },
+    {
+      "batch_stem": "batch-215",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-215.json"
+    },
+    {
+      "batch_stem": "batch-216",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-216.json"
+    },
+    {
+      "batch_stem": "batch-217",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-217.json"
+    },
+    {
+      "batch_stem": "batch-218",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-218.json"
+    },
+    {
+      "batch_stem": "batch-219",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-219.json"
+    },
+    {
+      "batch_stem": "batch-220",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-220.json"
+    },
+    {
+      "batch_stem": "batch-221",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-221.json"
+    },
+    {
+      "batch_stem": "batch-222",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-222.json"
+    },
+    {
+      "batch_stem": "batch-223",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-223.json"
+    },
+    {
+      "batch_stem": "batch-224",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-224.json"
+    },
+    {
+      "batch_stem": "batch-225",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-225.json"
+    },
+    {
+      "batch_stem": "batch-226",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-226.json"
+    },
+    {
+      "batch_stem": "batch-227",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-227.json"
+    },
+    {
+      "batch_stem": "batch-228",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-228.json"
+    },
+    {
+      "batch_stem": "batch-229",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-229.json"
+    },
+    {
+      "batch_stem": "batch-231",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-231.json"
+    },
+    {
+      "batch_stem": "batch-232",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-232.json"
+    },
+    {
+      "batch_stem": "batch-233",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-233.json"
+    },
+    {
+      "batch_stem": "batch-235",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-235.json"
+    },
+    {
+      "batch_stem": "batch-236",
+      "card_count": 5,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-236.json"
+    },
+    {
+      "batch_stem": "batch-238",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-238.json"
+    },
+    {
+      "batch_stem": "batch-239",
+      "card_count": 3,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-239.json"
+    },
+    {
+      "batch_stem": "batch-240",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-240.json"
+    },
+    {
+      "batch_stem": "batch-241",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-241.json"
+    },
+    {
+      "batch_stem": "batch-242",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-242.json"
+    },
+    {
+      "batch_stem": "batch-243",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-243.json"
+    },
+    {
+      "batch_stem": "batch-246",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-246.json"
+    },
+    {
+      "batch_stem": "batch-248",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-248.json"
+    },
+    {
+      "batch_stem": "batch-251",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-251.json"
+    },
+    {
+      "batch_stem": "batch-253",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-253.json"
+    },
+    {
+      "batch_stem": "batch-254",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-254.json"
+    },
+    {
+      "batch_stem": "batch-255",
+      "card_count": 4,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-255.json"
+    },
+    {
+      "batch_stem": "batch-256",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-256.json"
+    },
+    {
+      "batch_stem": "batch-257",
+      "card_count": 2,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-257.json"
+    },
+    {
+      "batch_stem": "batch-258",
+      "card_count": 1,
+      "path": "/mnt/c/Users/James/OneDrive/Desktop/shadowverse/sve-card-effects/reparse-failures/input-batches/batch-258.json"
+    }
+  ]
+}

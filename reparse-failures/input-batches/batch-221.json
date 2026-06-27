@@ -1,0 +1,221 @@
+{
+  "Summoning Drills": {
+    "source": {
+      "name": "Summoning Drills",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Alchemist / Earth Sigil",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Summon a Guardform Golem token. [fanfare] Discard a card: Put a Strikeform Golem token into your EX area. Give each Golem follower on your field and in your EX area [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-054EN.png",
+      "cardNos": [
+        "BP09-054EN",
+        "PR-207EN",
+        "SDD03-015EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Guardform Golem",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "summon",
+                  "tokenName": "Strikeform Golem",
+                  "count": 1,
+                  "zone": "exArea"
+                },
+                {
+                  "op": "buffFieldTrait",
+                  "trait": "Golem",
+                  "atk": 1,
+                  "def": 0
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing Stack keyword/effect. Add the card's Stack ability, e.g. as a passive/addStack representation rather than only fanfare abilities.",
+      "The second fanfare buffs only Golem followers on your field and in your EX area, but parsed buffFieldTrait does not include EX area. Change it to include EX area as well.",
+      "The second fanfare should buff Golem followers specifically; using trait \"Golem\" may be incorrect if the engine distinguishes follower traits from names. Encode the buff so it clearly applies to Golem followers on your field and in your EX area."
+    ]
+  },
+  "Sunbright Elf": {
+    "source": {
+      "name": "Sunbright Elf",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Give each Pixie token follower in your EX area [attack]+1/[defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-009EN",
+        "SDD01-011EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Sunbright Elf Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": "Pixie",
+            "atk": 1,
+            "def": 1,
+            "otherOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should give +1/+1 only to Pixie token followers in your EX area, but parsed buffFieldTrait affects field cards instead. Encode an effect that buffs Pixie token followers in EX area only."
+    ]
+  },
+  "Sunbright Elf Evolved": {
+    "source": {
+      "name": "Sunbright Elf Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Elf",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Summon up to 2 Pixie token followers from your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-010EN",
+        "SDD01-012EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Sunbright Elf",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summonFromExArea",
+            "filter": {
+              "trait": "Pixie"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should summon up to 2 Pixie token followers from your EX area, but parsed summonFromExArea has no count limit and no token restriction. Change it to summon up to 2 Pixie token followers from your EX area."
+    ]
+  },
+  "Suttungr": {
+    "source": {
+      "name": "Suttungr",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Gigant",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Select up to 2 enemy followers on the field and engage them. They don't refresh during their controller's next start phase."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-130EN.png",
+      "cardNos": [
+        "BP09-130EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Suttungr Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "engage",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 2
+            },
+            "skipRefreshNextStart": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should select up to 2 enemy followers, but parsed engage requires exactly 2 targets. Change it to an optional/up-to-2 target selection."
+    ]
+  }
+}

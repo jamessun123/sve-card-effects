@@ -1,0 +1,168 @@
+{
+  "Dryad": {
+    "source": {
+      "name": "Dryad",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Fae-Touched / Verdant",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "Strike: Select an enemy follower on the field and give it [attack]-1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-017EN.png",
+      "cardNos": [
+        "BP04-017EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "buff",
+            "atk": -1,
+            "def": 0,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; Strike should be represented by the timing on the ability, not as a printed keyword entry.",
+      "The Strike ability should only give the selected enemy follower [attack]-1; do not encode an unnecessary \"def\": 0 field in the buff effect."
+    ]
+  },
+  "Dual Flames": {
+    "source": {
+      "name": "Dual Flames",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith / Beast",
+        "rarity": "Silver",
+        "cardSet": "Starter Deck #6 “Maculate Ablution”",
+        "cost": "4",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Summon a Holy Tiger token. [act][cost02], [engage], put this card into its owner's cemetery: Summon a Holy Tiger token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD06/SD06-006EN.png",
+      "cardNos": [
+        "SD06-006EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Holy Tiger",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "engage": true,
+            "burySelf": true
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Holy Tiger",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"activated\" from keywords; these should be represented by ability timings, not keyword entries."
+    ]
+  },
+  "Earthen Dragonewt": {
+    "source": {
+      "name": "Earthen Dragonewt",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonewt / Draconic Duelist",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Look at the top card of your deck. If it's a Draconic Duelist card, you may reveal it and add it to your hand. If Overflow is active for you, give your leader [defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-067EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Draconic Duelist"
+            },
+            "lookAt": 1,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "overflow"
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare top-deck check is encoded too broadly: it should look at the top card of your deck and, only if that exact card is a Draconic Duelist card, you may reveal it and add it to your hand. Using searchDeckChoose with remainderTo deckBottom incorrectly allows reordering/moving the top card when it does not match."
+    ]
+  }
+}

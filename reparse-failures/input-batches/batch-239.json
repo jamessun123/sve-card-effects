@@ -1,0 +1,200 @@
+{
+  "Valkyrie of Order": {
+    "source": {
+      "name": "Valkyrie of Order",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Angel / Lightborne",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "1",
+        "effect": "[fanfare] [costX]: Give this follower [attack]+X/[defense]+X, where X equals a number of your choice."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-136EN.png",
+      "cardNos": [
+        "BP09-136EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "withChosenNumber",
+            "min": 0,
+            "max": 99,
+            "then": {
+              "op": "buff",
+              "atk": {
+                "op": "chosenNumber"
+              },
+              "def": {
+                "op": "chosenNumber"
+              },
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare uses withChosenNumber with max 99, but [costX] means X is the PP paid for the ability; encode this as a fanfare ability with a variable PP cost tied to the chosen number instead of an unrestricted chosenNumber range."
+    ]
+  },
+  "Valnareik, Lustful Desire Evolved": {
+    "source": {
+      "name": "Valnareik, Lustful Desire Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen / Demon",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "While Sanguine is active for you, this has Storm. On Evolve - Choose 1. (1) Put a Wings of Desire token into your EX area. (2) Draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-077EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Valnareik, Lustful Desire",
+      "specialType": "evolved",
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "sanguine"
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Wings of Desire token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Wings of Desire",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              },
+              {
+                "label": "Draw a card",
+                "effect": {
+                  "op": "draw",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Storm is encoded as an unconditional keyword, but the source says 'While Sanguine is active for you, this has Storm'; remove 'storm' from keywords and keep only the passive conditional grantKeyword ability."
+    ]
+  },
+  "Valse, Champion Deadeye": {
+    "source": {
+      "name": "Valse, Champion Deadeye",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[act] [cost01], [engage]: Select an enemy leader or enemy follower on the field and deal it damage equal to this follower's attack. [act] [cost03], [engage]: Select an enemy amulet on the field and banish it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-027EN.png",
+      "cardNos": [
+        "BP07-027EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true
+          },
+          "effect": {
+            "op": "dealDamageDynamic",
+            "amount": {
+              "op": "selfAttack"
+            },
+            "targets": {
+              "type": "anyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3,
+            "engage": true
+          },
+          "effect": {
+            "op": "banish",
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first activated ability should target an enemy leader or enemy follower, but it is encoded as targeting anyFollower only; encode a target/effect that can hit either enemyLeader or enemyFollower.",
+      "The second activated ability should banish an enemy amulet only, but it is encoded as banishing any enemy field card; restrict the target to enemy amulet cards."
+    ]
+  }
+}

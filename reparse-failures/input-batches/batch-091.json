@@ -1,0 +1,126 @@
+{
+  "Ghoul": {
+    "source": {
+      "name": "Ghoul",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Bury another Departed follower: Draw 2 cards. Discard a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-084EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buryFieldFollowers",
+                "filter": {
+                  "trait": "Departed"
+                },
+                "excludeSelf": true
+              },
+              {
+                "op": "draw",
+                "count": 2
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should require burying another Departed follower as a cost/requirement before drawing 2 cards and discarding 1 card; current encoding buries all other Departed followers on your field. Change the first step to selecting and burying exactly one other Departed follower on your field, then draw 2 cards and discard a card."
+    ]
+  },
+  "Gigahand Golem": {
+    "source": {
+      "name": "Gigahand Golem",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Golem",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[evolve] [cost05]: Evolve this follower. [fanfare] Summon a Magic Sediment token. [act] Earth Rite: Select another Golem follower on your field and give it [attack]+1/[defense]+1. Activate only once per turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-046EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Gigahand Golem Evolved",
+      "evolveCost": 5,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Magic Sediment",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "trait": "Golem"
+              },
+              "excludeSelf": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is encoded incorrectly: Earth Rite should be paid as an activated cost, not as a trigger condition. Change the activated ability to use cost { \"earthRite\": { \"count\": 1 } } with oncePerTurn true, targeting another Golem follower on your field for +1/+1."
+    ]
+  }
+}

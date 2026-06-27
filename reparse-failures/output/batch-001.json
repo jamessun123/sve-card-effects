@@ -1,0 +1,44 @@
+{
+  "#UNICUS": {
+    "keywords": [
+      "storm",
+      "bane",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 9
+        },
+        "condition": {
+          "type": "sourceInExArea"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "0. Lhynkal, The Fool": {
+    "evolvesTo": "0. Lhynkal, The Fool Evolved",
+    "evolveCost": 1,
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Arcana",
+            "cardType": "spell"
+          },
+          "lookAt": 5,
+          "to": "hand",
+          "optional": true,
+          "remainderTo": "deckBottom"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  }
+}

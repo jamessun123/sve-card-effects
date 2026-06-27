@@ -1,0 +1,183 @@
+{
+  "Dead to Rights": {
+    "source": {
+      "name": "Dead to Rights",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Wasteland / Departed / Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] Banish this card and an Iceschillendrig, Gilded Autocrat from your cemetery: Select an enemy follower on the field and engage it. ---------- [quick] Select an enemy follower on the field and give it [attack]-2/[defense]-2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-075EN.png",
+      "cardNos": [
+        "BP11-075EN",
+        "SDD05-012EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "effect": {
+            "op": "engage",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "cost": {
+            "banishSelf": true,
+            "banishFromCemetery": {
+              "identityName": "Iceschillendrig, Gilded Autocrat"
+            },
+            "banishCount": 1
+          }
+        },
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "buff",
+            "atk": -2,
+            "def": -2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated cemetery ability cost is encoded incorrectly. It should use a cemetery-banish cost object matching 'Banish this card and an Iceschillendrig, Gilded Autocrat from your cemetery', e.g. banishSelf plus banishFromCemetery with filter {\"identityName\":\"Iceschillendrig, Gilded Autocrat\"} and count 1, not a non-reference shape with separate banishCount."
+    ]
+  },
+  "Death the Nyctophile": {
+    "source": {
+      "name": "Death the Nyctophile",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "6",
+        "effect": "Rush. [lastwords] Select an enemy follower on the field. Destroy it and deal 3 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-104EN.png",
+      "cardNos": [
+        "BP09-104EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect must keep the same selected enemy follower for both clauses: destroy that follower and deal 3 damage to its leader. Replace the sequence of destroy enemy follower + deal 3 to enemy leader with a single linked effect such as damageFollowerAndLeader using followerAmount 0/linked destroy semantics or another implementation that targets one enemy follower and then damages its leader."
+    ]
+  },
+  "Death's Breath": {
+    "source": {
+      "name": "Death's Breath",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Departed",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "6",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower that costs 8 play points or less in your cemetery. Put it onto your field and give it Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-115EN.png",
+      "cardNos": [
+        "BP01-115EN",
+        "PR-053EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "cardType": "follower",
+                  "maxCost": 8
+                },
+                "to": "field"
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "ward",
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell should put a follower from your cemetery onto your field, not add it to hand. Replace tutorFromCemetery to hand/field-like tutoring with an effect that summons or revives a selected follower from your cemetery to the field, then grant Ward to that summoned follower."
+    ]
+  }
+}

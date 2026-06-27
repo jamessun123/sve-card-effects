@@ -1,0 +1,406 @@
+{
+  "Madlance Centaur": {
+    "source": {
+      "name": "Madlance Centaur",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "7",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Rush. Strike - Select an enemy follower on the field and deal it 4 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-027EN.png",
+      "cardNos": [
+        "BP08-027EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" from keywords; Strike is a triggered ability timing and should only be represented by the abilities entry with timing \"strike\"."
+    ]
+  },
+  "Maeve, Guardian of Earth": {
+    "source": {
+      "name": "Maeve, Guardian of Earth",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Zealot / Luminary / Lightborne",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Bury an amulet: Give this [attack]+1/[defense]+1. Give your leader [defense]+3."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-109EN.png",
+      "cardNos": [
+        "BP16-109EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Bury an amulet",
+            "cost": {
+              "op": "buryFromFieldSelect",
+              "optional": false
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 1,
+                  "targets": {
+                    "type": "self"
+                  }
+                },
+                {
+                  "op": "healLeader",
+                  "amount": 3
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing \"fanfare\", not as a keyword.",
+      "The optional cost \"Bury an amulet\" is encoded too broadly; the cost should require selecting and burying an amulet on your field, not any field card."
+    ]
+  },
+  "Mage of Nightfall": {
+    "source": {
+      "name": "Mage of Nightfall",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Intimidate. [fanfare] Earth Rite: Give this follower [attack]+2/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-053EN.png",
+      "cardNos": [
+        "BP04-053EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "intimidate",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing \"fanfare\", not as a keyword.",
+      "Earth Rite is missing as a cost/effect component; the fanfare should consume Earth Rite with an Earth Rite cost/effect rather than only using a condition gate."
+    ]
+  },
+  "Magiblade Witch Evolved": {
+    "source": {
+      "name": "Magiblade Witch Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Choose one of the following. (1) Summon a Magic Sediment token. (2) Earth Rite: Select up to 2 enemy followers on the field and deal 4 damage divided between them."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-049EN.png",
+      "cardNos": [
+        "BP07-049EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Magiblade Witch",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon a Magic Sediment token",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Magic Sediment",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Earth Rite: Deal 4 damage divided between up to 2 enemy followers",
+                "effect": {
+                  "op": "dealDamageSplit",
+                  "primaryAmount": 4,
+                  "maxTargets": 2,
+                  "targets": {
+                    "type": "enemyFollower"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second On Evolve option is missing Earth Rite; encode option (2) so it requires/consumes Earth Rite before dealing 4 damage divided between up to 2 enemy followers."
+    ]
+  },
+  "Magic Illusionist": {
+    "source": {
+      "name": "Magic Illusionist",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve][cost02]: Evolve this follower. [lastwords] Earth Rite: Put this follower onto its owner's field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-047EN.png",
+      "cardNos": [
+        "BP04-047EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Magic Illusionist Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "fanfare",
+        "lastWords",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "reviveToField",
+            "engaged": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; this card has no Fanfare ability.",
+      "Earth Rite is missing as a cost/effect component on Last Words; the lastWords ability should consume Earth Rite with an Earth Rite cost/effect rather than only using a condition gate."
+    ]
+  },
+  "Magic Illusionist Evolved": {
+    "source": {
+      "name": "Magic Illusionist Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Mage",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[lastwords] Earth Rite: Put this follower onto its owner's field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-048EN.png",
+      "cardNos": [
+        "BP04-048EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Magic Illusionist",
+      "specialType": "evolved",
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "reviveToField",
+            "engaged": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability timing \"lastWords\", not as a keyword.",
+      "Earth Rite is missing as a cost/effect component on Last Words; the lastWords ability should consume Earth Rite with an Earth Rite cost/effect rather than only using a condition gate."
+    ]
+  },
+  "Magic Owl": {
+    "source": {
+      "name": "Magic Owl",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Arcanaform",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "Rush. [fanfare][lastwords] Discard a spell: Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-055EN.png",
+      "cardNos": [
+        "BP04-055EN",
+        "PR-114EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a spell",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "cardType": "spell"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a spell",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "cardType": "spell"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the ability timing \"fanfare\", not as a keyword.",
+      "Remove \"lastWords\" from keywords; Last Words should be represented by the ability timing \"lastWords\", not as a keyword."
+    ]
+  }
+}

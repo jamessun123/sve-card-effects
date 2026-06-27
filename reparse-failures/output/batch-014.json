@@ -1,0 +1,119 @@
+{
+  "Angelic Strike": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Destroy enemy cards",
+              "effect": {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFieldCard",
+                  "count": 2
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Anne & Grea, Mysterian Duo": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "Academic",
+          "count": 10
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard 2 Academic cards",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic"
+            },
+            "count": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ]
+          }
+        }
+      },
+      {
+        "timing": "startOfEnd",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Academic",
+            "count": 5
+          },
+          "then": {
+            "op": "summon",
+            "tokenName": "Anne's Summoning",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Anne's Summoning": {
+    "keywords": [
+      "rush",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "healLeader",
+          "amount": 2
+        }
+      },
+      {
+        "timing": "startOfMain",
+        "effect": {
+          "op": "banishSelf"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "Ruler of Cocytus": {
+    "source": {
+      "name": "Ruler of Cocytus",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Archfiend",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "6",
+        "attack": "6",
+        "defense": "6",
+        "effect": "[fanfare] Deal 6 damage to your leader. Put a Silent Rider, Servant of Cocytus, Demon of Purgatory, and Astaroth's Reckoning token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-115EN.png",
+      "cardNos": [
+        "BP16-115EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 6,
+                "targets": {
+                  "type": "selfLeader"
+                }
+              },
+              {
+                "op": "summon",
+                "tokenName": "Silent Rider",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Servant of Cocytus",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Demon of Purgatory",
+                "count": 1,
+                "zone": "exArea"
+              },
+              {
+                "op": "summon",
+                "tokenName": "Astaroth's Reckoning",
+                "count": 1,
+                "zone": "exArea"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare summons the wrong token name: source says 'Silent Rider, Servant of Cocytus' as one token name, plus 'Demon of Purgatory' and 'Astaroth's Reckoning'. Replace the separate 'Silent Rider' and 'Servant of Cocytus' summons with a single summon of 'Silent Rider, Servant of Cocytus'."
+    ]
+  },
+  "Rune Blade Summoner": {
+    "source": {
+      "name": "Rune Blade Summoner",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Gold",
+        "cardSet": "Starter Deck #3 “Mysteries of Conjuration”",
+        "cost": "3",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[fanfare] Spellchain (5): Give this follower [attack]+4/[defense]+4. SC (10): Give this follower Storm. (If you have at least 5 spells in your cemetery, perform Spellchain (5). Then, if you have at least 10 spells, perform SC (10).)"
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD03/SD03-002EN.png",
+      "cardNos": [
+        "SD03-002EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "chooseMultiple",
+            "min": 0,
+            "max": 2,
+            "options": [
+              {
+                "label": "Spellchain (5) - Give this follower [attack]+4/[defense]+4",
+                "effect": {
+                  "op": "buff",
+                  "atk": 4,
+                  "def": 4,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              },
+              {
+                "label": "SC (10) - Give this follower Storm",
+                "effect": {
+                  "op": "grantKeyword",
+                  "keyword": "storm",
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as chooseMultiple, but source is not a choice effect. It should be a sequential conditional fanfare: if Spellchain (5), buff this follower +4/+4; then if Spellchain (10), give this follower Storm.",
+      "Add the missing Spellchain conditions: the +4/+4 effect should be gated by condition { type: 'spellchain', count: 5 } and the Storm effect by condition { type: 'spellchain', count: 10 } or equivalent nested ifs."
+    ]
+  },
+  "Runic Guardian": {
+    "source": {
+      "name": "Runic Guardian",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Alchemist",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Choose one of the following effects. (1) Earth Rite: Give this follower [attack]+1/[defense]+2. (2) Summon a Magic Sediment token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-067EN.png",
+      "cardNos": [
+        "BP01-067EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Earth Rite - Give this follower [attack]+1/[defense]+2",
+                "effect": {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 2,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              },
+              {
+                "label": "Summon a Magic Sediment token",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Magic Sediment",
+                  "count": 1,
+                  "zone": "field"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first fanfare option is missing its Earth Rite requirement. 'Earth Rite: Give this follower [attack]+1/[defense]+2' should consume 1 Earth Sigil stack, e.g. via removeCounter/earthRite cost or an earthRite condition+payment, rather than being an unconditional buff option."
+    ]
+  }
+}

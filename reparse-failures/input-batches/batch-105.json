@@ -1,0 +1,227 @@
+{
+  "Hermit of Lust": {
+    "source": {
+      "name": "Hermit of Lust",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Omen / Demon",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "3",
+        "effect": "[fanfare] Give your leader [defense]-1: Give this Intimidate. [act] Give your leader [defense]-1: Give this [attack]+1. Activate only once per turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-090EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "healLeader",
+            "amount": -1
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0
+          },
+          "oncePerTurn": true,
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": -1
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is incomplete: after giving your leader defense -1, it should also give this follower Intimidate. Add a second step granting the Intimidate keyword to self.",
+      "Activated ability cost is encoded incorrectly as {\"pp\":0}; the cost is \"Give your leader [defense]-1\" and should not use a 0-PP activated cost. Encode the leader defense loss as part of the effect before the buff.",
+      "The activated ability should give this follower [attack]+1 once per turn, which is correct in part, but it is missing no other text; only remove the incorrect 0-PP cost and keep the self buff after the leader defense loss."
+    ]
+  },
+  "Hermit of Truth": {
+    "source": {
+      "name": "Hermit of Truth",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Omen / Mage",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Select a follower in your cemetery with both the Omen and Mage traits not named Hermit of Truth and put it into your EX area. If this wasn't put onto the field from hand, the selected follower costs 3 less to play this turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-053EN",
+        "PR-375EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Omen",
+              "cardType": "follower",
+              "excludeIdentityName": "Hermit of Truth"
+            },
+            "to": "exArea",
+            "playCostReduction": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery filter is incomplete: the selected follower must have both the Omen and Mage traits, not just Omen. Encode the filter so it requires both traits.",
+      "The play cost reduction is conditional: \"If this wasn't put onto the field from hand, the selected follower costs 3 less to play this turn.\" Do not apply playCostReduction unconditionally on tutorFromCemetery; gate it with condition {\"type\":\"notEnteredFromHand\"}."
+    ]
+  },
+  "Hermit of Unkilling": {
+    "source": {
+      "name": "Hermit of Unkilling",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Omen / Hunter",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Select an enemy follower on the field and, if there are at least 3 Hunter cards in your cemetery, change its defense to 1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-014EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Hermit of Unkilling Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Hunter",
+              "count": 3
+            },
+            "then": {
+              "op": "setStats",
+              "atk": 0,
+              "def": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare changes only the selected enemy follower's defense to 1. It should not set attack to 0. Replace the setStats effect with an effect that only changes defense to 1."
+    ]
+  },
+  "Hermit of Unkilling Evolved": {
+    "source": {
+      "name": "Hermit of Unkilling Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen / Hunter",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Search your deck for a follower with \"Izudia\" in its name, reveal it, add it to your hand, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-015EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Hermit of Unkilling",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "identityNameContains": "Izudia"
+            },
+            "lookAt": 40,
+            "to": "hand",
+            "optional": false,
+            "reveal": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve search filter is incomplete: it should search for a follower with \"Izudia\" in its name. Add \"cardType\":\"follower\" to the filter.",
+      "The search effect is encoded with searchDeckChoose/lookAt 40 and remainderTo deckBottom, but the card text is a full-deck search then shuffle. Encode it as tutorFromDeck with reveal true to hand, then shuffle, rather than a top-of-deck selection effect."
+    ]
+  }
+}

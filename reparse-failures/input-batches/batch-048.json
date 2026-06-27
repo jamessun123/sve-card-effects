@@ -1,0 +1,59 @@
+{
+  "Crystalia Lily": {
+    "source": {
+      "name": "Crystalia Lily",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Crystalian",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "2",
+        "attack": "1",
+        "defense": "3",
+        "effect": "[evolve][cost02]: Evolve this follower. [fanfare] Look at the top 2 cards of your deck. You may reveal a Crystalian or Pixie follower from among them and add it to your hand. Put the remaining cards on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-008EN.png",
+      "cardNos": [
+        "BP02-008EN",
+        "PR-444EN",
+        "SP01-008EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Crystalia Lily Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "traitsAny": [
+                "Crystalian",
+                "Pixie"
+              ]
+            },
+            "lookAt": 2,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare tutor filter is too broad; it should require a follower with trait Crystalian or Pixie, so add \"cardType\": \"follower\" to the searchDeckChoose filter."
+    ]
+  }
+}

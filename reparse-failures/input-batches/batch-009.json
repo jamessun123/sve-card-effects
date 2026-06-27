@@ -1,0 +1,212 @@
+{
+  "All-Feeling Divine": {
+    "source": {
+      "name": "All-Feeling Divine",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Festive / Zealot / Eidolon",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Summon a Fox of Invitation token. [act] [cost02], banish this from your cemetery: Summon a Fox of Invitation token. Give each Fox of Invitation on your field [attack]+2/[defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-088EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "evolve",
+        "activated"
+      ],
+      "evolvesTo": "All-Feeling Divine Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fox of Invitation",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "banishSelf": true,
+            "banishFromCemetery": {
+              "cardNo": "BP14-088EN"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Fox of Invitation",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "buffFieldTrait",
+                "trait": "Fox of Invitation",
+                "atk": 2,
+                "def": 1,
+                "otherOnly": true
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability should set \"activateFrom\": \"cemetery\" because the source says \"banish this from your cemetery\".",
+      "Activated ability cost is incorrectly encoded with both \"banishSelf\" and malformed \"banishFromCemetery\" fields; encode the cost as banishing this card from cemetery rather than as a field/self banish cost.",
+      "The buff effect should affect each Fox of Invitation on your field, including the token just summoned; remove \"otherOnly\": true.",
+      "The buff targeting is incorrect: \"buffFieldTrait\" with \"trait\": \"Fox of Invitation\" does not match card name text. It should target Fox of Invitation by identity/name rather than trait."
+    ]
+  },
+  "Allure of Shadows": {
+    "source": {
+      "name": "Allure of Shadows",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Necromancer",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and deal it 4 damage. Necrocharge (10) - Search your deck for a Luna, Soul Keeper, summon it, then shuffle."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-084EN.png",
+      "cardNos": [
+        "BP17-084EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "necrocharge",
+                  "count": 10
+                },
+                "then": {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityName": "Luna, Soul Keeper"
+                  },
+                  "to": "field"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the \"fanfare\" keyword; this is a Spell and the source text does not have Fanfare.",
+      "Necrocharge clause should summon Luna, Soul Keeper from the deck, then shuffle. \"tutorFromDeck\" to field is incorrect; use a deck-to-field summon implementation and include the shuffle step if required by the engine/card conventions."
+    ]
+  },
+  "Alpha Drive": {
+    "source": {
+      "name": "Alpha Drive",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Machina / Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose one of the following. (1) Select a Machina follower in your cemetery and add it to your hand. (2) Select a Mono, Garnet Rebel in your cemetery and summon it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-075EN.png",
+      "cardNos": [
+        "BP07-075EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Return Machina from cemetery",
+                "effect": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "trait": "Machina",
+                    "cardType": "follower"
+                  },
+                  "to": "hand"
+                }
+              },
+              {
+                "label": "Summon Mono from cemetery",
+                "effect": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "identityName": "Mono, Garnet Rebel"
+                  },
+                  "to": "field"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second choose option should summon Mono, Garnet Rebel from your cemetery, not add it to hand/field via \"tutorFromCemetery\". Use a cemetery-to-field summon effect for the selected named card."
+    ]
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "Riley, Hydroshaman": {
+    "source": {
+      "name": "Riley, Hydroshaman",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[fanfare] Earth Rite: Choose one of the following. If this card was put onto the field from the cemetery, choose up to 3 instead. (1) Select an enemy follower on the field and deal it 5 damage. (2) Give this follower [attack]+3. (3) Draw 2 cards. [act] [cost06]: Summon this card from your cemetery. Give it Storm and \"[lastwords] Banish this card.\""
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-038EN.png",
+      "cardNos": [
+        "BP07-038EN",
+        "SDD03-008EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Riley, Astral Shaman Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "earthRite",
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 3,
+            "options": [
+              {
+                "label": "Select an enemy follower on the field and deal it 5 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Give this follower [attack]+3",
+                "effect": {
+                  "op": "buff",
+                  "atk": 3,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              },
+              {
+                "label": "Draw 2 cards",
+                "effect": {
+                  "op": "draw",
+                  "count": 2
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 6
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "reviveSelfFromCemetery"
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantLastWords",
+                "effect": {
+                  "op": "banishSelf"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare choice count is wrong. It should choose exactly 1 option normally, and only choose up to 3 if this card was put onto the field from the cemetery. Encode this with a conditional using notEnteredFromHand/entered-from-cemetery logic instead of a single choose with max 3.",
+      "The activated ability is missing activateFrom: \"cemetery\". The source says '[act] [cost06]: Summon this card from your cemetery', so the ability must activate from the cemetery, not from the field/hand.",
+      "Storm is incorrectly listed as a printed keyword. The source only grants Storm to this card when summoned from the cemetery with its activated ability, so remove 'storm' from keywords and keep it only in the activated effect."
+    ]
+  },
+  "Rimewind": {
+    "source": {
+      "name": "Rimewind",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] Select an unevolved enemy follower on the field and return it to its owner's hand. Spellchain (10): Put it on top of its owner's deck instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-041EN.png",
+      "cardNos": [
+        "BP02-041EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "condition": {
+            "type": "spellchain",
+            "count": 10
+          },
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Return an unevolved enemy follower to its owner's hand",
+                "effect": {
+                  "op": "returnToHand",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Put it on top of its owner's deck instead",
+                "effect": {
+                  "op": "putOnTopOfDeck",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is encoded as a player choice under Spellchain (10), but the source says the top-of-deck effect happens instead of returning to hand when Spellchain (10) is active. Encode this as a conditional: if spellchain 10, put the selected unevolved enemy follower on top of its owner's deck; else return it to hand.",
+      "The base spell effect without Spellchain (10) is missing as an unconditional/default branch. Add the normal returnToHand effect when the Spellchain condition is not met.",
+      "The target restriction 'unevolved enemy follower' is missing. Restrict the target selector to unevolved enemy followers if supported; otherwise this needs engine support for selecting only unevolved followers."
+    ]
+  },
+  "Rin Shibuya": {
+    "source": {
+      "name": "Rin Shibuya",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Gold",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Ward. [fanfare] If there's a follower with \"Uzuki Shimamura\" in its name on your field, select an enemy follower on the field and deal it 5 damage. [fanfare] If there's a follower with \"Mio Honda\" in its name on your field, deal 5 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-021EN.png",
+      "cardNos": [
+        "CP02-021EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Uzuki Shimamura"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Mio Honda"
+          },
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 5,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second Fanfare effect targets the enemy leader only, but it is encoded as dealDamageAllEnemies for 5 damage to all enemy followers and leaders. Replace it with a dealDamage effect targeting enemyLeader for 5 damage."
+    ]
+  },
+  "Risa Matoba": {
+    "source": {
+      "name": "Risa Matoba",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Look at the top 3 cards of your deck. You may summon an iM@S CG follower that costs 2 or less from among them. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-148EN.png",
+      "cardNos": [
+        "CP02-093EN",
+        "PR-148EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "iM@S CG",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "lookAt": 3,
+            "maxTotalCost": 2,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect should allow summoning at most one qualifying follower from the top 3 cards, but it is encoded as searchDeckSummonMultiple with maxTotalCost 2, which could permit multiple summons. Replace it with an effect that looks at the top 3 cards and may summon a single iM@S CG follower that costs 2 or less, then puts the rest on the bottom."
+    ]
+  }
+}

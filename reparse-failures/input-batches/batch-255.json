@@ -1,0 +1,280 @@
+{
+  "Yuwan, Dimensional Avenger Evolved": {
+    "source": {
+      "name": "Yuwan, Dimensional Avenger Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Supreme",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Put an Ancient Artifact token into your EX area. On Super-Evolve - Select an enemy follower on the field. Deal 4 damage to it and 2 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-094EN.png",
+      "cardNos": [
+        "BP17-094EN"
+      ]
+    },
+    "previousParsed": {
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Ancient Artifact",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "onSuperEvolve",
+          "effect": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 4,
+            "leaderAmount": 2
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Super-Evolve is missing the required enemy follower selection; encode it as a targeted effect that selects 1 enemy follower, then deals 4 damage to that follower and 2 damage to its leader, rather than an untargeted damageFollowerAndLeader effect."
+    ]
+  },
+  "Yuzu Kitami": {
+    "source": {
+      "name": "Yuzu Kitami",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Gold",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost02]: Evolve this follower. Ward. [act] Lesson (1): Select another card that costs 1 or less on your field and return it to its owner's hand. For the rest of this turn, this card's [act] abilities except [evolve] can't be activated."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-004EN.png",
+      "cardNos": [
+        "CP02-004EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Yuzu Kitami Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Lesson (1)",
+            "cost": {
+              "op": "returnToHand",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 1,
+                "excludeSelf": true,
+                "maxCost": 1
+              }
+            },
+            "then": {
+              "op": "grantActRestriction",
+              "exceptEvolve": true,
+              "untilEndOfTurn": true
+            }
+          },
+          "cost": {
+            "pp": 0
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated Lesson (1) ability is encoded with cost.pp: 0, but Lesson (1) means the activated ability itself should have cost {\"pp\":1} rather than using optionalCost with a free activation.",
+      "The activated Lesson (1) ability incorrectly uses optionalCost for returning another 1-cost-or-less card; that return is mandatory as part of the effect, not an optional additional cost, so encode it as a sequence/effect that returns another card on your field with maxCost 1.",
+      "The self-restriction after Lesson (1) should be 'this card's [act] abilities except [evolve] can't be activated' until end of turn; the current structure should use grantActRestriction with exceptEvolve true as part of the activated effect after the return."
+    ]
+  },
+  "Yuzu Kitami Evolved": {
+    "source": {
+      "name": "Yuzu Kitami Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Gold",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Ward. On Evolve - Select an enemy follower that costs 2 or less on the field and return it to its owner's hand. [act] Lesson (1): Select another card that costs 1 or less on your field and return it to its owner's hand. For the rest of this turn, this card's [act] abilities can't be activated."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-005EN.png",
+      "cardNos": [
+        "CP02-005EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Yuzu Kitami",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "returnToHand",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1,
+              "maxCost": 2
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Lesson (1)",
+            "cost": {
+              "op": "returnToHand",
+              "targets": {
+                "type": "allyFieldCard",
+                "count": 1,
+                "excludeSelf": true,
+                "maxCost": 1
+              }
+            },
+            "then": {
+              "op": "grantActRestriction",
+              "untilEndOfTurn": true
+            }
+          },
+          "cost": {
+            "pp": 0
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated Lesson (1) ability is encoded with cost.pp: 0, but Lesson (1) means the activated ability itself should have cost {\"pp\":1}.",
+      "The activated Lesson (1) ability incorrectly uses optionalCost for returning another 1-cost-or-less card; that return is mandatory effect text, not an optional cost, so encode it as a normal activated effect that returns another card on your field with maxCost 1.",
+      "The self-restriction after Lesson (1) is overbroadly/incorrectly encoded; evolved Yuzu says 'this card's [act] abilities can't be activated' this turn, so encode grantActRestriction without exceptEvolve, applied after the return."
+    ]
+  },
+  "Yuzuki, Righteous Demon": {
+    "source": {
+      "name": "Yuzuki, Righteous Demon",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Bane. [fanfare] Each opponent buries a follower. Necrocharge (10) - They bury 2 instead. [act] [cost03], discard this card: Select an enemy follower on the field. Deal it 5 damage and bury the top card of your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-075EN.png",
+      "cardNos": [
+        "BP06-075EN",
+        "PR-165EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "bane",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "effect": {
+            "op": "buryEachOpponentFollowers",
+            "count": 2
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buryEachOpponentFollowers",
+            "count": 1
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "hand",
+          "cost": {
+            "pp": 3
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard this card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "identityName": "Yuzuki, Righteous Demon"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                },
+                {
+                  "op": "mill",
+                  "count": 1
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The base fanfare effect should be 'Each opponent buries a follower. Necrocharge (10) - They bury 2 instead.' but parsed encodes two separate fanfare abilities, causing both to resolve when Necrocharge (10) is met. Replace with a single conditional fanfare using if/necrocharge so it buries 2 instead of 1, not in addition to 1."
+    ]
+  }
+}

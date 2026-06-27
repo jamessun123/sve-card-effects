@@ -1,0 +1,114 @@
+{
+  "Al-mi'raj Defender": {
+    "source": {
+      "name": "Al-mi'raj Defender",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Look at the top 5 cards of your deck. You may put one of them into your EX area. If it's a Beast follower that costs 4 or less, it costs 4 less to play this turn. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-103EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Beast"
+            },
+            "lookAt": 5,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 4,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare search filter is too narrow: the card says you may put one of the top 5 cards into your EX area, not only a Beast card. Encode searchDeckChoose without the Beast filter.",
+      "The play cost reduction condition is incorrect: it should apply only if the chosen card is a Beast follower that costs 4 or less. Encode the EX-area placement with a conditional reduction restricted to Beast follower and maxCost 4, not unconditional reduction on any chosen Beast card."
+    ]
+  },
+  "Albert, Thunderous Doom": {
+    "source": {
+      "name": "Albert, Thunderous Doom",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Levin / Cutthroat",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "6",
+        "attack": "3",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this follower. Storm. [fanfare] Bury another Levin follower: Select an enemy follower on the field and destroy it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-019EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Albert, Thunderous Doom Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Bury another Levin follower",
+            "cost": {
+              "op": "buryFieldFollowers",
+              "filter": {
+                "trait": "Levin"
+              },
+              "excludeSelf": true,
+              "sourceOnly": false
+            },
+            "then": {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare bury cost is encoded as buryFieldFollowers, which would bury all matching Levin followers; it should bury exactly one other Levin follower you choose. Encode the cost as a single selected selfFollower with trait Levin and excludeSelf true, using a one-card bury/select-to-cemetery effect rather than mass bury."
+    ]
+  }
+}

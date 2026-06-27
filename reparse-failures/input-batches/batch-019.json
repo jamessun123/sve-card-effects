@@ -1,0 +1,305 @@
+{
+  "Arcane Personnel Carrier": {
+    "source": {
+      "name": "Arcane Personnel Carrier",
+      "type": "token",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Amulet / Token",
+        "trait": "Wasteland / Mount",
+        "rarity": "-",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] Bury this card: Select a follower on your field. Give it Ward and, if it's a Wasteland follower, [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-T05EN.png",
+      "cardNos": [
+        "BP11-T05EN",
+        "BP16-T22EN",
+        "SDD02-T05EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "burySelf": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "grantKeyword",
+                "keyword": "ward",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "fieldTraitMin",
+                  "trait": "Wasteland",
+                  "count": 1
+                },
+                "then": {
+                  "op": "buff",
+                  "def": 1,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the printed keyword \"ward\" from keywords; the source does not say this amulet itself has Ward, it grants Ward to a selected follower with its activated ability.",
+      "The conditional buff is encoded incorrectly: it should check whether the selected follower is a Wasteland follower, not whether there is any Wasteland card on your field. Encode the target selection once and apply Ward plus [defense]+1 to that same target only if that target has the Wasteland trait."
+    ]
+  },
+  "Arch Summoner Erasmus": {
+    "source": {
+      "name": "Arch Summoner Erasmus",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "7",
+        "attack": "6",
+        "defense": "8",
+        "effect": "[fanfare] Earth Rite: Select an enemy follower on the field. Deal 6 damage to it and 2 damage to its leader. [act][engage], Earth Rite: Select an enemy follower on the field. Deal 6 damage to it and 2 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-051EN.png",
+      "cardNos": [
+        "BP01-051EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "engage"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 6,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 6,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"engage\" from keywords; [engage] here is only the cost of the activated ability, not a printed card keyword.",
+      "The damage ability is encoded incorrectly: \"Select an enemy follower on the field. Deal 6 damage to it and 2 damage to its leader\" should target the selected follower's leader. Encode this as op \"damageFollowerAndLeader\" with followerAmount 6 and leaderAmount 2, or otherwise preserve the linkage to the chosen follower's controller."
+    ]
+  },
+  "Archer Evolved": {
+    "source": {
+      "name": "Archer Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Hunter",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "-",
+        "attack": "1",
+        "defense": "4",
+        "effect": "Whenever another follower is put onto your field, select up to 2 enemy followers on the field and deal them 1 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-019EN.png",
+      "cardNos": [
+        "BP01-019EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Archer",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "effect": {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 2
+              }
+            }
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The damage ability should say \"select up to 2 enemy followers\" but the encoding uses a required target count of 2. Encode this as an effect that can target 0 to 2 enemy followers, such as dealDamageSplit with primaryAmount 1 and maxTargets 2, or otherwise make the two targets optional."
+    ]
+  },
+  "Arctic Chimera": {
+    "source": {
+      "name": "Arctic Chimera",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Arcanaform / Forbidden",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Rush. Strike - Select an enemy follower on the field and deal it damage equal to this follower's attack. [lastwords] Earth Rite: Put this onto its owner's field, change its attack and defense to 2, and give it Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-041EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "strike",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "selfAttack"
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "condition": {
+            "type": "earthRite",
+            "count": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Arctic Chimera",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "setStats",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"strike\" and \"lastWords\" from keywords; they are ability timings and should not be listed as printed keywords.",
+      "The Last Words re-entry is encoded incorrectly: \"Put this onto its owner's field\" should revive the same card, not summon a token copy named Arctic Chimera. Use reviveToField or equivalent to return this specific card.",
+      "The Last Words stat change and Storm grant should apply to the returned card itself. The current selfFollower targeting after summoning a token does not faithfully represent that linkage; encode the revive of this card followed by setting this card's stats to 2/2 and granting it Storm."
+    ]
+  }
+}

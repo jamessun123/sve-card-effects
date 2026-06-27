@@ -1,0 +1,120 @@
+{
+  "Radical Gunslinger": {
+    "source": {
+      "name": "Radical Gunslinger",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Officer",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "0",
+        "defense": "1",
+        "effect": "[fanfare] Summon a Dutiful Steed token. [act] [engage] this card and 2 Mount cards on your field: Select an enemy leader or enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-023EN.png",
+      "cardNos": [
+        "BP11-023EN",
+        "PR-282EN",
+        "SDD02-010EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Dutiful Steed",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "buryFromField": {
+              "cardType": "follower"
+            },
+            "buryFieldCount": 2
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          },
+          "parseConfidence": "review"
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is encoded incorrectly: it should require engaging this card and 2 Mount cards on your field, not burying 2 followers. Replace the cost with an engage-self-plus-2-Mount-engage cost representation instead of buryFromField/buryFieldCount.",
+      "Activated ability target is encoded too broadly: it should target an enemy leader or an enemy follower, not any enemy field card. Encode the damage target as enemy leader or enemy follower only."
+    ]
+  },
+  "Raio, Omen of Truth Evolved": {
+    "source": {
+      "name": "Raio, Omen of Truth Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen / Mage",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "9",
+        "defense": "9",
+        "effect": "On Evolve: Look at the top 9 cards of your deck. You may put up to 3 cards that cost 3 play points or less from among them into your EX area. They cost 3 less to play this turn. Put the remaining cards on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-036EN.png",
+      "cardNos": [
+        "BP05-036EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Raio, Omen of Truth",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "maxCost": 3
+            },
+            "lookAt": 9,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 3,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve effect is incomplete: it should let you put up to 3 cards that cost 3 or less from among the top 9 cards into your EX area, but the encoding only supports choosing one. Encode selection of up to 3 qualifying cards from the 9 looked at cards.",
+      "On Evolve effect is missing duration on the cost reduction: the chosen cards should cost 3 less to play this turn, not permanently."
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "Samurai Outlaw": {
+    "source": {
+      "name": "Samurai Outlaw",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[evolve] [cost04]: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-029EN.png",
+      "cardNos": [
+        "BP06-029EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Samurai Outlaw Evolved",
+      "evolveCost": 4,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not encode the printed evolve cost line as a keyword. Remove \"evolve\" from keywords and encode the evolve linkage only with evolvesTo and evolveCost."
+    ]
+  },
+  "Sarina Matsumoto": {
+    "source": {
+      "name": "Sarina Matsumoto",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "3",
+        "attack": "1",
+        "defense": "5",
+        "effect": "Whenever you play a spell, select an enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-046EN.png",
+      "cardNos": [
+        "CP02-046EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onCardPlayed",
+          "filter": {
+            "cardType": "spell"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell trigger is encoded with a top-level filter field, but card-play triggers should gate with a condition/filter supported by the wrapper/effect model. Encode 'Whenever you play a spell' as an onCardPlayed ability that correctly restricts the trigger to spells, then deal 2 damage to an enemy follower."
+    ]
+  },
+  "Scalebound Plight": {
+    "source": {
+      "name": "Scalebound Plight",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "As an additional cost to play this card, engage a [dragoncraft] follower that costs 7 or more on your field. ---------- Deal 2 damage to each enemy leader. Give your leader [defense]+2. Draw 2 cards."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-064EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "engage",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "dragon",
+                    "minCost": 7
+                  }
+                }
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              },
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is encoded as part of the spell effect sequence, but the source says it is an additional cost to play the card. Move the engage-a-7-cost-or-more Dragoncraft follower requirement out of the resolving effect and encode it as a play/additional cost restriction for the spell.",
+      "The additional cost target restriction is malformed: the target selector should not contain a nested filter object here. The selected ally follower must be restricted to Dragoncraft and cost 7 or more using supported target fields or a proper cost-target encoding.",
+      "The damage effect is incorrect. 'Deal 2 damage to each enemy leader' should damage only the enemy leader, not all enemy followers and leaders. Replace dealDamageAllEnemies with the correct leader-only damage effect."
+    ]
+  }
+}

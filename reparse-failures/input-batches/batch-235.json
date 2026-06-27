@@ -1,0 +1,96 @@
+{
+  "Unbound Emotion": {
+    "source": {
+      "name": "Unbound Emotion",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Silver",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "This card costs 1 more to play for every follower on the field. ---------- Deal 7 damage to each follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-062EN.png",
+      "cardNos": [
+        "CP02-062EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "playCostIncrease",
+            "amountPerFollower": 1
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 7,
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect is encoded as dealDamageAllEnemies with followersOnly:true, but the source says \"Deal 7 damage to each follower on the field.\" It should damage all followers on both fields, e.g. use dealDamageOtherFollowers with amount 7 and also include the source follower set as needed so every follower on the field is hit."
+    ]
+  },
+  "Undead King": {
+    "source": {
+      "name": "Undead King",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "6",
+        "attack": "6",
+        "defense": "6",
+        "effect": "[fanfare] Select up to 2 followers in your cemetery and add them to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-124EN.png",
+      "cardNos": [
+        "BP01-124EN",
+        "SD05-009EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "cardType": "follower"
+            },
+            "to": "hand"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare says \"Select up to 2 followers in your cemetery and add them to your hand,\" but tutorFromCemetery is encoded without a count/max selection limit. It should allow selecting up to 2 follower cards from your cemetery and adding them to hand."
+    ]
+  }
+}

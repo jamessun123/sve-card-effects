@@ -1,0 +1,99 @@
+{
+  "Moonrise Werewolf": {
+    "evolvesTo": "Moonrise Werewolf Evolved",
+    "evolveCost": 1,
+    "keywords": [],
+    "abilities": [],
+    "parseConfidence": "high"
+  },
+  "Moonshade Mage": {
+    "keywords": [
+      "ward",
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "draw",
+              "count": 3
+            },
+            {
+              "op": "discard",
+              "count": 2
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "effect": {
+          "op": "optionalCost",
+          "cost": {
+            "op": "discard",
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 6,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mr. Bertrand, Magic Mentor": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Put a Mysterian Missile token into your EX area",
+              "effect": {
+                "op": "summon",
+                "tokenName": "Mysterian Missile",
+                "count": 1,
+                "zone": "exArea"
+              }
+            },
+            {
+              "label": "Select an Academic spell in your cemetery and, if there are at least 5 Academic cards in your cemetery, add it to your hand",
+              "effect": {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Academic",
+                  "count": 5
+                },
+                "then": {
+                  "op": "tutorFromCemetery",
+                  "filter": {
+                    "trait": "Academic",
+                    "cardType": "spell"
+                  },
+                  "to": "hand"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

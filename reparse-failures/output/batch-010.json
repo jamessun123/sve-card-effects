@@ -1,0 +1,11 @@
+{
+  "Amataz, Reverse Blader": {
+    "evolvesTo": "Amataz, Reverse Blader Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [],
+    "parseConfidence": "high"
+  }
+}

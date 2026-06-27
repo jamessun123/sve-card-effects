@@ -1,0 +1,86 @@
+{
+  "Dragonsong Flute": {
+    "source": {
+      "name": "Dragonsong Flute",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Amulet",
+        "trait": "Dragonheart",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When this card is discarded, put a Hellflame Dragon token into your EX area. ---------- [fanfare][cost03]: Summon a Hellflame Dragon token. Draw a card. [act][engage], discard a card: Put a Hellflame Dragon token into your EX area. This ability can be activated if Overflow is active for you."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-054EN.png",
+      "cardNos": [
+        "BP02-054EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "onDiscard",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Hellflame Dragon",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Hellflame Dragon",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          },
+          "cost": {
+            "pp": 3
+          }
+        },
+        {
+          "timing": "activated",
+          "condition": {
+            "type": "overflow"
+          },
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "discard": 1
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Hellflame Dragon",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare ability is encoded incorrectly: '[fanfare][cost03]' is not an activated cost field here. It should be a fanfare ability with the 3 PP payment represented according to fanfare cost-line handling, not as an activated-style cost object on the ability.",
+      "Activated ability cost is encoded incorrectly: 'discard a card' should be represented as an implemented discard cost/effect, not 'cost.discard'. Change it to an implemented discard cost form if available, or model via an appropriate cost/effect wrapper.",
+      "Activated ability should note that it can be activated only if Overflow is active for you; condition is present, but because the discard cost is malformed the full ability is not correctly encoded."
+    ]
+  }
+}

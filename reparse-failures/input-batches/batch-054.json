@@ -1,0 +1,449 @@
+{
+  "Deepwood Wolf": {
+    "source": {
+      "name": "Deepwood Wolf",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "7",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Storm. Whenever another Beast follower is put onto your field, give this follower [attack]+2/[defense]+2. [act] [cost01], put this card from your hand into your EX area: Select a card on your field and put it into its owner's EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-017EN.png",
+      "cardNos": [
+        "BP10-017EN"
+      ]
+    },
+    "previousParsed": {
+      "evolveCost": 0,
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Beast"
+            },
+            "effect": {
+              "op": "buff",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveSourceToExArea"
+              },
+              {
+                "op": "moveToExArea",
+                "targets": {
+                  "type": "allyFieldCard",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive trigger incorrectly includes this card itself; change the grantOnAllyFollowerEnter filter/effect so it only triggers when another Beast follower enters your field, excluding Deepwood Wolf.",
+      "The activated ability is missing that it can be activated from hand; add \"activateFrom\": \"hand\" to represent \"put this card from your hand into your EX area\"."
+    ]
+  },
+  "Delta Cannon": {
+    "source": {
+      "name": "Delta Cannon",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Machina / Golem",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When a Tetra, Sapphire Rebel is put onto your field, [cost01]: Put this card from your cemetery into your EX area. ---------- [quick] Select an enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-041EN.png",
+      "cardNos": [
+        "BP07-041EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "moveSourceToExArea"
+          }
+        },
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery-to-EX ability is missing its trigger condition; encode it as a triggered ability that works only when a Tetra, Sapphire Rebel is put onto your field, rather than an always-available activated ability from cemetery."
+    ]
+  },
+  "Demon Maestro": {
+    "source": {
+      "name": "Demon Maestro",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "2",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[act] Give your leader [defense]-2: Draw a card. This ability can be activated once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-080EN.png",
+      "cardNos": [
+        "BP03-080EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": -2
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing its cost; encode \"Give your leader [defense]-2\" as an activation cost, not as part of the effect sequence with no cost field."
+    ]
+  },
+  "Demon of Purgatory": {
+    "source": {
+      "name": "Demon of Purgatory",
+      "type": "token",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Token",
+        "trait": "Archfiend",
+        "rarity": "-",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "1",
+        "attack": "6",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Select an enemy follower on the field and deal it 6 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-T08EN.png",
+      "cardNos": [
+        "BP16-T08EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 6,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be listed in keywords; remove \"fanfare\" from keywords and keep the Fanfare effect only in abilities."
+    ]
+  },
+  "Demon's Epitaph": {
+    "source": {
+      "name": "Demon's Epitaph",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Eidolon / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[evolve] Discard a card: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-098EN.png",
+      "cardNos": [
+        "BP05-098EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Demon's Epitaph Evolved",
+      "evolveCost": 0,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "evolveOtherFollower",
+              "filter": {
+                "identityName": "Demon's Epitaph"
+              },
+              "excludeSelf": false
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is encoded incorrectly; instead of evolving another follower matching this card's name, it should evolve this follower after discarding a card.",
+      "The evolve ability should be a direct paid evolve action, not an optionalCost wrapper; make discarding a card the required cost for the evolve timing effect."
+    ]
+  },
+  "Demon's Epitaph Evolved": {
+    "source": {
+      "name": "Demon's Epitaph Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Eidolon / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "4",
+        "effect": "Bane. [lastwords] Deal 2 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-099EN.png",
+      "cardNos": [
+        "BP05-099EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Demon's Epitaph",
+      "specialType": "evolved",
+      "keywords": [
+        "bane"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 2,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect is overbroad; it should deal 2 damage to each enemy leader only, not to all enemies including followers."
+    ]
+  },
+  "Demoncaller": {
+    "source": {
+      "name": "Demoncaller",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Onmyoji",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. Whenever a Shikigami follower is put onto your field, give it [attack]+1 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-042EN.png",
+      "cardNos": [
+        "BP06-042EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Demoncaller Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Shikigami"
+            },
+            "effect": {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Shikigami entry trigger is encoded with the wrong target; the buff should be applied to the entering Shikigami follower, not to Demoncaller itself.",
+      "The triggered buff is incomplete; in addition to +1 attack, it must also give the entering Shikigami follower Rush."
+    ]
+  },
+  "Demoncaller Evolved": {
+    "source": {
+      "name": "Demoncaller Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Onmyoji",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Summon a Paper Shikigami token. Whenever a Shikigami follower is put onto your field, give it [attack]+1 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-043EN.png",
+      "cardNos": [
+        "BP06-043EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Demoncaller",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Paper Shikigami",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Shikigami"
+            },
+            "effect": {
+              "op": "buff",
+              "atk": 1,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Shikigami entry trigger is encoded with the wrong target; the buff should be applied to the entering Shikigami follower, not to Demoncaller Evolved itself.",
+      "The triggered buff is incomplete; in addition to +1 attack, it must also give the entering Shikigami follower Rush."
+    ]
+  }
+}

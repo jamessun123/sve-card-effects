@@ -1,0 +1,90 @@
+{
+  "Castor": {
+    "source": {
+      "name": "Castor",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed / Celestial",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[lastwords][cost02]: Put this follower onto its owner's field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-093EN.png",
+      "cardNos": [
+        "BP04-093EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "identityName": "Castor"
+            },
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Last Words is missing its [cost02] requirement. It should be encoded as a lastWords ability with a 2 PP cost before putting this follower onto its owner's field.",
+      "The resurrection effect is encoded as summonFromCemetery filtering by identity name, but the card text specifically returns this follower itself. It should instead revive this exact card to the field, e.g. using reviveToField/self-resummon semantics tied to the source."
+    ]
+  },
+  "Celestial Shikigami": {
+    "source": {
+      "name": "Celestial Shikigami",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Token",
+        "trait": "Shikigami",
+        "rarity": "-",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "5",
+        "effect": "Aura."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-T01EN.png",
+      "cardNos": [
+        "BP06-T01EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "aura"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraAbilityDamageCap",
+            "amount": 0
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card text only has the keyword Aura, but the parsed ability invents an unsupported continuous effect reducing ability damage to 0. Remove the passive auraAbilityDamageCap ability and keep only the Aura keyword."
+    ]
+  }
+}

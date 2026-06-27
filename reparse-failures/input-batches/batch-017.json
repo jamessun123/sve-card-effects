@@ -1,0 +1,106 @@
+{
+  "Apostle of Unkilling Evolved": {
+    "source": {
+      "name": "Apostle of Unkilling Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen / Hunter",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve: Search your deck for a Hunter follower that costs 2 play points or less, put it onto your field, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-005EN.png",
+      "cardNos": [
+        "BP05-005EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Apostle of Unkilling",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "Hunter",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "to": "field"
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability searches a follower from the deck to the field but omits the required deck shuffle afterward. Encode it as a `sequence` with `tutorFromDeck` to `field` followed by `shuffleDeck`."
+    ]
+  },
+  "Apostle of Usurpation": {
+    "source": {
+      "name": "Apostle of Usurpation",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Omen / Thief",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Each opponent puts the top 2 cards of their deck into their cemetery. Then, if there are at least 10 cards in opponents' cemeteries, draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-021EN.png",
+      "cardNos": [
+        "BP05-021EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Apostle of Usurpation Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "millOpponent",
+            "count": 2
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "opponentCemeteryMin",
+              "count": 10
+            },
+            "then": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare is split into two separate `fanfare` abilities, which does not preserve the required order 'Then, if...'. Encode this as a single `fanfare` ability using `sequence`: first mill each opponent for 2, then check `opponentCemeteryMin: 10`, then draw 1."
+    ]
+  }
+}

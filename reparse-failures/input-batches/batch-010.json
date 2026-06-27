@@ -1,0 +1,48 @@
+{
+  "Amataz, Reverse Blader": {
+    "source": {
+      "name": "Amataz, Reverse Blader",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf / Fae-Touched",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this. Ward."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-002EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Amataz, Reverse Blader Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "ward"
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Ward is encoded incorrectly as an `evolve` ability. It is a printed keyword on the base card, so move `ward` into `keywords` and remove the `timing: \"evolve\"` passiveKeywords ability."
+    ]
+  }
+}

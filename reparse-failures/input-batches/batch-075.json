@@ -1,0 +1,63 @@
+{
+  "Fairy Beast": {
+    "source": {
+      "name": "Fairy Beast",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Pixie / Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "5",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[act] Banish a Pixie follower in your EX area: Give your leader [defense]+3 and draw a card. This ability can be activated once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-013EN.png",
+      "cardNos": [
+        "BP01-013EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 0,
+            "banishFromExArea": {
+              "trait": "Pixie",
+              "cardType": "follower"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "healLeader",
+                "amount": 3
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword \"fanfare\"; the source card has no Fanfare keyword.",
+      "The activated cost is encoded incorrectly. Replace the custom cost fields with the implemented activated cost shape using banishFromExArea, e.g. {\"banishFromExArea\":{\"filter\":{\"trait\":\"Pixie\",\"cardType\":\"follower\"},\"count\":1}} as the cost."
+    ]
+  }
+}

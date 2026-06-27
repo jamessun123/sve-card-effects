@@ -1,0 +1,66 @@
+{
+  "Enforcer": {
+    "source": {
+      "name": "Enforcer",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Machina / Golem",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "Rush. [fanfare] If there are at least 3 Machina cards in your EX area, give this [attack]+3 and Assail. [lastwords] Put an Assembly Droid token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-047EN.png",
+      "cardNos": [
+        "BP17-047EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "exAreaTraitMin",
+              "trait": "Machina",
+              "count": 3
+            },
+            "then": {
+              "op": "buff",
+              "atk": 3,
+              "def": 0,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Assembly Droid",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare effect is incomplete: after giving this follower [attack]+3, it should also give this follower Assail. Add a grantKeyword effect for keyword \"assail\" targeting self within the Fanfare resolution."
+    ]
+  }
+}

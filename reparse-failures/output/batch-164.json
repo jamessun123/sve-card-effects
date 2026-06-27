@@ -1,0 +1,29 @@
+{
+  "Nirle, Draconic Prodigy": {
+    "evolvesTo": "Nirle, Draconic Prodigy Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "overflow"
+        },
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Mount"
+          },
+          "then": {
+            "op": "increaseMaxPp",
+            "amount": 1
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

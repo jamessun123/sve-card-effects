@@ -1,0 +1,118 @@
+{
+  "All-Feeling Divine": {
+    "keywords": [],
+    "evolvesTo": "All-Feeling Divine Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "summon",
+          "tokenName": "Fox of Invitation",
+          "count": 1,
+          "zone": "field"
+        }
+      },
+      {
+        "timing": "activated",
+        "activateFrom": "cemetery",
+        "cost": {
+          "pp": 2,
+          "banishSelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "summon",
+              "tokenName": "Fox of Invitation",
+              "count": 1,
+              "zone": "field"
+            },
+            {
+              "op": "buffFieldTrait",
+              "identityName": "Fox of Invitation",
+              "atk": 2,
+              "def": 1,
+              "otherOnly": false
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Allure of Shadows": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 4,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "necrocharge",
+                "count": 10
+              },
+              "then": {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "identityName": "Luna, Soul Keeper"
+                },
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Alpha Drive": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "choose",
+          "min": 1,
+          "max": 1,
+          "options": [
+            {
+              "label": "Return Machina from cemetery",
+              "effect": {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "trait": "Machina",
+                  "cardType": "follower"
+                },
+                "to": "hand"
+              }
+            },
+            {
+              "label": "Summon Mono from cemetery",
+              "effect": {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "identityName": "Mono, Garnet Rebel"
+                },
+                "count": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

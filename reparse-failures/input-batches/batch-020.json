@@ -1,0 +1,169 @@
+{
+  "Ardent Torch": {
+    "source": {
+      "name": "Ardent Torch",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Omen / Wyrmkin",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select a follower on your field. Deal 1 damage to it and each enemy leader, and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-387EN.png",
+      "cardNos": [
+        "PR-387EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 1,
+                "followersOnly": false
+              },
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell effect incorrectly deals 1 damage to all enemies and then again to the enemy leader; it should deal 1 damage only to the selected follower on your field and to the enemy leader, then draw 1 card. Replace the middle damage steps with a single enemyLeader damage effect and remove the all-enemies damage step."
+    ]
+  },
+  "Aria, Lady of the Woods Evolved": {
+    "source": {
+      "name": "Aria, Lady of the Woods Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Pixie / Princess",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "-",
+        "attack": "1",
+        "defense": "1",
+        "effect": "On Evolve - Summon a Fairy token. On Super-Evolve - Give each Pixie token follower on your field and in your EX area [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-002EN.png",
+      "cardNos": [
+        "BP16-002EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Aria, Lady of the Woods",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fairy",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "onSuperEvolve",
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": "Pixie",
+            "atk": 1,
+            "def": 1,
+            "otherOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Super-Evolve effect is encoded too broadly and incorrectly excludes self. Source says 'Give each Pixie token follower on your field and in your EX area [attack]+1/[defense]+1.' It should affect Pixie token followers only, include EX area cards, and not use otherOnly unless the source says 'other'."
+    ]
+  },
+  "Arion": {
+    "source": {
+      "name": "Arion",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "6",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Rush. [lastwords] Select an [abysscraft] follower that costs 5 or less in your cemetery and summon it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-080EN.png",
+      "cardNos": [
+        "BP08-080EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "cardClass": "abyss",
+              "cardType": "follower",
+              "maxCost": 5
+            },
+            "to": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect uses tutorFromCemetery to field, but source says to select an Abysscraft follower in your cemetery and summon it. It should be encoded as a summon-from-cemetery effect selecting an Abysscraft follower that costs 5 or less, not as adding/moving with tutorFromCemetery."
+    ]
+  }
+}

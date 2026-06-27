@@ -1,0 +1,212 @@
+{
+  "Embracing Wings": {
+    "source": {
+      "name": "Embracing Wings",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "Omen / Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field. Destroy it, deal 2 damage to your leader, and select up to 1 Valnareik, Omen of Lust in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-084EN.png",
+      "cardNos": [
+        "BP05-084EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "selfLeader"
+                }
+              },
+              {
+                "op": "tutorFromCemetery",
+                "filter": {
+                  "identityName": "Valnareik, Omen of Lust"
+                },
+                "to": "hand"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery retrieval should be optional ('select up to 1'); encode the last step as an optional cemetery tutor rather than a mandatory tutorFromCemetery to hand."
+    ]
+  },
+  "Emerald Wildfox": {
+    "source": {
+      "name": "Emerald Wildfox",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Fae-Touched / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[fanfare] Draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-018EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare should not be listed in keywords; keep the fanfare ability only and remove 'fanfare' from keywords."
+    ]
+  },
+  "Emmylou, Witch of Wonder": {
+    "source": {
+      "name": "Emmylou, Witch of Wonder",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Choose 1. (1) Summon a Magic Sediment token. (2) Earth Rite: Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-053EN.png",
+      "cardNos": [
+        "BP16-053EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon a Magic Sediment token",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Magic Sediment",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Earth Rite - Deal 3 damage to an enemy follower",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second choice is missing the Earth Rite condition/cost; encode option 2 so it only resolves with Earth Rite (1), e.g. using an if/removeCounter style Earth Rite implementation before dealing 3 damage."
+    ]
+  },
+  "Empyreal Swordsman": {
+    "source": {
+      "name": "Empyreal Swordsman",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "5",
+        "attack": "5",
+        "defense": "4",
+        "effect": "At the start of your end phase, select an enemy follower on the field. Deal 4 damage to it and 2 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-023EN.png",
+      "cardNos": [
+        "BP05-023EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The start-of-end ability is incomplete; after dealing 4 damage to the selected enemy follower, it should also deal 2 damage to that follower's leader. Encode this with damageFollowerAndLeader or an equivalent sequence that includes both damages."
+    ]
+  }
+}

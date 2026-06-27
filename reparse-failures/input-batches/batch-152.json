@@ -1,0 +1,216 @@
+{
+  "Mio Honda [Mermaid Star]": {
+    "source": {
+      "name": "Mio Honda [Mermaid Star]",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Rush. [fanfare] Look at the top 2 cards of your deck. You may summon a Passion follower from among them. Bury the rest. [act] [cost02], Lesson (2): Look at the top 2 cards of your deck. You may summon a Passion follower from among them. Bury the rest."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-465EN.png",
+      "cardNos": [
+        "PR-465EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "Passion",
+              "cardType": "follower"
+            },
+            "lookAt": 2,
+            "maxTotalCost": 6,
+            "remainderTo": "cemetery"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2
+          },
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "Passion",
+              "cardType": "follower"
+            },
+            "lookAt": 2,
+            "maxTotalCost": 6,
+            "remainderTo": "cemetery"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword.",
+      "The Fanfare effect incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; the card says you may summon a Passion follower from among the top 2 cards with no cost limit, so it should summon at most 1 matching Passion follower from the looked-at cards and bury the rest.",
+      "The activated ability is missing the Lesson (2) cost. In addition to paying 2 PP, it should require banishing 2 Magical Item tokens/cards from your EX area.",
+      "The activated ability also incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; it should summon at most 1 Passion follower from among the top 2 cards, then bury the rest."
+    ]
+  },
+  "Mio Honda [Positive Passion]": {
+    "source": {
+      "name": "Mio Honda [Positive Passion]",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Legendary",
+        "cardSet": "Crossover Starter Deck “Passion”",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Rush. [fanfare] Look at the top 2 cards of your deck. You may summon a Passion follower from among them. Bury the rest. [act] [cost02], Lesson (2): Look at the top 2 cards of your deck. You may summon a Passion follower from among them. Bury the rest."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02c/CSD02c-001EN.png",
+      "cardNos": [
+        "CSD02c-001EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "Passion",
+              "cardType": "follower"
+            },
+            "lookAt": 2,
+            "maxTotalCost": 6,
+            "remainderTo": "cemetery"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2
+          },
+          "effect": {
+            "op": "searchDeckSummonMultiple",
+            "filter": {
+              "trait": "Passion",
+              "cardType": "follower"
+            },
+            "lookAt": 2,
+            "maxTotalCost": 6,
+            "remainderTo": "cemetery"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword.",
+      "The Fanfare effect incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; the card says you may summon a Passion follower from among the top 2 cards with no cost limit, so it should summon at most 1 matching Passion follower from the looked-at cards and bury the rest.",
+      "The activated ability is missing the Lesson (2) cost. In addition to paying 2 PP, it should require banishing 2 Magical Item tokens/cards from your EX area.",
+      "The activated ability also incorrectly uses `searchDeckSummonMultiple` with `maxTotalCost: 6`; it should summon at most 1 Passion follower from among the top 2 cards, then bury the rest."
+    ]
+  },
+  "Mirei Hayasaka [individuals]": {
+    "source": {
+      "name": "Mirei Hayasaka [individuals]",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Legendary",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "While there are at least 10 iM@S CG cards in your cemetery, this has Storm. [fanfare] Bury the top 2 cards of your deck. Strike - Select an enemy follower on the field and, if there are at least 10 iM@S CG cards in your cemetery, deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-049EN.png",
+      "cardNos": [
+        "ECP02-049EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "iM@S CG",
+            "count": 10
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "mill",
+            "count": 2
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "iM@S CG",
+              "count": 10
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `storm` from `keywords`; Storm is conditional here ('While there are at least 10 iM@S CG cards in your cemetery, this has Storm') and should only be represented by the passive conditional ability.",
+      "Remove `fanfare` from `keywords`; Fanfare should be represented as an ability timing, not a keyword."
+    ]
+  }
+}

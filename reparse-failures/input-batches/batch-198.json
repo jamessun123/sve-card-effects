@@ -1,0 +1,62 @@
+{
+  "Samurai": {
+    "source": {
+      "name": "Samurai",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[act][cost03]: Give this follower Storm and Bane."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-030EN.png",
+      "cardNos": [
+        "BP02-030EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "bane",
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card has an incorrect keyword entry: remove 'fanfare' from keywords, since the source text has no Fanfare ability."
+    ]
+  }
+}

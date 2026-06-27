@@ -1,0 +1,130 @@
+{
+  "Kyoko Igarashi [P.C.S.]": {
+    "source": {
+      "name": "Kyoko Igarashi [P.C.S.]",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Legendary",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Select an enemy follower on the field and give it [attack]-1/[defense]-1 for every Cute follower on your field. [act] Lesson (1): Select an enemy follower on the field and give it [attack]-1/[defense]-1. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-002EN.png",
+      "cardNos": [
+        "CSD02a-002EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Cute",
+              "multiplier": -1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "Lesson (1)",
+            "cost": {
+              "op": "spendPp",
+              "amount": 1
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": -1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be represented by the fanfare-timed ability, not as a keyword.",
+      "The fanfare debuff is encoded as dealDamage, but the source gives the selected enemy follower [attack]-1/[defense]-1 for every Cute follower on your field. Encode this as a stat reduction effect on the target with dynamic atk and def equal to negative Cute follower count.",
+      "The activated ability cost is incorrect: Lesson (1) should be represented as an activated ability with a 1 PP cost, not cost.pp 0 plus optionalCost/spendPp.",
+      "The activated ability effect is encoded as dealDamage -1, but it should give the selected enemy follower [attack]-1/[defense]-1. Encode it as a target buff/stat reduction with atk -1 and def -1.",
+      "The activated ability is missing the once-per-turn restriction from \"Activate only once per turn.\" Add oncePerTurn: true to the activated ability."
+    ]
+  },
+  "Ladica, Verdant Claw": {
+    "source": {
+      "name": "Ladica, Verdant Claw",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Natura / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. [fanfare] Look at the top 5 cards of your deck. You may reveal a Natura card from among them and add it to your hand. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-002EN.png",
+      "cardNos": [
+        "BP17-002EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Ladica, Verdant Claw Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Natura"
+            },
+            "lookAt": 5,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"evolve\" and \"fanfare\" from keywords; the evolve cost line should be represented by evolveCost/evolvesTo and Fanfare by the fanfare ability, not keyword entries."
+    ]
+  }
+}

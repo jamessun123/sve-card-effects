@@ -1,0 +1,332 @@
+{
+  "Syoko Hoshi": {
+    "source": {
+      "name": "Syoko Hoshi",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Passion”",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. This follower can't attack enemies. At the start of your end phase, give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02c/CSD02c-014EN.png",
+      "cardNos": [
+        "CP02-083EN",
+        "CSD02c-014EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Syoko Hoshi Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "cannotAttack"
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive ability is too broad: \"This follower can't attack enemies\" does not mean it can't attack at all. Replace the current cannotAttack encoding with an effect that only prevents attacks against enemy followers/leaders, not all attacks."
+    ]
+  },
+  "Syoko Hoshi Evolved": {
+    "source": {
+      "name": "Syoko Hoshi Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Passion”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "2",
+        "effect": "At the start of your end phase, deal 1 damage to each enemy leader. [lastwords] Deal 1 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02c/CSD02c-015EN.png",
+      "cardNos": [
+        "CP02-084EN",
+        "CSD02c-015EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Syoko Hoshi",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Both abilities are encoded as dealDamageAllEnemies, which damages enemy followers and the enemy leader. The source says \"deal 1 damage to each enemy leader,\" so each ability should instead deal 1 damage only to enemy leaders."
+    ]
+  },
+  "Syoko Hoshi [individuals]": {
+    "source": {
+      "name": "Syoko Hoshi [individuals]",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Passion",
+        "rarity": "Legendary",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[fanfare] Bury the top 2 cards of your deck. [act] [cost01], Lesson (2), [engage]: Select an iM@S CG follower in your cemetery that costs 2 or less and put it into your EX area. It costs 2 less to play this turn. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-048EN.png",
+      "cardNos": [
+        "ECP02-048EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "mill",
+            "count": 2
+          }
+        },
+        {
+          "timing": "activated",
+          "activateFrom": "field",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 1,
+            "engage": true,
+            "burySelf": true
+          },
+          "condition": {
+            "type": "ownCemeteryMin",
+            "count": 10
+          },
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "cardClass": "abyss",
+              "cardType": "follower",
+              "maxCost": 2,
+              "trait": "iM@S CG"
+            },
+            "to": "exArea",
+            "playCostReduction": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost incorrectly includes burySelf; the source cost is only [cost01], Lesson (2), [engage]. Remove burySelf from the cost.",
+      "The activated ability condition is encoded as ownCemeteryMin 10, but Lesson (2) is not the same as having 10 cards in your cemetery. Replace this with the correct Lesson (2) condition/cost handling."
+    ]
+  },
+  "Taketsumi, Aconite Paladin": {
+    "source": {
+      "name": "Taketsumi, Aconite Paladin",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Festive / Commander",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[adv] [cost04], banish this: You may summon a Taketsumi, Creator of Paradise from your evolve deck. Activate only if there are at least 5 Festive cards or at least 10 [swordcraft] cards in your cemetery. [fanfare] Draw a card. Discard a card. Put a Glittering Gold token into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-018EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "advanced",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 4,
+            "banishSelf": true
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "conditionAny",
+              "conditions": [
+                {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Festive",
+                  "count": 5
+                },
+                {
+                  "type": "ownCemeteryClassMin",
+                  "cardClass": "sword",
+                  "count": 10
+                }
+              ]
+            },
+            "then": {
+              "op": "summonFromEvolveDeck",
+              "filter": {
+                "identityName": "Taketsumi, Creator of Paradise ADVANCED"
+              }
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 1
+              },
+              {
+                "op": "discard",
+                "count": 1
+              },
+              {
+                "op": "summon",
+                "tokenName": "Glittering Gold",
+                "count": 1,
+                "zone": "exArea"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The ADVANCED activated ability should only be usable if the cemetery condition is met. Move the condition to the ability's condition field instead of resolving it with an in-effect if.",
+      "The summon-from-evolve-deck filter is incorrect: it should reference the actual card name/identity \"Taketsumi, Creator of Paradise ADVANCED\" exactly as a summon target from the evolve deck."
+    ]
+  },
+  "Taketsumi, Creator of Paradise ADVANCED": {
+    "source": {
+      "name": "Taketsumi, Creator of Paradise ADVANCED",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Advanced",
+        "trait": "Festive / Commander",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[fanfare] Summon 2 Sootspawn tokens. [act] [engage]: Select an enemy follower on the field. Deal 5 damage to it and 3 damage to its leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-019EN"
+      ]
+    },
+    "previousParsed": {
+      "specialType": "advanced",
+      "keywords": [
+        "fanfare",
+        "advanced"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Sootspawn",
+            "count": 2,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated damage ability is encoded incorrectly: the source says \"Select an enemy follower on the field. Deal 5 damage to it and 3 damage to its leader.\" The 3 damage must go to that follower's leader, not always the enemy leader in a separate untargeted step. Encode this with damageFollowerAndLeader using the selected enemy follower."
+    ]
+  }
+}

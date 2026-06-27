@@ -1,0 +1,237 @@
+{
+  "Tart Man": {
+    "source": {
+      "name": "Tart Man",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Lightborne",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Search your deck for any card, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-108EN.png",
+      "cardNos": [
+        "BP08-108EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeckAny",
+            "to": "hand",
+            "optional": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect is missing the required shuffle after tutoring. Wrap tutorFromDeckAny in a sequence and add shuffleDeck as the second step."
+    ]
+  },
+  "Tartarus, the Tormentor Evolved": {
+    "source": {
+      "name": "Tartarus, the Tormentor Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "-",
+        "attack": "8",
+        "defense": "8",
+        "effect": "On Evolve - Select a Departed follower in your cemetery and summon it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-073EN.png",
+      "cardNos": [
+        "BP08-073EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "evolvesFrom": "Tartarus, the Tormentor",
+      "specialType": "evolved",
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Departed",
+              "cardType": "follower"
+            },
+            "to": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incorrectly encoded as tutorFromCemetery to field. It should summon a Departed follower from your cemetery. Replace with summonFromCemetery using filter { trait: 'Departed', cardType: 'follower' } and count 1."
+    ]
+  },
+  "Teachings of Creation": {
+    "source": {
+      "name": "Teachings of Creation",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Earth Sigil",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-075EN.png",
+      "cardNos": [
+        "BP01-075EN",
+        "PR-298EN",
+        "SDD03-019EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Stack keyword/effect is missing. Add the implemented stack ability, e.g. a passive/addStack representation corresponding to 'Stack.'"
+    ]
+  },
+  "Technolord": {
+    "source": {
+      "name": "Technolord",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Machina / Deity",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "6",
+        "attack": "6",
+        "defense": "6",
+        "effect": "[fanfare] Banish 3 Machina cards from your cemetery: Choose up to 2 of the following. (1) Select an enemy follower on the field and destroy it. (2) Select an enemy amulet on the field and destroy it. (3) Deal 3 damage to each enemy leader. (4) Search your deck for a Machina card not named Technolord, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-103EN.png",
+      "cardNos": [
+        "BP07-103EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish 3 Machina cards from your cemetery",
+            "cost": {
+              "op": "banishFromCemetery",
+              "filter": {
+                "trait": "Machina"
+              },
+              "count": 3
+            },
+            "then": {
+              "op": "chooseMultiple",
+              "min": 0,
+              "max": 2,
+              "options": [
+                {
+                  "label": "Destroy an enemy follower",
+                  "effect": {
+                    "op": "destroy",
+                    "targets": {
+                      "type": "enemyFollower",
+                      "count": 1
+                    }
+                  }
+                },
+                {
+                  "label": "Destroy an enemy amulet",
+                  "effect": {
+                    "op": "destroy",
+                    "targets": {
+                      "type": "enemyFieldCard",
+                      "count": 1
+                    }
+                  }
+                },
+                {
+                  "label": "Deal 3 damage to each enemy leader",
+                  "effect": {
+                    "op": "dealDamage",
+                    "amount": 3,
+                    "targets": {
+                      "type": "enemyLeader"
+                    }
+                  }
+                },
+                {
+                  "label": "Search your deck for a Machina card not named Technolord",
+                  "effect": {
+                    "op": "searchDeckChoose",
+                    "filter": {
+                      "trait": "Machina",
+                      "excludeIdentityName": "Technolord"
+                    },
+                    "lookAt": 40,
+                    "to": "hand",
+                    "optional": false,
+                    "reveal": true,
+                    "remainderTo": "deckBottom"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Option (2) is too broad: enemyFieldCard can target followers or amulets, but the source specifically says 'Select an enemy amulet on the field and destroy it.' Restrict this option to enemy amulets only.",
+      "Option (4) is incorrectly encoded as searchDeckChoose with remainderTo deckBottom. The source is a full-deck search, add to hand, then shuffle. Replace with tutorFromDeck using filter { trait: 'Machina', excludeIdentityName: 'Technolord' }, to: 'hand', reveal: true, followed by shuffleDeck in sequence."
+    ]
+  }
+}

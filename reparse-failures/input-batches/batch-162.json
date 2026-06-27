@@ -1,0 +1,304 @@
+{
+  "Nelcha, Fashion Hazard": {
+    "source": {
+      "name": "Nelcha, Fashion Hazard",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf / Cutthroat",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. Strike - Select an enemy follower on the field. If there are at least 5 [forestcraft] spells with different names in your cemetery, give it [attack]-2/[defense]-2 and give this follower [attack]+2/[defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-005EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Nelcha, Fashion Hazard Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "if",
+                "condition": {
+                  "type": "spellchain",
+                  "count": 5
+                },
+                "then": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "buff",
+                      "atk": -2,
+                      "def": -2,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    },
+                    {
+                      "op": "buff",
+                      "atk": 2,
+                      "def": 2,
+                      "targets": {
+                        "type": "self"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Strike ability is missing the required target selection before the condition; encode it as a strike effect that selects an enemy follower, then if spellchain(5) applies [attack]-2/[defense]-2 to that selected follower and [attack]+2/[defense]+2 to this follower."
+    ]
+  },
+  "Nene Kurihara": {
+    "source": {
+      "name": "Nene Kurihara",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "5",
+        "attack": "3",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. Ward. [fanfare] Select an enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-009EN.png",
+      "cardNos": [
+        "CSD02a-009EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Nene Kurihara Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `fanfare` from `keywords`; Fanfare should be represented by the existing `timing: \"fanfare\"` ability, not as a keyword."
+    ]
+  },
+  "Nene Kurihara Evolved": {
+    "source": {
+      "name": "Nene Kurihara Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "5",
+        "effect": "Ward. On Evolve - [cost03]: Select a Cute follower in your cemetery and summon it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-010EN.png",
+      "cardNos": [
+        "CSD02a-010EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Nene Kurihara",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Cute",
+              "cardType": "follower"
+            },
+            "to": "field"
+          },
+          "cost": {
+            "pp": 3
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve ability incorrectly uses `tutorFromCemetery` to `field`; it should summon the selected Cute follower from your cemetery, so encode it with `summonFromCemetery` (filter trait Cute, cardType follower, count 1) and keep the [cost03] payment."
+    ]
+  },
+  "Neptune": {
+    "source": {
+      "name": "Neptune",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart / Marine",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve][cost02]: Evolve this follower. Ward. [fanfare] Summon a Megalorca token. While this card is on your field, your Megalorca tokens have Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-055EN.png",
+      "cardNos": [
+        "BP02-055EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Neptune Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Megalorca",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "identityName": "Megalorca"
+            },
+            "effect": {
+              "op": "grantKeyword",
+              "keyword": "rush",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Passive Megalorca-granting ability is encoded incorrectly as `grantOnCardPlayed`; the source is a continuous field effect that all your Megalorca tokens have Rush while this card is on your field. Encode it as an aura/passive keyword grant to your Megalorca followers (for example with `auraGrantKeyword` or equivalent restricted to Megalorca), not only when they are played."
+    ]
+  },
+  "Neptune Evolved": {
+    "source": {
+      "name": "Neptune Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Dragonheart / Marine",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "Ward. On Evolve: Summon a Megalorca token. While this card is on your field, your Megalorca tokens have Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-056EN.png",
+      "cardNos": [
+        "BP02-056EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Neptune",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Megalorca",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "identityName": "Megalorca"
+            },
+            "effect": {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Passive Megalorca-granting ability is encoded incorrectly as `grantOnCardPlayed`; the source is a continuous field effect that all your Megalorca tokens have Storm while this card is on your field. Encode it as an aura/passive keyword grant to your Megalorca followers (for example with `auraGrantKeyword` or equivalent restricted to Megalorca), not only when they are played."
+    ]
+  }
+}

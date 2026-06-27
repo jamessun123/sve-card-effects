@@ -1,0 +1,431 @@
+{
+  "Arthurian Light": {
+    "source": {
+      "name": "Arthurian Light",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Amulet",
+        "trait": "Commander",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act][cost01], [engage]: Summon a Knight token and give it Storm. [act][cost02], [engage]: Select an enemy follower on the field and engage it. [act][cost03], [engage]: Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-041EN.png",
+      "cardNos": [
+        "BP01-041EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 1,
+            "engage": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "Knight",
+                "count": 1,
+                "zone": "field"
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "engage": true
+          },
+          "effect": {
+            "op": "engage",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 3,
+            "engage": true
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'fanfare' from keywords; the source card has only activated abilities and no Fanfare."
+    ]
+  },
+  "Aryll, Moonstruck Vampire": {
+    "source": {
+      "name": "Aryll, Moonstruck Vampire",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Vampire",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Summon 2 Forest Bat tokens. [act] [engage]: Select a Vampire token follower on your field and give it [attack]+1/[defense]+1, Rush, and Drain."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-091EN.png",
+      "cardNos": [
+        "BP16-091EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Forest Bat",
+            "count": 2,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Vampire"
+                  }
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "rush",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Vampire"
+                  }
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "drain",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "trait": "Vampire"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded too broadly as any self follower with trait Vampire. It should target a Vampire token follower on your field, so the target selector/filter should restrict to token followers with trait Vampire.",
+      "The activated ability uses separate target selectors for buff, Rush, and Drain, which can allow different followers to be chosen for each step. It should target the same selected Vampire token follower for all three effects, e.g. by applying the buff and both keyword grants to one chosen target."
+    ]
+  },
+  "Assault Dragoon": {
+    "source": {
+      "name": "Assault Dragoon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. [act] [engage]: Select a [dragoncraft] follower that costs 2 or less on your field. Give it [attack]+1/[defense]+1 and Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-059EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolvesTo": "Assault Dragoon Evolved",
+      "evolveCost": 2,
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "dragon",
+                    "maxCost": 2
+                  }
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "dragon",
+                    "maxCost": 2
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability uses separate target selectors for the buff and Storm grant, which can allow different followers to be chosen for each step. It should target the same selected Dragoncraft follower that costs 2 or less on your field for both effects."
+    ]
+  },
+  "Assault Dragoon Evolved": {
+    "source": {
+      "name": "Assault Dragoon Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Dragonheart",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Select a [dragoncraft] follower that costs 2 or less in your cemetery and summon it. [act] [engage]: Select a [dragoncraft] follower that costs 2 or less on your field. Give it [attack]+1/[defense]+1 and Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-060EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "evolvesFrom": "Assault Dragoon",
+      "specialType": "evolved",
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "count": 1
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "dragon",
+                    "maxCost": 2
+                  }
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "cardClass": "dragon",
+                    "maxCost": 2
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability uses separate target selectors for the buff and Storm grant, which can allow different followers to be chosen for each step. It should target the same selected Dragoncraft follower that costs 2 or less on your field for both effects."
+    ]
+  },
+  "Assault Jaguar": {
+    "source": {
+      "name": "Assault Jaguar",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Hunter",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "4",
+        "defense": "1",
+        "effect": "Rush. [lastwords] Look at the top 2 cards of your deck. You may reveal a Hunter card from among them and add it to your hand. Bury the rest."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-010EN.png",
+      "cardNos": [
+        "BP06-010EN",
+        "PR-155EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Hunter"
+            },
+            "lookAt": 2,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "cemetery"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'lastWords' from keywords; Last Words should be represented as an ability timing, not as a printed keyword entry."
+    ]
+  },
+  "Assault Tentacle": {
+    "source": {
+      "name": "Assault Tentacle",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Token",
+        "trait": "Machina / Supreme",
+        "rarity": "-",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "4",
+        "defense": "2",
+        "effect": "Storm. [lastwords] Select an enemy follower on the field and deal it 4 damage."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-T04EN",
+        "BP17-T15EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect keyword 'lastWords' from keywords; Last Words should be represented as an ability timing, not as a printed keyword entry."
+    ]
+  }
+}

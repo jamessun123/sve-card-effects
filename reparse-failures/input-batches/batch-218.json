@@ -1,0 +1,156 @@
+{
+  "Starseer's Telescope": {
+    "source": {
+      "name": "Starseer's Telescope",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Amulet",
+        "trait": "Mage / Earth Sigil / Celestial",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "0",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Stack. [fanfare] Look at the top card of your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-056EN.png",
+      "cardNos": [
+        "BP04-056EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "peekDeck",
+            "count": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card is missing the printed Stack keyword/effect. Add an ability or keyword representing Stack, such as a passive addStack-compatible Earth Sigil stack implementation, in addition to the fanfare peek effect."
+    ]
+  },
+  "Steel Demolitionist": {
+    "source": {
+      "name": "Steel Demolitionist",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Mercenary / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[fanfare] Banish a card in your EX area: Select an enemy leader or enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-116EN.png",
+      "cardNos": [
+        "BP05-116EN",
+        "PR-118EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish a card in your EX area",
+            "cost": {
+              "op": "banishFromExArea",
+              "count": 1
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFieldCard",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The damage target is encoded as enemyFieldCard, which excludes the enemy leader. The source says 'enemy leader or enemy follower'. Change the effect to target either enemy leader or enemy follower, e.g. with a choose effect or a target selector that supports leader-or-follower targeting."
+    ]
+  },
+  "Steelcap Pachycephalosaurus Evolved": {
+    "source": {
+      "name": "Steelcap Pachycephalosaurus Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Natura / Wyrmkin",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Select an enemy follower on the field and deal it 2 damage. If you've discarded a card this turn, deal 4 damage instead. [lastwords] Summon a Naterran Great Tree token."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-056EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Steelcap Pachycephalosaurus",
+      "specialType": "evolved",
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Naterran Great Tree",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect is incomplete. The source says to deal 2 damage to an enemy follower, or 4 damage instead if you've discarded a card this turn. Encode this with an if condition {\"type\":\"discardedThisTurn\"} that deals 4 damage in the then branch and 2 damage in the else branch to the selected enemy follower."
+    ]
+  }
+}

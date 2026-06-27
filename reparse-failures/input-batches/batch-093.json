@@ -1,0 +1,155 @@
+{
+  "Ginsetsu, Terror Banquet": {
+    "source": {
+      "name": "Ginsetsu, Terror Banquet",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Arena / Yokai",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "3",
+        "defense": "5",
+        "effect": "[fanfare] Summon 2 One-Tailed Fox tokens. [fanfare] [cost02]: Summon a One-Tailed Fox token. Give each other Yokai follower on your field [attack]+1. Whenever another Yokai follower you control leaves the field, select an enemy follower on the field. Deal 1 damage to it and its leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-079EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summon",
+                "tokenName": "One-Tailed Fox",
+                "count": 2,
+                "zone": "exArea"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "cost": {
+              "op": "spendPp",
+              "amount": 2
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "summon",
+                  "tokenName": "One-Tailed Fox",
+                  "count": 1,
+                  "zone": "exArea"
+                },
+                {
+                  "op": "buffFieldTrait",
+                  "trait": "Yokai",
+                  "atk": 1,
+                  "def": 0,
+                  "excludeSelf": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "onLeaveField",
+          "effect": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 1,
+            "leaderAmount": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The first fanfare incorrectly summons 2 One-Tailed Fox tokens into the EX area. It should summon 2 One-Tailed Fox tokens onto your field (`zone: \"field\"`).",
+      "The optional [cost02] fanfare incorrectly summons the extra One-Tailed Fox token into the EX area. It should summon that token onto your field (`zone: \"field\"`).",
+      "The last ability is encoded with the wrong timing and missing restrictions/targeting. It should trigger when another Yokai follower you control leaves the field, not on this card's own `onLeaveField`, and it should select an enemy follower, then deal 1 damage to it and its leader.",
+      "The last ability uses invalid/inaccurate effect encoding. Replace `dealDamageFollowerAndLeader`/`dealDamageOtherFollowers` style with `damageFollowerAndLeader` including the required enemy follower selection, or equivalent correct targeting structure supported by the DSL."
+    ]
+  },
+  "Gliesaray": {
+    "source": {
+      "name": "Gliesaray",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Omen",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field and deal it 2 damage. If there is a Gilnelise, Omen of Craving on your field, banish the selected follower instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-117EN.png",
+      "cardNos": [
+        "BP05-117EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal it 2 damage",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 2,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Banish it instead",
+                "effect": {
+                  "op": "banish",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is incorrectly encoded as an unconditional `choose` between dealing 2 damage and banishing. It should always select an enemy follower and deal it 2 damage, then if there is a Gilnelise, Omen of Craving on your field, banish that selected follower instead.",
+      "The card is missing the named-follower condition. Encode the banish clause with a condition like `namedFollowerOnFieldByName` for `Gilnelise, Omen of Craving` after selecting the target."
+    ]
+  }
+}

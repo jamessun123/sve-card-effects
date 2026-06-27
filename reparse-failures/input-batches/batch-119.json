@@ -1,0 +1,58 @@
+{
+  "Juggling Moggy": {
+    "source": {
+      "name": "Juggling Moggy",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Mage / Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] [cost04], Earth Rite: Select an enemy follower that costs 4 or less on the field and banish it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-044EN.png",
+      "cardNos": [
+        "BP10-044EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Juggling Moggy Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "earthRite",
+              "count": 1
+            },
+            "then": {
+              "op": "banish",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1,
+                "maxCost": 4
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare ability is missing the [cost04] activation requirement; encode the fanfare with a 4 PP cost in addition to the Earth Rite condition."
+    ]
+  }
+}

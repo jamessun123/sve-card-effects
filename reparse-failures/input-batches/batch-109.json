@@ -1,0 +1,202 @@
+{
+  "Holylord Eachtar": {
+    "source": {
+      "name": "Holylord Eachtar",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith / Luminary / Lightborne",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "7",
+        "attack": "5",
+        "defense": "6",
+        "effect": "Ward. [fanfare] Select up to 2 [havencraft] followers that cost 2 or less in your cemetery and summon them. While this card is on your field, each [havencraft] follower on your field has Rush. [act] Banish 3 [havencraft] followers from your cemetery: Give each other follower on your field [attack]+1/[defense]+1. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-086EN.png",
+      "cardNos": [
+        "BP08-086EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "cardClass": "haven",
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "count": 2,
+            "maxTotalCost": 2
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "trait": "Havencraft",
+            "excludeSelf": false
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "banishFromCemetery": {
+              "cardClass": "haven"
+            },
+            "banishCount": 3
+          },
+          "oncePerTurn": true,
+          "effect": {
+            "op": "buffFieldTrait",
+            "cardClass": "haven",
+            "atk": 1,
+            "def": 1,
+            "excludeSelf": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare summon is encoded with `maxTotalCost: 2`, but the text says 'Select up to 2 Havencraft followers that cost 2 or less in your cemetery and summon them.' Remove `maxTotalCost`; each selected follower only needs individual `maxCost: 2` with count 2.",
+      "Rush aura is encoded with `trait: \"Havencraft\"`, but Havencraft is a class, not a trait. It should grant Rush to each Havencraft follower on your field by using `cardClass: \"haven\"` instead.",
+      "Activated cost is encoded incorrectly. The banish-from-cemetery cost should use the implemented cost shape `banishFromCemetery` with a `filter` and `count`, e.g. `{ \"banishFromCemetery\": { \"filter\": { \"cardClass\": \"haven\", \"cardType\": \"follower\" }, \"count\": 3 } }`.",
+      "Activated buff targets are wrong. The text says 'Give each other follower on your field +1/+1,' not each other Havencraft follower. Encode the effect so it buffs all other followers on your field, not class-limited followers."
+    ]
+  },
+  "Honest Cohort": {
+    "source": {
+      "name": "Honest Cohort",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Omen / Mage",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] Select an enemy follower on the field and deal it 3 damage. If there is a Raio, Omen of Truth on your field, deal 6 damage to the selected follower and 3 damage to its leader instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-050EN.png",
+      "cardNos": [
+        "BP05-050EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Raio, Omen of Truth"
+            },
+            "then": {
+              "op": "damageFollowerAndLeader",
+              "followerAmount": 6,
+              "leaderAmount": 3
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Raio mode is encoded without selecting the enemy follower target. The card says to deal 6 damage to the selected follower and 3 damage to its leader instead. Encode the Raio branch so it includes the selected enemy follower target for the 6 damage plus 3 to that follower's leader."
+    ]
+  },
+  "Honorable Thief": {
+    "source": {
+      "name": "Honorable Thief",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Thief",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] Each opponent buries the top 2 cards of their deck. Then, if there are at least 10 cards in opponents' cemeteries, evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-031EN.png",
+      "cardNos": [
+        "BP10-031EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Honorable Thief Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "millOpponent",
+            "count": 2
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "opponentCemeteryMin",
+            "count": 10
+          },
+          "effect": {
+            "op": "autoEvolveIf",
+            "condition": {
+              "type": "opponentCemeteryMin",
+              "count": 10
+            },
+            "triggerOnEvolve": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is split into two separate abilities, but the text is sequential: each opponent buries the top 2 cards of their deck, then if there are at least 10 cards in opponents' cemeteries, evolve this follower. Encode this as one `fanfare` ability using `sequence` with `millOpponent` followed by an `if` check.",
+      "The auto-evolve clause is redundantly gated twice. Replace the current second fanfare ability with an `if` effect inside the single fanfare sequence whose `then` evolves this follower.",
+      "Auto-evolve is encoded with `triggerOnEvolve: true`, which is not part of the source text. Remove that flag unless required for a distinct printed clause."
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "Yukari Mizumoto": {
+    "source": {
+      "name": "Yukari Mizumoto",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Choose one of the following. (1) Select an enemy amulet on the field and destroy it. (2) Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-016EN.png",
+      "cardNos": [
+        "CP02-065EN",
+        "CSD02a-016EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Destroy an enemy amulet",
+                "effect": {
+                  "op": "destroy",
+                  "targets": {
+                    "type": "enemyFieldCard",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Draw a card",
+                "effect": {
+                  "op": "draw",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Option (1) is too broad: it should destroy an enemy amulet on the field, not any enemy field card. Change the target/effect to an amulet-only destruction effect; if no amulet-only target selector exists, the engine should add one and this card should use it."
+    ]
+  }
+}

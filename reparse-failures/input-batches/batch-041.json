@@ -1,0 +1,313 @@
+{
+  "Charming Gentlemouse Evolved": {
+    "source": {
+      "name": "Charming Gentlemouse Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Arcanaform",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve - Select an enemy follower on the field and deal it damage equal to 2 times the number of cards named Charming Gentlemouse on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-048EN.png",
+      "cardNos": [
+        "BP06-048EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Charming Gentlemouse",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Charming Gentlemouse",
+              "multiplier": 2
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve damage amount is encoded with traitFieldCount using trait \"Charming Gentlemouse\", but the source counts cards named Charming Gentlemouse on your field. Encode the amount with namedIdentityFieldCount { \"identityName\": \"Charming Gentlemouse\", \"multiplier\": 2 } instead."
+    ]
+  },
+  "Checkmate": {
+    "source": {
+      "name": "Checkmate",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Chess",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] Banish this card from your cemetery: Select a Mystic King on your field and give it Storm. ---------- Deal each enemy follower on the field damage equal to the number of Chess cards in your cemetery."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-042EN.png",
+      "cardNos": [
+        "BP10-042EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "activateFrom": "cemetery",
+          "cost": {
+            "banishSelf": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "grantKeyword",
+                "keyword": "storm",
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1,
+                  "filter": {
+                    "identityName": "Mystic King"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": {
+              "op": "cemeteryFilterCount",
+              "filter": {
+                "trait": "Chess"
+              },
+              "divisor": 1
+            },
+            "followersOnly": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability incorrectly lists keyword \"activated\" in keywords; activated abilities should be represented only in abilities, so remove that keyword entry.",
+      "The activated ability's target selector is incorrect: it uses selfFollower with a nested filter, but the source says to select a Mystic King on your field. Target a self follower matching Mystic King correctly.",
+      "The spell damage effect is correct in substance, but if using cemeteryFilterCount for Chess cards in your cemetery, ensure it counts your cemetery's Chess cards exactly as written."
+    ]
+  },
+  "Chika Yokoyama": {
+    "source": {
+      "name": "Chika Yokoyama",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Gold",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] If there are at least 5 Cute cards in your cemetery, give this follower [attack]+1/[defense]+2 and Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-004EN.png",
+      "cardNos": [
+        "CSD02a-004EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Cute",
+              "count": 5
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 2,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Ward is encoded as a printed keyword, but the source grants Ward only if there are at least 5 Cute cards in your cemetery on fanfare. Remove ward from keywords and add a conditional grantKeyword { \"keyword\": \"ward\", \"targets\": { \"type\": \"self\" } } in the fanfare effect alongside the buff."
+    ]
+  },
+  "Chipper Skipper": {
+    "source": {
+      "name": "Chipper Skipper",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Elf",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this follower. Whenever a Mercenary follower is put onto your field, give it [attack]+1/[defense]+1 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-005EN.png",
+      "cardNos": [
+        "BP10-005EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Chipper Skipper Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Mercenary",
+              "cardType": "follower"
+            },
+            "effect": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "lastSummoned"
+              }
+            },
+            "oncePerTurn": false
+          }
+        },
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": []
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive ability is missing the Rush grant. Add grantKeyword { \"keyword\": \"rush\", \"targets\": { \"type\": \"lastSummoned\" } } together with the +1/+1 buff whenever a Mercenary follower enters your field.",
+      "The extra timing \"evolve\" ability with passiveKeywords [] is spurious and should be removed."
+    ]
+  },
+  "Chipper Skipper Evolved": {
+    "source": {
+      "name": "Chipper Skipper Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Arcana / Elf",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Look at the top 4 cards of your deck. You may put a follower that costs 2 or less from among them into your EX area. It costs 2 less to play this turn. Put the rest on the bottom of your deck in any order. Whenever a Mercenary follower is put onto your field, give it [attack]+1/[defense]+1 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-006EN.png",
+      "cardNos": [
+        "BP10-006EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Chipper Skipper",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardType": "follower",
+              "maxCost": 2
+            },
+            "lookAt": 4,
+            "to": "exArea",
+            "optional": true,
+            "playCostReduction": 2,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "trait": "Mercenary",
+              "cardType": "follower"
+            },
+            "effect": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "lastSummoned"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive ability is missing the Rush grant. Add grantKeyword { \"keyword\": \"rush\", \"targets\": { \"type\": \"lastSummoned\" } } together with the +1/+1 buff whenever a Mercenary follower enters your field."
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "#UNICUS": {
+    "source": {
+      "name": "#UNICUS",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute / Cool / Passion",
+        "rarity": "Special",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "10",
+        "attack": "5",
+        "defense": "5",
+        "effect": "When playing this card, banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery: This card costs 9 less to play. ---------- Storm. Bane. Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-SP13EN.png",
+      "cardNos": [
+        "CP02-SP13EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "storm",
+        "bane",
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "banishFromCemetery",
+                  "filter": {
+                    "trait": "Cute"
+                  },
+                  "count": 3
+                },
+                {
+                  "op": "banishFromCemetery",
+                  "filter": {
+                    "trait": "Cool"
+                  },
+                  "count": 3
+                },
+                {
+                  "op": "banishFromCemetery",
+                  "filter": {
+                    "trait": "Passion"
+                  },
+                  "count": 3
+                }
+              ]
+            },
+            "then": {
+              "op": "playCostReduction",
+              "amount": 9
+            }
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "storm",
+              "bane",
+              "ward"
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The play-cost reduction clause is incorrectly encoded as a fanfare optionalCost ability; it should be a passive/when-playing cost reduction effect requiring banishing 3 Cute, 3 Cool, and 3 Passion cards from your cemetery as an additional play cost, not a field fanfare ability.",
+      "Remove unsupported keyword entries \"fanfare\" from keywords; only printed keywords \"storm\", \"bane\", and \"ward\" should be in keywords."
+    ]
+  },
+  "0. Lhynkal, The Fool": {
+    "source": {
+      "name": "0. Lhynkal, The Fool",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Mage",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Look at the top 5 cards of your deck. From among them, you may reveal up to 2 Arcana spells and add them to your hand. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-037EN.png",
+      "cardNos": [
+        "BP10-037EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "0. Lhynkal, The Fool Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Arcana",
+              "cardType": "spell"
+            },
+            "lookAt": 5,
+            "to": "hand",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare search effect allows revealing up to 2 Arcana spells, but parsed searchDeckChoose only allows choosing one; encode the ability so up to 2 matching Arcana spells can be added to hand from the top 5, with the rest put on the bottom.",
+      "Remove keyword entries \"evolve\" and \"fanfare\" from keywords; evolve is already represented by evolveCost/evolvesTo and fanfare by the fanfare ability timing."
+    ]
+  }
+}

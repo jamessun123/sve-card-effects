@@ -1,0 +1,433 @@
+{
+  "Mona, Levin Mage": {
+    "source": {
+      "name": "Mona, Levin Mage",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Levin",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "1",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Ward. [fanfare] Discard a Levin card: Draw a card. At the start of your end phase, if there are at least 5 Levin cards in your cemetery, give your leader [defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-032EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a Levin card",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Levin"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Levin",
+            "count": 5
+          },
+          "effect": {
+            "op": "healLeader",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" from keywords; Fanfare should be encoded as an ability timing, not a printed keyword."
+    ]
+  },
+  "Mono, Garnet Rebel": {
+    "source": {
+      "name": "Mono, Garnet Rebel",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Demon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. Activate only if there are 5 Machina followers on your field. [act] Banish 2 Machina cards from your cemetery: Summon an Assembly Droid token. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-069EN.png",
+      "cardNos": [
+        "BP07-069EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Mono, Garnet Rebel Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Machina",
+            "count": 5
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": []
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 0,
+            "banishFromCemetery": {
+              "trait": "Machina"
+            },
+            "banishCount": 2
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Assembly Droid",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is incorrectly encoded as a no-op passiveKeywords effect; it should encode the actual evolve payment ability/effect for \"[evolve] [cost01]: Evolve this follower\" with the fieldTraitMin Machina 5 condition.",
+      "The activated ability cost is malformed; encode the cemetery banish cost using the implemented activated cost shape with banishFromCemetery filter {\"trait\":\"Machina\"} and count 2, instead of unsupported fields \"banishFromCemetery\" + \"banishCount\" at the top level."
+    ]
+  },
+  "Mono, Garnet Rebel Evolved": {
+    "source": {
+      "name": "Mono, Garnet Rebel Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Machina / Demon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "5",
+        "defense": "4",
+        "effect": "Storm. [act] [cost02], banish an Alpha Drive from your cemetery: Give each Machina follower on your field [attack]+2/[defense]+2 and Rush. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-070EN.png",
+      "cardNos": [
+        "BP07-070EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Mono, Garnet Rebel",
+      "specialType": "evolved",
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 2,
+            "banishFromCemetery": {
+              "identityName": "Alpha Drive"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": "Machina",
+            "atk": 2,
+            "def": 2,
+            "keyword": "rush"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is malformed; encode the cemetery banish cost using the implemented activated cost shape with banishFromCemetery filter {\"identityName\":\"Alpha Drive\"} and count 1, instead of unsupported fields \"banishFromCemetery\" + \"banishCount\" at the top level."
+    ]
+  },
+  "Mono, Immortal Garnet": {
+    "source": {
+      "name": "Mono, Immortal Garnet",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Machina / Demon",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Summon an Assembly Droid token. Strike - Select an enemy follower on the field and deal it damage equal to the number of other Machina followers on your field. [act] [cost00]: Give this [attack]+1/[defense]+1 and Storm. Activate only if there are 5 Machina followers on your field, and only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-076EN.png",
+      "cardNos": [
+        "BP17-076EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Assembly Droid",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Machina",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 0
+          },
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Machina",
+            "count": 5
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"fanfare\" and \"strike\" from keywords; these are ability timings and should not be listed as printed keywords.",
+      "The Strike damage amount is incorrect; it should deal damage equal to the number of other Machina followers on your field, so the amount must exclude this follower rather than count all Machina followers.",
+      "The activated ability is incomplete; it must also grant this follower Storm in addition to +1/+1."
+    ]
+  },
+  "Monochrome Duel": {
+    "source": {
+      "name": "Monochrome Duel",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Commander / Fable",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] [cost02], banish this card from your cemetery: Give each Knight on your field [attack]+1 and Storm. ---------- Search your deck for a Queen Hemera the White and Queen Magnus the Black, summon them, then shuffle your deck. Give them [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-024EN.png",
+      "cardNos": [
+        "BP09-024EN",
+        "PR-223EN",
+        "SS01-001EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2,
+            "banishSelf": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buffFieldTrait",
+                "trait": "Knight",
+                "atk": 1,
+                "keyword": "storm",
+                "excludeSelf": false
+              }
+            ]
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "traitsAny": [
+                    "Queen Hemera the White",
+                    "Queen Magnus the Black"
+                  ]
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "anyFollower",
+                  "count": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"activated\" from keywords; activated is not a printed keyword and should only be represented by an activated ability timing.",
+      "The spell effect incorrectly searches by traitsAny for card names; it should summon Queen Hemera the White and Queen Magnus the Black specifically, using identity/name-based filters so both exact cards are found.",
+      "The spell effect should summon both named followers, not a single card selected by tutorFromDeck.",
+      "The +1/+1 buff should be applied specifically to the summoned Queen Hemera the White and Queen Magnus the Black, not any 2 followers chosen with anyFollower.",
+      "The activated cemetery ability should banish this card from your cemetery, so the ability should specify activation from cemetery in addition to the banish-self cost."
+    ]
+  },
+  "Moon and Sun": {
+    "source": {
+      "name": "Moon and Sun",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Spell",
+        "trait": "Deity",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[act] [cost04], banish this card from your cemetery: Select an Amaterasu and Tsukuyomi in your cemetery and summon them. ---------- Search your deck for an Amaterasu or Tsukuyomi, summon it, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-125EN.png",
+      "cardNos": [
+        "BP09-125EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 4,
+            "banishSelf": true
+          },
+          "effect": {
+            "op": "summonFromCemetery",
+            "filter": {
+              "traitsAny": [
+                "Deity"
+              ],
+              "identityName": "Amaterasu"
+            },
+            "count": 2
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "traitsAny": [
+                "Deity"
+              ],
+              "identityName": "Amaterasu"
+            },
+            "lookAt": 40,
+            "to": "field",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"activated\" from keywords; activated is not a printed keyword and should only be represented by an activated ability timing.",
+      "The activated cemetery ability should summon both Amaterasu and Tsukuyomi from your cemetery, but the current filter only matches Amaterasu.",
+      "The spell effect should search for and summon an Amaterasu or Tsukuyomi, but the current filter only matches Amaterasu.",
+      "The activated cemetery ability should banish this card from your cemetery, so the ability should specify activation from cemetery in addition to the banish-self cost."
+    ]
+  }
+}

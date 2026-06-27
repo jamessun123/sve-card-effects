@@ -1,0 +1,194 @@
+{
+  "Tetra, Sapphire Rebel Evolved": {
+    "source": {
+      "name": "Tetra, Sapphire Rebel Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Machina / Golem",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "While this card is on your field, any Machina card you play from the EX area costs 1 less. 4 times per turn, when you play a Machina card, select an enemy follower on the field and deal it 1 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-036EN.png",
+      "cardNos": [
+        "BP07-036EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Tetra, Sapphire Rebel",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "passive",
+          "filter": {
+            "trait": "Machina"
+          },
+          "effect": {
+            "op": "exAreaPlayCostReduction",
+            "amount": 1
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnCardPlayed",
+            "filter": {
+              "trait": "Machina"
+            },
+            "effect": {
+              "op": "dealDamage",
+              "amount": 1,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "maxPerTurn": 4
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "Passive cost reduction is incorrectly scoped: it should apply only while this card is on your field to Machina cards played from the EX area. Encode the passive ability using effect {\"op\":\"exAreaPlayCostReduction\",\"amount\":1} without an unsupported top-level filter, or otherwise ensure the reduction is limited to Machina cards from EX area.",
+      "The triggered damage ability is missing the source-zone restriction from the English text: it should trigger while this card is on your field when you play a Machina card. Encode it as a field passive/onCardPlayed-style grant tied to this card being on the field.",
+      "The trigger should be '4 times per turn' when you play a Machina card; the current grantOnCardPlayed encoding is acceptable for the count, but the ability should not be a generic passive without clearly representing the field-based trigger condition."
+    ]
+  },
+  "Thornclad Arbiter": {
+    "source": {
+      "name": "Thornclad Arbiter",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Ward. [fanfare] Look at the top 5 cards of your deck. You may summon an amulet that costs 2 or less from among them. Put the rest on the bottom of your deck in any order. [act] [engage]: Select an amulet on your field and destroy it."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-097EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "cardType": "amulet",
+              "maxCost": 2
+            },
+            "lookAt": 5,
+            "to": "field",
+            "optional": true,
+            "remainderTo": "deckBottom"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "destroy",
+            "targets": {
+              "type": "allyFieldCard",
+              "count": 1,
+              "filter": {
+                "cardType": "amulet"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability target is encoded incorrectly: it should select an amulet on your field, but the parsed target uses allyFieldCard with an unsupported nested filter. Encode it using a valid target/effect combination that correctly restricts the chosen target to an amulet you control and then destroys it."
+    ]
+  },
+  "Threadsnipper Puppet": {
+    "source": {
+      "name": "Threadsnipper Puppet",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[act] [engage]: Put a Puppet token into your EX area. [act] [engage], banish a Puppet from your EX area: Draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-017EN.png",
+      "cardNos": [
+        "BP17-017EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Puppet",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "banishFromExArea": {
+              "trait": "Puppetry"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second activated ability cost is encoded incorrectly: banishing a Puppet from your EX area should use the implemented activated cost shape with banishFromExArea containing both filter and count, e.g. {\"engage\":true,\"banishFromExArea\":{\"filter\":{\"identityName\":\"Puppet\"},\"count\":1}} or equivalent valid EX-area Puppet filter, instead of unsupported fields banishCount and a bare trait object."
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "Ms. Tart Man": {
+    "source": {
+      "name": "Ms. Tart Man",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Lightborne",
+        "rarity": "Ultimate",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Search your deck for any card, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-U07EN.png",
+      "cardNos": [
+        "BP08-U07EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeckAny",
+            "to": "hand",
+            "optional": false,
+            "reveal": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is missing the required deck shuffle after tutoring; encode the effect as a sequence of tutorFromDeckAny to hand, then shuffleDeck."
+    ]
+  },
+  "Mysteria, Magic Founder": {
+    "source": {
+      "name": "Mysteria, Magic Founder",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Academic",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Reveal an Academic follower from your hand: Select an enemy follower on the field and deal it 2 damage. While this card is on your field, any Academic follower you play costs 1 less."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-036EN.png",
+      "cardNos": [
+        "BP06-036EN",
+        "BP08-SP01EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Mysteria, Magic Founder Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Reveal an Academic follower from your hand",
+            "cost": {
+              "op": "discardFromHand",
+              "filter": {
+                "trait": "Academic",
+                "cardType": "follower"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 1
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare cost is encoded incorrectly: the card says 'Reveal an Academic follower from your hand,' not discard one. Replace discardFromHand with a reveal-from-hand cost/effect for an Academic follower; if reveal is represented as an optional cost, it must not remove the card from hand.",
+      "Passive cost reduction is too broad: it currently reduces this card's own play cost generically. It should specifically make any Academic follower you play cost 1 less while this card is on your field; encode this as an aura/passive reduction applying to Academic followers you play, not a self playCostReduction."
+    ]
+  }
+}

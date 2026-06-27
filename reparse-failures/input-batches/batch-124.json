@@ -1,0 +1,225 @@
+{
+  "Koume Shirasaka [Haunted Gown]": {
+    "source": {
+      "name": "Koume Shirasaka [Haunted Gown]",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Select a Cool follower in your cemetery not named Koume Shirasaka [Haunted Gown] that costs 3 or less and, if there are at least 3 Cool followers on your field, summon it. [act] [cost01], Lesson (1), [engage]: Search your deck for a Last Daylight, put it into your EX area, then shuffle. It costs 2 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-058EN.png",
+      "cardNos": [
+        "ECP02-058EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "Cool",
+              "count": 3
+            },
+            "then": {
+              "op": "summonFromCemetery",
+              "filter": {
+                "trait": "Cool",
+                "cardType": "follower",
+                "maxCost": 3,
+                "excludeIdentityName": "Koume Shirasaka [Haunted Gown]"
+              },
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityNameContains": "Last Daylight"
+                },
+                "to": "exArea",
+                "reveal": true
+              },
+              {
+                "op": "playCostReduction",
+                "amount": 2
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          },
+          "cost": {
+            "pp": 1,
+            "banishFromExArea": {
+              "trait": "Magical Item"
+            },
+            "banishCount": 1,
+            "engage": true
+          }
+        }
+      ],
+      "parseConfidence": "manual"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability should grant the cost reduction to the card put into the EX area, not use a standalone `playCostReduction` on this card. Encode the search as `tutorFromDeck` with `filter: { \"identityName\": \"Last Daylight\" }`, `to: \"exArea\"`, `playCostReduction: 2`, then shuffle.",
+      "The activated ability cost for Lesson (1) is encoded with unsupported/wrong cost fields. Change it to use the implemented activated cost form for banishing from EX area, e.g. `cost: { \"pp\": 1, \"banishFromExArea\": { \"filter\": { \"trait\": \"Magical Item\" }, \"count\": 1 }, \"engage\": true }`."
+    ]
+  },
+  "Krampus": {
+    "source": {
+      "name": "Krampus",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Bury another follower: Select an enemy follower on the field. Destroy it, give your leader [defense]+1, bury the top 2 cards of your deck, and draw a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-092EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "cost": {
+            "buryFromField": {
+              "cardType": "follower"
+            },
+            "buryFieldCount": 1,
+            "excludeSelfFromBury": true
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "destroy",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "healLeader",
+                "amount": 1
+              },
+              {
+                "op": "mill",
+                "count": 2
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare's 'Bury another follower' is encoded as an ability `cost`, but fanfare abilities do not use `cost`. Encode it inside the effect with `optionalCost` or an equivalent sequence that buries another follower from your field before the rest of the fanfare resolves."
+    ]
+  },
+  "Kudlak": {
+    "source": {
+      "name": "Kudlak",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Vampire",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "7",
+        "attack": "4",
+        "defense": "6",
+        "effect": "[fanfare] Select up to 2 Vampire cards that cost a total of 6 or less in your cemetery and put them into your EX area. They cost 0 play points to play this turn. [act] [engage]: Select an enemy follower on the field and deal it damage equal to the number of Vampire cards on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-071EN.png",
+      "cardNos": [
+        "BP07-071EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Vampire",
+              "cardType": "card",
+              "maxCost": 6
+            },
+            "to": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": {
+              "op": "traitFieldCount",
+              "trait": "Vampire",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare should select up to 2 Vampire cards in your cemetery with total cost 6 or less and put them into your EX area; `tutorFromCemetery` only gets one card and does not enforce up to 2 / total cost 6. Encode an effect that moves up to 2 matching cards with max total cost 6 to EX area.",
+      "The fanfare is missing 'They cost 0 play points to play this turn.' After moving the selected cards to EX area, those cards should receive play cost reduction so their cost becomes 0 this turn."
+    ]
+  }
+}

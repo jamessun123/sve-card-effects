@@ -1,0 +1,64 @@
+{
+  "Valiant Fencer": {
+    "source": {
+      "name": "Valiant Fencer",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Heroic",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve][cost01]: Evolve this follower. This ability can be activated if there are 2 cards or less in your hand. [fanfare] Search your deck for a Heroic card with a different name from this card, reveal it, and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-019EN.png",
+      "cardNos": [
+        "BP03-019EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Valiant Fencer Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "evolve",
+          "condition": {
+            "type": "handMax",
+            "count": 2
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": []
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "trait": "Heroic",
+              "cardType": "follower",
+              "excludeIdentityName": "Valiant Fencer"
+            },
+            "to": "hand",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare filter is too narrow. The source says \"Search your deck for a Heroic card with a different name from this card,\" which is any Heroic card, not only a Heroic follower. Remove `\"cardType\": \"follower\"` from the `tutorFromDeck` filter while keeping the Heroic trait, different-name restriction, reveal, and add-to-hand behavior."
+    ]
+  }
+}

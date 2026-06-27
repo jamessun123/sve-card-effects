@@ -1,0 +1,355 @@
+{
+  "Last Daylight": {
+    "source": {
+      "name": "Last Daylight",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Spell",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Bronze",
+        "cardSet": "Crossover Set “THE IDOLM@STER CINDERELLA GIRLS”",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Select an enemy follower on the field. Deal it 3 damage and give [attack]+1 to each follower that costs 1 or less on your field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CP02/CP02-085EN.png",
+      "cardNos": [
+        "CP02-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "abyss",
+                "atk": 1,
+                "otherOnly": true
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The second step is incorrectly encoded as buffing Abysscraft followers and using otherOnly. It should buff each follower that costs 1 or less on your field by +1 attack; encode a field buff targeting your followers with maxCost 1 and no exclude-self restriction."
+    ]
+  },
+  "Lecia, Sky Saber": {
+    "source": {
+      "name": "Lecia, Sky Saber",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander",
+        "rarity": "Ultimate",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Search your deck for a Nano, the Dawnblade, summon it, then shuffle. Whenever a Nano, the Dawnblade on your field evolves, choose one. (1) Put a Twilight Blade token into your EX area. (2) Give your leader [defense]+2."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-U02EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Nano, the Dawnblade"
+                },
+                "to": "field"
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        },
+        {
+          "timing": "onAllyEvolve",
+          "filter": {
+            "identityName": "Nano, the Dawnblade"
+          },
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Twilight Blade token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Twilight Blade",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              },
+              {
+                "label": "Give your leader [defense]+2",
+                "effect": {
+                  "op": "healLeader",
+                  "amount": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The onAllyEvolve ability incorrectly places the evolved-card restriction in a top-level 'filter' field. It should trigger only when a Nano, the Dawnblade on your field evolves; encode the restriction in a supported way rather than an unsupported wrapper field, so the ability only triggers from that named ally's evolve."
+    ]
+  },
+  "Lelouch, Leader of the Black Knights": {
+    "source": {
+      "name": "Lelouch, Leader of the Black Knights",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "7",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[fanfare] Necrocharge (10): Select up to 2 [abysscraft] followers that cost 2 play points or less in your cemetery and put them onto your field. Give each other follower on your field [attack]+1/[defense]+1. NC (20): Give [attack]+3/[defense]+3 instead. While this card is on your field, each [abysscraft] follower on your field has Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-083EN.png",
+      "cardNos": [
+        "BP04-083EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "necrocharge",
+              "count": 10
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "summonFromCemetery",
+                  "filter": {
+                    "cardClass": "abyss",
+                    "cardType": "follower",
+                    "maxCost": 2
+                  },
+                  "count": 2,
+                  "maxTotalCost": 2
+                },
+                {
+                  "op": "buffFieldTrait",
+                  "cardClass": "abyss",
+                  "atk": 1,
+                  "def": 1,
+                  "otherOnly": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 20
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "count": 2,
+                "maxTotalCost": 2
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "abyss",
+                "atk": 3,
+                "def": 3,
+                "otherOnly": true
+              }
+            ]
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "cardClass": "abyss",
+            "excludeSelf": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as two separate abilities, causing the NC(20) version to also stack with the NC(10) version. It should be a single fanfare that summons up to 2 qualifying followers, then gives each other follower on your field +3/+3 if Necrocharge (20), otherwise +1/+1 if Necrocharge (10).",
+      "summonFromCemetery incorrectly uses maxTotalCost: 2. The source says up to 2 followers that each cost 2 or less, not total cost 2; remove maxTotalCost.",
+      "The buff step incorrectly limits the buff to Abysscraft followers. It should give each other follower on your field +1/+1 or +3/+3 regardless of class.",
+      "The passive Rush aura is encoded with cardClass at the top level of auraGrantKeyword, which is not a supported field for that operation. It should grant Rush to each Abysscraft follower on your field using a supported filtering field."
+    ]
+  },
+  "Lelouch, Righteous Emperor": {
+    "source": {
+      "name": "Lelouch, Righteous Emperor",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Special",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "7",
+        "attack": "5",
+        "defense": "6",
+        "effect": "[fanfare] Necrocharge (10): Select up to 2 [abysscraft] followers that cost 2 play points or less in your cemetery and put them onto your field. Give each other follower on your field [attack]+1/[defense]+1. NC (20): Give [attack]+3/[defense]+3 instead. While this card is on your field, each [abysscraft] follower on your field has Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-SP01EN.png",
+      "cardNos": [
+        "BP04-SP01EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "necrocharge",
+              "count": 10
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "summonFromCemetery",
+                  "filter": {
+                    "cardClass": "abyss",
+                    "cardType": "follower",
+                    "maxCost": 2
+                  },
+                  "count": 2,
+                  "maxTotalCost": 2
+                },
+                {
+                  "op": "buffFieldTrait",
+                  "cardClass": "abyss",
+                  "atk": 1,
+                  "def": 1,
+                  "otherOnly": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 20
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "summonFromCemetery",
+                "filter": {
+                  "cardClass": "abyss",
+                  "cardType": "follower",
+                  "maxCost": 2
+                },
+                "count": 2,
+                "maxTotalCost": 2
+              },
+              {
+                "op": "buffFieldTrait",
+                "cardClass": "abyss",
+                "atk": 3,
+                "def": 3,
+                "otherOnly": true
+              }
+            ]
+          }
+        },
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "auraGrantKeyword",
+            "keyword": "rush",
+            "cardClass": "abyss",
+            "excludeSelf": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as two separate abilities, causing the NC(20) version to also stack with the NC(10) version. It should be a single fanfare that summons up to 2 qualifying followers, then gives each other follower on your field +3/+3 if Necrocharge (20), otherwise +1/+1 if Necrocharge (10).",
+      "summonFromCemetery incorrectly uses maxTotalCost: 2. The source says up to 2 followers that each cost 2 or less, not total cost 2; remove maxTotalCost.",
+      "The buff step incorrectly limits the buff to Abysscraft followers. It should give each other follower on your field +1/+1 or +3/+3 regardless of class.",
+      "The passive Rush aura is encoded with cardClass at the top level of auraGrantKeyword, which is not a supported field for that operation. It should grant Rush to each Abysscraft follower on your field using a supported filtering field."
+    ]
+  }
+}

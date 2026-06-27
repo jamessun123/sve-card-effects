@@ -1,0 +1,244 @@
+{
+  "Tristan of the Round Table Evolved": {
+    "source": {
+      "name": "Tristan of the Round Table Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Officer / Arthurian",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "Ward. On Evolve: Select an Arthurian card in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-036EN.png",
+      "cardNos": [
+        "BP04-036EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Arthurian"
+            },
+            "to": "hand"
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing printed keyword Ward; add \"ward\" to keywords."
+    ]
+  },
+  "Trombone Devil": {
+    "source": {
+      "name": "Trombone Devil",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve][cost01]: Evolve this follower. At the start of your end phase, if Sanguine is active for you, select an enemy leader or enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-081EN.png",
+      "cardNos": [
+        "BP03-081EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Trombone Devil Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "condition": {
+            "type": "sanguine"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ]
+    },
+    "verdict": "fail",
+    "issues": [
+      "The end phase damage ability targets only enemyFieldCard, but the source says enemy leader or enemy follower; encode a target that includes both leader and follower, or use a choose effect with enemyLeader and enemyFollower options.",
+      "Using keyword \"evolve\" is incorrect for the printed evolve cost line; keep evolvesTo/evolveCost, but do not list \"evolve\" in keywords."
+    ]
+  },
+  "Trombone Devil Evolved": {
+    "source": {
+      "name": "Trombone Devil Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": "On Evolve: Deal 1 damage to each leader. At the start of your end phase, if Sanguine is active for you, select an enemy leader or enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-082EN.png",
+      "cardNos": [
+        "BP03-082EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Trombone Devil",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 1,
+            "followersOnly": false
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "condition": {
+            "type": "sanguine"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve is encoded as dealDamageAllEnemies, but the source says deal 1 damage to each leader; replace with damage to both leaders only, not all enemy cards.",
+      "The end phase damage ability targets only enemyFieldCard, but the source says enemy leader or enemy follower; encode a target that includes both leader and follower, or use a choose effect with enemyLeader and enemyFollower options."
+    ]
+  },
+  "Troya, Thunder of Hagelberg": {
+    "source": {
+      "name": "Troya, Thunder of Hagelberg",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Assassin",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. Bane."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-025EN.png",
+      "cardNos": [
+        "BP07-025EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Troya, Thunder of Hagelberg Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "bane"
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Bane is a printed keyword, but it is encoded as an ability with timing \"evolve\"; move \"bane\" to keywords and remove the extra ability.",
+      "Using keyword \"evolve\" is incorrect for the printed evolve cost line; keep evolvesTo/evolveCost, but do not list \"evolve\" in keywords."
+    ]
+  },
+  "Truth Summons": {
+    "source": {
+      "name": "Truth Summons",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Alchemist / Golem",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Earth Rite: Summon a Guardian Golem token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-056EN.png",
+      "cardNos": [
+        "BP16-056EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Guardian Golem",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing Earth Rite condition/cost; encode the spell ability with condition {\"type\":\"earthRite\",\"count\":1} so the summon only happens with Earth Rite."
+    ]
+  }
+}

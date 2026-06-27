@@ -16,10 +16,13 @@ BATCHES_DIR = ROOT / "batches"
 DSL_BATCHES_DIR = ROOT / "DSL_batches"
 CARD_BATCHES_DIR = ROOT / "scraped-card-text" / "cards-by-name-batches"
 SECRETS_PATH = ROOT / "secrets.json"
-MODEL = "gpt-5.4"
+MODEL = "gpt-5.4-mini"
 RESPONSES_ENDPOINT = "/v1/responses"
 # OpenAI enqueued prompt token limit per model/org (gpt-5.4-mini defaults to 2M).
-DEFAULT_MAX_ENQUEUED_TOKENS = 850_000
+DEFAULT_MAX_ENQUEUED_TOKENS = 1_900_000
+# Per-request input limit for gpt-5.4-mini (400K context). Keep well below the window
+# because len/4 underestimates JSON-heavy prompts (~3 chars/token is common).
+DEFAULT_MAX_REQUEST_TOKENS = 250_000
 _CHARS_PER_TOKEN_ESTIMATE = 4
 
 _PROMPT_FORMAT_CACHE: str | None = None

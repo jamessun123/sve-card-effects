@@ -1,0 +1,61 @@
+{
+  "Mystic King": {
+    "source": {
+      "name": "Mystic King",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Chess",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "6",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve][cost02]: Evolve this follower. [act] Put another Chess follower from your field into its owner's cemetery: Select an enemy follower on the field and deal it 5 damage. For the rest of this turn, this card's [act] abilities except [evolve] can't be activated."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-037EN.png",
+      "cardNos": [
+        "BP03-037EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolvesTo": "Mystic King Evolved",
+      "evolveCost": 2,
+      "abilities": [
+        {
+          "timing": "activated",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "cost": {
+            "pp": 0,
+            "buryFromField": {
+              "cardType": "follower",
+              "trait": "Chess",
+              "excludeSelf": true
+            },
+            "buryFieldCount": 1
+          },
+          "oncePerTurn": true
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability is missing the clause 'For the rest of this turn, this card's [act] abilities except [evolve] can't be activated.' Add grantActRestriction with exceptEvolve true and untilEndOfTurn true after dealing 5 damage.",
+      "The activated ability is incorrectly limited with oncePerTurn. The source does not say once per turn; it becomes unusable for the rest of the turn only after each activation because of the effect itself. Remove oncePerTurn and encode the printed self-restriction effect instead."
+    ]
+  }
+}

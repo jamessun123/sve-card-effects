@@ -1,0 +1,59 @@
+{
+  "Nirle, Draconic Prodigy": {
+    "source": {
+      "name": "Nirle, Draconic Prodigy",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wasteland / Wyrmkin",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "2",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this. Activate only if Overflow is active for you. [fanfare] If there's a Mount card on your field, increase your max play points by 1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-060EN.png",
+      "cardNos": [
+        "BP16-060EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Nirle, Draconic Prodigy Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "overflow"
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Mount"
+            },
+            "then": {
+              "op": "increaseMaxPp",
+              "amount": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare ability is incorrectly gated by Overflow. Remove the outer condition {\"type\":\"overflow\"}; Overflow applies only to the [evolve] ability, not the fanfare.",
+      "The fanfare condition is encoded as checking for a follower named Mount, but the source says 'if there's a Mount card on your field'. It should check for a Mount card on your field rather than namedFollowerOnFieldByName.",
+      "The [evolve] ability is missing. Add the evolve linkage as an ability/cost line that activates only if Overflow is active for you: timing \"evolve\" (or equivalent evolve clause) with condition {\"type\":\"overflow\"} and cost 1."
+    ]
+  }
+}

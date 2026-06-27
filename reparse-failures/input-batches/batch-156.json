@@ -1,0 +1,178 @@
+{
+  "Moonrise Werewolf": {
+    "source": {
+      "name": "Moonrise Werewolf",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Arcana / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-086EN.png",
+      "cardNos": [
+        "BP10-086EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Moonrise Werewolf Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing the card's [evolve] ability in abilities[]. Encode it as a timing \"evolve\" ability with cost {\"pp\":1} and effect {\"op\":\"noop\",\"label\":\"Evolve this follower\"} or equivalent evolve-payment representation, rather than only putting \"evolve\" in keywords."
+    ]
+  },
+  "Moonshade Mage": {
+    "source": {
+      "name": "Moonshade Mage",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Arcanaform",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "8",
+        "attack": "6",
+        "defense": "6",
+        "effect": "Ward. [fanfare] Draw 3 cards. Discard 2 cards. [act] [engage], discard a card: Select an enemy follower on the field and deal it 6 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-046EN.png",
+      "cardNos": [
+        "BP08-046EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "draw",
+                "count": 3
+              },
+              {
+                "op": "discard",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "discard": 1
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 6,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability cost is encoded incorrectly. Replace cost {\"pp\":0,\"engage\":true,\"discard\":1} with a supported representation using cost {\"engage\":true} and effect {\"op\":\"optionalCost\",\"cost\":{\"op\":\"discard\",\"count\":1},\"then\":{\"op\":\"dealDamage\",\"amount\":6,\"targets\":{\"type\":\"enemyFollower\",\"count\":1}}}, or another valid supported discard-cost encoding."
+    ]
+  },
+  "Mr. Bertrand, Magic Mentor": {
+    "source": {
+      "name": "Mr. Bertrand, Magic Mentor",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Academic",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "2",
+        "effect": "[fanfare] Choose one of the following. (1) Put a Mysterian Missile token into your EX area. (2) Select an Academic spell in your cemetery and, if there are at least 5 Academic cards in your cemetery, add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-060EN.png",
+      "cardNos": [
+        "BP09-060EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Put a Mysterian Missile token into your EX area",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Mysterian Missile",
+                  "count": 1,
+                  "zone": "exArea"
+                }
+              },
+              {
+                "label": "Select an Academic spell in your cemetery and, if there are at least 5 Academic cards in your cemetery, add it to your hand",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "ownCemeteryMin",
+                    "count": 5
+                  },
+                  "then": {
+                    "op": "tutorFromCemetery",
+                    "filter": {
+                      "trait": "Academic",
+                      "cardType": "spell"
+                    },
+                    "to": "hand"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery-count condition on option (2) is incorrect. It should check for at least 5 Academic cards in your cemetery, not at least 5 cards of any kind. Replace condition {\"type\":\"ownCemeteryMin\",\"count\":5} with {\"type\":\"ownCemeteryTraitMin\",\"trait\":\"Academic\",\"count\":5}."
+    ]
+  }
+}

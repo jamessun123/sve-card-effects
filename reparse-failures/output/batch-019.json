@@ -1,0 +1,180 @@
+{
+  "Arcane Personnel Carrier": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "activated",
+        "cost": {
+          "burySelf": true
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "grantKeyword",
+              "keyword": "ward",
+              "targets": {
+                "type": "selfFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Wasteland",
+                "count": 1
+              },
+              "then": {
+                "op": "buff",
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Arch Summoner Erasmus": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "engage": true
+        },
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyLeader"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Archer Evolved": {
+    "evolvesFrom": "Archer",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "grantOnAllyFollowerEnter",
+          "effect": {
+            "op": "dealDamageSplit",
+            "primaryAmount": 1,
+            "maxTargets": 2,
+            "targets": {
+              "type": "enemyFollower"
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Arctic Chimera": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "dealDamage",
+          "amount": {
+            "op": "selfAttack"
+          },
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "condition": {
+          "type": "earthRite",
+          "count": 1
+        },
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "reviveToField",
+              "engaged": false
+            },
+            {
+              "op": "setStats",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "self"
+              }
+            },
+            {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

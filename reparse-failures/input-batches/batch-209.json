@@ -1,0 +1,112 @@
+{
+  "Silver Cog Spinner": {
+    "source": {
+      "name": "Silver Cog Spinner",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Luminary / Lightborne",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "5",
+        "defense": "4",
+        "effect": "[fanfare] If there are at least 5 cards in your hand, recover 2 play points. If there are 5 or less cards, draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-096EN.png",
+      "cardNos": [
+        "BP05-096EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "handMin",
+              "count": 5
+            },
+            "then": {
+              "op": "recoverPp",
+              "amount": 2
+            },
+            "else": {
+              "op": "draw",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The else branch is incorrect: the source says 'If there are 5 or less cards, draw a card,' but the parsed card uses else for all cases below 5. It should only draw when hand size is exactly 5 while recovering 2 PP when hand size is at least 5, causing both clauses to apply at exactly 5. Encode as a sequence of two conditional checks, one with handMin 5 -> recoverPp 2 and one with handMax 5 -> draw 1."
+    ]
+  },
+  "Silvercloud Dragonrider": {
+    "source": {
+      "name": "Silvercloud Dragonrider",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "7",
+        "attack": "5",
+        "defense": "6",
+        "effect": "When this is discarded, [cost02]: Summon a Dragon token. ---------- Ward. [fanfare] Summon a Dragon token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-074EN.png",
+      "cardNos": [
+        "BP16-074EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Dragon",
+            "count": 1,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Dragon",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The discard-triggered ability is missing its trigger timing and is incorrectly encoded as a generic activated ability. It should be an ability with timing 'onDiscard' and cost {\"pp\":2} that summons a Dragon token to the field."
+    ]
+  }
+}

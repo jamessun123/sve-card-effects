@@ -1,0 +1,167 @@
+{
+  "Coral Shark": {
+    "source": {
+      "name": "Coral Shark",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Marine",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "1",
+        "effect": "Rush. [fanfare] Give this follower [attack]+X, where X is the number of other Marine followers on your field."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-069EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffDynamic",
+            "atk": {
+              "op": "traitFieldCount",
+              "trait": "Marine",
+              "multiplier": 1
+            },
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove 'fanfare' from keywords; Fanfare should be represented by the ability timing, not as a keyword entry.",
+      "The Fanfare buff counts all Marine followers on your field, but the source says 'other Marine followers'; encode the dynamic attack increase excluding this follower, e.g. by subtracting self or adding support for an excludeSelf variant on traitFieldCount."
+    ]
+  },
+  "Cosmic Angel": {
+    "source": {
+      "name": "Cosmic Angel",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Angel / Lightborne",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "4",
+        "effect": "Ward. [fanfare] Search your deck for an Angel card not named Cosmic Angel, reveal it, add it to your hand, then shuffle. If there are at least 5 Angel cards in your cemetery, give your leader [defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-115EN.png",
+      "cardNos": [
+        "BP17-115EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "trait": "Angel",
+                  "excludeIdentityName": "Cosmic Angel"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "ownCemeteryTraitMin",
+                  "trait": "Angel",
+                  "count": 5
+                },
+                "then": {
+                  "op": "healLeader",
+                  "amount": 2
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove 'fanfare' from keywords; Fanfare should only appear as the ability timing."
+    ]
+  },
+  "Cougar Pelt Warrior Evolved": {
+    "source": {
+      "name": "Cougar Pelt Warrior Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Beast",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "3",
+        "effect": "On Evolve - Search your deck for a Cougar Pelt Warrior, put it onto your field engaged, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-078EN.png",
+      "cardNos": [
+        "BP06-078EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "evolvesFrom": "Cougar Pelt Warrior",
+      "specialType": "evolved",
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "identityName": "Cougar Pelt Warrior"
+            },
+            "to": "field",
+            "reveal": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect should put Cougar Pelt Warrior onto your field engaged, but the parsed tutorFromDeck to field does not encode the engaged state. Change it to an effect that summons/puts the tutored card onto the field engaged and include the shuffle."
+    ]
+  }
+}

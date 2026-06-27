@@ -1,0 +1,262 @@
+{
+  "Leonidas's Resolve": {
+    "source": {
+      "name": "Leonidas's Resolve",
+      "type": "token",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Amulet / Token",
+        "trait": "Commander",
+        "rarity": "-",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "8",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Whenever a [swordcraft] follower is put onto your field, give it [attack]+3/[defense]+3 and Rush."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-T03EN.png",
+      "cardNos": [
+        "BP02-T03EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "cardClass": "sword"
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 3,
+                "def": 3,
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              },
+              {
+                "op": "grantKeyword",
+                "keyword": "rush",
+                "targets": {
+                  "type": "lastSummoned"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The trigger should use the ability's filter/condition for 'Whenever a Swordcraft follower is put onto your field'; move the Swordcraft restriction out of the root ability body and encode it using a supported trigger filter/condition on the onAllyFollowerEnter ability so only Swordcraft followers trigger it."
+    ]
+  },
+  "Lesser Mummy": {
+    "source": {
+      "name": "Lesser Mummy",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Starter Deck #5 “Waltz of the Undying Night”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve][cost01]: Evolve this follower. [fanfare] Necrocharge (10): Give this follower Storm. (If your cemetery contains at least 10 cards, perform Necrocharge (10).)"
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD05/SD05-010EN.png",
+      "cardNos": [
+        "SD05-010EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Lesser Mummy Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryMin",
+              "count": 10
+            },
+            "then": {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare condition is encoded as ownCemeteryMin 10, but the card specifically uses Necrocharge (10); change the condition to {\"type\":\"necrocharge\",\"count\":10}."
+    ]
+  },
+  "Levin Justice": {
+    "source": {
+      "name": "Levin Justice",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Commander / Levin",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "You may play this card for 2 more play points. ---------- Select an enemy follower on the field. Deal it 3 damage and search your deck for a Yurius, Levin Duke, summon it, then shuffle. If you played this card for 2 more play points, also search your deck for an Albert, Levin Saber, summon it, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-025EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Select an enemy follower on the field. Deal it 3 damage and search your deck for a Yurius, Levin Duke, summon it, then shuffle.",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "dealDamage",
+                      "amount": 3,
+                      "targets": {
+                        "type": "enemyFollower",
+                        "count": 1
+                      }
+                    },
+                    {
+                      "op": "tutorFromDeck",
+                      "filter": {
+                        "identityName": "Yurius, Levin Duke"
+                      },
+                      "to": "field"
+                    },
+                    {
+                      "op": "shuffleDeck"
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Play this card for 2 more play points and also search your deck for an Albert, Levin Saber, summon it, then shuffle.",
+                "additionalPpCost": 2,
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "tutorFromDeck",
+                      "filter": {
+                        "identityName": "Albert, Levin Saber"
+                      },
+                      "to": "field"
+                    },
+                    {
+                      "op": "shuffleDeck"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The spell is not a choice between two separate effects; the base effect (deal 3 to an enemy follower, then summon Yurius from deck, then shuffle) should always happen, and the Albert summon should be an additional conditional effect if the spell was played for 2 more play points.",
+      "The extra 2 play point mode is encoded as a separate choose option that omits the base damage and Yurius summon; instead encode a single spell effect with an optional/additional 2 PP cost that, if paid, also tutors and summons Albert, Levin Saber, then shuffles."
+    ]
+  },
+  "Levin Scholar": {
+    "source": {
+      "name": "Levin Scholar",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Levin",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[fanfare] Search your deck for a Levin follower, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-033EN.png",
+      "cardNos": [
+        "BP06-033EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Levin",
+                  "cardType": "follower"
+                },
+                "lookAt": 1,
+                "to": "hand",
+                "optional": true,
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The deck search is encoded as searchDeckChoose with lookAt:1, but the card searches the entire deck; replace it with tutorFromDeck using filter {\"trait\":\"Levin\",\"cardType\":\"follower\"}, to:\"hand\", reveal:true, followed by shuffleDeck."
+    ]
+  }
+}

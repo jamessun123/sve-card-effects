@@ -1,0 +1,192 @@
+{
+  "New Generations": {
+    "keywords": [
+      "storm",
+      "bane",
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Banish 3 Cute cards, 3 Cool cards, and 3 Passion cards from your cemetery",
+          "cost": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Cute"
+                },
+                "count": 3
+              },
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Cool"
+                },
+                "count": 3
+              },
+              {
+                "op": "banishFromCemetery",
+                "filter": {
+                  "trait": "Passion"
+                },
+                "count": 3
+              }
+            ]
+          },
+          "then": {
+            "op": "playCostReduction",
+            "amount": 9
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "storm",
+            "bane",
+            "ward"
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Newfound Allies": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "spell",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "shuffleDeck"
+            },
+            {
+              "op": "searchDeckSummonMultiple",
+              "filter": {
+                "cardType": "follower"
+              },
+              "lookAt": 2,
+              "maxTotalCost": 99,
+              "remainderTo": "cemetery"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nicola, Enduring Steward": {
+    "keywords": [
+      "fanfare",
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "fieldTraitMin",
+          "trait": "Machina",
+          "count": 2
+        },
+        "effect": {
+          "op": "passiveKeywords",
+          "keywords": [
+            "rush",
+            "bane"
+          ]
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "then": {
+            "op": "grantKeyword",
+            "keyword": "assail",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      },
+      {
+        "timing": "lastWords",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Discard 2 Machina cards",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Machina"
+            },
+            "count": 2
+          },
+          "then": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "moveSourceToExArea"
+              },
+              {
+                "op": "grantPlayCostReduction",
+                "amount": 1,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nicola, Forbidden Strength": {
+    "keywords": [
+      "fanfare"
+    ],
+    "evolvesTo": "Nicola, Forbidden Strength Evolved",
+    "evolveCost": 1,
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Nicola, Forbidden Strength Evolved": {
+    "evolvesFrom": "Nicola, Forbidden Strength",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "tutorFromCemetery",
+          "filter": {
+            "trait": "Machina",
+            "maxCost": 2
+          },
+          "to": "exArea",
+          "playCostReduction": 2
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

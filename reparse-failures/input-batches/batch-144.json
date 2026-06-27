@@ -1,0 +1,157 @@
+{
+  "Marwynn, Omen of Repose": {
+    "source": {
+      "name": "Marwynn, Omen of Repose",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Omen / Zealot",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve] [cost04]: Evolve this follower. [evolve] Skip your next turn: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-086EN.png",
+      "cardNos": [
+        "BP05-086EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolvesTo": "Marwynn, Omen of Repose Evolved",
+      "evolveCost": 4,
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "grantActRestriction",
+            "exceptEvolve": true,
+            "untilEndOfTurn": true
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolve ability is incorrectly encoded as grantActRestriction. It should encode the printed evolve payment options: one standard evolve ability with cost {\"pp\":4} that evolves this follower, and a second evolve ability that uses skip your next turn as the cost to evolve this follower."
+    ]
+  },
+  "Masamune, Raging Dragon": {
+    "source": {
+      "name": "Masamune, Raging Dragon",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Dragonheart / Draconic Duelist",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Bane. [fanfare] If there are at least 3 Draconic Duelist cards on your field, give this follower [attack]+2/[defense]+2 and Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-067EN.png",
+      "cardNos": [
+        "BP09-067EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "bane",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "Draconic Duelist",
+              "count": 3
+            },
+            "then": {
+              "op": "buff",
+              "atk": 2,
+              "def": 2,
+              "targets": {
+                "type": "self"
+              },
+              "keyword": "storm"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare effect incorrectly puts Storm inside a buff effect. It should grant +2/+2 to this follower and separately grant this follower Storm, typically as a sequence of buff then grantKeyword targeting self."
+    ]
+  },
+  "Masquerade Ghost": {
+    "source": {
+      "name": "Masquerade Ghost",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #3 “Flame of Lævateinn”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[evolve][cost01]: Evolve this follower. Whenever a Ghost is put onto your field, give it [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP03/BP03-074EN.png",
+      "cardNos": [
+        "BP03-074EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolvesTo": "Masquerade Ghost Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "grantOnAllyFollowerEnter",
+            "filter": {
+              "identityName": "Ghost"
+            },
+            "effect": {
+              "op": "buff",
+              "atk": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            "oncePerTurn": false
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The passive trigger buffs this card itself, but the source says 'Whenever a Ghost is put onto your field, give it [attack]+1.' The buff target should be the Ghost that entered, not this follower; use the entering follower as the target (for example lastSummoned) for the +1 attack buff."
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "Hippocampus Evolved": {
+    "source": {
+      "name": "Hippocampus Evolved",
+      "type": "evolved",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Marine",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "7",
+        "defense": "7",
+        "effect": ""
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-076EN.png",
+      "cardNos": [
+        "BP04-076EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Hippocampus",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The evolved card is missing Ward; add \"ward\" to keywords to match the base card's printed Ward."
+    ]
+  },
+  "Hiromi Seki [Twinkle in My Eye] Evolved": {
+    "source": {
+      "name": "Hiromi Seki [Twinkle in My Eye] Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Gold",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "On Evolve - Select a Cute card in your cemetery and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-033EN.png",
+      "cardNos": [
+        "ECP02-033EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Hiromi Seki [Twinkle in My Eye]",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Cute",
+              "cardType": "follower"
+            },
+            "to": "hand"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve filter is incorrect: source says select a Cute card in your cemetery and add it to your hand, but parsed restricts to cardType follower. Remove the follower restriction so tutorFromCemetery can target any card with trait \"Cute\"."
+    ]
+  }
+}

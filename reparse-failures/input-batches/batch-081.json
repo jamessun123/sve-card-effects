@@ -1,0 +1,305 @@
+{
+  "Flame and Glass, Duality": {
+    "source": {
+      "name": "Flame and Glass, Duality",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Deity / Archfiend",
+        "rarity": "Ultimate",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "6",
+        "attack": "7",
+        "defense": "7",
+        "effect": "[fanfare] Banish a Fiend or Archfiend card from your cemetery: Select up to 2 enemy cards on the field and destroy them. [act] Banish a Fiend or Archfiend card from your cemetery: Give this Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-U07EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish a Fiend or Archfiend card from your cemetery",
+            "cost": {
+              "op": "banishFromCemetery",
+              "filter": {
+                "traitsAny": [
+                  "Fiend",
+                  "Archfiend"
+                ]
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFieldCard",
+                "count": 2,
+                "maxCost": 0
+              }
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0
+          },
+          "effect": {
+            "op": "optionalCost",
+            "label": "Banish a Fiend or Archfiend card from your cemetery",
+            "cost": {
+              "op": "banishFromCemetery",
+              "filter": {
+                "traitsAny": [
+                  "Fiend",
+                  "Archfiend"
+                ]
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "grantKeyword",
+              "keyword": "storm",
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare destroy effect is incorrectly encoded as destroy with targets.count 2 and maxCost 0. It should target up to 2 enemyFieldCard targets without a maxCost restriction, using an optional/up-to targeting form if available.",
+      "The parsed keywords incorrectly include \"fanfare\" and \"activated\". These are timings represented by abilities, not keywords."
+    ]
+  },
+  "Flashstep Quickblader": {
+    "source": {
+      "name": "Flashstep Quickblader",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set \"New World Genesis\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this. Storm."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP16/BP16-032EN.png",
+      "cardNos": [
+        "BP16-032EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Flashstep Quickblader Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "storm"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"evolve\". The evolve cost line should be represented by evolvesTo/evolveCost, not as a keyword."
+    ]
+  },
+  "Floral Fencer": {
+    "source": {
+      "name": "Floral Fencer",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve][cost01]: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-002EN.png",
+      "cardNos": [
+        "PR-002EN",
+        "SD02-003EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Floral Fencer Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"evolve\". The evolve cost line should be represented by evolvesTo/evolveCost, not as a keyword."
+    ]
+  },
+  "Floral Fencer Evolved": {
+    "source": {
+      "name": "Floral Fencer Evolved",
+      "type": "evolved",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Officer",
+        "rarity": "Promo",
+        "cardSet": "Promo Cards",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve: Summon a Steelclad Knight and Knight token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/PR/PR-008EN.png",
+      "cardNos": [
+        "PR-008EN",
+        "SD02-004EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Floral Fencer",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Steelclad Knight",
+            "count": 1,
+            "zone": "field"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability is incomplete: it summons only Steelclad Knight, but it should summon both a Steelclad Knight and a Knight token. Encode this as a sequence with two summon steps."
+    ]
+  },
+  "Flower Doll": {
+    "source": {
+      "name": "Flower Doll",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry / Verdant",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Put a Puppet token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-014EN.png",
+      "cardNos": [
+        "BP05-014EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Flower Doll Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Puppet",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"evolve\" and \"fanfare\". Evolve is represented by evolvesTo/evolveCost, and Fanfare is represented by the ability timing, so neither should be in keywords."
+    ]
+  },
+  "Flower Doll Evolved": {
+    "source": {
+      "name": "Flower Doll Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Puppetry / Verdant",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[lastwords] Select up to 1 Puppetry follower in your cemetery (including this one) and add it to your hand."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-015EN.png",
+      "cardNos": [
+        "BP05-015EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Flower Doll",
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "tutorFromCemetery",
+            "filter": {
+              "trait": "Puppetry"
+            },
+            "to": "hand",
+            "optional": true
+          }
+        }
+      ],
+      "specialType": "evolved",
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The parsed keywords incorrectly include \"lastWords\". Last Words is represented by the ability timing, not as a keyword."
+    ]
+  }
+}

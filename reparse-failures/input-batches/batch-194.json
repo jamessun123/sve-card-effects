@@ -1,0 +1,291 @@
+{
+  "Round Table Assembly": {
+    "source": {
+      "name": "Round Table Assembly",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Commander / Arthurian",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose one of the following. (1) Search your deck for an Arthurian follower, reveal it, and add it to your hand. (2) Select an Arthurian follower on your field and give it [attack]+1/[defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-031EN.png",
+      "cardNos": [
+        "BP04-031EN",
+        "PR-113EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Search your deck for an Arthurian follower, reveal it, and add it to your hand.",
+                "effect": {
+                  "op": "searchDeckChoose",
+                  "filter": {
+                    "trait": "Arthurian",
+                    "cardType": "follower"
+                  },
+                  "lookAt": 40,
+                  "to": "hand",
+                  "optional": false,
+                  "reveal": true
+                }
+              },
+              {
+                "label": "Select an Arthurian follower on your field and give it [attack]+1/[defense]+2.",
+                "effect": {
+                  "op": "buff",
+                  "atk": 1,
+                  "def": 2,
+                  "targets": {
+                    "type": "selfFollower",
+                    "count": 1,
+                    "filter": {
+                      "trait": "Arthurian"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Option 2 target encoding is incorrect: `buff.targets` should target an Arthurian follower on your field using a supported selector, e.g. `{\"type\":\"selfFollower\",\"count\":1,\"trait\":\"Arthurian\"}` or equivalent supported target restriction, not an unsupported nested `filter` on targets."
+    ]
+  },
+  "Rowen, Dragon Lance": {
+    "source": {
+      "name": "Rowen, Dragon Lance",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Wyrmkin / Cutthroat / Draconic Duelist",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "4",
+        "defense": "2",
+        "effect": "Rush. Assail. [fanfare] Put a Curse of the Black Dragon token into your EX area. Strike - Select an enemy follower on the field. Deal it 2 damage and, if Overflow is active for you, deal 1 damage to its leader. [act] [cost04]: Select an enemy follower on the field. Deal 3 damage to it and 1 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-055EN.png",
+      "cardNos": [
+        "BP17-055EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "assail",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Curse of the Black Dragon",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "overflow"
+                },
+                "then": {
+                  "op": "dealDamage",
+                  "amount": 1,
+                  "targets": {
+                    "type": "enemyLeader"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 4
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 3,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 1,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not include `fanfare` in `keywords`; Fanfare should be represented only as a `timing: \"fanfare\"` ability.",
+      "The activated ability should encode 'deal 3 damage to it and 1 damage to its leader' as a single linked effect using `damageFollowerAndLeader`, not as two separate `dealDamage` steps that can hit different targets."
+    ]
+  },
+  "Roy, Dragoncleaver": {
+    "source": {
+      "name": "Roy, Dragoncleaver",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Follower",
+        "trait": "Draconic Duelist / Cutthroat",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "3",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Search your deck for a 2-cost [dragoncraft] spell, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-074EN.png",
+      "cardNos": [
+        "BP09-074EN",
+        "SDD04-012EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Roy, Dragoncleaver Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardClass": "dragon",
+              "cardType": "spell",
+              "maxCost": 2
+            },
+            "to": "exArea",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not include `evolve` in `keywords`; the evolve line should be represented by `evolveCost`/evolve linkage, not as a keyword.",
+      "Do not include `fanfare` in `keywords`; Fanfare should be represented only as a `timing: \"fanfare\"` ability.",
+      "The fanfare tutor destination is wrong: the searched 2-cost Dragoncraft spell should be added to your hand (`to: \"hand\"`), not put into your EX area."
+    ]
+  },
+  "Royal Banner": {
+    "source": {
+      "name": "Royal Banner",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Amulet",
+        "trait": "Commander",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "4",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Give each [swordcraft] follower on your field [attack]+1/[defense]+1. Whenever a [swordcraft] follower is put onto your field, give it [attack]+1/[defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-033EN.png",
+      "cardNos": [
+        "BP01-033EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffFieldTrait",
+            "cardClass": "sword",
+            "atk": 1,
+            "def": 1,
+            "otherOnly": false
+          }
+        },
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "cardClass": "sword"
+          },
+          "effect": {
+            "op": "buff",
+            "atk": 1,
+            "def": 1,
+            "targets": {
+              "type": "lastSummoned"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not include `fanfare` in `keywords`; Fanfare should be represented only as a `timing: \"fanfare\"` ability.",
+      "The triggered buff should fire whenever a Swordcraft follower is put onto your field, not only when one enters by summon. Encode this as a granted/triggered effect for any ally follower entering your field with the matching class, and the filter must be placed in a supported location rather than as a top-level `filter` field on the ability."
+    ]
+  }
+}

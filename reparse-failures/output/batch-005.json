@@ -1,0 +1,46 @@
+{
+  "Aether of the White Wing": {
+    "keywords": [
+      "ward"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "tutorFromDeck",
+          "filter": {
+            "cardClass": "haven",
+            "cardType": "follower",
+            "excludeIdentityName": "Aether of the White Wing",
+            "maxCost": {
+              "op": "maxPp"
+            }
+          },
+          "to": "field"
+        }
+      }
+    ],
+    "parseConfidence": "review"
+  },
+  "Aiko Takamori Evolved": {
+    "evolvesFrom": "Aiko Takamori",
+    "specialType": "evolved",
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "onEvolve",
+        "effect": {
+          "op": "selectFromHand",
+          "filter": {
+            "trait": "Passion",
+            "cardType": "follower",
+            "maxCost": 3
+          },
+          "to": "field",
+          "optional": true
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

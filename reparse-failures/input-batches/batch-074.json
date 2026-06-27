@@ -1,0 +1,134 @@
+{
+  "Exterminus Weapon": {
+    "source": {
+      "name": "Exterminus Weapon",
+      "type": "token",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower / Token",
+        "trait": "Machina / Officer",
+        "rarity": "-",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "2",
+        "attack": "6",
+        "defense": "6",
+        "effect": "Ward. [fanfare] Select an enemy card on the field and destroy it. [lastwords] Deal 4 damage to each enemy leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-T01EN.png",
+      "cardNos": [
+        "BP10-T01EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "destroy",
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageAllEnemies",
+            "amount": 4,
+            "followersOnly": false
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words effect is encoded incorrectly as `dealDamageAllEnemies` for 4 damage. It should deal 4 damage only to each enemy leader; replace it with an effect that targets enemy leaders only, such as leader-only damage in multiplayer."
+    ]
+  },
+  "Extreme Carrot": {
+    "source": {
+      "name": "Extreme Carrot",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Natura / Mercenary",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Rush. [lastwords] [cost01], banish a Naterran Great Tree from your field or EX area: Search your deck for an Extreme Carrot, summon it, then shuffle your deck. Give your leader [defense]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-117EN.png",
+      "cardNos": [
+        "BP07-117EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "optionalCost",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "spendPp",
+                  "amount": 1
+                },
+                {
+                  "op": "banishFromExArea",
+                  "filter": {
+                    "identityName": "Naterran Great Tree"
+                  },
+                  "count": 1
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityName": "Extreme Carrot"
+                  },
+                  "to": "field"
+                },
+                {
+                  "op": "shuffleDeck"
+                },
+                {
+                  "op": "healLeader",
+                  "amount": 1
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Last Words optional cost is incomplete: it requires banishing a Naterran Great Tree from your field or EX area, but the encoding only banishes from EX area. Change the cost to allow selecting and banishing Naterran Great Tree from either your field or your EX area."
+    ]
+  }
+}

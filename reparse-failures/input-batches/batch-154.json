@@ -1,0 +1,290 @@
+{
+  "Mjerrabaine, Great One": {
+    "source": {
+      "name": "Mjerrabaine, Great One",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Omen",
+        "rarity": "Special",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Discard 3 cards: Put a Great Testimony token into your EX area. [act] Banish a Mjerrabaine, Omen of One from your cemetery: Deal 2 damage to each enemy leader. Draw 2 cards. Activate only once per turn."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-SP01EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard 3 cards",
+            "cost": {
+              "op": "discard",
+              "count": 3
+            },
+            "then": {
+              "op": "summon",
+              "tokenName": "Great Testimony",
+              "count": 1,
+              "zone": "exArea"
+            }
+          }
+        },
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "banishFromCemetery": {
+              "identityName": "Mjerrabaine, Omen of One"
+            },
+            "banishCount": 1
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              },
+              {
+                "op": "draw",
+                "count": 2
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare cost is encoded incorrectly as optionalCost. '[fanfare] Discard 3 cards: Put a Great Testimony token into your EX area.' is a mandatory fanfare cost/effect line and should not be optional.",
+      "The activated cost is malformed. It should use the implemented activated cost shape with banishFromCemetery containing both filter and count, e.g. banishing 1 card named 'Mjerrabaine, Omen of One' from your cemetery.",
+      "The activated damage effect is encoded incorrectly: 'Deal 2 damage to each enemy leader' should hit enemy leaders only, not enemy followers. Replace dealDamageAllEnemies with an effect that deals 2 to enemy leaders only."
+    ]
+  },
+  "Mjerrabaine, Omen of One": {
+    "source": {
+      "name": "Mjerrabaine, Omen of One",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Omen",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "5",
+        "attack": "5",
+        "defense": "5",
+        "effect": "[evolve] [cost01]: Evolve this follower. Rush. At the start of your end phase, if there are 2 cards or less in your hand, deal 3 damage to each enemy leader. If there are 0 cards in your hand, deal 3 damage to each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-103EN.png",
+      "cardNos": [
+        "BP05-103EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "rush"
+      ],
+      "evolvesTo": "Mjerrabaine, Omen of One Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "handMax",
+              "count": 2
+            },
+            "then": {
+              "op": "dealDamageAllEnemies",
+              "amount": 3,
+              "followersOnly": false
+            },
+            "else": {
+              "op": "if",
+              "condition": {
+                "type": "handMax",
+                "count": 0
+              },
+              "then": {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": true
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The end-phase damage effect is encoded incorrectly: if you have 2 or fewer cards in hand, it should deal 3 damage to each enemy leader only, not to enemy followers as well. Replace that branch with leader-only damage.",
+      "The 0-cards-in-hand clause is nested under else, so it will never apply when you have 0 cards in hand. It should be an additional effect checked independently after the leader-damage clause, since both clauses apply when hand size is 0.",
+      "Keywords are incorrect: 'evolve' should not be listed in keywords. The evolve line should be represented by evolveCost/evolvesTo only."
+    ]
+  },
+  "Mjerrabaine, Omen of One Evolved": {
+    "source": {
+      "name": "Mjerrabaine, Omen of One Evolved",
+      "type": "evolved",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "6",
+        "defense": "6",
+        "effect": "At the start of your end phase, refresh this card and, if there are 2 cards or less in your hand, deal 5 damage to each enemy leader. If there are 0 cards in your hand, deal 5 damage to each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-104EN.png",
+      "cardNos": [
+        "BP05-104EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Mjerrabaine, Omen of One",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "refresh",
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "handMax",
+                  "count": 2
+                },
+                "then": {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 5,
+                  "followersOnly": false
+                },
+                "else": {
+                  "op": "if",
+                  "condition": {
+                    "type": "handMax",
+                    "count": 0
+                  },
+                  "then": {
+                    "op": "dealDamageAllEnemies",
+                    "amount": 5,
+                    "followersOnly": true
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The end-phase damage effect is encoded incorrectly: if you have 2 or fewer cards in hand, it should deal 5 damage to each enemy leader only, not to enemy followers as well. Replace that branch with leader-only damage.",
+      "The 0-cards-in-hand clause is nested under else, so it will never apply when you have 0 cards in hand. It should be checked independently after refreshing and the leader-damage clause, since both clauses apply when hand size is 0."
+    ]
+  },
+  "Momoka Sakurai": {
+    "source": {
+      "name": "Momoka Sakurai",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cute",
+        "rarity": "Silver",
+        "cardSet": "Crossover Starter Deck “Cute”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] [cost02], Lesson (1): Give this follower [attack]+1/[defense]+1. (To perform Lesson (1), banish a Magical Item token from your EX area.)"
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/CSD02a/CSD02a-005EN.png",
+      "cardNos": [
+        "CSD02a-005EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "evolvesTo": "Momoka Sakurai Evolved",
+      "evolveCost": 1,
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[cost02], Lesson (1)",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "spendPp",
+                  "amount": 2
+                },
+                {
+                  "op": "banishFromExArea",
+                  "filter": {
+                    "trait": "Magical Item"
+                  },
+                  "count": 1
+                }
+              ]
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keywords are incorrect: 'evolve' and 'fanfare' should not be listed in keywords. The evolve line should be represented by evolveCost/evolvesTo, and Fanfare should remain only as the ability timing."
+    ]
+  }
+}

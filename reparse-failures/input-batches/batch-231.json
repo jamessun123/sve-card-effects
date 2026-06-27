@@ -1,0 +1,145 @@
+{
+  "Treant": {
+    "source": {
+      "name": "Treant",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Fae-Touched",
+        "rarity": "Bronze",
+        "cardSet": "Starter Deck #1 “Regal Fairy Princess”",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve][cost02]: Evolve this follower. [fanfare] Combo (3): Change this card's [evolve] cost to 0. (If you've played at least 3 cards this turn, including this one, perform Combo (3).)"
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD01/SD01-009EN.png",
+      "cardNos": [
+        "SD01-009EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Treant Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "combo",
+              "count": 3
+            },
+            "then": {
+              "op": "playCostReduction",
+              "amount": 0
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare Combo (3) effect is encoded incorrectly as playCostReduction amount 0; it should change this card's evolve cost to 0, using an evolve-cost-changing effect such as evolveCostReduction for 2 or equivalent self-targeted evolve-cost set/reduction logic."
+    ]
+  },
+  "Treant Evolved": {
+    "source": {
+      "name": "Treant Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Fae-Touched",
+        "rarity": "Bronze",
+        "cardSet": "Starter Deck #1 “Regal Fairy Princess”",
+        "cost": "-",
+        "attack": "5",
+        "defense": "5",
+        "effect": ""
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SD01/SD01-010EN.png",
+      "cardNos": [
+        "SD01-010EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Treant Evolved",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "evolvesFrom is incorrect; it should be \"Treant\", not \"Treant Evolved\"."
+    ]
+  },
+  "Trick Dullahan": {
+    "source": {
+      "name": "Trick Dullahan",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "[fanfare] Put a Ghost token into your EX area. Necrocharge (10): Put 3 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-078EN.png",
+      "cardNos": [
+        "BP02-078EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Ghost",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "necrocharge",
+            "count": 10
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Ghost",
+            "count": 3,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Necrocharge (10): Put 3 instead is encoded as an additional separate summon-3 ability, which would produce 4 Ghosts total. It should be a single Fanfare effect that summons 1 normally, or 3 instead if condition type necrocharge count 10 is met."
+    ]
+  }
+}

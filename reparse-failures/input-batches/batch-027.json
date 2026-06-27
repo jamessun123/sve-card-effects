@@ -1,0 +1,131 @@
+{
+  "Bandage Connoisseur": {
+    "source": {
+      "name": "Bandage Connoisseur",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Departed",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "6",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare][lastwords] Select an enemy follower on the field. Deal 4 damage to it and 1 damage to its leader."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-085EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 4,
+            "leaderAmount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "dealDamageFollowerAndLeader",
+            "followerAmount": 4,
+            "leaderAmount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Both abilities use an unimplemented/incorrect op id `dealDamageFollowerAndLeader`; change each to `damageFollowerAndLeader` with the same follower target and amounts 4 and 1."
+    ]
+  },
+  "Barrage Brawler": {
+    "source": {
+      "name": "Barrage Brawler",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Faith",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "1",
+        "attack": "0",
+        "defense": "1",
+        "effect": "[evolve] Discard a card: Evolve this follower. At the start of your end phase, if you have at least 2 play points, select an enemy leader and deal it 1 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-099EN.png",
+      "cardNos": [
+        "BP06-099EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "evolve"
+      ],
+      "evolvesTo": "Barrage Brawler Evolved",
+      "evolveCost": 0,
+      "abilities": [
+        {
+          "timing": "evolve",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Discard a card",
+            "cost": {
+              "op": "discard",
+              "count": 1
+            },
+            "then": {
+              "op": "evolveOtherFollower",
+              "filter": {
+                "identityName": "Barrage Brawler"
+              },
+              "excludeSelf": false
+            }
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "condition": {
+            "type": "ppMin",
+            "count": 2
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyLeader"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The `[evolve] Discard a card: Evolve this follower.` ability is encoded incorrectly. It should be an evolve ability whose cost is discarding 1 card and which evolves this card itself, not an `optionalCost` that uses `evolveOtherFollower` targeting Barrage Brawler. Encode the discard as the evolve payment/self-evolve effect for this card."
+    ]
+  }
+}

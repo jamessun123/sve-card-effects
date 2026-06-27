@@ -1,0 +1,57 @@
+{
+  "Winged Staff Priestess": {
+    "source": {
+      "name": "Winged Staff Priestess",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Luminary",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Ward. [lastwords] Search your deck for a Winged Staff Priestess, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-097EN.png",
+      "cardNos": [
+        "BP06-097EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "tutorFromDeck",
+                "filter": {
+                  "identityName": "Winged Staff Priestess"
+                },
+                "to": "hand",
+                "reveal": true
+              },
+              {
+                "op": "shuffleDeck"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove \"lastWords\" from keywords; Last Words should be encoded as an ability timing, not a keyword."
+    ]
+  }
+}

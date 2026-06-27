@@ -1,0 +1,246 @@
+{
+  "Assembly Droid": {
+    "source": {
+      "name": "Assembly Droid",
+      "type": "token",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower / Token",
+        "trait": "Machina",
+        "rarity": "-",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "[act] [engage], bury 3 Machina followers: Select an enemy follower on the field and deal it 5 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-T01EN.png",
+      "cardNos": [
+        "BP07-T01EN",
+        "BP17-T17EN",
+        "PR-170EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "act"
+      ],
+      "abilities": [
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "engage": true,
+            "buryFromField": {
+              "cardType": "follower"
+            },
+            "buryFieldCount": 3,
+            "excludeSelfFromBury": true
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 5,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated cost is encoded incorrectly: it should bury 3 Machina followers, not 3 arbitrary followers excluding self. Change the cost to banish/bury from field with a Machina follower filter and do not add excludeSelf unless the source says 'other'."
+    ]
+  },
+  "Asuka Ninomiya [Gentle Evening]": {
+    "source": {
+      "name": "Asuka Ninomiya [Gentle Evening]",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Special",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "While there are at least 3 Cool followers on your field, this has Storm. [fanfare] [cost02], Lesson (1): Search your deck for a follower with \"Ranko Kanzaki\" in its name, put it into your EX area, then shuffle. It costs 4 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-SP10EN.png",
+      "cardNos": [
+        "ECP02-SP10EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 3
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "storm"
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[cost02], Lesson (1)",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "spendPp",
+                  "amount": 2
+                },
+                {
+                  "op": "banishFromExArea",
+                  "filter": {
+                    "trait": "Magical Item"
+                  },
+                  "count": 1
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityNameContains": "Ranko Kanzaki"
+                  },
+                  "to": "exArea",
+                  "reveal": true
+                },
+                {
+                  "op": "shuffleDeck"
+                },
+                {
+                  "op": "playCostReduction",
+                  "amount": 4
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not list 'storm' in keywords as a printed keyword; the source gives Storm only conditionally. Keep Storm only in the passive ability.",
+      "Fanfare cost/effect is encoded incorrectly after tutoring: 'It costs 4 less to play this turn' applies to the card put into your EX area, not this source card. Change the final step to apply a 4-cost reduction to the tutored card in EX area, not a generic/self playCostReduction."
+    ]
+  },
+  "Asuka Ninomiya [Sweet & Charming]": {
+    "source": {
+      "name": "Asuka Ninomiya [Sweet & Charming]",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Legendary",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "While there are at least 3 Cool followers on your field, this has Storm. [fanfare] [cost02], Lesson (1): Search your deck for a follower with \"Ranko Kanzaki\" in its name, put it into your EX area, then shuffle. It costs 4 less to play this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-052EN.png",
+      "cardNos": [
+        "ECP02-052EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 3
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "storm"
+            ]
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[cost02], Lesson (1)",
+            "cost": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "spendPp",
+                  "amount": 2
+                },
+                {
+                  "op": "banishFromExArea",
+                  "filter": {
+                    "trait": "Magical Item"
+                  },
+                  "count": 1
+                }
+              ]
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "tutorFromDeck",
+                  "filter": {
+                    "identityNameContains": "Ranko Kanzaki"
+                  },
+                  "to": "exArea"
+                },
+                {
+                  "op": "shuffleDeck"
+                },
+                {
+                  "op": "playCostReduction",
+                  "amount": 4
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not list 'storm' in keywords as a printed keyword; the source gives Storm only conditionally. Keep Storm only in the passive ability.",
+      "Fanfare cost/effect is encoded incorrectly after tutoring: 'It costs 4 less to play this turn' applies to the card put into your EX area, not this source card. Change the final step to apply a 4-cost reduction to the tutored card in EX area, not a generic/self playCostReduction."
+    ]
+  }
+}

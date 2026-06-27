@@ -1,0 +1,274 @@
+{
+  "Mega Enforcer": {
+    "source": {
+      "name": "Mega Enforcer",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Machina / Golem",
+        "rarity": "Gold",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "At the start of your end phase, select an enemy follower on the field. If there are at least 3 Machina cards in your EX area, deal it 3 damage and draw a card. [lastwords] Put an Assembly Droid token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-043EN.png",
+      "cardNos": [
+        "BP17-043EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "lastWords"
+      ],
+      "abilities": [
+        {
+          "timing": "startOfEnd",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "exAreaTraitMin",
+              "trait": "Machina",
+              "count": 3
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "dealDamage",
+                  "amount": 3,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                },
+                {
+                  "op": "draw",
+                  "count": 1
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "lastWords",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Assembly Droid",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The startOfEnd ability incorrectly omits the required target selection before the condition; it should still select an enemy follower on the field, then if there are at least 3 Machina cards in your EX area, deal 3 damage to that selected follower and draw a card."
+    ]
+  },
+  "Melody's Return": {
+    "source": {
+      "name": "Melody's Return",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Omen / Idolatry",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "As an additional cost to play this, banish a follower with \"Lishenna\" in its name from your cemetery. ---------- If there are at least 2 Idolatry cards on your field, search your deck for a follower with \"Lishenna\" in its name, summon it, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP15-045EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "optionalCost",
+            "label": "banish a follower with \"Lishenna\" in its name from your cemetery",
+            "cost": {
+              "op": "banishFromCemetery",
+              "filter": {
+                "identityNameContains": "Lishenna"
+              },
+              "count": 1
+            },
+            "then": {
+              "op": "if",
+              "condition": {
+                "type": "fieldTraitMin",
+                "trait": "Idolatry",
+                "count": 2
+              },
+              "then": {
+                "op": "sequence",
+                "steps": [
+                  {
+                    "op": "tutorFromDeck",
+                    "filter": {
+                      "identityNameContains": "Lishenna"
+                    },
+                    "to": "field"
+                  },
+                  {
+                    "op": "shuffleDeck"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is mandatory, not optional; replace optionalCost with a mandatory additional-cost encoding so the spell requires banishing a follower with 'Lishenna' in its name from your cemetery to be played.",
+      "The cemetery cost filter is too broad; it should require a follower with 'Lishenna' in its name, so add cardType: 'follower' to the banishFromCemetery filter.",
+      "The deck search filter is too broad; it should search for a follower with 'Lishenna' in its name, so add cardType: 'follower' to the tutorFromDeck filter."
+    ]
+  },
+  "Mena, Levin Duelist": {
+    "source": {
+      "name": "Mena, Levin Duelist",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Levin",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "3",
+        "defense": "2",
+        "effect": "Rush. While there are at least 5 Levin cards in your cemetery, this follower has Assail and \"Strike - Give this follower [attack]+2/[defense]+1.\""
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-033EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Levin",
+            "count": 5
+          },
+          "effect": {
+            "op": "passiveKeywords",
+            "keywords": [
+              "assail"
+            ]
+          }
+        },
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "Levin",
+            "count": 5
+          },
+          "effect": {
+            "op": "grantLastWords",
+            "effect": {
+              "op": "buff",
+              "atk": 2,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The conditional granted triggered ability is encoded as grantLastWords, but the card gains a Strike ability; replace this with a passive/conditional Strike ability that gives this follower +2/+1 when it attacks."
+    ]
+  },
+  "Meowskers, Fluffy Consul": {
+    "source": {
+      "name": "Meowskers, Fluffy Consul",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower",
+        "trait": "Natura / Lightborne / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "Storm. [fanfare] If this was put onto the field by an ability, draw a card. Strike - [cost01]: Select an enemy follower on the field and deal it 2 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-095EN.png",
+      "cardNos": [
+        "BP17-095EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "notEnteredFromHand"
+          },
+          "effect": {
+            "op": "draw",
+            "count": 1
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          },
+          "cost": {
+            "pp": 1
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare condition is wrong; 'If this was put onto the field by an ability' should be encoded as notEnteredFromHand, not merely 'not played from hand' if that is being used loosely. Ensure the condition specifically matches not being put onto the field from hand.",
+      "The Strike ability has a PP cost but is missing an activated/paid strike encoding; represent the Strike ability with its required [cost01] so the damage effect only occurs if 1 PP is paid."
+    ]
+  }
+}

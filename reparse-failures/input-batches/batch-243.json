@@ -1,0 +1,103 @@
+{
+  "Vuella, One-Winged Demon": {
+    "source": {
+      "name": "Vuella, One-Winged Demon",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #8 \"Alterchaotica\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "3",
+        "effect": "[act] [cost01]: Reveal the top card of your deck. If it's a 2-cost card, put it into your EX area. It costs 2 less to play this turn. Activate only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP08/BP08-074EN.png",
+      "cardNos": [
+        "BP08-074EN",
+        "PR-261EN",
+        "SP01-037EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "activated",
+          "oncePerTurn": true,
+          "cost": {
+            "pp": 1
+          },
+          "effect": {
+            "op": "putDeckTopToExArea",
+            "ifFilter": {
+              "maxCost": 2
+            },
+            "playCostReduction": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability checks the wrong cost condition. \"If it's a 2-cost card\" should be encoded with \"ifFilter\": {\"minCost\": 2, \"maxCost\": 2} instead of only {\"maxCost\": 2}."
+    ]
+  },
+  "Wardrobe Raider Evolved": {
+    "source": {
+      "name": "Wardrobe Raider Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #1 “Advent of Genesis”",
+        "cost": "-",
+        "attack": "3",
+        "defense": "3",
+        "effect": "On Evolve, put a follower from your field into its owner's cemetery: Select an enemy follower on the field and destroy it."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP01/BP01-123EN.png",
+      "cardNos": [
+        "BP01-123EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Wardrobe Raider",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "optionalCost",
+            "label": "Put a follower from your field into its owner's cemetery",
+            "cost": {
+              "op": "buryFromFieldSelect"
+            },
+            "then": {
+              "op": "destroy",
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve cost is incorrectly encoded as optionalCost. \"Put a follower from your field into its owner's cemetery\" is mandatory, so it should be a sequence with buryFromFieldSelect followed by destroy, not an optional cost that may be declined."
+    ]
+  }
+}

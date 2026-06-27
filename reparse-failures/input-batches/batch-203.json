@@ -1,0 +1,148 @@
+{
+  "Servant of Destruction": {
+    "source": {
+      "name": "Servant of Destruction",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Omen / Idolatry",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[evolve] [cost02]: Evolve this follower. [fanfare] If there are at least 3 Idolatry cards on your field, change this card's [evolve] cost to 0 for the rest of this turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-048EN.png",
+      "cardNos": [
+        "BP05-048EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Servant of Destruction Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "fieldTraitMin",
+              "trait": "Idolatry",
+              "count": 3
+            },
+            "then": {
+              "op": "evolveCostReduction",
+              "amount": 2
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not encode printed Fanfare/Evolve as keywords. Remove \"evolve\" and \"fanfare\" from keywords; keep evolveCost/evolvesTo and the fanfare ability only.",
+      "The fanfare condition is wrong. The source says \"If there are at least 3 Idolatry cards on your field,\" not trait-min followers only. Encode the condition to check Idolatry cards on your field; if the engine cannot count non-follower field cards by trait, this should be handled with an engine condition for field card trait count.",
+      "The fanfare should change this card's evolve cost to 0 for the rest of this turn. The current evolveCostReduction by 2 is only correct if it is guaranteed to apply only to this card for the rest of the turn; encode it explicitly as this card's evolve-cost change for the turn."
+    ]
+  },
+  "Servant of Destruction Evolved": {
+    "source": {
+      "name": "Servant of Destruction Evolved",
+      "type": "evolved",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Omen / Idolatry",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve: Select an enemy follower on the field. Deal 2 damage to it and its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-049EN.png",
+      "cardNos": [
+        "BP05-049EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Servant of Destruction",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "damageFollowerAndLeader",
+            "followerAmount": 2,
+            "leaderAmount": 2
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "On Evolve should select an enemy follower and deal 2 damage to it and its leader. The encoded damageFollowerAndLeader effect is missing the required selected enemy follower target. Add target selection for one enemy follower to the onEvolve effect."
+    ]
+  },
+  "Servant of Lust": {
+    "source": {
+      "name": "Servant of Lust",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Omen / Demon",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "2",
+        "attack": "3",
+        "defense": "1",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Deal 1 damage to your leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-080EN.png",
+      "cardNos": [
+        "BP05-080EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Servant of Lust Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "selfLeader"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Do not encode printed Fanfare/Evolve as keywords. Remove \"evolve\" and \"fanfare\" from keywords; keep evolveCost/evolvesTo and the fanfare ability only."
+    ]
+  }
+}

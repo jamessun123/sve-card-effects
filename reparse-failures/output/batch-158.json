@@ -1,0 +1,31 @@
+{
+  "Mystic King": {
+    "keywords": [],
+    "evolvesTo": "Mystic King Evolved",
+    "evolveCost": 2,
+    "abilities": [
+      {
+        "timing": "activated",
+        "effect": {
+          "op": "dealDamage",
+          "amount": 5,
+          "targets": {
+            "type": "enemyFollower",
+            "count": 1
+          }
+        },
+        "cost": {
+          "pp": 0,
+          "buryFromField": {
+            "cardType": "follower",
+            "trait": "Chess",
+            "excludeSelf": true
+          },
+          "buryFieldCount": 1
+        },
+        "oncePerTurn": true
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

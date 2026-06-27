@@ -1,0 +1,129 @@
+{
+  "Fieran, Havensent Wind God": {
+    "source": {
+      "name": "Fieran, Havensent Wind God",
+      "type": "base",
+      "class": "neutral",
+      "details": {
+        "format": "Any",
+        "class": "Neutral",
+        "cardType": "Follower",
+        "trait": "Deity",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #10 \"Gods of the Arcana\"",
+        "cost": "4",
+        "attack": "2",
+        "defense": "2",
+        "effect": "This card costs 3 less to play from the EX area. ---------- [fanfare] Select an enemy follower on the field and deal it 4 damage. At the start of your end phase, give each other follower on your field [attack]+1."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP10/BP10-113EN.png",
+      "cardNos": [
+        "BP10-113EN",
+        "PR-446EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 3
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 4,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "buffFieldTrait",
+                "atk": 1,
+                "def": 0,
+                "otherOnly": true
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cost reduction is encoded as an unconditional playCostReduction, but the source says this card costs 3 less to play from the EX area; encode it with condition {\"type\":\"sourceInExArea\"} or use exAreaPlayCostReduction amount 3.",
+      "The +1 attack to each other follower is incorrectly placed inside the fanfare sequence; it should be a separate ability with timing \"startOfEnd\" and effect buffFieldTrait with atk 1, otherOnly true."
+    ]
+  },
+  "Fiery Paean": {
+    "source": {
+      "name": "Fiery Paean",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Amulet",
+        "trait": "Faith / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[fanfare] Put a Holy Tiger token into your EX area. [act] [engage]: Select a Holy Tiger on your field and give it Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-102EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Holy Tiger",
+            "count": 1,
+            "zone": "exArea"
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "identityName": "Holy Tiger"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The activated ability targets a Holy Tiger using an unsupported filter inside targets; it should target a follower on your field specifically restricted to Holy Tiger, using a correct target encoding supported by the engine."
+    ]
+  }
+}

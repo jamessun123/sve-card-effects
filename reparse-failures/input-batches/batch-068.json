@@ -1,0 +1,192 @@
+{
+  "Elegance in Action": {
+    "source": {
+      "name": "Elegance in Action",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Officer / Maid",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #7 \"Verdant Steel\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "When this card is discarded, select an enemy follower on the field and engage it. ---------- Select an enemy follower on the field. Engage it and draw a card."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP07/BP07-034EN.png",
+      "cardNos": [
+        "BP07-034EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "onDiscard",
+          "effect": {
+            "op": "engage",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "engage",
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "draw",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The card is incorrectly given the `quick` keyword; the source text does not include Quick, so remove `quick` from `keywords`."
+    ]
+  },
+  "Elements of Creation": {
+    "source": {
+      "name": "Elements of Creation",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell / Token",
+        "trait": "Mage",
+        "rarity": "-",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Spellchain (10) - Deal 7 damage to each enemy leader. Give your leader [defense]+7."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-T05EN.png",
+      "cardNos": [
+        "BP17-T05EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "spellchain",
+              "count": 10
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 7,
+                  "followersOnly": false
+                },
+                {
+                  "op": "healLeader",
+                  "amount": 7
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The damage effect is encoded as `dealDamageAllEnemies`, which deals damage to enemy followers (and possibly the leader) rather than to each enemy leader. It should deal 7 damage to each enemy leader; encode this using the correct leader-targeting damage effect supported by the engine for enemy leaders."
+    ]
+  },
+  "Elf General": {
+    "source": {
+      "name": "Elf General",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Elf",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "5",
+        "effect": "Ward. [fanfare] Summon 2 Fairy tokens. Give them [attack]+1/[defense]+1 and Ward."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-014EN.png",
+      "cardNos": [
+        "BP09-014EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "ward",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Fairy",
+            "count": 2,
+            "zone": "field"
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buffFieldTrait",
+            "trait": "Fairy",
+            "atk": 1,
+            "def": 1,
+            "otherOnly": false
+          }
+        },
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "ward",
+            "targets": {
+              "type": "selfFollower",
+              "filter": {
+                "trait": "Fairy"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Fanfare should summon 2 Fairy tokens and then give those summoned Fairies +1/+1 and Ward; the current `buffFieldTrait` with `trait: \"Fairy\"` is incorrect because Fairy is not a trait filter and it can affect unrelated Fairy followers already on your field. It should target the summoned Fairy followers specifically, e.g. the last summoned followers.",
+      "The Ward-granting effect is encoded incorrectly with `grantKeyword` targeting `selfFollower` plus a nested filter not supported by the target selector reference. It should grant Ward specifically to the 2 Fairy tokens summoned by this Fanfare, not to an arbitrary self follower."
+    ]
+  }
+}

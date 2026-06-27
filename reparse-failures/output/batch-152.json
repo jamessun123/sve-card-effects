@@ -1,0 +1,145 @@
+{
+  "Mio Honda [Mermaid Star]": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Passion",
+                "cardType": "follower"
+              },
+              "lookAt": 2,
+              "to": "field",
+              "optional": true,
+              "remainderTo": "cemetery"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "banishFromExArea": {
+            "trait": "Magical Item"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Passion",
+            "cardType": "follower"
+          },
+          "lookAt": 2,
+          "to": "field",
+          "optional": true,
+          "remainderTo": "cemetery"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mio Honda [Positive Passion]": {
+    "keywords": [
+      "rush"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "searchDeckChoose",
+              "filter": {
+                "trait": "Passion",
+                "cardType": "follower"
+              },
+              "lookAt": 2,
+              "to": "field",
+              "optional": true,
+              "remainderTo": "cemetery"
+            }
+          ]
+        }
+      },
+      {
+        "timing": "activated",
+        "cost": {
+          "pp": 2,
+          "banishFromExArea": {
+            "trait": "Magical Item"
+          },
+          "banishCount": 2
+        },
+        "effect": {
+          "op": "searchDeckChoose",
+          "filter": {
+            "trait": "Passion",
+            "cardType": "follower"
+          },
+          "lookAt": 2,
+          "to": "field",
+          "optional": true,
+          "remainderTo": "cemetery"
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mirei Hayasaka [individuals]": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "passive",
+        "condition": {
+          "type": "ownCemeteryTraitMin",
+          "trait": "iM@S CG",
+          "count": 10
+        },
+        "effect": {
+          "op": "grantKeyword",
+          "keyword": "storm",
+          "targets": {
+            "type": "self"
+          }
+        }
+      },
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "mill",
+          "count": 2
+        }
+      },
+      {
+        "timing": "strike",
+        "effect": {
+          "op": "if",
+          "condition": {
+            "type": "ownCemeteryTraitMin",
+            "trait": "iM@S CG",
+            "count": 10
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

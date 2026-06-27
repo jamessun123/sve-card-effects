@@ -1,0 +1,73 @@
+{
+  "Major Prayers": {
+    "source": {
+      "name": "Major Prayers",
+      "type": "base",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Spell",
+        "trait": "Natura / Faith / Lightborne / Beast",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "3",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Choose one. (1) Give your leader [defense]+2. Draw 2 cards. (2) Search your deck for up to 2 different cards with \"Meowskers\" in their names, summon them, then shuffle."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-092EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Give your leader [defense]+2. Draw 2 cards.",
+                "effect": {
+                  "op": "sequence",
+                  "steps": [
+                    {
+                      "op": "healLeader",
+                      "amount": 2
+                    },
+                    {
+                      "op": "draw",
+                      "count": 2
+                    }
+                  ]
+                }
+              },
+              {
+                "label": "Search your deck for up to 2 different cards with \"Meowskers\" in their names, summon them, then shuffle.",
+                "effect": {
+                  "op": "searchDeckSummonMultiple",
+                  "filter": {
+                    "identityNameContains": "Meowskers"
+                  },
+                  "lookAt": 40,
+                  "maxTotalCost": 999,
+                  "remainderTo": "deckBottom"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Second choose option is encoded as searchDeckSummonMultiple with remainderTo deckBottom and maxTotalCost 999, but the card says to search your deck for up to 2 different cards with 'Meowskers' in their names, summon them, then shuffle. It should be encoded as tutoring up to 2 distinct matching cards from the whole deck directly to the field and then shuffling, not as a top-of-deck look/summon-multiple effect."
+    ]
+  }
+}

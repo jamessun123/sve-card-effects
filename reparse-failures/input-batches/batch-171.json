@@ -1,0 +1,200 @@
+{
+  "Paracelise, Demon of Greed": {
+    "source": {
+      "name": "Paracelise, Demon of Greed",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Festive / Demon",
+        "rarity": "Legendary",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this. Activate only if there are 0 cards in your hand. [fanfare] Put the top card of your deck into your EX area. Discard a card."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-072EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Paracelise, Demon of Greed Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "condition": {
+            "type": "handMax",
+            "count": 0
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "putDeckTopToExArea"
+              },
+              {
+                "op": "discard",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The hand-empty condition is applied to the fanfare, but the source text says it applies only to the [evolve] ability. Remove the `handMax: 0` condition from the fanfare ability and encode the evolve ability instead.",
+      "The card is missing its implementable evolve activated ability. Add a `timing: \"evolve\"` ability with cost `{ \"pp\": 1 }` and condition `{ \"type\": \"handMax\", \"count\": 0 }` to represent \"[evolve] [cost01]: Evolve this. Activate only if there are 0 cards in your hand.\""
+    ]
+  },
+  "Paracelise, Demon of Greed Evolved": {
+    "source": {
+      "name": "Paracelise, Demon of Greed Evolved",
+      "type": "evolved",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Festive / Demon",
+        "rarity": "Special",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Select an enemy follower on the field. Deal 5 damage to it, 2 damage to its leader, give your leader [defense]+2, and put the top card of your deck into your EX area."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-SP02EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Paracelise, Demon of Greed",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 5,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 1
+                }
+              },
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyLeader"
+                }
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              },
+              {
+                "op": "putDeckTopToExArea"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve effect incorrectly lets you choose any enemy follower for 5 damage and then deals 2 damage to any enemy leader separately. It should target a single enemy follower and deal 5 damage to that follower and 2 damage to its leader in the same linked effect; use `damageFollowerAndLeader` instead of separate `dealDamage` steps."
+    ]
+  },
+  "Parkour Werewolf": {
+    "source": {
+      "name": "Parkour Werewolf",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Demon / Beast",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "This doesn't take ability damage. Strike - Deal 2 damage to each enemy leader. Give your leader [defense]+2. [act] [cost02]: Give this Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-084EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "effect": {
+            "op": "damageImmunity",
+            "amount": 99,
+            "targets": {
+              "type": "self"
+            }
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 2,
+                "followersOnly": false
+              },
+              {
+                "op": "healLeader",
+                "amount": 2
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 2
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Strike ability is encoded as `dealDamageAllEnemies` for 2, which damages enemy followers and the enemy leader. The source says \"Deal 2 damage to each enemy leader\" only; replace that step with `dealDamage` targeting `{ \"type\": \"enemyLeader\" }` for 2."
+    ]
+  }
+}

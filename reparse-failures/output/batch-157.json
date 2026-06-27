@@ -1,0 +1,65 @@
+{
+  "Ms. Tart Man": {
+    "keywords": [],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "sequence",
+          "steps": [
+            {
+              "op": "tutorFromDeckAny",
+              "to": "hand",
+              "optional": false,
+              "reveal": false
+            },
+            {
+              "op": "shuffleDeck"
+            }
+          ]
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  },
+  "Mysteria, Magic Founder": {
+    "evolvesTo": "Mysteria, Magic Founder Evolved",
+    "evolveCost": 1,
+    "keywords": [
+      "fanfare"
+    ],
+    "abilities": [
+      {
+        "timing": "fanfare",
+        "effect": {
+          "op": "optionalCost",
+          "label": "Reveal an Academic follower from your hand",
+          "cost": {
+            "op": "discardFromHand",
+            "filter": {
+              "trait": "Academic",
+              "cardType": "follower"
+            },
+            "count": 1
+          },
+          "then": {
+            "op": "dealDamage",
+            "amount": 2,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      },
+      {
+        "timing": "passive",
+        "effect": {
+          "op": "playCostReduction",
+          "amount": 1
+        }
+      }
+    ],
+    "parseConfidence": "high"
+  }
+}

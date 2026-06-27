@@ -1,0 +1,259 @@
+{
+  "Pyne, Twisted Justice Evolved": {
+    "source": {
+      "name": "Pyne, Twisted Justice Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Zealot / Cutthroat",
+        "rarity": "Silver",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "2",
+        "defense": "4",
+        "effect": "Ward. On Evolve - Select up to 2 enemy followers on the field. They don't refresh during their controller's next start phase."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP13-096EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Pyne, Twisted Justice",
+      "specialType": "evolved",
+      "keywords": [
+        "ward"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "engage",
+            "targets": {
+              "type": "enemyFollower",
+              "count": 2,
+              "skipRefreshNextStart": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve ability encodes `skipRefreshNextStart` inside `targets`, but for `engage` it must be a top-level field on the effect. Change the ability to `{\"timing\":\"onEvolve\",\"effect\":{\"op\":\"engage\",\"targets\":{\"type\":\"enemyFollower\",\"count\":2},\"skipRefreshNextStart\":true}}`."
+    ]
+  },
+  "Quadra Magic": {
+    "source": {
+      "name": "Quadra Magic",
+      "type": "token",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell / Token",
+        "trait": "Mage",
+        "rarity": "-",
+        "cardSet": "Booster Set \"Convergent Destinies\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Spellchain (5) - This costs 1 less to play. ---------- Select up to 2 enemy followers on the field and deal them 2 damage. Put an Elements of Creation token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP17/BP17-T04EN.png",
+      "cardNos": [
+        "BP17-T04EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "condition": {
+            "type": "spellchain",
+            "count": 5
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamage",
+                "amount": 2,
+                "targets": {
+                  "type": "enemyFollower",
+                  "count": 2
+                }
+              },
+              {
+                "op": "summon",
+                "tokenName": "Elements of Creation",
+                "count": 1,
+                "zone": "exArea"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Spellchain (5) clause is a cost reduction, not a condition on whether the spell effect happens. Add a passive/play-cost-reduction ability such as a `playCostReduction` with `condition: {\"type\":\"spellchain\",\"count\":5}` for amount 1, and keep the spell effect unconditional.",
+      "The damage effect should select up to 2 enemy followers and deal 2 damage to them; `dealDamage` with `count: 2` does not represent optional multi-target selection correctly. Encode the targeting as an effect that supports up to 2 selected followers, such as a split/multi-target damage form, rather than conditioning the whole spell."
+    ]
+  },
+  "Queen Hemera the White": {
+    "source": {
+      "name": "Queen Hemera the White",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Commander / Fable / Lightborne",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "3",
+        "attack": "4",
+        "defense": "3",
+        "effect": "Rush. [fanfare] Summon a Knight token. If there's a Queen Magnus the Black on your field, summon 2 instead. Strike - Put a Knight token into your EX area."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-027EN.png",
+      "cardNos": [
+        "BP09-027EN",
+        "SS01-002EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "rush",
+        "strike"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Summon a Knight token",
+                "effect": {
+                  "op": "summon",
+                  "tokenName": "Knight",
+                  "count": 1,
+                  "zone": "field"
+                }
+              },
+              {
+                "label": "Summon 2 Knight tokens if there's a Queen Magnus the Black on your field",
+                "effect": {
+                  "op": "if",
+                  "condition": {
+                    "type": "namedFollowerOnFieldByName",
+                    "identityName": "Queen Magnus the Black"
+                  },
+                  "then": {
+                    "op": "summon",
+                    "tokenName": "Knight",
+                    "count": 2,
+                    "zone": "field"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "strike",
+          "effect": {
+            "op": "summon",
+            "tokenName": "Knight",
+            "count": 1,
+            "zone": "exArea"
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Rush is correctly a keyword, but Strike should not be listed in `keywords`; it should only be represented by the `strike` ability already present. Remove `\"strike\"` from `keywords`.",
+      "The fanfare is not a choice. It should always summon 1 Knight token, and if Queen Magnus the Black is on your field, summon 2 instead. Replace the `choose` ability with a conditional effect such as `if namedFollowerOnFieldByName Queen Magnus the Black then summon 2 else summon 1`."
+    ]
+  },
+  "Queen Vampire, Sultry Evening": {
+    "source": {
+      "name": "Queen Vampire, Sultry Evening",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Vampire",
+        "rarity": "Legendary",
+        "cardSet": "Special Set \"Seaside Memories\"",
+        "cost": "5",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Select an enemy follower on the field and deal it 4 damage. At the start of your end phase, if there are at least 3 other Vampire cards on your field, deal 3 damage to each enemy leader and give your leader [defense]+3."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/SP01/SP01-032EN.png",
+      "cardNos": [
+        "SP01-032EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "dealDamage",
+            "amount": 4,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Vampire",
+            "count": 3
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "dealDamageAllEnemies",
+                "amount": 3,
+                "followersOnly": false
+              },
+              {
+                "op": "healLeader",
+                "amount": 3
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The end-phase condition should require at least 3 other Vampire cards on your field, but the parse uses `fieldTraitMin` count 3 without excluding this card. Encode the condition as requiring 4 Vampire cards including this one, or otherwise represent '3 other' correctly.",
+      "The end-phase damage effect should deal 3 damage to each enemy leader only, but `dealDamageAllEnemies` with `followersOnly: false` also hits enemy followers. Replace it with damage to enemy leaders only; if multiplayer support is intended, use an effect that targets each enemy leader rather than all enemies."
+    ]
+  }
+}

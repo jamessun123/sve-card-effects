@@ -1,0 +1,94 @@
+{
+  "Shrouded Assassin": {
+    "source": {
+      "name": "Shrouded Assassin",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Assassin",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "2",
+        "attack": "1",
+        "defense": "2",
+        "effect": "[evolve][cost02]: Evolve this follower. Bane."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-028EN.png",
+      "cardNos": [
+        "BP04-028EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Shrouded Assassin Evolved",
+      "evolveCost": 2,
+      "keywords": [
+        "evolve"
+      ],
+      "abilities": [],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Missing keyword \"bane\"; add \"bane\" to keywords."
+    ]
+  },
+  "Shuten-Doji": {
+    "source": {
+      "name": "Shuten-Doji",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Yokai",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "1",
+        "defense": "4",
+        "effect": "[evolve] [cost01]: Evolve this follower. Bane. [fanfare] Banish 2 Yokai cards from your cemetery: Evolve this follower."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-072EN.png",
+      "cardNos": [
+        "BP06-072EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Shuten-Doji Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "evolve",
+        "bane"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryTraitMin",
+              "trait": "Yokai",
+              "count": 2
+            },
+            "then": {
+              "op": "evolveOtherFollower",
+              "filter": {
+                "trait": "Yokai"
+              },
+              "excludeSelf": true
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Fanfare is encoded incorrectly; it should banish 2 Yokai cards from your cemetery as a cost/effect and then evolve this follower, not check cemetery count and evolve another Yokai follower. Replace with a fanfare ability that banishes 2 Yokai cards from your cemetery and evolves this follower."
+    ]
+  }
+}

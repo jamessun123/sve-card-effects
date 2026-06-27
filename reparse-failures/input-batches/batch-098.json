@@ -1,0 +1,301 @@
+{
+  "Grasshopper Conductor Evolved": {
+    "source": {
+      "name": "Grasshopper Conductor Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Fae-Touched / Insect",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "4",
+        "effect": "On Evolve - Search your deck for a [forestcraft] spell that costs 1 or less, reveal it, add it to your hand, then shuffle your deck."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-013EN.png",
+      "cardNos": [
+        "BP09-013EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Grasshopper Conductor",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "tutorFromDeck",
+            "filter": {
+              "cardClass": "forest",
+              "cardType": "spell",
+              "maxCost": 1
+            },
+            "to": "exArea",
+            "reveal": true
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The On Evolve tutor puts the card in the wrong zone; change `to` from `exArea` to `hand` so it matches 'reveal it, add it to your hand'."
+    ]
+  },
+  "Gravikinetic Warrior": {
+    "source": {
+      "name": "Gravikinetic Warrior",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Follower",
+        "trait": "Officer / Supreme",
+        "rarity": "Bronze",
+        "cardSet": "Booster Set #5 “Omens Eternal”",
+        "cost": "4",
+        "attack": "4",
+        "defense": "4",
+        "effect": "[fanfare] Select a token follower on your field and give it [attack]+2/[defense]+2."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP05/BP05-032EN.png",
+      "cardNos": [
+        "BP05-032EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "buff",
+            "atk": 2,
+            "def": 2,
+            "targets": {
+              "type": "selfFollower",
+              "count": 1,
+              "filter": {
+                "cardType": "follower"
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare target is encoded too broadly; it should target a token follower on your field, not any self follower. Restrict the target to token followers (e.g. `printingType: \"token\"`)."
+    ]
+  },
+  "Grea the Dragonborn": {
+    "source": {
+      "name": "Grea the Dragonborn",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Dragonewt / Academic",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #2 “Reign of Bahamut”",
+        "cost": "4",
+        "attack": "5",
+        "defense": "4",
+        "effect": "If there is an Anne, Belle of Mysteria on your field, this card costs 2 less to play. [act][engage]: Select an enemy follower on the field and deal it 3 damage. If there is an Anne, Belle of Mysteria on your field, deal 6 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP02/BP02-040EN.png",
+      "cardNos": [
+        "BP02-040EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "activated"
+      ],
+      "abilities": [
+        {
+          "timing": "passive",
+          "condition": {
+            "type": "namedFollowerOnFieldByName",
+            "identityName": "Anne, Belle of Mysteria"
+          },
+          "effect": {
+            "op": "playCostReduction",
+            "amount": 2
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "engage": true
+          },
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "namedFollowerOnFieldByName",
+              "identityName": "Anne, Belle of Mysteria"
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 6,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove `activated` from `keywords`; [act] abilities should be represented as an ability with `timing: \"activated\"`, not as a keyword."
+    ]
+  },
+  "Grea's Ember": {
+    "source": {
+      "name": "Grea's Ember",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Spell",
+        "trait": "Mage / Academic / Princess",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] Select an enemy follower on the field and deal it 2 damage. If there are at least 5 Academic cards in your cemetery, deal 3 damage instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-047EN.png",
+      "cardNos": [
+        "BP09-047EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryMin",
+              "count": 5
+            },
+            "then": {
+              "op": "dealDamage",
+              "amount": 3,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 2,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The cemetery condition is encoded incorrectly; it should check for at least 5 Academic cards in your cemetery, not 5 cards of any kind. Use `condition: { \"type\": \"ownCemeteryTraitMin\", \"trait\": \"Academic\", \"count\": 5 }`."
+    ]
+  },
+  "Grea, Mysterian Dragoness": {
+    "source": {
+      "name": "Grea, Mysterian Dragoness",
+      "type": "base",
+      "class": "rune",
+      "details": {
+        "format": "Any",
+        "class": "Runecraft",
+        "cardType": "Follower",
+        "trait": "Mage / Academic / Princess",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #9 \"Duet of Dawn and Dusk\"",
+        "cost": "3",
+        "attack": "3",
+        "defense": "3",
+        "effect": "[evolve] [cost01]: Evolve this follower. [fanfare] Select an enemy follower on the field. If there are at least 10 Academic cards in your cemetery, deal 4 damage to it and 1 damage to its leader."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP09/BP09-039EN.png",
+      "cardNos": [
+        "BP09-039EN",
+        "SP01-021EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesTo": "Grea, Mysterian Dragoness Evolved",
+      "evolveCost": 1,
+      "keywords": [
+        "fanfare",
+        "evolve"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "ownCemeteryMin",
+              "count": 10
+            },
+            "then": {
+              "op": "damageFollowerAndLeader",
+              "followerAmount": 4,
+              "leaderAmount": 1
+            },
+            "else": {
+              "op": "dealDamage",
+              "amount": 0,
+              "targets": {
+                "type": "enemyFollower",
+                "count": 1
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare is encoded as if it does something when the condition is false, but the source says only to select an enemy follower and then deal damage if you have at least 10 Academic cards in your cemetery. Remove the `else` branch with `dealDamage` 0.",
+      "The cemetery condition is too broad; it should check for at least 10 Academic cards in your cemetery, not 10 cards of any kind. Use `condition: { \"type\": \"ownCemeteryTraitMin\", \"trait\": \"Academic\", \"count\": 10 }`.",
+      "The `damageFollowerAndLeader` effect is missing the required selected enemy follower target; encode the selected enemy follower target so the 4 damage applies to that chosen follower."
+    ]
+  }
+}

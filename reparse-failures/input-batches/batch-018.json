@@ -1,0 +1,144 @@
+{
+  "Aquatic Authority": {
+    "source": {
+      "name": "Aquatic Authority",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Dragonheart / Marine",
+        "rarity": "Bronze",
+        "cardSet": "Combined Set \"Banquet of Dreams & Trial of the Omens\"",
+        "cost": "1",
+        "attack": "-",
+        "defense": "-",
+        "effect": "Look at the top 3 cards of your deck. You may put a Marine card from among them into your EX area. If Overflow is active for you, it costs 1 less to play this turn. Put the rest on the bottom of your deck in any order."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP14-069EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "searchDeckChoose",
+                "filter": {
+                  "trait": "Marine"
+                },
+                "lookAt": 3,
+                "to": "exArea",
+                "optional": true,
+                "remainderTo": "deckBottom"
+              },
+              {
+                "op": "if",
+                "condition": {
+                  "type": "overflow"
+                },
+                "then": {
+                  "op": "playCostReduction",
+                  "amount": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Overflow clause is encoded incorrectly: after putting a Marine card into your EX area, the selected card should get a temporary cost reduction this turn, not this spell itself. Replace the standalone if->playCostReduction with a single searchDeckChoose that includes \"playCostReduction\": 1 and is gated by Overflow for the selected card."
+    ]
+  },
+  "Aragavy the Berserker": {
+    "source": {
+      "name": "Aragavy the Berserker",
+      "type": "base",
+      "class": "abyss",
+      "details": {
+        "format": "Any",
+        "class": "Abysscraft",
+        "cardType": "Follower",
+        "trait": "Arena / Beast",
+        "rarity": "Legendary",
+        "cardSet": "Booster Set #6 “Paragons of the Colosseum”",
+        "cost": "3",
+        "attack": "4",
+        "defense": "3",
+        "effect": "[fanfare] [cost05]: Deal 5 damage to each other follower on the field. Give this follower [attack]+2/[defense]+2 and Storm. At the start of your end phase, if Sanguine is active for you, select an enemy leader or enemy follower on the field and deal it 3 damage."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP06/BP06-071EN.png",
+      "cardNos": [
+        "BP06-071EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "optionalCost",
+            "label": "[cost05]",
+            "cost": {
+              "op": "spendPp",
+              "amount": 5
+            },
+            "then": {
+              "op": "sequence",
+              "steps": [
+                {
+                  "op": "dealDamageAllEnemies",
+                  "amount": 5,
+                  "followersOnly": true
+                },
+                {
+                  "op": "buff",
+                  "atk": 2,
+                  "def": 2,
+                  "targets": {
+                    "type": "self"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "timing": "startOfEnd",
+          "condition": {
+            "type": "sanguine"
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 3,
+            "targets": {
+              "type": "enemyFieldCard",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The fanfare damage effect is wrong: \"each other follower on the field\" should be encoded with dealDamageOtherFollowers amount 5, not dealDamageAllEnemies followersOnly true.",
+      "The fanfare is missing \"Give this follower Storm\" after the optional [cost05] payment; add a grantKeyword effect for storm targeting self within the paid sequence.",
+      "The end phase ability target is wrong: it should target an enemy leader or enemy follower, but enemyFieldCard cannot hit the leader. Encode this as a choice or equivalent targeting that includes enemyLeader as well as enemyFollower."
+    ]
+  }
+}

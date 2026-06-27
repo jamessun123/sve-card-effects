@@ -1,0 +1,221 @@
+{
+  "Gullias, Silverbeast Lord Evolved": {
+    "source": {
+      "name": "Gullias, Silverbeast Lord Evolved",
+      "type": "evolved",
+      "class": "haven",
+      "details": {
+        "format": "Any",
+        "class": "Havencraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Machina / Faith / Supreme",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "-",
+        "attack": "4",
+        "defense": "5",
+        "effect": "On Evolve - Choose one. (1) Select an enemy follower on the field and deal it 5 damage. (2) Give each other Machina follower on your field [attack]+1/[defense]+1. [act], banish 2 cards named Repair Mode from your EX area: Give this follower Storm."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-090EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Gullias, Silverbeast Lord",
+      "specialType": "evolved",
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Deal 5 damage to an enemy follower",
+                "effect": {
+                  "op": "dealDamage",
+                  "amount": 5,
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Give each other Machina follower on your field [attack]+1/[defense]+1",
+                "effect": {
+                  "op": "buffFieldTrait",
+                  "trait": "Machina",
+                  "atk": 1,
+                  "def": 1,
+                  "excludeSelf": true
+                }
+              }
+            ]
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0,
+            "banishFromExArea": {
+              "identityName": "Repair Mode"
+            },
+            "banishCount": 2
+          },
+          "effect": {
+            "op": "grantKeyword",
+            "keyword": "storm",
+            "targets": {
+              "type": "self"
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Activated ability cost is encoded incorrectly. Replace the nonstandard cost fields with a valid activated cost using banishFromExArea, e.g. {\"cost\":{\"banishFromExArea\":{\"filter\":{\"identityName\":\"Repair Mode\"},\"count\":2}}}, while keeping the effect that grants this follower Storm."
+    ]
+  },
+  "Guren Revolt": {
+    "source": {
+      "name": "Guren Revolt",
+      "type": "base",
+      "class": "dragon",
+      "details": {
+        "format": "Any",
+        "class": "Dragoncraft",
+        "cardType": "Spell",
+        "trait": "Wyrmkin",
+        "rarity": "Gold",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "5",
+        "attack": "-",
+        "defense": "-",
+        "effect": "[quick] You may play this card for 5 more play points. Select an enemy follower on the field and banish it. If you played this card for 5 more play points, instead of banishing that follower, banish each enemy follower on the field."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-067EN.png",
+      "cardNos": [
+        "BP04-067EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "spell",
+          "quick": true,
+          "effect": {
+            "op": "choose",
+            "min": 1,
+            "max": 1,
+            "options": [
+              {
+                "label": "Banis h an enemy follower",
+                "effect": {
+                  "op": "banish",
+                  "targets": {
+                    "type": "enemyFollower",
+                    "count": 1
+                  }
+                }
+              },
+              {
+                "label": "Pay 5 more play points to banish each enemy follower instead",
+                "additionalPpCost": 5,
+                "effect": {
+                  "op": "banish",
+                  "targets": {
+                    "type": "enemyFollower"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The upgraded mode should banish each enemy follower on the field, but it is encoded as a normal single-target banish with no count limit. Change the second choose option effect to use banishUpTo with maxCount large enough to cover all enemy followers, or another implemented all-enemy-follower banish encoding, while keeping additionalPpCost: 5."
+    ]
+  },
+  "Hajime Fujiwara [Pink Blossom Dream]": {
+    "source": {
+      "name": "Hajime Fujiwara [Pink Blossom Dream]",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "iM@S CG / Cool",
+        "rarity": "Legendary",
+        "cardSet": "EX Crossover Set \"THE IDOLM@STER CINDERELLA GIRLS\"",
+        "cost": "2",
+        "attack": "2",
+        "defense": "2",
+        "effect": "[fanfare] Look at the top card of your deck. If it's a Cool card, you may reveal it and add it to your hand. [act] [cost00]: Select an enemy follower on the field and deal it 1 damage. Activate only if there are at least 3 Cool followers on your field, and only once per turn."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/ECP02/ECP02-003EN.png",
+      "cardNos": [
+        "ECP02-003EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare",
+        "quick"
+      ],
+      "abilities": [
+        {
+          "timing": "fanfare",
+          "effect": {
+            "op": "searchDeckChoose",
+            "filter": {
+              "trait": "Cool"
+            },
+            "lookAt": 1,
+            "to": "hand",
+            "optional": true,
+            "reveal": true
+          }
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 0
+          },
+          "oncePerTurn": true,
+          "condition": {
+            "type": "fieldTraitMin",
+            "trait": "Cool",
+            "count": 3
+          },
+          "effect": {
+            "op": "dealDamage",
+            "amount": 1,
+            "targets": {
+              "type": "enemyFollower",
+              "count": 1
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Keywords incorrectly include quick; the source text does not give this card Quick. Remove \"quick\" from keywords.",
+      "The fanfare is encoded too broadly. It should look only at the top card of your deck and add it to hand only if that specific card is a Cool card; the current searchDeckChoose could take any Cool card from the looked-at cards. Encode the top-card check so only the top card can be revealed and added."
+    ]
+  }
+}

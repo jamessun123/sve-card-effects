@@ -1,0 +1,213 @@
+{
+  "Stringmaster": {
+    "source": {
+      "name": "Stringmaster",
+      "type": "base",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower",
+        "trait": "Puppetry",
+        "rarity": "Silver",
+        "cardSet": "Booster Set \"Bullet of Fate\"",
+        "cost": "1",
+        "attack": "1",
+        "defense": "1",
+        "effect": "Once on each of your turns, when a Puppet is put onto your field, put 2 Puppet tokens into your EX area. [act] [cost04]: Give this follower [attack]+2/[defense]+2. Summon a Puppet token."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP11/BP11-010EN.png",
+      "cardNos": [
+        "BP11-010EN",
+        "PR-271EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [
+        "fanfare"
+      ],
+      "abilities": [
+        {
+          "timing": "onAllyFollowerEnter",
+          "filter": {
+            "identityName": "Puppet"
+          },
+          "effect": {
+            "op": "summon",
+            "tokenName": "Puppet",
+            "count": 2,
+            "zone": "exArea"
+          },
+          "oncePerTurn": true
+        },
+        {
+          "timing": "activated",
+          "cost": {
+            "pp": 4
+          },
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "buff",
+                "atk": 2,
+                "def": 2,
+                "targets": {
+                  "type": "self"
+                }
+              },
+              {
+                "op": "summon",
+                "tokenName": "Puppet",
+                "count": 1,
+                "zone": "field"
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "Remove the incorrect 'fanfare' keyword; the source text does not include Fanfare.",
+      "The trigger ability should put 2 Puppet tokens into your EX area when a Puppet is put onto your field, but the trigger filter is placed at the ability root instead of inside a supported condition/effect structure. Re-encode this using a valid onAllyFollowerEnter implementation that restricts the entering follower to identityName 'Puppet' while keeping oncePerTurn true."
+    ]
+  },
+  "Stroke of Conviction": {
+    "source": {
+      "name": "Stroke of Conviction",
+      "type": "base",
+      "class": "sword",
+      "details": {
+        "format": "Any",
+        "class": "Swordcraft",
+        "cardType": "Spell",
+        "trait": "Natura / Commander / Officer / Beast / Princess",
+        "rarity": "Gold",
+        "cardSet": "Combined Set \"Worldreaver's Descent & Dominion of Darkness\"",
+        "cost": "2",
+        "attack": "-",
+        "defense": "-",
+        "effect": "As an additional cost to play this card, engage 2 cards named Naterran Great Tree on your field. ---------- Select an enemy follower on the field and up to 1 Natura follower on your field. Deal 5 damage to the first follower and 2 damage to its leader. Give the second [attack]+1/[defense]+1."
+      },
+      "imgSrc": "",
+      "cardNos": [
+        "BP12-024EN"
+      ]
+    },
+    "previousParsed": {
+      "keywords": [],
+      "abilities": [
+        {
+          "timing": "spell",
+          "effect": {
+            "op": "sequence",
+            "steps": [
+              {
+                "op": "engage",
+                "targets": {
+                  "type": "allyFieldCard",
+                  "count": 2
+                }
+              },
+              {
+                "op": "dealDamageFollowerAndLeader",
+                "followerAmount": 5,
+                "leaderAmount": 2
+              },
+              {
+                "op": "buff",
+                "atk": 1,
+                "def": 1,
+                "targets": {
+                  "type": "selfFollower",
+                  "count": 1
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parseConfidence": "review"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The additional cost is wrong: it must engage exactly 2 cards named Naterran Great Tree on your field, not any 2 ally field cards. Re-encode the engage targets to restrict to identityName 'Naterran Great Tree'.",
+      "The damage effect uses an invalid operation name. Replace dealDamageFollowerAndLeader with the implemented op damageFollowerAndLeader.",
+      "The damage effect is incomplete because it does not target 'an enemy follower on the field.' Re-encode the damage step so it selects 1 enemy follower and deals it 5 damage and 2 damage to its leader.",
+      "The buff effect targets the wrong set of cards. It should target up to 1 Natura follower on your field, not any selfFollower. Re-encode the buff targets to your field with a Natura trait filter and make the selection optional."
+    ]
+  },
+  "Sukuna, Brave and Small Evolved": {
+    "source": {
+      "name": "Sukuna, Brave and Small Evolved",
+      "type": "evolved",
+      "class": "forest",
+      "details": {
+        "format": "Any",
+        "class": "Forestcraft",
+        "cardType": "Follower / Evolved",
+        "trait": "Hunter",
+        "rarity": "Silver",
+        "cardSet": "Booster Set #4 “Cosmic Mythos”",
+        "cost": "-",
+        "attack": "2",
+        "defense": "2",
+        "effect": "Storm. On Evolve: Combo (3) - Give this follower [attack]+1/[defense]+1. Combo (5) - Give [attack]+3/[defense]+3 instead."
+      },
+      "imgSrc": "/wordpress/wp-content/images/cardlist/BP04/BP04-011EN.png",
+      "cardNos": [
+        "BP04-011EN",
+        "SDD01-010EN"
+      ]
+    },
+    "previousParsed": {
+      "evolvesFrom": "Sukuna, Brave and Small",
+      "specialType": "evolved",
+      "keywords": [
+        "storm"
+      ],
+      "abilities": [
+        {
+          "timing": "onEvolve",
+          "effect": {
+            "op": "if",
+            "condition": {
+              "type": "combo",
+              "count": 3
+            },
+            "then": {
+              "op": "buff",
+              "atk": 1,
+              "def": 1,
+              "targets": {
+                "type": "self"
+              }
+            },
+            "else": {
+              "op": "if",
+              "condition": {
+                "type": "combo",
+                "count": 5
+              },
+              "then": {
+                "op": "buff",
+                "atk": 3,
+                "def": 3,
+                "targets": {
+                  "type": "self"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "parseConfidence": "high"
+    },
+    "verdict": "fail",
+    "issues": [
+      "The Combo thresholds are encoded in the wrong order. Combo (5) should take precedence and give this follower +3/+3 instead of the Combo (3) bonus; re-encode as if combo 5 then buff +3/+3, else if combo 3 then buff +1/+1."
+    ]
+  }
+}
